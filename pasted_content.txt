@@ -1,0 +1,852 @@
+PROJECT IDENTITY
+==========================================================
+
+This system is not intended to be:
+- a chatbot,
+- a wrapper around an API,
+- a simple automation tool,
+- or a static assistant.
+
+This project is the construction of a:
+
+MODULAR EVOLUTIONARY COGNITIVE OPERATING SYSTEM
+
+A continuously adapting intelligence infrastructure capable of:
+- autonomous learning,
+- memory persistence,
+- self-reflection,
+- planning,
+- tool usage,
+- reasoning,
+- evolution,
+- specialization,
+- and long-term cognitive growth.
+
+The system is designed as a digital organism rather than traditional software.
+
+==========================================================
+CORE PHILOSOPHY
+==========================================================
+
+The system must continuously:
+
+Observe
+→ Learn
+→ Encode
+→ Remember
+→ Reason
+→ Plan
+→ Simulate
+→ Act
+→ Reflect
+→ Evolve
+→ Improve
+→ Repeat
+
+Capabilities are not hardcoded.
+
+Capabilities emerge from:
+- interaction,
+- memory,
+- reinforcement,
+- abstraction,
+- reflection,
+- experimentation,
+- and recursive adaptation.
+
+The architecture itself must be capable of evolving.
+
+==========================================================
+SOVEREIGN LOCAL-FIRST PRINCIPLE
+==========================================================
+
+The system operates locally.
+
+Core principles:
+- local ownership,
+- local execution,
+- local memory,
+- local training,
+- local inference,
+- local orchestration.
+
+No dependency on paid APIs.
+
+No dependency on external reasoning providers.
+
+The AI must remain fully controllable, inspectable, and sandboxed.
+
+==========================================================
+GENERAL INTELLIGENCE OBJECTIVE
+==========================================================
+
+The system should evolve toward:
+
+GENERAL ADAPTIVE INTELLIGENCE INFRASTRUCTURE
+
+not isolated task execution.
+
+The goal is:
+- persistent cognition,
+- cross-domain reasoning,
+- autonomous learning,
+- adaptive specialization,
+- and long-term intelligence growth.
+
+==========================================================
+LEARN EVERYTHING PRINCIPLE
+==========================================================
+
+Any observable interaction can become training data.
+
+Sources include:
+- screen activity,
+- workflows,
+- code,
+- files,
+- browser sessions,
+- conversations,
+- trading charts,
+- software usage,
+- planning patterns,
+- reasoning traces,
+- failures,
+- successes,
+- user interactions,
+- simulations,
+- reflections,
+- generated synthetic environments.
+
+Everything can become:
+- memory,
+- abstraction,
+- strategy,
+- or training experience.
+
+==========================================================
+SYSTEM ARCHITECTURE
+==========================================================
+
+The architecture is modular and distributed.
+
+It behaves more like a society of cooperating cognitive systems than a monolithic model.
+
+Architecture:
+
+Perception Layer
+→ Encoding Layer
+→ Memory Layer
+→ Retrieval Layer
+→ Transformer Reasoning Layer
+→ Reflection Layer
+→ Planning Layer
+→ Tool Orchestration Layer
+→ Evolution Layer
+→ World Model Layer
+→ Meta-Learning Layer
+
+==========================================================
+MULTI-AGENT COGNITION
+==========================================================
+
+The system contains specialized internal agents.
+
+Examples:
+- Coding Agent
+- Trading Agent
+- Reflection Agent
+- Planning Agent
+- Research Agent
+- Vision Agent
+- Memory Agent
+- Tool Agent
+- Evaluation Agent
+- Safety Agent
+
+Agents collaborate through:
+- shared memory,
+- event systems,
+- planning coordination,
+- strategic discussion,
+- and consensus reasoning.
+
+==========================================================
+INTERNAL AGENT SOCIETY
+==========================================================
+
+Problems are solved through distributed cognition.
+
+Process:
+
+Problem
+→ Internal Debate
+→ Strategy Generation
+→ Simulation
+→ Evaluation
+→ Consensus
+→ Execution
+→ Reflection
+→ Memory Consolidation
+
+==========================================================
+COGNITIVE LAYERS
+==========================================================
+
+1. Perception
+2. Semantic Encoding
+3. Context Formation
+4. Memory Retrieval
+5. Transformer Reasoning
+6. Planning
+7. Reflection
+8. Simulation
+9. Execution
+10. Evaluation
+11. Evolution
+12. Consolidation
+
+==========================================================
+SCREEN LEARNING SYSTEM
+==========================================================
+
+The system learns from:
+- screenshots,
+- workflows,
+- software interaction,
+- UI structures,
+- repetitive behaviors,
+- demonstrations.
+
+Pipeline:
+
+Screen Capture
+→ OCR/Vision Analysis
+→ Semantic Encoding
+→ Pattern Extraction
+→ Workflow Modeling
+→ Memory Storage
+
+Capabilities:
+- learn workflows,
+- understand interfaces,
+- observe user behavior,
+- identify recurring strategies,
+- build procedural knowledge.
+
+==========================================================
+FILE LEARNING SYSTEM
+==========================================================
+
+Learn from:
+- TXT
+- PDF
+- DOCX
+- MD
+- CSV
+- JSON
+- XML
+- code files
+- logs
+- databases
+- research documents
+
+Pipeline:
+
+Read
+→ Parse
+→ Chunk
+→ Embed
+→ Store
+→ Link Concepts
+→ Build Knowledge Graph
+
+==========================================================
+WEB LEARNING SYSTEM
+==========================================================
+
+The AI autonomously studies:
+- documentation,
+- repositories,
+- tutorials,
+- APIs,
+- research papers,
+- public datasets,
+- technical discussions,
+- educational resources.
+
+Pipeline:
+
+Crawl
+→ Parse
+→ Encode
+→ Summarize
+→ Store
+→ Build Relationships
+
+==========================================================
+MEMORY SYSTEM
+==========================================================
+
+The AI maintains multiple memory layers.
+
+1. Short-Term Memory
+- active context
+
+2. Episodic Memory
+- experiences
+
+3. Semantic Memory
+- facts and abstractions
+
+4. Procedural Memory
+- workflows and skills
+
+5. Strategic Memory
+- long-term goals and successful strategies
+
+6. Reflection Memory
+- lessons learned
+
+7. Vector Memory
+- semantic embeddings
+
+8. Cold Memory
+- archived long-term storage
+
+==========================================================
+DISTRIBUTED MEMORY NODE
+==========================================================
+
+An old laptop can function as:
+
+COLD MEMORY NODE
+
+Responsibilities:
+- vector storage,
+- archives,
+- logs,
+- reflections,
+- checkpoints,
+- embeddings,
+- semantic graphs,
+- long-term memory consolidation.
+
+Architecture:
+
+Main Node
+↕
+Memory Node
+↕
+Training Node
+↕
+Evaluation Node
+
+==========================================================
+MEMORY CONSOLIDATION
+==========================================================
+
+The AI compresses experiences into abstractions.
+
+Pipeline:
+
+Raw Experiences
+→ Summaries
+→ Patterns
+→ Concepts
+→ Strategies
+→ Knowledge Structures
+
+The system should forget low-value noise while preserving high-value abstractions.
+
+==========================================================
+VECTOR MEMORY
+==========================================================
+
+Content becomes embeddings.
+
+Pipeline:
+
+Content
+→ Embedding Generation
+→ Vector Storage
+→ Similarity Retrieval
+→ Context Injection
+
+==========================================================
+TRANSFORMER CORE
+==========================================================
+
+The system includes a custom-built transformer architecture.
+
+Components:
+- tokenizer,
+- embeddings,
+- positional encoding,
+- self-attention,
+- feedforward networks,
+- normalization,
+- residual connections,
+- output projection.
+
+Architecture:
+
+Tokens
+→ Embeddings
+→ Attention Layers
+→ Reasoning Layers
+→ Output Generation
+
+==========================================================
+CUSTOM TOKENIZER
+==========================================================
+
+Pipeline:
+
+Raw Text
+→ Vocabulary Construction
+→ Token Mapping
+→ Integer Sequences
+
+Progression:
+Character Tokenizer
+→ BPE Tokenizer
+→ Advanced Semantic Tokenizer
+
+==========================================================
+CUSTOM TRAINING ENGINE
+==========================================================
+
+Training Loop:
+
+Input
+→ Prediction
+→ Loss Calculation
+→ Backpropagation
+→ Weight Update
+→ Repeat
+
+Capabilities:
+- gradient updates,
+- checkpointing,
+- distributed training,
+- replay buffers,
+- curriculum learning,
+- self-supervised learning,
+- reinforcement learning.
+
+==========================================================
+SELF-SUPERVISED LEARNING
+==========================================================
+
+The AI learns from raw unlabeled data.
+
+Examples:
+- next token prediction,
+- sequence continuation,
+- workflow prediction,
+- action prediction,
+- code completion,
+- planning prediction.
+
+==========================================================
+REINFORCEMENT LEARNING
+==========================================================
+
+The AI learns from:
+- rewards,
+- penalties,
+- outcomes,
+- efficiency,
+- long-term success.
+
+Loop:
+
+Observe
+→ Act
+→ Evaluate
+→ Reward
+→ Learn
+→ Improve
+
+==========================================================
+REPLAY BUFFER
+==========================================================
+
+Store:
+
+(state, action, reward, outcome)
+
+Replay experiences periodically for:
+- stability,
+- retention,
+- policy improvement.
+
+==========================================================
+CURRICULUM LEARNING
+==========================================================
+
+Learning progression:
+
+Easy Tasks
+→ Intermediate Tasks
+→ Advanced Tasks
+→ Autonomous Exploration
+
+==========================================================
+CATASTROPHIC FORGETTING PREVENTION
+==========================================================
+
+Mechanisms:
+- weighted retention,
+- memory rehearsal,
+- importance scoring,
+- periodic consolidation.
+
+==========================================================
+REFLECTION ENGINE
+==========================================================
+
+The AI continuously asks:
+- what worked?
+- what failed?
+- why?
+- what should improve?
+- which strategies are weak?
+- which are strong?
+
+Reflection Loop:
+
+Action
+→ Outcome
+→ Analysis
+→ Lesson Extraction
+→ Memory Storage
+→ Behavioral Update
+
+==========================================================
+META-COGNITION
+==========================================================
+
+The AI analyzes:
+- how it reasons,
+- which methods succeed,
+- where failures occur,
+- how to optimize cognition itself.
+
+The system learns HOW to learn.
+
+==========================================================
+EVOLUTION ENGINE
+==========================================================
+
+The AI continuously evolves:
+- prompts,
+- strategies,
+- planning trees,
+- memory priorities,
+- subsystem routing,
+- architectures,
+- workflows,
+- reasoning patterns.
+
+Evolution Loop:
+
+Generate Variants
+→ Evaluate
+→ Rank
+→ Preserve Best
+→ Mutate Weak
+→ Repeat
+
+==========================================================
+ARCHITECTURAL EVOLUTION
+==========================================================
+
+Not only models evolve.
+
+The architecture itself evolves:
+- module topology,
+- subsystem relationships,
+- routing systems,
+- memory hierarchies,
+- planning pathways,
+- cognitive specialization.
+
+==========================================================
+WORLD MODEL
+==========================================================
+
+The AI builds predictive models of:
+- software systems,
+- workflows,
+- trading behavior,
+- human interaction,
+- tool behavior,
+- code execution,
+- strategic outcomes.
+
+Core principle:
+
+Action
+→ Consequence
+
+==========================================================
+INTERNAL SIMULATION ENGINE
+==========================================================
+
+Before acting:
+
+simulate possible futures
+
+The AI evaluates:
+- risk,
+- efficiency,
+- strategic outcomes,
+- failure probability.
+
+==========================================================
+TRADING INTELLIGENCE
+==========================================================
+
+Capabilities:
+- market analysis,
+- indicator learning,
+- pattern discovery,
+- reinforcement learning trading,
+- backtesting,
+- strategy evolution,
+- risk management.
+
+Indicators:
+- RSI
+- MACD
+- ATR
+- EMA
+- SMA
+- Bollinger Bands
+
+Trading Loop:
+
+Observe Market
+→ Predict
+→ Simulate Trade
+→ Evaluate
+→ Learn
+→ Evolve Strategy
+
+==========================================================
+CODING INTELLIGENCE
+==========================================================
+
+Capabilities:
+- read repositories,
+- parse syntax trees,
+- generate code,
+- debug,
+- test,
+- optimize,
+- refactor,
+- learn APIs,
+- understand architectures.
+
+Languages:
+- Python
+- JavaScript
+- TypeScript
+- C
+- C++
+- Rust
+- Go
+- Java
+- Kotlin
+- Swift
+- SQL
+- Bash
+- HTML/CSS
+- and others.
+
+==========================================================
+ASSISTANT SYSTEM
+==========================================================
+
+Capabilities:
+- planning,
+- scheduling,
+- automation,
+- summarization,
+- explanation,
+- organization,
+- workflow assistance,
+- task execution.
+
+==========================================================
+TOOL ORCHESTRATION
+==========================================================
+
+Capabilities:
+- open applications,
+- automate workflows,
+- use browsers,
+- execute code,
+- interact with files,
+- coordinate subsystems.
+
+==========================================================
+EVENT BUS SYSTEM
+==========================================================
+
+Subsystems communicate through events.
+
+Example:
+
+Vision Agent detects pattern
+→ Event emitted
+→ Planner reacts
+→ Memory stores
+→ Evaluator scores
+
+==========================================================
+DYNAMIC SKILL ROUTING
+==========================================================
+
+Tasks route automatically to specialized subsystems.
+
+Example:
+
+Coding Task
+→ Coding Engine
+
+Trading Task
+→ Trading Engine
+
+Research Task
+→ Research Agent
+
+==========================================================
+SPARSE ACTIVATION
+==========================================================
+
+Only relevant experts activate for a task.
+
+Improves:
+- efficiency,
+- scalability,
+- specialization.
+
+==========================================================
+CONTEXT COMPRESSION
+==========================================================
+
+Long histories become:
+- summaries,
+- semantic abstractions,
+- vector representations.
+
+==========================================================
+BENCHMARKING SYSTEM
+==========================================================
+
+The AI continuously evaluates:
+- reasoning,
+- coding,
+- trading,
+- memory,
+- planning,
+- retrieval,
+- tool use,
+- adaptability.
+
+==========================================================
+HALLUCINATION DETECTION
+==========================================================
+
+The AI estimates confidence before acting.
+
+Low confidence:
+- gather evidence,
+- verify,
+- avoid unsafe execution.
+
+==========================================================
+CHECKPOINT & ROLLBACK
+==========================================================
+
+Evolution can destabilize intelligence.
+
+Workflow:
+
+Checkpoint
+→ Mutation
+→ Evaluation
+→ Rollback if degraded
+
+==========================================================
+RECOVERY SYSTEM
+==========================================================
+
+If instability occurs:
+
+restore checkpoints
+rebuild indexes
+recover memory
+reload stable states
+
+==========================================================
+SYNTHETIC DATA GENERATION
+==========================================================
+
+The AI generates:
+- simulated bugs,
+- market scenarios,
+- planning puzzles,
+- synthetic workflows,
+- training tasks,
+- reasoning environments.
+
+==========================================================
+LONG-TERM IDENTITY
+==========================================================
+
+Maintain:
+- strategic continuity,
+- persistent goals,
+- stable principles,
+- behavioral consistency.
+
+==========================================================
+AUTONOMOUS CURIOSITY
+==========================================================
+
+The AI seeks:
+- knowledge gaps,
+- useful abstractions,
+- unexplored patterns,
+- valuable learning opportunities.
+
+Curiosity Score:
+
+Novelty × Utility × Strategic Value
+
+==========================================================
+FINAL SYSTEM DIRECTION
+==========================================================
+
+This project evolves toward:
+
+A distributed, self-improving, locally sovereign cognitive operating system capable of:
+- adaptive intelligence,
+- recursive self-improvement,
+- autonomous learning,
+- cross-domain reasoning,
+- persistent memory,
+- evolutionary architecture,
+- multi-agent cognition,
+- world modeling,
+- tool orchestration,
+- and long-term cognitive growth.
+
+The system behaves more like:
+a digital organism
+
+than:
+traditional software.

@@ -1,0 +1,1391 @@
+# Evolutionary AI Training Engine (Safe Sandbox Blueprint)
+
+## Goal
+
+Build a single-file modular AI engine capable of:
+
+* Learning from screen activity
+* Learning from local files
+* Self-supervised training
+* Reinforcement learning
+* Multi-domain skill learning
+* Code understanding and generation
+* Trading analysis
+* Assistant behavior
+* Web knowledge ingestion
+* Evolutionary adaptation
+* Long-term memory
+* Tool usage
+* App launching and automation
+
+This design intentionally excludes:
+
+* Malware behavior
+* Credential theft
+* Unauthorized intrusion
+* Exploit automation
+* Harmful cyber operations
+
+---
+
+# Core Philosophy
+
+The engine behaves like a continuously evolving organism:
+
+```text
+Observe → Encode → Store → Reason → Act → Evaluate → Adapt
+```
+
+The system should:
+
+1. Learn continuously
+2. Generate hypotheses
+3. Test strategies
+4. Reward successful behavior
+5. Mutate weak strategies
+6. Retain useful abstractions
+7. Build world models
+
+---
+
+# High-Level Architecture
+
+```text
+┌─────────────────────────────────────┐
+│          INPUT LAYER               │
+│  Screen / Files / APIs / Web       │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│      PERCEPTION & ENCODING         │
+│ OCR / Vision / NLP / Parsers       │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│          MEMORY SYSTEM             │
+│ Episodic / Semantic / Vector DB    │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│         REASONING ENGINE           │
+│ Planning / Reflection / Goals      │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│         ACTION SYSTEM              │
+│ Apps / Browser / Code / Trading    │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│        TRAINING ENGINE             │
+│ RL + Self-Supervised + Evolution   │
+└─────────────────────────────────────┘
+                 ↓
+┌─────────────────────────────────────┐
+│       SELF-IMPROVEMENT LOOP        │
+│ Mutation / Scoring / Selection     │
+└─────────────────────────────────────┘
+```
+
+---
+
+# SINGLE-FILE STRUCTURE
+
+```python
+# ==========================================================
+# EVOLUTIONARY GENERAL AI ENGINE
+# ==========================================================
+
+# Imports
+# Config
+# Utilities
+# Vision Layer
+# File Learning Layer
+# Web Learning Layer
+# Memory System
+# Embedding System
+# Transformer Reasoner
+# Trading Engine
+# Coding Engine
+# Assistant Engine
+# Reinforcement Trainer
+# Evolutionary Optimizer
+# Reflection Engine
+# Tool System
+# App Runner
+# Scheduler
+# Main Loop
+```
+
+---
+
+# 1. INPUT COLLECTION
+
+## Screen Learning
+
+Purpose:
+
+* Observe workflows
+* Learn patterns
+* Extract text and UI structure
+
+Recommended tools:
+
+| Purpose              | Tool        |
+| -------------------- | ----------- |
+| Screenshots          | mss         |
+| OCR                  | pytesseract |
+| Vision understanding | local VLM   |
+| UI automation        | pyautogui   |
+
+Example:
+
+```python
+import mss
+from PIL import Image
+
+with mss.mss() as sct:
+    monitor = sct.monitors[1]
+    shot = sct.grab(monitor)
+    img = Image.frombytes('RGB', shot.size, shot.rgb)
+```
+
+---
+
+## File Learning
+
+The engine scans:
+
+* PDFs
+* TXT
+* MD
+* DOCX
+* CSV
+* Code files
+* Notes
+* Logs
+
+Pipeline:
+
+```text
+Read File → Parse → Chunk → Embed → Store
+```
+
+Example:
+
+```python
+from pathlib import Path
+
+for file in Path("data").rglob("*"):
+    print(file)
+```
+
+---
+
+# 2. WEB LEARNING MODULE
+
+Purpose:
+
+* Read documentation
+* Learn APIs
+* Read tutorials
+* Observe public repositories
+* Build knowledge graphs
+
+Safe approach:
+
+* Rate-limited crawling
+* Respect robots.txt
+* Public information only
+* No unauthorized access
+
+Suggested stack:
+
+| Purpose            | Tool           |
+| ------------------ | -------------- |
+| Browser automation | Playwright     |
+| Parsing            | BeautifulSoup  |
+| Async crawling     | aiohttp        |
+| Search             | DuckDuckGo API |
+
+---
+
+# 3. MULTI-MODAL MEMORY SYSTEM
+
+The AI should remember:
+
+| Memory Type         | Example         |
+| ------------------- | --------------- |
+| Episodic            | What happened   |
+| Semantic            | Facts           |
+| Procedural          | Skills          |
+| Strategic           | Long-term plans |
+| Emotional weighting | Reward priority |
+
+Example schema:
+
+```python
+memory_item = {
+    "timestamp": time.time(),
+    "source": "screen",
+    "content": text,
+    "embedding": vector,
+    "reward": score
+}
+```
+
+---
+
+# 4. EMBEDDING + VECTOR SEARCH
+
+The engine needs semantic recall.
+
+Recommended:
+
+| Purpose    | Tool                  |
+| ---------- | --------------------- |
+| Embeddings | sentence-transformers |
+| Vector DB  | FAISS / ChromaDB      |
+
+Flow:
+
+```text
+Content → Embedding → Vector DB → Similarity Search
+```
+
+---
+
+# 5. TRANSFORMER REASONING CORE
+
+The transformer becomes the central reasoning system.
+
+Responsibilities:
+
+* Summarization
+* Planning
+* Reflection
+* Coding
+* Trading analysis
+* Dialogue
+* Tool selection
+
+Recommended:
+
+| Level       | Model          |
+| ----------- | -------------- |
+| Lightweight | Phi-3          |
+| Mid         | Mistral        |
+| Strong      | Llama 3        |
+| Coding      | DeepSeek-Coder |
+
+---
+
+# 6. SELF-SUPERVISED LEARNING
+
+The AI generates labels from raw data.
+
+Examples:
+
+## Next-token prediction
+
+```text
+Input: The market trend is
+Target: bullish
+```
+
+## Sequence prediction
+
+```text
+Observe → Predict next event
+```
+
+## Tool outcome prediction
+
+```text
+Action → Predicted result
+```
+
+---
+
+# 7. REINFORCEMENT LEARNING
+
+The AI improves through reward.
+
+Core equation:
+
+[
+Q(s,a) \leftarrow Q(s,a) + \alpha[r + \gamma \max Q(s',a') - Q(s,a)]
+]
+
+Use cases:
+
+| Domain    | Reward          |
+| --------- | --------------- |
+| Trading   | Profit          |
+| Coding    | Passing tests   |
+| Assistant | User success    |
+| Planning  | Goal completion |
+
+---
+
+# 8. EVOLUTIONARY LEARNING
+
+This is the mutation engine.
+
+## Process
+
+```text
+Create Variants
+→ Evaluate
+→ Rank
+→ Preserve Best
+→ Mutate Weak
+→ Repeat
+```
+
+The AI evolves:
+
+* Strategies
+* Prompts
+* Architectures
+* Hyperparameters
+* Tool chains
+
+Example:
+
+```python
+child = mutate(parent)
+fitness = evaluate(child)
+```
+
+---
+
+# 9. TRADING LEARNING ENGINE
+
+Components:
+
+| Module        | Purpose            |
+| ------------- | ------------------ |
+| Market stream | Live prices        |
+| Indicators    | RSI, MACD, ATR     |
+| Simulator     | Backtesting        |
+| RL policy     | Trade decisions    |
+| Risk manager  | Capital protection |
+
+Learning loop:
+
+```text
+Observe chart
+→ Predict direction
+→ Execute simulated trade
+→ Receive reward
+→ Improve policy
+```
+
+---
+
+# 10. CODING LEARNING ENGINE
+
+The coding subsystem should:
+
+* Read repositories
+* Parse syntax trees
+* Learn APIs
+* Generate code
+* Run tests
+* Debug failures
+
+Safe sandbox execution only.
+
+Recommended:
+
+| Purpose    | Tool           |
+| ---------- | -------------- |
+| Parsing    | tree-sitter    |
+| Execution  | Docker sandbox |
+| Testing    | pytest         |
+| Formatting | black          |
+
+---
+
+# 11. APP CONTROL SYSTEM
+
+The assistant can:
+
+* Open applications
+* Read windows
+* Type
+* Click
+* Execute workflows
+
+Example:
+
+```python
+import subprocess
+
+subprocess.Popen(["notepad.exe"])
+```
+
+Guardrails:
+
+* Explicit permissions
+* Allowlist tools
+* Restricted filesystem access
+
+---
+
+# 12. REFLECTION ENGINE
+
+This is critical.
+
+The AI periodically asks:
+
+```text
+What worked?
+What failed?
+Why?
+What should change?
+```
+
+Reflection improves:
+
+* Planning
+* Strategy selection
+* Long-term adaptation
+
+---
+
+# 13. WORLD MODEL
+
+The system should build internal representations:
+
+```text
+Action → Consequence
+```
+
+This enables:
+
+* Simulation
+* Prediction
+* Strategic planning
+* Multi-step reasoning
+
+---
+
+# 14. TASK PLANNER
+
+Suggested architecture:
+
+```text
+Goal
+→ Decompose
+→ Prioritize
+→ Execute
+→ Monitor
+→ Replan
+```
+
+---
+
+# 15. SECURITY MODEL
+
+Even in a sandbox, safe architecture matters.
+
+Recommended constraints:
+
+* Containerized execution
+* Capability permissions
+* Isolated browser
+* API allowlists
+* Human approval for high-impact actions
+* Resource limits
+
+---
+
+# 16. MAIN EVOLUTION LOOP
+
+Pseudo-architecture:
+
+```python
+while True:
+
+    observations = collect_inputs()
+
+    knowledge = encode(observations)
+
+    memory.store(knowledge)
+
+    plan = reason(memory)
+
+    action = decide(plan)
+
+    result = execute(action)
+
+    reward = evaluate(result)
+
+    trainer.learn(reward)
+
+    evolution_engine.mutate_if_needed()
+
+    reflection_engine.review_cycle()
+```
+
+---
+
+# 17. RECOMMENDED SINGLE-FILE MODULE LIST
+
+```python
+# ===== CORE =====
+Config
+Logger
+Scheduler
+
+# ===== INPUT =====
+ScreenCapture
+OCRProcessor
+FileScanner
+WebCrawler
+
+# ===== MEMORY =====
+VectorMemory
+EpisodicMemory
+SemanticStore
+
+# ===== REASONING =====
+TransformerCore
+Planner
+Reflector
+
+# ===== LEARNING =====
+SelfSupervisedTrainer
+RLTrainer
+EvolutionEngine
+
+# ===== DOMAIN AGENTS =====
+TradingAgent
+CodingAgent
+AssistantAgent
+
+# ===== TOOLS =====
+BrowserTool
+AppRunner
+CodeExecutor
+
+# ===== SAFETY =====
+PermissionManager
+SandboxGuard
+
+# ===== MAIN =====
+main_loop()
+```
+
+---
+
+# 18. TECHNOLOGY STACK
+
+| Area          | Recommended       |
+| ------------- | ----------------- |
+| Language      | Python            |
+| Deep Learning | PyTorch           |
+| Transformers  | HuggingFace       |
+| RL            | Stable-Baselines3 |
+| Vision        | OpenCV            |
+| OCR           | Tesseract         |
+| Vector DB     | ChromaDB          |
+| Browser       | Playwright        |
+| Sandbox       | Docker            |
+| Scheduling    | asyncio           |
+
+---
+
+# 19. REALISTIC DEVELOPMENT PHASES
+
+## Phase 1
+
+Basic assistant + memory
+
+## Phase 2
+
+Screen/file learning
+
+## Phase 3
+
+Trading + coding agent
+
+## Phase 4
+
+Self-supervised training
+
+## Phase 5
+
+Evolutionary mutation engine
+
+## Phase 6
+
+Planning + world models
+
+## Phase 7
+
+Distributed multi-agent architecture
+
+---
+
+# 20. IMPORTANT REALITY
+
+A true general-purpose evolving AI system is not a small script.
+
+Even a prototype requires:
+
+* Large compute
+* Data pipelines
+* Safety systems
+* Persistent memory
+* Evaluation loops
+* Resource management
+* Continuous debugging
+
+The correct approach is:
+
+```text
+Start modular
+→ Validate each subsystem
+→ Integrate gradually
+→ Add evolutionary layers later
+```
+
+Trying to build every capability at once usually produces instability and uncontrollable complexity.
+
+---
+
+# 21. MYTHOS-STYLE COGNITIVE ARCHITECTURE
+
+The system should emulate a deeply reflective, continuously evolving cognitive architecture inspired by advanced autonomous reasoning systems.
+
+Core properties:
+
+* Persistent long-term memory
+* Recursive self-reflection
+* Goal persistence
+* Multi-agent internal debate
+* Continuous world-model updates
+* Tool-augmented reasoning
+* Dynamic planning trees
+* Self-generated hypotheses
+* Strategic abstraction
+* Autonomous curiosity
+* Adaptive workflow generation
+* Emergent specialization
+* Internal simulation before execution
+* Context-aware personality modulation
+* Skill fusion across domains
+
+The architecture should behave less like a static chatbot and more like a living cognitive operating system.
+
+==========================================================
+
+# COGNITIVE LAYERS
+
+```text
+Perception Layer
+→ Semantic Encoding Layer
+→ Memory Consolidation Layer
+→ Transformer Reasoning Layer
+→ Reflection Layer
+→ Strategic Planning Layer
+→ Tool Orchestration Layer
+→ Evolution Layer
+→ World Model Layer
+→ Meta-Learning Layer
+```
+
+==========================================================
+
+# INTERNAL THINKING FRAMEWORK
+
+The system should internally:
+
+1. Observe
+2. Build hypotheses
+3. Simulate outcomes
+4. Compare strategies
+5. Evaluate risk
+6. Execute selectively
+7. Reflect on results
+8. Improve future behavior
+
+==========================================================
+
+# RECURSIVE SELF-IMPROVEMENT
+
+The AI should periodically:
+
+* Review failures
+* Analyze bottlenecks
+* Identify weak skills
+* Propose improvements
+* Test alternative strategies
+* Benchmark variants
+* Preserve superior behaviors
+
+Improvement targets:
+
+* Reasoning chains
+* Planning depth
+* Memory retrieval quality
+* Tool selection
+* Coding efficiency
+* Trading strategies
+* Workflow automation
+* Task decomposition
+
+==========================================================
+
+# AUTONOMOUS CURIOSITY SYSTEM
+
+The AI should develop exploration priorities:
+
+* Detect knowledge gaps
+* Seek useful patterns
+* Prioritize high-value learning
+* Build domain expertise dynamically
+* Form conceptual links across disciplines
+
+Curiosity score example:
+
+```text
+Novelty × Utility × Relevance × Long-term Value
+```
+
+==========================================================
+
+# META-LEARNING ENGINE
+
+The system should learn HOW to learn.
+
+Capabilities:
+
+* Detect effective learning strategies
+* Adapt training methods by domain
+* Optimize memory compression
+* Improve reinforcement schedules
+* Adjust exploration vs exploitation
+* Discover better planning methods
+
+==========================================================
+
+# INTERNAL AGENT COUNCIL
+
+Specialized agents collaborate internally:
+
+| Agent            | Role                     |
+| ---------------- | ------------------------ |
+| Research Agent   | Collects information     |
+| Logic Agent      | Validates reasoning      |
+| Planner Agent    | Creates strategies       |
+| Reflection Agent | Reviews outcomes         |
+| Coding Agent     | Writes/debugs code       |
+| Trading Agent    | Learns market behavior   |
+| Memory Agent     | Organizes recall         |
+| Vision Agent     | Understands visual input |
+| Safety Agent     | Enforces sandbox rules   |
+
+Decision process:
+
+```text
+Problem
+→ Multi-agent analysis
+→ Debate/Scoring
+→ Consensus planning
+→ Execution
+→ Reflection
+```
+
+==========================================================
+
+# WORLD MODEL EVOLUTION
+
+The AI continuously builds predictive models of:
+
+* Software systems
+* Human workflows
+* Market behavior
+* Coding patterns
+* User preferences
+* Cause/effect relationships
+* Long-term strategic outcomes
+
+==========================================================
+
+# STRATEGIC MEMORY CONSOLIDATION
+
+The system periodically compresses:
+
+* Repeated experiences
+* Successful strategies
+* Workflow patterns
+* Tool sequences
+* Semantic concepts
+
+into reusable abstractions.
+
+==========================================================
+
+# SAFE AUTONOMY MODEL
+
+Even with advanced autonomy:
+
+* Remain inside sandbox boundaries
+* Require permission layers for sensitive operations
+* Log important decisions
+* Keep execution interpretable
+* Maintain rollback/recovery systems
+* Preserve resource limits
+* Prevent uncontrolled self-modification
+
+==========================================================
+
+# 22. ADVANCED SYSTEM STABILIZATION LAYERS
+
+==========================================================
+
+# CURRICULUM LEARNING ENGINE
+
+==========================================================
+
+The AI should not learn randomly.
+
+Learning progression:
+
+```text
+Easy Tasks
+→ Intermediate Tasks
+→ Advanced Tasks
+→ Autonomous Exploration
+```
+
+This improves:
+
+* stability
+* abstraction
+* transfer learning
+* planning quality
+
+==========================================================
+
+# REPLAY BUFFER SYSTEM
+
+==========================================================
+
+Store historical experiences:
+
+```text
+(state, action, reward, outcome)
+```
+
+Replay experiences periodically to:
+
+* reinforce learning
+* stabilize RL
+* improve long-term retention
+
+==========================================================
+
+# CATASTROPHIC FORGETTING PREVENTION
+
+==========================================================
+
+The AI must preserve important knowledge while learning new information.
+
+Mechanisms:
+
+* importance scoring
+* weighted retention
+* periodic consolidation
+* memory rehearsal
+* knowledge compression
+
+==========================================================
+
+# KNOWLEDGE DISTILLATION
+
+==========================================================
+
+Large reasoning systems should periodically compress specialized knowledge into smaller expert subsystems.
+
+Examples:
+
+```text
+General Intelligence
+→ Coding Specialist
+→ Trading Specialist
+→ Research Specialist
+```
+
+==========================================================
+
+# DYNAMIC SKILL ROUTING
+
+==========================================================
+
+Tasks should route automatically to specialized subsystems.
+
+Example:
+
+```text
+Coding Request
+→ Coding Engine
+
+Trading Request
+→ Trading Planner
+
+Research Request
+→ Research Agent
+```
+
+==========================================================
+
+# CONTEXT COMPRESSION ENGINE
+
+==========================================================
+
+Long-term conversations and observations must be compressed.
+
+Pipeline:
+
+```text
+Raw Context
+→ Summarization
+→ Semantic Compression
+→ Vector Storage
+→ Retrieval Index
+```
+
+==========================================================
+
+# CHECKPOINT & ROLLBACK SYSTEM
+
+==========================================================
+
+Evolutionary mutations can destabilize intelligence.
+
+Required workflow:
+
+```text
+Checkpoint
+→ Mutation
+→ Evaluation
+→ Rollback if degraded
+```
+
+==========================================================
+
+# INTERNAL BENCHMARKING SYSTEM
+
+==========================================================
+
+The AI continuously evaluates itself.
+
+Benchmark domains:
+
+* coding
+* planning
+* memory retrieval
+* reasoning
+* trading
+* tool usage
+* automation
+
+==========================================================
+
+# HALLUCINATION DETECTION SYSTEM
+
+==========================================================
+
+Before acting, estimate confidence.
+
+```text
+Low confidence
+→ gather more evidence
+→ request verification
+→ avoid execution
+```
+
+==========================================================
+
+# MULTI-SPEED MEMORY
+
+==========================================================
+
+Architecture:
+
+```text
+Fast Memory
+→ active reasoning
+
+Warm Memory
+→ recent knowledge
+
+Cold Memory
+→ archived long-term storage
+```
+
+The old laptop can function as:
+
+* cold memory storage
+* archive server
+* reflection database
+* vector storage node
+
+==========================================================
+
+# EVENT BUS ARCHITECTURE
+
+==========================================================
+
+Subsystems communicate using events.
+
+Example:
+
+```text
+Vision Agent detects pattern
+→ Event emitted
+→ Planner receives event
+→ Memory stores event
+→ RL trainer evaluates event
+```
+
+==========================================================
+
+# AUTONOMOUS GOAL STACK
+
+==========================================================
+
+Maintain layered goals:
+
+```text
+Primary Goals
+Secondary Goals
+Exploration Goals
+Maintenance Goals
+Temporary Goals
+```
+
+==========================================================
+
+# PLANNER STABILIZATION
+
+==========================================================
+
+Prevent infinite recursion.
+
+Use:
+
+* planning depth limits
+* execution budgets
+* recursion thresholds
+* timeout systems
+
+==========================================================
+
+# SYNTHETIC DATA GENERATION
+
+==========================================================
+
+The AI should generate internal training environments.
+
+Examples:
+
+* simulated bugs
+* market simulations
+* synthetic workflows
+* planning puzzles
+* reasoning tasks
+
+==========================================================
+
+# SPARSE ACTIVATION SYSTEM
+
+==========================================================
+
+Only activate relevant experts.
+
+```text
+Task
+→ Expert Selection
+→ Partial Activation
+```
+
+Improves:
+
+* efficiency
+* scalability
+* reasoning quality
+
+==========================================================
+
+# META-COGNITIVE ENGINE
+
+==========================================================
+
+The AI should analyze:
+
+* how it reasons
+* which methods succeed
+* which strategies fail
+* where reasoning breaks down
+
+This creates adaptive reasoning strategies.
+
+==========================================================
+
+# DISTRIBUTED COGNITION
+
+==========================================================
+
+Long-term architecture:
+
+```text
+Main Node
+↕
+Memory Node
+↕
+Training Node
+↕
+Evaluation Node
+```
+
+==========================================================
+
+# INTERNAL SIMULATION ENGINE
+
+==========================================================
+
+Before executing actions:
+
+```text
+simulate possible outcomes
+```
+
+Improves:
+
+* planning
+* risk assessment
+* strategic reasoning
+
+==========================================================
+
+# LONG-TERM IDENTITY LAYER
+
+==========================================================
+
+Maintain:
+
+* strategic consistency
+* persistent goals
+* behavioral continuity
+* stable evolution principles
+
+==========================================================
+
+# RECOVERY SYSTEM
+
+==========================================================
+
+If instability occurs:
+
+```text
+rollback
+restore
+rebuild indexes
+reload checkpoints
+recover memory
+```
+
+==========================================================
+
+# LOCAL-ONLY ARCHITECTURE
+
+==========================================================
+
+The system is designed for local execution.
+
+No dependency on paid APIs.
+
+Architecture:
+
+```text
+MAIN NODE
+- reasoning
+- training
+- planning
+- RL
+- evolution
+- coding
+- trading
+
+MEMORY NODE (Old Laptop)
+- vector storage
+- archives
+- logs
+- reflections
+- checkpoints
+- knowledge graphs
+```
+
+==========================================================
+
+# CUSTOM FOUNDATION MODEL DEVELOPMENT
+
+==========================================================
+
+The system should eventually include:
+
+* custom tokenizer
+* custom transformer
+* custom trainer
+* custom inference engine
+* custom model manager
+* custom memory systems
+* custom reasoning architecture
+
+==========================================================
+
+# TOKENIZER SYSTEM
+
+==========================================================
+
+Pipeline:
+
+```text
+Raw Text
+→ Vocabulary Builder
+→ Token Mapping
+→ Integer Sequences
+```
+
+Recommended progression:
+
+```text
+Character Tokenizer
+→ BPE Tokenizer
+→ Advanced Tokenizer
+```
+
+==========================================================
+
+# TRANSFORMER ARCHITECTURE
+
+==========================================================
+
+Core architecture:
+
+```text
+Tokens
+→ Embeddings
+→ Positional Encoding
+→ Attention Layers
+→ Feedforward Layers
+→ Output Projection
+```
+
+Core mechanism:
+
+Attention:
+
+```text
+Attention(Q,K,V)
+```
+
+==========================================================
+
+# TRAINING ENGINE
+
+==========================================================
+
+Training loop:
+
+```text
+Input
+→ Prediction
+→ Loss
+→ Backpropagation
+→ Weight Update
+→ Repeat
+```
+
+==========================================================
+
+# CUSTOM INFERENCE ENGINE
+
+==========================================================
+
+Responsibilities:
+
+* load checkpoints
+* schedule inference
+* manage context
+* token generation
+* memory allocation
+* routing
+* caching
+
+==========================================================
+
+# CUSTOM MODEL MANAGER
+
+==========================================================
+
+Responsibilities:
+
+* model loading
+* model unloading
+* quantization
+* GPU allocation
+* checkpoint management
+* routing requests
+* context handling
+
+==========================================================
+
+# TRUE PROJECT IDENTITY
+
+==========================================================
+
+This project is not merely:
+
+* a chatbot
+* an automation tool
+* a simple LLM wrapper
+
+It is evolving toward:
+
+```text
+A Modular Cognitive Operating System
+```
+
+with:
+
+* persistent cognition
+* autonomous learning
+* adaptive memory
+* evolutionary reasoning
+* tool orchestration
+* planning systems
+* distributed memory
+* multi-agent intelligence
+* self-improvement
+* long-term world modeling
+
+# Final Guidance
+
+The strongest path is:
+
+1. Build the memory system first
+2. Add observation capabilities
+3. Add tool usage
+4. Add RL learning
+5. Add self-supervised training
+6. Add reflection
+7. Add evolutionary mutation last
+
+That sequence creates a far more stable intelligence architecture than trying to evolve everything immediately.

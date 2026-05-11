@@ -1,0 +1,29 @@
+# Core Dependencies
+asyncio
+aiohttp
+python-dotenv
+pydantic
+loguru
+
+# Memory & Embeddings
+chromadb
+sentence-transformers
+numpy
+faiss-cpu
+
+# Perception
+playwright
+beautifulsoup4
+mss
+pytesseract
+Pillow
+
+# Intelligence & Agents
+torch
+transformers
+openai
+
+# Utilities
+pytest
+black
+isort
