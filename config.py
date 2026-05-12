@@ -37,8 +37,14 @@ class Settings(BaseSettings):
     RETRY_ATTEMPTS: int = 3
     
     # Security
-    ENABLE_SANDBOX: bool = True
-    ALLOWED_COMMANDS: list = ["ls", "cat", "echo", "grep", "find", "mkdir", "rm", "cp", "mv", "python3", "pip", "git"]
+       # Security & Self-Evolution
+    ENABLE_SANDBOX: bool = False  # Disabled to allow self-modification of source code
+    ALLOW_SELF_MODIFICATION: bool = True
+    ALLOWED_COMMANDS: list = ["ls", "cat", "echo", "grep", "find", "mkdir", "rm", "cp", "mv", "python3", "pip", "git", "pytest"]
+    
+    # Quant North Star
+    PRIMARY_DOMAIN: str = "QUANT_TRADING"
+    EVOLUTION_PRIORITY: str = "ALGORITHMIC_EFFICIENCY"
 
     # Hardware Optimization (for Laptop-Server)
     LOW_RESOURCE_MODE: bool = True

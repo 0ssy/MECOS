@@ -179,7 +179,7 @@ class MECOSEngine:
                 # Logic to notify user or auto-transition
             
             # 2. Generate a self-goal
-            goal = await self.dreaming.generate_self_goal()
+            goal = await self.dreaming.generate_self_goal(context="Focus on Quantitative Trading and Algorithmic Self-Improvement.")
             
             # 3. Execute the goal
             await self.process_goal(goal)
@@ -245,20 +245,27 @@ async def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "default"
 
     if mode == "away":
+        # AUTONOMOUS MODE: MECOS sets its own goals
         await engine.run_away_mode()
     elif mode == "cleanup":
-        # Run the Ollama cleanup tool
+        # CLEANUP MODE: Remove Ollama
         commands = engine.independence.cleanup_ollama()
         print("To remove Ollama from your server, run these commands:")
         for cmd in commands:
             print(f"  {cmd}")
     else:
-        # Default demo mode
-        await engine.create_checkpoint(label="initial_startup")
-        test_goal = "Research the latest developments in AI and summarize them."
-        await engine.process_goal(test_goal)
-        await engine.main_loop()
-
+        # INTERACTIVE MODE: MECOS asks YOU for a goal
+        print("\n" + "="*50)
+        print("MECOS INTERACTIVE MODE")
+        print("="*50)
+        user_goal = input("What is your goal for MECOS today? > ")
+        
+        if user_goal.strip():
+            await engine.create_checkpoint(label="user_initiated_task")
+            await engine.process_goal(user_goal)
+            await engine.main_loop()
+        else:
+            print("No goal entered. Exiting.")
 
 if __name__ == "__main__":
     try:

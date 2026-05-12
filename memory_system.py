@@ -33,6 +33,11 @@ class VectorMemory:
         )
         return results
 
+    def count(self):
+        """Return the total number of items in the collection."""
+        return self.collection.count()
+
+
 class MemorySystem:
     def __init__(self):
         self.vector_memory = VectorMemory()
@@ -57,3 +62,10 @@ class MemorySystem:
     async def retrieve_context(self, query: str):
         """Retrieve relevant context for reasoning."""
         return await self.vector_memory.query(query)
+
+    async def get_stats(self):
+        """Return memory statistics."""
+        return {
+            "experience_count": self.vector_memory.count(),
+            "short_term_buffer_size": len(self.short_term_buffer)
+        }

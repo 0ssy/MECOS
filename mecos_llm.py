@@ -13,6 +13,7 @@ from config import settings
 class MECOSLLM:
     def __init__(self):
         # Connect to the remote server laptop (Ollama)
+        # It uses the SERVER_IP you set in config.py
         self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
         self.model = settings.DEFAULT_MODEL
         logger.info(f"MECOS LLM connected to remote brain at {settings.LOCAL_LLM_URL}")
