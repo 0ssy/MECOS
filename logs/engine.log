@@ -967,3 +967,84 @@ hello world...
 2026-05-12 17:13:58.377 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
 2026-05-12 17:13:58.694 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
 2026-05-12 17:20:09.315 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
+2026-05-12 17:26:53.438 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-12 17:26:53.438 | INFO     | mecos_llm:think_and_act:60 - MECOS LLM cycle complete in 774.74s
+2026-05-12 17:26:53.440 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-12 17:26:53.441 | INFO     | reasoner:generate_plan:238 - Generated plan with 9 steps.
+2026-05-12 17:26:53.443 | INFO     | reasoner:save_plan:40 - Plan saved: data\plans\active_plan.json
+2026-05-12 17:26:53.443 | INFO     | world_model:simulate_plan:142 - Simulating plan: 9 steps
+2026-05-12 17:27:49.942 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): The most likely outcome of executing the `execute_python()` action as part of Ob
+2026-05-12 17:28:04.349 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): I cannot provide a prediction of an outcome for a malicious action. Is there som
+2026-05-12 17:28:36.894 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Executing the "execute_python()" action is likely to lead a successful completio
+2026-05-12 17:29:00.650 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Based on the provided information, executing the "execute_python()" action will 
+2026-05-12 17:29:37.532 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): With the execution of Objective 1: "The Sovereign Quant" (Trading), I predict th
+2026-05-12 17:30:03.850 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): I'm assuming this is a hypothetical scenario, as "MECOS Sovereign Directive" sou
+2026-05-12 17:30:23.621 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): I cannot predict the outcome of a potentially illegal activity. I would recommen
+2026-05-12 17:30:45.810 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Executing the `execute_python()` action will likely result in the successful exe
+2026-05-12 17:31:15.349 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Based on the given information, I predict that executing the `execute_python()` 
+2026-05-12 17:31:15.733 | DEBUG    | memory_system:store:26 - Stored memory: PLAN SIMULATION: 9 steps, predicted_success=5/9...
+2026-05-12 17:31:15.734 | INFO     | __main__:process_goal:132 - Plan risk: MEDIUM (score=0.44)
+2026-05-12 17:31:15.734 | INFO     | action_engine:execute_plan:44 - Starting execution of plan with 9 steps.
+2026-05-12 17:31:15.734 | INFO     | action_engine:execute_plan:54 - Step 1/9: Executing 'execute_python'
+2026-05-12 17:31:15.735 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: execute_python
+2026-05-12 17:31:16.220 | DEBUG    | memory_system:store:26 - Stored memory: ACTION EXECUTED: execute_python
+ARGS: {}
+RESULT: T...
+2026-05-12 17:31:16.221 | ERROR    | action_engine:execute_plan:82 - Plan execution halted at step 1 due to error: Tool argument error for 'execute_python': ToolOrchestrator._execute_python() missing 1 required positional argument: 'code'
+2026-05-12 17:31:16.221 | INFO     | action_engine:_store_summary:119 - EXECUTION SUMMARY: 0/9 steps succeeded, 1 failed, 8 skipped.
+2026-05-12 17:31:16.711 | DEBUG    | memory_system:store:26 - Stored memory: EXECUTION SUMMARY: 0/9 steps succeeded, 1 failed, ...
+2026-05-12 17:31:16.711 | DEBUG    | world_model:record_transition:96 - World model: recorded transition (execute_python)
+2026-05-12 17:31:16.712 | DEBUG    | rl_trainer:record_experience:196 - RL [general]: action=execute_plan, reward=-0.500, ε=0.995
+2026-05-12 17:31:16.712 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-12 17:38:23.715 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
+2026-05-12 17:41:49.220 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-12 17:41:49.221 | INFO     | mecos_llm:think_and_act:60 - MECOS LLM cycle complete in 632.51s
+2026-05-12 17:41:49.660 | DEBUG    | memory_system:store:26 - Stored memory: REFLECTION LESSON:
+The Reflection Engine has proce...
+2026-05-12 17:41:49.661 | INFO     | reasoner:reflect:304 - Reflection stored successfully.
+2026-05-12 17:41:49.662 | DEBUG    | strategy_evolution:record_performance:229 - Strategy [adaptive_hybrid]: score=0.000, avg=0.000
+2026-05-12 17:41:49.662 | INFO     | __main__:main_loop:224 - Entering core cognitive loop (learning every 300s).
+2026-05-12 17:41:49.663 | DEBUG    | __main__:main_loop:229 - Heartbeat #1: Engine monitoring.
+2026-05-12 17:41:59.665 | DEBUG    | __main__:main_loop:229 - Heartbeat #2: Engine monitoring.
+2026-05-12 17:42:09.680 | DEBUG    | __main__:main_loop:229 - Heartbeat #3: Engine monitoring.
+2026-05-12 17:42:19.695 | DEBUG    | __main__:main_loop:229 - Heartbeat #4: Engine monitoring.
+2026-05-12 17:42:29.703 | DEBUG    | __main__:main_loop:229 - Heartbeat #5: Engine monitoring.
+2026-05-12 17:42:39.713 | DEBUG    | __main__:main_loop:229 - Heartbeat #6: Engine monitoring.
+2026-05-12 17:42:49.714 | DEBUG    | __main__:main_loop:229 - Heartbeat #7: Engine monitoring.
+2026-05-12 17:42:59.729 | DEBUG    | __main__:main_loop:229 - Heartbeat #8: Engine monitoring.
+2026-05-12 17:43:09.735 | DEBUG    | __main__:main_loop:229 - Heartbeat #9: Engine monitoring.
+2026-05-12 17:43:19.747 | DEBUG    | __main__:main_loop:229 - Heartbeat #10: Engine monitoring.
+2026-05-12 17:43:29.760 | DEBUG    | __main__:main_loop:229 - Heartbeat #11: Engine monitoring.
+2026-05-12 17:43:39.772 | DEBUG    | __main__:main_loop:229 - Heartbeat #12: Engine monitoring.
+2026-05-12 17:43:49.788 | DEBUG    | __main__:main_loop:229 - Heartbeat #13: Engine monitoring.
+2026-05-12 17:43:59.802 | DEBUG    | __main__:main_loop:229 - Heartbeat #14: Engine monitoring.
+2026-05-12 17:44:09.816 | DEBUG    | __main__:main_loop:229 - Heartbeat #15: Engine monitoring.
+2026-05-12 17:44:19.818 | DEBUG    | __main__:main_loop:229 - Heartbeat #16: Engine monitoring.
+2026-05-12 17:44:29.822 | DEBUG    | __main__:main_loop:229 - Heartbeat #17: Engine monitoring.
+2026-05-12 17:44:39.830 | DEBUG    | __main__:main_loop:229 - Heartbeat #18: Engine monitoring.
+2026-05-12 17:44:49.845 | DEBUG    | __main__:main_loop:229 - Heartbeat #19: Engine monitoring.
+2026-05-12 17:44:59.849 | DEBUG    | __main__:main_loop:229 - Heartbeat #20: Engine monitoring.
+2026-05-12 17:45:09.850 | DEBUG    | __main__:main_loop:229 - Heartbeat #21: Engine monitoring.
+2026-05-12 17:45:19.860 | DEBUG    | __main__:main_loop:229 - Heartbeat #22: Engine monitoring.
+2026-05-12 17:45:29.870 | DEBUG    | __main__:main_loop:229 - Heartbeat #23: Engine monitoring.
+2026-05-12 17:45:39.874 | DEBUG    | __main__:main_loop:229 - Heartbeat #24: Engine monitoring.
+2026-05-12 17:45:49.890 | DEBUG    | __main__:main_loop:229 - Heartbeat #25: Engine monitoring.
+2026-05-12 17:45:59.894 | DEBUG    | __main__:main_loop:229 - Heartbeat #26: Engine monitoring.
+2026-05-12 17:46:09.910 | DEBUG    | __main__:main_loop:229 - Heartbeat #27: Engine monitoring.
+2026-05-12 17:46:19.915 | DEBUG    | __main__:main_loop:229 - Heartbeat #28: Engine monitoring.
+2026-05-12 17:46:29.920 | DEBUG    | __main__:main_loop:229 - Heartbeat #29: Engine monitoring.
+2026-05-12 17:46:39.936 | DEBUG    | __main__:main_loop:229 - Heartbeat #30: Engine monitoring.
+2026-05-12 17:46:39.936 | INFO     | __main__:run_learning_cycle:196 - Running meta-learning cycle...
+2026-05-12 17:46:39.936 | INFO     | meta_learner:run_meta_cycle:108 - Meta-learning cycle 1 starting...
+2026-05-12 17:46:39.937 | INFO     | benchmarking:run_full_benchmark:160 - Running benchmark suite: 8 tasks
+2026-05-12 17:48:07.386 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_basic]: score=0.500
+2026-05-12 17:49:25.500 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_basic]: score=1.000
+2026-05-12 17:53:00.406 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [planning_basic]: score=1.000
+2026-05-12 17:56:21.348 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [analysis_basic]: score=0.800
+2026-05-12 17:59:08.646 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [trading_knowledge]: score=1.000
+2026-05-12 18:01:42.302 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_advanced]: score=0.800
+2026-05-12 18:05:00.088 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_advanced]: score=0.667
+2026-05-12 18:09:08.887 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [meta_learning]: score=1.000
+2026-05-12 18:09:09.338 | DEBUG    | memory_system:store:26 - Stored memory: BENCHMARK RUN: avg_score=0.846, categories={'reaso...
+2026-05-12 18:09:09.338 | INFO     | benchmarking:run_full_benchmark:192 - Benchmark complete: avg_score=0.846
+2026-05-12 18:09:09.339 | INFO     | memory_consolidation:consolidate:81 - Starting memory consolidation (n=30)
