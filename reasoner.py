@@ -1,118 +1,454 @@
 import json
+import re
+from pathlib import Path
 from loguru import logger
+
 from config import settings
 from memory_system import MemorySystem
 from mecos_llm import get_mecos_llm
-import re
 
 
 class Reasoner:
+
+    MAX_RETRIES = 3
+
     def __init__(self, memory_system: MemorySystem):
+
         self.memory = memory_system
-        # Using the custom MECOS LLM for autonomous thinking
+
         self.llm = get_mecos_llm()
+
+        # Plan persistence
+        self.plan_dir = Path("data/plans")
+        self.plan_dir.mkdir(parents=True, exist_ok=True)
+
         logger.info("Reasoner initialized with custom MECOS LLM.")
 
-    async def generate_plan(self, goal: str):
-        """Generate a structured plan based on a goal and current context."""
+    # =========================================================
+    # PLAN PERSISTENCE
+    # =========================================================
 
-        # 1. Retrieve relevant context
-        context_results = await self.memory.retrieve_context(goal)
-        # Ensure we safely access the first document list
-        docs = context_results.get('documents', [[]])
-        context_str = "\n".join(docs[0]) if docs else ""
-
-        # 2. Construct prompt
-        prompt = f"""
-        You are the reasoning core of MECOS (Modular Evolutionary Cognitive Operating System).
-        Your goal is: {goal}
-        
-        Relevant context from memory:
-        {context_str}
-        
-        Available tools:
-        - terminal_command(command: str)
-        - file_write(path: str, content: str)
-        
-        Decompose this goal into a structured plan.
-        You MUST return a JSON object with a key "plan" that contains a list of actions.
-        Each action MUST have a "tool" and "args" key.
-        
-        Example format:
-        {{
-            "plan": [
-                {{"tool": "file_write", "args": {{"path": "test.txt", "content": "hello"}}}},
-                {{"tool": "terminal_command", "args": {{"command": "ls -la"}}}}
-            ]
-        }}
-
-        CRITICAL: 
-        1. Return ONLY the JSON object.
-        2. Do NOT include markdown code blocks (```json).
-        3. Do NOT include any text before or after the JSON.
-        4. Ensure all quotes are standard double quotes.
-        """
+    def save_plan(self, plan, filename="active_plan.json"):
 
         try:
-            # 3. Get response from LLM
-            result = await self.llm.think_and_act(prompt, system_prompt="You are the MECOS Reasoning Core.")
-            self.llm.save_experience(prompt, result.get(
-                'monologue', ''), result.get('response', ''))
 
-            content = result.get('response', '')
+            path = self.plan_dir / filename
 
-            # 4. Robust JSON extraction using regex
-            match = re.search(r'\{.*\}', content, re.DOTALL)
-            if match:
-                json_str = match.group()
-                try:
-                    plan_data = json.loads(json_str)
-                except json.JSONDecodeError:
-                    # Strip common markdown artifacts if standard loads fails
-                    clean_content = json_str.replace(
-                        '```json', '').replace('```', '').strip()
-                    plan_data = json.loads(clean_content)
-            else:
-                plan_data = {}
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(plan, f, indent=2)
 
-            # 5. Robustly extract the plan list
-            plan = []
-            if isinstance(plan_data, dict):
-                if "plan" in plan_data and isinstance(plan_data["plan"], list):
-                    plan = plan_data["plan"]
-                elif "actions" in plan_data and isinstance(plan_data["actions"], list):
-                    plan = plan_data["actions"]
-                else:
-                    # Try to find any list in the dict
-                    plan = next((v for v in plan_data.values()
-                                if isinstance(v, list)), [])
-            elif isinstance(plan_data, list):
-                plan = plan_data
-
-            logger.info(f"Generated plan with {len(plan)} steps.")
-            return plan
+            logger.info(f"Plan saved: {path}")
 
         except Exception as e:
-            logger.error(f"Failed to generate plan: {e}")
+            logger.error(f"Failed to save plan: {e}")
+
+    def load_plan(self, filename="active_plan.json"):
+
+        try:
+
+            path = self.plan_dir / filename
+
+            if not path.exists():
+                return []
+
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+
+        except Exception as e:
+
+            logger.error(f"Failed to load plan: {e}")
             return []
 
-    async def reflect(self, goal: str, plan: list, results: list):
-        """Analyze the outcome of a plan and extract lessons."""
-        reflection_prompt = f"""
-        Goal: {goal}
-        Executed Plan: {json.dumps(plan)}
-        Results: {json.dumps(results)}
-        
-        What worked? What failed? What should be improved? 
-        Extract a concise lesson for future strategies.
-        """
+    # =========================================================
+    # PLAN GENERATION
+    # =========================================================
+
+    async def generate_plan(self, goal: str):
 
         try:
-            result = await self.llm.think_and_act(reflection_prompt, system_prompt="You are the MECOS Reflection Engine.")
-            lesson = result.get('response', '')
-            await self.memory.add_experience(f"REFLECTION LESSON:\n{lesson}", source="reflection_engine")
-            logger.info("Reflection completed and stored.")
-            return lesson
+
+            # ---------------------------------------------
+            # Retrieve memory context
+            # ---------------------------------------------
+
+            context_results = await self.memory.retrieve_context(goal)
+
+            docs = context_results.get("documents", [[]])
+
+            context_str = "\n".join(docs[0]) if docs else ""
+
+            # ---------------------------------------------
+            # Planning prompt
+            # ---------------------------------------------
+
+            prompt = f"""
+You are the reasoning core of MECOS.
+
+GOAL:
+{goal}
+
+RELEVANT MEMORY:
+{context_str}
+
+AVAILABLE TOOLS:
+- terminal_command(command: str)
+- file_write(path: str, content: str)
+- file_read(path: str)
+- execute_python(code: str)
+
+TASK:
+Create a sequential execution plan.
+
+RULES:
+1. Return ONLY JSON
+2. No markdown
+3. No explanations
+4. Use this schema:
+
+{{
+    "plan": [
+        {{
+            "step": 1,
+            "objective": "description",
+            "tool": "tool_name",
+            "args": {{}}
+        }}
+    ]
+}}
+"""
+
+            # ---------------------------------------------
+            # LLM inference
+            # ---------------------------------------------
+
+            result = await self.llm.think_and_act(
+                prompt,
+                system_prompt="You are the MECOS Reasoning Core."
+            )
+
+            try:
+
+                self.llm.save_experience(
+                    prompt,
+                    result.get("monologue", ""),
+                    result.get("response", "")
+                )
+
+            except Exception as e:
+                logger.warning(f"Failed saving cognition trace: {e}")
+
+            content = result.get("response", "")
+
+            if not content:
+
+                logger.warning("LLM returned empty response.")
+                return []
+
+            # ---------------------------------------------
+            # Extract JSON
+            # ---------------------------------------------
+
+            match = re.search(r"\{.*\}", content, re.DOTALL)
+
+            if not match:
+
+                logger.error("No JSON found in response.")
+                return []
+
+            json_str = match.group()
+
+            json_str = re.sub(r"```json|```", "", json_str).strip()
+
+            json_str = re.sub(
+                r",\s*([\]}])",
+                r"\1",
+                json_str
+            )
+
+            # ---------------------------------------------
+            # Parse JSON
+            # ---------------------------------------------
+
+            try:
+
+                plan_data = json.loads(json_str)
+
+            except json.JSONDecodeError as e:
+
+                logger.error(f"JSON parse failed: {e}")
+
+                logger.debug(f"RAW JSON:\n{json_str}")
+
+                return []
+
+            # ---------------------------------------------
+            # Extract plan
+            # ---------------------------------------------
+
+            raw_plan = []
+
+            if isinstance(plan_data, dict):
+
+                raw_plan = (
+                    plan_data.get("plan")
+                    or plan_data.get("actions")
+                    or []
+                )
+
+            elif isinstance(plan_data, list):
+
+                raw_plan = plan_data
+
+            validated_plan = []
+
+            for step in raw_plan:
+
+                if not isinstance(step, dict):
+                    continue
+
+                validated_plan.append({
+
+                    "step": step.get(
+                        "step",
+                        len(validated_plan) + 1
+                    ),
+
+                    "objective": step.get(
+                        "objective",
+                        "undefined"
+                    ),
+
+                    "tool": step.get("tool", ""),
+
+                    "args": step.get("args", {}),
+
+                    # Task lifecycle
+                    "state": "pending",
+
+                    # Reflection memory
+                    "reflection": None,
+
+                    # Execution output
+                    "result": None,
+
+                    # Retry counter
+                    "retries": 0
+                })
+
+            logger.info(
+                f"Generated plan with "
+                f"{len(validated_plan)} steps."
+            )
+
+            # Save immediately
+            self.save_plan(validated_plan)
+
+            return validated_plan
+
         except Exception as e:
-            logger.error(f"Reflection failed: {e}")
+
+            logger.exception(
+                f"Failed to generate plan: {e}"
+            )
+
+            return []
+
+    # =========================================================
+    # REFLECTION ENGINE
+    # =========================================================
+
+    async def reflect(
+        self,
+        goal: str,
+        plan: list,
+        results: list
+    ):
+
+        try:
+
+            reflection_prompt = f"""
+GOAL:
+{goal}
+
+EXECUTED PLAN:
+{json.dumps(plan, indent=2)}
+
+RESULTS:
+{json.dumps(results, indent=2)}
+
+Analyze:
+1. What worked?
+2. What failed?
+3. What should improve?
+4. What should MECOS remember?
+
+Return concise operational lessons.
+"""
+
+            result = await self.llm.think_and_act(
+                reflection_prompt,
+                system_prompt=(
+                    "You are the MECOS Reflection Engine."
+                )
+            )
+
+            lesson = result.get("response", "")
+
+            if lesson:
+
+                await self.memory.add_experience(
+                    f"REFLECTION LESSON:\n{lesson}",
+                    source="reflection_engine"
+                )
+
+                logger.info(
+                    "Reflection stored successfully."
+                )
+
+            return lesson
+
+        except Exception as e:
+
+            logger.exception(
+                f"Reflection failed: {e}"
+            )
+
             return ""
+
+    # =========================================================
+    # AUTONOMOUS EXECUTION LOOP
+    # =========================================================
+
+    async def execute_plan(
+        self,
+        goal: str,
+        plan: list,
+        action_engine
+    ):
+
+        try:
+
+            for task in plan:
+
+                # Skip completed tasks
+                if task["state"] == "complete":
+                    continue
+
+                logger.info(
+                    f"Executing Step "
+                    f"{task['step']}: "
+                    f"{task['objective']}"
+                )
+
+                try:
+
+                    task["state"] = "running"
+
+                    # ---------------------------------
+                    # Execute tool action
+                    # ---------------------------------
+
+                    result = await action_engine.execute(task)
+
+                    task["result"] = result
+
+                    # ---------------------------------
+                    # Store execution memory
+                    # ---------------------------------
+
+                    await self.memory.add_experience(
+                        f"""
+TASK:
+{task['objective']}
+
+RESULT:
+{result}
+""",
+                        source="execution_engine"
+                    )
+
+                    # ---------------------------------
+                    # Reflection phase
+                    # ---------------------------------
+
+                    task["state"] = "reflecting"
+
+                    lesson = await self.reflect(
+                        goal,
+                        [task],
+                        [result]
+                    )
+
+                    # ---------------------------------
+                    # Reflection gate
+                    # ---------------------------------
+
+                    if lesson:
+
+                        task["reflection"] = lesson
+
+                        task["state"] = "complete"
+
+                        logger.info(
+                            f"Task complete: "
+                            f"Step {task['step']}"
+                        )
+
+                    else:
+
+                        task["state"] = "failed"
+
+                        logger.warning(
+                            f"Reflection failed "
+                            f"for Step {task['step']}"
+                        )
+
+                    # ---------------------------------
+                    # Persist updated plan
+                    # ---------------------------------
+
+                    self.save_plan(plan)
+
+                except Exception as e:
+
+                    logger.exception(
+                        f"Execution failed for "
+                        f"Step {task['step']}: {e}"
+                    )
+
+                    task["retries"] += 1
+
+                    if (
+                        task["retries"]
+                        >= self.MAX_RETRIES
+                    ):
+
+                        task["state"] = "failed"
+
+                        logger.error(
+                            f"Task permanently failed: "
+                            f"Step {task['step']}"
+                        )
+
+                    else:
+
+                        task["state"] = "pending"
+
+                        logger.warning(
+                            f"Retrying Step "
+                            f"{task['step']} "
+                            f"({task['retries']}/"
+                            f"{self.MAX_RETRIES})"
+                        )
+
+                    self.save_plan(plan)
+
+            logger.info(
+                "Plan execution completed."
+            )
+
+        except Exception as e:
+
+            logger.exception(
+                f"Autonomous execution loop failed: {e}"
+            )

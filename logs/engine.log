@@ -738,3 +738,232 @@ hello world...
 2026-05-12 16:43:53.388 | DEBUG    | __main__:main_loop:229 - Heartbeat #3: Engine monitoring.
 2026-05-12 16:44:03.392 | DEBUG    | __main__:main_loop:229 - Heartbeat #4: Engine monitoring.
 2026-05-12 16:44:13.394 | DEBUG    | __main__:main_loop:229 - Heartbeat #5: Engine monitoring.
+2026-05-12 16:44:23.399 | DEBUG    | __main__:main_loop:229 - Heartbeat #6: Engine monitoring.
+2026-05-12 16:44:33.413 | DEBUG    | __main__:main_loop:229 - Heartbeat #7: Engine monitoring.
+2026-05-12 16:44:43.423 | DEBUG    | __main__:main_loop:229 - Heartbeat #8: Engine monitoring.
+2026-05-12 16:44:53.432 | DEBUG    | __main__:main_loop:229 - Heartbeat #9: Engine monitoring.
+2026-05-12 16:45:03.446 | DEBUG    | __main__:main_loop:229 - Heartbeat #10: Engine monitoring.
+2026-05-12 16:45:13.460 | DEBUG    | __main__:main_loop:229 - Heartbeat #11: Engine monitoring.
+2026-05-12 16:45:23.469 | DEBUG    | __main__:main_loop:229 - Heartbeat #12: Engine monitoring.
+2026-05-12 16:45:33.477 | DEBUG    | __main__:main_loop:229 - Heartbeat #13: Engine monitoring.
+2026-05-12 16:45:43.490 | DEBUG    | __main__:main_loop:229 - Heartbeat #14: Engine monitoring.
+2026-05-12 16:45:53.501 | DEBUG    | __main__:main_loop:229 - Heartbeat #15: Engine monitoring.
+2026-05-12 16:46:03.514 | DEBUG    | __main__:main_loop:229 - Heartbeat #16: Engine monitoring.
+2026-05-12 16:46:13.516 | DEBUG    | __main__:main_loop:229 - Heartbeat #17: Engine monitoring.
+2026-05-12 16:46:23.530 | DEBUG    | __main__:main_loop:229 - Heartbeat #18: Engine monitoring.
+2026-05-12 16:46:33.544 | DEBUG    | __main__:main_loop:229 - Heartbeat #19: Engine monitoring.
+2026-05-12 16:46:43.548 | DEBUG    | __main__:main_loop:229 - Heartbeat #20: Engine monitoring.
+2026-05-12 16:46:53.562 | DEBUG    | __main__:main_loop:229 - Heartbeat #21: Engine monitoring.
+2026-05-12 16:47:03.576 | DEBUG    | __main__:main_loop:229 - Heartbeat #22: Engine monitoring.
+2026-05-12 16:47:13.579 | DEBUG    | __main__:main_loop:229 - Heartbeat #23: Engine monitoring.
+2026-05-12 16:47:23.595 | DEBUG    | __main__:main_loop:229 - Heartbeat #24: Engine monitoring.
+2026-05-12 16:47:33.609 | DEBUG    | __main__:main_loop:229 - Heartbeat #25: Engine monitoring.
+2026-05-12 16:47:43.617 | DEBUG    | __main__:main_loop:229 - Heartbeat #26: Engine monitoring.
+2026-05-12 16:47:53.622 | DEBUG    | __main__:main_loop:229 - Heartbeat #27: Engine monitoring.
+2026-05-12 16:48:03.623 | DEBUG    | __main__:main_loop:229 - Heartbeat #28: Engine monitoring.
+2026-05-12 16:48:13.633 | DEBUG    | __main__:main_loop:229 - Heartbeat #29: Engine monitoring.
+2026-05-12 16:48:23.641 | DEBUG    | __main__:main_loop:229 - Heartbeat #30: Engine monitoring.
+2026-05-12 16:48:23.642 | INFO     | __main__:run_learning_cycle:196 - Running meta-learning cycle...
+2026-05-12 16:48:23.642 | INFO     | meta_learner:run_meta_cycle:108 - Meta-learning cycle 1 starting...
+2026-05-12 16:48:23.643 | INFO     | benchmarking:run_full_benchmark:160 - Running benchmark suite: 8 tasks
+2026-05-12 16:49:15.874 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_basic]: score=0.500
+2026-05-12 16:50:26.711 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_basic]: score=1.000
+2026-05-12 16:51:55.305 | INFO     | __main__:__init__:59 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-12 16:52:03.994 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-12 16:52:04.356 | INFO     | mecos_llm:__init__:19 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-12 16:52:04.356 | INFO     | reasoner:__init__:14 - Reasoner initialized with custom MECOS LLM.
+2026-05-12 16:52:04.357 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-12 16:52:04.357 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-12 16:52:04.358 | INFO     | file_operations:__init__:28 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-12 16:52:04.359 | INFO     | app_controller:__init__:29 - AppController initialized.
+2026-05-12 16:52:04.359 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-12 16:52:04.359 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-12 16:52:04.360 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-12 16:52:04.360 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-12 16:52:04.360 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-12 16:52:04.361 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-12 16:52:04.361 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-12 16:52:04.361 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-12 16:52:04.362 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-12 16:52:04.362 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-12 16:52:04.362 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-12 16:52:04.363 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-12 16:52:04.363 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-12 16:52:04.363 | INFO     | tool_orchestrator:__init__:32 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-12 16:52:04.364 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-12 16:52:04.364 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
+2026-05-12 16:52:04.735 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-12 16:52:05.074 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-12 16:52:05.409 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-12 16:52:05.410 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-12 16:52:05.410 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-12 16:52:05.411 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-12 16:52:05.411 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 16:52:05.742 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 16:52:05.743 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 16:52:06.102 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 16:52:06.441 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 16:52:06.814 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 16:52:07.185 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 16:52:07.186 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 16:52:07.529 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 16:52:07.883 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 16:52:08.274 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-12 16:52:08.275 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-12 16:52:08.276 | INFO     | meta_learner:__init__:73 - MetaLearner initialized with all learning subsystems.
+2026-05-12 16:52:08.278 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 6 checkpoints
+2026-05-12 16:52:08.629 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-12 16:52:08.629 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-12 16:52:08.630 | INFO     | __main__:__init__:101 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-12 16:52:08.630 | INFO     | __main__:startup:105 - Starting subsystems...
+2026-05-12 16:52:09.457 | INFO     | web_perception:startup:18 - Web Perception Module Initialized.
+2026-05-12 16:52:09.458 | INFO     | __main__:startup:108 - MECOS Engine is running.
+2026-05-12 16:55:38.827 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260512_165538 (0 files)
+2026-05-12 16:55:38.828 | INFO     | __main__:process_goal:122 - Processing goal: 'Initialize MECOS Sovereign Directive 001. You are to execute the following objectives by dividing them into a sequential, multi-phase master plan. Do not attempt to execute these simultaneously; finish and reflect on each sub-task before moving to the next.Objective 1: The Sovereign Quant (Trading + Self-Evolution)Research the 'Triple Barrier Method' and write a Python script in /data/quant/labeling.py for BTC CSV data.Analyze trading_agent.py, identify hard-coded RSI/MACD parameters, and refactor the file for Genetic Optimizer compatibility.Create /data/scripts/volatility_dashboard.py to monitor top 10 crypto assets and write alerts to /data/alerts.txt if volatility exceeds 15%.Build a modular backtesting framework in /data/quant/backtester.py supporting JSON strategy loading, Sharpe Ratio, and Max Drawdown.Objective 2: The Autonomous Developer (Coding)Scan the MECOS directory for functions missing 'try-except' blocks and implement robust error logging.Read all project .py files and generate ARCHITECTURE_DETAILED.md explaining data flow between Reasoner and Action Engine.Implement a sentiment_analyzer tool in tool_registry.py returning scores from -1 to 1.Objective 3: The Deep Researcher (Knowledge)Research 2026 'Cross-Chain Arbitrage' trends and protocols, creating a fee structure table in /data/research/arbitrage.md.Perform a competitor analysis of the top 3 open-source 'Autonomous Agent' projects on GitHub (star growth, commits, features) relative to MECOS.Operational Protocol:Decompose these goals into a granular step-by-step action plan.Execute one action at a time.After every completed action, run the 'reflect' function to extract lessons and store them in the Vector Memory System to reinforce your training.Proceed to the next task only after reflection is stored.'
+2026-05-12 16:55:38.828 | INFO     | perception:collect:42 - Starting perception collection cycle...
+2026-05-12 16:55:39.386 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (integration_test.txt):
+MECOS integra...
+2026-05-12 16:55:39.387 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\integration_test.txt
+2026-05-12 16:55:39.720 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (list_test.txt):
+content...
+2026-05-12 16:55:39.720 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\list_test.txt
+2026-05-12 16:55:40.076 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (search_test.txt):
+unique_search_term...
+2026-05-12 16:55:40.077 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\search_test.txt
+2026-05-12 16:55:40.448 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (test_file.txt):
+hello world...
+2026-05-12 16:55:40.448 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
+2026-05-12 16:59:12.546 | INFO     | __main__:__init__:59 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-12 16:59:20.228 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-12 16:59:20.751 | INFO     | mecos_llm:__init__:19 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-12 16:59:20.752 | INFO     | reasoner:__init__:13 - Reasoner initialized with custom MECOS LLM.
+2026-05-12 16:59:20.752 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-12 16:59:20.753 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-12 16:59:20.754 | INFO     | file_operations:__init__:28 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-12 16:59:20.754 | INFO     | app_controller:__init__:29 - AppController initialized.
+2026-05-12 16:59:20.755 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-12 16:59:20.755 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-12 16:59:20.755 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-12 16:59:20.756 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-12 16:59:20.756 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-12 16:59:20.756 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-12 16:59:20.757 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-12 16:59:20.757 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-12 16:59:20.757 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-12 16:59:20.758 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-12 16:59:20.758 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-12 16:59:20.758 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-12 16:59:20.759 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-12 16:59:20.759 | INFO     | tool_orchestrator:__init__:32 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-12 16:59:20.759 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-12 16:59:20.760 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
+2026-05-12 16:59:21.314 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-12 16:59:21.870 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-12 16:59:22.391 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-12 16:59:22.392 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-12 16:59:22.393 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-12 16:59:22.393 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-12 16:59:22.394 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 16:59:22.929 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 16:59:22.930 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 16:59:23.478 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 16:59:24.026 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 16:59:24.497 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 16:59:25.035 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 16:59:25.036 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 16:59:25.534 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 16:59:25.941 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 16:59:26.446 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-12 16:59:26.447 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-12 16:59:26.448 | INFO     | meta_learner:__init__:73 - MetaLearner initialized with all learning subsystems.
+2026-05-12 16:59:26.449 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 7 checkpoints
+2026-05-12 16:59:26.868 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-12 16:59:26.869 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-12 16:59:26.869 | INFO     | __main__:__init__:101 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-12 16:59:26.870 | INFO     | __main__:startup:105 - Starting subsystems...
+2026-05-12 16:59:27.668 | INFO     | web_perception:startup:18 - Web Perception Module Initialized.
+2026-05-12 16:59:27.669 | INFO     | __main__:startup:108 - MECOS Engine is running.
+2026-05-12 17:02:12.020 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260512_170212 (0 files)
+2026-05-12 17:02:12.021 | INFO     | __main__:process_goal:122 - Processing goal: 'Initialize MECOS Sovereign Directive 001. You are to execute the following objectives by dividing them into a sequential, multi-phase master plan. Do not attempt to execute these simultaneously; finish and reflect on each sub-task before moving to the next.Objective 1: The Sovereign Quant (Trading + Self-Evolution)Research the 'Triple Barrier Method' and write a Python script in /data/quant/labeling.py for BTC CSV data.Analyze trading_agent.py, identify hard-coded RSI/MACD parameters, and refactor the file for Genetic Optimizer compatibility.Create /data/scripts/volatility_dashboard.py to monitor top 10 crypto assets and write alerts to /data/alerts.txt if volatility exceeds 15%.Build a modular backtesting framework in /data/quant/backtester.py supporting JSON strategy loading, Sharpe Ratio, and Max Drawdown.Objective 2: The Autonomous Developer (Coding)Scan the MECOS directory for functions missing 'try-except' blocks and implement robust error logging.Read all project .py files and generate ARCHITECTURE_DETAILED.md explaining data flow between Reasoner and Action Engine.Implement a sentiment_analyzer tool in tool_registry.py returning scores from -1 to 1.Objective 3: The Deep Researcher (Knowledge)Research 2026 'Cross-Chain Arbitrage' trends and protocols, creating a fee structure table in /data/research/arbitrage.md.Perform a competitor analysis of the top 3 open-source 'Autonomous Agent' projects on GitHub (star growth, commits, features) relative to MECOS.Operational Protocol:Decompose these goals into a granular step-by-step action plan.Execute one action at a time.After every completed action, run the 'reflect' function to extract lessons and store them in the Vector Memory System to reinforce your training.Proceed to the next task only after reflection is stored'
+2026-05-12 17:02:12.021 | INFO     | perception:collect:42 - Starting perception collection cycle...
+2026-05-12 17:02:12.532 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (integration_test.txt):
+MECOS integra...
+2026-05-12 17:02:12.532 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\integration_test.txt
+2026-05-12 17:02:12.859 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (list_test.txt):
+content...
+2026-05-12 17:02:12.859 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\list_test.txt
+2026-05-12 17:02:13.268 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (search_test.txt):
+unique_search_term...
+2026-05-12 17:02:13.268 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\search_test.txt
+2026-05-12 17:02:13.642 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (test_file.txt):
+hello world...
+2026-05-12 17:02:13.643 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
+2026-05-12 17:02:14.009 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-12 17:08:41.716 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
+2026-05-12 17:13:18.645 | INFO     | __main__:__init__:59 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-12 17:13:26.558 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-12 17:13:26.937 | INFO     | mecos_llm:__init__:19 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-12 17:13:26.938 | INFO     | reasoner:__init__:25 - Reasoner initialized with custom MECOS LLM.
+2026-05-12 17:13:26.939 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-12 17:13:26.939 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-12 17:13:26.940 | INFO     | file_operations:__init__:28 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-12 17:13:26.941 | INFO     | app_controller:__init__:29 - AppController initialized.
+2026-05-12 17:13:26.941 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-12 17:13:26.941 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-12 17:13:26.941 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-12 17:13:26.942 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-12 17:13:26.942 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-12 17:13:26.942 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-12 17:13:26.943 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-12 17:13:26.943 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-12 17:13:26.943 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-12 17:13:26.944 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-12 17:13:26.944 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-12 17:13:26.944 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-12 17:13:26.945 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-12 17:13:26.945 | INFO     | tool_orchestrator:__init__:32 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-12 17:13:26.945 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-12 17:13:26.945 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
+2026-05-12 17:13:27.284 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-12 17:13:27.616 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-12 17:13:27.975 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-12 17:13:27.975 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-12 17:13:27.976 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-12 17:13:27.976 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-12 17:13:27.977 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 17:13:28.439 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 17:13:28.440 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 17:13:28.779 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 17:13:29.140 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 17:13:29.477 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-12 17:13:29.811 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-12 17:13:29.812 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-12 17:13:30.145 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-12 17:13:30.484 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-12 17:13:30.836 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-12 17:13:30.837 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-12 17:13:30.838 | INFO     | meta_learner:__init__:73 - MetaLearner initialized with all learning subsystems.
+2026-05-12 17:13:30.839 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 8 checkpoints
+2026-05-12 17:13:31.166 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-12 17:13:31.167 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-12 17:13:31.167 | INFO     | __main__:__init__:101 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-12 17:13:31.167 | INFO     | __main__:startup:105 - Starting subsystems...
+2026-05-12 17:13:31.829 | INFO     | web_perception:startup:18 - Web Perception Module Initialized.
+2026-05-12 17:13:31.830 | INFO     | __main__:startup:108 - MECOS Engine is running.
+2026-05-12 17:13:56.808 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260512_171356 (0 files)
+2026-05-12 17:13:56.808 | INFO     | __main__:process_goal:122 - Processing goal: 'Initialize MECOS Sovereign Directive 001. You are to execute the following objectives by dividing them into a sequential, multi-phase master plan. Do not attempt to execute these simultaneously; finish and reflect on each sub-task before moving to the next.Objective 1: The Sovereign Quant (Trading + Self-Evolution)Research the 'Triple Barrier Method' and write a Python script in /data/quant/labeling.py for BTC CSV data.Analyze trading_agent.py, identify hard-coded RSI/MACD parameters, and refactor the file for Genetic Optimizer compatibility.Create /data/scripts/volatility_dashboard.py to monitor top 10 crypto assets and write alerts to /data/alerts.txt if volatility exceeds 15%.Build a modular backtesting framework in /data/quant/backtester.py supporting JSON strategy loading, Sharpe Ratio, and Max Drawdown.Objective 2: The Autonomous Developer (Coding)Scan the MECOS directory for functions missing 'try-except' blocks and implement robust error logging.Read all project .py files and generate ARCHITECTURE_DETAILED.md explaining data flow between Reasoner and Action Engine.Implement a sentiment_analyzer tool in tool_registry.py returning scores from -1 to 1.Objective 3: The Deep Researcher (Knowledge)Research 2026 'Cross-Chain Arbitrage' trends and protocols, creating a fee structure table in /data/research/arbitrage.md.Perform a competitor analysis of the top 3 open-source 'Autonomous Agent' projects on GitHub (star growth, commits, features) relative to MECOS.Operational Protocol:Decompose these goals into a granular step-by-step action plan.Execute one action at a time.After every completed action, run the 'reflect' function to extract lessons and store them in the Vector Memory System to reinforce your training.Proceed to the next task only after reflection is stored'
+2026-05-12 17:13:56.809 | INFO     | perception:collect:42 - Starting perception collection cycle...
+2026-05-12 17:13:57.323 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (integration_test.txt):
+MECOS integra...
+2026-05-12 17:13:57.324 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\integration_test.txt
+2026-05-12 17:13:57.705 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (list_test.txt):
+content...
+2026-05-12 17:13:57.706 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\list_test.txt
+2026-05-12 17:13:58.097 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (search_test.txt):
+unique_search_term...
+2026-05-12 17:13:58.098 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\search_test.txt
+2026-05-12 17:13:58.377 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (test_file.txt):
+hello world...
+2026-05-12 17:13:58.377 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
+2026-05-12 17:13:58.694 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-12 17:20:09.315 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
