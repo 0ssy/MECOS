@@ -1,0 +1,92 @@
+[
+  {
+    "step": 1,
+    "objective": "Research the 'Triple Barrier Method' and write a Python script in /data/quant/labeling.py for BTC CSV data.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 2,
+    "objective": "Analyze trading_agent.py, identify hard-coded RSI/MACD parameters, and refactor the file for Genetic Optimizer compatibility.",
+    "tool": "file_read",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 3,
+    "objective": "Create /data/scripts/volatility_dashboard.py to monitor top 10 crypto assets and write alerts to /data/alerts.txt if volatility exceeds 15%.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 4,
+    "objective": "Build a modular backtesting framework in /data/quant/backtester.py supporting JSON strategy loading, Sharpe Ratio, and Max Drawdown.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 5,
+    "objective": "Scan the MECOS directory for functions missing 'try-except' blocks and implement robust error logging.",
+    "tool": "file_read",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 6,
+    "objective": "Read all project .py files and generate ARCHITECTURE_DETAILED.md explaining data flow between Reasoner and Action Engine.",
+    "tool": "file_read",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 7,
+    "objective": "Implement a sentiment_analyzer tool in tool_registry.py returning scores from -1 to 1.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 8,
+    "objective": "Research 2026 'Cross-Chain Arbitrage' trends and protocols, creating a fee structure table in /data/research/arbitrage.md.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 9,
+    "objective": "Perform a competitor analysis of the top 3 open-source 'Autonomous Agent' projects on GitHub (star growth, commits, features) relative to MECOS.",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  }
+]
