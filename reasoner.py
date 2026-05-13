@@ -8,51 +8,28 @@ from memory_system import MemorySystem
 from mecos_llm import get_mecos_llm
 
 
-
 def clean_json_string(json_str: str) -> str:
     """Remove comments and clean JSON string before parsing."""
+
     # Remove // single-line comments
     json_str = re.sub(r'//.*?$', '', json_str, flags=re.MULTILINE)
+
     # Remove /* multi-line comments */
     json_str = re.sub(r'/\*.*?\*/', '', json_str, flags=re.DOTALL)
+
     # Remove trailing commas before } or ]
-    json_str = re.sub(r',(\s*[}\]])', r'', json_str)
+    json_str = re.sub(r',(\s*[}\]])', r'\1', json_str)
+
     return json_str.strip()
 
 
-
-def _validate_plan_step(step: dict) -> tuple[bool, str]:
-    """Validate that a plan step has proper tool arguments."""
-    tool = step.get('tool', '')
-    args = step.get('args', {})
-    
-    # Validation rules
-    if tool == 'execute_python':
-        code = args.get('code', '')
-        # Check if they put a filename instead of code
-        if code.endswith('.py') and '\n' not in code and 'import' not in code:
-            return False, f"execute_python requires actual Python CODE, not a filename. Got: {code}"
-    
-    if tool == 'execute_bash':
-        command = args.get('command', '')
-        if not command:
-            return False, "execute_bash requires a 'command' argument"
-    
-    if tool == 'file_write':
-        path = args.get('path', '')
-        content_arg = args.get('content', '')
-        if not path or not content_arg:
-            return False, "file_write requires both 'path' and 'content' arguments"
-    
-    return True, ""
-\n\nclass Reasoner:
+class Reasoner:
 
     MAX_RETRIES = 3
 
     def __init__(self, memory_system: MemorySystem):
 
         self.memory = memory_system
-
         self.llm = get_mecos_llm()
 
         # Plan persistence

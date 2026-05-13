@@ -3,30 +3,30 @@ import re
 with open('reasoner.py', 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Add this helper function at the top of the file (after imports)
-helper_function = '''
-def clean_json_string(json_str: str) -> str:
-    \"\"\"Remove comments and clean JSON string before parsing.\"\"\"
-    # Remove // single-line comments
-    json_str = re.sub(r'//.*?$', '', json_str, flags=re.MULTILINE)
-    # Remove /* multi-line comments */
-    json_str = re.sub(r'/\*.*?\*/', '', json_str, flags=re.DOTALL)
-    # Remove trailing commas before } or ]
-    json_str = re.sub(r',(\s*[}\]])', r'\1', json_str)
-    return json_str.strip()
-'''
+# Remove the broken validation function
+# Look for the literal \n\n that broke it
+content = content.replace('\\n\\nclass Reasoner:', '\n\nclass Reasoner:')
+content = content.replace('\\n', '\n')  # Fix any other escaped newlines
 
-# Insert after imports (find "class Reasoner:")
-if 'def clean_json_string' not in content:
-    content = content.replace('class Reasoner:', helper_function + '\n\nclass Reasoner:')
+# Remove the entire broken validation block if it exists
+if '_validate_plan_step' in content:
+    # Find and remove the validation function
+    import re
+    # Remove from the function definition to where Reasoner class starts
+    pattern = r'def _validate_plan_step.*?(?=class Reasoner:)'
+    content = re.sub(pattern, '', content, flags=re.DOTALL)
 
-# Now replace json.loads(clean_json) with json.loads(clean_json_string(clean_json))
-content = content.replace(
-    'plan_data = json.loads(clean_json)',
-    'plan_data = json.loads(clean_json_string(clean_json))'
-)
+# Also remove any broken validation calls in the loop
+if 'is_valid, error_msg = _validate_plan_step' in content:
+    # Restore the original loop
+    content = re.sub(
+        r'for step in plan_data:.*?continue',
+        'for step in plan_data:',
+        content,
+        flags=re.DOTALL
+    )
 
 with open('reasoner.py', 'w', encoding='utf-8') as f:
     f.write(content)
 
-print('✅ Robust JSON cleaner added to reasoner.py')
+print('✅ reasoner.py syntax errors fixed')

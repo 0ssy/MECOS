@@ -1700,3 +1700,46 @@ N
 2026-05-13 22:05:38.968 | DEBUG    | world_model:record_transition:96 - World model: recorded transition (execute_python)
 2026-05-13 22:05:38.969 | DEBUG    | rl_trainer:record_experience:196 - RL [general]: action=execute_plan, reward=-0.500, ε=0.995
 2026-05-13 22:05:38.970 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-13 22:09:33.028 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
+2026-05-13 22:11:42.949 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-13 22:11:42.949 | INFO     | mecos_llm:think_and_act:60 - MECOS LLM cycle complete in 363.98s
+2026-05-13 22:11:43.444 | DEBUG    | memory_system:store:26 - Stored memory: REFLECTION LESSON:
+Based on the results, it appear...
+2026-05-13 22:11:43.444 | INFO     | reasoner:reflect:316 - Reflection stored successfully.
+2026-05-13 22:11:43.446 | DEBUG    | strategy_evolution:record_performance:229 - Strategy [adaptive_hybrid]: score=0.000, avg=0.000
+2026-05-13 22:11:43.446 | INFO     | __main__:main_loop:221 - Entering core cognitive loop (learning every 300s).
+2026-05-13 22:11:43.446 | DEBUG    | __main__:main_loop:226 - Heartbeat #1: Engine monitoring.
+2026-05-13 22:11:53.456 | DEBUG    | __main__:main_loop:226 - Heartbeat #2: Engine monitoring.
+2026-05-13 22:12:03.470 | DEBUG    | __main__:main_loop:226 - Heartbeat #3: Engine monitoring.
+2026-05-13 22:12:13.474 | DEBUG    | __main__:main_loop:226 - Heartbeat #4: Engine monitoring.
+2026-05-13 22:12:23.483 | DEBUG    | __main__:main_loop:226 - Heartbeat #5: Engine monitoring.
+2026-05-13 22:12:33.490 | DEBUG    | __main__:main_loop:226 - Heartbeat #6: Engine monitoring.
+2026-05-13 22:12:43.491 | DEBUG    | __main__:main_loop:226 - Heartbeat #7: Engine monitoring.
+2026-05-13 22:12:53.500 | DEBUG    | __main__:main_loop:226 - Heartbeat #8: Engine monitoring.
+2026-05-13 22:13:03.505 | DEBUG    | __main__:main_loop:226 - Heartbeat #9: Engine monitoring.
+2026-05-13 22:13:13.508 | DEBUG    | __main__:main_loop:226 - Heartbeat #10: Engine monitoring.
+2026-05-13 22:13:23.522 | DEBUG    | __main__:main_loop:226 - Heartbeat #11: Engine monitoring.
+2026-05-13 22:13:33.538 | DEBUG    | __main__:main_loop:226 - Heartbeat #12: Engine monitoring.
+2026-05-13 22:13:43.541 | DEBUG    | __main__:main_loop:226 - Heartbeat #13: Engine monitoring.
+2026-05-13 22:13:53.542 | DEBUG    | __main__:main_loop:226 - Heartbeat #14: Engine monitoring.
+2026-05-13 22:14:03.554 | DEBUG    | __main__:main_loop:226 - Heartbeat #15: Engine monitoring.
+2026-05-13 22:14:13.559 | DEBUG    | __main__:main_loop:226 - Heartbeat #16: Engine monitoring.
+2026-05-13 22:14:23.560 | DEBUG    | __main__:main_loop:226 - Heartbeat #17: Engine monitoring.
+2026-05-13 22:14:33.567 | DEBUG    | __main__:main_loop:226 - Heartbeat #18: Engine monitoring.
+2026-05-13 22:14:43.581 | DEBUG    | __main__:main_loop:226 - Heartbeat #19: Engine monitoring.
+2026-05-13 22:14:53.589 | DEBUG    | __main__:main_loop:226 - Heartbeat #20: Engine monitoring.
+2026-05-13 22:15:03.590 | DEBUG    | __main__:main_loop:226 - Heartbeat #21: Engine monitoring.
+2026-05-13 22:15:13.594 | DEBUG    | __main__:main_loop:226 - Heartbeat #22: Engine monitoring.
+2026-05-13 22:15:23.595 | DEBUG    | __main__:main_loop:226 - Heartbeat #23: Engine monitoring.
+2026-05-13 22:15:33.605 | DEBUG    | __main__:main_loop:226 - Heartbeat #24: Engine monitoring.
+2026-05-13 22:15:43.609 | DEBUG    | __main__:main_loop:226 - Heartbeat #25: Engine monitoring.
+2026-05-13 22:15:53.616 | DEBUG    | __main__:main_loop:226 - Heartbeat #26: Engine monitoring.
+2026-05-13 22:16:03.620 | DEBUG    | __main__:main_loop:226 - Heartbeat #27: Engine monitoring.
+2026-05-13 22:16:13.635 | DEBUG    | __main__:main_loop:226 - Heartbeat #28: Engine monitoring.
+2026-05-13 22:16:23.649 | DEBUG    | __main__:main_loop:226 - Heartbeat #29: Engine monitoring.
+2026-05-13 22:16:33.659 | DEBUG    | __main__:main_loop:226 - Heartbeat #30: Engine monitoring.
+2026-05-13 22:16:33.660 | INFO     | __main__:run_learning_cycle:193 - Running meta-learning cycle...
+2026-05-13 22:16:33.661 | INFO     | meta_learner:run_meta_cycle:108 - Meta-learning cycle 1 starting...
+2026-05-13 22:16:33.662 | INFO     | benchmarking:run_full_benchmark:160 - Running benchmark suite: 8 tasks
+2026-05-13 22:18:35.489 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_basic]: score=0.500
+2026-05-13 22:19:53.596 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_basic]: score=1.000
