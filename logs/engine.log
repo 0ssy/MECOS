@@ -1300,3 +1300,4 @@ hello world...
 2026-05-13 19:11:14.047 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [planning_basic]: score=1.000
 2026-05-13 19:14:34.155 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [analysis_basic]: score=1.000
 2026-05-13 19:17:31.755 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [trading_knowledge]: score=0.800
+2026-05-13 19:20:23.563 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_advanced]: score=0.800
