@@ -1576,3 +1576,28 @@ hello world...
     "step":...
 2026-05-13 19:45:38.119 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\plans\active_plan.json
 2026-05-13 19:45:38.396 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-13 21:26:26.382 | INFO     | __main__:__init__:59 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-13 21:26:33.618 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-13 21:26:33.982 | INFO     | mecos_llm:__init__:19 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-13 21:26:33.983 | INFO     | reasoner:__init__:37 - Reasoner initialized with custom MECOS LLM.
+2026-05-13 21:26:33.983 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-13 21:26:33.984 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-13 21:26:33.984 | INFO     | file_operations:__init__:28 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-13 21:26:33.985 | INFO     | app_controller:__init__:29 - AppController initialized.
+2026-05-13 21:26:33.985 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-13 21:26:33.985 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-13 21:26:33.985 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-13 21:26:33.986 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-13 21:26:33.986 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-13 21:26:33.986 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-13 21:26:33.986 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-13 21:26:33.987 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-13 21:26:33.987 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-13 21:26:33.987 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-13 21:26:33.988 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-13 21:26:33.988 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-13 21:26:33.988 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-13 21:26:33.988 | INFO     | tool_orchestrator:__init__:32 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-13 21:26:33.989 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-13 21:26:33.989 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
+2026-05-13 21:26:34.510 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
