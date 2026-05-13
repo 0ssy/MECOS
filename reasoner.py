@@ -8,6 +8,18 @@ from memory_system import MemorySystem
 from mecos_llm import get_mecos_llm
 
 
+
+def clean_json_string(json_str: str) -> str:
+    """Remove comments and clean JSON string before parsing."""
+    # Remove // single-line comments
+    json_str = re.sub(r'//.*?$', '', json_str, flags=re.MULTILINE)
+    # Remove /* multi-line comments */
+    json_str = re.sub(r'/\*.*?\*/', '', json_str, flags=re.DOTALL)
+    # Remove trailing commas before } or ]
+    json_str = re.sub(r',(\s*[}\]])', r'', json_str)
+    return json_str.strip()
+
+
 class Reasoner:
 
     MAX_RETRIES = 3
