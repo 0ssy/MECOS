@@ -168,6 +168,7 @@ class MECOSEngine:
             "risk": risk,
         }
 
+
     async def run_away_mode(self):
         """Continuous autonomous operation while the user is away."""
         logger.info("MECOS entering 'Away Mode' (Autonomous Dreaming).")
@@ -176,20 +177,16 @@ class MECOSEngine:
             readiness = await self.independence.check_readiness()
             if readiness == "TOTAL_SOVEREIGNTY":
                 logger.warning("MECOS HAS REACHED TOTAL SOVEREIGNTY. OLLAMA IS NO LONGER NEEDED.")
-                # Logic to notify user or auto-transition
-            
-            # 2. Generate a self-goal
+            # 2. Generate a self-goal (NOW INSIDE THE LOOP)
             goal = await self.dreaming.generate_self_goal(context="Focus on Quantitative Trading and Algorithmic Self-Improvement.")
-            
             # 3. Execute the goal
             await self.process_goal(goal)
-            
             # 4. Self-reflect
             await self.dreaming.self_reflect()
-            
             # 5. Rest/Idle to manage resources
             logger.info(f"Goal complete. Sleeping for {settings.IDLE_SLEEP_TIME}s...")
             await asyncio.sleep(settings.IDLE_SLEEP_TIME)
+
 
     async def run_learning_cycle(self):
         """Run a full meta-learning cycle."""
