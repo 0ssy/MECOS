@@ -1601,3 +1601,102 @@ hello world...
 2026-05-13 21:26:33.989 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
 2026-05-13 21:26:33.989 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
 2026-05-13 21:26:34.510 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-13 21:26:35.048 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-13 21:26:35.475 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-13 21:26:35.475 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-13 21:26:35.475 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-13 21:26:35.476 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-13 21:26:35.477 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-13 21:26:35.930 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-13 21:26:35.931 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-13 21:26:36.311 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-13 21:26:36.694 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 1 runs
+2026-05-13 21:26:36.694 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-13 21:26:37.068 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-13 21:26:37.421 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-13 21:26:37.422 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-13 21:26:37.776 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-13 21:26:38.133 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 1 runs
+2026-05-13 21:26:38.133 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-13 21:26:38.485 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-13 21:26:38.486 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-13 21:26:38.486 | INFO     | meta_learner:__init__:73 - MetaLearner initialized with all learning subsystems.
+2026-05-13 21:26:38.487 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 10 checkpoints
+2026-05-13 21:26:38.865 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-13 21:26:38.867 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-13 21:26:38.867 | INFO     | __main__:__init__:101 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-13 21:26:38.868 | INFO     | __main__:startup:105 - Starting subsystems...
+2026-05-13 21:26:40.640 | INFO     | web_perception:startup:18 - Web Perception Module Initialized.
+2026-05-13 21:26:40.641 | INFO     | __main__:startup:108 - MECOS Engine is running.
+2026-05-13 21:26:45.262 | INFO     | checkpoint_manager:create_checkpoint:96 - Pruned old checkpoint: ckpt_20260512_152728
+2026-05-13 21:26:45.263 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260513_212645 (1 files)
+2026-05-13 21:26:45.264 | INFO     | __main__:process_goal:122 - Processing goal: 'Perform a cross-asset volatility analysis for the S&P 500 (Equities), EUR/USD (Forex), and BTC (Crypto). Identify which asset class currently offers the best risk-adjusted returns. Then, rewrite your trading_agent.py to include a new 'Multi-Asset Risk Scaler' that automatically adjusts position sizes based on this volatility. Finally, save a detailed market report to /data/quant/global_macro_report.md'
+2026-05-13 21:26:45.264 | INFO     | perception:collect:42 - Starting perception collection cycle...
+2026-05-13 21:26:45.904 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (hello_world.py):
+print("hello world"...
+2026-05-13 21:26:45.904 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\hello_world.py
+2026-05-13 21:26:46.298 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (integration_test.txt):
+MECOS integra...
+2026-05-13 21:26:46.299 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\integration_test.txt
+2026-05-13 21:26:46.615 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (list_test.txt):
+content...
+2026-05-13 21:26:46.617 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\list_test.txt
+2026-05-13 21:26:46.945 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (search_test.txt):
+unique_search_term...
+2026-05-13 21:26:46.946 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\search_test.txt
+2026-05-13 21:26:47.311 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (test_file.txt):
+hello world...
+2026-05-13 21:26:47.312 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
+2026-05-13 21:26:47.673 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (active_plan.json):
+[
+  {
+    "step":...
+2026-05-13 21:26:47.673 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\plans\active_plan.json
+2026-05-13 21:26:48.032 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-13 21:46:27.763 | INFO     | mecos_llm:think_and_act:46 - MECOS LLM is generating final response...
+2026-05-13 22:02:33.581 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-13 22:02:33.582 | INFO     | mecos_llm:think_and_act:60 - MECOS LLM cycle complete in 2145.55s
+2026-05-13 22:02:33.584 | INFO     | mecos_llm:save_experience:89 - MECOS LLM experience saved for self-training.
+2026-05-13 22:02:33.587 | INFO     | reasoner:generate_plan:250 - Generated plan with 4 steps.
+2026-05-13 22:02:33.589 | INFO     | reasoner:save_plan:52 - Plan saved: data\plans\active_plan.json
+2026-05-13 22:02:33.592 | INFO     | world_model:simulate_plan:142 - Simulating plan: 4 steps
+2026-05-13 22:03:23.689 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Executing the volatility calculator code (volatility_calculator.py) is likely to
+2026-05-13 22:04:04.620 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Following the analysis(), the most likely outcome is that the cross-asset volati
+2026-05-13 22:04:54.760 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Based on the provided code, I predict that the cross-asset volatility analysis w
+2026-05-13 22:05:34.825 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): The most likely outcome of executing `python trading_agent.py` is that the scrip
+2026-05-13 22:05:35.349 | DEBUG    | memory_system:store:26 - Stored memory: PLAN SIMULATION: 4 steps, predicted_success=4/4...
+2026-05-13 22:05:35.350 | INFO     | __main__:process_goal:132 - Plan risk: LOW (score=0.0)
+2026-05-13 22:05:35.351 | INFO     | action_engine:execute_plan:44 - Starting execution of plan with 4 steps.
+2026-05-13 22:05:35.351 | INFO     | action_engine:execute_plan:54 - Step 1/4: Executing 'execute_python'
+2026-05-13 22:05:35.352 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: execute_python
+2026-05-13 22:05:35.575 | WARNING  | code_executor:execute:132 - Code execution failed (exit 1) [python]: Traceback (most recent call last):
+  File "C:\Users\josep\Downloads\MECOS\data\sandbox\tmp0yxeodwf.py", line 1, in <module>
+    volatility_calculator.py
+    ^^^^^^^^^^^^^^^^^^^^^
+NameError: name '
+2026-05-13 22:05:35.576 | WARNING  | action_engine:_execute_with_retry:99 - Retry 1/2 for 'execute_python'
+2026-05-13 22:05:36.592 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: execute_python
+2026-05-13 22:05:36.772 | WARNING  | code_executor:execute:132 - Code execution failed (exit 1) [python]: Traceback (most recent call last):
+  File "C:\Users\josep\Downloads\MECOS\data\sandbox\tmp552wumt_.py", line 1, in <module>
+    volatility_calculator.py
+    ^^^^^^^^^^^^^^^^^^^^^
+NameError: name '
+2026-05-13 22:05:36.774 | WARNING  | action_engine:_execute_with_retry:99 - Retry 2/2 for 'execute_python'
+2026-05-13 22:05:37.781 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: execute_python
+2026-05-13 22:05:37.945 | WARNING  | code_executor:execute:132 - Code execution failed (exit 1) [python]: Traceback (most recent call last):
+  File "C:\Users\josep\Downloads\MECOS\data\sandbox\tmpaiy4lffx.py", line 1, in <module>
+    volatility_calculator.py
+    ^^^^^^^^^^^^^^^^^^^^^
+NameError: name '
+2026-05-13 22:05:38.516 | DEBUG    | memory_system:store:26 - Stored memory: ACTION EXECUTED: execute_python
+ARGS: {"code": "vo...
+2026-05-13 22:05:38.517 | ERROR    | action_engine:execute_plan:82 - Plan execution halted at step 1 due to error: Error (exit 1): Traceback (most recent call last):
+  File "C:\Users\josep\Downloads\MECOS\data\sandbox\tmpaiy4lffx.py", line 1, in <module>
+    volatility_calculator.py
+    ^^^^^^^^^^^^^^^^^^^^^
+N
+2026-05-13 22:05:38.517 | INFO     | action_engine:_store_summary:119 - EXECUTION SUMMARY: 0/4 steps succeeded, 1 failed, 3 skipped.
+2026-05-13 22:05:38.967 | DEBUG    | memory_system:store:26 - Stored memory: EXECUTION SUMMARY: 0/4 steps succeeded, 1 failed, ...
+2026-05-13 22:05:38.968 | DEBUG    | world_model:record_transition:96 - World model: recorded transition (execute_python)
+2026-05-13 22:05:38.969 | DEBUG    | rl_trainer:record_experience:196 - RL [general]: action=execute_plan, reward=-0.500, ε=0.995
+2026-05-13 22:05:38.970 | INFO     | mecos_llm:think_and_act:32 - MECOS LLM is thinking (generating internal monologue)...

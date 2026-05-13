@@ -1,11 +1,10 @@
 [
   {
     "step": 1,
-    "objective": "Create Python file",
-    "tool": "file_write",
+    "objective": "Calculate cross-asset volatility for S&P 500 (Equities), EUR/USD (Forex), and BTC (Crypto) using historical data.",
+    "tool": "execute_python",
     "args": {
-      "path": "hello_world.py",
-      "content": ""
+      "code": "volatility_calculator.py"
     },
     "state": "pending",
     "reflection": null,
@@ -14,11 +13,32 @@
   },
   {
     "step": 2,
-    "objective": "Write 'print(\"hello world\")' to the file",
-    "tool": "file_write",
+    "objective": "Analyze the calculated volatility values to determine which asset class currently offers the best risk-adjusted returns.",
+    "tool": "analysis",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 3,
+    "objective": "Rewrite `trading_agent.py` to include a new 'Multi-Asset Risk Scaler' that automatically adjusts position sizes based on this volatility.",
+    "tool": "execute_python",
     "args": {
-      "path": "hello_world.py",
-      "content": "print(\"hello world\")"
+      "code": "multi_asset_risk_scorer.py"
+    },
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 4,
+    "objective": "Integrate the multi-asset risk scaler into the trading agent and update its trading logic to adapt to changing market conditions.",
+    "tool": "execute_python",
+    "args": {
+      "code": "trading_agent.py"
     },
     "state": "pending",
     "reflection": null,
