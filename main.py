@@ -11,7 +11,7 @@ from config import settings
 
 # ── Phase 1-3: Core ──────────────────────────────────────────────────────────
 from memory_system import MemorySystem
-from perception import PerceptionLayer as Perception
+from perception import PerceptionLayer
 from web_perception import WebPerception
 from reasoner import Reasoner
 
