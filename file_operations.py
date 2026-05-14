@@ -16,21 +16,19 @@ from config import settings
 
 
 
-    def _normalize_path(self, path: str) -> Path:
+class FileOperations:
+    def _normalize_path(self, path: str):
         """Normalize path - strip /data/ prefix that LLM often adds."""
+        from pathlib import Path
         # Strip leading /data/ or data/
         if path.startswith('/data/'):
             path = path[6:]
         elif path.startswith('data/'):
             path = path[5:]
-        
         # Remove leading slashes
         path = path.lstrip('/\\')
-        
-        return self.base_dir / path
+        return self.base_dir / Path(path)
 
-
-class FileOperations:
     """
     Safe file system operations with sandboxing and rollback support.
     All write operations are restricted to the DATA_DIR unless explicitly overridden.

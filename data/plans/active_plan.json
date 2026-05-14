@@ -1,11 +1,11 @@
 [
   {
     "step": 1,
-    "objective": "Create 'success.txt' in '/data'",
+    "objective": "Create a file called success.txt with content 'MECOS works!'",
     "tool": "file_write",
     "args": {
-      "path": "/data/success.txt",
-      "content": "'MECOS is working!'"
+      "path": "success.txt",
+      "content": "'MECOS works!'"
     },
     "state": "pending",
     "reflection": null,
