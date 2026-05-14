@@ -15,6 +15,21 @@ from loguru import logger
 from config import settings
 
 
+
+    def _normalize_path(self, path: str) -> Path:
+        """Normalize path - strip /data/ prefix that LLM often adds."""
+        # Strip leading /data/ or data/
+        if path.startswith('/data/'):
+            path = path[6:]
+        elif path.startswith('data/'):
+            path = path[5:]
+        
+        # Remove leading slashes
+        path = path.lstrip('/\\')
+        
+        return self.base_dir / path
+
+
 class FileOperations:
     """
     Safe file system operations with sandboxing and rollback support.
@@ -29,7 +44,7 @@ class FileOperations:
 
     def _safe_path(self, path: str) -> Path:
         """Resolve a path and ensure it stays within base_dir."""
-        resolved = (self.base_dir / path).resolve()
+        resolved = self._normalize_path(path).resolve()
         try:
             resolved.relative_to(self.base_dir.resolve())
         except ValueError:

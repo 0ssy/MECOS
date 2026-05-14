@@ -82,8 +82,7 @@ class MemoryConsolidation:
 
         # Retrieve recent memories
         context_results = await self.memory.retrieve_context(
-            "experience learning action result", n_results=n_memories
-        )
+            "experience learning action result")
         docs = context_results.get("documents", [[]])[0] if context_results else []
 
         if not docs:
@@ -115,8 +114,7 @@ class MemoryConsolidation:
         # Store back into memory system
         await self.memory.add_experience(
             f"CONSOLIDATED KNOWLEDGE:\n{knowledge[:500]}",
-            source="memory_consolidation",
-        )
+            source="memory_consolidation")
 
         logger.info(f"Consolidation complete: {len(important)} memories → {len(patterns)} patterns")
         return {
@@ -139,8 +137,7 @@ Return a JSON object with key "patterns" containing a list of pattern strings (m
             response = self.client.chat.completions.create(
                 model=settings.DEFAULT_MODEL,
                 messages=[{"role": "user", "content": prompt}],
-                response_format={"type": "json_object"},
-            )
+                response_format={"type": "json_object"})
             data = json.loads(response.choices[0].message.content)
             patterns = data.get("patterns", [])
             return [str(p) for p in patterns[:10]]
@@ -166,8 +163,7 @@ Write a concise knowledge summary (max 300 words) that captures the most importa
         try:
             response = self.client.chat.completions.create(
                 model=settings.DEFAULT_MODEL,
-                messages=[{"role": "user", "content": prompt}],
-            )
+                messages=[{"role": "user", "content": prompt}])
             return response.choices[0].message.content.strip()
         except Exception as e:
             logger.error(f"Knowledge distillation failed: {e}")
@@ -188,8 +184,7 @@ Write a concise knowledge summary (max 300 words) that captures the most importa
         scored = sorted(
             [(doc, self._score_importance(doc)) for doc in docs],
             key=lambda x: x[1],
-            reverse=True,
-        )
+            reverse=True)
         pruned_count = len(docs) - keep_top_n
         logger.info(f"Pruned {pruned_count} low-importance memories")
         return pruned_count
