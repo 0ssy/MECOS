@@ -178,7 +178,8 @@ class MECOSEngine:
             if readiness == "TOTAL_SOVEREIGNTY":
                 logger.warning("MECOS HAS REACHED TOTAL SOVEREIGNTY. OLLAMA IS NO LONGER NEEDED.")
             # 2. Generate a self-goal (NOW INSIDE THE LOOP)
-            goal = await self.dreaming.generate_self_goal(context="Focus on Quantitative Trading and Algorithmic Self-Improvement.")
+           goal = await self.dreaming.generate_self_goal()
+
             # 3. Execute the goal
             await self.process_goal(goal)
             # 4. Self-reflect
