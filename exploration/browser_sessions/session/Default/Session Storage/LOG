@@ -1,2 +1,3 @@
-2026/05/19-19:56:50.838 757c Creating DB C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\Session Storage since it was missing.
-2026/05/19-19:56:50.847 757c Reusing MANIFEST C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\Session Storage/MANIFEST-000001
+2026/05/19-20:44:48.977 4e88 Reusing MANIFEST C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\Session Storage/MANIFEST-000001
+2026/05/19-20:44:48.978 4e88 Recovering log #3
+2026/05/19-20:44:48.979 4e88 Reusing old log C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\Session Storage/000003.log 

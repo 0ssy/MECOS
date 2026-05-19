@@ -1,11 +1,10 @@
 [
   {
     "step": 1,
-    "objective": "Create a new Python file",
-    "tool": "file_write",
+    "objective": "Verify `execute_cpp` tool usage",
+    "tool": "terminal_command",
     "args": {
-      "path": "hello.py",
-      "content": "print('Hello, World!')"
+      "command": "execute_cpp --help"
     },
     "state": "pending",
     "reflection": null,
@@ -14,9 +13,11 @@
   },
   {
     "step": 2,
-    "objective": "Write the 'hello' function in Python",
-    "tool": "execute_python",
-    "args": {},
+    "objective": "Obtain a basic C++ program script",
+    "tool": "file_read",
+    "args": {
+      "path": "test_file.txt"
+    },
     "state": "pending",
     "reflection": null,
     "result": null,
@@ -24,11 +25,11 @@
   },
   {
     "step": 3,
-    "objective": "Write the 'main' script to test the 'hello' function",
+    "objective": "Write the C++ program to learn_c++.cpp",
     "tool": "file_write",
     "args": {
-      "path": "main.py",
-      "content": "print('Main says: Hello, World!')"
+      "path": "learn_c++.cpp",
+      "content": ""
     },
     "state": "pending",
     "reflection": null,
@@ -37,8 +38,8 @@
   },
   {
     "step": 4,
-    "objective": "Test the 'main' script and make sure it runs without errors",
-    "tool": "execute_python",
+    "objective": "Compile and execute the C++ program",
+    "tool": "execute_cpp",
     "args": {},
     "state": "pending",
     "reflection": null,

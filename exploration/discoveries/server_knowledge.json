@@ -1,0 +1,47 @@
+{
+  "gmail": {
+    "history": [
+      {
+        "url": "https://mail.google.com",
+        "analysis": "",
+        "timestamp": "2026-05-19T13:34:05.443802"
+      }
+    ]
+  },
+  "google_docs": {
+    "history": [
+      {
+        "url": "https://docs.google.com",
+        "analysis": "",
+        "timestamp": "2026-05-19T13:36:40.500991"
+      }
+    ]
+  },
+  "stackoverflow": {
+    "history": [
+      {
+        "url": "https://stackoverflow.com",
+        "analysis": "",
+        "timestamp": "2026-05-19T13:44:30.921145"
+      }
+    ]
+  },
+  "mail": {
+    "history": [
+      {
+        "url": "https://mail.google.com",
+        "analysis": "",
+        "timestamp": "2026-05-19T13:46:38.073399"
+      }
+    ]
+  },
+  "github": {
+    "history": [
+      {
+        "url": "https://github.com",
+        "analysis": "",
+        "timestamp": "2026-05-19T13:48:50.474919"
+      }
+    ]
+  }
+}
