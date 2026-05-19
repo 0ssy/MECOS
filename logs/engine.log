@@ -2773,3 +2773,181 @@ The reflection engine's analysi...
 2026-05-19 20:09:02.516 | DEBUG    | __main__:main_loop:240 - Heartbeat #23: Engine monitoring.
 2026-05-19 20:09:12.517 | DEBUG    | __main__:main_loop:240 - Heartbeat #24: Engine monitoring.
 2026-05-19 20:09:22.520 | DEBUG    | __main__:main_loop:240 - Heartbeat #25: Engine monitoring.
+2026-05-19 20:23:50.169 | INFO     | __main__:__init__:61 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-19 20:24:00.125 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-19 20:24:00.535 | INFO     | mecos_llm:__init__:20 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-19 20:24:00.536 | INFO     | reasoner:__init__:39 - Reasoner initialized with custom MECOS LLM.
+2026-05-19 20:24:00.537 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-19 20:24:00.538 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-19 20:24:00.538 | INFO     | file_operations:__init__:41 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-19 20:24:00.539 | INFO     | app_controller:__init__:29 - AppController initialized.
+2026-05-19 20:24:00.539 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-19 20:24:00.539 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-19 20:24:00.540 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-19 20:24:00.540 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-19 20:24:00.540 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-19 20:24:00.541 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-19 20:24:00.541 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-19 20:24:00.541 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-19 20:24:00.542 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-19 20:24:00.542 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-19 20:24:00.542 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-19 20:24:00.542 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-19 20:24:00.543 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-19 20:24:00.543 | INFO     | tool_orchestrator:__init__:32 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-19 20:24:00.543 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-19 20:24:00.544 | INFO     | trading_agent:__init__:190 - TradingAgent initialized.
+2026-05-19 20:24:01.029 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-19 20:24:01.476 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-19 20:24:01.882 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-19 20:24:01.882 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-19 20:24:01.882 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-19 20:24:01.883 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-19 20:24:01.884 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-19 20:24:02.395 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-19 20:24:02.396 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-19 20:24:02.796 | INFO     | memory_consolidation:_load:39 - Loaded 2 consolidated knowledge items
+2026-05-19 20:24:02.796 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-19 20:24:03.252 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 4 runs
+2026-05-19 20:24:03.253 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-19 20:24:03.692 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-19 20:24:04.087 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-19 20:24:04.089 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-19 20:24:04.516 | INFO     | memory_consolidation:_load:39 - Loaded 2 consolidated knowledge items
+2026-05-19 20:24:04.517 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-19 20:24:04.954 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 4 runs
+2026-05-19 20:24:04.955 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-19 20:24:05.362 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-19 20:24:05.363 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-19 20:24:05.365 | INFO     | meta_learner:__init__:73 - MetaLearner initialized with all learning subsystems.
+2026-05-19 20:24:05.368 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 10 checkpoints
+2026-05-19 20:24:05.806 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-19 20:24:05.806 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-19 20:24:05.807 | INFO     | __main__:__init__:103 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-19 20:24:05.807 | INFO     | __main__:startup:107 - Starting subsystems...
+2026-05-19 20:24:06.662 | INFO     | web_perception:startup:18 - Web Perception Module Initialized.
+2026-05-19 20:24:06.663 | INFO     | __main__:startup:110 - MECOS Engine is running.
+2026-05-19 20:24:16.249 | INFO     | checkpoint_manager:create_checkpoint:96 - Pruned old checkpoint: ckpt_20260513_180526
+2026-05-19 20:24:16.251 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260519_202416 (2 files)
+2026-05-19 20:24:16.251 | INFO     | __main__:process_goal:135 - Processing goal: 'learn c++'
+2026-05-19 20:24:16.251 | INFO     | perception:collect:42 - Starting perception collection cycle...
+2026-05-19 20:24:16.834 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (hello.py):
+print('Hello, World!')...
+2026-05-19 20:24:16.835 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\hello.py
+2026-05-19 20:24:17.290 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (hello_world.py):
+print("hello world"...
+2026-05-19 20:24:17.290 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\hello_world.py
+2026-05-19 20:24:17.627 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (integration_test.txt):
+MECOS integra...
+2026-05-19 20:24:17.628 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\integration_test.txt
+2026-05-19 20:24:17.965 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (list_test.txt):
+content...
+2026-05-19 20:24:17.966 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\list_test.txt
+2026-05-19 20:24:18.344 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (search_test.txt):
+unique_search_term...
+2026-05-19 20:24:18.344 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\search_test.txt
+2026-05-19 20:24:18.675 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (success.txt):
+'MECOS works!'...
+2026-05-19 20:24:18.676 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\success.txt
+2026-05-19 20:24:19.008 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (test_file.txt):
+hello world...
+2026-05-19 20:24:19.008 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\test_file.txt
+2026-05-19 20:24:19.403 | DEBUG    | memory_system:store:26 - Stored memory: FILE CONTENT (active_plan.json):
+[
+  {
+    "step":...
+2026-05-19 20:24:19.403 | INFO     | perception:ingest_file:31 - Ingested file: C:\Users\josep\Downloads\MECOS\data\plans\active_plan.json
+2026-05-19 20:24:19.732 | INFO     | mecos_llm:think_and_act:33 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-19 20:33:34.690 | INFO     | mecos_llm:think_and_act:47 - MECOS LLM is generating final response...
+2026-05-19 20:36:36.205 | INFO     | mecos_llm:save_experience:90 - MECOS LLM experience saved for self-training.
+2026-05-19 20:36:36.205 | INFO     | mecos_llm:think_and_act:61 - MECOS LLM cycle complete in 736.47s
+2026-05-19 20:36:36.206 | INFO     | mecos_llm:save_experience:90 - MECOS LLM experience saved for self-training.
+2026-05-19 20:36:36.207 | INFO     | reasoner:generate_plan:252 - Generated plan with 4 steps.
+2026-05-19 20:36:36.209 | INFO     | reasoner:save_plan:54 - Plan saved: data\plans\active_plan.json
+2026-05-19 20:36:36.209 | INFO     | world_model:simulate_plan:142 - Simulating plan: 4 steps
+2026-05-19 20:37:13.817 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Executing the command `execute_cpp --help` in a terminal will display the help m
+2026-05-19 20:37:55.784 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): The most likely outcome of this action is that the file `test_file.txt` does not
+2026-05-19 20:38:33.400 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Based on the provided information, I predict that attempting to write a file nam
+2026-05-19 20:39:08.606 | DEBUG    | world_model:predict_outcome:132 - World model prediction (LLM): Based on the action taken (`execute_cpp()`), the most likely outcome is that an 
+2026-05-19 20:39:09.146 | DEBUG    | memory_system:store:26 - Stored memory: PLAN SIMULATION: 4 steps, predicted_success=1/4...
+2026-05-19 20:39:09.147 | INFO     | __main__:process_goal:145 - Plan risk: HIGH (score=0.75)
+2026-05-19 20:39:09.148 | INFO     | action_engine:execute_plan:44 - Starting execution of plan with 4 steps.
+2026-05-19 20:39:09.148 | INFO     | action_engine:execute_plan:54 - Step 1/4: Executing 'terminal_command'
+2026-05-19 20:39:09.149 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: terminal_command
+2026-05-19 20:39:09.149 | WARNING  | app_controller:run_command:49 - Command not in allowlist: 'execute_cpp'
+2026-05-19 20:39:09.149 | WARNING  | action_engine:_execute_with_retry:99 - Retry 1/2 for 'terminal_command'
+2026-05-19 20:39:09.150 | INFO     | exploration.sync_tool:sync_server_knowledge:7 - Syncing knowledge from server (192.168.1.88)...
+2026-05-19 20:39:12.746 | SUCCESS  | exploration.sync_tool:sync_server_knowledge:14 - Server knowledge synced successfully.
+2026-05-19 20:39:12.757 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: terminal_command
+2026-05-19 20:39:12.757 | WARNING  | app_controller:run_command:49 - Command not in allowlist: 'execute_cpp'
+2026-05-19 20:39:12.758 | WARNING  | action_engine:_execute_with_retry:99 - Retry 2/2 for 'terminal_command'
+2026-05-19 20:39:13.766 | INFO     | tool_orchestrator:run_tool:254 - Orchestrating tool: terminal_command
+2026-05-19 20:39:13.767 | WARNING  | app_controller:run_command:49 - Command not in allowlist: 'execute_cpp'
+2026-05-19 20:39:14.384 | DEBUG    | memory_system:store:26 - Stored memory: ACTION EXECUTED: terminal_command
+ARGS: {"command"...
+2026-05-19 20:39:14.384 | ERROR    | action_engine:execute_plan:82 - Plan execution halted at step 1 due to error: Error (exit -1): Command not in allowlist: 'execute_cpp'
+2026-05-19 20:39:14.385 | INFO     | action_engine:_store_summary:119 - EXECUTION SUMMARY: 0/4 steps succeeded, 1 failed, 3 skipped.
+2026-05-19 20:39:14.851 | DEBUG    | memory_system:store:26 - Stored memory: EXECUTION SUMMARY: 0/4 steps succeeded, 1 failed, ...
+2026-05-19 20:39:14.852 | DEBUG    | world_model:record_transition:96 - World model: recorded transition (terminal_command)
+2026-05-19 20:39:14.852 | DEBUG    | rl_trainer:record_experience:196 - RL [general]: action=execute_plan, reward=-0.500, ε=0.995
+2026-05-19 20:39:14.853 | INFO     | mecos_llm:think_and_act:33 - MECOS LLM is thinking (generating internal monologue)...
+2026-05-19 20:42:46.131 | INFO     | mecos_llm:think_and_act:47 - MECOS LLM is generating final response...
+2026-05-19 20:44:44.984 | INFO     | mecos_llm:save_experience:90 - MECOS LLM experience saved for self-training.
+2026-05-19 20:44:44.985 | INFO     | mecos_llm:think_and_act:61 - MECOS LLM cycle complete in 330.13s
+2026-05-19 20:44:45.332 | DEBUG    | memory_system:store:26 - Stored memory: REFLECTION LESSON:
+Based on the analysis, here are...
+2026-05-19 20:44:45.333 | INFO     | reasoner:reflect:318 - Reflection stored successfully.
+2026-05-19 20:44:45.333 | DEBUG    | strategy_evolution:record_performance:229 - Strategy [adaptive_hybrid]: score=0.000, avg=0.000
+2026-05-19 20:44:45.333 | INFO     | __main__:main_loop:235 - Entering core cognitive loop (learning every 300s).
+2026-05-19 20:44:45.334 | DEBUG    | __main__:main_loop:240 - Heartbeat #1: Engine monitoring.
+2026-05-19 20:46:24.905 | DEBUG    | __main__:main_loop:240 - Heartbeat #2: Engine monitoring.
+2026-05-19 20:46:34.910 | DEBUG    | __main__:main_loop:240 - Heartbeat #3: Engine monitoring.
+2026-05-19 20:46:44.916 | DEBUG    | __main__:main_loop:240 - Heartbeat #4: Engine monitoring.
+2026-05-19 20:46:54.917 | INFO     | exploration.system_explorer:explore_system:11 - Exploring laptop environment...
+2026-05-19 20:48:26.414 | DEBUG    | __main__:main_loop:240 - Heartbeat #5: Engine monitoring.
+2026-05-19 20:48:36.416 | DEBUG    | __main__:main_loop:240 - Heartbeat #6: Engine monitoring.
+2026-05-19 20:48:46.431 | DEBUG    | __main__:main_loop:240 - Heartbeat #7: Engine monitoring.
+2026-05-19 20:48:56.416 | INFO     | exploration.system_explorer:explore_system:11 - Exploring laptop environment...
+2026-05-19 20:50:31.081 | DEBUG    | __main__:main_loop:240 - Heartbeat #8: Engine monitoring.
+2026-05-19 20:50:41.084 | DEBUG    | __main__:main_loop:240 - Heartbeat #9: Engine monitoring.
+2026-05-19 20:50:51.090 | DEBUG    | __main__:main_loop:240 - Heartbeat #10: Engine monitoring.
+2026-05-19 20:51:01.091 | DEBUG    | __main__:main_loop:240 - Heartbeat #11: Engine monitoring.
+2026-05-19 20:52:44.273 | DEBUG    | __main__:main_loop:240 - Heartbeat #12: Engine monitoring.
+2026-05-19 20:52:54.288 | DEBUG    | __main__:main_loop:240 - Heartbeat #13: Engine monitoring.
+2026-05-19 20:53:04.296 | DEBUG    | __main__:main_loop:240 - Heartbeat #14: Engine monitoring.
+2026-05-19 20:53:14.309 | DEBUG    | __main__:main_loop:240 - Heartbeat #15: Engine monitoring.
+2026-05-19 20:54:51.675 | DEBUG    | __main__:main_loop:240 - Heartbeat #16: Engine monitoring.
+2026-05-19 20:55:01.683 | DEBUG    | __main__:main_loop:240 - Heartbeat #17: Engine monitoring.
+2026-05-19 20:55:11.684 | DEBUG    | __main__:main_loop:240 - Heartbeat #18: Engine monitoring.
+2026-05-19 20:55:21.675 | INFO     | exploration.system_explorer:explore_system:11 - Exploring laptop environment...
+2026-05-19 20:56:54.539 | DEBUG    | __main__:main_loop:240 - Heartbeat #19: Engine monitoring.
+2026-05-19 20:57:04.546 | DEBUG    | __main__:main_loop:240 - Heartbeat #20: Engine monitoring.
+2026-05-19 20:57:14.548 | DEBUG    | __main__:main_loop:240 - Heartbeat #21: Engine monitoring.
+2026-05-19 20:57:24.554 | DEBUG    | __main__:main_loop:240 - Heartbeat #22: Engine monitoring.
+2026-05-19 20:59:02.820 | DEBUG    | __main__:main_loop:240 - Heartbeat #23: Engine monitoring.
+2026-05-19 20:59:12.824 | DEBUG    | __main__:main_loop:240 - Heartbeat #24: Engine monitoring.
+2026-05-19 20:59:22.832 | DEBUG    | __main__:main_loop:240 - Heartbeat #25: Engine monitoring.
+2026-05-19 20:59:32.840 | DEBUG    | __main__:main_loop:240 - Heartbeat #26: Engine monitoring.
+2026-05-19 21:01:09.971 | DEBUG    | __main__:main_loop:240 - Heartbeat #27: Engine monitoring.
+2026-05-19 21:01:19.977 | DEBUG    | __main__:main_loop:240 - Heartbeat #28: Engine monitoring.
+2026-05-19 21:01:29.983 | DEBUG    | __main__:main_loop:240 - Heartbeat #29: Engine monitoring.
+2026-05-19 21:01:39.989 | DEBUG    | __main__:main_loop:240 - Heartbeat #30: Engine monitoring.
+2026-05-19 21:01:39.989 | INFO     | __main__:run_learning_cycle:207 - Running meta-learning cycle...
+2026-05-19 21:01:39.990 | INFO     | meta_learner:run_meta_cycle:108 - Meta-learning cycle 1 starting...
+2026-05-19 21:01:39.990 | INFO     | benchmarking:run_full_benchmark:160 - Running benchmark suite: 8 tasks
+2026-05-19 21:04:35.510 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_basic]: score=0.750
+2026-05-19 21:06:16.387 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_basic]: score=1.000
+2026-05-19 21:10:40.426 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [planning_basic]: score=1.000
+2026-05-19 21:13:38.300 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [analysis_basic]: score=1.000
+2026-05-19 21:15:55.687 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [trading_knowledge]: score=0.800
+2026-05-19 21:18:56.313 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_advanced]: score=0.800
+2026-05-19 21:22:08.806 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_advanced]: score=0.667
+2026-05-19 21:25:27.288 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [meta_learning]: score=0.833
+2026-05-19 21:25:27.877 | DEBUG    | memory_system:store:26 - Stored memory: BENCHMARK RUN: avg_score=0.856, categories={'reaso...
+2026-05-19 21:25:27.878 | INFO     | benchmarking:run_full_benchmark:192 - Benchmark complete: avg_score=0.856
+2026-05-19 21:25:27.879 | INFO     | memory_consolidation:consolidate:81 - Starting memory consolidation (n=30)
+2026-05-19 21:28:06.367 | DEBUG    | memory_system:store:26 - Stored memory: CONSOLIDATED KNOWLEDGE:
+**Lesson Learned:**
+
+As si...
+2026-05-19 21:28:06.367 | INFO     | memory_consolidation:consolidate:119 - Consolidation complete: 5 memories → 3 patterns
