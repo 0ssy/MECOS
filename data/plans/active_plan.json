@@ -1,12 +1,45 @@
 [
   {
     "step": 1,
-    "objective": "Create a file called success.txt with content 'MECOS works!'",
+    "objective": "Create a new Python file",
     "tool": "file_write",
     "args": {
-      "path": "success.txt",
-      "content": "'MECOS works!'"
+      "path": "hello.py",
+      "content": "print('Hello, World!')"
     },
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 2,
+    "objective": "Write the 'hello' function in Python",
+    "tool": "execute_python",
+    "args": {},
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 3,
+    "objective": "Write the 'main' script to test the 'hello' function",
+    "tool": "file_write",
+    "args": {
+      "path": "main.py",
+      "content": "print('Main says: Hello, World!')"
+    },
+    "state": "pending",
+    "reflection": null,
+    "result": null,
+    "retries": 0
+  },
+  {
+    "step": 4,
+    "objective": "Test the 'main' script and make sure it runs without errors",
+    "tool": "execute_python",
+    "args": {},
     "state": "pending",
     "reflection": null,
     "result": null,

@@ -1,0 +1,4 @@
+[0519/195655.685:INFO:CONSOLE:0] "[.WebGL-0xaec00175400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/195655.781:INFO:CONSOLE:0] "[.WebGL-0xaec00175400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/195655.837:INFO:CONSOLE:0] "[.WebGL-0xaec00175400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/195655.896:INFO:CONSOLE:0] "[.WebGL-0xaec00175400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
