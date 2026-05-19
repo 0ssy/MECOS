@@ -8,6 +8,8 @@ import sys
 from loguru import logger
 
 from config import settings
+from exploration.sync_tool import sync_server_knowledge
+
 
 # ── Phase 1-3: Core ──────────────────────────────────────────────────────────
 from memory_system import MemorySystem
@@ -106,6 +108,16 @@ class MECOSEngine:
         await self.web_perception.startup()
         self.is_running = True
         logger.info("MECOS Engine is running.")
+        from exploration.exploration_engine import ExplorationEngine
+        self.local_explorer = ExplorationEngine()
+        asyncio.create_task(self.local_explorer.run())
+        asyncio.create_task(self.knowledge_sync_loop())
+
+    async def knowledge_sync_loop(self):
+        while True:
+            await sync_server_knowledge()
+            await asyncio.sleep(3600)  # Sync every hour
+        
 
     async def shutdown(self):
         """Gracefully shut down all subsystems."""
@@ -178,7 +190,7 @@ class MECOSEngine:
             if readiness == "TOTAL_SOVEREIGNTY":
                 logger.warning("MECOS HAS REACHED TOTAL SOVEREIGNTY. OLLAMA IS NO LONGER NEEDED.")
             # 2. Generate a self-goal (NOW INSIDE THE LOOP)
-           goal = await self.dreaming.generate_self_goal()
+            goal = await self.dreaming.generate_self_goal()
 
             # 3. Execute the goal
             await self.process_goal(goal)
