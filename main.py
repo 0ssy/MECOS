@@ -109,6 +109,7 @@ class MECOSEngine:
         self.is_running = True
         logger.info("MECOS Engine is running.")
         from exploration.exploration_engine import ExplorationEngine
+
         self.local_explorer = ExplorationEngine()
         asyncio.create_task(self.local_explorer.run())
         asyncio.create_task(self.knowledge_sync_loop())
