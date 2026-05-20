@@ -7,6 +7,9 @@ import asyncio
 import sys
 from loguru import logger
 from exploration.browser_explorer import BrowserExplorer
+from exploration.config import config as exploration_config
+from exploration.knowledge_base import KnowledgeBase
+from exploration.vision_analyzer import VisionAnalyzer
 
 from config import settings
 from exploration.sync_tool import sync_server_knowledge
@@ -100,6 +103,8 @@ class MECOSEngine:
         # ── Autonomous & Sovereignty ──────────────────────────────────────
         self.dreaming = DreamingEngine(self.memory)
         self.independence = IndependenceManager(self.memory)
+        self.knowledge_base = KnowledgeBase()
+        self.vision = VisionAnalyzer()
 
         logger.info("All 7 phases + Dreaming + Independence initialized successfully.")
 
@@ -123,6 +128,11 @@ class MECOSEngine:
         while True:
             await sync_server_knowledge()
             await asyncio.sleep(3600)  # Sync every hour
+
+    async def _run_browser_exploration(self):
+        while self.is_running:
+            await self.browser.explore("https://github.com", "github")
+            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
         
 
     async def shutdown(self):
