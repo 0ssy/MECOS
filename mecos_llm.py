@@ -39,7 +39,7 @@ class MECOSLLM:
                 timeout=float(settings.LLM_THINK_TIMEOUT)
             )
         except asyncio.TimeoutError:
-            logger.error(f"LLM call timed out after {settings.LLM_THINK_TIMEOUT}s")
+            logger.warning(f"LLM call timed out after {settings.LLM_THINK_TIMEOUT}s")
             return None
         except Exception as e:
             logger.error(f"LLM call failed: {e}")

@@ -5,6 +5,8 @@ Process launching, management, and system automation with permission guardrails.
 
 import asyncio
 import subprocess
+import os
+from pathlib import Path
 import psutil
 from typing import Optional, List, Dict
 from loguru import logger
@@ -21,6 +23,7 @@ class AppController:
         "python", "python3", "node", "npm", "git", "curl", "wget",
         "cat", "ls", "find", "grep", "echo", "mkdir", "cp", "mv",
         "head", "tail", "wc", "sort", "uniq", "awk", "sed",
+        "powershell", "cmd", "tasklist", "where", "winget",
     }
 
     def __init__(self, allowed_commands: Optional[List[str]] = None):
@@ -139,3 +142,54 @@ class AppController:
             }
         except Exception as e:
             return {"error": str(e)}
+
+    def list_running_processes(self, limit: int = 50) -> List[Dict[str, str]]:
+        """Return lightweight metadata for running processes."""
+        processes = []
+        try:
+            for proc in psutil.process_iter(["pid", "name", "username", "exe"]):
+                info = proc.info
+                processes.append({
+                    "pid": str(info.get("pid", "")),
+                    "name": str(info.get("name") or ""),
+                    "user": str(info.get("username") or ""),
+                    "exe": str(info.get("exe") or ""),
+                })
+        except Exception as e:
+            logger.error(f"Failed to list running processes: {e}")
+        return processes[:max(1, int(limit))]
+
+    def list_installed_executables(self, limit: int = 150) -> List[str]:
+        """Scan common install directories and return executable paths."""
+        candidates = []
+        seen = set()
+        search_roots = [
+            os.environ.get("ProgramFiles", r"C:\Program Files"),
+            os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)"),
+        ]
+        for root in search_roots:
+            if not root or not Path(root).exists():
+                continue
+            try:
+                for dirpath, _, filenames in os.walk(root):
+                    for filename in filenames:
+                        if not filename.lower().endswith(".exe"):
+                            continue
+                        full_path = str(Path(dirpath) / filename)
+                        if full_path in seen:
+                            continue
+                        seen.add(full_path)
+                        candidates.append(full_path)
+                        if len(candidates) >= max(1, int(limit)):
+                            return candidates
+            except Exception as e:
+                logger.warning(f"Executable scan skipped for {root}: {e}")
+        return candidates
+
+    def map_computer(self, process_limit: int = 50, executable_limit: int = 150) -> Dict[str, object]:
+        """Build a compact machine map for perception and planning."""
+        return {
+            "system_info": self.get_system_info(),
+            "running_processes": self.list_running_processes(limit=process_limit),
+            "installed_executables": self.list_installed_executables(limit=executable_limit),
+        }

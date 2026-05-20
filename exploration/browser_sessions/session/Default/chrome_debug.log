@@ -1,46 +1,117 @@
-[0520/174737.829:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
-[0520/174737.835:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/174737.836:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/174737.836:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/174737.836:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/174737.836:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/174737.837:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/174737.838:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/174737.838:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/174737.838:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/174738.218:INFO:CONSOLE:0] "[.WebGL-0xe8c0016f800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174738.323:INFO:CONSOLE:0] "[.WebGL-0xe8c0016f800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174738.405:INFO:CONSOLE:0] "[.WebGL-0xe8c0016f800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174738.466:INFO:CONSOLE:0] "[.WebGL-0xe8c0016f800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
-[0520/174739.848:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/174741.862:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/174743.883:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/174745.910:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/174750.987:INFO:CONSOLE:0] "[.WebGL-0x348403d75e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174751.058:INFO:CONSOLE:0] "[.WebGL-0x348403d75e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174751.225:INFO:CONSOLE:0] "[.WebGL-0x348403d75e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/174751.263:INFO:CONSOLE:0] "[.WebGL-0x348403d75e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
-[0520/175522.329:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
-[0520/175522.333:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/175522.334:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/175522.334:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
-[0520/175522.334:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/175522.334:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/175522.334:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/175522.336:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/175522.336:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
-[0520/175522.336:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
-[0520/175524.363:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/175526.377:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/175528.400:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/175530.417:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
-[0520/175538.151:INFO:CONSOLE:0] "[.WebGL-0x58ec0294da00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/175538.217:INFO:CONSOLE:0] "[.WebGL-0x58ec0294da00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/175538.288:INFO:CONSOLE:0] "[.WebGL-0x58ec0294da00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0520/175538.332:INFO:CONSOLE:0] "[.WebGL-0x58ec0294da00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
-[0520/180020.316:ERROR:content\browser\network_service_instance_impl.cc:703] Network service crashed or was terminated, restarting service.
-[0520/180025.378:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=-1073741510
-[0520/180025.378:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
-[0520/180045.528:ERROR:content\browser\network_service_instance_impl.cc:703] Network service crashed or was terminated, restarting service.
-[0520/180050.543:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=-1073741510
-[0520/180050.543:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
+[0520/194441.842:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/194441.845:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194441.844:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194441.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194441.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194441.846:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194441.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194441.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194441.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194441.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194443.866:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194445.889:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194447.895:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194449.921:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194505.564:INFO:CONSOLE:0] "[.WebGL-0xd2c026b4a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/194505.637:INFO:CONSOLE:0] "[.WebGL-0xd2c026b4a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/194505.689:INFO:CONSOLE:0] "[.WebGL-0xd2c026b4a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/194505.746:INFO:CONSOLE:0] "[.WebGL-0xd2c026b4a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
+[0520/194616.851:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/194616.857:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194616.857:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194616.857:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194616.858:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194616.858:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194616.858:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194616.858:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194616.858:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194616.858:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194618.886:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194620.914:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194622.936:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194624.959:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194626.366:INFO:CONSOLE:1] "useTranslation: DISMISS is not available", source: https://duckduckgo.com/dist/wpm.main.785dc3a9e1cf7d3c6dab.js (1)
+[0520/194930.633:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/194930.638:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194930.637:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194930.639:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194930.639:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194930.639:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/194930.639:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194930.639:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194930.639:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/194930.639:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/194932.656:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194934.688:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/194936.699:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195057.840:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/195057.845:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195057.845:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195057.845:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195057.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195057.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195057.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195057.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195057.846:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195057.846:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195059.869:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195101.889:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195103.912:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195105.100:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/195105.106:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195105.106:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195105.106:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/195105.107:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195105.107:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195105.107:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195105.107:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195105.107:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/195105.107:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/195105.924:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195106.777:INFO:CONSOLE:1] "useTranslation: DISMISS is not available", source: https://duckduckgo.com/dist/wpm.main.785dc3a9e1cf7d3c6dab.js (1)
+[0520/195107.123:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195109.135:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195111.154:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195113.179:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/195154.860:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=1
+[0520/195154.860:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
+[0520/195154.877:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=1
+[0520/195154.877:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
+[0520/200054.860:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/200054.867:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200054.867:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200054.867:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200054.868:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200054.868:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200054.868:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200054.868:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200054.868:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200054.868:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200056.887:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200058.911:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200100.933:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200102.946:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200118.791:WARNING:content\browser\btm\btm_database.cc:128] Failed to initialize the DIPS SQLite database.
+[0520/200118.795:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200118.796:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200118.796:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200118.796:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200118.796:ERROR:net\disk_cache\cache_util_win.cc:25] Unable to move the cache: Access is denied. (0x5)
+[0520/200118.797:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200118.797:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200118.797:ERROR:net\disk_cache\disk_cache.cc:284] Unable to create cache
+[0520/200118.797:ERROR:gpu\ipc\host\gpu_disk_cache.cc:737] Gpu Cache Creation failed: -2
+[0520/200120.811:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200122.846:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200124.862:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200126.883:WARNING:components\leveldb_proto\internal\leveldb_database.cc:124] Unable to open C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata: IO error: C:\Users\josep\Downloads\MECOS\exploration\browser_sessions\session\Default\shared_proto_db\metadata/LOCK: Access denied. (ChromeMethodBFE: 15::LockFile::5)
+[0520/200136.553:INFO:CONSOLE:0] "[.WebGL-0x67ec0221c800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/200136.636:INFO:CONSOLE:0] "[.WebGL-0x67ec0221c800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/200136.699:INFO:CONSOLE:0] "[.WebGL-0x67ec0221c800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0520/200136.756:INFO:CONSOLE:0] "[.WebGL-0x67ec0221c800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
+[0520/200431.455:ERROR:content\browser\network_service_instance_impl.cc:703] Network service crashed or was terminated, restarting service.
+[0520/200436.477:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=-1073741510
+[0520/200436.477:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
+[0520/200456.613:ERROR:content\browser\network_service_instance_impl.cc:703] Network service crashed or was terminated, restarting service.
+[0520/200501.703:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=-1073741510
+[0520/200501.703:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)

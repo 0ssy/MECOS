@@ -153,6 +153,10 @@ AVAILABLE TOOLS:
 - file_write(path: str, content: str)
 - file_read(path: str)
 - execute_python(code: str)
+- web_fetch(url: str)
+- web_ingest(url: str)
+- web_crawl(seed_urls: list, max_pages: int, max_depth: int)
+- app_map(process_limit: int, executable_limit: int)
 
 TASK:
 Create a sequential execution plan.

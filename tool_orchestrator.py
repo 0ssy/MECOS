@@ -5,6 +5,7 @@ Integrates: ToolRegistry, CodeExecutor, FileOperations, BrowserAutomation, AppCo
 """
 
 import asyncio
+import json
 from typing import Any, Optional
 from loguru import logger
 
@@ -137,6 +138,18 @@ class ToolOrchestrator:
             permissions=ToolPermission(can_access_network=True),
             category="web",
         ))
+        self.registry.register(ToolSpec(
+            name="web_crawl",
+            description="Crawl and ingest multiple pages from seed URLs.",
+            func=self._web_crawl,
+            parameters={
+                "seed_urls": "List of starting URLs",
+                "max_pages": "Maximum pages to crawl",
+                "max_depth": "Link depth from seed URLs",
+            },
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
 
         # ── System Info ───────────────────────────────────────────────────
         self.registry.register(ToolSpec(
@@ -144,6 +157,17 @@ class ToolOrchestrator:
             description="Return current CPU, memory, and disk usage statistics.",
             func=self._system_info,
             parameters={},
+            permissions=ToolPermission(),
+            category="system",
+        ))
+        self.registry.register(ToolSpec(
+            name="app_map",
+            description="Map running processes and installed executables on this machine.",
+            func=self._app_map,
+            parameters={
+                "process_limit": "Maximum running processes in result",
+                "executable_limit": "Maximum executables in result",
+            },
             permissions=ToolPermission(),
             category="system",
         ))
@@ -236,9 +260,27 @@ class ToolOrchestrator:
             return f"Ingested: {url}"
         return f"Web perception not available. URL: {url}"
 
+    async def _web_crawl(self, seed_urls: list, max_pages: int = 10, max_depth: int = 1) -> str:
+        if not self.web_perception:
+            return "Web perception not available."
+        result = await self.web_perception.crawl_web(
+            seed_urls=seed_urls,
+            max_pages=max_pages,
+            max_depth=max_depth,
+            same_domain_only=True,
+        )
+        return json.dumps(result)
+
     async def _system_info(self) -> str:
         info = self.app_controller.get_system_info()
         return "\n".join(f"{k}: {v}" for k, v in info.items())
+
+    async def _app_map(self, process_limit: int = 50, executable_limit: int = 150) -> str:
+        machine_map = self.app_controller.map_computer(
+            process_limit=int(process_limit),
+            executable_limit=int(executable_limit),
+        )
+        return json.dumps(machine_map)
 
     # ── Public interface ──────────────────────────────────────────────────
 

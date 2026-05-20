@@ -54,6 +54,38 @@ class Settings(BaseSettings):
     CPU_LIMIT_PERCENT: int = 80
     IDLE_SLEEP_TIME: int = 60 # Seconds between cognitive cycles when idle
 
+    # Web/App Perception
+    WEB_CRAWL_MAX_PAGES: int = 10
+    WEB_CRAWL_MAX_DEPTH: int = 1
+    WEB_CRAWL_SAME_DOMAIN_ONLY: bool = True
+    WEB_SEARCH_URL_TEMPLATES: list = [
+        "https://duckduckgo.com/?q={query}",
+        "https://www.google.com/search?q={query}",
+        "https://search.brave.com/search?q={query}",
+    ]
+    WEB_NAVIGATION_TIMEOUT_MS: int = 20000
+    WEB_BLOCKED_URL_PATTERNS: list = [
+        "pow-captcha",
+        "captcha",
+        "/help",
+        "/settings",
+        "consent.google.com",
+    ]
+    ASSIST_WEB_LOOKUP_ENABLED: bool = True
+    ASSIST_WEB_MAX_PAGES: int = 6
+    ASSIST_WEB_MAX_DEPTH: int = 1
+    APP_PERCEPTION_MAX_PROCESSES: int = 50
+    APP_PERCEPTION_MAX_EXECUTABLES: int = 150
+
+    # Training Acceleration
+    TRAINING_ACCELERATION_FACTOR: int = 2
+
+    # Governance gate before Ollama removal
+    GOV_MIN_EXPERIENCES: int = 100
+    GOV_MIN_TRADING_ANALYSES: int = 20
+    GOV_MIN_TRADING_ACTIONABLE_RATE: float = 0.10
+    GOV_MIN_META_EPISODES: int = 5
+
     class Config:
         env_file = ".env"
         extra = "allow"

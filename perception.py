@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from loguru import logger
 from memory_system import MemorySystem
+from app_controller import AppController
+from app_perception import AppPerception
 
 class FilePerception:
     def __init__(self, memory_system: MemorySystem):
@@ -33,11 +35,12 @@ class FilePerception:
             logger.error(f"Failed to ingest {file_path}: {e}")
 
 class PerceptionLayer:
-    def __init__(self, memory_system: MemorySystem):
+    def __init__(self, memory_system: MemorySystem, app_controller: AppController = None):
         self.file_perception = FilePerception(memory_system)
-        # Web and Screen perception to be added in later phases
+        self.app_perception = AppPerception(memory_system, app_controller or AppController())
 
     async def collect(self, data_dir: str):
         """Perform a collection cycle."""
         logger.info("Starting perception collection cycle...")
         await self.file_perception.scan_directory(data_dir)
+        await self.app_perception.map_computer()

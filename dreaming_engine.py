@@ -38,7 +38,10 @@ class DreamingEngine:
         
         logger.info("MECOS is dreaming of new goals...")
         result = await self.llm.think_and_act(prompt, system_prompt="You are the MECOS Dreaming Engine.")
-        goal = result['response'].strip().strip('"')
+        goal = (result.get('response') or "").strip().strip('"')
+        if not goal:
+            goal = f"Research and improve {topic} for user benefit."
+            logger.warning(f"Dream goal fallback activated: {goal}")
         
         logger.info(f"MECOS has set a new autonomous goal: {goal}")
         return goal

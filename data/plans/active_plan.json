@@ -5,7 +5,7 @@
     "tool": "file_write",
     "args": {
       "path": "plans/fallback_goal.txt",
-      "content": "MECOS fallback plan generated.\nGoal: learn leetcode\nReason: llm_empty_response\n"
+      "content": "MECOS fallback plan generated.\nGoal: \nReason: llm_empty_response\n"
     },
     "state": "pending",
     "reflection": null,

@@ -66,6 +66,7 @@ class MetaLearner:
             "strategy_mutation_rate": 0.15,
         }
         self.adaptation_log: List[Dict] = []
+        self.acceleration_factor = max(1, int(settings.TRAINING_ACCELERATION_FACTOR))
 
         self.save_dir = settings.MEMORY_DIR / "meta"
         self.save_dir.mkdir(parents=True, exist_ok=True)
@@ -119,15 +120,18 @@ class MetaLearner:
         results["adaptation"] = adaptation
 
         # 3. Memory consolidation
-        consolidation_result = await self.consolidation.consolidate(n_memories=30)
+        consolidation_batch = 30 * self.acceleration_factor
+        consolidation_result = await self.consolidation.consolidate(n_memories=consolidation_batch)
         results["consolidation"] = consolidation_result
 
         # 4. RL training from replay
-        await self.rl_trainer.train_from_replay(batch_size=16)
+        rl_batch = 16 * self.acceleration_factor
+        await self.rl_trainer.train_from_replay(batch_size=rl_batch)
         results["rl_stats"] = self.rl_trainer.get_stats()
 
         # 5. SSL training
-        ssl_result = await self.ssl_trainer.train_from_memory(n_samples=5)
+        ssl_samples = 5 * self.acceleration_factor
+        ssl_result = await self.ssl_trainer.train_from_memory(n_samples=ssl_samples)
         results["ssl_result"] = ssl_result
 
         # 6. Strategy evolution (every 5 cycles)

@@ -5,6 +5,8 @@ Full system entry point integrating all 7 phases + Dreaming + Independence.
 
 import asyncio
 import sys
+import random
+from urllib.parse import quote_plus
 from loguru import logger
 from exploration.browser_explorer import BrowserExplorer
 from exploration.config import config as exploration_config
@@ -56,10 +58,12 @@ class MECOSEngine:
 
     def __init__(self):
         self.is_running = False
+        self.goal_history = []
 
         # Configure logging
         log_path = settings.LOGS_DIR
         log_path.mkdir(parents=True, exist_ok=True)
+        logger.remove()
         logger.add(log_path / "engine.log", rotation="100 MB", retention="7 days", level="DEBUG")
         logger.add(sys.stdout, level="INFO", colorize=True)
         logger.info(f"Initializing {settings.PROJECT_NAME} Engine (all 7 phases + Dreaming + Independence)...")
@@ -67,15 +71,16 @@ class MECOSEngine:
         # ── Phase 1: Memory ───────────────────────────────────────────────
         self.memory = MemorySystem()
 
+        # ── Phase 4: Tool Orchestration ───────────────────────────────────
+        self.orchestrator = ToolOrchestrator()
+
         # ── Phase 2: Perception ───────────────────────────────────────────
-        self.perception = PerceptionLayer(self.memory)
+        self.perception = PerceptionLayer(self.memory, self.orchestrator.app_controller)
         self.web_perception = WebPerception(self.memory)
 
         # ── Phase 3: Reasoning ────────────────────────────────────────────
         self.reasoner = Reasoner(self.memory)
 
-        # ── Phase 4: Tool Orchestration ───────────────────────────────────
-        self.orchestrator = ToolOrchestrator()
         self.orchestrator.web_perception = self.web_perception
         self.action_engine = ActionExecutionEngine(self.orchestrator, self.memory)
 
@@ -102,7 +107,7 @@ class MECOSEngine:
 
         # ── Autonomous & Sovereignty ──────────────────────────────────────
         self.dreaming = DreamingEngine(self.memory)
-        self.independence = IndependenceManager(self.memory)
+        self.independence = IndependenceManager(self.memory, self.trading_agent, self.meta_learner)
         self.knowledge_base = KnowledgeBase()
         self.vision = VisionAnalyzer()
 
@@ -120,6 +125,8 @@ class MECOSEngine:
 
         # Run exploration in background
         asyncio.create_task(self._run_browser_exploration())
+        asyncio.create_task(self._run_web_learning_loop())
+        asyncio.create_task(self._run_app_learning_loop())
         self.local_explorer = ExplorationEngine()
         asyncio.create_task(self.local_explorer.run())
         asyncio.create_task(self.knowledge_sync_loop())
@@ -131,7 +138,27 @@ class MECOSEngine:
 
     async def _run_browser_exploration(self):
         while self.is_running:
-            await self.browser.explore("https://github.com", "github")
+            focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
+            seed_urls = self._build_goal_seed_urls(focus_goal, samples=1)
+            if seed_urls:
+                await self.browser.explore(seed_urls[0], "goal_exploration")
+            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+
+    async def _run_web_learning_loop(self):
+        while self.is_running:
+            focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
+            seed_urls = self._build_goal_seed_urls(focus_goal, samples=3)
+            await self.web_perception.crawl_web(
+                seed_urls=seed_urls,
+                max_pages=settings.WEB_CRAWL_MAX_PAGES,
+                max_depth=settings.WEB_CRAWL_MAX_DEPTH,
+                same_domain_only=False,
+            )
+            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+
+    async def _run_app_learning_loop(self):
+        while self.is_running:
+            await self.perception.app_perception.map_computer()
             await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
         
 
@@ -147,7 +174,28 @@ class MECOSEngine:
         The full cognitive cycle for a goal:
         Observe → Simulate → Reason → Act → Learn → Reflect
         """
+        goal = (goal or "").strip()
+        if not goal:
+            goal = f"Autonomous learning focus: {random.choice(self.dreaming.curiosity_topics)}"
+            logger.warning(f"Received empty goal. Using fallback goal: '{goal}'")
+
         logger.info(f"Processing goal: '{goal}'")
+        await self.memory.add_experience(
+            content=f"USER REQUEST: {goal}",
+            source="user_goal",
+        )
+        self.goal_history.append(goal)
+        if len(self.goal_history) > 100:
+            self.goal_history.pop(0)
+
+        if settings.ASSIST_WEB_LOOKUP_ENABLED and self._needs_web_assist(goal):
+            assist_urls = self._build_goal_seed_urls(goal, samples=5)
+            await self.web_perception.crawl_web(
+                seed_urls=assist_urls,
+                max_pages=settings.ASSIST_WEB_MAX_PAGES,
+                max_depth=settings.ASSIST_WEB_MAX_DEPTH,
+                same_domain_only=False,
+            )
 
         # 1. Observe — collect environmental data
         await self.perception.collect(str(settings.DATA_DIR))
@@ -195,6 +243,42 @@ class MECOSEngine:
             "results": results,
             "risk": risk,
         }
+
+    def _needs_web_assist(self, goal: str) -> bool:
+        goal_l = goal.lower()
+        assist_signals = [
+            "help",
+            "how",
+            "what",
+            "learn",
+            "research",
+            "?",
+        ]
+        return any(signal in goal_l for signal in assist_signals)
+
+    def _build_goal_seed_urls(self, goal: str, samples: int = 3) -> list:
+        goal = (goal or "").strip()
+        if not goal:
+            return []
+        query_variants = [
+            goal,
+            f"{goal} tutorial",
+            f"{goal} guide",
+            f"{goal} workflow",
+            f"{goal} examples",
+        ]
+        random.shuffle(query_variants)
+        templates = list(settings.WEB_SEARCH_URL_TEMPLATES)
+        random.shuffle(templates)
+
+        urls = []
+        for template in templates:
+            for query in query_variants:
+                q = quote_plus(query)
+                urls.append(template.format(query=q))
+                if len(urls) >= max(1, samples):
+                    return urls
+        return urls[:max(1, samples)]
 
 
     async def run_away_mode(self):
@@ -247,7 +331,11 @@ class MECOSEngine:
         The core autonomous loop.
         Runs a meta-learning cycle every `learning_interval` seconds.
         """
-        logger.info(f"Entering core cognitive loop (learning every {learning_interval}s).")
+        effective_learning_interval = max(
+            60,
+            int(learning_interval / max(1, settings.TRAINING_ACCELERATION_FACTOR))
+        )
+        logger.info(f"Entering core cognitive loop (learning every {effective_learning_interval}s).")
         cycle = 0
         try:
             while self.is_running:
@@ -255,7 +343,8 @@ class MECOSEngine:
                 logger.debug(f"Heartbeat #{cycle}: Engine monitoring.")
 
                 # Periodic learning cycle
-                if cycle % (learning_interval // 10) == 0:
+                cycle_window = max(1, effective_learning_interval // 10)
+                if cycle % cycle_window == 0:
                     await self.run_learning_cycle()
 
                 await asyncio.sleep(10)
@@ -291,7 +380,8 @@ async def main():
             await engine.process_goal(user_goal)
             await engine.main_loop()
         else:
-            print("No goal entered. Exiting.")
+            print("No goal entered. Continuing in passive autonomous learning mode.")
+            await engine.main_loop()
 
 if __name__ == "__main__":
     try:
