@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     SERVER_IP: str = "192.168.1.88"  # Replace with your Server Laptop's IP address
     LOCAL_LLM_URL: str = f"http://{SERVER_IP}:11434/v1"
     DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "llama3") # Or mistral, phi3, etc.
+    LLM_REQUEST_TIMEOUT: int = 45
+    LLM_THINK_TIMEOUT: int = 45
     
     # Embedding Configuration (Local)
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2" # Runs locally via sentence-transformers

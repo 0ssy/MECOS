@@ -6,6 +6,7 @@ Optimized to use the remote Server Laptop for inference.
 
 import json
 import time
+import asyncio
 from loguru import logger
 from openai import OpenAI
 from config import settings
@@ -15,9 +16,34 @@ class MECOSLLM:
         # Connect to the remote server laptop (Ollama)
         # It uses the SERVER_IP you set in config.py
         self.client = OpenAI(
-            timeout=300.0,base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
+            timeout=float(settings.LLM_REQUEST_TIMEOUT),
+            base_url=settings.LOCAL_LLM_URL,
+            api_key="local-no-key"
+        )
         self.model = settings.DEFAULT_MODEL
         logger.info(f"MECOS LLM connected to remote brain at {settings.LOCAL_LLM_URL}")
+
+    def _chat_completion(self, system_prompt: str, user_prompt: str):
+        return self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+        )
+
+    async def _chat_completion_with_timeout(self, system_prompt: str, user_prompt: str):
+        try:
+            return await asyncio.wait_for(
+                asyncio.to_thread(self._chat_completion, system_prompt, user_prompt),
+                timeout=float(settings.LLM_THINK_TIMEOUT)
+            )
+        except asyncio.TimeoutError:
+            logger.error(f"LLM call timed out after {settings.LLM_THINK_TIMEOUT}s")
+            return None
+        except Exception as e:
+            logger.error(f"LLM call failed: {e}")
+            return None
 
     async def think_and_act(self, prompt: str, system_prompt: str = "You are the MECOS AI."):
         """
@@ -32,26 +58,26 @@ class MECOSLLM:
         
         logger.info("MECOS LLM is thinking (generating internal monologue)...")
         try:
-            thought_response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": thinking_prompt}
-                ]
-            )
+            thought_response = await self._chat_completion_with_timeout(system_prompt, thinking_prompt)
+            if thought_response is None:
+                return {
+                    "monologue": "",
+                    "response": "",
+                    "stats": {"duration": time.time() - start_time, "model": self.model}
+                }
             monologue = thought_response.choices[0].message.content
             
             # Step 2: Final Response
             final_prompt = f"{prompt}\n\n[MY THOUGHTS]: {monologue}\n\n[FINAL RESPONSE]:"
             
             logger.info("MECOS LLM is generating final response...")
-            final_response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": final_prompt}
-                ]
-            )
+            final_response = await self._chat_completion_with_timeout(system_prompt, final_prompt)
+            if final_response is None:
+                return {
+                    "monologue": monologue,
+                    "response": "",
+                    "stats": {"duration": time.time() - start_time, "model": self.model}
+                }
             response = final_response.choices[0].message.content
             
             # Log the experience for future fine-tuning

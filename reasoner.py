@@ -1,5 +1,6 @@
 import json
 import re
+import ast
 from pathlib import Path
 from loguru import logger
 
@@ -37,6 +38,49 @@ class Reasoner:
         self.plan_dir.mkdir(parents=True, exist_ok=True)
 
         logger.info("Reasoner initialized with custom MECOS LLM.")
+
+    def _build_fallback_plan(self, goal: str, reason: str) -> list:
+        logger.warning(f"Using fallback plan: {reason}")
+        fallback_content = (
+            f"MECOS fallback plan generated.\n"
+            f"Goal: {goal}\n"
+            f"Reason: {reason}\n"
+        )
+        return [
+            {
+                "step": 1,
+                "objective": "Persist user goal for recovery",
+                "tool": "file_write",
+                "args": {
+                    "path": "plans/fallback_goal.txt",
+                    "content": fallback_content
+                },
+                "state": "pending",
+                "reflection": None,
+                "result": None,
+                "retries": 0,
+            },
+            {
+                "step": 2,
+                "objective": "Collect current system telemetry",
+                "tool": "system_info",
+                "args": {},
+                "state": "pending",
+                "reflection": None,
+                "result": None,
+                "retries": 0,
+            },
+            {
+                "step": 3,
+                "objective": "List current data workspace files",
+                "tool": "file_list",
+                "args": {"path": ".", "pattern": "*"},
+                "state": "pending",
+                "reflection": None,
+                "result": None,
+                "retries": 0,
+            },
+        ]
 
     # =========================================================
     # PLAN PERSISTENCE
@@ -156,7 +200,9 @@ RULES:
             if not content:
 
                 logger.warning("LLM returned empty response.")
-                return []
+                fallback_plan = self._build_fallback_plan(goal, "llm_empty_response")
+                self.save_plan(fallback_plan)
+                return fallback_plan
 
             # ---------------------------------------------
             # Extract JSON
@@ -167,7 +213,9 @@ RULES:
             if not match:
 
                 logger.error("No JSON found in response.")
-                return []
+                fallback_plan = self._build_fallback_plan(goal, "no_json_in_llm_response")
+                self.save_plan(fallback_plan)
+                return fallback_plan
 
             json_str = match.group()
 
@@ -188,12 +236,19 @@ RULES:
                 plan_data = json.loads(json_str)
 
             except json.JSONDecodeError as e:
+                logger.warning(f"Strict JSON parse failed: {e}. Trying tolerant parser...")
+                cleaned = clean_json_string(json_str)
+                try:
+                    plan_data = ast.literal_eval(cleaned)
+                except (ValueError, SyntaxError) as fallback_error:
 
-                logger.error(f"JSON parse failed: {e}")
+                    logger.error(f"Plan parse failed after fallback: {fallback_error}")
 
-                logger.debug(f"RAW JSON:\n{json_str}")
+                    logger.debug(f"RAW JSON:\n{json_str}")
 
-                return []
+                    fallback_plan = self._build_fallback_plan(goal, "json_parse_failure")
+                    self.save_plan(fallback_plan)
+                    return fallback_plan
 
             # ---------------------------------------------
             # Extract plan
@@ -253,6 +308,11 @@ RULES:
                 f"Generated plan with "
                 f"{len(validated_plan)} steps."
             )
+
+            if not validated_plan:
+                fallback_plan = self._build_fallback_plan(goal, "empty_validated_plan")
+                self.save_plan(fallback_plan)
+                return fallback_plan
 
             # Save immediately
             self.save_plan(validated_plan)
