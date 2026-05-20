@@ -1,7 +1,4 @@
-[0519/204451.662:INFO:CONSOLE:0] "[.WebGL-0x711403ec1800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0519/204451.768:INFO:CONSOLE:0] "[.WebGL-0x711403ec1800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0519/204451.835:INFO:CONSOLE:0] "[.WebGL-0x711403ec1800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
-[0519/204451.887:INFO:CONSOLE:0] "[.WebGL-0x711403ec1800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
-[0519/214623.989:ERROR:content\browser\network_service_instance_impl.cc:703] Network service crashed or was terminated, restarting service.
-[0519/214629.001:ERROR:content\browser\gpu\gpu_process_host.cc:999] GPU process exited unexpectedly: exit_code=-1073741510
-[0519/214629.001:WARNING:content\browser\gpu\gpu_process_host.cc:1441] The GPU process has crashed 1 time(s)
+[0519/224330.945:INFO:CONSOLE:0] "[.WebGL-0x47e403e68e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/224331.046:INFO:CONSOLE:0] "[.WebGL-0x47e403e68e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/224331.130:INFO:CONSOLE:0] "[.WebGL-0x47e403e68e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: https://github.com/ (0)
+[0519/224331.182:INFO:CONSOLE:0] "[.WebGL-0x47e403e68e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: https://github.com/ (0)
