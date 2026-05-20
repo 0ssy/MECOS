@@ -1,5 +1,6 @@
 import asyncio
 from collections import deque
+from contextlib import suppress
 from urllib.parse import urljoin, urlparse
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
@@ -94,7 +95,8 @@ class WebPerception:
                 "error": str(e),
             }
         finally:
-            await page.close()
+            with suppress(Exception):
+                await page.close()
 
     async def crawl_web(self, seed_urls: list, max_pages: int = 10, max_depth: int = 1, same_domain_only: bool = True):
         """

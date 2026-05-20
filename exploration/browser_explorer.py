@@ -22,13 +22,21 @@ class BrowserExplorer:
         self.page = await self.context.new_page()
 
     async def explore(self, url, name):
-        await self.page.goto(url)
-        await asyncio.sleep(3)
-        screenshot_bytes = await self.page.screenshot()
-        image = Image.open(io.BytesIO(screenshot_bytes))
-        analysis = await self.vision.analyze_screenshot(image)
-        self.kb.add_log(name, {"url": url, "analysis": analysis})
+        if not self.page or self.page.is_closed():
+            return
+        try:
+            await self.page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            await asyncio.sleep(3)
+            screenshot_bytes = await self.page.screenshot()
+            image = Image.open(io.BytesIO(screenshot_bytes))
+            analysis = await self.vision.analyze_screenshot(image)
+            self.kb.add_log(name, {"url": url, "analysis": analysis})
+        except Exception as e:
+            logger.debug(f"Browser explore skipped for {url}: {e}")
 
     async def shutdown(self):
-        if self.context: await self.context.close()
-        if self.playwright: await self.playwright.stop()
+        if self.context:
+            await self.context.close()
+        if self.playwright:
+            await self.playwright.stop()
+        self.page = None

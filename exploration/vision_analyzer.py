@@ -1,3 +1,4 @@
+import asyncio
 import base64
 import io
 import requests
@@ -19,10 +20,11 @@ class VisionAnalyzer:
     async def analyze_screenshot(self, image, prompt="What is happening?"):
         try:
             img_base64 = self.encode_image(image)
-            response = requests.post(
+            response = await asyncio.to_thread(
+                requests.post,
                 f"{self.server_url}/analyze_screen",
                 json={"image": img_base64, "prompt": prompt},
-                timeout=config.VISION_TIMEOUT
+                timeout=config.VISION_TIMEOUT,
             )
             return response.json().get("analysis", "") if response.status_code == 200 else ""
         except Exception as e:

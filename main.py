@@ -6,6 +6,7 @@ Full system entry point integrating all 7 phases + Dreaming + Independence.
 import asyncio
 import sys
 import random
+from contextlib import suppress
 from urllib.parse import quote_plus
 from loguru import logger
 from exploration.browser_explorer import BrowserExplorer
@@ -59,6 +60,8 @@ class MECOSEngine:
     def __init__(self):
         self.is_running = False
         self.goal_history = []
+        self.background_tasks = []
+        self._shutdown_started = False
 
         # Configure logging
         log_path = settings.LOGS_DIR
@@ -119,54 +122,93 @@ class MECOSEngine:
         await self.web_perception.startup()
         self.is_running = True
         logger.info("MECOS Engine is running.")
-        from exploration.exploration_engine import ExplorationEngine
         self.browser = BrowserExplorer(self.knowledge_base, self.vision)
         await self.browser.startup()
 
         # Run exploration in background
-        asyncio.create_task(self._run_browser_exploration())
-        asyncio.create_task(self._run_web_learning_loop())
-        asyncio.create_task(self._run_app_learning_loop())
-        self.local_explorer = ExplorationEngine()
-        asyncio.create_task(self.local_explorer.run())
-        asyncio.create_task(self.knowledge_sync_loop())
+        self.background_tasks.append(asyncio.create_task(self._run_browser_exploration()))
+        self.background_tasks.append(asyncio.create_task(self._run_web_learning_loop()))
+        self.background_tasks.append(asyncio.create_task(self._run_app_learning_loop()))
+        self.background_tasks.append(asyncio.create_task(self.knowledge_sync_loop()))
 
     async def knowledge_sync_loop(self):
         while True:
-            await sync_server_knowledge()
-            await asyncio.sleep(3600)  # Sync every hour
+            try:
+                await sync_server_knowledge()
+                await asyncio.sleep(3600)  # Sync every hour
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"Knowledge sync loop error: {e}")
+                await asyncio.sleep(30)
 
     async def _run_browser_exploration(self):
         while self.is_running:
-            focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
-            seed_urls = self._build_goal_seed_urls(focus_goal, samples=1)
-            if seed_urls:
-                await self.browser.explore(seed_urls[0], "goal_exploration")
-            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            try:
+                focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
+                seed_urls = self._build_goal_seed_urls(focus_goal, samples=1)
+                if seed_urls:
+                    await self.browser.explore(seed_urls[0], "goal_exploration")
+                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"Browser exploration loop error: {e}")
+                await asyncio.sleep(10)
 
     async def _run_web_learning_loop(self):
         while self.is_running:
-            focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
-            seed_urls = self._build_goal_seed_urls(focus_goal, samples=3)
-            await self.web_perception.crawl_web(
-                seed_urls=seed_urls,
-                max_pages=settings.WEB_CRAWL_MAX_PAGES,
-                max_depth=settings.WEB_CRAWL_MAX_DEPTH,
-                same_domain_only=False,
-            )
-            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            try:
+                focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
+                seed_urls = self._build_goal_seed_urls(focus_goal, samples=3)
+                await self.web_perception.crawl_web(
+                    seed_urls=seed_urls,
+                    max_pages=settings.WEB_CRAWL_MAX_PAGES,
+                    max_depth=settings.WEB_CRAWL_MAX_DEPTH,
+                    same_domain_only=False,
+                )
+                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"Web learning loop error: {e}")
+                await asyncio.sleep(10)
 
     async def _run_app_learning_loop(self):
         while self.is_running:
-            await self.perception.app_perception.map_computer()
-            await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            try:
+                await self.perception.app_perception.map_computer()
+                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.warning(f"App learning loop error: {e}")
+                await asyncio.sleep(10)
         
 
     async def shutdown(self):
         """Gracefully shut down all subsystems."""
+        if self._shutdown_started:
+            return
+        self._shutdown_started = True
         logger.info("Shutting down MECOS Engine...")
-        await self.web_perception.shutdown()
         self.is_running = False
+        if self.background_tasks:
+            wait_timeout = max(10, int(settings.WEB_NAVIGATION_TIMEOUT_MS / 1000) + 5)
+            done, pending = await asyncio.wait(self.background_tasks, timeout=wait_timeout)
+            for task in pending:
+                task.cancel()
+            if pending:
+                with suppress(Exception):
+                    await asyncio.wait_for(
+                        asyncio.gather(*pending, return_exceptions=True),
+                        timeout=3,
+                    )
+        self.background_tasks = []
+        with suppress(Exception):
+            if hasattr(self, "browser") and self.browser:
+                await self.browser.shutdown()
+        await self.web_perception.shutdown()
         logger.info("Shutdown complete.")
 
     async def process_goal(self, goal: str) -> dict:
@@ -310,12 +352,156 @@ class MECOSEngine:
         """Create a system state checkpoint."""
         return await self.checkpoint_manager.create_checkpoint(label=label)
 
+    def _recent_memory_fallback(self, user_message: str, limit: int = 3) -> str:
+        """Build a deterministic fallback reply from recent memory when LLM is unavailable."""
+        entries = list(reversed(self.memory.short_term_buffer[-50:]))
+        if not entries:
+            return "I couldn't generate a full response right now, and I don't have recent memory entries to summarize yet."
+
+        is_discovery_query = any(
+            token in (user_message or "").lower()
+            for token in ("discover", "learn", "found", "what have you", "background")
+        )
+
+        summary_lines = []
+        seen = set()
+        for entry in entries:
+            source = (entry.get("source") or "general").strip()
+            content = (entry.get("content") or "").strip()
+            if not content:
+                continue
+
+            line = None
+            if content.startswith("WEB CONTENT ("):
+                right = content.find("):")
+                if right > len("WEB CONTENT ("):
+                    url = content[len("WEB CONTENT ("):right]
+                    line = f"- Web: ingested {url}"
+            elif content.startswith("WEB CRAWL SUMMARY:"):
+                line = f"- Web: {content[:180]}"
+            elif content.startswith("APP MAP ["):
+                line = "- Apps: updated local app/process map snapshot."
+            elif content.startswith("APP WORKFLOW TRACE:"):
+                line = f"- Apps: {content[:180]}"
+            elif source in {"web_perception", "web_perception_crawl", "app_perception", "app_workflow_learning"}:
+                line = f"- {source}: {content[:180]}"
+            elif not is_discovery_query:
+                line = f"- {source}: {content[:180]}"
+
+            if line:
+                key = line.lower()
+                if key not in seen:
+                    seen.add(key)
+                    summary_lines.append(line)
+            if len(summary_lines) >= max(1, int(limit)):
+                break
+
+        if not summary_lines:
+            return "I couldn't generate a full response right now, but I am still learning in the background."
+
+        if is_discovery_query:
+            return "LLM timed out, but here are my latest memory-backed discoveries:\n" + "\n".join(summary_lines)
+        return "LLM timed out, but here are recent memory-backed updates:\n" + "\n".join(summary_lines)
+
+    async def chat(self, user_message: str) -> str:
+        """Conversational reply using memory context while background learning continues."""
+        message = (user_message or "").strip()
+        if not message:
+            return ""
+
+        context_results = await self.memory.retrieve_context(message)
+        docs = context_results.get("documents", [[]])
+        context_str = "\n".join(docs[0][:5]) if docs and docs[0] else ""
+
+        prompt = f"""
+You are MECOS, a practical personal AI assistant.
+
+USER MESSAGE:
+{message}
+
+RELEVANT MEMORY:
+{context_str}
+
+Respond directly and clearly.
+"""
+        result = await self.reasoner.llm.think_and_act(
+            prompt,
+            system_prompt="You are the MECOS Conversational Assistant.",
+        )
+        reply = (result.get("response") or "").strip()
+        if not reply:
+            reply = self._recent_memory_fallback(message, limit=3)
+
+        await self.memory.add_experience(
+            content=f"CHAT USER: {message}\nCHAT ASSISTANT: {reply}",
+            source="chat",
+        )
+        return reply
+
+    async def chat_loop(self):
+        """
+        Interactive chat loop that keeps MECOS learning in the background.
+        Commands:
+          /goal <text>  -> run full goal execution pipeline
+          /status       -> print current system status
+          /exit         -> leave chat
+        """
+        print("\n" + "=" * 50)
+        print("MECOS CHAT MODE")
+        print("=" * 50)
+        print("Type /goal <text> to execute a goal, /status for system status, /exit to quit.")
+
+        learning_task = asyncio.create_task(self.main_loop())
+        try:
+            while self.is_running:
+                user_input = await asyncio.to_thread(input, "You > ")
+                user_input = (user_input or "").strip()
+                if not user_input:
+                    continue
+
+                user_l = user_input.lower()
+                if user_l in {"/exit", "exit", "quit"}:
+                    break
+
+                if user_l == "/status":
+                    status = await self.get_system_status_async()
+                    print(f"MECOS > {status}")
+                    continue
+
+                if user_l.startswith("/goal "):
+                    goal = user_input[6:].strip()
+                    if goal:
+                        await self.create_checkpoint(label="chat_goal")
+                        result = await self.process_goal(goal)
+                        print(
+                            "MECOS > "
+                            f"Goal executed. plan_steps={result.get('plan_steps', 0)}, "
+                            f"risk={result.get('risk', {}).get('risk_level', 'UNKNOWN')}"
+                        )
+                    continue
+
+                reply = await self.chat(user_input)
+                print(f"MECOS > {reply}")
+        finally:
+            self.is_running = False
+            learning_task.cancel()
+            with suppress(asyncio.CancelledError):
+                await learning_task
+            await self.shutdown()
+
     async def collaborative_solve(self, goal: str) -> dict:
         """Use multi-agent collaboration to solve a complex goal."""
         return await self.coordinator.collaborative_solve(goal)
 
     def get_system_status(self) -> dict:
         """Return a comprehensive system status report."""
+        readiness = "UNKNOWN"
+        if self.is_running:
+            try:
+                asyncio.get_running_loop()
+                readiness = self.independence.last_readiness
+            except RuntimeError:
+                readiness = asyncio.run(self.independence.check_readiness())
         return {
             "running": self.is_running,
             "learning_status": self.meta_learner.get_learning_status(),
@@ -323,7 +509,20 @@ class MECOSEngine:
             "agents_registered": self.coordinator.get_registered_agents(),
             "world_model": self.world_model.get_model_stats(),
             "checkpoints": len(self.checkpoint_manager.list_checkpoints()),
-            "independence_readiness": asyncio.run(self.independence.check_readiness()) if self.is_running else "UNKNOWN"
+            "independence_readiness": readiness,
+        }
+
+    async def get_system_status_async(self) -> dict:
+        """Async-safe status report for running event loops (chat mode)."""
+        readiness = await self.independence.check_readiness() if self.is_running else "UNKNOWN"
+        return {
+            "running": self.is_running,
+            "learning_status": self.meta_learner.get_learning_status(),
+            "tools_available": len(self.orchestrator.registry.list_tools()),
+            "agents_registered": self.coordinator.get_registered_agents(),
+            "world_model": self.world_model.get_model_stats(),
+            "checkpoints": len(self.checkpoint_manager.list_checkpoints()),
+            "independence_readiness": readiness,
         }
 
     async def main_loop(self, learning_interval: int = 300):
@@ -349,7 +548,7 @@ class MECOSEngine:
 
                 await asyncio.sleep(10)
         except asyncio.CancelledError:
-            await self.shutdown()
+            return
 
 
 async def main():
@@ -369,19 +568,8 @@ async def main():
         for cmd in commands:
             print(f"  {cmd}")
     else:
-        # INTERACTIVE MODE: MECOS asks YOU for a goal
-        print("\n" + "="*50)
-        print("MECOS INTERACTIVE MODE")
-        print("="*50)
-        user_goal = input("What is your goal for MECOS today? > ")
-        
-        if user_goal.strip():
-            await engine.create_checkpoint(label="user_initiated_task")
-            await engine.process_goal(user_goal)
-            await engine.main_loop()
-        else:
-            print("No goal entered. Continuing in passive autonomous learning mode.")
-            await engine.main_loop()
+        # CHAT MODE: conversational loop + background learning
+        await engine.chat_loop()
 
 if __name__ == "__main__":
     try:
