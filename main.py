@@ -6,6 +6,7 @@ Full system entry point integrating all 7 phases + Dreaming + Independence.
 import asyncio
 import sys
 from loguru import logger
+from exploration.browser_explorer import BrowserExplorer
 
 from config import settings
 from exploration.sync_tool import sync_server_knowledge
@@ -109,7 +110,11 @@ class MECOSEngine:
         self.is_running = True
         logger.info("MECOS Engine is running.")
         from exploration.exploration_engine import ExplorationEngine
+        self.browser = BrowserExplorer(self.knowledge_base, self.vision)
+        await self.browser.startup()
 
+        # Run exploration in background
+        asyncio.create_task(self._run_browser_exploration())
         self.local_explorer = ExplorationEngine()
         asyncio.create_task(self.local_explorer.run())
         asyncio.create_task(self.knowledge_sync_loop())
