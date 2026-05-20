@@ -1,0 +1,1 @@
+class StatisticalArbitrageAgent: pass

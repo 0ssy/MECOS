@@ -1,0 +1,1 @@
+class SentimentAgent: pass
