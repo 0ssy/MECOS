@@ -7325,3 +7325,116 @@ Duck.ai by DuckDuck...
 2026-05-20 21:56:53.430 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [trading_knowledge]: score=1.000
 2026-05-20 22:02:08.709 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [reasoning_advanced]: score=0.600
 2026-05-20 22:08:10.399 | DEBUG    | benchmarking:run_full_benchmark:166 - Benchmark [coding_advanced]: score=0.667
+2026-05-22 18:54:27.422 | INFO     | __main__:__init__:72 - Initializing MECOS Engine (all 7 phases + Dreaming + Independence)...
+2026-05-22 18:54:37.139 | INFO     | memory_system:__init__:13 - Vector Memory System Initialized.
+2026-05-22 18:54:37.140 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-22 18:54:37.140 | INFO     | code_executor:__init__:61 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-22 18:54:37.141 | INFO     | file_operations:__init__:41 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-22 18:54:37.141 | INFO     | app_controller:__init__:32 - AppController initialized.
+2026-05-22 18:54:37.142 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-22 18:54:37.142 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-22 18:54:37.142 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-22 18:54:37.142 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-22 18:54:37.143 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-22 18:54:37.143 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-22 18:54:37.144 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-22 18:54:37.144 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-22 18:54:37.144 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-22 18:54:37.144 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-22 18:54:37.145 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-22 18:54:37.145 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-22 18:54:37.145 | INFO     | tool_registry:register:49 - Tool registered: [web] web_crawl v1.0.0
+2026-05-22 18:54:37.145 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-22 18:54:37.146 | INFO     | tool_registry:register:49 - Tool registered: [system] app_map v1.0.0
+2026-05-22 18:54:37.146 | INFO     | tool_orchestrator:__init__:33 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-22 18:54:37.896 | INFO     | mecos_llm:__init__:24 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-22 18:54:37.897 | INFO     | reasoner:__init__:40 - Reasoner initialized with custom MECOS LLM.
+2026-05-22 18:54:37.898 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-22 18:54:37.898 | INFO     | trading.agents.regime_detection_agent:__init__:10 - RegimeDetectionAgent initialized.
+2026-05-22 18:54:37.898 | INFO     | trading.agents.meta_orchestrator:__init__:10 - MetaOrchestrator initialized.
+2026-05-22 18:54:37.899 | INFO     | trading.agents.risk_engine:__init__:8 - RiskEngine initialized.
+2026-05-22 18:54:37.899 | INFO     | trading.agents.options_pricing_agent:__init__:10 - OptionsPricingAgent initialized.
+2026-05-22 18:54:37.900 | INFO     | trading_agent:__init__:21 - Advanced TradingAgent initialized.
+2026-05-22 18:54:38.551 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-22 18:54:39.221 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-22 18:54:39.871 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-22 18:54:39.871 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-22 18:54:39.872 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-22 18:54:39.872 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-22 18:54:39.873 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-22 18:54:40.564 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-22 18:54:40.565 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-22 18:54:41.134 | INFO     | memory_consolidation:_load:39 - Loaded 4 consolidated knowledge items
+2026-05-22 18:54:41.135 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-22 18:54:41.723 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 6 runs
+2026-05-22 18:54:41.724 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-22 18:54:42.323 | INFO     | rl_trainer:__init__:157 - RLTrainer initialized for domain: general (ε=1.000)
+2026-05-22 18:54:42.991 | INFO     | self_supervised_trainer:__init__:36 - SelfSupervisedTrainer initialized.
+2026-05-22 18:54:42.992 | INFO     | curriculum_manager:__init__:124 - CurriculumManager initialized.
+2026-05-22 18:54:43.617 | INFO     | memory_consolidation:_load:39 - Loaded 4 consolidated knowledge items
+2026-05-22 18:54:43.618 | INFO     | memory_consolidation:__init__:33 - MemoryConsolidation initialized.
+2026-05-22 18:54:44.213 | INFO     | benchmarking:_load:124 - Benchmark history loaded: 6 runs
+2026-05-22 18:54:44.213 | INFO     | benchmarking:__init__:118 - BenchmarkingEngine initialized.
+2026-05-22 18:54:44.834 | INFO     | strategy_evolution:__init__:118 - StrategyEvolution initialized: 4 strategies
+2026-05-22 18:54:44.835 | INFO     | genetic_optimizer:__init__:69 - GeneticOptimizer initialized (pop=20, mut=0.15)
+2026-05-22 18:54:44.836 | INFO     | meta_learner:__init__:74 - MetaLearner initialized with all learning subsystems.
+2026-05-22 18:54:44.838 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 10 checkpoints
+2026-05-22 18:54:45.492 | INFO     | world_model:__init__:58 - WorldModel initialized.
+2026-05-22 18:54:45.492 | WARNING  | sovereign_inference:__init__:30 - Sovereign model not found at C:\Users\josep\Downloads\MECOS\models\mecos_core.gguf. Still dependent on external engine.
+2026-05-22 18:54:45.494 | INFO     | __main__:__init__:117 - All 7 phases + Dreaming + Independence initialized successfully.
+2026-05-22 18:54:45.495 | INFO     | __main__:startup:121 - Starting subsystems...
+2026-05-22 18:54:59.133 | INFO     | web_perception:startup:22 - Web Perception Module Initialized.
+2026-05-22 18:54:59.134 | INFO     | __main__:startup:124 - MECOS Engine is running.
+2026-05-22 18:55:03.866 | DEBUG    | memory_system:store:26 - Stored memory: APP MAP [2026-05-22T18:55:02.706510]: {'system_inf...
+2026-05-22 18:55:03.867 | INFO     | app_perception:map_computer:30 - App perception mapped machine: 50 processes, 150 executables.
+2026-05-22 18:55:03.867 | INFO     | exploration.sync_tool:sync_server_knowledge:8 - Syncing knowledge from server (192.168.1.88)...
+2026-05-22 18:55:03.869 | INFO     | __main__:main_loop:537 - Entering core cognitive loop (learning every 150s).
+2026-05-22 18:55:03.869 | DEBUG    | __main__:main_loop:542 - Heartbeat #1: Engine monitoring.
+2026-05-22 18:55:03.871 | INFO     | web_perception:ingest_url:49 - Navigating to https://duckduckgo.com/?q=trading+strategies+examples...
+2026-05-22 18:55:10.104 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://duckduckgo.com/?q=trading+str...
+2026-05-22 18:55:10.104 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://duckduckgo.com/?q=trading+strategies+examples
+2026-05-22 18:55:10.240 | INFO     | web_perception:ingest_url:49 - Navigating to https://duckduckgo.com/?q=trading+strategies+workflow...
+2026-05-22 18:55:12.095 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://duckduckgo.com/?q=trading+str...
+2026-05-22 18:55:12.095 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://duckduckgo.com/?q=trading+strategies+workflow
+2026-05-22 18:55:12.216 | INFO     | web_perception:ingest_url:49 - Navigating to https://duckduckgo.com/?q=trading+strategies+tutorial...
+2026-05-22 18:55:13.851 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://duckduckgo.com/?q=trading+str...
+2026-05-22 18:55:13.851 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://duckduckgo.com/?q=trading+strategies+tutorial
+2026-05-22 18:55:13.881 | DEBUG    | __main__:main_loop:542 - Heartbeat #2: Engine monitoring.
+2026-05-22 18:55:13.964 | INFO     | web_perception:ingest_url:49 - Navigating to https://apps.apple.com/app/duckduckgo-private-browser/id663592361?platform=iphone&pt=866401&mt=8&ct=serp-atb-serp...
+2026-05-22 18:55:16.318 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://apps.apple.com/app/duckduckgo...
+2026-05-22 18:55:16.319 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://apps.apple.com/app/duckduckgo-private-browser/id663592361?platform=iphone&pt=866401&mt=8&ct=serp-atb-serp
+2026-05-22 18:55:16.444 | INFO     | web_perception:ingest_url:49 - Navigating to https://duck.ai...
+2026-05-22 18:55:19.544 | SUCCESS  | exploration.sync_tool:sync_server_knowledge:19 - Server knowledge synced successfully.
+2026-05-22 18:55:22.005 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://duck.ai):
+Duck.ai by DuckDuck...
+2026-05-22 18:55:22.005 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://duck.ai
+2026-05-22 18:55:22.212 | INFO     | web_perception:ingest_url:49 - Navigating to https://www.reddit.com/r/duckduckgo/...
+2026-05-22 18:55:23.106 | ERROR    | web_perception:ingest_url:89 - Failed to ingest https://www.reddit.com/r/duckduckgo/: Page.content: Unable to retrieve content because the page is navigating and changing the content.
+2026-05-22 18:55:23.530 | DEBUG    | memory_system:store:26 - Stored memory: WEB CRAWL SUMMARY: {'visited': ['https://duckduckg...
+2026-05-22 18:55:23.531 | INFO     | web_perception:crawl_web:163 - Web crawl complete: 5/6 pages ingested.
+2026-05-22 18:55:23.892 | DEBUG    | __main__:main_loop:542 - Heartbeat #3: Engine monitoring.
+2026-05-22 18:55:35.308 | DEBUG    | memory_system:store:26 - Stored memory: APP MAP [2026-05-22T18:55:34.748098]: {'system_inf...
+2026-05-22 18:55:35.309 | INFO     | app_perception:map_computer:30 - App perception mapped machine: 50 processes, 150 executables.
+2026-05-22 18:55:35.309 | DEBUG    | __main__:main_loop:542 - Heartbeat #4: Engine monitoring.
+2026-05-22 18:55:45.316 | DEBUG    | __main__:main_loop:542 - Heartbeat #5: Engine monitoring.
+2026-05-22 18:55:53.668 | INFO     | web_perception:ingest_url:49 - Navigating to https://search.brave.com/search?q=system+efficiency...
+2026-05-22 18:55:55.485 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://search.brave.com/search?q=sys...
+2026-05-22 18:55:55.485 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://search.brave.com/search?q=system+efficiency
+2026-05-22 18:55:55.488 | DEBUG    | __main__:main_loop:542 - Heartbeat #6: Engine monitoring.
+2026-05-22 18:55:55.626 | INFO     | web_perception:ingest_url:49 - Navigating to https://search.brave.com/search?q=system+efficiency+examples...
+2026-05-22 18:55:57.476 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://search.brave.com/search?q=sys...
+2026-05-22 18:55:57.476 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://search.brave.com/search?q=system+efficiency+examples
+2026-05-22 18:55:57.596 | INFO     | web_perception:ingest_url:49 - Navigating to https://search.brave.com/search?q=system+efficiency+tutorial...
+2026-05-22 18:55:59.228 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://search.brave.com/search?q=sys...
+2026-05-22 18:55:59.229 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://search.brave.com/search?q=system+efficiency+tutorial
+2026-05-22 18:55:59.353 | INFO     | web_perception:ingest_url:49 - Navigating to https://tb-manual.torproject.org/security-settings/#safest...
+2026-05-22 18:56:04.868 | DEBUG    | memory_system:store:26 - Stored memory: WEB CONTENT (https://tb-manual.torproject.org/secu...
+2026-05-22 18:56:04.869 | SUCCESS  | web_perception:ingest_url:80 - Successfully ingested web content from https://tb-manual.torproject.org/security-settings/#safest
+2026-05-22 18:56:05.423 | DEBUG    | memory_system:store:26 - Stored memory: WEB CRAWL SUMMARY: {'visited': ['https://search.br...
+2026-05-22 18:56:05.423 | INFO     | web_perception:crawl_web:163 - Web crawl complete: 4/4 pages ingested.
+2026-05-22 18:56:06.671 | DEBUG    | memory_system:store:26 - Stored memory: APP MAP [2026-05-22T18:56:06.238383]: {'system_inf...
+2026-05-22 18:56:06.672 | INFO     | app_perception:map_computer:30 - App perception mapped machine: 50 processes, 150 executables.
+2026-05-22 18:56:06.672 | DEBUG    | __main__:main_loop:542 - Heartbeat #7: Engine monitoring.
+2026-05-22 18:56:16.682 | DEBUG    | __main__:main_loop:542 - Heartbeat #8: Engine monitoring.
+2026-05-22 18:56:26.683 | DEBUG    | __main__:main_loop:542 - Heartbeat #9: Engine monitoring.
+2026-05-22 18:56:35.240 | INFO     | __main__:shutdown:194 - Shutting down MECOS Engine...
