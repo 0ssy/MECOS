@@ -1,41 +1,32 @@
-import numpy as np
-from typing import Dict, List, Any
+from typing import Dict, Any
 from loguru import logger
+import numpy as np
 
-class MarketMicrostructureAnalyzer:
+class MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U:
     def __init__(self, memory):
         self.memory = memory
-        logger.info("Market Microstructure Analyzer initialized")
+        logger.info('MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U initialized')
 
-    async def analyze_orderbook(self,
-                                bids: List[Dict],
-                                asks: List[Dict]) -> Dict[str, Any]:
+    async def analyze(self, orderbook: Dict) -> Dict[str, Any]:
 
-        total_bid_volume = sum([b["size"] for b in bids])
-        total_ask_volume = sum([a["size"] for a in asks])
+        bids = orderbook.get('bids', [])
+        asks = orderbook.get('asks', [])
 
-        imbalance = (
-            total_bid_volume - total_ask_volume
-        ) / max(total_bid_volume + total_ask_volume, 1)
+        if not bids or not asks:
+            return {'imbalance': 0}
 
-        best_bid = max([b["price"] for b in bids])
-        best_ask = min([a["price"] for a in asks])
+        bid_volume = sum([b[1] for b in bids])
+        ask_volume = sum([a[1] for a in asks])
 
-        spread = best_ask - best_bid
+        total = bid_volume + ask_volume
 
-        if imbalance > 0.2:
-            pressure = "BUY_PRESSURE"
+        imbalance = 0 if total == 0 else (bid_volume - ask_volume) / total
 
-        elif imbalance < -0.2:
-            pressure = "SELL_PRESSURE"
-
-        else:
-            pressure = "NEUTRAL"
+        spread = asks[0][0] - bids[0][0]
 
         return {
-            "orderbook_imbalance": float(imbalance),
-            "spread": float(spread),
-            "pressure": pressure,
-            "bid_volume": float(total_bid_volume),
-            "ask_volume": float(total_ask_volume)
+            'imbalance': float(imbalance),
+            'spread': float(spread),
+            'bid_volume': float(bid_volume),
+            'ask_volume': float(ask_volume)
         }
