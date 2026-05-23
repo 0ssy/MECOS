@@ -16,6 +16,8 @@ class TradingConfig:
     MAX_DRAWDOWN = 0.10         # Stop trading if 10% loss
     MAX_LEVERAGE = 3.0          # Max 3x leverage
     MAX_POSITION_SIZE = 0.20    # No single asset > 20% of portfolio
+    MAX_LEVERAGE = 1.0
+    MIN_CONFIDENCE = 0.75
     
     # --- Options Pricing ---
     RISK_FREE_RATE = 0.05       # 5% annual interest rate for Black-Scholes

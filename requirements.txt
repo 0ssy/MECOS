@@ -1,9 +1,14 @@
 # Core Dependencies
 asyncio
 aiohttp
+websockets
 python-dotenv
 pydantic
 loguru
+pandas
+scipy
+statsmodels
+alpaca-py
 
 # Memory & Embeddings
 chromadb

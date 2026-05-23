@@ -45,3 +45,10 @@ class TradingAgent:
             **self.stats,
             "actionable_rate": actionable_rate,
         }
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        "trading_agent.py defines the TradingAgent class only. "
+        "Run live trading with: python run_live_trading.py"
+    )

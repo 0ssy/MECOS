@@ -1,82 +1,197 @@
 import os
-import asyncio
-from loguru import logger
+import pandas as pd
 from typing import Dict, List, Any
+
+from loguru import logger
+from dotenv import load_dotenv
+
+from alpaca.common.exceptions import APIError
+from alpaca.data.enums import DataFeed
+from alpaca.data.historical.stock import StockHistoricalDataClient
+from alpaca.data.requests import StockBarsRequest
+from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
+
+from alpaca.trading.client import TradingClient
+from alpaca.trading.requests import MarketOrderRequest
+from alpaca.trading.enums import OrderSide, TimeInForce
 
 class BrokerConnector:
     """
-    Connects MECOS Trading Agents to real broker APIs (e.g., Alpaca).
-    Currently configured for Paper Trading.
+    Institutional Broker Connector
+    Alpaca Paper Trading + Market Data
     """
+
     def __init__(self):
-        # In a real implementation, you would use the alpaca-trade-api package
-        # e.g., self.api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL)
-        self.api_key = os.environ.get("ALPACA_API_KEY", "dummy_key")
-        self.secret_key = os.environ.get("ALPACA_SECRET_KEY", "dummy_secret")
-        self.base_url = os.environ.get("ALPACA_BASE_URL", "https://paper-api.alpaca.markets" )
-        self.is_paper = "paper" in self.base_url
-        
-        logger.info(f"BrokerConnector initialized. Paper Trading: {self.is_paper}")
+        load_dotenv()
 
-    async def get_market_data(self, symbol: str, timeframe: str = "1D", limit: int = 100) -> List[Dict]:
-        """Fetch historical market data."""
-        logger.info(f"Fetching market data for {symbol} ({timeframe})...")
-        # Simulate API call delay
-        await asyncio.sleep(0.5)
-        
-        # Simulated data for demonstration
-        # In reality, this would call self.api.get_bars()
-        import random
-        from datetime import datetime, timedelta
-        
-        data = []
-        base_price = 150.0
-        for i in range(limit):
-            date = datetime.now() - timedelta(days=limit-i)
-            close = base_price + random.uniform(-5, 5)
-            data.append({
-                "timestamp": date.isoformat(),
-                "open": close + random.uniform(-1, 1),
-                "high": close + random.uniform(0, 2),
-                "low": close - random.uniform(0, 2),
-                "close": close,
-                "volume": random.randint(1000, 10000)
+        self.api_key = os.getenv("ALPACA_API_KEY")
+        self.secret_key = os.getenv("ALPACA_SECRET_KEY")
+        self.base_url = os.getenv(
+            "ALPACA_BASE_URL",
+            "https://paper-api.alpaca.markets"
+        )
+
+        missing = []
+        if not self.api_key:
+            missing.append("ALPACA_API_KEY")
+        if not self.secret_key:
+            missing.append("ALPACA_SECRET_KEY")
+
+        if missing:
+            raise ValueError(
+                "Missing Alpaca API credentials: "
+                + ", ".join(missing)
+                + ". Set them in environment variables or .env file."
+            )
+
+        self.trading_client = TradingClient(
+            self.api_key,
+            self.secret_key,
+            paper=True
+        )
+
+        self.data_client = StockHistoricalDataClient(
+            self.api_key,
+            self.secret_key
+        )
+
+        logger.info("BrokerConnector initialized")
+
+    async def get_market_data(
+        self,
+        symbol: str,
+        timeframe: str = "1Hour",
+        limit: int = 200
+    ) -> List[Dict]:
+
+        tf_map = {
+            "1Min": TimeFrame(1, TimeFrameUnit.Minute),
+            "5Min": TimeFrame(5, TimeFrameUnit.Minute),
+            "15Min": TimeFrame(15, TimeFrameUnit.Minute),
+            "1Hour": TimeFrame(1, TimeFrameUnit.Hour),
+            "1Day": TimeFrame(1, TimeFrameUnit.Day),
+        }
+        tf_key = timeframe if timeframe in tf_map else "1Hour"
+        bar_minutes = {
+            "1Min": 1,
+            "5Min": 5,
+            "15Min": 15,
+            "1Hour": 60,
+            "1Day": 1440,
+        }
+        now_utc = pd.Timestamp.utcnow()
+        lookback_minutes = max(limit * bar_minutes[tf_key] * 3, bar_minutes[tf_key] * 100)
+        start_utc = now_utc - pd.Timedelta(minutes=lookback_minutes)
+
+        request = StockBarsRequest(
+            symbol_or_symbols=symbol,
+            timeframe=tf_map[tf_key],
+            start=start_utc.to_pydatetime(),
+            end=now_utc.to_pydatetime(),
+            feed=DataFeed.IEX,
+            limit=limit,
+        )
+        try:
+            bars = self.data_client.get_stock_bars(request)
+        except APIError as exc:
+            logger.error(f"Failed to fetch market data for {symbol}: {exc}")
+            return []
+        if bars.df.empty:
+            logger.warning(f"No market data returned for {symbol} ({tf_key}).")
+            return []
+
+        df = bars.df.reset_index()
+        required_columns = {"timestamp", "open", "high", "low", "close", "volume"}
+        if not required_columns.issubset(set(df.columns)):
+            logger.warning(
+                f"Unexpected bars schema for {symbol}: {list(df.columns)}"
+            )
+            return []
+
+        formatted = []
+
+        for _, row in df.iterrows():
+            if any(pd.isna(row[col]) for col in ["open", "high", "low", "close", "volume"]):
+                continue
+
+            formatted.append({
+                "timestamp": str(row["timestamp"]),
+                "open": float(row["open"]),
+                "high": float(row["high"]),
+                "low": float(row["low"]),
+                "close": float(row["close"]),
+                "volume": float(row["volume"])
             })
-            base_price = close # Random walk
-            
-        return data
 
-    async def place_order(self, symbol: str, qty: float, side: str, type: str = "market") -> Dict[str, Any]:
-        """Place an order with the broker."""
-        logger.info(f"Placing {side} order for {qty} {symbol} ({type})...")
-        # Simulate API call delay
-        await asyncio.sleep(0.5)
-        
-        # Simulated response
+        return formatted[-limit:]
+
+    async def place_order(
+        self,
+        symbol: str,
+        qty: float,
+        side: str
+    ) -> Dict[str, Any]:
+
+        order_side = (
+            OrderSide.BUY
+            if side.upper() == "BUY"
+            else OrderSide.SELL
+        )
+
+        market_order = MarketOrderRequest(
+            symbol=symbol,
+            qty=qty,
+            side=order_side,
+            time_in_force=TimeInForce.DAY
+        )
+
+        try:
+            order = self.trading_client.submit_order(
+                order_data=market_order
+            )
+        except APIError as exc:
+            raise RuntimeError(
+                f"Order submit failed for {symbol} {side} qty={qty}: {exc}"
+            ) from exc
+
+        logger.info(
+            f"Order submitted: {side} {qty} {symbol}"
+        )
+
         return {
-            "id": f"order_{random.randint(1000, 9999)}",
-            "symbol": symbol,
-            "qty": qty,
+            "id": order.id,
+            "symbol": order.symbol,
+            "qty": order.qty,
             "side": side,
-            "type": type,
-            "status": "accepted",
-            "filled_qty": 0,
-            "created_at": datetime.now().isoformat()
+            "status": str(order.status)
         }
 
-    async def get_positions(self) -> List[Dict]:
-        """Get current open positions."""
-        logger.info("Fetching current positions...")
-        await asyncio.sleep(0.2)
-        return [] # Simulated empty portfolio
+    async def get_positions(self):
+        positions = self.trading_client.get_all_positions()
 
-    async def get_account_info(self) -> Dict[str, Any]:
-        """Get account balance and status."""
-        logger.info("Fetching account info...")
-        await asyncio.sleep(0.2)
+        output = []
+
+        for pos in positions:
+
+            output.append({
+                "symbol": pos.symbol,
+                "qty": float(pos.qty),
+                "market_value": float(pos.market_value),
+                "unrealized_pl": float(pos.unrealized_pl)
+            })
+
+        return output
+
+    async def get_account_info(self):
+        try:
+            account = self.trading_client.get_account()
+        except APIError as exc:
+            raise RuntimeError(f"Failed to get account info: {exc}") from exc
+
         return {
-            "cash": 100000.0,
-            "portfolio_value": 100000.0,
-            "status": "ACTIVE"
+            "cash": float(account.cash),
+            "portfolio_value": float(account.portfolio_value),
+            "buying_power": float(account.buying_power),
+            "equity": float(account.equity),
+            "status": str(account.status)
         }
-
