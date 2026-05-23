@@ -1,25 +1,31 @@
-import asyncio
 import os
+from dotenv import load_dotenv
+from alpaca.data.live.stock import StockDataStream
 
-from trading.live_trading_connector import LiveTradingConnector
+# LOAD .env
+load_dotenv(dotenv_path=".env")
 
-async def on_quote(data):
+API_KEY = os.getenv("APCA_API_KEY_ID")
+API_SECRET = os.getenv("APCA_API_SECRET_KEY")
 
-    print()
-    print('QUOTE RECEIVED')
-    print(data)
+print("ENV EXISTS:", os.path.exists(".env"))
+print("KEY:", API_KEY[:6] if API_KEY else "MISSING")
+print("SECRET:", "LOADED" if API_SECRET else "MISSING")
 
-async def main():
 
-    connector = LiveTradingConnector(
-        api_key=os.getenv('ALPACA_API_KEY'),
-        secret_key=os.getenv('ALPACA_SECRET_KEY'),
-        paper=True
+async def quote_handler(q):
+    print(
+        f"{q.symbol} | "
+        f"BID: {q.bid_price} | "
+        f"ASK: {q.ask_price}"
     )
 
-    await connector.stream_quotes(
-        ['AAPL'],
-        on_quote
-    )
 
-asyncio.run(main())
+stream = StockDataStream(
+    API_KEY,
+    API_SECRET,
+)
+
+stream.subscribe_quotes(quote_handler, "AAPL")
+
+stream.run()
