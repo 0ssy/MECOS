@@ -26,37 +26,16 @@ from .position_manager import PositionManager
 from .performance_monitor import PerformanceMonitor
 from .risk_monitor import RiskMonitor
 from .trading_agent import TradingAgent
+from .universe_manager import UniverseManager
+from .universe_scanner import UniverseScanner
 
-__all__ = [
-    'RegimeDetectionAgent',
-    'MetaOrchestrator',
-    'RiskEngine',
-    'TrendAgent',
-    'OptionsPricingAgent',
-    'FeatureEngine',
-    'MarketPhysicsEngine',
-    'PortfolioEngine',
-    'ExecutionEngine',
-    'MeanReversionAgent',
-    'VolatilityArbitrageAgent',
-    'LiquidityHunterAgent',
-    'SentimentAgent',
-    'MacroAgent',
-    'CrossAssetArbitrageAgent',
-    'StatisticalArbitrageEngine',
-    'ReinforcementLearningOptimizer',
-    'CausalInferenceEngine',
-    'MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U',
-    'BacktestingFramework',
-    'LiveTradingConnector',
-    'EventBus',
-    'Event',
-    'EventType',
-    'TradeDatabase',
-    'OrderManager',
-    'OrderStatus',
-    'PositionManager',
-    'PerformanceMonitor',
-    'RiskMonitor',
-    'TradingAgent'
+__all__ = ['UniverseManager', 'UniverseScanner', 
+    'RegimeDetectionAgent', 'MetaOrchestrator', 'RiskEngine', 'TrendAgent', 'OptionsPricingAgent',
+    'FeatureEngine', 'MarketPhysicsEngine', 'PortfolioEngine', 'ExecutionEngine',
+    'MeanReversionAgent', 'VolatilityArbitrageAgent', 'LiquidityHunterAgent', 'SentimentAgent',
+    'MacroAgent', 'CrossAssetArbitrageAgent', 'StatisticalArbitrageEngine',
+    'ReinforcementLearningOptimizer', 'CausalInferenceEngine', 'MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U',
+    'BacktestingFramework', 'LiveTradingConnector', 'EventBus', 'Event', 'EventType',
+    'TradeDatabase', 'OrderManager', 'OrderStatus', 'PositionManager', 'PerformanceMonitor', 
+    'RiskMonitor', 'TradingAgent'
 ]

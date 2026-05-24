@@ -15,8 +15,11 @@ class TradingConfig:
     # --- Risk Engine ---
     MAX_DRAWDOWN = 0.10         # Stop trading if 10% loss
     MAX_LEVERAGE = 3.0          # Max 3x leverage
-    MAX_POSITION_SIZE = 0.20    # No single asset > 20% of portfolio
-    MAX_LEVERAGE = 1.0
+    MAX_POSITION_SIZE = 0.10    # No single asset > 10% of portfolio
+    MAX_TOTAL_EXPOSURE = 0.80   # Gross exposure cap
+    MAX_CRYPTO_EXPOSURE = 0.25  # Crypto concentration cap
+    MAX_DAILY_LOSS = 0.03       # Daily loss kill switch
+    MAX_OPEN_TRADES = 10        # Concurrent positions cap
     MIN_CONFIDENCE = 0.75
     
     # --- Options Pricing ---
