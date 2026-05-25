@@ -13,3 +13,7 @@ build/
 .idea/
 .vscode/
 .DS_Store/
+*.db
+*.json
+*.sqlite
+*.jsonl

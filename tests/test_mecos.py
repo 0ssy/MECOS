@@ -263,11 +263,11 @@ class TestQTable:
         q_val = qt.get_q("state1", "action1")
         assert q_val > 0
 
-    def test_best_action(self):
+    def test_get_action(self):
         qt = QTable()
         qt.update("s", "a1", 1.0, "s2", ["a1", "a2"])
         qt.update("s", "a2", -1.0, "s2", ["a1", "a2"])
-        best = qt.best_action("s", ["a1", "a2"])
+        best = qt.get_action("s", ["a1", "a2"])
         assert best == "a1"
 
 

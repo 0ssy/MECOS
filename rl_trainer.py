@@ -112,7 +112,7 @@ class RLTrainer:
             self.q_table[state] = {}
         self.q_table[state][action] = new_q
 
-    def best_action(self, state: str, actions: List[str]) -> str:
+    def get_action(self, state: str, actions: List[str]) -> str:
         """Return the action with highest Q-value for the given state."""
         if not actions:
             return ""
@@ -204,7 +204,7 @@ class RLTrainer:
             return ""
         if random.random() < self.epsilon:
             return random.choice(available_actions)  # Explore
-        return self.q_table.best_action(state, available_actions)  # Exploit
+        return self.q_table.get_action(state, available_actions)  # Exploit
 
     def record_experience(
         self,
