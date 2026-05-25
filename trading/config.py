@@ -5,7 +5,7 @@ class TradingConfig:
     TREND_THRESHOLD = 0.02      # Percentage move to consider "trending"
 
     # --- Meta-Orchestrator ---
-    MIN_CONFIDENCE = 0.05       # Burn-in consensus threshold (lower to allow signal flow)
+    MIN_CONFIDENCE = 0.01
     SIGNAL_WEIGHTS = {
         "trend": 1.2,           # Give trend signals more weight
         "mean_reversion": 1.0,
@@ -22,12 +22,14 @@ class TradingConfig:
     # --- Risk Engine ---
     MAX_DRAWDOWN = 0.10         # Stop trading if 10% loss
     MAX_LEVERAGE = 3.0          # Max 3x leverage
-    MAX_POSITION_SIZE = 0.25    # No single asset > 10% of portfolio
-    MAX_TOTAL_EXPOSURE = 1.5   # Gross exposure cap
-    MAX_CRYPTO_EXPOSURE = 0.25  # Crypto concentration cap
+    MAX_POSITION_SIZE = 0.90
+    MAX_TOTAL_EXPOSURE = 5.0
+    MAX_CRYPTO_EXPOSURE = 1.0  # Crypto concentration cap
     MAX_DAILY_LOSS = 0.03       # Daily loss kill switch
     MAX_OPEN_TRADES = 10        # Concurrent positions cap
     # --- Options Pricing ---
     RISK_FREE_RATE = 0.05       # 5% annual interest rate for Black-Scholes
 
     FOREX_SYMBOLS = ['EURUSD', 'GBPUSD', 'USDJPY']
+
+    MAX_SECTOR_EXPOSURE = 1.0

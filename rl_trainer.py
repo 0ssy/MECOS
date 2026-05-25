@@ -204,7 +204,7 @@ class RLTrainer:
             return ""
         if random.random() < self.epsilon:
             return random.choice(available_actions)  # Explore
-        return self.q_table.get_action(state, available_actions)  # Exploit
+        return self.q_table.predict(state, available_actions)  # Exploit
 
     def record_experience(
         self,
