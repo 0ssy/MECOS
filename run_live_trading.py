@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from memory_system import MemorySystem
 from trading.trading_agent import TradingAgent
@@ -16,7 +17,10 @@ async def main():
 
     memory = MemorySystem()
 
-    trader = TradingAgent(memory)
+    quant_mode = os.getenv("MECOS_QUANT_MODE", "balanced")
+    print(f"Quant mode selected: {quant_mode}")
+
+    trader = TradingAgent(memory, quant_mode=quant_mode)
 
     broker = BrokerConnector()
 

@@ -5,11 +5,18 @@ class TradingConfig:
     TREND_THRESHOLD = 0.02      # Percentage move to consider "trending"
 
     # --- Meta-Orchestrator ---
-    MIN_CONFIDENCE = 0.6        # Required consensus to execute a trade
+    MIN_CONFIDENCE = 0.25       # Burn-in consensus threshold (lower to allow signal flow)
     SIGNAL_WEIGHTS = {
         "trend": 1.2,           # Give trend signals more weight
-        "mean_reversion": 0.8,
-        "sentiment": 1.0
+        "mean_reversion": 1.0,
+        "volatility": 0.9,
+        "options_pricing": 0.8,
+        "order_flow": 1.1,
+        "liquidity_hunter": 1.0,
+        "statistical_arbitrage": 0.9,
+        "sentiment": 1.0,
+        "reinforcement_learning": 0.8,
+        "market_making": 1.0,
     }
 
     # --- Risk Engine ---
@@ -20,7 +27,5 @@ class TradingConfig:
     MAX_CRYPTO_EXPOSURE = 0.25  # Crypto concentration cap
     MAX_DAILY_LOSS = 0.03       # Daily loss kill switch
     MAX_OPEN_TRADES = 10        # Concurrent positions cap
-    MIN_CONFIDENCE = 0.75
-    
     # --- Options Pricing ---
     RISK_FREE_RATE = 0.05       # 5% annual interest rate for Black-Scholes

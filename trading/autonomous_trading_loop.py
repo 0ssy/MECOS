@@ -2,6 +2,7 @@ import asyncio
 from typing import List, Dict, Any, Optional
 from loguru import logger
 from datetime import datetime
+from pathlib import Path
 from .cooldown_manager import CooldownManager
 from .regime_detection import detect_regime
 from .exposure_manager import ExposureManager
@@ -263,6 +264,9 @@ class AutonomousTradingLoop:
         self._last_symbol_cycle_time[symbol] = now
 
         self.loop_stats['iterations'] += 1
+
+        # Keep account equity in sync before risk checks and sizing decisions.
+        await self.paper_executor.update_equity({symbol: tick.get('close', 0.0)})
 
         # Regime detection
         price_change = tick['close'] / tick['open'] - 1 if tick['open'] else 0

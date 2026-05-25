@@ -1,10 +1,11 @@
 
 from loguru import logger
+from trading.config import TradingConfig
 
 class RiskManager:
     def __init__(self):
-        # relaxed for simulation warmup
-        self.max_drawdown = 0.15
+        # Calibrated for burn-in while preserving a hard stop.
+        self.max_drawdown = max(0.20, float(getattr(TradingConfig, "MAX_DRAWDOWN", 0.10)))
         # per-trade risk
         self.max_position_size = 0.20
         # state

@@ -1,265 +1,252 @@
-from itertools import combinations
-from typing import List, Dict, Any
+from typing import Dict, Any, List, Optional, Tuple
 from loguru import logger
 
 from memory_system import MemorySystem
-from trading import (
-    FeatureEngine,
-    MarketPhysicsEngine,
-    PortfolioEngine,
-    ExecutionEngine,
-    RegimeDetectionAgent,
-    MetaOrchestrator,
-    RiskEngine,
-    TrendAgent,
-    OptionsPricingAgent,
-    MeanReversionAgent,
-    VolatilityArbitrageAgent,
-    LiquidityHunterAgent,
-    SentimentAgent,
-    StatisticalArbitrageEngine,
-    MarketMakingAgent,
-    QuantSignalFusion,
-)
-
-MIN_CONFIDENCE_BY_MODE = {
-    "conservative": 0.70,
-    "balanced": 0.60,
-    "aggressive_research": 0.50,
-}
+from trading.config import TradingConfig
+from trading.regime_detection_agent import RegimeDetectionAgent
+from trading.meta_orchestrator import MetaOrchestrator
+from trading.risk_engine import RiskEngine
+from trading.feature_engine import FeatureEngine
+from trading.market_physics_engine import MarketPhysicsEngine
+from trading.portfolio_engine import PortfolioEngine
+from trading.quant_signal_fusion import QuantSignalFusion
+from trading.trend_agent import TrendAgent
+from trading.mean_reversion_agent import MeanReversionAgent
+from trading.volatility_arbitrage_agent import VolatilityArbitrageAgent
+from trading.options_pricing_agent import OptionsPricingAgent
+from trading.liquidity_hunter_agent import LiquidityHunterAgent
+from trading.statistical_arbitrage_engine import StatisticalArbitrageEngine
+from trading.sentiment_agent import SentimentAgent
+from trading.reinforcement_learning_optimizer import ReinforcementLearningOptimizer
+from trading.market_making_agent import MarketMakingAgent
 
 
-def _normalize_quant_mode(mode: str) -> str:
-    normalized = (mode or "balanced").strip().lower().replace("-", "_")
-    aliases = {
-        "research": "aggressive_research",
-        "aggressive": "aggressive_research",
-        "option2": "balanced",
-        "option3": "aggressive_research",
-    }
-    normalized = aliases.get(normalized, normalized)
-    if normalized not in MIN_CONFIDENCE_BY_MODE:
-        return "balanced"
-    return normalized
+class _OrderFlowProxyAgent:
+    def __init__(self, memory: MemorySystem):
+        self.memory = memory
+
+    async def analyze(self, data: List[Dict], features: Dict, physics: Optional[Dict] = None) -> Dict[str, Any]:
+        imbalance = float(features.get("order_flow_imbalance", 0.0))
+        spread_pressure = float(features.get("spread_pressure", 0.0))
+        signal = "HOLD"
+        if imbalance > 0.25 and spread_pressure < 0.01:
+            signal = "BUY"
+        elif imbalance < -0.25 and spread_pressure < 0.01:
+            signal = "SELL"
+        confidence = min(0.9, abs(imbalance) * 1.5)
+        return {
+            "signal": signal,
+            "confidence": float(confidence),
+            "imbalance": imbalance,
+            "spread_pressure": spread_pressure,
+        }
+
+
+class _StatisticalArbitrageProxyAgent:
+    def __init__(self, memory: MemorySystem):
+        self.engine = StatisticalArbitrageEngine(memory)
+
+    async def analyze(
+        self,
+        pair_data: Any,
+        features: Optional[Dict[str, Any]] = None,
+        physics: Optional[Dict[str, Any]] = None,
+        **kwargs,
+    ) -> Dict[str, Any]:
+        if not isinstance(pair_data, dict):
+            return {"signal": "HOLD", "confidence": 0.0, "reason": "pair_data_not_available"}
+        symbols = list(pair_data.keys())
+        if len(symbols) < 2:
+            return {"signal": "HOLD", "confidence": 0.0, "reason": "insufficient_pair_data"}
+        left, right = symbols[0], symbols[1]
+        result = await self.engine.analyze_pair(pair_data[left], pair_data[right])
+        signal = str(result.get("signal", "HOLD")).upper()
+        confidence = min(0.9, abs(float(result.get("z_score", 0.0))) / 3.0)
+        return {
+            **result,
+            "signal": signal,
+            "confidence": float(confidence),
+            "pair": [left, right],
+        }
+
+
+class _ReinforcementLearningProxyAgent:
+    def __init__(self, memory: MemorySystem):
+        self.optimizer = ReinforcementLearningOptimizer(memory)
+
+    async def analyze(self, data: List[Dict], features: Dict, physics: Optional[Dict] = None) -> Dict[str, Any]:
+        state = {
+            "trend_strength": round(float(features.get("trend_strength", 0.0)), 3),
+            "volatility": round(float(features.get("realized_volatility", 0.0)), 3),
+            "momentum": round(float(features.get("roc_20", 0.0)), 3),
+        }
+        action = self.optimizer.choose_action(state)
+        return {
+            "signal": str(action).upper(),
+            "confidence": 0.55 if action != "HOLD" else 0.40,
+            "state": state,
+        }
 
 
 class TradingAgent:
     def __init__(self, memory: MemorySystem, quant_mode: str = "balanced"):
         self.memory = memory
-        self.quant_mode = _normalize_quant_mode(quant_mode)
-        self.min_confidence = MIN_CONFIDENCE_BY_MODE[self.quant_mode]
-
-        self.feature_engine = FeatureEngine(memory)
-        self.physics_engine = MarketPhysicsEngine(memory)
-        self.portfolio_engine = PortfolioEngine(memory)
-        self.execution_engine = ExecutionEngine(memory)
+        self.quant_mode = quant_mode
 
         self.regime_detector = RegimeDetectionAgent(memory)
         self.meta_orchestrator = MetaOrchestrator(memory)
         self.risk_engine = RiskEngine(memory)
-        self.stat_arb_engine = StatisticalArbitrageEngine(memory)
+        self.feature_engine = FeatureEngine(memory)
+        self.physics_engine = MarketPhysicsEngine(memory)
+        self.portfolio_engine = PortfolioEngine(memory)
         self.signal_fusion = QuantSignalFusion()
 
-        self.agents = {
-            "trend": TrendAgent(memory),
-            "options": OptionsPricingAgent(memory),
-            "mean_reversion": MeanReversionAgent(memory),
-            "volatility": VolatilityArbitrageAgent(memory),
-            "liquidity": LiquidityHunterAgent(memory),
-            "sentiment": SentimentAgent(memory),
-            "market_making": MarketMakingAgent(memory),
-        }
-        for name, agent in self.agents.items():
-            self.meta_orchestrator.register_agent(name, agent)
+        self.trend_agent = TrendAgent(memory)
+        self.mean_reversion_agent = MeanReversionAgent(memory)
+        self.volatility_agent = VolatilityArbitrageAgent(memory)
+        self.options_pricing_agent = OptionsPricingAgent(memory)
+        self.order_flow_agent = _OrderFlowProxyAgent(memory)
+        self.liquidity_hunter_agent = LiquidityHunterAgent(memory)
+        self.statistical_arbitrage_agent = _StatisticalArbitrageProxyAgent(memory)
+        self.sentiment_agent = SentimentAgent(memory)
+        self.reinforcement_learning_agent = _ReinforcementLearningProxyAgent(memory)
+        self.market_making_agent = MarketMakingAgent(memory)
 
-        self.paper_portfolio = {
-            "cash": 10000.0,
-            "positions": {},
-            "total_value": 10000.0,
-        }
-        self.stats = {
-            "analyses": 0,
-            "actionable_signals": 0,
-            "risk_rejections": 0,
-            "total_pnl": 0,
-            "win_rate": 0,
-        }
+        self.meta_orchestrator.register_agent("trend", self.trend_agent)
+        self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
+        self.meta_orchestrator.register_agent("volatility", self.volatility_agent)
+        self.meta_orchestrator.register_agent("options_pricing", self.options_pricing_agent)
+        self.meta_orchestrator.register_agent("order_flow", self.order_flow_agent)
+        self.meta_orchestrator.register_agent("liquidity_hunter", self.liquidity_hunter_agent)
+        self.meta_orchestrator.register_agent("statistical_arbitrage", self.statistical_arbitrage_agent)
+        self.meta_orchestrator.register_agent("sentiment", self.sentiment_agent)
+        self.meta_orchestrator.register_agent("reinforcement_learning", self.reinforcement_learning_agent)
+        self.meta_orchestrator.register_agent("market_making", self.market_making_agent)
 
-        logger.info("INSTITUTIONAL QUANT TRADING AGENT INITIALIZED")
-        logger.info(f"    Quant mode: {self.quant_mode} | min_confidence={self.min_confidence:.2f}")
-        logger.info("    Engines: Feature, Physics, Portfolio, Execution")
-        logger.info(f"    Agents: {len(self.agents)} specialist strategies")
-        logger.info("    Fusion: Regime-aware Bayesian ensemble")
+        self.paper_portfolio = {"cash": 10000.0, "positions": {}, "total_value": 10000.0}
+        logger.info("Advanced TradingAgent initialized with all specialist agents.")
 
-    async def analyze_market(self, symbol: str, data: List[Dict]) -> Dict[str, Any]:
-        self.stats["analyses"] += 1
-        logger.info(f" Analyzing {symbol}...")
+    async def _analyze_symbol(self, symbol: str, data: List[Dict]) -> Dict[str, Any]:
+        if not data:
+            return {
+                "decision": "HOLD",
+                "final_decision": "HOLD",
+                "confidence": 0.0,
+                "signals": {},
+                "agent_signals": {},
+                "regime": "unknown",
+                "reason": "no_data",
+            }
 
         valid_data = [bar for bar in data if isinstance(bar, dict) and "close" in bar]
         if not valid_data:
-            return {"final_decision": "HOLD", "confidence": 0.0, "reason": "invalid_market_data"}
-        data = valid_data
+            return {
+                "decision": "HOLD",
+                "final_decision": "HOLD",
+                "confidence": 0.0,
+                "signals": {},
+                "agent_signals": {},
+                "regime": "unknown",
+                "reason": "invalid_data",
+            }
 
-        features = await self.feature_engine.compute_features(data)
-        physics = await self.physics_engine.analyze(symbol, data, features)
-        regime = await self.regime_detector.detect_regime(data)
-        orchestrated = await self.meta_orchestrator.orchestrate_signals(data, regime, features, physics)
-        fused = self.signal_fusion.fuse(orchestrated, features, regime)
-        signals = {
-            **orchestrated,
-            **fused,
-            "regime": regime,
-        }
+        logger.info(f"Analyzing {symbol}...")
+        regime = await self.regime_detector.detect_regime(valid_data)
+        features = await self.feature_engine.compute_features(valid_data)
+        features["close"] = float(valid_data[-1].get("close", 0.0))
+        physics = await self.physics_engine.analyze(symbol, valid_data, features)
 
-        logger.debug(
-            "   Signals: Trend={} | MeanRev={} | Sentiment={} | MM={}".format(
-                signals.get("agent_signals", {}).get("trend", {}).get("signal", "N/A"),
-                signals.get("agent_signals", {}).get("mean_reversion", {}).get("signal", "N/A"),
-                signals.get("agent_signals", {}).get("sentiment", {}).get("sentiment", "N/A"),
-                signals.get("agent_signals", {}).get("market_making", {}).get("signal", "N/A"),
-            )
+        orchestrator_data = {symbol: valid_data}
+        orchestrated = await self.meta_orchestrator.orchestrate_signals(
+            orchestrator_data,
+            regime,
+            features,
+            physics,
         )
+        fused = self.signal_fusion.fuse(orchestrated, features, regime)
 
-        decision = str(signals.get("decision", signals.get("final_decision", "HOLD"))).upper()
-        confidence = float(signals.get("confidence", 0.0))
-        signals["decision"] = decision
-        signals["final_decision"] = decision
+        orchestrator_decision = str(orchestrated.get("final_decision", "HOLD")).upper()
+        final_decision = str(fused.get("decision", orchestrator_decision)).upper()
+        confidence = float(fused.get("confidence", orchestrated.get("confidence", 0.0)))
 
-        if decision == "HOLD":
-            logger.info("   HOLD: insufficient signal agreement")
-            return {
-                **signals,
-                "features": features,
-                "physics": physics,
-                "portfolio": await self.portfolio_engine.calculate_portfolio_metrics(self.paper_portfolio),
-            }
+        # Keep decision semantics consistent across logs and execution:
+        # if orchestrator consensus is HOLD, do not promote to BUY/SELL in fusion.
+        if orchestrator_decision == "HOLD":
+            final_decision = "HOLD"
+            confidence = float(orchestrated.get("confidence", confidence))
 
-        if confidence < self.min_confidence:
-            logger.info("   REJECTED: low confidence")
-            signals["decision"] = "HOLD"
-            signals["final_decision"] = "HOLD"
-            return {
-                **signals,
-                "features": features,
-                "physics": physics,
-                "portfolio": await self.portfolio_engine.calculate_portfolio_metrics(self.paper_portfolio),
-            }
+        if confidence < float(TradingConfig.MIN_CONFIDENCE):
+            final_decision = "HOLD"
 
-        if signals["final_decision"] != "HOLD":
-            signal_strength = signals.get("confidence", 0.5)
-            volatility = features.get("realized_volatility", 0.3)
-            sizing = signals.get("sizing_multipliers", {})
+        position_size = 0.0
+        portfolio_metrics = await self.portfolio_engine.calculate_portfolio_metrics(self.paper_portfolio)
+        if final_decision != "HOLD":
+            sizing = fused.get("sizing_multipliers", {})
+            volatility = float(features.get("realized_volatility", 0.3) or 0.3)
             position_size = await self.portfolio_engine.optimize_position_size(
-                signal_strength,
-                self.paper_portfolio,
-                volatility,
-                confidence_multiplier=sizing.get("confidence_multiplier", 1.0),
-                regime_multiplier=sizing.get("regime_multiplier", 1.0),
-                liquidity_multiplier=sizing.get("microstructure_multiplier", 1.0),
-                correlation_penalty=sizing.get("correlation_penalty", 1.0),
+                signal_strength=confidence,
+                portfolio=self.paper_portfolio,
+                volatility=volatility,
+                confidence_multiplier=float(sizing.get("confidence_multiplier", 1.0)),
+                regime_multiplier=float(sizing.get("regime_multiplier", 1.0)),
+                liquidity_multiplier=float(sizing.get("microstructure_multiplier", 1.0)),
+                correlation_penalty=float(sizing.get("correlation_penalty", 1.0)),
             )
             trade = {
                 "symbol": symbol,
-                "side": signals["final_decision"],
-                "size": position_size,
-                "price": data[-1]["close"],
+                "side": final_decision,
+                "size": max(position_size, 0.01),
+                "price": float(valid_data[-1].get("close", 0.0)),
             }
-            execution_plan = await self.execution_engine.plan_execution(
-                trade,
-                {
-                    "volume_ratio": features.get("volume_ratio", 1.0),
-                    "spread_pressure": features.get("spread_pressure", 0.001),
-                },
-            )
-            risk = await self.risk_engine.evaluate_risk(trade, self.paper_portfolio)
-            if risk["action"] == "REJECT":
-                self.stats["risk_rejections"] += 1
-                signals["final_decision"] = "HOLD"
-                signals["decision"] = "HOLD"
-                logger.warning(f"   TRADE REJECTED: {risk.get('reason', 'Risk limit')}")
-            else:
-                self.stats["actionable_signals"] += 1
-                logger.info(f"   TRADE APPROVED: {trade['side']} {position_size:.1%} @ {trade['price']}")
-                signals["execution_plan"] = execution_plan
-                signals["position_size"] = position_size
-                signals["allocation"] = position_size
-                signals["volatility"] = volatility
+            risk_evaluation = await self.risk_engine.evaluate_risk(trade, self.paper_portfolio)
+            risk_action = str(risk_evaluation.get("action", "APPROVE")).upper()
 
-        portfolio_metrics = await self.portfolio_engine.calculate_portfolio_metrics(self.paper_portfolio)
-        await self.memory.add_experience(
-            f"QUANT ANALYSIS: {symbol} | Decision: {signals.get('final_decision', 'HOLD')} | "
-            f"Vol: {features.get('realized_volatility', 0):.3f} | "
-            f"Tail Risk: {physics['tail_risk']['tail_risk_score']:.3f} | "
-            f"Exposure: {portfolio_metrics.get('total_exposure', 0):.1%} | "
-            f"Regime: {regime}",
-            source="trading_agent",
-            metadata={
-                "symbol": symbol,
-                "features": features,
-                "physics": physics,
-                "signals": signals,
-                "portfolio": portfolio_metrics,
-            },
-        )
+            if risk_action == "REJECT":
+                final_decision = "HOLD"
+                logger.warning(
+                    f"TRADE REJECTED for {symbol}: {risk_evaluation.get('reason', 'Risk rejection')}"
+                )
+            elif risk_action == "ADJUST":
+                trade["size"] = float(risk_evaluation.get("new_size", trade["size"]))
+                position_size = float(trade["size"])
+                logger.info(
+                    f"TRADE ADJUSTED for {symbol}: New size {trade['size']:.2f} due to "
+                    f"{risk_evaluation.get('reason', 'Risk adjustment')}"
+                )
 
+        logger.info(f"Decision for {symbol}: {final_decision} (Confidence: {confidence:.2f})")
         return {
-            **signals,
+            "symbol": symbol,
+            "decision": final_decision,
+            "final_decision": final_decision,
+            "confidence": confidence,
+            "signals": orchestrated.get("agent_signals", {}),
+            "agent_signals": orchestrated.get("agent_signals", {}),
             "features": features,
             "physics": physics,
             "portfolio": portfolio_metrics,
+            "position_size": float(position_size),
+            "allocation": float(position_size),
+            "buy_score": float(fused.get("buy_score", orchestrated.get("buy_score", 0.0))),
+            "sell_score": float(fused.get("sell_score", orchestrated.get("sell_score", 0.0))),
+            "hold_score": float(fused.get("hold_score", orchestrated.get("hold_score", 0.0))),
+            "regime": regime,
         }
+
+    async def analyze_market(
+        self,
+        symbol_or_market_data: Any,
+        data: Optional[List[Dict]] = None,
+    ) -> Dict[str, Any]:
+        if isinstance(symbol_or_market_data, dict) and data is None:
+            all_decisions: Dict[str, Any] = {}
+            for symbol, symbol_data in symbol_or_market_data.items():
+                all_decisions[symbol] = await self._analyze_symbol(symbol, symbol_data)
+            return all_decisions
+
+        symbol = str(symbol_or_market_data)
+        return await self._analyze_symbol(symbol, data or [])
 
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
-        per_asset: Dict[str, Dict[str, Any]] = {}
-        for symbol, data in market_data.items():
-            per_asset[symbol] = await self.analyze_market(symbol, data)
-
-        correlations = {}
-        symbols = list(market_data.keys())
-        for i, left in enumerate(symbols):
-            left_series = [bar.get("close", 0.0) for bar in market_data[left]]
-            if len(left_series) < 10:
-                continue
-            for right in symbols[i + 1:]:
-                right_series = [bar.get("close", 0.0) for bar in market_data[right]]
-                min_len = min(len(left_series), len(right_series))
-                if min_len < 10:
-                    continue
-                a = left_series[-min_len:]
-                b = right_series[-min_len:]
-                mean_a = sum(a) / min_len
-                mean_b = sum(b) / min_len
-                var_a = sum((x - mean_a) ** 2 for x in a)
-                var_b = sum((x - mean_b) ** 2 for x in b)
-                if var_a <= 1e-9 or var_b <= 1e-9:
-                    corr = 0.0
-                else:
-                    cov = sum((a[j] - mean_a) * (b[j] - mean_b) for j in range(min_len))
-                    corr = cov / (var_a ** 0.5 * var_b ** 0.5)
-                correlations[f"{left}:{right}"] = float(corr)
-
-        pair_arbitrage = []
-        for left, right in combinations(symbols, 2):
-            try:
-                pair_signal = await self.stat_arb_engine.analyze_pair(market_data[left], market_data[right])
-                pair_signal["pair"] = [left, right]
-                pair_arbitrage.append(pair_signal)
-            except Exception as exc:
-                pair_arbitrage.append({"pair": [left, right], "signal": "HOLD", "error": str(exc)})
-
-        return {
-            "asset_signals": per_asset,
-            "cross_asset_correlation": correlations,
-            "pair_arbitrage": pair_arbitrage,
-        }
-
-    def get_performance_metrics(self) -> Dict[str, Any]:
-        analyses = max(self.stats["analyses"], 1)
-        actionable_rate = self.stats["actionable_signals"] / analyses
-        return {
-            **self.stats,
-            "actionable_rate": actionable_rate,
-            "sharpe_ratio": 0,
-            "max_drawdown": 0,
-            "portfolio_value": self.paper_portfolio["total_value"],
-        }
+        decisions = await self.analyze_market(market_data)
+        return {"asset_signals": decisions}

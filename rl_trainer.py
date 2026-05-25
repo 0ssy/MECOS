@@ -18,6 +18,40 @@ from memory_system import MemorySystem
 from config import settings
 
 
+class QTable:
+    """
+    Tabular Q-learning implementation.
+    Suitable for discrete state/action spaces.
+    """
+
+    def __init__(self, learning_rate: float = 0.1, discount: float = 0.95):
+        self.lr = learning_rate
+        self.gamma = discount
+        self.q_table: Dict[str, Dict[str, float]] = {}
+
+    def get_q(self, state: str, action: str) -> float:
+        return self.q_table.get(state, {}).get(action, 0.0)
+
+    def update(self, state: str, action: str, reward: float, next_state: str, actions: List[str]):
+        """Q-learning update: Q(s,a) ← Q(s,a) + α[r + γ·max Q(s',a') - Q(s,a)]"""
+        current_q = self.get_q(state, action)
+        max_next_q = max(self.get_q(next_state, a) for a in actions) if actions else 0.0
+        new_q = current_q + self.lr * (reward + self.gamma * max_next_q - current_q)
+
+        if state not in self.q_table:
+            self.q_table[state] = {}
+        self.q_table[state][action] = new_q
+
+    def load(self, path: Path):
+        """Load Q-table from a file."""
+        if path.exists():
+            with path.open('r') as f:
+                self.q_table = json.load(f)
+                logger.info(f"QTable loaded from {path}")
+        else:
+            logger.warning(f"QTable file not found: {path}")
+
+
 class ReplayBuffer:
     """
     Experience replay buffer for RL training.
@@ -54,26 +88,26 @@ class ReplayBuffer:
             logger.info(f"Replay buffer loaded: {len(self.buffer)} experiences")
 
 
-class QTable:
+class RLTrainer:
     """
-    Tabular Q-learning implementation.
-    Suitable for discrete state/action spaces.
+    RL agent for tabular Q-learning with experience replay.
     """
 
-    def __init__(self, learning_rate: float = 0.1, discount: float = 0.95):
-        self.lr = learning_rate
-        self.gamma = discount
-        self.q_table: Dict[str, Dict[str, float]] = {}
-
-    def get_q(self, state: str, action: str) -> float:
-        return self.q_table.get(state, {}).get(action, 0.0)
-
-    def update(self, state: str, action: str, reward: float, next_state: str, actions: List[str]):
-        """Q-learning update: Q(s,a) ← Q(s,a) + α[r + γ·max Q(s',a') - Q(s,a)]"""
-        current_q = self.get_q(state, action)
-        max_next_q = max(self.get_q(next_state, a) for a in actions) if actions else 0.0
-        new_q = current_q + self.lr * (reward + self.gamma * max_next_q - current_q)
-
+    def __init__(self, memory: MemorySystem, domain: str = "general"):
+        self.memory = memory
+        self.domain = domain
+        self.q_table = QTable()
+        self.replay = ReplayBuffer(capacity=20000)
+        self.epsilon = 0.5  # More aggressive exploration
+        self.epsilon_min = 0.05
+        self.epsilon_decay = 0.995
+        self.stats = {
+            "episodes": 0,
+            "total_reward": 0.0,
+            "buffer_size": 0,
+            "epsilon": self.epsilon,
+        }
+        logger.info(f"RLTrainer initialized for domain: {domain} (ε={self.epsilon:.3f})")
         if state not in self.q_table:
             self.q_table[state] = {}
         self.q_table[state][action] = new_q

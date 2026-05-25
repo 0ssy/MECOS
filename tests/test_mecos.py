@@ -18,7 +18,7 @@ from tool_registry import ToolRegistry, ToolSpec, ToolPermission
 from code_executor import CodeExecutor
 from file_operations import FileOperations
 from app_controller import AppController
-from trading_agent import TradingAgent, IndicatorEngine
+from trading_agent import TradingAgent
 from coding_agent import CodingAgent, SyntaxAnalyzer
 from research_agent import ResearchAgent, KnowledgeGraph
 from agent_coordinator import AgentCoordinator, AgentRole

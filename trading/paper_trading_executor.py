@@ -144,6 +144,9 @@ class PaperTradingExecutor:
         allocation = signal.get('allocation', signal.get('position_size', 0.1))
         price = signal.get('features', {}).get('close', 100.0)
         position_size = self.paper_account['cash'] * allocation
+        tracked_position = self.position_manager.positions.get(symbol, {})
+        has_open_position = float(tracked_position.get('size', 0.0) or 0.0) > 0.0
+        reduce_only_exit = decision == 'SELL' and has_open_position
         
         trade = {
             'symbol': symbol,
@@ -170,19 +173,22 @@ class PaperTradingExecutor:
         
         notional = position_size
         shares = notional / price
+        if reduce_only_exit:
+            shares = float(tracked_position.get('size', 0.0) or 0.0)
 
-        order_risk_check = await self.risk_monitor.check_order_risk(
-            portfolio=portfolio,
-            symbol=symbol,
-            proposed_notional=notional,
-            current_prices={symbol: price},
-            positions=self.position_manager.positions,
-        )
+        if not reduce_only_exit:
+            order_risk_check = await self.risk_monitor.check_order_risk(
+                portfolio=portfolio,
+                symbol=symbol,
+                proposed_notional=notional,
+                current_prices={symbol: price},
+                positions=self.position_manager.positions,
+            )
 
-        if order_risk_check.get('breach', False):
-            self.execution_stats['rejected_orders'] += 1
-            logger.warning(f'ORDER RISK REJECTED: {order_risk_check["reason"]}')
-            return {'status': 'REJECTED', 'reason': order_risk_check['reason']}
+            if order_risk_check.get('breach', False):
+                self.execution_stats['rejected_orders'] += 1
+                logger.warning(f'ORDER RISK REJECTED: {order_risk_check["reason"]}')
+                return {'status': 'REJECTED', 'reason': order_risk_check['reason']}
         
         if decision == 'BUY':
             cost = shares * price
@@ -296,11 +302,26 @@ class PaperTradingExecutor:
         return {'status': 'REJECTED', 'reason': f'Unsupported decision: {decision}'}
 
     async def update_equity(self, current_prices: Dict[str, float]):
-        unrealized_pnl = await self.position_manager.calculate_unrealized_pnl(current_prices)
-        local_position_value = 0.0
-        for symbol, pos in self.positions.items():
-            local_position_value += pos.get('shares', 0.0) * float(current_prices.get(symbol, 0.0))
-        self.paper_account['equity'] = self.paper_account['cash'] + unrealized_pnl + local_position_value
+        await self.position_manager.calculate_unrealized_pnl(current_prices)
+
+        position_value = 0.0
+        for symbol, position in self.position_manager.positions.items():
+            size = float(position.get('size', 0.0) or 0.0)
+            if size <= 0.0:
+                continue
+            mark_price = float(
+                current_prices.get(
+                    symbol,
+                    position.get('last_price', position.get('avg_price', 0.0)),
+                )
+                or 0.0
+            )
+            if mark_price <= 0.0:
+                mark_price = float(position.get('avg_price', 0.0) or 0.0)
+            position_value += size * mark_price
+
+        # Equity = cash + marked-to-market position value.
+        self.paper_account['equity'] = self.paper_account['cash'] + position_value
 
     def enable_execution(self):
         self.execution_enabled = True
