@@ -19,7 +19,11 @@ class PortfolioEngine:
     async def optimize_position_size(self, 
                                     signal_strength: float,
                                     portfolio: Dict,
-                                    volatility: float) -> float:
+                                    volatility: float,
+                                    confidence_multiplier: float = 1.0,
+                                    regime_multiplier: float = 1.0,
+                                    liquidity_multiplier: float = 1.0,
+                                    correlation_penalty: float = 1.0) -> float:
         """Kelly Criterion + volatility targeting"""
         
         # Kelly Criterion: f* = (bp - q) / b
@@ -40,8 +44,10 @@ class PortfolioEngine:
         vol_scalar = self.target_volatility / max(volatility, 0.01)
         vol_scalar = np.clip(vol_scalar, 0.5, 2.0)
         
-        # Final position size
-        position_size = kelly_fraction * vol_scalar
+        # Final position size with dynamic overlays.
+        dynamic_scalar = confidence_multiplier * regime_multiplier * liquidity_multiplier * correlation_penalty
+        dynamic_scalar = np.clip(dynamic_scalar, 0.25, 1.75)
+        position_size = kelly_fraction * vol_scalar * dynamic_scalar
         position_size = min(position_size, self.max_position_size)
         
         return float(position_size)

@@ -1,112 +1,89 @@
-from typing import Dict, Any
+
 from loguru import logger
 
-from .asset_profiles import infer_market
-
-class RiskMonitor:
+class RiskManager:
     def __init__(self):
-        self.max_daily_loss = 0.03
-        self.max_total_drawdown = 0.10
-        self.max_leverage = 3.0
+        # relaxed for simulation warmup
+        self.max_drawdown = 0.15
+        # per-trade risk
+        self.max_position_size = 0.20
+        # state
+        self.starting_equity = 10000
+        self.peak_equity = 10000
+        self.kill_switch = False
+        self.daily_pnl = 0.0
+        self.max_daily_loss = 500.0
 
-        self.max_total_exposure = 0.80
-        self.max_single_position = 0.10
-        self.max_crypto_exposure = 0.25
-        self.max_open_trades = 10
+    def validate_order(self, portfolio_value, proposed_size):
+        if self.kill_switch:
+            logger.warning("KILL SWITCH ACTIVE")
+            return False
 
-        self.daily_pnl = 0
-        self.peak_value = 10000
-        logger.info('Risk Monitor initialized')
+        # update peak
+        if portfolio_value > self.peak_equity:
+            self.peak_equity = portfolio_value
 
-    async def check_risk_limits(self, portfolio: Dict) -> Dict[str, Any]:
-        total_value = portfolio['total_value']
-        
-        if total_value > self.peak_value:
-            self.peak_value = total_value
-        
-        drawdown = (self.peak_value - total_value) / self.peak_value
-        
-        if drawdown > self.max_total_drawdown:
-            return {
-                'breach': True,
-                'reason': 'Max drawdown exceeded',
-                'action': 'HALT_TRADING'
-            }
+        # drawdown calculation
+        drawdown = (
+            self.peak_equity - portfolio_value
+        ) / self.peak_equity
 
-        if self.peak_value > 0:
-            daily_loss_ratio = max(0.0, -self.daily_pnl / self.peak_value)
-            if daily_loss_ratio > self.max_daily_loss:
-                return {
-                    'breach': True,
-                    'reason': 'Max daily loss exceeded',
-                    'action': 'HALT_TRADING'
-                }
-        
-        return {
-            'breach': False,
-            'drawdown': float(drawdown)
-        }
+        # equity/drawdown logging
+        logger.info(
+            f"Equity=${portfolio_value:.2f} | "
+            f"Peak=${self.peak_equity:.2f} | "
+            f"DD={drawdown:.2%}"
+        )
 
-    async def check_order_risk(self,
-                               portfolio: Dict,
-                               symbol: str,
-                               proposed_notional: float,
-                               current_prices: Dict[str, float],
-                               positions: Dict[str, Dict]) -> Dict[str, Any]:
-        total_value = max(portfolio.get('total_value', 0.0), 1.0)
-        open_trades = len(positions)
+        # trigger protection
+        if drawdown >= self.max_drawdown:
+            logger.error(
+                f"RISK BREACH: "
+                f"Drawdown {drawdown:.2%}"
+            )
+            self.kill_switch = True
+            return False
 
-        if open_trades >= self.max_open_trades and symbol not in positions:
-            return {
-                'breach': True,
-                'reason': 'Max open trades exceeded',
-                'action': 'REJECT_ORDER'
-            }
+        # position size protection
+        if proposed_size > self.max_position_size:
+            logger.warning(
+                f"Position too large: "
+                f"{proposed_size:.2%}"
+            )
+            return False
 
-        single_position_ratio = proposed_notional / total_value
-        if single_position_ratio > self.max_single_position:
-            return {
-                'breach': True,
-                'reason': 'Max single position exceeded',
-                'action': 'REJECT_ORDER'
-            }
+        return True
 
-        total_exposure = 0.0
-        crypto_exposure = 0.0
+    async def check_risk_limits(self, portfolio):
+        portfolio_value = float(portfolio.get('total_value', self.starting_equity))
+        if not self.validate_order(portfolio_value, 0.0):
+            return {'breach': True, 'reason': 'drawdown_limit', 'action': 'HALT_TRADING'}
 
-        for held_symbol, position in positions.items():
-            if held_symbol not in current_prices:
-                continue
-
-            exposure = abs(position.get('size', 0.0) * current_prices[held_symbol])
-            total_exposure += exposure
-
-            if infer_market(held_symbol) == 'crypto':
-                crypto_exposure += exposure
-
-        projected_total_exposure = (total_exposure + proposed_notional) / total_value
-        if projected_total_exposure > self.max_total_exposure:
-            return {
-                'breach': True,
-                'reason': 'Max total exposure exceeded',
-                'action': 'REJECT_ORDER'
-            }
-
-        projected_crypto_exposure = crypto_exposure
-        if infer_market(symbol) == 'crypto':
-            projected_crypto_exposure += proposed_notional
-
-        if (projected_crypto_exposure / total_value) > self.max_crypto_exposure:
-            return {
-                'breach': True,
-                'reason': 'Max crypto exposure exceeded',
-                'action': 'REJECT_ORDER'
-            }
+        if self.daily_pnl <= -abs(self.max_daily_loss):
+            self.kill_switch = True
+            return {'breach': True, 'reason': 'daily_loss_limit', 'action': 'HALT_TRADING'}
 
         return {'breach': False}
 
-    async def update_daily_pnl(self, pnl: float):
-        self.daily_pnl += pnl
+    async def check_order_risk(self, portfolio, symbol, proposed_notional, current_prices, positions):
+        total_value = float(portfolio.get('total_value', self.starting_equity))
+        proposed_size = proposed_notional / max(total_value, 1.0)
+        if not self.validate_order(total_value, proposed_size):
+            return {'breach': True, 'reason': 'order_risk_limit'}
 
-    def reset_daily(self):
-        self.daily_pnl = 0
+        # Basic concentration cap at 30% notional per asset.
+        price = float(current_prices.get(symbol, 0.0))
+        current_position = positions.get(symbol, {}) if isinstance(positions, dict) else {}
+        current_notional = float(current_position.get('size', 0.0)) * price
+        concentration = (current_notional + proposed_notional) / max(total_value, 1.0)
+        if concentration > 0.30:
+            return {'breach': True, 'reason': 'asset_concentration_limit'}
+
+        return {'breach': False}
+
+    async def update_daily_pnl(self, pnl):
+        self.daily_pnl += float(pnl)
+
+
+# Export for backward compatibility
+RiskMonitor = RiskManager

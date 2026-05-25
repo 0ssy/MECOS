@@ -58,6 +58,25 @@ class TradeDatabase:
             timestamp TEXT
         )
         ''')
+
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS trades (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT,
+            symbol TEXT,
+            side TEXT,
+            entry_price REAL,
+            exit_price REAL,
+            quantity REAL,
+            pnl REAL,
+            confidence REAL,
+            regime TEXT,
+            status TEXT DEFAULT 'OPEN',
+            entry_time TEXT,
+            exit_time TEXT,
+            holding_seconds REAL DEFAULT 0
+        )
+        ''')
         
         self.conn.commit()
 
@@ -76,6 +95,18 @@ class TradeDatabase:
         ))
         self.conn.commit()
         return cursor.lastrowid
+
+    def update_order_status(self, order_id: int, status: str) -> None:
+        cursor = self.conn.cursor()
+        cursor.execute(
+            '''
+            UPDATE orders
+            SET status = ?, timestamp = ?
+            WHERE id = ?
+            ''',
+            (status, datetime.now().isoformat(), int(order_id)),
+        )
+        self.conn.commit()
 
     def insert_fill(self, fill: Dict):
         cursor = self.conn.cursor()
@@ -120,6 +151,106 @@ class TradeDatabase:
             datetime.now().isoformat()
         ))
         self.conn.commit()
+
+    def get_latest_portfolio_snapshot(self) -> Dict[str, Any]:
+        import json
+
+        cursor = self.conn.cursor()
+        cursor.execute(
+            '''
+            SELECT total_value, cash, positions, timestamp
+            FROM portfolio_snapshots
+            ORDER BY id DESC
+            LIMIT 1
+            '''
+        )
+        row = cursor.fetchone()
+        if not row:
+            return {}
+
+        total_value, cash, positions_json, timestamp = row
+        try:
+            positions = json.loads(positions_json or "{}")
+        except Exception:
+            positions = {}
+
+        return {
+            "total_value": float(total_value or 0.0),
+            "cash": float(cash or 0.0),
+            "positions": positions if isinstance(positions, dict) else {},
+            "timestamp": timestamp,
+        }
+
+    def insert_trade(self, trade: Dict[str, Any]) -> int:
+        cursor = self.conn.cursor()
+        now = datetime.now().isoformat()
+        cursor.execute('''
+        INSERT INTO trades (
+            timestamp, symbol, side, entry_price, exit_price,
+            quantity, pnl, confidence, regime, status, entry_time
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            now,
+            trade['symbol'],
+            trade['side'],
+            trade.get('entry_price', 0.0),
+            None,
+            trade.get('quantity', 0.0),
+            None,
+            trade.get('confidence', 0.0),
+            trade.get('regime', 'unknown'),
+            'OPEN',
+            now,
+        ))
+        self.conn.commit()
+        return cursor.lastrowid
+
+    def close_trade(self, trade_id: int, exit_price: float, pnl: float, holding_seconds: float) -> None:
+        cursor = self.conn.cursor()
+        now = datetime.now().isoformat()
+        cursor.execute('''
+        UPDATE trades
+        SET exit_price = ?, pnl = ?, status = 'CLOSED', exit_time = ?, holding_seconds = ?
+        WHERE id = ?
+        ''', (exit_price, pnl, now, float(max(0.0, holding_seconds)), trade_id))
+        self.conn.commit()
+
+    def get_open_trade_for_symbol(self, symbol: str) -> Dict[str, Any]:
+        cursor = self.conn.cursor()
+        cursor.execute('''
+        SELECT * FROM trades
+        WHERE symbol = ? AND status = 'OPEN'
+        ORDER BY id DESC
+        LIMIT 1
+        ''', (symbol,))
+        row = cursor.fetchone()
+        if not row:
+            return {}
+        columns = [desc[0] for desc in cursor.description]
+        return dict(zip(columns, row))
+
+    def get_trade_summary(self) -> Dict[str, Any]:
+        cursor = self.conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM trades")
+        total = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(*) FROM trades WHERE status = 'CLOSED' AND pnl > 0")
+        wins = cursor.fetchone()[0]
+
+        cursor.execute("SELECT COUNT(*) FROM trades WHERE status = 'CLOSED' AND pnl <= 0")
+        losses = cursor.fetchone()[0]
+
+        cursor.execute("SELECT AVG(holding_seconds) FROM trades WHERE status = 'CLOSED'")
+        avg_holding = cursor.fetchone()[0] or 0.0
+
+        return {
+            'total_trades': int(total),
+            'winning_trades': int(wins),
+            'losing_trades': int(losses),
+            'avg_holding_seconds': float(avg_holding),
+        }
 
     def get_recent_signals(self, limit: int = 100) -> List[Dict]:
         cursor = self.conn.cursor()

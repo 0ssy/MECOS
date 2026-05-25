@@ -9,6 +9,7 @@ pandas
 scipy
 statsmodels
 alpaca-py
+ib_insync
 
 # Memory & Embeddings
 chromadb

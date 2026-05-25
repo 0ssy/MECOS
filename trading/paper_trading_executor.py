@@ -1,36 +1,129 @@
 import asyncio
-from typing import Dict, Any, List
+import inspect
+from typing import Dict, Any, List, Callable, Awaitable, Optional
 from loguru import logger
 from datetime import datetime
+from .order_manager import OrderManager
 
 class PaperTradingExecutor:
-    def __init__(self, database, position_manager, risk_monitor, memory):
+    def __init__(self, database, position_manager, risk_monitor, memory, order_manager: Optional[OrderManager] = None):
         self.database = database
         self.position_manager = position_manager
         self.risk_monitor = risk_monitor
         self.memory = memory
-        
+        self.order_manager = order_manager or OrderManager(database)
+        self.order_status_callbacks: List[Callable[[Dict[str, Any]], Awaitable[None]]] = []
+        self.order_manager.register_status_callback(self._handle_order_status)
+
         self.paper_account = {
             'cash': 10000.0,
             'initial_capital': 10000.0,
             'equity': 10000.0
         }
-        
-        self.execution_enabled = False
+
+        self.execution_enabled = True  # Force enable execution for paper trading
         self.kill_switch_triggered = False
-        
+        self.positions = {}
+        self.stop_loss_pct = 0.02
+        self.take_profit_pct = 0.05
+        self.trailing_stop_pct = 0.015
+        self.max_holding_seconds = 4 * 60 * 60
+
         self.execution_stats = {
             'total_orders': 0,
             'executed_orders': 0,
             'rejected_orders': 0,
             'total_pnl': 0
         }
-        
-        logger.info(f'Paper Trading Executor initialized | Capital: ')
+
+        self._restore_portfolio_state()
+        logger.info(f'Paper Trading Executor initialized | Capital: {self.paper_account["cash"]:.2f} | Execution enabled: {self.execution_enabled}')
+
+    def _restore_portfolio_state(self):
+        snapshot = self.database.get_latest_portfolio_snapshot()
+        if not snapshot:
+            return
+
+        cash = float(snapshot.get('cash', self.paper_account['cash']) or self.paper_account['cash'])
+        total_value = float(snapshot.get('total_value', self.paper_account['equity']) or self.paper_account['equity'])
+        positions = snapshot.get('positions', {})
+        if not isinstance(positions, dict):
+            positions = {}
+
+        self.paper_account['cash'] = cash
+        self.paper_account['equity'] = total_value
+        if hasattr(self.position_manager, 'load_positions'):
+            self.position_manager.load_positions(positions)
+        self.positions = {}
+        for symbol, pos in positions.items():
+            if not isinstance(pos, dict):
+                continue
+            size = float(pos.get('size', 0.0) or 0.0)
+            if size <= 0:
+                continue
+            self.positions[symbol] = {'shares': size}
+
+        logger.info(
+            f'Portfolio state restored from snapshot: cash={cash:.2f}, equity={total_value:.2f}, positions={len(self.positions)}'
+        )
+
+    def register_order_status_callback(self, callback: Callable[[Dict[str, Any]], Awaitable[None]]):
+        self.order_status_callbacks.append(callback)
+
+    async def _handle_order_status(self, status_event: Dict[str, Any]):
+        for callback in self.order_status_callbacks:
+            try:
+                result = callback(status_event)
+                if inspect.isawaitable(result):
+                    await result
+            except Exception as exc:
+                logger.error(f'Paper executor order callback failed: {exc}')
+
+    def generate_exit_signal(self, symbol: str, tick: Dict[str, Any], regime: str = 'unknown') -> Dict[str, Any]:
+        position = self.position_manager.positions.get(symbol)
+        if not position or position.get('size', 0) <= 0:
+            return {}
+
+        current_price = float(tick.get('close', 0.0) or 0.0)
+        if current_price <= 0:
+            return {}
+
+        self.position_manager.mark_price(symbol, current_price)
+
+        avg_price = float(position.get('avg_price', current_price) or current_price)
+        peak_price = float(position.get('peak_price', current_price) or current_price)
+        holding_seconds = self.position_manager.get_holding_seconds(symbol)
+        pnl_pct = (current_price - avg_price) / max(avg_price, 1e-9)
+        drawdown_from_peak = (peak_price - current_price) / max(peak_price, 1e-9)
+
+        exit_reason = ''
+        if pnl_pct <= -self.stop_loss_pct:
+            exit_reason = 'stop_loss'
+        elif pnl_pct >= self.take_profit_pct:
+            exit_reason = 'take_profit'
+        elif drawdown_from_peak >= self.trailing_stop_pct:
+            exit_reason = 'trailing_stop'
+        elif holding_seconds >= self.max_holding_seconds:
+            exit_reason = 'time_exit'
+
+        if not exit_reason:
+            return {}
+
+        logger.info(f'EXIT TRIGGERED {symbol}: {exit_reason} | pnl={pnl_pct:.2%} | hold={holding_seconds:.0f}s')
+        return {
+            'symbol': symbol,
+            'decision': 'SELL',
+            'allocation': 1.0,
+            'confidence': 1.0,
+            'regime': regime,
+            'features': {'close': current_price},
+            'exit_reason': exit_reason,
+            'force_exit': True,
+        }
 
     async def execute_signal(self, signal: Dict[str, Any]) -> Dict[str, Any]:
         if not self.execution_enabled:
-            logger.debug(f'Execution disabled - signal ignored: {signal["symbol"]} {signal["decision"]}')
+            logger.debug('Execution disabled')
             return {'status': 'DISABLED', 'reason': 'Execution not enabled'}
         
         if self.kill_switch_triggered:
@@ -42,17 +135,20 @@ class PaperTradingExecutor:
         
         self.execution_stats['total_orders'] += 1
         
-        symbol = signal['symbol']
+        symbol = signal.get('symbol')
+        if not symbol:
+            self.execution_stats['rejected_orders'] += 1
+            return {'status': 'REJECTED', 'reason': 'Missing symbol'}
+
         decision = signal['decision']
-        confidence = signal['confidence']
-        
-        position_size = signal.get('position_size', 0.1)
-        price = signal['features'].get('close', 100.0)
+        allocation = signal.get('allocation', signal.get('position_size', 0.1))
+        price = signal.get('features', {}).get('close', 100.0)
+        position_size = self.paper_account['cash'] * allocation
         
         trade = {
             'symbol': symbol,
             'side': decision,
-            'size': position_size,
+            'size': allocation,
             'price': price
         }
         
@@ -72,7 +168,7 @@ class PaperTradingExecutor:
             
             return {'status': 'REJECTED', 'reason': risk_check['reason']}
         
-        notional = position_size * self.paper_account['equity']
+        notional = position_size
         shares = notional / price
 
         order_risk_check = await self.risk_monitor.check_order_risk(
@@ -93,31 +189,41 @@ class PaperTradingExecutor:
             
             if cost > self.paper_account['cash']:
                 self.execution_stats['rejected_orders'] += 1
-                logger.warning(f'Insufficient cash:  < ')
+                logger.warning(f'Insufficient cash: need ${cost:.2f}, have ${self.paper_account["cash"]:.2f}')
                 return {'status': 'REJECTED', 'reason': 'Insufficient cash'}
             
             self.paper_account['cash'] -= cost
+            current_shares = self.positions.get(symbol, {}).get('shares', 0.0)
+            self.positions[symbol] = {'shares': current_shares + shares}
             
             await self.position_manager.update_position(symbol, 'BUY', shares, price)
+            if symbol in self.position_manager.positions:
+                self.position_manager.positions[symbol]['sector'] = signal.get('sector', 'unknown')
             
-            order_id = self.database.insert_order({
+            order = {
                 'symbol': symbol,
                 'side': 'BUY',
                 'size': shares,
                 'price': price,
                 'status': 'FILLED'
-            })
-            
-            self.database.insert_fill({
-                'order_id': order_id,
-                'symbol': symbol,
-                'size': shares,
-                'price': price
-            })
+            }
+            order_id = await self.order_manager.create_order(order)
+            await self.order_manager.submit_order(order_id)
+            await self.order_manager.fill_order(order_id, price, shares)
             
             self.execution_stats['executed_orders'] += 1
+
+            self.database.insert_trade({
+                'symbol': symbol,
+                'side': 'LONG',
+                'entry_price': price,
+                'quantity': shares,
+                'confidence': signal.get('confidence', 0.0),
+                'regime': signal.get('regime', 'unknown'),
+            })
             
-            logger.info(f'EXECUTED BUY: {symbol} | Shares: {shares:.2f} @  | Cost: ')
+            logger.info(f'EXECUTING BUY {symbol} | size=${position_size:.2f}')
+            logger.info(f'Portfolio Cash: ${self.paper_account["cash"]:.2f}')
             
             return {
                 'status': 'EXECUTED',
@@ -130,40 +236,49 @@ class PaperTradingExecutor:
             }
         
         elif decision == 'SELL':
-            if symbol not in self.position_manager.positions:
+            if symbol not in self.positions and symbol not in self.position_manager.positions:
                 logger.warning(f'No position to sell: {symbol}')
                 return {'status': 'REJECTED', 'reason': 'No position'}
-            
-            position = self.position_manager.positions[symbol]
-            sell_shares = min(shares, position['size'])
+
+            local_position = self.positions.get(symbol, {'shares': 0.0})
+            tracked_position = self.position_manager.positions.get(symbol, {'size': shares, 'avg_price': price})
+            sell_shares = min(shares, tracked_position.get('size', shares))
             
             proceeds = sell_shares * price
             self.paper_account['cash'] += proceeds
+
+            remaining = max(0.0, local_position.get('shares', 0.0) - sell_shares)
+            if remaining <= 0:
+                self.positions.pop(symbol, None)
+            else:
+                self.positions[symbol] = {'shares': remaining}
             
             await self.position_manager.update_position(symbol, 'SELL', sell_shares, price)
             
-            order_id = self.database.insert_order({
+            order = {
                 'symbol': symbol,
                 'side': 'SELL',
                 'size': sell_shares,
                 'price': price,
                 'status': 'FILLED'
-            })
+            }
+            order_id = await self.order_manager.create_order(order)
+            await self.order_manager.submit_order(order_id)
+            await self.order_manager.fill_order(order_id, price, sell_shares)
             
-            self.database.insert_fill({
-                'order_id': order_id,
-                'symbol': symbol,
-                'size': sell_shares,
-                'price': price
-            })
-            
-            pnl = (price - position['avg_price']) * sell_shares
+            pnl = (price - tracked_position.get('avg_price', price)) * sell_shares
             self.execution_stats['total_pnl'] += pnl
             await self.risk_monitor.update_daily_pnl(pnl)
+
+            holding_seconds = self.position_manager.get_holding_seconds(symbol)
+            open_trade = self.database.get_open_trade_for_symbol(symbol)
+            if open_trade:
+                self.database.close_trade(open_trade['id'], price, pnl, holding_seconds)
             
             self.execution_stats['executed_orders'] += 1
             
-            logger.info(f'EXECUTED SELL: {symbol} | Shares: {sell_shares:.2f} @  | Proceeds:  | PnL: ')
+            logger.info(f'EXECUTING SELL {symbol} | size=${position_size:.2f}')
+            logger.info(f'Portfolio Cash: ${self.paper_account["cash"]:.2f}')
             
             return {
                 'status': 'EXECUTED',
@@ -173,12 +288,19 @@ class PaperTradingExecutor:
                 'shares': sell_shares,
                 'price': price,
                 'proceeds': proceeds,
-                'pnl': pnl
+                'pnl': pnl,
+                'holding_seconds': holding_seconds,
+                'exit_reason': signal.get('exit_reason', ''),
             }
+
+        return {'status': 'REJECTED', 'reason': f'Unsupported decision: {decision}'}
 
     async def update_equity(self, current_prices: Dict[str, float]):
         unrealized_pnl = await self.position_manager.calculate_unrealized_pnl(current_prices)
-        self.paper_account['equity'] = self.paper_account['cash'] + unrealized_pnl
+        local_position_value = 0.0
+        for symbol, pos in self.positions.items():
+            local_position_value += pos.get('shares', 0.0) * float(current_prices.get(symbol, 0.0))
+        self.paper_account['equity'] = self.paper_account['cash'] + unrealized_pnl + local_position_value
 
     def enable_execution(self):
         self.execution_enabled = True

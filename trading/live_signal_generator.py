@@ -31,16 +31,26 @@ class LiveSignalGenerator:
         
         try:
             analysis = await self.trading_agent.analyze_market(symbol, historical_data)
+            if analysis is None:
+                return None
+
+            decision = analysis.get('decision', analysis.get('final_decision', 'HOLD'))
+            if decision == 'HOLD':
+                self.signal_stats['total_signals'] += 1
+                self.signal_stats['hold_signals'] += 1
+                return None
             
             signal = {
                 'timestamp': datetime.now().isoformat(),
                 'symbol': symbol,
-                'decision': analysis['final_decision'],
-                'confidence': analysis['confidence'],
+                'decision': decision,
+                'confidence': analysis.get('confidence', 0.0),
                 'regime': analysis.get('regime', 'unknown'),
                 'features': analysis.get('features', {}),
                 'physics': analysis.get('physics', {}),
-                'portfolio': analysis.get('portfolio', {})
+                'portfolio': analysis.get('portfolio', {}),
+                'allocation': analysis.get('allocation', analysis.get('position_size', 0.1)),
+                'volatility': analysis.get('volatility', 0.0)
             }
             
             self.signal_history.append(signal)
@@ -52,7 +62,7 @@ class LiveSignalGenerator:
             if self.validation_mode:
                 self._validate_signal(signal)
             
-            logger.info(f'SIGNAL: {symbol} | {signal["decision"]} | Conf: {signal["confidence"]:.2f} | Regime: {signal["regime"]}')
+            logger.info(f'SIGNAL: {symbol} | {signal["decision"]} | Conf: {signal["confidence"]:.2f}')
             
             return signal
             

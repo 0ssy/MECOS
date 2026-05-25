@@ -37,6 +37,9 @@ class FeatureEngine:
         
         # 6. REGIME FEATURES
         features.update(self._compute_regime_features(df))
+
+        # 7. MICROSTRUCTURE FEATURES
+        features.update(self._compute_microstructure_features(df))
         
         return features
     
@@ -188,6 +191,43 @@ class FeatureEngine:
             "regime_trend": int(trend),
             "regime_volatility": vol_regime,
             "trend_strength": float(abs(sma_20 - sma_50) / sma_50) if sma_50 > 0 else 0
+        }
+
+    def _compute_microstructure_features(self, df: pd.DataFrame) -> Dict:
+        """Order-flow and short-horizon pressure proxies from OHLCV bars."""
+        close = df['close'].values
+        open_ = df['open'].values if 'open' in df.columns else close
+        high = df['high'].values if 'high' in df.columns else close
+        low = df['low'].values if 'low' in df.columns else close
+        volume = df['volume'].values if 'volume' in df.columns else np.ones_like(close)
+
+        if len(close) < 5:
+            return {
+                "order_flow_imbalance": 0.0,
+                "volume_imbalance": 0.0,
+                "microstructure_pressure": 0.0,
+            }
+
+        price_delta = close[-20:] - open_[-20:]
+        vol_slice = volume[-20:]
+        signed_volume = np.sign(price_delta) * vol_slice
+        total_volume = np.sum(np.abs(vol_slice)) + 1e-9
+        order_flow_imbalance = float(np.sum(signed_volume) / total_volume)
+
+        up_volume = float(np.sum(vol_slice[price_delta > 0])) if np.any(price_delta > 0) else 0.0
+        down_volume = float(np.sum(vol_slice[price_delta < 0])) if np.any(price_delta < 0) else 0.0
+        volume_imbalance = 0.0
+        if (up_volume + down_volume) > 0:
+            volume_imbalance = (up_volume - down_volume) / (up_volume + down_volume)
+
+        range_slice = (high[-20:] - low[-20:]) / np.maximum(close[-20:], 1e-9)
+        avg_range = float(np.mean(range_slice))
+        microstructure_pressure = float(order_flow_imbalance * (1.0 + avg_range * 20.0))
+
+        return {
+            "order_flow_imbalance": float(np.clip(order_flow_imbalance, -1.0, 1.0)),
+            "volume_imbalance": float(np.clip(volume_imbalance, -1.0, 1.0)),
+            "microstructure_pressure": float(np.clip(microstructure_pressure, -1.5, 1.5)),
         }
     
     @staticmethod

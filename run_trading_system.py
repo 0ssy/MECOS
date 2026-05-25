@@ -1,9 +1,10 @@
 import asyncio
+import os
 from datetime import datetime
 from loguru import logger
 from memory_system import MemorySystem
 from trading import *
-from trading.broker.alpaca_adapter import AlpacaAdapter
+from trading.broker.multi_broker_adapter import MultiBrokerAdapter
 from trading.market_data_stream import MarketDataStream
 from trading.live_signal_generator import LiveSignalGenerator
 from trading.paper_trading_executor import PaperTradingExecutor
@@ -19,15 +20,15 @@ async def main():
     
     memory = MemorySystem()
     db = TradeDatabase()
-    agent = TradingAgent(memory)
+    quant_mode = os.getenv('MECOS_QUANT_MODE', 'balanced')
+    logger.info(f'Quant mode selected: {quant_mode}')
+
+    agent = TradingAgent(memory, quant_mode=quant_mode)
     
     stream = MarketDataStream()
 
-    try:
-        stream.set_broker_adapter(AlpacaAdapter())
-        logger.info('Live broker adapter configured: Alpaca')
-    except Exception as e:
-        logger.warning(f'Live broker adapter unavailable, using simulation: {e}')
+    stream.set_broker_adapter(MultiBrokerAdapter())
+    logger.info('Live broker adapter configured: MultiBroker (IBKR/Alpaca/Binance)')
 
     signal_gen = LiveSignalGenerator(agent, stream, memory)
     
@@ -48,7 +49,8 @@ async def main():
         perf_mon, 
         db,
         universe_mgr,
-        scanner
+        scanner,
+        quant_mode=quant_mode,
     )
     
     logger.info('')
