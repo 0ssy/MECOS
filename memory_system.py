@@ -5,6 +5,9 @@ from loguru import logger
 from config import settings
 import time
 import json
+from typing import Any, Dict, List, Optional, Tuple
+
+from memory_quality import MemoryQualityGate
 
 class VectorMemory:
     def __init__(self):
@@ -49,10 +52,35 @@ class MemorySystem:
     def __init__(self):
         self.vector_memory = VectorMemory()
         self.short_term_buffer = []
+        self.quality_gate = MemoryQualityGate()
+        self.quality_stats = {
+            "promoted": 0,
+            "demoted": 0,
+            "contradictions": 0,
+        }
 
     async def add_experience(self, content: str, source: str = "general", metadata: dict = None):
         """Add a new experience to both short-term and long-term memory."""
-        metadata = metadata or {}
+        metadata = dict(metadata or {})
+        quality = self.quality_gate.assess(
+            content=content,
+            source=source,
+            metadata=metadata,
+            short_term_buffer=self.short_term_buffer,
+        )
+        metadata.update(
+            {
+                "quality_score": float(quality["quality_score"]),
+                "source_weight": float(quality["source_weight"]),
+                "timestamp_unix": float(time.time()),
+                "promoted": bool(quality["promote"]),
+                "contradiction_penalty": float(quality["contradiction_penalty"]),
+            }
+        )
+
+        if quality["contradiction_penalty"] > 0:
+            self.quality_stats["contradictions"] += 1
+
         # 1. Add to short-term buffer
         self.short_term_buffer.append({
             "content": content,
@@ -60,23 +88,69 @@ class MemorySystem:
             "metadata": metadata,
             "timestamp": time.time()
         })
-        
-        # 2. Persist to long-term vector memory
-        store_metadata = {"source": source}
-        store_metadata.update(metadata)
-        await self.vector_memory.store(content, store_metadata)
-        
+
+        # 2. Persist to long-term vector memory only for quality-promoted memories.
+        if quality["promote"]:
+            store_metadata = {"source": source}
+            store_metadata.update(metadata)
+            await self.vector_memory.store(content, store_metadata)
+            self.quality_stats["promoted"] += 1
+        else:
+            self.quality_stats["demoted"] += 1
+            logger.debug(
+                f"Memory demoted (not persisted): source={source} quality={quality['quality_score']:.2f} "
+                f"content={content[:80]}"
+            )
+
         # Keep buffer manageable
-        if len(self.short_term_buffer) > 100:
+        if len(self.short_term_buffer) > 250:
             self.short_term_buffer.pop(0)
 
-    async def retrieve_context(self, query: str):
+    async def retrieve_context(self, query: str, n_results: int = 5):
         """Retrieve relevant context for reasoning."""
-        return await self.vector_memory.query(query)
+        fetch_n = max(int(n_results), 1)
+        raw = await self.vector_memory.query(query, n_results=min(5000, max(10, fetch_n * 4)))
+        return self._rerank_results(raw, query=query, n_results=fetch_n)
+
+    def _rerank_results(self, raw: Dict[str, Any], query: str, n_results: int) -> Dict[str, Any]:
+        docs = (raw.get("documents") or [[]])[0]
+        metas = (raw.get("metadatas") or [[]])[0]
+        ids = (raw.get("ids") or [[]])[0]
+        distances = (raw.get("distances") or [[]])[0]
+
+        rows: List[Tuple[float, str, Dict[str, Any], Any, Any]] = []
+        for idx, doc in enumerate(docs):
+            meta = metas[idx] if idx < len(metas) and isinstance(metas[idx], dict) else {}
+            retrieval_score = self.quality_gate.retrieval_score(
+                content=str(doc),
+                query=query,
+                metadata=meta,
+            )
+            if retrieval_score < self.quality_gate.min_retrieval_score:
+                continue
+            row_id = ids[idx] if idx < len(ids) else None
+            row_dist = distances[idx] if idx < len(distances) else None
+            rows.append((retrieval_score, str(doc), meta, row_id, row_dist))
+
+        rows.sort(key=lambda r: r[0], reverse=True)
+        selected = rows[:n_results]
+
+        selected_docs = [r[1] for r in selected]
+        selected_metas = [dict(r[2], retrieval_score=float(r[0])) for r in selected]
+        selected_ids = [r[3] for r in selected]
+        selected_distances = [r[4] for r in selected if r[4] is not None]
+
+        return {
+            "documents": [selected_docs],
+            "metadatas": [selected_metas],
+            "ids": [selected_ids],
+            "distances": [selected_distances],
+        }
 
     async def get_stats(self):
         """Return memory statistics."""
         return {
             "experience_count": self.vector_memory.count(),
-            "short_term_buffer_size": len(self.short_term_buffer)
+            "short_term_buffer_size": len(self.short_term_buffer),
+            "quality": dict(self.quality_stats),
         }

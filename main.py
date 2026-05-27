@@ -1,578 +1,376 @@
 """
-MECOS - Meta-Cognitive Engine for Continuous Operation and Self-improvement
-Full system entry point integrating all 7 phases + Dreaming + Independence.
+MECOS Unified Runtime Entry Point.
+Connects cognition, research, perception, coding, orchestration, memory, and trading.
 """
+from __future__ import annotations
 
+import argparse
 import asyncio
-import sys
-import random
-from contextlib import suppress
-from urllib.parse import quote_plus
+import os
+from pathlib import Path
+from typing import Any, Dict, Optional
+
 from loguru import logger
-from exploration.browser_explorer import BrowserExplorer
-from exploration.config import config as exploration_config
-from exploration.knowledge_base import KnowledgeBase
-from exploration.vision_analyzer import VisionAnalyzer
 
-from config import settings
-from exploration.sync_tool import sync_server_knowledge
-
-
-# ── Phase 1-3: Core ──────────────────────────────────────────────────────────
-from memory_system import MemorySystem
-from perception import PerceptionLayer
-from web_perception import WebPerception
-from reasoner import Reasoner
-
-# ── Phase 4: Tool Orchestration ───────────────────────────────────────────────
-from tool_orchestrator import ToolOrchestrator
 from action_engine import ActionExecutionEngine
-
-# ── Phase 5: Specialized Agents ───────────────────────────────────────────────
-from trading_agent import TradingAgent
-from coding_agent import CodingAgent
-from research_agent import ResearchAgent
 from agent_coordinator import AgentCoordinator, AgentRole
+from app_controller import AppController
+from coding_agent import CodingAgent as CoreCodingAgent
+from continuous_loop import ContinuousResearchLoop
+from engineer import CodingAgent as RuntimeCodingAgent
+from engineer import SandboxExecutor as RuntimeSandboxExecutor
+from knowledge_graph import KnowledgeGraph as RuntimeKnowledgeGraph
+from memory_system import MemorySystem
+from model_router import ModelRouter
+from orchestrator import AutonomousOrchestrator
+from perception import PerceptionLayer
+from reasoner import Reasoner
+from research_agent import ResearchAgent as CoreResearchAgent
+from runtime import (
+    CrashRecovery,
+    DriftGuard,
+    ExecutionGuard,
+    HealthMonitor,
+    ResearchGovernor,
+    RuntimeBenchmarkHarness,
+    RuntimeWatchdog,
+    StateCheckpoint,
+)
+from self_debug import SelfDebugger
+from self_improvement import EvolutionAgent
+from tool_orchestrator import ToolOrchestrator
+from trading.trading_system import TradingSystem
+from trading_agent import TradingAgent as QuantTradingAgent
+from vector_memory import VectorMemory as RuntimeVectorMemory
+from web_perception import WebPerception
+from analyzer import ResearchAgent as RuntimeResearchAgent
 
-# ── Phase 6: Learning Engines ─────────────────────────────────────────────────
-from rl_trainer import RLTrainer
-from self_supervised_trainer import SelfSupervisedTrainer
-from curriculum_manager import CurriculumManager
-from memory_consolidation import MemoryConsolidation
-from benchmarking import BenchmarkingEngine
 
-# ── Phase 7: Evolution & Meta-Learning ───────────────────────────────────────
-from meta_learner import MetaLearner
-from checkpoint_manager import CheckpointManager
-from world_model import WorldModel
+class UnifiedMECOSRuntime:
+    def __init__(self, trading_execution_mode: str = "paper"):
+        self.memory: Optional[MemorySystem] = None
+        self.web: Optional[WebPerception] = None
+        self.trading_system: Optional[TradingSystem] = None
+        self._trading_task: Optional[asyncio.Task] = None
+        self.connection_state: Dict[str, bool] = {}
+        self.components: Dict[str, Any] = {}
+        self.trading_execution_mode = str(trading_execution_mode or "paper").strip().lower()
+        self.health_monitor = HealthMonitor(stale_threshold_seconds=45.0)
+        self.execution_guard = ExecutionGuard(default_timeout_seconds=120.0, retries=1)
+        self.state_checkpoint = StateCheckpoint()
+        self.crash_recovery = CrashRecovery(self.state_checkpoint)
+        self.benchmark_harness = RuntimeBenchmarkHarness()
+        self.drift_guard = DriftGuard()
+        self.research_governor = ResearchGovernor()
+        self.watchdog = RuntimeWatchdog(
+            monitor=self.health_monitor,
+            on_stale_component=self._on_stale_component,
+            interval_seconds=10.0,
+        )
+        self._heartbeat_task: Optional[asyncio.Task] = None
 
-# ── Autonomous & Sovereignty ─────────────────────────────────────────────────
-from dreaming_engine import DreamingEngine
-from independence_manager import IndependenceManager
+    async def _on_stale_component(self, component: str, stale_for_seconds: float):
+        logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
 
-
-class MECOSEngine:
-    """
-    The complete MECOS cognitive engine.
-    Integrates all 7 phases into a unified autonomous system.
-    """
-
-    def __init__(self):
-        self.is_running = False
-        self.goal_history = []
-        self.background_tasks = []
-        self._shutdown_started = False
-
-        # Configure logging
-        log_path = settings.LOGS_DIR
-        log_path.mkdir(parents=True, exist_ok=True)
-        logger.remove()
-        logger.add(log_path / "engine.log", rotation="100 MB", retention="7 days", level="DEBUG")
-        logger.add(sys.stdout, level="INFO", colorize=True)
-        logger.info(f"Initializing {settings.PROJECT_NAME} Engine (all 7 phases + Dreaming + Independence)...")
-
-        # ── Phase 1: Memory ───────────────────────────────────────────────
-        self.memory = MemorySystem()
-
-        # ── Phase 4: Tool Orchestration ───────────────────────────────────
-        self.orchestrator = ToolOrchestrator()
-
-        # ── Phase 2: Perception ───────────────────────────────────────────
-        self.perception = PerceptionLayer(self.memory, self.orchestrator.app_controller)
-        self.web_perception = WebPerception(self.memory)
-
-        # ── Phase 3: Reasoning ────────────────────────────────────────────
-        self.reasoner = Reasoner(self.memory)
-
-        self.orchestrator.web_perception = self.web_perception
-        self.action_engine = ActionExecutionEngine(self.orchestrator, self.memory)
-
-        # ── Phase 5: Specialized Agents ───────────────────────────────────
-        self.trading_agent = TradingAgent(self.memory)
-        self.coding_agent = CodingAgent(self.memory, self.orchestrator)
-        self.research_agent = ResearchAgent(self.memory, self.web_perception)
-        self.coordinator = AgentCoordinator(self.memory)
-        self.coordinator.register_agent("trading", self.trading_agent, AgentRole.TRADING)
-        self.coordinator.register_agent("coding", self.coding_agent, AgentRole.CODING)
-        self.coordinator.register_agent("research", self.research_agent, AgentRole.RESEARCH)
-
-        # ── Phase 6: Learning Engines ─────────────────────────────────────
-        self.rl_trainer = RLTrainer(self.memory, domain="general")
-        self.ssl_trainer = SelfSupervisedTrainer(self.memory)
-        self.curriculum = CurriculumManager(self.memory)
-        self.consolidation = MemoryConsolidation(self.memory)
-        self.benchmarking = BenchmarkingEngine(self.memory)
-
-        # ── Phase 7: Evolution & Meta-Learning ───────────────────────────
-        self.meta_learner = MetaLearner(self.memory)
-        self.checkpoint_manager = CheckpointManager()
-        self.world_model = WorldModel(self.memory)
-
-        # ── Autonomous & Sovereignty ──────────────────────────────────────
-        self.dreaming = DreamingEngine(self.memory)
-        self.independence = IndependenceManager(self.memory, self.trading_agent, self.meta_learner)
-        self.knowledge_base = KnowledgeBase()
-        self.vision = VisionAnalyzer()
-
-        logger.info("All 7 phases + Dreaming + Independence initialized successfully.")
+    async def _heartbeat_loop(self):
+        while True:
+            self.health_monitor.heartbeat("runtime_main")
+            if self._trading_task and not self._trading_task.done():
+                self.health_monitor.heartbeat("trading_loop")
+            await asyncio.sleep(5)
 
     async def startup(self):
-        """Initialize all subsystems that require async startup."""
-        logger.info("Starting subsystems...")
-        await self.web_perception.startup()
-        self.is_running = True
-        logger.info("MECOS Engine is running.")
-        self.browser = BrowserExplorer(self.knowledge_base, self.vision)
-        await self.browser.startup()
+        self.drift_guard.add_anchor("Stability before expansion", source="operator_policy")
+        self.health_monitor.mark_started("runtime_main")
+        await self.watchdog.start()
+        self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
 
-        # Run exploration in background
-        self.background_tasks.append(asyncio.create_task(self._run_browser_exploration()))
-        self.background_tasks.append(asyncio.create_task(self._run_web_learning_loop()))
-        self.background_tasks.append(asyncio.create_task(self._run_app_learning_loop()))
-        self.background_tasks.append(asyncio.create_task(self.knowledge_sync_loop()))
+        self.memory = MemorySystem()
+        self.connection_state["memory"] = True
+        self.components["memory"] = self.memory
+        self.health_monitor.mark_started("memory")
 
-    async def knowledge_sync_loop(self):
-        while True:
+        app_controller = AppController()
+        perception = PerceptionLayer(self.memory, app_controller)
+        self.connection_state["perception"] = True
+        self.components["app_controller"] = app_controller
+        self.components["perception"] = perception
+        self.health_monitor.mark_started("perception")
+
+        self.web = WebPerception(self.memory)
+        try:
+            await self.web.startup()
+            self.connection_state["web_perception"] = True
+        except Exception as exc:
+            logger.warning(f"Web perception startup failed: {exc}")
+            self.connection_state["web_perception"] = False
+        self.components["web_perception"] = self.web
+        self.health_monitor.mark_started("web_perception")
+
+        tools = ToolOrchestrator()
+        tools.web_perception = self.web
+        action_engine = ActionExecutionEngine(tools, self.memory)
+        reasoner = await self.execution_guard.run("reasoner_init", asyncio.to_thread(Reasoner, self.memory))
+        self.connection_state["reasoning"] = True
+        self.components["tools"] = tools
+        self.components["action_engine"] = action_engine
+        self.components["reasoner"] = reasoner
+        self.health_monitor.mark_started("reasoning")
+
+        core_coding = CoreCodingAgent(self.memory, tools)
+        core_research = CoreResearchAgent(self.memory, self.web)
+        coordinator = AgentCoordinator(self.memory)
+        self.connection_state["core_coding"] = True
+        self.connection_state["core_research"] = True
+        self.connection_state["agent_coordinator"] = True
+        self.components["core_coding_agent"] = core_coding
+        self.components["core_research_agent"] = core_research
+        self.components["agent_coordinator"] = coordinator
+        self.health_monitor.mark_started("agents")
+
+        runtime_memory = RuntimeVectorMemory()
+        runtime_graph = RuntimeKnowledgeGraph()
+        runtime_research = RuntimeResearchAgent(memory_layer=runtime_memory)
+        runtime_sandbox = RuntimeSandboxExecutor()
+        runtime_coding = RuntimeCodingAgent(runtime_sandbox)
+        runtime_debugger = SelfDebugger(runtime_sandbox)
+        runtime_orchestrator = AutonomousOrchestrator()
+        runtime_orchestrator.set_layer_priority("research", 120)
+        runtime_orchestrator.set_compute_budget(10)
+        runtime_evolution = EvolutionAgent(memory_layer=runtime_memory)
+        runtime_router = ModelRouter(main_brain_url="http://192.168.1.88:11434")
+        runtime_loop = ContinuousResearchLoop(runtime_research)
+
+        self.connection_state["runtime_memory"] = True
+        self.connection_state["runtime_knowledge_graph"] = True
+        self.connection_state["runtime_research"] = True
+        self.connection_state["runtime_coding"] = True
+        self.connection_state["runtime_debugger"] = True
+        self.connection_state["runtime_orchestrator"] = True
+        self.connection_state["runtime_evolution"] = True
+        self.connection_state["runtime_router"] = True
+
+        self.components["runtime_memory"] = runtime_memory
+        self.components["runtime_graph"] = runtime_graph
+        self.components["runtime_research_agent"] = runtime_research
+        self.components["runtime_sandbox"] = runtime_sandbox
+        self.components["runtime_coding_agent"] = runtime_coding
+        self.components["runtime_debugger"] = runtime_debugger
+        self.components["runtime_orchestrator"] = runtime_orchestrator
+        self.components["runtime_evolution"] = runtime_evolution
+        self.components["runtime_router"] = runtime_router
+        self.components["runtime_research_loop"] = runtime_loop
+        self.health_monitor.mark_started("runtime_stack")
+
+        try:
+            quant_trading = QuantTradingAgent(self.memory, quant_mode="balanced")
+            coordinator.register_agent("trading", quant_trading, AgentRole.TRADING)
+            self.connection_state["quant_trading_agent"] = True
+            self.components["quant_trading_agent"] = quant_trading
+        except Exception as exc:
+            logger.warning(f"Quant trading agent init failed: {exc}")
+            self.connection_state["quant_trading_agent"] = False
+
+        coordinator.register_agent("coding", core_coding, AgentRole.CODING)
+        coordinator.register_agent("research", core_research, AgentRole.RESEARCH)
+
+        try:
+            self.trading_system = TradingSystem(
+                memory_system=self.memory,
+                quant_mode="balanced",
+                execution_mode=self.trading_execution_mode,
+            )
+            self.connection_state["trading_system"] = True
+            self.components["trading_system"] = self.trading_system
+        except Exception as exc:
+            logger.warning(f"TradingSystem init failed: {exc}")
+            self.connection_state["trading_system"] = False
+
+        await self.state_checkpoint.save_runtime_state(
+            {
+                "connection_state": self.connection_state,
+                "trading_execution_mode": self.trading_execution_mode,
+            }
+        )
+        await self.state_checkpoint.create_checkpoint(
+            label="runtime_startup",
+            metadata={"connection_state": self.connection_state},
+        )
+        logger.info(f"Unified MECOS startup complete: {self.connection_state}")
+
+    async def run_runtime_demo(self):
+        runtime_memory: RuntimeVectorMemory = self.components["runtime_memory"]
+        runtime_graph: RuntimeKnowledgeGraph = self.components["runtime_graph"]
+        runtime_research: RuntimeResearchAgent = self.components["runtime_research_agent"]
+        runtime_coding: RuntimeCodingAgent = self.components["runtime_coding_agent"]
+        runtime_debugger: SelfDebugger = self.components["runtime_debugger"]
+        runtime_orchestrator: AutonomousOrchestrator = self.components["runtime_orchestrator"]
+        runtime_evolution: EvolutionAgent = self.components["runtime_evolution"]
+        runtime_router: ModelRouter = self.components["runtime_router"]
+        runtime_loop: ContinuousResearchLoop = self.components["runtime_research_loop"]
+
+        background = asyncio.create_task(runtime_loop.start(["autonomous runtime", "recursive engineering"]))
+        await self.execution_guard.run(
+            "runtime_research_analyze_repo",
+            runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
+        )
+        module_code = await runtime_coding.build_module("diagnostic_tool", "runtime health checks")
+        debug_result = {"success": True}
+        if module_code:
+            debug_result = await self.execution_guard.run(
+                "runtime_debugger_verify_and_repair",
+                runtime_debugger.verify_and_repair(module_code, "diagnostic_tool.py"),
+                timeout_seconds=180.0,
+            )
+
+        runtime_graph.add_node("mecos_core", "runtime", {"mode": "local-first"})
+        runtime_graph.add_node("sandbox", "component", {"purpose": "safe execution"})
+        runtime_graph.add_edge("mecos_core", "sandbox", "uses")
+
+        await self.execution_guard.run(
+            "runtime_router_route_request",
+            runtime_router.route_request("plan evolution", "long_term_planning"),
+        )
+        evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
+        planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
+
+        runtime_loop.stop()
+        background.cancel()
+        try:
+            await background
+        except asyncio.CancelledError:
+            pass
+
+        found = runtime_memory.search("runtime")
+        memory_retrieval = await self.memory.retrieve_context("runtime health", n_results=5) if self.memory else {"metadatas": [[]]}
+        meta_rows = (memory_retrieval.get("metadatas") or [[]])[0]
+        retrieval_scores = [
+            float(m.get("retrieval_score", 0.0))
+            for m in meta_rows
+            if isinstance(m, dict) and isinstance(m.get("retrieval_score", 0.0), (int, float))
+        ]
+        memory_relevance = sum(retrieval_scores) / max(len(retrieval_scores), 1)
+        research_metrics = runtime_research.get_metrics()
+        research_governance = self.research_governor.evaluate(research_metrics)
+        evolution_scores = [float(b.get("score", 0.0)) for b in runtime_evolution.benchmarks]
+        evolution_delta = 0.0
+        if len(evolution_scores) >= 2:
+            evolution_delta = evolution_scores[-1] - evolution_scores[-2]
+        coding_compile_success = 1.0 if module_code else 0.0
+        debug_success = 1.0 if bool(debug_result.get("success", False)) else 0.0
+        benchmark_metrics = {
+            "research_useful_discoveries_per_hour": float(research_metrics.get("useful_discoveries_per_hour", 0.0)),
+            "coding_compile_success_rate": coding_compile_success,
+            "debug_repair_success_rate": debug_success,
+            "memory_retrieval_relevance": float(memory_relevance),
+            "evolution_benchmark_delta": float(evolution_delta),
+            "planning_task_completion_efficiency": float(planning_summary.get("efficiency", 0.0)),
+            "research_quality_index": float(research_governance.get("research_quality_index", 0.0)),
+        }
+        benchmark_entry = self.benchmark_harness.record(benchmark_metrics)
+        previous = self.benchmark_harness.previous()
+        delta = self.benchmark_harness.benchmark_delta(
+            benchmark_metrics,
+            previous.get("metrics", {}) if previous else None,
+        )
+        drift_status = self.drift_guard.evaluate(benchmark_metrics)
+        if drift_status.get("drift_detected"):
+            await self.state_checkpoint.create_checkpoint(
+                label="drift_rollback_anchor",
+                metadata={"drift_status": drift_status, "delta": delta},
+            )
+            logger.warning(
+                f"Drift detected: average_delta={drift_status.get('average_delta', 0.0):.3f}. "
+                "Rollback anchor checkpoint created."
+            )
+        self.components["benchmark_entry"] = benchmark_entry
+        self.components["benchmark_delta"] = delta
+        self.components["drift_status"] = drift_status
+        self.components["research_governance"] = research_governance
+        logger.info(f"Runtime demo complete. memory_hits={len(found)}")
+
+    async def start_trading(self, run_seconds: int):
+        if not self.trading_system:
+            logger.warning("TradingSystem unavailable; skipping trading start")
+            return
+        self._trading_task = asyncio.create_task(self.trading_system.start(use_starter_universe=True))
+        await asyncio.sleep(max(1, int(run_seconds)))
+        self.trading_system.stop()
+        if self._trading_task and not self._trading_task.done():
+            self._trading_task.cancel()
             try:
-                await sync_server_knowledge()
-                await asyncio.sleep(3600)  # Sync every hour
+                await self._trading_task
             except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.warning(f"Knowledge sync loop error: {e}")
-                await asyncio.sleep(30)
-
-    async def _run_browser_exploration(self):
-        while self.is_running:
-            try:
-                focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
-                seed_urls = self._build_goal_seed_urls(focus_goal, samples=1)
-                if seed_urls:
-                    await self.browser.explore(seed_urls[0], "goal_exploration")
-                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
-            except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.warning(f"Browser exploration loop error: {e}")
-                await asyncio.sleep(10)
-
-    async def _run_web_learning_loop(self):
-        while self.is_running:
-            try:
-                focus_goal = random.choice(self.goal_history) if self.goal_history else random.choice(self.dreaming.curiosity_topics)
-                seed_urls = self._build_goal_seed_urls(focus_goal, samples=3)
-                await self.web_perception.crawl_web(
-                    seed_urls=seed_urls,
-                    max_pages=settings.WEB_CRAWL_MAX_PAGES,
-                    max_depth=settings.WEB_CRAWL_MAX_DEPTH,
-                    same_domain_only=False,
-                )
-                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
-            except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.warning(f"Web learning loop error: {e}")
-                await asyncio.sleep(10)
-
-    async def _run_app_learning_loop(self):
-        while self.is_running:
-            try:
-                await self.perception.app_perception.map_computer()
-                await asyncio.sleep(exploration_config.EXPLORATION_INTERVAL)
-            except asyncio.CancelledError:
-                break
-            except Exception as e:
-                logger.warning(f"App learning loop error: {e}")
-                await asyncio.sleep(10)
-        
+                pass
+        logger.info("Trading segment stopped")
 
     async def shutdown(self):
-        """Gracefully shut down all subsystems."""
-        if self._shutdown_started:
-            return
-        self._shutdown_started = True
-        logger.info("Shutting down MECOS Engine...")
-        self.is_running = False
-        if self.background_tasks:
-            wait_timeout = max(10, int(settings.WEB_NAVIGATION_TIMEOUT_MS / 1000) + 5)
-            done, pending = await asyncio.wait(self.background_tasks, timeout=wait_timeout)
-            for task in pending:
-                task.cancel()
-            if pending:
-                with suppress(Exception):
-                    await asyncio.wait_for(
-                        asyncio.gather(*pending, return_exceptions=True),
-                        timeout=3,
-                    )
-        self.background_tasks = []
-        with suppress(Exception):
-            if hasattr(self, "browser") and self.browser:
-                await self.browser.shutdown()
-        await self.web_perception.shutdown()
-        logger.info("Shutdown complete.")
-
-    async def process_goal(self, goal: str) -> dict:
-        """
-        The full cognitive cycle for a goal:
-        Observe → Simulate → Reason → Act → Learn → Reflect
-        """
-        goal = (goal or "").strip()
-        if not goal:
-            goal = f"Autonomous learning focus: {random.choice(self.dreaming.curiosity_topics)}"
-            logger.warning(f"Received empty goal. Using fallback goal: '{goal}'")
-
-        logger.info(f"Processing goal: '{goal}'")
-        await self.memory.add_experience(
-            content=f"USER REQUEST: {goal}",
-            source="user_goal",
-        )
-        self.goal_history.append(goal)
-        if len(self.goal_history) > 100:
-            self.goal_history.pop(0)
-
-        if settings.ASSIST_WEB_LOOKUP_ENABLED and self._needs_web_assist(goal):
-            assist_urls = self._build_goal_seed_urls(goal, samples=5)
-            await self.web_perception.crawl_web(
-                seed_urls=assist_urls,
-                max_pages=settings.ASSIST_WEB_MAX_PAGES,
-                max_depth=settings.ASSIST_WEB_MAX_DEPTH,
-                same_domain_only=False,
-            )
-
-        # 1. Observe — collect environmental data
-        await self.perception.collect(str(settings.DATA_DIR))
-
-        # 2. Reason & Plan
-        plan = await self.reasoner.generate_plan(goal)
-
-        # 3. Simulate plan risk before execution
-        risk = await self.world_model.evaluate_plan_risk(plan, goal)
-        logger.info(f"Plan risk: {risk['risk_level']} (score={risk['risk_score']})")
-
-        results = []
-        if plan:
-            # 4. Execute plan
-            results = await self.action_engine.execute_plan(plan)
-
-            # 5. Record transitions in world model
-            for r in results:
-                self.world_model.record_transition(
-                    state=goal,
-                    action=r.get("tool", ""),
-                    outcome=r.get("result", ""),
-                    next_state=f"after_{r.get('tool', '')}",
-                    reward=1.0 if r.get("success") else -0.5,
-                )
-
-            # 6. RL: record experience
-            success_rate = sum(1 for r in results if r.get("success")) / max(len(results), 1)
-            self.rl_trainer.record_experience(
-                state=goal[:100],
-                action="execute_plan",
-                outcome={"success": success_rate > 0.5, "partial": 0.3 <= success_rate <= 0.5},
-                next_state="post_execution",
-            )
-
-            # 7. Reflect
-            await self.reasoner.reflect(goal, plan, results)
-
-            # 8. Strategy performance feedback
-            self.meta_learner.strategy_evolution.record_performance(success_rate)
-
-        return {
-            "goal": goal,
-            "plan_steps": len(plan),
-            "results": results,
-            "risk": risk,
-        }
-
-    def _needs_web_assist(self, goal: str) -> bool:
-        goal_l = goal.lower()
-        assist_signals = [
-            "help",
-            "how",
-            "what",
-            "learn",
-            "research",
-            "?",
-        ]
-        return any(signal in goal_l for signal in assist_signals)
-
-    def _build_goal_seed_urls(self, goal: str, samples: int = 3) -> list:
-        goal = (goal or "").strip()
-        if not goal:
-            return []
-        query_variants = [
-            goal,
-            f"{goal} tutorial",
-            f"{goal} guide",
-            f"{goal} workflow",
-            f"{goal} examples",
-        ]
-        random.shuffle(query_variants)
-        templates = list(settings.WEB_SEARCH_URL_TEMPLATES)
-        random.shuffle(templates)
-
-        urls = []
-        for template in templates:
-            for query in query_variants:
-                q = quote_plus(query)
-                urls.append(template.format(query=q))
-                if len(urls) >= max(1, samples):
-                    return urls
-        return urls[:max(1, samples)]
-
-
-    async def run_away_mode(self):
-        """Continuous autonomous operation while the user is away."""
-        logger.info("MECOS entering 'Away Mode' (Autonomous Dreaming).")
-        while self.is_running:
-            # 1. Check for Independence Readiness
-            readiness = await self.independence.check_readiness()
-            if readiness == "TOTAL_SOVEREIGNTY":
-                logger.warning("MECOS HAS REACHED TOTAL SOVEREIGNTY. OLLAMA IS NO LONGER NEEDED.")
-            # 2. Generate a self-goal (NOW INSIDE THE LOOP)
-            goal = await self.dreaming.generate_self_goal()
-
-            # 3. Execute the goal
-            await self.process_goal(goal)
-            # 4. Self-reflect
-            await self.dreaming.self_reflect()
-            # 5. Rest/Idle to manage resources
-            logger.info(f"Goal complete. Sleeping for {settings.IDLE_SLEEP_TIME}s...")
-            await asyncio.sleep(settings.IDLE_SLEEP_TIME)
-
-
-    async def run_learning_cycle(self):
-        """Run a full meta-learning cycle."""
-        logger.info("Running meta-learning cycle...")
-        return await self.meta_learner.run_meta_cycle()
-
-    async def create_checkpoint(self, label: str = "") -> str:
-        """Create a system state checkpoint."""
-        return await self.checkpoint_manager.create_checkpoint(label=label)
-
-    def _recent_memory_fallback(self, user_message: str, limit: int = 3) -> str:
-        """Build a deterministic fallback reply from recent memory when LLM is unavailable."""
-        entries = list(reversed(self.memory.short_term_buffer[-50:]))
-        if not entries:
-            return "I couldn't generate a full response right now, and I don't have recent memory entries to summarize yet."
-
-        is_discovery_query = any(
-            token in (user_message or "").lower()
-            for token in ("discover", "learn", "found", "what have you", "background")
-        )
-
-        summary_lines = []
-        seen = set()
-        for entry in entries:
-            source = (entry.get("source") or "general").strip()
-            content = (entry.get("content") or "").strip()
-            if not content:
-                continue
-
-            line = None
-            if content.startswith("WEB CONTENT ("):
-                right = content.find("):")
-                if right > len("WEB CONTENT ("):
-                    url = content[len("WEB CONTENT ("):right]
-                    line = f"- Web: ingested {url}"
-            elif content.startswith("WEB CRAWL SUMMARY:"):
-                line = f"- Web: {content[:180]}"
-            elif content.startswith("APP MAP ["):
-                line = "- Apps: updated local app/process map snapshot."
-            elif content.startswith("APP WORKFLOW TRACE:"):
-                line = f"- Apps: {content[:180]}"
-            elif source in {"web_perception", "web_perception_crawl", "app_perception", "app_workflow_learning"}:
-                line = f"- {source}: {content[:180]}"
-            elif not is_discovery_query:
-                line = f"- {source}: {content[:180]}"
-
-            if line:
-                key = line.lower()
-                if key not in seen:
-                    seen.add(key)
-                    summary_lines.append(line)
-            if len(summary_lines) >= max(1, int(limit)):
-                break
-
-        if not summary_lines:
-            return "I couldn't generate a full response right now, but I am still learning in the background."
-
-        if is_discovery_query:
-            return "LLM timed out, but here are my latest memory-backed discoveries:\n" + "\n".join(summary_lines)
-        return "LLM timed out, but here are recent memory-backed updates:\n" + "\n".join(summary_lines)
-
-    async def chat(self, user_message: str) -> str:
-        """Conversational reply using memory context while background learning continues."""
-        message = (user_message or "").strip()
-        if not message:
-            return ""
-
-        context_results = await self.memory.retrieve_context(message)
-        docs = context_results.get("documents", [[]])
-        context_str = "\n".join(docs[0][:5]) if docs and docs[0] else ""
-
-        prompt = f"""
-You are MECOS, a practical personal AI assistant.
-
-USER MESSAGE:
-{message}
-
-RELEVANT MEMORY:
-{context_str}
-
-Respond directly and clearly.
-"""
-        result = await self.reasoner.llm.think_and_act(
-            prompt,
-            system_prompt="You are the MECOS Conversational Assistant.",
-        )
-        reply = (result.get("response") or "").strip()
-        if not reply:
-            reply = self._recent_memory_fallback(message, limit=3)
-
-        await self.memory.add_experience(
-            content=f"CHAT USER: {message}\nCHAT ASSISTANT: {reply}",
-            source="chat",
-        )
-        return reply
-
-    async def chat_loop(self):
-        """
-        Interactive chat loop that keeps MECOS learning in the background.
-        Commands:
-          /goal <text>  -> run full goal execution pipeline
-          /status       -> print current system status
-          /exit         -> leave chat
-        """
-        print("\n" + "=" * 50)
-        print("MECOS CHAT MODE")
-        print("=" * 50)
-        print("Type /goal <text> to execute a goal, /status for system status, /exit to quit.")
-
-        learning_task = asyncio.create_task(self.main_loop())
-        try:
-            while self.is_running:
-                user_input = await asyncio.to_thread(input, "You > ")
-                user_input = (user_input or "").strip()
-                if not user_input:
-                    continue
-
-                user_l = user_input.lower()
-                if user_l in {"/exit", "exit", "quit"}:
-                    break
-
-                if user_l == "/status":
-                    status = await self.get_system_status_async()
-                    print(f"MECOS > {status}")
-                    continue
-
-                if user_l.startswith("/goal "):
-                    goal = user_input[6:].strip()
-                    if goal:
-                        await self.create_checkpoint(label="chat_goal")
-                        result = await self.process_goal(goal)
-                        print(
-                            "MECOS > "
-                            f"Goal executed. plan_steps={result.get('plan_steps', 0)}, "
-                            f"risk={result.get('risk', {}).get('risk_level', 'UNKNOWN')}"
-                        )
-                    continue
-
-                reply = await self.chat(user_input)
-                print(f"MECOS > {reply}")
-        finally:
-            self.is_running = False
-            learning_task.cancel()
-            with suppress(asyncio.CancelledError):
-                await learning_task
-            await self.shutdown()
-
-    async def collaborative_solve(self, goal: str) -> dict:
-        """Use multi-agent collaboration to solve a complex goal."""
-        return await self.coordinator.collaborative_solve(goal)
-
-    def get_system_status(self) -> dict:
-        """Return a comprehensive system status report."""
-        readiness = "UNKNOWN"
-        if self.is_running:
+        if self._heartbeat_task:
+            self._heartbeat_task.cancel()
             try:
-                asyncio.get_running_loop()
-                readiness = self.independence.last_readiness
-            except RuntimeError:
-                readiness = asyncio.run(self.independence.check_readiness())
-        return {
-            "running": self.is_running,
-            "learning_status": self.meta_learner.get_learning_status(),
-            "tools_available": len(self.orchestrator.registry.list_tools()),
-            "agents_registered": self.coordinator.get_registered_agents(),
-            "world_model": self.world_model.get_model_stats(),
-            "checkpoints": len(self.checkpoint_manager.list_checkpoints()),
-            "independence_readiness": readiness,
-        }
+                await self._heartbeat_task
+            except asyncio.CancelledError:
+                pass
+            self._heartbeat_task = None
 
-    async def get_system_status_async(self) -> dict:
-        """Async-safe status report for running event loops (chat mode)."""
-        readiness = await self.independence.check_readiness() if self.is_running else "UNKNOWN"
-        return {
-            "running": self.is_running,
-            "learning_status": self.meta_learner.get_learning_status(),
-            "tools_available": len(self.orchestrator.registry.list_tools()),
-            "agents_registered": self.coordinator.get_registered_agents(),
-            "world_model": self.world_model.get_model_stats(),
-            "checkpoints": len(self.checkpoint_manager.list_checkpoints()),
-            "independence_readiness": readiness,
-        }
-
-    async def main_loop(self, learning_interval: int = 300):
-        """
-        The core autonomous loop.
-        Runs a meta-learning cycle every `learning_interval` seconds.
-        """
-        effective_learning_interval = max(
-            60,
-            int(learning_interval / max(1, settings.TRAINING_ACCELERATION_FACTOR))
+        if self.trading_system:
+            try:
+                self.trading_system.stop()
+            except Exception:
+                pass
+        if self.web:
+            try:
+                await self.web.shutdown()
+            except Exception:
+                pass
+        await self.state_checkpoint.save_runtime_state(
+            {
+                "connection_state": self.connection_state,
+                "trading_execution_mode": self.trading_execution_mode,
+                "shutdown": True,
+            }
         )
-        logger.info(f"Entering core cognitive loop (learning every {effective_learning_interval}s).")
-        cycle = 0
-        try:
-            while self.is_running:
-                cycle += 1
-                logger.debug(f"Heartbeat #{cycle}: Engine monitoring.")
-
-                # Periodic learning cycle
-                cycle_window = max(1, effective_learning_interval // 10)
-                if cycle % cycle_window == 0:
-                    await self.run_learning_cycle()
-
-                await asyncio.sleep(10)
-        except asyncio.CancelledError:
-            return
+        await self.state_checkpoint.create_checkpoint(
+            label="runtime_shutdown",
+            metadata={"connection_state": self.connection_state},
+        )
+        await self.watchdog.stop()
 
 
 async def main():
-    engine = MECOSEngine()
-    await engine.startup()
+    parser = argparse.ArgumentParser(description="MECOS unified runtime entrypoint")
+    parser.add_argument("--start-trading", action="store_true", help="Start trading loop after runtime demo")
+    parser.add_argument("--trading-seconds", type=int, default=30, help="How long to run trading before stopping")
+    parser.add_argument(
+        "--execution-mode",
+        choices=["paper", "live"],
+        default=str(os.getenv("MECOS_TRADING_EXECUTION_MODE", "paper")).strip().lower(),
+        help="Trading execution mode: paper uses simulated fills, live submits real broker orders",
+    )
+    args = parser.parse_args()
 
-    # Check for command line arguments
-    mode = sys.argv[1] if len(sys.argv) > 1 else "default"
+    runtime = UnifiedMECOSRuntime(trading_execution_mode=args.execution_mode)
+    try:
+        await runtime.startup()
+        await runtime.run_runtime_demo()
+        if args.start_trading:
+            await runtime.start_trading(args.trading_seconds)
+    except Exception as exc:
+        await runtime.crash_recovery.record_crash(
+            exc,
+            runtime_state={
+                "connection_state": runtime.connection_state,
+                "trading_execution_mode": runtime.trading_execution_mode,
+            },
+        )
+        raise
+    finally:
+        await runtime.shutdown()
 
-    if mode == "away":
-        # AUTONOMOUS MODE: MECOS sets its own goals
-        await engine.run_away_mode()
-    elif mode == "cleanup":
-        # CLEANUP MODE: Remove Ollama
-        commands = engine.independence.cleanup_ollama()
-        print("To remove Ollama from your server, run these commands:")
-        for cmd in commands:
-            print(f"  {cmd}")
-    else:
-        # CHAT MODE: conversational loop + background learning
-        await engine.chat_loop()
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
+

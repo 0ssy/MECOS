@@ -20,9 +20,16 @@ from .broker.multi_broker_adapter import MultiBrokerAdapter
 from .broker.base_adapter import BrokerAdapter
 
 class TradingSystem:
-    def __init__(self, memory_system=None, broker_adapter: Optional[BrokerAdapter] = None, quant_mode: str = 'balanced'):
+    def __init__(
+        self,
+        memory_system=None,
+        broker_adapter: Optional[BrokerAdapter] = None,
+        quant_mode: str = 'balanced',
+        execution_mode: str = 'paper',
+    ):
         self.memory = memory_system
         self.quant_mode = quant_mode
+        self.execution_mode = str(execution_mode or 'paper').strip().lower()
         self.db = TradeDatabase()
         self.agent = TradingAgent(self.memory, quant_mode=self.quant_mode)
         self.stream = MarketDataStream()
@@ -32,13 +39,24 @@ class TradingSystem:
         self.order_manager = OrderManager(self.db)
         self.risk_monitor = RiskMonitor()
         self.performance_monitor = PerformanceMonitor(self.db)
-        self.executor = PaperTradingExecutor(self.db, self.position_manager, self.risk_monitor, self.memory, self.order_manager)
-        self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
 
         # Broker adapter (multi-broker live routing: IBKR + Alpaca + Binance)
         self.broker_adapter = broker_adapter or MultiBrokerAdapter()
         self.stream.set_broker_adapter(self.broker_adapter)
-        logger.info(f"TradingSystem initialized with broker adapter: {type(self.broker_adapter).__name__}")
+        self.executor = PaperTradingExecutor(
+            self.db,
+            self.position_manager,
+            self.risk_monitor,
+            self.memory,
+            self.order_manager,
+            broker_adapter=self.broker_adapter,
+            execution_mode=self.execution_mode,
+        )
+        self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
+        logger.info(
+            f"TradingSystem initialized with broker adapter: {type(self.broker_adapter).__name__} "
+            f"| execution_mode={self.execution_mode.upper()}"
+        )
 
     def get_components(self) -> Dict[str, Any]:
         return {

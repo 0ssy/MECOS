@@ -57,6 +57,17 @@ class TestMemorySystem:
         result = await memory.retrieve_context("MECOS experience")
         assert result is not None
 
+    @pytest.mark.asyncio
+    async def test_retrieve_with_limit_and_quality_stats(self, memory):
+        await memory.add_experience("High confidence runtime checkpoint created", source="reasoner", metadata={"confidence": 0.95})
+        await memory.add_experience("noise", source="general", metadata={"confidence": 0.05})
+        result = await memory.retrieve_context("runtime checkpoint", n_results=3)
+        assert result is not None
+        assert "documents" in result
+        stats = await memory.get_stats()
+        assert "quality" in stats
+        assert "promoted" in stats["quality"]
+
 
 # ── Phase 4: Tool Registry ────────────────────────────────────────────────────
 

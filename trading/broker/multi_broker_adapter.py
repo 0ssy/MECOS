@@ -1,4 +1,5 @@
 import asyncio
+import math
 from typing import Any, Awaitable, Callable, Dict, List
 
 from loguru import logger
@@ -14,6 +15,7 @@ class MultiBrokerAdapter(BrokerAdapter):
         self.ibkr = self._try_init('IBKR', IbkrAdapter)
         self.alpaca = self._try_init('Alpaca', AlpacaAdapter)
         self.binance = self._try_init('Binance', BinanceAdapter)
+        self._degraded_stream_adapters = set()
 
         if not any([self.ibkr, self.alpaca, self.binance]):
             raise RuntimeError('No broker adapters available. Check IBKR/TWS and API keys.')
@@ -52,32 +54,93 @@ class MultiBrokerAdapter(BrokerAdapter):
         return False
 
     def _stream_adapter_for_symbol(self, symbol: str):
-        if self._is_crypto(symbol):
-            if self.binance:
-                return self.binance
-            if self.ibkr:
-                return self.ibkr
-            return self.alpaca
-        if self._is_forex(symbol):
-            return self.ibkr or self.alpaca
-        return self.ibkr or self.alpaca
+        candidates = self._stream_candidates_for_symbol(symbol)
+        return candidates[0] if candidates else None
 
     def _order_adapter_for_symbol(self, symbol: str):
+        candidates = self._order_candidates_for_symbol(symbol)
+        return candidates[0] if candidates else None
+
+    @staticmethod
+    def _unique_adapters(adapters):
+        out = []
+        for adapter in adapters:
+            if adapter is None:
+                continue
+            if adapter in out:
+                continue
+            out.append(adapter)
+        return out
+
+    def _stream_candidates_for_symbol(self, symbol: str, exclude=None):
+        excluded = set(exclude or set())
+        excluded |= self._degraded_stream_adapters
+
         if self._is_crypto(symbol):
-            return self.binance or self.ibkr
-        return self.ibkr or self.alpaca
+            preferred = [self.binance, self.ibkr, self.alpaca]
+        elif self._is_forex(symbol):
+            preferred = [self.ibkr, self.alpaca]
+        else:
+            preferred = [self.ibkr, self.alpaca]
+
+        return [a for a in self._unique_adapters(preferred) if a not in excluded]
+
+    def _order_candidates_for_symbol(self, symbol: str, exclude=None):
+        excluded = set(exclude or set())
+        if self._is_crypto(symbol):
+            preferred = [self.binance, self.ibkr, self.alpaca]
+        else:
+            preferred = [self.ibkr, self.alpaca]
+        return [a for a in self._unique_adapters(preferred) if a not in excluded]
 
     async def get_live_bars(self, symbol: str, timeframe: str = '1Min', limit: int = 200) -> List[Dict[str, Any]]:
-        adapter = self._stream_adapter_for_symbol(symbol)
-        if adapter is None:
-            raise RuntimeError(f'No broker adapter available for live bars: {symbol}')
-        return await adapter.get_live_bars(symbol, timeframe=timeframe, limit=limit)
+        errors = []
+        for adapter in self._stream_candidates_for_symbol(symbol):
+            try:
+                return await adapter.get_live_bars(symbol, timeframe=timeframe, limit=limit)
+            except Exception as exc:
+                logger.warning(f'Live bars failed on {type(adapter).__name__} for {symbol}: {exc}')
+                errors.append(f'{type(adapter).__name__}: {exc}')
+        raise RuntimeError(f'No broker adapter available for live bars: {symbol} | errors={errors}')
 
     async def submit_order(self, symbol: str, qty: float, side: str, order_type: str = 'market') -> Dict[str, Any]:
-        adapter = self._order_adapter_for_symbol(symbol)
-        if adapter is None:
-            raise RuntimeError(f'No broker adapter available for order: {symbol}')
-        return await adapter.submit_order(symbol, qty, side, order_type=order_type)
+        requested_qty = float(qty or 0.0)
+        if requested_qty <= 0.0:
+            raise RuntimeError(f'Invalid order quantity: {requested_qty}')
+
+        is_equity_like = (not self._is_crypto(symbol)) and (not self._is_forex(symbol))
+        fractional_equity = is_equity_like and (not requested_qty.is_integer())
+
+        candidates = self._order_candidates_for_symbol(symbol)
+        if fractional_equity and self.alpaca in candidates:
+            # IBKR rejects fractional stock API orders in this setup; prioritize Alpaca.
+            candidates = [self.alpaca] + [adapter for adapter in candidates if adapter is not self.alpaca]
+
+        errors = []
+        for adapter in candidates:
+            adapter_qty = requested_qty
+            if is_equity_like and isinstance(adapter, IbkrAdapter):
+                adapter_qty = float(math.floor(requested_qty))
+                if adapter_qty < 1.0:
+                    msg = (
+                        f'Skipping IBKR for {symbol}: equity quantity {requested_qty} is fractional and below 1 share.'
+                    )
+                    logger.warning(msg)
+                    errors.append(f'IbkrAdapter: {msg}')
+                    continue
+                if adapter_qty != requested_qty:
+                    logger.warning(
+                        f'Adjusted IBKR order quantity for {symbol}: requested={requested_qty} -> rounded={adapter_qty}'
+                    )
+            try:
+                return await adapter.submit_order(symbol, adapter_qty, side, order_type=order_type)
+            except Exception as exc:
+                logger.warning(
+                    f'Order submit failed on {type(adapter).__name__} for {symbol} '
+                    f'(qty={adapter_qty}, requested={requested_qty}): {exc}'
+                )
+                errors.append(f'{type(adapter).__name__}: {exc}')
+        raise RuntimeError(f'No broker adapter available for order: {symbol} | errors={errors}')
 
     async def cancel_order(self, order_id: str) -> Dict[str, Any]:
         for adapter in [self.ibkr, self.alpaca, self.binance]:
@@ -130,9 +193,11 @@ class MultiBrokerAdapter(BrokerAdapter):
                 done, _ = await asyncio.wait(list(active_tasks.values()), return_when=asyncio.FIRST_COMPLETED)
 
                 finished_adapters = []
+                restart_map: Dict[BrokerAdapter, List[str]] = {}
                 for adapter, task in active_tasks.items():
                     if task in done:
                         finished_adapters.append(adapter)
+                        adapter_symbols = grouped.get(adapter, [])
                         if task.cancelled():
                             logger.warning(f'{type(adapter).__name__} stream cancelled.')
                             continue
@@ -140,11 +205,35 @@ class MultiBrokerAdapter(BrokerAdapter):
                         exc = task.exception()
                         if exc is not None:
                             logger.error(f'{type(adapter).__name__} stream failed: {exc}')
+                            self._degraded_stream_adapters.add(adapter)
+                            rerouted = 0
+                            for symbol in adapter_symbols:
+                                candidates = self._stream_candidates_for_symbol(symbol, exclude={adapter})
+                                if not candidates:
+                                    continue
+                                fallback_adapter = candidates[0]
+                                restart_map.setdefault(fallback_adapter, []).append(symbol)
+                                rerouted += 1
+                            if rerouted:
+                                logger.warning(
+                                    f'Rerouting {rerouted} symbols from {type(adapter).__name__} '
+                                    f'to fallback streams after failure.'
+                                )
                         else:
                             logger.warning(f'{type(adapter).__name__} stream ended.')
 
                 for adapter in finished_adapters:
                     active_tasks.pop(adapter, None)
+                    grouped.pop(adapter, None)
+
+                for adapter, adapter_symbols in restart_map.items():
+                    # Avoid duplicate symbol subscriptions if multiple failed streams reroute in the same cycle.
+                    merged_symbols = list(dict.fromkeys(grouped.get(adapter, []) + adapter_symbols))
+                    grouped[adapter] = merged_symbols
+                    if adapter in active_tasks:
+                        continue
+                    logger.info(f'Starting fallback stream on {type(adapter).__name__} for: {merged_symbols}')
+                    active_tasks[adapter] = asyncio.create_task(adapter.stream_quotes(merged_symbols, callback))
 
                 if not active_tasks:
                     raise RuntimeError('All broker streams stopped.')

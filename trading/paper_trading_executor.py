@@ -4,14 +4,28 @@ from typing import Dict, Any, List, Callable, Awaitable, Optional
 from loguru import logger
 from datetime import datetime
 from .order_manager import OrderManager
+from .broker.base_adapter import BrokerAdapter
 
 class PaperTradingExecutor:
-    def __init__(self, database, position_manager, risk_monitor, memory, order_manager: Optional[OrderManager] = None):
+    def __init__(
+        self,
+        database,
+        position_manager,
+        risk_monitor,
+        memory,
+        order_manager: Optional[OrderManager] = None,
+        broker_adapter: Optional[BrokerAdapter] = None,
+        execution_mode: str = 'paper',
+    ):
         self.database = database
         self.position_manager = position_manager
         self.risk_monitor = risk_monitor
         self.memory = memory
         self.order_manager = order_manager or OrderManager(database)
+        self.broker_adapter = broker_adapter
+        self.execution_mode = str(execution_mode or 'paper').strip().lower()
+        if self.execution_mode not in {'paper', 'live'}:
+            raise ValueError(f'Unsupported execution_mode: {self.execution_mode}')
         self.order_status_callbacks: List[Callable[[Dict[str, Any]], Awaitable[None]]] = []
         self.order_manager.register_status_callback(self._handle_order_status)
 
@@ -37,7 +51,10 @@ class PaperTradingExecutor:
         }
 
         self._restore_portfolio_state()
-        logger.info(f'Paper Trading Executor initialized | Capital: {self.paper_account["cash"]:.2f} | Execution enabled: {self.execution_enabled}')
+        logger.info(
+            f'Paper Trading Executor initialized | Capital: {self.paper_account["cash"]:.2f} '
+            f'| Execution enabled: {self.execution_enabled} | Mode: {self.execution_mode.upper()}'
+        )
 
     def _restore_portfolio_state(self):
         snapshot = self.database.get_latest_portfolio_snapshot()
@@ -191,6 +208,15 @@ class PaperTradingExecutor:
                 return {'status': 'REJECTED', 'reason': order_risk_check['reason']}
         
         if decision == 'BUY':
+            if self.execution_mode == 'live':
+                return await self._execute_live_order(
+                    symbol=symbol,
+                    side='BUY',
+                    qty=shares,
+                    signal=signal,
+                    reference_price=price,
+                )
+
             cost = shares * price
             
             if cost > self.paper_account['cash']:
@@ -249,6 +275,15 @@ class PaperTradingExecutor:
             local_position = self.positions.get(symbol, {'shares': 0.0})
             tracked_position = self.position_manager.positions.get(symbol, {'size': shares, 'avg_price': price})
             sell_shares = min(shares, tracked_position.get('size', shares))
+
+            if self.execution_mode == 'live':
+                return await self._execute_live_order(
+                    symbol=symbol,
+                    side='SELL',
+                    qty=sell_shares,
+                    signal=signal,
+                    reference_price=price,
+                )
             
             proceeds = sell_shares * price
             self.paper_account['cash'] += proceeds
@@ -300,6 +335,98 @@ class PaperTradingExecutor:
             }
 
         return {'status': 'REJECTED', 'reason': f'Unsupported decision: {decision}'}
+
+    async def _execute_live_order(
+        self,
+        symbol: str,
+        side: str,
+        qty: float,
+        signal: Dict[str, Any],
+        reference_price: float,
+    ) -> Dict[str, Any]:
+        if self.broker_adapter is None:
+            self.execution_stats['rejected_orders'] += 1
+            return {'status': 'REJECTED', 'reason': 'Live mode requires broker adapter'}
+
+        order_qty = float(qty or 0.0)
+        if order_qty <= 0.0:
+            self.execution_stats['rejected_orders'] += 1
+            return {'status': 'REJECTED', 'reason': f'Invalid order quantity: {order_qty}'}
+
+        try:
+            broker_order = await self.broker_adapter.submit_order(
+                symbol=symbol,
+                qty=order_qty,
+                side=side,
+                order_type='market',
+            )
+        except Exception as exc:
+            self.execution_stats['rejected_orders'] += 1
+            logger.error(f'LIVE ORDER FAILED {symbol} {side} qty={order_qty}: {exc}')
+            return {'status': 'REJECTED', 'reason': str(exc), 'symbol': symbol, 'side': side}
+
+        order = {
+            'symbol': symbol,
+            'side': side,
+            'size': order_qty,
+            'price': reference_price,
+            'status': str(broker_order.get('status', 'SUBMITTED')),
+            'broker_order_id': str(broker_order.get('id', '')),
+        }
+        order_id = await self.order_manager.create_order(order)
+        await self.order_manager.submit_order(order_id)
+        await self.order_manager.fill_order(order_id, reference_price, order_qty)
+
+        self.execution_stats['executed_orders'] += 1
+        logger.info(f'LIVE ORDER SENT {symbol} {side} qty={order_qty} broker={type(self.broker_adapter).__name__}')
+
+        if side == 'BUY':
+            await self.position_manager.update_position(symbol, 'BUY', order_qty, reference_price)
+            if symbol in self.position_manager.positions:
+                self.position_manager.positions[symbol]['sector'] = signal.get('sector', 'unknown')
+            self.database.insert_trade({
+                'symbol': symbol,
+                'side': 'LONG',
+                'entry_price': reference_price,
+                'quantity': order_qty,
+                'confidence': signal.get('confidence', 0.0),
+                'regime': signal.get('regime', 'unknown'),
+            })
+            return {
+                'status': 'EXECUTED',
+                'order_id': order_id,
+                'broker_order_id': broker_order.get('id'),
+                'symbol': symbol,
+                'side': side,
+                'shares': order_qty,
+                'price': reference_price,
+                'live_execution': True,
+            }
+
+        tracked_position = self.position_manager.positions.get(symbol, {'avg_price': reference_price})
+        await self.position_manager.update_position(symbol, 'SELL', order_qty, reference_price)
+        pnl = (reference_price - tracked_position.get('avg_price', reference_price)) * order_qty
+        self.execution_stats['total_pnl'] += pnl
+        await self.risk_monitor.update_daily_pnl(pnl)
+
+        holding_seconds = self.position_manager.get_holding_seconds(symbol)
+        open_trade = self.database.get_open_trade_for_symbol(symbol)
+        if open_trade:
+            self.database.close_trade(open_trade['id'], reference_price, pnl, holding_seconds)
+
+        return {
+            'status': 'EXECUTED',
+            'order_id': order_id,
+            'broker_order_id': broker_order.get('id'),
+            'symbol': symbol,
+            'side': side,
+            'shares': order_qty,
+            'price': reference_price,
+            'pnl': pnl,
+            'holding_seconds': holding_seconds,
+            'exit_reason': signal.get('exit_reason', ''),
+            'live_execution': True,
+        }
 
     async def update_equity(self, current_prices: Dict[str, float]):
         await self.position_manager.calculate_unrealized_pnl(current_prices)
