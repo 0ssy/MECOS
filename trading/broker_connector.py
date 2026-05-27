@@ -22,14 +22,15 @@ class BrokerConnector:
     """
 
     def __init__(self):
-        load_dotenv()
+        load_dotenv(override=True)
 
-        self.api_key = os.getenv("ALPACA_API_KEY")
-        self.secret_key = os.getenv("ALPACA_SECRET_KEY")
+        self.api_key = self._resolve_credential("ALPACA_API_KEY", "APCA_API_KEY_ID")
+        self.secret_key = self._resolve_credential("ALPACA_SECRET_KEY", "APCA_API_SECRET_KEY")
         self.base_url = os.getenv(
             "ALPACA_BASE_URL",
             "https://paper-api.alpaca.markets"
-        )
+        ).strip().rstrip("/")
+        self.paper_mode = self._is_paper_mode(self.base_url)
 
         missing = []
         if not self.api_key:
@@ -44,18 +45,71 @@ class BrokerConnector:
                 + ". Set them in environment variables or .env file."
             )
 
-        self.trading_client = TradingClient(
-            self.api_key,
-            self.secret_key,
-            paper=True
-        )
+        self.trading_client = self._build_trading_client(self.paper_mode)
 
         self.data_client = StockHistoricalDataClient(
             self.api_key,
             self.secret_key
         )
 
-        logger.info("BrokerConnector initialized")
+        self._validate_auth_or_retry_mode()
+        logger.info(f"BrokerConnector initialized | paper_mode={self.paper_mode}")
+
+    @staticmethod
+    def _sanitize_secret(value: str) -> str:
+        token = (value or "").strip()
+        if (token.startswith("'") and token.endswith("'")) or (token.startswith('"') and token.endswith('"')):
+            token = token[1:-1].strip()
+        return token
+
+    def _resolve_credential(self, primary_name: str, fallback_name: str) -> str:
+        primary = self._sanitize_secret(os.getenv(primary_name, ""))
+        if primary:
+            return primary
+        return self._sanitize_secret(os.getenv(fallback_name, ""))
+
+    @staticmethod
+    def _is_paper_mode(base_url: str) -> bool:
+        normalized = str(base_url or "").lower()
+        if "paper-api.alpaca.markets" in normalized:
+            return True
+        if "api.alpaca.markets" in normalized:
+            return False
+        return True
+
+    def _build_trading_client(self, paper_mode: bool) -> TradingClient:
+        return TradingClient(
+            self.api_key,
+            self.secret_key,
+            paper=bool(paper_mode)
+        )
+
+    def _validate_auth_or_retry_mode(self):
+        try:
+            self.trading_client.get_account()
+            return
+        except APIError as exc:
+            msg = str(exc).lower()
+            if "unauthorized" not in msg:
+                raise
+
+            # Retry once with opposite account mode (paper/live mismatch is common).
+            alternate_mode = not self.paper_mode
+            alternate_client = self._build_trading_client(alternate_mode)
+            try:
+                alternate_client.get_account()
+                self.trading_client = alternate_client
+                self.paper_mode = alternate_mode
+                logger.warning(
+                    f"Alpaca auth succeeded after mode switch | paper_mode={self.paper_mode}"
+                )
+                return
+            except APIError:
+                pass
+            raise RuntimeError(
+                "Alpaca authentication failed for both paper and live modes. "
+                "Verify API key/secret pair and account access."
+            ) from exc
 
     async def get_market_data(
         self,

@@ -42,6 +42,7 @@ from .trading_system import TradingSystem
 from .autonomous_trading_loop import AutonomousTradingLoop
 from .paper_trading_executor import PaperTradingExecutor
 from .market_data_stream import MarketDataStream
+from .schemas import Signal, Decision, Order, Position, RiskState, MarketEvent
 
 __all__ = [
     'UniverseManager', 'UniverseScanner',
@@ -54,6 +55,6 @@ __all__ = [
     'BacktestingFramework', 'ReplayBacktester', 'LiveTradingConnector', 'EventBus', 'Event', 'EventType',
     'TradeDatabase', 'OrderManager', 'OrderStatus', 'PositionManager', 'PerformanceMonitor',
     'RiskMonitor', 'TradingAgent', 'AutonomousTradingLoop', 'PaperTradingExecutor',
-    'MarketDataStream'
+    'MarketDataStream', 'Signal', 'Decision', 'Order', 'Position', 'RiskState', 'MarketEvent'
 ]
 

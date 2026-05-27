@@ -79,8 +79,20 @@ class AlpacaAdapter(BrokerAdapter):
             logger.error('Alpaca SDK not available. Please install alpaca-py.')
             raise
 
-        api_key = getattr(settings, 'ALPACA_API_KEY', None) or os.getenv('ALPACA_API_KEY')
-        secret_key = getattr(settings, 'ALPACA_SECRET_KEY', None) or os.getenv('ALPACA_SECRET_KEY')
+        api_key = (
+            getattr(settings, 'ALPACA_API_KEY', None)
+            or os.getenv('ALPACA_API_KEY')
+            or os.getenv('APCA_API_KEY_ID')
+        )
+        secret_key = (
+            getattr(settings, 'ALPACA_SECRET_KEY', None)
+            or os.getenv('ALPACA_SECRET_KEY')
+            or os.getenv('APCA_API_SECRET_KEY')
+        )
+        if isinstance(api_key, str):
+            api_key = api_key.strip().strip('"').strip("'")
+        if isinstance(secret_key, str):
+            secret_key = secret_key.strip().strip('"').strip("'")
         if not api_key or not secret_key:
             logger.error('Missing Alpaca API credentials.')
             raise RuntimeError('Missing Alpaca API credentials.')

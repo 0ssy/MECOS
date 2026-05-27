@@ -168,12 +168,9 @@ class TradingAgent:
         orchestrator_decision = str(orchestrated.get("final_decision", "HOLD")).upper()
         final_decision = str(fused.get("decision", orchestrator_decision)).upper()
         confidence = float(fused.get("confidence", orchestrated.get("confidence", 0.0)))
-
-        # Keep decision semantics consistent across logs and execution:
-        # if orchestrator consensus is HOLD, do not promote to BUY/SELL in fusion.
-        if orchestrator_decision == "HOLD":
+        edge = float(fused.get("edge", 0.0))
+        if orchestrator_decision == "HOLD" and abs(edge) < 0.20:
             final_decision = "HOLD"
-            confidence = float(orchestrated.get("confidence", confidence))
 
         if confidence < float(TradingConfig.MIN_CONFIDENCE):
             final_decision = "HOLD"
@@ -215,6 +212,13 @@ class TradingAgent:
                 )
 
         logger.info(f"Decision for {symbol}: {final_decision} (Confidence: {confidence:.2f})")
+        spread_pressure = float(features.get("spread_pressure", 0.0))
+        expected_move = float(max(abs(features.get("roc_5", 0.0)), abs(features.get("trend_strength", 0.0))))
+        if expected_move <= 0.0 and valid_data[-1].get("open"):
+            expected_move = abs(
+                float(valid_data[-1].get("close", 0.0) or 0.0) / float(valid_data[-1].get("open", 1.0) or 1.0) - 1.0
+            )
+
         return {
             "symbol": symbol,
             "decision": final_decision,
@@ -230,6 +234,9 @@ class TradingAgent:
             "buy_score": float(fused.get("buy_score", orchestrated.get("buy_score", 0.0))),
             "sell_score": float(fused.get("sell_score", orchestrated.get("sell_score", 0.0))),
             "hold_score": float(fused.get("hold_score", orchestrated.get("hold_score", 0.0))),
+            "edge": float(edge),
+            "expected_move": float(expected_move),
+            "spread_pressure": float(spread_pressure),
             "regime": regime,
         }
 

@@ -14,6 +14,7 @@ class PortfolioEngine:
         self.max_position_size = 0.20  # Max 20% per position
         self.max_sector_exposure = 0.40  # Max 40% per sector
         self.target_volatility = 0.15  # 15% annual vol target
+        self.base_risk = 0.01  # 1% risk budget per trade before overlays
         logger.info("Portfolio Engine initialized")
     
     async def optimize_position_size(self, 
@@ -40,14 +41,15 @@ class PortfolioEngine:
         kelly_fraction = (odds * win_prob - (1 - win_prob)) / odds
         kelly_fraction = np.clip(kelly_fraction, 0, 0.25)  # Cap at 25%
         
-        # Volatility adjustment (inverse volatility weighting)
-        vol_scalar = self.target_volatility / max(volatility, 0.01)
-        vol_scalar = np.clip(vol_scalar, 0.5, 2.0)
-        
+        # Volatility-adaptive sizing: high vol -> smaller size, low vol -> larger size.
+        inverse_vol_size = self.base_risk / max(volatility, 0.005)
+        inverse_vol_size = np.clip(inverse_vol_size, 0.01, self.max_position_size)
+
         # Final position size with dynamic overlays.
         dynamic_scalar = confidence_multiplier * regime_multiplier * liquidity_multiplier * correlation_penalty
         dynamic_scalar = np.clip(dynamic_scalar, 0.25, 1.75)
-        position_size = kelly_fraction * vol_scalar * dynamic_scalar
+        base_size = min(kelly_fraction, inverse_vol_size)
+        position_size = base_size * dynamic_scalar
         position_size = min(position_size, self.max_position_size)
         
         return float(position_size)

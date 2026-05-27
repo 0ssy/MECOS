@@ -8,6 +8,8 @@ from typing import Dict, Any, Tuple
 import numpy as np
 
 
+EDGE_DECISION_THRESHOLD = 0.35
+
 REGIME_AGENT_WEIGHTS = {
     "trending": {
         "trend": 1.25,
@@ -60,7 +62,13 @@ REGIME_AGENT_WEIGHTS = {
 
 class QuantSignalFusion:
     def _base_weight(self, regime: str, agent_name: str) -> float:
-        regime_weights = REGIME_AGENT_WEIGHTS.get(regime, REGIME_AGENT_WEIGHTS["unknown"])
+        normalized_regime = str(regime or "unknown").strip().lower()
+        normalized_regime = {
+            "trend": "trending",
+            "high_volatility": "volatile_trend",
+            "range": "ranging",
+        }.get(normalized_regime, normalized_regime)
+        regime_weights = REGIME_AGENT_WEIGHTS.get(normalized_regime, REGIME_AGENT_WEIGHTS["unknown"])
         return float(regime_weights.get(agent_name, 1.0))
 
     @staticmethod
@@ -120,22 +128,26 @@ class QuantSignalFusion:
                 hold_score += weighted_conf
 
         total_score = buy_score + sell_score + hold_score
+        buy_norm = buy_score / total_score if total_score > 1e-9 else 0.0
+        sell_norm = sell_score / total_score if total_score > 1e-9 else 0.0
+        hold_norm = hold_score / total_score if total_score > 1e-9 else 1.0
+        edge = buy_norm - sell_norm
         if total_score <= 1e-9:
             decision = "HOLD"
             raw_confidence = 0.0
-        elif buy_score >= sell_score and buy_score >= hold_score:
+        elif edge > EDGE_DECISION_THRESHOLD:
             decision = "BUY"
-            raw_confidence = buy_score / total_score
-        elif sell_score >= buy_score and sell_score >= hold_score:
+            raw_confidence = buy_norm
+        elif edge < -EDGE_DECISION_THRESHOLD:
             decision = "SELL"
-            raw_confidence = sell_score / total_score
+            raw_confidence = sell_norm
         else:
             decision = "HOLD"
-            raw_confidence = hold_score / total_score
+            raw_confidence = hold_norm
 
         num_agents = max(len(agent_signals), 1)
         agreement = max(votes.values()) / num_agents
-        directional_edge = abs(buy_score - sell_score) / max(total_score, 1e-9)
+        directional_edge = abs(edge)
         bayes_confidence = self._bayesian_confidence(raw_confidence, agreement, directional_edge)
         sizing = self._sizing_multipliers(features, regime, bayes_confidence)
 
@@ -145,6 +157,7 @@ class QuantSignalFusion:
             "buy_score": float(buy_score),
             "sell_score": float(sell_score),
             "hold_score": float(hold_score),
+            "edge": float(edge),
             "raw_confidence": float(raw_confidence),
             "agreement": float(agreement),
             "directional_edge": float(directional_edge),

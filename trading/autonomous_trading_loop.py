@@ -10,6 +10,8 @@ from .equity_persistence import EquityPersistence
 from .pnl_engine import PnLEngine
 from .attribution_logger import AttributionLogger
 from .confidence_calibrator import ConfidenceCalibrator
+from .event_bus import EventBus, Event, EventType
+from .schemas import Signal, Decision, MarketEvent
 
 try:
     from rl_trainer import RLTrainer
@@ -77,12 +79,23 @@ class AutonomousTradingLoop:
         self.pnl_engine = PnLEngine()
         self.attribution_logger = AttributionLogger()
         self.confidence_calibrator = ConfidenceCalibrator()
+        self.event_bus = EventBus()
 
         self.running = False
         self.symbols = []
         self.current_regime = 'trending'
         self.cycle_interval_seconds = 10.0
+        self.symbol_cooldown_seconds = 300
         self._last_symbol_cycle_time = {}
+        self._signal_persistence: Dict[str, Dict[str, Any]] = {}
+        self.max_correlated_positions = 3
+        self.min_acceptable_volatility = 0.003
+        self.max_acceptable_volatility = 0.050
+        self.enable_trade_quality_filter = True
+        self.trade_quality_spread_multiplier = 2.5
+        self.enable_signal_persistence = True
+        self.signal_persistence_count_required = 2
+        self.signal_persistence_seconds = 5.0
 
         self.loop_stats = {
             'iterations': 0,
@@ -96,6 +109,9 @@ class AutonomousTradingLoop:
 
         self.rl_trainer: Optional[Any] = None
         self.rl_trade_context: Dict[str, Dict[str, Any]] = {}
+        self.rl_min_buffer_to_override = 128
+        self.rl_min_confidence_for_override = 0.75
+        self.rl_min_q_advantage = 0.03
         self._init_rl_trainer()
         if hasattr(self.paper_executor, 'register_order_status_callback'):
             self.paper_executor.register_order_status_callback(self._on_order_status)
@@ -153,11 +169,31 @@ class AutonomousTradingLoop:
 
         base_decision = signal.get('decision', 'HOLD')
         available_actions = ['BUY', 'SELL', 'HOLD']
-        rl_action = self.rl_trainer.choose_action(state, available_actions)
+        confidence = float(signal.get('confidence', 0.0) or 0.0)
+        rl_stats = self.rl_trainer.get_stats() if hasattr(self.rl_trainer, 'get_stats') else {}
+        buffer_size = int(rl_stats.get('buffer_size', 0))
+
+        # Stability guard: keep rule engine in control until RL has enough evidence.
+        if buffer_size < self.rl_min_buffer_to_override or confidence < self.rl_min_confidence_for_override:
+            signal['base_decision'] = base_decision
+            signal['rl_action'] = base_decision
+            signal['decision_source'] = 'rules_rl_warmup'
+            signal['decision'] = base_decision
+            signal['final_decision'] = base_decision
+            return signal
+
+        rl_action = self.rl_trainer.choose_action(state, available_actions, allow_exploration=False)
 
         # Allow RL to override base decision for more aggressive learning
         if rl_action not in {'BUY', 'SELL', 'HOLD'}:
             rl_action = base_decision
+
+        if hasattr(self.rl_trainer, 'q_values'):
+            qvals = self.rl_trainer.q_values(state, available_actions)
+            q_best = float(qvals.get(rl_action, 0.0))
+            q_base = float(qvals.get(base_decision, 0.0))
+            if q_best - q_base < self.rl_min_q_advantage:
+                rl_action = base_decision
 
         signal['base_decision'] = base_decision
         signal['rl_action'] = rl_action
@@ -184,11 +220,14 @@ class AutonomousTradingLoop:
             raw_pnl = float(result.get('pnl', 0.0) or 0.0)
             holding_seconds = float(result.get('holding_seconds', 0.0) or 0.0)
             max_drawdown = float(metrics.get('max_drawdown', 0.0) or 0.0)
+            entry_context = context.get('entry_context', {}) if isinstance(context, dict) else {}
+            causal = self._infer_loss_causes(entry_context, tick, result, metrics)
+            causal_penalty = float(causal.get('causal_penalty', 0.0) or 0.0)
 
             # Penalty shaping discourages repeating high-drawdown and overlong holds.
             drawdown_penalty = max(0.0, max_drawdown - 0.05) * 100.0
             holding_penalty = max(0.0, holding_seconds - 4 * 3600) / 3600.0 * 0.1
-            adjusted_pnl = raw_pnl - drawdown_penalty - holding_penalty
+            adjusted_pnl = raw_pnl - drawdown_penalty - holding_penalty - causal_penalty
 
             next_session, _ = self._get_market_session_policy(tick)
             next_state = self._build_rl_state(
@@ -206,16 +245,85 @@ class AutonomousTradingLoop:
                     'raw_pnl': raw_pnl,
                     'drawdown_penalty': drawdown_penalty,
                     'holding_penalty': holding_penalty,
+                    'causal_penalty': causal_penalty,
+                    'loss_causes': causal.get('loss_causes', []),
                 },
                 next_state=next_state,
                 done=True,
             )
             await self.rl_trainer.train_from_replay(batch_size=32)
             logger.info(
-                f"RL update {symbol}: action={context['action']} raw_pnl={raw_pnl:.2f} adjusted={adjusted_pnl:.2f}"
+                f"RL update {symbol}: action={context['action']} raw_pnl={raw_pnl:.2f} "
+                f"adjusted={adjusted_pnl:.2f} causes={causal.get('loss_causes', [])}"
             )
+            if raw_pnl < 0:
+                self.attribution_logger.log(
+                    {
+                        'symbol': symbol,
+                        'decision': context.get('action', 'HOLD'),
+                        'event': 'RL_CAUSAL_UPDATE',
+                        'pnl': raw_pnl,
+                        'adjusted_pnl': adjusted_pnl,
+                        'loss_causes': causal.get('loss_causes', []),
+                        'causal_penalty': causal_penalty,
+                        'regime': entry_context.get('regime', self.current_regime),
+                        'session': entry_context.get('session', 'unknown'),
+                    }
+                )
         except Exception as exc:
             logger.error(f'RL trade outcome update failed for {symbol}: {exc}')
+
+    def _infer_loss_causes(
+        self,
+        entry_context: Dict[str, Any],
+        tick: Dict[str, Any],
+        result: Dict[str, Any],
+        metrics: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        pnl = float(result.get('pnl', 0.0) or 0.0)
+        if pnl >= 0:
+            return {'loss_causes': [], 'causal_penalty': 0.0}
+
+        causes = []
+        penalty = 0.0
+
+        confidence = float(entry_context.get('confidence', 0.0) or 0.0)
+        threshold = float(entry_context.get('confidence_threshold', 0.0) or 0.0)
+        edge = abs(float(entry_context.get('edge', 0.0) or 0.0))
+        spread = float(entry_context.get('spread_pressure', 0.0) or 0.0)
+        expected_move = float(entry_context.get('expected_move', 0.0) or 0.0)
+        session = str(entry_context.get('session', 'unknown')).lower()
+        entry_vol = float(entry_context.get('volatility', 0.0) or 0.0)
+        current_vol = float(tick.get('volatility', entry_vol) or entry_vol)
+        drawdown = float(metrics.get('max_drawdown', 0.0) or 0.0)
+        holding_seconds = float(result.get('holding_seconds', 0.0) or 0.0)
+
+        if confidence <= max(0.55, threshold):
+            causes.append('weak_confidence_entry')
+            penalty += 0.05
+        if edge < 0.20:
+            causes.append('weak_edge_entry')
+            penalty += 0.06
+        if spread > 0.006 and expected_move <= spread * 1.5:
+            causes.append('spread_dominated_entry')
+            penalty += 0.08
+        if session in {'lunch_chop', 'after_hours', 'crypto_weekend'}:
+            causes.append('adverse_session')
+            penalty += 0.05
+        if current_vol > self.max_acceptable_volatility or current_vol < self.min_acceptable_volatility:
+            causes.append('volatility_dislocation')
+            penalty += 0.07
+        elif abs(current_vol - entry_vol) > max(0.01, entry_vol * 0.8):
+            causes.append('volatility_regime_shift')
+            penalty += 0.05
+        if drawdown > 0.08:
+            causes.append('portfolio_drawdown_stress')
+            penalty += 0.05
+        if holding_seconds >= self.paper_executor.max_holding_seconds * 0.8:
+            causes.append('stale_holding_time')
+            penalty += 0.03
+
+        return {'loss_causes': causes, 'causal_penalty': min(0.35, penalty)}
 
     async def start(self, use_starter_universe: bool = True):
         if self.running:
@@ -224,6 +332,7 @@ class AutonomousTradingLoop:
         
         self.running = True
         self.loop_stats['start_time'] = datetime.now()
+        await self.event_bus.start()
         
         if use_starter_universe:
             self.symbols = self.universe_manager.load_starter_universe()
@@ -272,6 +381,17 @@ class AutonomousTradingLoop:
         price_change = tick['close'] / tick['open'] - 1 if tick['open'] else 0
         volatility = tick.get('volatility', 0)
         self.current_regime = detect_regime(volatility, price_change)
+        await self.event_bus.publish(
+            Event(
+                EventType.MARKET_TICK,
+                {
+                    'symbol': symbol,
+                    'price': float(tick.get('close', 0.0) or 0.0),
+                    'regime': self.current_regime,
+                    'volatility': float(volatility or 0.0),
+                },
+            )
+        )
 
         session_name, session_policy = self._get_market_session_policy(tick)
 
@@ -300,26 +420,29 @@ class AutonomousTradingLoop:
             signal['regime'] = self.current_regime
             signal['symbol'] = symbol
             signal['sector'] = tick.get('sector', 'unknown')
+            signal.setdefault('features', {})
 
             # Session-aware policy: lower participation outside liquid sessions.
             signal['allocation'] = float(signal.get('allocation', signal.get('size', 0.1))) * session_policy['size_multiplier']
 
-            threshold_session = (
-                'crypto_weekend'
-                if session_name == 'crypto_weekend'
-                else 'after_hours'
-                if session_name == 'after_hours'
-                else 'market_hours'
-            )
-            min_conf = self.session_thresholds.get(threshold_session, 0.72)
+            # Confidence calibration
+            if 'confidence' in signal:
+                signal_age = self._signal_age_seconds(signal)
+                signal['confidence'] = self.confidence_calibrator.calibrate(
+                    signal['confidence'],
+                    age_seconds=signal_age,
+                )
+
+            min_conf = session_policy['min_confidence']
             if signal.get('confidence', 0.0) < min_conf:
                 self.loop_stats['hold_signals'] += 1
                 logger.info(f"Session gate HOLD for {symbol}: conf={signal.get('confidence', 0.0):.2f} < {min_conf:.2f} ({session_name})")
                 return
 
-            # Confidence calibration
-            if 'confidence' in signal:
-                signal['confidence'] = self.confidence_calibrator.calibrate(signal['confidence'])
+            if self.enable_trade_quality_filter:
+                if not self._passes_trade_quality(symbol, tick, signal, min_conf):
+                    self.loop_stats['hold_signals'] += 1
+                    return
 
             rl_state = self._build_rl_state(symbol, tick, signal, session_name)
             signal['rl_state'] = rl_state
@@ -329,36 +452,96 @@ class AutonomousTradingLoop:
                 logger.info(f"RL policy HOLD for {symbol}: base={signal.get('base_decision', 'N/A')}")
                 return
 
-            # Attribution logging
-            self.attribution_logger.log(signal)
+            if self.enable_signal_persistence:
+                if not self._passes_signal_persistence(symbol, signal):
+                    self.loop_stats['hold_signals'] += 1
+                    return
+
+            await self.event_bus.publish(
+                Event(
+                    EventType.SIGNAL_CREATED,
+                    {
+                        'symbol': symbol,
+                        'decision': signal.get('decision', 'HOLD'),
+                        'confidence': float(signal.get('confidence', 0.0) or 0.0),
+                        'edge': float(signal.get('edge', 0.0) or 0.0),
+                        'regime': signal.get('regime', self.current_regime),
+                    },
+                )
+            )
 
             # Trade cooldown
             if signal['decision'] != 'HOLD':
-                if not self.cooldown_manager.can_trade(symbol):
+                if not self.cooldown_manager.can_trade(symbol, cooldown_seconds=self.symbol_cooldown_seconds):
                     logger.info(f"Cooldown active for {symbol}, skipping trade.")
                     return
 
                 # Exposure management (sector must be provided by tick or symbol mapping)
                 sector = tick.get('sector', 'unknown')
-                notional = tick['close'] * signal.get('size', 1.0)
+                allocation = float(signal.get('allocation', signal.get('size', 0.1)) or 0.1)
+                notional = self.paper_executor.paper_account.get('equity', 1.0) * allocation
                 portfolio_value = self.paper_executor.paper_account.get('equity', 1.0)
-                if not self.exposure_manager.can_add(sector, notional, portfolio_value):
-                    logger.info(f"Sector exposure cap reached for {sector}, skipping trade.")
+                if not self.exposure_manager.can_add(
+                    sector=sector,
+                    notional=notional,
+                    portfolio_value=portfolio_value,
+                    symbol=symbol,
+                    max_correlated_positions=self.max_correlated_positions,
+                ):
+                    logger.info(f"Exposure/correlation cap reached for {symbol} ({sector}), skipping trade.")
                     return
 
+                await self.event_bus.publish(
+                    Event(
+                        EventType.RISK_APPROVED,
+                        {'symbol': symbol, 'decision': signal.get('decision', 'HOLD'), 'notional': float(notional)},
+                    )
+                )
                 result = await self.paper_executor.execute_signal(signal)
                 self._update_execution_stats_from_result(result)
+                await self.event_bus.publish(
+                    Event(
+                        EventType.ORDER_SUBMITTED,
+                        {
+                            'symbol': symbol,
+                            'status': result.get('status', 'UNKNOWN'),
+                            'side': result.get('side', signal.get('decision', 'HOLD')),
+                        },
+                    )
+                )
 
                 if result.get('status') == 'EXECUTED':
+                    await self.event_bus.publish(
+                        Event(
+                            EventType.ORDER_FILLED,
+                            {
+                                'symbol': symbol,
+                                'side': result.get('side', signal.get('decision', 'HOLD')),
+                                'price': float(result.get('price', tick.get('close', 0.0)) or 0.0),
+                                'shares': float(result.get('shares', 0.0) or 0.0),
+                            },
+                        )
+                    )
                     executed_side = result.get('side', signal.get('decision', 'HOLD'))
                     if executed_side in {'BUY', 'SELL'} and 'pnl' not in result:
                         self.rl_trade_context[symbol] = {
                             'state': rl_state,
                             'action': signal.get('decision', executed_side),
                             'ts': datetime.now().isoformat(),
+                            'entry_context': {
+                                'confidence': float(signal.get('confidence', 0.0) or 0.0),
+                                'edge': float(signal.get('edge', 0.0) or 0.0),
+                                'spread_pressure': float(signal.get('spread_pressure', 0.0) or 0.0),
+                                'expected_move': float(signal.get('expected_move', 0.0) or 0.0),
+                                'regime': str(signal.get('regime', self.current_regime)),
+                                'session': str(signal.get('session', 'unknown')),
+                                'volatility': float(signal.get('volatility', 0.0) or 0.0),
+                                'confidence_threshold': float(signal.get('confidence_threshold', 0.0) or 0.0),
+                            },
                         }
                     self.cooldown_manager.record_trade(symbol)
                     self.exposure_manager.update_exposure(symbol, sector, notional)
+                    self.attribution_logger.log(self._build_structured_telemetry(signal, result))
                     await self._post_trade_updates(symbol, tick, result)
 
         if self.loop_stats['iterations'] % 100 == 0:
@@ -449,6 +632,12 @@ class AutonomousTradingLoop:
 
         if result.get('side') == 'SELL' and 'pnl' in result:
             await self._record_rl_trade_outcome(symbol, tick, result, metrics)
+            await self.event_bus.publish(
+                Event(
+                    EventType.PNL_UPDATED,
+                    {'symbol': symbol, 'pnl': float(result.get('pnl', 0.0) or 0.0)},
+                )
+            )
 
         self.equity_persistence.save(
             _time.time(),
@@ -492,16 +681,146 @@ class AutonomousTradingLoop:
         if weekday >= 5:
             return 'crypto_weekend', {'min_confidence': weekend_conf, 'size_multiplier': 0.50}
         if 9 <= hour < 11:
-            return 'us_open', {'min_confidence': market_hours_conf, 'size_multiplier': 1.00}
+            return 'us_open', {'min_confidence': market_hours_conf + 0.03, 'size_multiplier': 1.00}
         if 11 <= hour < 14:
-            return 'lunch_chop', {'min_confidence': market_hours_conf, 'size_multiplier': 0.70}
+            return 'lunch_chop', {'min_confidence': market_hours_conf + 0.10, 'size_multiplier': 0.70}
         if 14 <= hour < 16:
-            return 'us_close', {'min_confidence': market_hours_conf, 'size_multiplier': 0.90}
+            return 'power_hour', {'min_confidence': market_hours_conf + 0.02, 'size_multiplier': 0.90}
         return 'after_hours', {'min_confidence': after_hours_conf, 'size_multiplier': 0.40}
+
+    def _signal_age_seconds(self, signal: Dict[str, Any]) -> float:
+        timestamp = signal.get('timestamp')
+        if not timestamp:
+            return 0.0
+        try:
+            ts = datetime.fromisoformat(str(timestamp).replace('Z', '+00:00'))
+            return max(0.0, (datetime.now(ts.tzinfo) - ts).total_seconds())
+        except ValueError:
+            return 0.0
+
+    def _adaptive_confidence_threshold(self, signal: Dict[str, Any], base_threshold: float) -> float:
+        regime = str(signal.get('regime', self.current_regime) or self.current_regime).lower()
+        volatility = float(signal.get('volatility', signal.get('features', {}).get('realized_volatility', 0.0)) or 0.0)
+        threshold = float(base_threshold)
+        if regime in {'panic', 'volatile_trend', 'high_volatility'}:
+            threshold += 0.05
+        elif regime in {'trending'}:
+            threshold -= 0.02
+        if volatility > 0.03:
+            threshold += 0.04
+        return min(max(threshold, 0.30), 0.95)
+
+    def _passes_trade_quality(self, symbol: str, tick: Dict[str, Any], signal: Dict[str, Any], base_threshold: float) -> bool:
+        features = signal.get('features', {}) if isinstance(signal.get('features', {}), dict) else {}
+        spread = float(
+            signal.get('spread_pressure', features.get('spread_pressure', 0.0))
+            or 0.0
+        )
+        expected_move = float(signal.get('expected_move', 0.0) or 0.0)
+        if expected_move <= 0.0 and tick.get('open'):
+            expected_move = abs(float(tick.get('close', 0.0) or 0.0) / float(tick.get('open', 1.0) or 1.0) - 1.0)
+        volatility = float(signal.get('volatility', tick.get('volatility', 0.0)) or 0.0)
+        confidence = float(signal.get('confidence', 0.0) or 0.0)
+        adaptive_threshold = self._adaptive_confidence_threshold(signal, base_threshold)
+        signal['confidence_threshold'] = adaptive_threshold
+
+        quality_checks = (
+            expected_move > (spread * self.trade_quality_spread_multiplier),
+            self.min_acceptable_volatility <= volatility <= self.max_acceptable_volatility,
+            confidence > adaptive_threshold,
+        )
+        if all(quality_checks):
+            return True
+        logger.info(
+            f"Quality gate HOLD for {symbol}: expected_move={expected_move:.4f} spread={spread:.4f} "
+            f"vol={volatility:.4f} conf={confidence:.2f} thr={adaptive_threshold:.2f}"
+        )
+        return False
+
+    def _passes_signal_persistence(self, symbol: str, signal: Dict[str, Any]) -> bool:
+        now = datetime.now()
+        decision = str(signal.get('decision', 'HOLD')).upper()
+        state = self._signal_persistence.get(symbol)
+
+        if not state or state.get('decision') != decision:
+            self._signal_persistence[symbol] = {
+                'decision': decision,
+                'count': 1,
+                'first_seen': now,
+            }
+            logger.debug(f"Persistence warmup for {symbol}: decision={decision} count=1")
+            return False
+
+        state['count'] = int(state.get('count', 1)) + 1
+        first_seen = state.get('first_seen', now)
+        if isinstance(first_seen, datetime):
+            elapsed = (now - first_seen).total_seconds()
+        else:
+            elapsed = 0.0
+        if state['count'] >= self.signal_persistence_count_required or elapsed >= self.signal_persistence_seconds:
+            return True
+        logger.debug(f"Persistence gate HOLD for {symbol}: decision={decision} count={state['count']} elapsed={elapsed:.1f}s")
+        return False
+
+    def _build_structured_telemetry(self, signal: Dict[str, Any], result: Dict[str, Any]) -> Dict[str, Any]:
+        reasons = []
+        if signal.get('decision_source'):
+            reasons.append(str(signal.get('decision_source')))
+        if signal.get('base_decision'):
+            reasons.append(f"base={signal.get('base_decision')}")
+        if signal.get('exit_reason'):
+            reasons.append(f"exit={signal.get('exit_reason')}")
+
+        market_event = MarketEvent(
+            event_type='EXECUTION_DECISION',
+            symbol=str(signal.get('symbol', '')),
+            timestamp=datetime.now().isoformat(),
+            payload={'status': result.get('status', 'UNKNOWN')},
+        )
+        decision = Decision(
+            symbol=str(signal.get('symbol', '')),
+            action=str(signal.get('decision', 'HOLD')),
+            confidence=float(signal.get('confidence', 0.0) or 0.0),
+            threshold=float(signal.get('confidence_threshold', 0.0) or 0.0),
+            approved=result.get('status') == 'EXECUTED',
+            reasons=reasons,
+        )
+        _ = Signal(
+            symbol=str(signal.get('symbol', '')),
+            decision=str(signal.get('decision', 'HOLD')),
+            confidence=float(signal.get('confidence', 0.0) or 0.0),
+            buy_score=float(signal.get('buy_score', 0.0) or 0.0),
+            sell_score=float(signal.get('sell_score', 0.0) or 0.0),
+            edge=float(signal.get('edge', 0.0) or 0.0),
+            regime=str(signal.get('regime', 'unknown')),
+            session=str(signal.get('session', 'unknown')),
+            reasons=reasons,
+        )
+
+        return {
+            'symbol': decision.symbol,
+            'decision': decision.action,
+            'confidence': decision.confidence,
+            'regime': signal.get('regime', 'unknown'),
+            'session': signal.get('session', 'unknown'),
+            'volatility': float(signal.get('volatility', 0.0) or 0.0),
+            'buy_score': float(signal.get('buy_score', 0.0) or 0.0),
+            'sell_score': float(signal.get('sell_score', 0.0) or 0.0),
+            'edge': float(signal.get('edge', 0.0) or 0.0),
+            'expected_move': float(signal.get('expected_move', 0.0) or 0.0),
+            'spread_pressure': float(signal.get('spread_pressure', 0.0) or 0.0),
+            'reason': reasons,
+            'execution_status': result.get('status', 'UNKNOWN'),
+            'event': market_event.event_type,
+        }
 
     def stop(self):
         self.running = False
         self.market_stream.stop()
+        try:
+            asyncio.get_running_loop().create_task(self.event_bus.stop())
+        except RuntimeError:
+            pass
         logger.warning('AUTONOMOUS TRADING LOOP STOPPED')
         self._log_status()
 
