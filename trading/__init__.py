@@ -25,7 +25,10 @@ from .market_making_agent import MarketMakingAgent
 from .quant_signal_fusion import QuantSignalFusion
 from .reinforcement_learning_optimizer import ReinforcementLearningOptimizer
 from .causal_inference_engine import CausalInferenceEngine
-from .market_microstructure_analyzer import MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U
+from .market_microstructure_analyzer import (
+    MarketMicrostructureAnalyzer,
+    MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U,
+)
 from .backtesting_framework import BacktestingFramework
 from .replay_backtester import ReplayBacktester
 from .live_trading_connector import LiveTradingConnector
@@ -51,7 +54,8 @@ __all__ = [
     'FeatureEngine', 'MarketPhysicsEngine', 'PortfolioEngine', 'ExecutionEngine',
     'MeanReversionAgent', 'VolatilityArbitrageAgent', 'LiquidityHunterAgent', 'SentimentAgent',
     'MacroAgent', 'CrossAssetArbitrageAgent', 'StatisticalArbitrageEngine', 'MarketMakingAgent', 'QuantSignalFusion',
-    'ReinforcementLearningOptimizer', 'CausalInferenceEngine', 'MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U',
+    'ReinforcementLearningOptimizer', 'CausalInferenceEngine',
+    'MarketMicrostructureAnalyzer', 'MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U',
     'BacktestingFramework', 'ReplayBacktester', 'LiveTradingConnector', 'EventBus', 'Event', 'EventType',
     'TradeDatabase', 'OrderManager', 'OrderStatus', 'PositionManager', 'PerformanceMonitor',
     'RiskMonitor', 'TradingAgent', 'AutonomousTradingLoop', 'PaperTradingExecutor',

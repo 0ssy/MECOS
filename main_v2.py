@@ -17,7 +17,6 @@ from agent_coordinator import AgentCoordinator, AgentRole
 from app_controller import AppController
 from coding_agent import CodingAgent as CoreCodingAgent
 from continuous_loop import ContinuousResearchLoop
-from engineer import CodingAgent as RuntimeCodingAgent
 from engineer import SandboxExecutor as RuntimeSandboxExecutor
 from knowledge_graph import KnowledgeGraph as RuntimeKnowledgeGraph
 from memory_system import MemorySystem
@@ -43,7 +42,6 @@ from trading.trading_system import TradingSystem
 from trading_agent import TradingAgent as QuantTradingAgent
 from vector_memory import VectorMemory as RuntimeVectorMemory
 from web_perception import WebPerception
-from analyzer import ResearchAgent as RuntimeResearchAgent
 
 
 class UnifiedMECOSRuntime:
@@ -98,6 +96,13 @@ class UnifiedMECOSRuntime:
             runtime_evolution: EvolutionAgent = self.components.get("runtime_evolution")
             if runtime_router and runtime_orchestrator and runtime_evolution:
                 try:
+                    trading_metrics = {}
+                    if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
+                        trading_metrics = self.trading_system.performance_monitor.get_metrics()
+                        if trading_metrics:
+                            self.benchmark_harness.record_trading_metrics(trading_metrics)
+                            await runtime_evolution.ingest_trading_performance(trading_metrics)
+                            runtime_orchestrator.attach_components({"latest_trading_metrics": trading_metrics})
                     await self.execution_guard.run(
                         "runtime_router_tick",
                         runtime_router.route_request("maintain runtime health", "long_term_planning"),
@@ -164,18 +169,20 @@ class UnifiedMECOSRuntime:
         tools.web_perception = self.web
         action_engine = ActionExecutionEngine(tools, self.memory)
         reasoner = await self.execution_guard.run("reasoner_init", asyncio.to_thread(Reasoner, self.memory))
+        runtime_sandbox = RuntimeSandboxExecutor()
         self.connection_state["reasoning"] = True
         self.components["tools"] = tools
         self.components["action_engine"] = action_engine
         self.components["reasoner"] = reasoner
         self.health_monitor.mark_started("reasoning")
 
-        core_coding = CoreCodingAgent(self.memory, tools)
+        core_coding = CoreCodingAgent(self.memory, tools, sandbox_executor=runtime_sandbox)
         core_research = CoreResearchAgent(self.memory, self.web)
         coordinator = AgentCoordinator(self.memory)
         self.connection_state["core_coding"] = True
         self.connection_state["core_research"] = True
         self.connection_state["agent_coordinator"] = True
+        self.connection_state["agents"] = True
         self.components["core_coding_agent"] = core_coding
         self.components["core_research_agent"] = core_research
         self.components["agent_coordinator"] = coordinator
@@ -183,14 +190,13 @@ class UnifiedMECOSRuntime:
 
         runtime_memory = RuntimeVectorMemory()
         runtime_graph = RuntimeKnowledgeGraph()
-        runtime_research = RuntimeResearchAgent(memory_layer=runtime_memory)
-        runtime_sandbox = RuntimeSandboxExecutor()
-        runtime_coding = RuntimeCodingAgent(runtime_sandbox)
+        runtime_research = core_research
+        runtime_coding = core_coding
         runtime_debugger = SelfDebugger(runtime_sandbox)
         runtime_orchestrator = AutonomousOrchestrator()
         runtime_orchestrator.set_layer_priority("research", 120)
         runtime_orchestrator.set_compute_budget(10)
-        runtime_evolution = EvolutionAgent(memory_layer=runtime_memory)
+        runtime_evolution = EvolutionAgent(memory_layer=runtime_memory, benchmark_harness=self.benchmark_harness)
         runtime_router = ModelRouter(main_brain_url="http://192.168.1.88:11434")
         runtime_loop = ContinuousResearchLoop(runtime_research)
 
@@ -202,6 +208,7 @@ class UnifiedMECOSRuntime:
         self.connection_state["runtime_orchestrator"] = True
         self.connection_state["runtime_evolution"] = True
         self.connection_state["runtime_router"] = True
+        self.connection_state["runtime_stack"] = True
 
         self.components["runtime_memory"] = runtime_memory
         self.components["runtime_graph"] = runtime_graph
@@ -213,6 +220,8 @@ class UnifiedMECOSRuntime:
         self.components["runtime_evolution"] = runtime_evolution
         self.components["runtime_router"] = runtime_router
         self.components["runtime_research_loop"] = runtime_loop
+        self.components["research_agent"] = core_research
+        self.components["coding_agent"] = core_coding
         self.health_monitor.mark_started("runtime_stack")
 
         try:
@@ -239,6 +248,17 @@ class UnifiedMECOSRuntime:
             logger.warning(f"TradingSystem init failed: {exc}")
             self.connection_state["trading_system"] = False
 
+        runtime_orchestrator.attach_components(
+            {
+                "research_agent": core_research,
+                "coding_agent": core_coding,
+                "memory": self.memory,
+                "evolution_agent": runtime_evolution,
+                "trading_system": self.trading_system,
+                "runtime_router": runtime_router,
+            }
+        )
+
         await self.state_checkpoint.save_runtime_state(
             {
                 "connection_state": self.connection_state,
@@ -254,8 +274,8 @@ class UnifiedMECOSRuntime:
     async def run_runtime_demo(self):
         runtime_memory: RuntimeVectorMemory = self.components["runtime_memory"]
         runtime_graph: RuntimeKnowledgeGraph = self.components["runtime_graph"]
-        runtime_research: RuntimeResearchAgent = self.components["runtime_research_agent"]
-        runtime_coding: RuntimeCodingAgent = self.components["runtime_coding_agent"]
+        runtime_research: CoreResearchAgent = self.components["runtime_research_agent"]
+        runtime_coding: CoreCodingAgent = self.components["runtime_coding_agent"]
         runtime_debugger: SelfDebugger = self.components["runtime_debugger"]
         runtime_orchestrator: AutonomousOrchestrator = self.components["runtime_orchestrator"]
         runtime_evolution: EvolutionAgent = self.components["runtime_evolution"]
@@ -286,6 +306,13 @@ class UnifiedMECOSRuntime:
         )
         evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
         planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
+        trading_metrics = {}
+        optimization_plan = {}
+        if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
+            trading_metrics = self.trading_system.performance_monitor.get_metrics()
+            if trading_metrics:
+                self.benchmark_harness.record_trading_metrics(trading_metrics)
+                optimization_plan = await runtime_evolution.ingest_trading_performance(trading_metrics)
 
         runtime_loop.stop()
         background.cancel()
@@ -319,6 +346,8 @@ class UnifiedMECOSRuntime:
             "evolution_benchmark_delta": float(evolution_delta),
             "planning_task_completion_efficiency": float(planning_summary.get("efficiency", 0.0)),
             "research_quality_index": float(research_governance.get("research_quality_index", 0.0)),
+            "trading_sharpe_ratio": float(trading_metrics.get("sharpe_ratio", 0.0)),
+            "trading_max_drawdown": float(trading_metrics.get("max_drawdown", 0.0)),
         }
         benchmark_entry = self.benchmark_harness.record(benchmark_metrics)
         previous = self.benchmark_harness.previous()
@@ -340,6 +369,7 @@ class UnifiedMECOSRuntime:
         self.components["benchmark_delta"] = delta
         self.components["drift_status"] = drift_status
         self.components["research_governance"] = research_governance
+        self.components["trading_optimization_plan"] = optimization_plan
         logger.info(f"Runtime demo complete. memory_hits={len(found)}")
 
     async def start_trading(self, run_seconds: int):

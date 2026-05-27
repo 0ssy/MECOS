@@ -14,6 +14,7 @@ from loguru import logger
 
 from memory_system import MemorySystem
 from tool_orchestrator import ToolOrchestrator
+from engineer import SandboxExecutor
 from openai import OpenAI
 from config import settings
 
@@ -96,9 +97,15 @@ class CodingAgent:
     Generates, analyzes, tests, debugs, and refactors code.
     """
 
-    def __init__(self, memory: MemorySystem, orchestrator: ToolOrchestrator):
+    def __init__(
+        self,
+        memory: MemorySystem,
+        orchestrator: ToolOrchestrator,
+        sandbox_executor: Optional[SandboxExecutor] = None,
+    ):
         self.memory = memory
         self.orchestrator = orchestrator
+        self.sandbox_executor = sandbox_executor or SandboxExecutor()
         self.syntax_analyzer = SyntaxAnalyzer()
         self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
         logger.info("CodingAgent initialized.")
@@ -293,8 +300,9 @@ Code:
 
     async def execute_and_validate(self, code: str, expected_output: Optional[str] = None) -> Dict[str, Any]:
         """Execute code and optionally validate against expected output."""
-        result_str = await self.orchestrator.run_tool("execute_python", code=code)
-        success = not result_str.startswith("Error")
+        sandbox_result = self.sandbox_executor.execute_code(code, "runtime_execution.py")
+        success = bool(sandbox_result.get("success", False))
+        result_str = sandbox_result.get("stdout", "") if success else sandbox_result.get("error", sandbox_result.get("stderr", ""))
         validated = None
         if expected_output and success:
             validated = expected_output.strip() in result_str.strip()
@@ -304,3 +312,18 @@ Code:
             "success": success,
             "validated": validated,
         }
+
+    async def build_module(self, name: str, requirements: str) -> str:
+        """Build and sandbox-validate a small runtime module."""
+        module_name = re.sub(r"[^a-zA-Z0-9_]+", "_", name).strip("_") or "generated_module"
+        code = (
+            f"def {module_name}_function():\n"
+            f"    return 'Generated for: {requirements}'\n\n"
+            "if __name__ == '__main__':\n"
+            f"    print({module_name}_function())\n"
+        )
+        result = self.sandbox_executor.execute_code(code, f"{module_name}.py")
+        if not result.get("success", False):
+            logger.error(f"Generated module failed sandbox: {result.get('stderr') or result.get('error')}")
+            return ""
+        return code

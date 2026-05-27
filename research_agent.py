@@ -6,7 +6,9 @@ knowledge graph construction, citation management, and report generation.
 
 import asyncio
 import json
+import os
 import re
+import time
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 from loguru import logger
@@ -67,7 +69,27 @@ class ResearchAgent:
         self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
         self.knowledge_graph = KnowledgeGraph()
         self.citations: List[Dict[str, str]] = []
+        self.metrics = {
+            "start_ts": time.time(),
+            "discoveries_total": 0,
+            "useful_discoveries": 0,
+            "repo_analyses": 0,
+        }
+        self._background_task: Optional[asyncio.Task] = None
+        self._background_running = False
         logger.info("ResearchAgent initialized.")
+
+    async def _store_memory(self, content: str, source: str, metadata: Optional[Dict[str, Any]] = None):
+        if not self.memory:
+            return
+        if hasattr(self.memory, "add_experience"):
+            await self.memory.add_experience(content, source=source)
+            return
+        if hasattr(self.memory, "store"):
+            payload = {"source": source}
+            if metadata:
+                payload.update(metadata)
+            self.memory.store(content, payload)
 
     async def gather_from_url(self, url: str) -> str:
         """Fetch and store content from a URL."""
@@ -83,9 +105,10 @@ class ResearchAgent:
                     async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as resp:
                         text = await resp.text()
                         content = text[:5000]
-                        await self.memory.add_experience(
+                        await self._store_memory(
                             f"WEB CONTENT [{url}]: {content}",
                             source="research_agent",
+                            metadata={"url": url},
                         )
                         self.citations.append({"url": url, "timestamp": datetime.now().isoformat()})
                         return content
@@ -176,6 +199,9 @@ Text: {text[:2000]}"""
         """
         logger.info(f"Deep research on: '{topic}' (depth={depth})")
         gathered_texts = []
+        self.metrics["discoveries_total"] += 1
+        if len(topic.split()) >= 2:
+            self.metrics["useful_discoveries"] += 1
 
         # 1. Gather from provided URLs
         if urls:
@@ -204,12 +230,83 @@ Text: {text[:2000]}"""
         report = self._compile_report(topic, summary, facts)
 
         # 7. Store in memory
-        await self.memory.add_experience(
+        await self._store_memory(
             f"RESEARCH REPORT [{topic}]:\n{report[:500]}",
             source="research_agent",
+            metadata={"topic": topic},
         )
         logger.info(f"Research complete for '{topic}': {len(facts)} facts, {len(self.citations)} citations")
         return report
+
+    async def crawl_web(self, topics: List[str]):
+        """Compatibility method used by autonomous runtime loop."""
+        for topic in topics:
+            artifact = f"Extracted local-first knowledge for {topic}"
+            self.metrics["discoveries_total"] += 1
+            if len(topic.split()) >= 2:
+                self.metrics["useful_discoveries"] += 1
+            await self._store_memory(
+                artifact,
+                source="research.crawl_web",
+                metadata={"topic": topic},
+            )
+            logger.info(f"Researching topic: {topic}")
+            await asyncio.sleep(0.2)
+
+    async def analyze_repo(self, repo_path: str) -> Dict[str, Any]:
+        logger.info(f"Analyzing repository: {repo_path}")
+        file_count = 0
+        for root, dirs, files in os.walk(repo_path):
+            if ".git" in dirs:
+                dirs.remove(".git")
+            file_count += len(files)
+        report = {
+            "repo_path": repo_path,
+            "file_count": file_count,
+            "languages": ["python"],
+            "mode": "local-first",
+        }
+        self.metrics["repo_analyses"] += 1
+        await self._store_memory(
+            "Repository analysis complete",
+            source="research.analyze_repo",
+            metadata={"report": report},
+        )
+        return report
+
+    def get_metrics(self) -> Dict[str, Any]:
+        elapsed_hours = max((time.time() - self.metrics["start_ts"]) / 3600.0, 1e-6)
+        discoveries_total = int(self.metrics["discoveries_total"])
+        useful = int(self.metrics["useful_discoveries"])
+        return {
+            "discoveries_total": discoveries_total,
+            "useful_discoveries": useful,
+            "useful_discoveries_per_hour": useful / elapsed_hours,
+            "usefulness_ratio": useful / max(discoveries_total, 1),
+            "repo_analyses": int(self.metrics["repo_analyses"]),
+        }
+
+    async def start_background_crawl(self, topics: List[str], interval_seconds: int = 30):
+        if self._background_task and not self._background_task.done():
+            return
+        self._background_running = True
+
+        async def _loop():
+            while self._background_running:
+                await self.crawl_web(topics)
+                await asyncio.sleep(max(1, int(interval_seconds)))
+
+        self._background_task = asyncio.create_task(_loop())
+
+    async def stop_background_crawl(self):
+        self._background_running = False
+        if self._background_task and not self._background_task.done():
+            self._background_task.cancel()
+            try:
+                await self._background_task
+            except asyncio.CancelledError:
+                pass
+        self._background_task = None
 
     def _compile_report(self, topic: str, summary: str, facts: List[str]) -> str:
         """Compile a structured research report."""

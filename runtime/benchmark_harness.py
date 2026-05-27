@@ -34,6 +34,28 @@ class RuntimeBenchmarkHarness:
         self._save()
         return entry
 
+    def record_trading_metrics(self, metrics: Dict[str, Any]) -> Dict[str, Any]:
+        sharpe = float(metrics.get("sharpe_ratio", 0.0))
+        drawdown = float(metrics.get("max_drawdown", 0.0))
+        total_trades = int(metrics.get("total_trades", 0))
+        normalized = {
+            "sharpe_ratio": sharpe,
+            "max_drawdown": drawdown,
+            "total_trades": total_trades,
+            "win_rate": float(metrics.get("win_rate", 0.0)),
+            "profit_factor": float(metrics.get("profit_factor", 0.0)),
+        }
+        return self.record({"domain": "trading", "trading": normalized})
+
+    def latest_trading_metrics(self) -> Optional[Dict[str, Any]]:
+        for entry in reversed(self.history):
+            metrics = entry.get("metrics", {})
+            if isinstance(metrics, dict) and metrics.get("domain") == "trading":
+                trading = metrics.get("trading")
+                if isinstance(trading, dict):
+                    return trading
+        return None
+
     def latest(self) -> Optional[Dict[str, Any]]:
         return self.history[-1] if self.history else None
 

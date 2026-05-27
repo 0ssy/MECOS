@@ -57,6 +57,12 @@ class TaskPlanner:
                 layer="evolution",
                 phase="evolution",
             ),
+            Task(
+                title="Trading Performance Review",
+                description="Ingest Sharpe and drawdown metrics into optimization loop",
+                layer="trading",
+                phase="evolution",
+            ),
         ]
         self.active_plan = plan
         return plan

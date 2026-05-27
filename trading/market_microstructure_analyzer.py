@@ -2,10 +2,10 @@ from typing import Dict, Any
 from loguru import logger
 import numpy as np
 
-class MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U:
+class MarketMicrostructureAnalyzer:
     def __init__(self, memory):
         self.memory = memory
-        logger.info('MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U initialized')
+        logger.info('MarketMicrostructureAnalyzer initialized')
 
     async def analyze(self, orderbook: Dict) -> Dict[str, Any]:
 
@@ -30,3 +30,7 @@ class MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U:
             'bid_volume': float(bid_volume),
             'ask_volume': float(ask_volume)
         }
+
+
+# Backward-compatible alias for existing imports.
+MKDvoVT7E8tdF4vmk78us6XYnsxz3iik5U = MarketMicrostructureAnalyzer
