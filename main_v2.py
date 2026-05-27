@@ -68,6 +68,8 @@ class UnifiedMECOSRuntime:
             interval_seconds=10.0,
         )
         self._heartbeat_task: Optional[asyncio.Task] = None
+        self._runtime_research_task: Optional[asyncio.Task] = None
+        self._runtime_cognition_task: Optional[asyncio.Task] = None
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -77,7 +79,58 @@ class UnifiedMECOSRuntime:
             self.health_monitor.heartbeat("runtime_main")
             if self._trading_task and not self._trading_task.done():
                 self.health_monitor.heartbeat("trading_loop")
+            for component in (
+                "memory",
+                "perception",
+                "web_perception",
+                "reasoning",
+                "agents",
+                "runtime_stack",
+            ):
+                if self.connection_state.get(component, False):
+                    self.health_monitor.heartbeat(component)
             await asyncio.sleep(5)
+
+    async def _runtime_cognition_loop(self):
+        while True:
+            runtime_router: ModelRouter = self.components.get("runtime_router")
+            runtime_orchestrator: AutonomousOrchestrator = self.components.get("runtime_orchestrator")
+            runtime_evolution: EvolutionAgent = self.components.get("runtime_evolution")
+            if runtime_router and runtime_orchestrator and runtime_evolution:
+                try:
+                    await self.execution_guard.run(
+                        "runtime_router_tick",
+                        runtime_router.route_request("maintain runtime health", "long_term_planning"),
+                        timeout_seconds=60.0,
+                    )
+                    await runtime_orchestrator.run_goal("Maintain MECOS subsystem coordination")
+                    await runtime_evolution.run_benchmark("runtime_governance", {"success_rate": 0.9})
+                except Exception as exc:
+                    logger.warning(f"Runtime cognition tick failed: {exc}")
+            await asyncio.sleep(120)
+
+    async def _start_runtime_background_loops(self):
+        runtime_loop: ContinuousResearchLoop = self.components.get("runtime_research_loop")
+        if runtime_loop and (not self._runtime_research_task or self._runtime_research_task.done()):
+            self._runtime_research_task = asyncio.create_task(
+                runtime_loop.start(["autonomous runtime", "recursive engineering", "runtime stability"])
+            )
+        if not self._runtime_cognition_task or self._runtime_cognition_task.done():
+            self._runtime_cognition_task = asyncio.create_task(self._runtime_cognition_loop())
+
+    async def _stop_runtime_background_loops(self):
+        runtime_loop: ContinuousResearchLoop = self.components.get("runtime_research_loop")
+        if runtime_loop:
+            runtime_loop.stop()
+        for task in (self._runtime_research_task, self._runtime_cognition_task):
+            if task and not task.done():
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
+        self._runtime_research_task = None
+        self._runtime_cognition_task = None
 
     async def startup(self):
         self.drift_guard.add_anchor("Stability before expansion", source="operator_policy")
@@ -293,6 +346,7 @@ class UnifiedMECOSRuntime:
         if not self.trading_system:
             logger.warning("TradingSystem unavailable; skipping trading start")
             return
+        await self._start_runtime_background_loops()
         self._trading_task = asyncio.create_task(self.trading_system.start(use_starter_universe=True))
         await asyncio.sleep(max(1, int(run_seconds)))
         self.trading_system.stop()
@@ -302,9 +356,37 @@ class UnifiedMECOSRuntime:
                 await self._trading_task
             except asyncio.CancelledError:
                 pass
+        await self._stop_runtime_background_loops()
         logger.info("Trading segment stopped")
 
+    async def run_full_runtime(self, run_seconds: int, include_trading: bool = False):
+        await self._start_runtime_background_loops()
+        if include_trading:
+            if not self.trading_system:
+                logger.warning("TradingSystem unavailable; running full runtime without trading.")
+            else:
+                self._trading_task = asyncio.create_task(self.trading_system.start(use_starter_universe=True))
+
+        try:
+            if int(run_seconds) <= 0:
+                while True:
+                    await asyncio.sleep(60)
+            else:
+                await asyncio.sleep(max(1, int(run_seconds)))
+        finally:
+            if self.trading_system:
+                self.trading_system.stop()
+            if self._trading_task and not self._trading_task.done():
+                self._trading_task.cancel()
+                try:
+                    await self._trading_task
+                except asyncio.CancelledError:
+                    pass
+            await self._stop_runtime_background_loops()
+        logger.info("Full runtime segment stopped")
+
     async def shutdown(self):
+        await self._stop_runtime_background_loops()
         if self._heartbeat_task:
             self._heartbeat_task.cancel()
             try:
@@ -339,8 +421,19 @@ class UnifiedMECOSRuntime:
 
 async def main():
     parser = argparse.ArgumentParser(description="MECOS unified runtime entrypoint")
-    parser.add_argument("--start-trading", action="store_true", help="Start trading loop after runtime demo")
+    parser.add_argument("--start-trading", action="store_true", help="(legacy) Start trading loop after runtime demo")
     parser.add_argument("--trading-seconds", type=int, default=30, help="How long to run trading before stopping")
+    parser.add_argument(
+        "--runtime-seconds",
+        type=int,
+        default=0,
+        help="How long to keep full MECOS runtime alive. 0 means run until interrupted.",
+    )
+    parser.add_argument(
+        "--no-trading",
+        action="store_true",
+        help="Run full MECOS runtime without trading loop.",
+    )
     parser.add_argument(
         "--execution-mode",
         choices=["paper", "live"],
@@ -353,8 +446,12 @@ async def main():
     try:
         await runtime.startup()
         await runtime.run_runtime_demo()
-        if args.start_trading:
-            await runtime.start_trading(args.trading_seconds)
+        include_trading = (not args.no_trading) or args.start_trading
+        if args.runtime_seconds != 0:
+            await runtime.run_full_runtime(args.runtime_seconds, include_trading=include_trading)
+        else:
+            # Default behavior for main.py: run full MECOS architecture continuously.
+            await runtime.run_full_runtime(0, include_trading=include_trading)
     except Exception as exc:
         await runtime.crash_recovery.record_crash(
             exc,
