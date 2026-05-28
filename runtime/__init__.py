@@ -18,3 +18,7 @@ __all__ = [
     "StateCheckpoint",
 ]
 
+
+# -- Hardening layer exports (auto-added by install_hardening.ps1) --
+from runtime.validity_filter import ValidityFilter, TrustedScoreStore, build_validity_pipeline, ScoredOutput, freeze_baseline
+from runtime.drift_guard import DriftGuard
