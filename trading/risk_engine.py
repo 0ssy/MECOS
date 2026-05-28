@@ -7,7 +7,7 @@ class RiskEngine:
         self.memory = memory
 
         self.max_drawdown = 0.10
-        self.max_position_size = 0.10
+        self.max_position_size = 0.25
         self.max_leverage = 3.0
         self.daily_loss_limit = 0.03
 

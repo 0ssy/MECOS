@@ -92,7 +92,7 @@ class AutonomousTradingLoop:
         self.min_acceptable_volatility = 0.003
         self.max_acceptable_volatility = 0.050
         self.enable_trade_quality_filter = True
-        self.trade_quality_spread_multiplier = 2.5
+        self.trade_quality_spread_multiplier = 0.5
         self.enable_signal_persistence = True
         self.signal_persistence_count_required = 2
         self.signal_persistence_seconds = 5.0

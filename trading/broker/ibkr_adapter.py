@@ -29,12 +29,30 @@ class IbkrAdapter(BrokerAdapter):
     async def _connect_async(self):
         if self.ib.isConnected():
             return
-        logger.info(f'Connecting to IBKR at {self.host}:{self.port} clientId={self.client_id}')
-        await self.ib.connectAsync(self.host, self.port, clientId=self.client_id, timeout=10)
-        if not self.ib.isConnected():
-            raise RuntimeError('IBKR connection failed')
-        self.ib.reqMarketDataType(3)
-        logger.info('IBKR connected')
+        ports = [self.port, 7497, 7496, 4001, 4002]
+        seen = set()
+        ordered_ports = []
+        for p in ports:
+            if p not in seen:
+                ordered_ports.append(p)
+                seen.add(p)
+
+        last_error = None
+        for p in ordered_ports:
+            try:
+                logger.info(f'Connecting to IBKR at {self.host}:{p} clientId={self.client_id}')
+                await self.ib.connectAsync(self.host, p, clientId=self.client_id, timeout=6)
+                if self.ib.isConnected():
+                    self.port = p
+                    # Delayed market data type fallback when live entitlements are unavailable.
+                    self.ib.reqMarketDataType(3)
+                    logger.info(f'IBKR connected on port {p}')
+                    return
+            except Exception as exc:
+                last_error = exc
+                continue
+
+        raise RuntimeError(f'IBKR connection failed on all candidate ports: {last_error}')
 
     async def _resolve_contract(self, symbol: str):
         symbol = str(symbol).upper().strip()

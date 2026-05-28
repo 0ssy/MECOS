@@ -203,8 +203,17 @@ Text: {text[:2000]}"""
         if len(topic.split()) >= 2:
             self.metrics["useful_discoveries"] += 1
 
-        # 1. Gather from provided URLs
-        if urls:
+        # 1. Gather from live web when available, otherwise from provided URLs.
+        if self.web and not urls:
+            query = topic.replace(" ", "+")
+            seed_urls = [
+                f"https://duckduckgo.com/?q={query}",
+                f"https://search.brave.com/search?q={query}",
+            ]
+            crawl_summary = await self.web.crawl_web(seed_urls=seed_urls, max_pages=max(2, depth), max_depth=0, same_domain_only=False)
+            if isinstance(crawl_summary, dict):
+                gathered_texts.append(f"Live crawl summary: {crawl_summary}")
+        elif urls:
             for url in urls[:depth]:
                 content = await self.gather_from_url(url)
                 gathered_texts.append(content)
@@ -239,19 +248,40 @@ Text: {text[:2000]}"""
         return report
 
     async def crawl_web(self, topics: List[str]):
-        """Compatibility method used by autonomous runtime loop."""
+        """Runtime loop research with live web ingestion when available."""
         for topic in topics:
-            artifact = f"Extracted local-first knowledge for {topic}"
             self.metrics["discoveries_total"] += 1
             if len(topic.split()) >= 2:
                 self.metrics["useful_discoveries"] += 1
-            await self._store_memory(
-                artifact,
-                source="research.crawl_web",
-                metadata={"topic": topic},
-            )
             logger.info(f"Researching topic: {topic}")
-            await asyncio.sleep(0.2)
+
+            if self.web:
+                query = topic.replace(" ", "+")
+                seed_urls = [
+                    f"https://duckduckgo.com/?q={query}",
+                    f"https://search.brave.com/search?q={query}",
+                ]
+                try:
+                    crawl_summary = await self.web.crawl_web(
+                        seed_urls=seed_urls,
+                        max_pages=2,
+                        max_depth=0,
+                        same_domain_only=False,
+                    )
+                    await self._store_memory(
+                        f"Live web research for {topic}: {crawl_summary}",
+                        source="research.crawl_web",
+                        metadata={"topic": topic, "live": True},
+                    )
+                except Exception as exc:
+                    logger.error(f"Live crawl failed for {topic}: {exc}")
+            else:
+                await self._store_memory(
+                    f"Extracted local-first knowledge for {topic}",
+                    source="research.crawl_web",
+                    metadata={"topic": topic, "live": False},
+                )
+            await asyncio.sleep(0.5)
 
     async def analyze_repo(self, repo_path: str) -> Dict[str, Any]:
         logger.info(f"Analyzing repository: {repo_path}")

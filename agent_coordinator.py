@@ -57,7 +57,7 @@ class AgentCoordinator:
         self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
         self._agents: Dict[str, Any] = {}
         self._message_log: List[AgentMessage] = []
-        logger.info("AgentCoordinator initialized.")
+        logger.info("Unified AgentCoordinator initialized.")
 
     def register_agent(self, name: str, agent: Any, role: AgentRole):
         """Register a specialized agent with the coordinator."""
@@ -94,7 +94,12 @@ class AgentCoordinator:
 
         agent_info = self._agents.get(role)
         if not agent_info:
-            return {"role": role, "result": f"No agent registered for role: {role}", "success": False}
+            for name, info in self._agents.items():
+                if role in name:
+                    agent_info = info
+                    break
+            if not agent_info:
+                return {"role": role, "result": f"No agent registered for role: {role}", "success": False}
 
         agent = agent_info["agent"]
         result = None
@@ -103,9 +108,15 @@ class AgentCoordinator:
             if role == "research":
                 result = await agent.deep_research(task)
             elif role == "coding":
-                result = await agent.generate_code(task)
+                if hasattr(agent, "generate_code"):
+                    result = await agent.generate_code(task)
+                elif hasattr(agent, "build_module"):
+                    result = await agent.build_module(task)
             elif role == "trading":
-                result = f"Trading analysis requested: {task}. Provide market data for full analysis."
+                if hasattr(agent, "execute"):
+                    result = await agent.execute(task)
+                else:
+                    result = f"Trading analysis requested: {task}. Agent ready."
             else:
                 result = f"Task acknowledged by {role} agent."
 
