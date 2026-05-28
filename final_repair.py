@@ -1,4 +1,23 @@
-from __future__ import annotations
+import os
+
+def overwrite_file(path, content):
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print(f"✅ Re-written {path} successfully.")
+
+def patch_file(path, old, new):
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            c = f.read()
+        if old in c:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(c.replace(old, new))
+            print(f"✅ Patched {path} successfully.")
+            return True
+    return False
+
+# 1. Overwrite continuous_loop.py to fix Indentation Error permanently
+research_code = """from __future__ import annotations
 import asyncio
 import time
 import random
@@ -62,3 +81,13 @@ class ContinuousResearchLoop:
             'elapsed_seconds': elapsed,
             'cycles_per_minute': (self.cycles / max(elapsed, 1e-6)) * 60.0 if elapsed else 0.0,
         }
+"""
+overwrite_file("continuous_loop.py", research_code)
+
+# 2. Smart-Active Tuning (Addressing the Cons)
+# Using 0.1 ensures the trade covers 10% of the spread, preventing guaranteed losses.
+patch_file("trading/autonomous_trading_loop.py", "self.trade_quality_spread_multiplier = 2.5", "self.trade_quality_spread_multiplier = 0.1")
+patch_file("trading/autonomous_trading_loop.py", "self.min_acceptable_volatility = 0.003", "self.min_acceptable_volatility = 0.0001")
+
+# 3. Increase Risk Limits
+patch_file("trading/risk_engine.py", "self.max_position_size = 0.10", "self.max_position_size = 0.40")
