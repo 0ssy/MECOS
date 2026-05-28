@@ -89,7 +89,7 @@ class AutonomousTradingLoop:
         self._last_symbol_cycle_time = {}
         self._signal_persistence: Dict[str, Dict[str, Any]] = {}
         self.max_correlated_positions = 3
-        self.min_acceptable_volatility = 0.0001
+        self.min_acceptable_volatility = 0.0005
         self.max_acceptable_volatility = 0.050
         self.enable_trade_quality_filter = True
         self.trade_quality_spread_multiplier = 0.2
