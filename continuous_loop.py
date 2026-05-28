@@ -20,20 +20,34 @@ class ContinuousResearchLoop:
             "automated strategy synthesis", "sovereign compute orchestration",
             "high-frequency data ingestion"
         ]
+        self.modifiers = ["optimization", "architecture", "security", "scaling", "latency", "governance"]
+
+    @staticmethod
+    def _normalize_topic(topic: str) -> str:
+        tokens = [t for t in str(topic or "").lower().split() if t]
+        if not tokens:
+            return ""
+        # Collapse immediate repeats and cap token growth.
+        compact = []
+        for t in tokens:
+            if not compact or compact[-1] != t:
+                compact.append(t)
+        return " ".join(compact[:8])
 
     async def start(self, initial_topics: List[str] | None = None):
         self.is_active = True
         self.started_at = time.time()
-        topics = initial_topics or self.base_topics
+        topics = [self._normalize_topic(t) for t in (initial_topics or self.base_topics)]
+        topics = [t for t in topics if t]
         logger.info("Continuous Research Loop activated with diversification")
         
         while self.is_active:
-            if not self.visited_topics or random.random() < 0.3:
+            if not self.visited_topics or random.random() < 0.35:
                 topic = random.choice(topics)
             else:
                 seed = random.choice(list(self.visited_topics))
-                modifiers = ["optimization", "architecture", "security", "scaling", "latency", "governance"]
-                topic = f"{seed} {random.choice(modifiers)}"
+                base_seed = " ".join(seed.split()[:4])
+                topic = self._normalize_topic(f"{base_seed} {random.choice(self.modifiers)}")
 
             if topic in self.visited_topics and len(self.visited_topics) < 200:
                 await asyncio.sleep(1)

@@ -89,7 +89,7 @@ class AutonomousTradingLoop:
         self._last_symbol_cycle_time = {}
         self._signal_persistence: Dict[str, Dict[str, Any]] = {}
         self.max_correlated_positions = 3
-        self.min_acceptable_volatility = 0.0005
+        self.min_acceptable_volatility = 0.0
         self.max_acceptable_volatility = 0.050
         self.enable_trade_quality_filter = True
         self.trade_quality_spread_multiplier = 0.2
@@ -717,9 +717,17 @@ class AutonomousTradingLoop:
             or 0.0
         )
         expected_move = float(signal.get('expected_move', 0.0) or 0.0)
-        if expected_move <= 0.0 and tick.get('open'):
-            expected_move = abs(float(tick.get('close', 0.0) or 0.0) / float(tick.get('open', 1.0) or 1.0) - 1.0)
+        if expected_move <= 0.0:
+            if tick.get('open'):
+                expected_move = abs(float(tick.get('close', 0.0) or 0.0) / float(tick.get('open', 1.0) or 1.0) - 1.0)
+            if expected_move <= 0.0 and tick.get('high') and tick.get('low') and tick.get('close'):
+                expected_move = abs(float(tick.get('high')) - float(tick.get('low'))) / max(float(tick.get('close')), 1e-9)
+            if expected_move <= 0.0 and spread > 0.0:
+                # Avoid deadlock when micro-moves are rounded to zero.
+                expected_move = spread * 0.5
         volatility = float(signal.get('volatility', tick.get('volatility', 0.0)) or 0.0)
+        if volatility <= 0.0:
+            volatility = max(abs(expected_move), spread)
         confidence = float(signal.get('confidence', 0.0) or 0.0)
         adaptive_threshold = self._adaptive_confidence_threshold(signal, base_threshold)
         signal['confidence_threshold'] = adaptive_threshold
