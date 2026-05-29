@@ -12,7 +12,7 @@ class MeanReversionAgent:
     def __init__(self, memory):
         self.memory = memory
         self.lookback = 20
-        self.entry_threshold = 1.5  # Z-score threshold (lowered from 2.0 for liquid ETFs)
+        self.entry_threshold = 2.0  # Z-score threshold
         self.exit_threshold = 0.5
         logger.info("Mean Reversion Agent initialized")
     
@@ -58,4 +58,3 @@ class MeanReversionAgent:
             "mean_reversion_strength": float(abs(autocorr)),
             "reason": f"Z-score: {z_score:.2f}, Autocorr: {autocorr:.2f}"
         }
-

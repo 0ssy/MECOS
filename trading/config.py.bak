@@ -1,6 +1,4 @@
 class TradingConfig:
-    # Dynamic agent weight adjustment
-    USE_DYNAMIC_WEIGHTS = True   # Adjust agent weights based on rolling PnL
     # --- Regime Detection ---
     REGIME_LOOKBACK = 50
     VOLATILITY_THRESHOLD = 2.0
@@ -60,4 +58,3 @@ class TradingConfig:
 
     FOREX_SYMBOLS = ['EURUSD', 'GBPUSD', 'USDJPY']
     MAX_SECTOR_EXPOSURE = 0.40  # Max 40% in any one sector
-

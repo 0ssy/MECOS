@@ -8,7 +8,7 @@ from typing import Dict, Any, Tuple
 import numpy as np
 
 
-EDGE_DECISION_THRESHOLD = 0.20  # Lowered from 0.35 — 8+ agents rarely hit 35% net edge
+EDGE_DECISION_THRESHOLD = 0.35
 
 REGIME_AGENT_WEIGHTS = {
     "trending": {
@@ -200,4 +200,3 @@ class QuantSignalFusion:
                 * confidence_multiplier
             ),
         }
-

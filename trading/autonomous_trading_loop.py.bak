@@ -94,7 +94,7 @@ class AutonomousTradingLoop:
         self.enable_trade_quality_filter = True
         self.trade_quality_spread_multiplier = 0.05
         self.enable_signal_persistence = True
-        self.signal_persistence_count_required = 2  # Reduced to 1 for high-confidence signals (see _passes_signal_persistence)
+        self.signal_persistence_count_required = 2
         self.signal_persistence_seconds = 5.0
 
         self.loop_stats = {
@@ -895,6 +895,5 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
-
 
 

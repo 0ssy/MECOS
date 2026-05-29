@@ -96,7 +96,7 @@ class ValidityFilter:
         penalty_factor: float = 0.0,
         audit_log_path: str = "memory_db/benchmarks/validity_audit_log.jsonl",
         trusted_store_path: str = "memory_db/benchmarks/trusted_scores.json",
-        baseline_path: str = "data/trusted_memory_anchors.json",
+        baseline_path: str = "data/benchmark_baseline.json",
     ):
         self.audit_rate = audit_rate
         self.penalty_factor = penalty_factor
@@ -400,7 +400,7 @@ class TrustedScoreStore:
 
 def build_validity_pipeline(
     audit_rate: float = 0.10,
-    baseline_path: str = "data/trusted_memory_anchors.json",
+    baseline_path: str = "data/benchmark_baseline.json",
 ) -> Tuple[ValidityFilter, TrustedScoreStore]:
     vf    = ValidityFilter(audit_rate=audit_rate, baseline_path=baseline_path)
     store = TrustedScoreStore(vf)
@@ -409,7 +409,7 @@ def build_validity_pipeline(
 
 def freeze_baseline(
     current_scores: Dict[str, float],
-    baseline_path: str = "data/trusted_memory_anchors.json",
+    baseline_path: str = "data/benchmark_baseline.json",
     force: bool = False,
 ) -> bool:
     import stat as _stat
@@ -430,3 +430,4 @@ def freeze_baseline(
     path.chmod(_stat.S_IRUSR | _stat.S_IRGRP | _stat.S_IROTH)
     logger.info(f"Frozen baseline written to {path} (read-only). Subsystems: {list(current_scores.keys())}")
     return True
+

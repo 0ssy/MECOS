@@ -11,7 +11,7 @@ class RegimeDetectionAgent:
 
     async def detect_regime(self, data: List[Dict]) -> str:
         if len(data) < self.lookback:
-            return "ranging"  # Conservative fallback: balanced weights until enough history
+            return "unknown"
 
         df = pd.DataFrame(data)
         close = df["close"]
@@ -33,4 +33,3 @@ class RegimeDetectionAgent:
             return "low_volatility"
 
         return "ranging"
-

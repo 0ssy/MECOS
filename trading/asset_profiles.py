@@ -44,3 +44,99 @@ def get_asset_profile(symbol: str) -> Dict[str, Any]:
     }
     profile = ASSET_PROFILES.get(symbol, {})
     return {**default_profile, **profile}
+
+
+# ---------------------------------------------------------------------------
+# Sector mapping for exposure manager
+# ---------------------------------------------------------------------------
+SECTOR_MAP: Dict[str, str] = {
+    # Mega-cap tech
+    'AAPL':  'technology',
+    'MSFT':  'technology',
+    'GOOGL': 'technology',
+    'GOOG':  'technology',
+    'META':  'technology',
+    'AMZN':  'technology',
+    'NFLX':  'technology',
+    'ADBE':  'technology',
+    'CRM':   'technology',
+    'ORCL':  'technology',
+    # Semiconductors
+    'NVDA':  'semiconductors',
+    'AMD':   'semiconductors',
+    'INTC':  'semiconductors',
+    'QCOM':  'semiconductors',
+    'AVGO':  'semiconductors',
+    'MU':    'semiconductors',
+    'AMAT':  'semiconductors',
+    'LRCX':  'semiconductors',
+    # Indices / ETFs
+    'SPY':   'index',
+    'QQQ':   'index',
+    'DIA':   'index',
+    'VTI':   'index',
+    'VOO':   'index',
+    'IVV':   'index',
+    'IWM':   'small_cap',
+    'VXX':   'volatility',
+    # Automotive / EV
+    'TSLA':  'automotive',
+    'F':     'automotive',
+    'GM':    'automotive',
+    'RIVN':  'automotive',
+    'LCID':  'automotive',
+    # Finance
+    'JPM':   'financials',
+    'BAC':   'financials',
+    'GS':    'financials',
+    'MS':    'financials',
+    'WFC':   'financials',
+    'V':     'financials',
+    'MA':    'financials',
+    'AXP':   'financials',
+    # Healthcare
+    'JNJ':   'healthcare',
+    'PFE':   'healthcare',
+    'MRNA':  'healthcare',
+    'UNH':   'healthcare',
+    'ABBV':  'healthcare',
+    'LLY':   'healthcare',
+    # Energy
+    'XOM':   'energy',
+    'CVX':   'energy',
+    'COP':   'energy',
+    # Consumer
+    'WMT':   'consumer',
+    'COST':  'consumer',
+    'TGT':   'consumer',
+    'HD':    'consumer',
+    'MCD':   'consumer',
+    'SBUX':  'consumer',
+    'NKE':   'consumer',
+    # Crypto (symbol variants)
+    'BTC/USD':  'crypto',
+    'ETH/USD':  'crypto',
+    'SOL/USD':  'crypto',
+    'AVAX/USD': 'crypto',
+    'LINK/USD': 'crypto',
+    'DOGE/USD': 'crypto',
+    'ADA/USD':  'crypto',
+    'BTC/USDT': 'crypto',
+    'ETH/USDT': 'crypto',
+    'SOL/USDT': 'crypto',
+}
+
+
+def get_sector(symbol: str) -> str:
+    """
+    Return the sector for a symbol.
+    Falls back to infer_market() so it never returns 'unknown'.
+    """
+    token = str(symbol or '').upper().strip()
+    if token in SECTOR_MAP:
+        return SECTOR_MAP[token]
+    # Infer from symbol structure
+    market = infer_market(token)
+    if market == 'equity':
+        return 'equity'
+    return market  # crypto / forex / commodity_fx

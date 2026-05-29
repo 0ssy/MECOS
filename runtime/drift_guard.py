@@ -34,7 +34,7 @@ class DriftEvent:
 class DriftGuard:
     def __init__(
         self,
-        baseline_path: str = "data/trusted_memory_anchors.json",
+        baseline_path: str = "data/benchmark_baseline.json",
         drift_log_path: str = "memory_db/benchmarks/drift_events.jsonl",
         drift_threshold: float = DRIFT_THRESHOLD,
         improve_threshold: float = IMPROVE_THRESHOLD,
@@ -143,7 +143,7 @@ class DriftGuard:
 
     def add_anchor(self, description: str, source: str = "system") -> str:
         """Store a trusted memory anchor entry."""
-        anchor_path = Path("data/trusted_memory_anchors.json")
+        anchor_path = Path("data/benchmark_baseline.json")
         anchor_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Load existing anchors (temporarily make writable if needed)
@@ -197,3 +197,4 @@ class DriftGuard:
             "improvement_count": len([e for e in events if e.direction == "IMPROVEMENT"]),
             "events": [asdict(e) for e in events],
         }
+

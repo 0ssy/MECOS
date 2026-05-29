@@ -1,3 +1,42 @@
+# final_fix.ps1
+# Run from your MECOS folder:
+#   .\final_fix.ps1
+
+$ErrorActionPreference = "Stop"
+
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "  MECOS Final Baseline Fix" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+
+# Step 1: Show the actual metrics file structure
+Write-Host ""
+Write-Host "Checking metrics file structure..." -ForegroundColor White
+$MetricsPath = "memory_db\benchmarks\runtime_subsystem_metrics.json"
+if (Test-Path $MetricsPath) {
+    Write-Host "  Found: $MetricsPath" -ForegroundColor Green
+    Write-Host "  First 30 lines:" -ForegroundColor Gray
+    Get-Content $MetricsPath | Select-Object -First 30
+} else {
+    Write-Host "  [NOT FOUND] $MetricsPath" -ForegroundColor Yellow
+    Write-Host "  Listing all files in memory_db\benchmarks\:" -ForegroundColor Gray
+    if (Test-Path "memory_db\benchmarks") {
+        Get-ChildItem "memory_db\benchmarks" | ForEach-Object { Write-Host "    $_" -ForegroundColor Gray }
+    } else {
+        Write-Host "    memory_db\benchmarks\ does not exist yet" -ForegroundColor Yellow
+    }
+}
+
+Write-Host ""
+
+# Step 2: Write the corrected freeze_baseline.py
+# Key changes:
+# - Uses data\benchmark_baseline.json (separate from trusted_memory_anchors.json)
+# - Handles metrics file being a list OR a dict
+# - Gracefully creates a minimal baseline if metrics file doesn't exist yet
+Write-Host "Writing corrected freeze_baseline.py ..." -ForegroundColor White
+
+Set-Content -Path "freeze_baseline.py" -Value @'
 """
 freeze_baseline.py - MECOS Frozen Benchmark Baseline Manager
 
@@ -232,3 +271,44 @@ def main():
 
 if __name__ == "__main__":
     main()
+'@ -Encoding UTF8
+
+Write-Host "  [OK]  freeze_baseline.py written" -ForegroundColor Green
+
+# Step 3: Also update drift_guard.py to point to the new baseline path
+Write-Host ""
+Write-Host "Updating drift_guard.py default baseline path..." -ForegroundColor White
+$DriftPath = "runtime\drift_guard.py"
+$drift = Get-Content $DriftPath -Raw
+$drift = $drift -replace '"data/trusted_memory_anchors.json"', '"data/benchmark_baseline.json"'
+Set-Content $DriftPath $drift -Encoding UTF8
+Write-Host "  [OK]  drift_guard.py updated" -ForegroundColor Green
+
+# Step 4: Also update validity_filter.py default baseline path
+Write-Host "Updating validity_filter.py default baseline path..." -ForegroundColor White
+$VFPath = "runtime\validity_filter.py"
+$vf = Get-Content $VFPath -Raw
+$vf = $vf -replace '"data/trusted_memory_anchors.json"', '"data/benchmark_baseline.json"'
+Set-Content $VFPath $vf -Encoding UTF8
+Write-Host "  [OK]  validity_filter.py updated" -ForegroundColor Green
+
+# Step 5: Run freeze
+Write-Host ""
+Write-Host "Freezing benchmark baseline..." -ForegroundColor White
+python freeze_baseline.py --force
+
+# Step 6: Show result
+Write-Host ""
+python freeze_baseline.py --show
+
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "  Done." -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Summary:" -ForegroundColor White
+Write-Host "  data\trusted_memory_anchors.json  <- UNTOUCHED (your policy anchor file)" -ForegroundColor Gray
+Write-Host "  data\benchmark_baseline.json      <- NEW frozen benchmark scores (read-only)" -ForegroundColor Green
+Write-Host ""
+Write-Host "Now apply the two patches from meta_learner_patch.py to meta_learner.py" -ForegroundColor Yellow
+Write-Host "Then MECOS hardening is fully complete." -ForegroundColor Yellow
+Write-Host ""

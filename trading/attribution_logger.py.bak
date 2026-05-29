@@ -39,32 +39,3 @@ class AttributionLogger:
             safe_entry = {k: (str(v) if not isinstance(v, (str, int, float, dict, list)) else v) for k, v in entry.items()}
             with open(self.path, 'a') as f:
                 f.write(json.dumps(safe_entry, default=_json_default) + '\n')
-
-
-# ---------------------------------------------------------------------------
-# Integration with DynamicAgentWeights
-# ---------------------------------------------------------------------------
-_dynamic_weights_instance = None
-
-def get_dynamic_weights():
-    global _dynamic_weights_instance
-    if _dynamic_weights_instance is None:
-        try:
-            from trading.dynamic_agent_weights import DynamicAgentWeights
-            _dynamic_weights_instance = DynamicAgentWeights()
-        except Exception:
-            pass
-    return _dynamic_weights_instance
-
-
-def record_agent_outcome(agent_name: str, pnl: float, signal: str = "BUY", confidence: float = 0.5):
-    """
-    Call after each trade closes to update dynamic weights.
-    agent_name: the primary agent that generated the signal (e.g. "trend", "mean_reversion")
-    """
-    dw = get_dynamic_weights()
-    if dw is not None:
-        try:
-            dw.record_outcome(agent_name, pnl, signal, confidence)
-        except Exception:
-            pass

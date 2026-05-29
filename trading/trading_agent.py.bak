@@ -97,8 +97,6 @@ class TradingAgent:
         self.regime_detector = RegimeDetectionAgent(memory)
         self.meta_orchestrator = MetaOrchestrator(memory)
         self.quant_fusion = QuantSignalFusion()  # Primary signal fusion layer
-        self.portfolio_engine = PortfolioEngine(memory)   # Proper Kelly + vol targeting
-        self.execution_engine = ExecutionEngine(memory)   # TWAP for large orders
         self.risk_engine = RiskEngine(memory)
         self.feature_engine = FeatureEngine(memory)
         self.physics_engine = MarketPhysicsEngine(memory)
@@ -275,7 +273,6 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
-
 
 
 

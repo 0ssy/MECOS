@@ -1,15 +1,8 @@
 # trading/exposure_manager.py
 
 SECTOR_LIMITS = {
-    'tech':        0.40,
-    'technology':  0.40,
-    'crypto':      0.25,
-    'equity':      0.80,
-    'index':       0.60,
-    'small_cap':   0.30,
-    'semiconductors': 0.30,
-    'automotive':  0.20,
-    'unknown':     0.80,   # fallback — generous so sector gaps never block trades
+    'tech': 0.40,
+    'crypto': 0.25,
 }
 
 CORRELATION_CLUSTERS = [
@@ -40,7 +33,7 @@ class ExposureManager:
         notional,
         portfolio_value,
         symbol=None,
-        max_correlated_positions=6,
+        max_correlated_positions=3,
         max_sector_exposure=None,
     ):
         max_exposure = float(max_sector_exposure) if max_sector_exposure is not None else SECTOR_LIMITS.get(sector, 1.0)
@@ -66,4 +59,3 @@ class ExposureManager:
     def reset(self):
         self.sector_exposure = {}
         self.symbol_exposure = {}
-
