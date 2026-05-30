@@ -106,7 +106,6 @@ class TradingAgent:
         except Exception as _eng_err:
             self.portfolio_engine = None
             self.execution_engine = None
-        self.uncertainty_flagger = None  # wired from main.py
         self.risk_engine = RiskEngine(memory)
         self.feature_engine = FeatureEngine(memory)
         self.physics_engine = MarketPhysicsEngine(memory)
@@ -241,25 +240,7 @@ class TradingAgent:
                     f"{risk_evaluation.get('reason', 'Risk adjustment')}"
                 )
 
-        # UncertaintyFlagger gate
-            if self.uncertainty_flagger is not None:
-                try:
-                    _uf_approval = self.uncertainty_flagger.score_plan(
-                        plan=f"{symbol} {final_decision}",
-                        signal_strength=float(fused.get("confidence", 0.5)),
-                        market_regime=0.7 if regime != "unknown" else 0.4,
-                        volatility_regime=float(min(1.0, 1.0 - features.get("realized_volatility", 0.3))),
-                        data_freshness=0.9,
-                        historical_accuracy=float(fused.get("agreement", 0.5)),
-                        edge_case_coverage=0.6,
-                    )
-                    if not _uf_approval.execution_approved and final_decision != "HOLD":
-                        logger.debug(f"UncertaintyFlagger blocked {symbol}: conf={_uf_approval.confidence_score:.2f}")
-                        final_decision = "HOLD"
-                        confidence = _uf_approval.confidence_score
-                except Exception:
-                    pass
-            logger.info(f"Decision for {symbol}: {final_decision} (Confidence: {confidence:.2f})")
+        logger.info(f"Decision for {symbol}: {final_decision} (Confidence: {confidence:.2f})")
         spread_pressure = float(features.get("spread_pressure", 0.0))
         expected_move = float(max(abs(features.get("roc_5", 0.0)), abs(features.get("trend_strength", 0.0))))
         if expected_move <= 0.0 and valid_data[-1].get("open"):
@@ -305,7 +286,6 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
-
 
 
 

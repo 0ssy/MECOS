@@ -52,20 +52,8 @@ try:
     from workers.memory_worker import run_memory_worker
     from workers.evolution_worker import run_evolution_worker
     _ADVANCED_LAYERS = True
-
-# --- MECOS v3.0 Reporting & Honesty Layer ---
-    try:
-        from runtime.uncertainty_flagger import UncertaintyFlagger
-        from reporting.milestone_alerts import AlertDispatcher, MilestoneAlertSystem
-        from reporting.daily_report_generator import DailyReportGenerator
-        from reporting.weekly_review_generator import WeeklyReviewGenerator
-        from runtime.app_discovery import AppDiscovery, AppLearner
-        _V3_LAYERS = True
-    except ImportError as _v3_err:
-        _V3_LAYERS = False
 except ImportError as _adv_err:
     _ADVANCED_LAYERS = False
-    _V3_LAYERS = False
 
 
 class UnifiedMECOSRuntime:
@@ -98,15 +86,6 @@ class UnifiedMECOSRuntime:
         self.knowledge_compressor = None
         self._compressor_task: Optional[asyncio.Task] = None
         self._dreaming_task: Optional[asyncio.Task] = None
-        # --- v3.0 component instances ---
-        self.uncertainty_flagger = None
-        self.alert_dispatcher    = None
-        self.milestone_system    = None
-        self.daily_reporter      = None
-        self.weekly_reviewer     = None
-        self.app_discovery       = None
-        self._daily_report_task: Optional[asyncio.Task] = None
-        self._weekly_review_task: Optional[asyncio.Task] = None
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -309,16 +288,7 @@ class UnifiedMECOSRuntime:
             metadata={"connection_state": self.connection_state},
         )
         await self._start_advanced_layers()
-        await self._start_v3_layers()
         logger.info(f"Unified MECOS startup complete: {self.connection_state}")
-        if self.uncertainty_flagger and 'quant_trading_agent' in self.connection_state:
-            try:
-                trading_agent = self.components.get('quant_trading_agent')
-                if trading_agent and not hasattr(trading_agent, 'uncertainty_flagger'):
-                    trading_agent.uncertainty_flagger = self.uncertainty_flagger
-                    logger.info('UncertaintyFlagger wired into TradingAgent')
-            except Exception:
-                pass
 
     async def run_runtime_demo(self):
         runtime_memory: RuntimeVectorMemory = self.components["runtime_memory"]
@@ -550,124 +520,6 @@ class UnifiedMECOSRuntime:
             logger.info('Distributed worker processes started')
         except Exception as _e:
             logger.warning(f'ProcessManager failed: {_e}')
-
-    async def _start_v3_layers(self):
-        if not _V3_LAYERS:
-            logger.warning('v3.0 layers not available')
-            return
-        try:
-            self.uncertainty_flagger = UncertaintyFlagger(
-                confidence_threshold=0.75,
-                track_assumptions=True,
-                flag_limitations=True,
-            )
-            logger.info('UncertaintyFlagger initialized')
-        except Exception as _e:
-            logger.warning(f'UncertaintyFlagger failed: {_e}')
-        try:
-            self.alert_dispatcher = AlertDispatcher()
-            # Register callback so alerts appear in logs
-            self.alert_dispatcher.register_callback(
-                'logger',
-                lambda title, msg, meta: logger.info(f'ALERT: {title} | {msg}')
-            )
-            logger.info('AlertDispatcher initialized')
-        except Exception as _e:
-            logger.warning(f'AlertDispatcher failed: {_e}')
-        try:
-            if self.alert_dispatcher:
-                from trading.trade_database import TradeDatabase
-                _db = TradeDatabase()
-                self.milestone_system = MilestoneAlertSystem(
-                    performance_tracker=None,
-                    alert_dispatcher=self.alert_dispatcher,
-                )
-                logger.info('MilestoneAlertSystem initialized')
-        except Exception as _e:
-            logger.warning(f'MilestoneAlertSystem failed: {_e}')
-        try:
-            self.daily_reporter = DailyReportGenerator(
-                output_dir='reports/daily'
-            )
-            self._daily_report_task = asyncio.create_task(self._daily_report_loop())
-            logger.info('DailyReportGenerator initialized')
-        except Exception as _e:
-            logger.warning(f'DailyReportGenerator failed: {_e}')
-        try:
-            self.weekly_reviewer = WeeklyReviewGenerator(
-                uncertainty_flagger=self.uncertainty_flagger,
-                output_dir='reports/weekly'
-            )
-            self._weekly_review_task = asyncio.create_task(self._weekly_review_loop())
-            logger.info('WeeklyReviewGenerator initialized')
-        except Exception as _e:
-            logger.warning(f'WeeklyReviewGenerator failed: {_e}')
-        try:
-            self.app_discovery = AppDiscovery(cache_dir='data/app_discovery')
-            asyncio.create_task(self._run_app_discovery())
-            logger.info('AppDiscovery initialized')
-        except Exception as _e:
-            logger.warning(f'AppDiscovery failed: {_e}')
-
-    async def _daily_report_loop(self):
-        import datetime as _dt
-        while True:
-            try:
-                now = _dt.datetime.now()
-                # Run at 17:00 daily
-                target = now.replace(hour=17, minute=0, second=0, microsecond=0)
-                if now >= target:
-                    target = target + _dt.timedelta(days=1)
-                wait_secs = (target - now).total_seconds()
-                await asyncio.sleep(wait_secs)
-                if self.daily_reporter:
-                    report = self.daily_reporter.generate_report()
-                    files  = self.daily_reporter.save_report(report)
-                    logger.info(f'Daily report saved: {files}')
-                    if self.alert_dispatcher:
-                        self.alert_dispatcher.dispatch(
-                            'Daily Report',
-                            f'PnL:  | Trades: {report.trades_count}',
-                            {}
-                        )
-            except asyncio.CancelledError:
-                break
-            except Exception as _e:
-                logger.error(f'Daily report error: {_e}')
-                await asyncio.sleep(3600)
-
-    async def _weekly_review_loop(self):
-        import datetime as _dt
-        while True:
-            try:
-                now = _dt.datetime.now()
-                # Run on Friday at 18:00
-                days_until_friday = (4 - now.weekday()) % 7
-                target = (now + _dt.timedelta(days=days_until_friday)).replace(
-                    hour=18, minute=0, second=0, microsecond=0)
-                if target <= now:
-                    target += _dt.timedelta(weeks=1)
-                wait_secs = (target - now).total_seconds()
-                await asyncio.sleep(wait_secs)
-                if self.weekly_reviewer:
-                    review = self.weekly_reviewer.generate_review()
-                    files  = self.weekly_reviewer.save_review(review)
-                    logger.info(f'Weekly review saved: {files}')
-            except asyncio.CancelledError:
-                break
-            except Exception as _e:
-                logger.error(f'Weekly review error: {_e}')
-                await asyncio.sleep(3600)
-
-    async def _run_app_discovery(self):
-        try:
-            await asyncio.sleep(30)  # Wait for full startup
-            if self.app_discovery:
-                apps = self.app_discovery.discover()
-                self.app_discovery.save_discovery()
-                logger.info(f'AppDiscovery: found {len(apps)} applications')
-        except Exception as _e:
-            logger.error(f'AppDiscovery error: {_e}')
 
     async def shutdown(self):
         await self._stop_runtime_background_loops()
