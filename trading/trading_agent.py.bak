@@ -97,6 +97,15 @@ class TradingAgent:
         self.regime_detector = RegimeDetectionAgent(memory)
         self.meta_orchestrator = MetaOrchestrator(memory)
         self.quant_fusion = QuantSignalFusion()  # Primary signal fusion layer
+        # Portfolio and execution engines (lazy import to avoid circular deps)
+        try:
+            from trading.portfolio_engine import PortfolioEngine
+            from trading.execution_engine import ExecutionEngine
+            self.portfolio_engine = PortfolioEngine(memory)
+            self.execution_engine = ExecutionEngine(memory)
+        except Exception as _eng_err:
+            self.portfolio_engine = None
+            self.execution_engine = None
         self.risk_engine = RiskEngine(memory)
         self.feature_engine = FeatureEngine(memory)
         self.physics_engine = MarketPhysicsEngine(memory)
@@ -172,12 +181,16 @@ class TradingAgent:
             regime=regime,
         )
         # Kelly-fraction position sizing
-        edge   = float(fused.get("edge", 0.0))
-        conf   = float(fused.get("confidence", 0.0))
-        vol    = float(features.get("realized_volatility", 0.02))
-        kelly  = _kelly_fraction(edge, conf, vol)
-        fused["kelly_fraction"] = kelly
-        fused["allocation"]     = kelly
+        _edge = float(fused.get("edge", 0.0))
+        _conf = float(fused.get("confidence", 0.0))
+        _vol = max(float(features.get("realized_volatility", 0.02)), 0.01)
+        _kelly = (
+            float(__import__("numpy").clip(0.5 * (_edge * _conf) / _vol, 0.01, 0.20))
+            if _edge > 0 and _conf > 0
+            else 0.01
+        )
+        fused["kelly_fraction"] = _kelly
+        fused["allocation"] = _kelly
         orchestrated = {**orchestrated, **fused}
         fused = self.signal_fusion.fuse(orchestrated, features, regime)
 
@@ -273,6 +286,9 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
+
+
+
 
 
 

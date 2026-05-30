@@ -43,18 +43,6 @@ from trading_agent import TradingAgent as QuantTradingAgent
 from vector_memory import VectorMemory as RuntimeVectorMemory
 from web_perception import WebPerception
 
-# --- Advanced Layer Imports ---
-try:
-    from runtime.message_bus import MessageBus, get_bus
-    from runtime.process_manager import ProcessManager, WorkerSpec
-    from knowledge_compressor import KnowledgeCompressor
-    from workers.research_worker import run_research_worker
-    from workers.memory_worker import run_memory_worker
-    from workers.evolution_worker import run_evolution_worker
-    _ADVANCED_LAYERS = True
-except ImportError as _adv_err:
-    _ADVANCED_LAYERS = False
-
 
 class UnifiedMECOSRuntime:
     def __init__(self, trading_execution_mode: str = "paper"):
@@ -80,12 +68,6 @@ class UnifiedMECOSRuntime:
         self._heartbeat_task: Optional[asyncio.Task] = None
         self._runtime_research_task: Optional[asyncio.Task] = None
         self._runtime_cognition_task: Optional[asyncio.Task] = None
-        # --- Advanced layer instances ---
-        self.message_bus = None
-        self.process_manager = None
-        self.knowledge_compressor = None
-        self._compressor_task: Optional[asyncio.Task] = None
-        self._dreaming_task: Optional[asyncio.Task] = None
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -287,7 +269,6 @@ class UnifiedMECOSRuntime:
             label="runtime_startup",
             metadata={"connection_state": self.connection_state},
         )
-        await self._start_advanced_layers()
         logger.info(f"Unified MECOS startup complete: {self.connection_state}")
 
     async def run_runtime_demo(self):
@@ -433,93 +414,6 @@ class UnifiedMECOSRuntime:
                     pass
             await self._stop_runtime_background_loops()
         logger.info("Full runtime segment stopped")
-
-    # --- Advanced layer helpers ---
-    async def _compression_loop(self):
-        while True:
-            try:
-                await asyncio.sleep(300)
-                if self.knowledge_compressor:
-                    await self.knowledge_compressor.compress_cycle()
-            except asyncio.CancelledError:
-                break
-            except Exception as _ce:
-                logger.error(f'Compression loop error: {_ce}')
-
-    async def _dreaming_loop(self, dreaming_engine):
-        while True:
-            try:
-                await asyncio.sleep(600)
-                goal = await dreaming_engine.generate_self_goal()
-                if goal:
-                    orchestrator = self.components.get('runtime_orchestrator')
-                    if orchestrator:
-                        await orchestrator.run_goal(goal)
-            except asyncio.CancelledError:
-                break
-            except Exception as _de:
-                logger.error(f'Dreaming loop error: {_de}')
-
-    def _on_research_result(self, worker_id: str, payload):
-        topic = payload.get('topic', 'unknown')
-        logger.debug(f'[ProcessManager] Research result from {worker_id}: {topic}')
-
-    async def _start_advanced_layers(self):
-        if not _ADVANCED_LAYERS:
-            logger.warning('Advanced layers not available - check imports')
-            return
-        try:
-            self.message_bus = MessageBus()
-            await self.message_bus.start_dispatch()
-            logger.info('MessageBus started')
-        except Exception as _e:
-            logger.warning(f'MessageBus failed: {_e}')
-        try:
-            kg  = self.components.get('runtime_knowledge_graph')
-            llm = self.components.get('reasoning')
-            if self.memory and kg:
-                self.knowledge_compressor = KnowledgeCompressor(
-                    memory=self.memory, knowledge_graph=kg, llm=llm
-                )
-                self._compressor_task = asyncio.create_task(self._compression_loop())
-                logger.info('KnowledgeCompressor started')
-        except Exception as _e:
-            logger.warning(f'KnowledgeCompressor failed: {_e}')
-        try:
-            from dreaming_engine import DreamingEngine
-            dreaming = DreamingEngine(self.memory)
-            self._dreaming_task = asyncio.create_task(self._dreaming_loop(dreaming))
-            logger.info('DreamingEngine started')
-        except Exception as _e:
-            logger.warning(f'DreamingEngine failed: {_e}')
-        try:
-            self.process_manager = ProcessManager()
-            self.process_manager.register(WorkerSpec(
-                worker_id='research_worker',
-                target_fn=run_research_worker,
-                cycle_interval=45.0,
-                max_restarts=10,
-            ))
-            self.process_manager.register(WorkerSpec(
-                worker_id='memory_worker',
-                target_fn=run_memory_worker,
-                cycle_interval=120.0,
-                max_restarts=5,
-            ))
-            self.process_manager.register(WorkerSpec(
-                worker_id='evolution_worker',
-                target_fn=run_evolution_worker,
-                cycle_interval=180.0,
-                max_restarts=5,
-            ))
-            self.process_manager.register_result_handler(
-                'research_result', self._on_research_result
-            )
-            self.process_manager.start_all()
-            asyncio.create_task(self.process_manager.monitor_loop())
-            logger.info('Distributed worker processes started')
-        except Exception as _e:
-            logger.warning(f'ProcessManager failed: {_e}')
 
     async def shutdown(self):
         await self._stop_runtime_background_loops()
