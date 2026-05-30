@@ -10,6 +10,7 @@ from .equity_persistence import EquityPersistence
 from .pnl_engine import PnLEngine
 from .attribution_logger import AttributionLogger
 from .confidence_calibrator import ConfidenceCalibrator
+from .config import TradingConfig
 from .event_bus import EventBus, Event, EventType
 from .schemas import Signal, Decision, MarketEvent
 
@@ -62,6 +63,9 @@ class AutonomousTradingLoop:
                  database,
                  universe_manager,
                  universe_scanner=None,
+                 uncertainty_flagger=None,
+                 milestone_system=None,
+                 reporting_scheduler=None,
                  quant_mode: str = 'balanced'):
         self.market_stream = market_stream
         self.signal_generator = signal_generator
@@ -70,6 +74,9 @@ class AutonomousTradingLoop:
         self.database = database
         self.universe_manager = universe_manager
         self.universe_scanner = universe_scanner
+        self.uncertainty_flagger = uncertainty_flagger
+        self.milestone_system = milestone_system
+        self.reporting_scheduler = reporting_scheduler
         self.quant_mode = _normalize_quant_mode(quant_mode)
         self.session_thresholds = SESSION_THRESHOLD_PROFILES[self.quant_mode]
 
@@ -94,7 +101,7 @@ class AutonomousTradingLoop:
         self.enable_trade_quality_filter = True
         self.trade_quality_spread_multiplier = 0.05
         self.enable_signal_persistence = True
-        self.signal_persistence_count_required = 2
+        self.signal_persistence_count_required = 2  # Reduced to 1 for high-confidence signals (see _passes_signal_persistence)
         self.signal_persistence_seconds = 5.0
 
         self.loop_stats = {
@@ -399,6 +406,7 @@ class AutonomousTradingLoop:
         exit_signal = {}
         if hasattr(self.paper_executor, 'generate_exit_signal'):
             exit_signal = self.paper_executor.generate_exit_signal(symbol, tick, regime=self.current_regime)
+        self._run_reporting_tick()
         if exit_signal:
             exit_signal['sector'] = tick.get('sector', 'unknown')
             result = await self.paper_executor.execute_signal(exit_signal)
@@ -460,6 +468,11 @@ class AutonomousTradingLoop:
 
             if self.enable_signal_persistence:
                 if not self._passes_signal_persistence(symbol, signal):
+                    self.loop_stats['hold_signals'] += 1
+                    return
+            if self.uncertainty_flagger:
+                approved = self._apply_uncertainty_gate(signal, tick)
+                if not approved:
                     self.loop_stats['hold_signals'] += 1
                     return
 
@@ -625,6 +638,11 @@ class AutonomousTradingLoop:
             self.performance_monitor.record_trade_close(
                 pnl=result['pnl'],
                 holding_seconds=result.get('holding_seconds', 0.0),
+                symbol=symbol,
+                price=float(tick.get('close', 0.0) or 0.0),
+                quantity=float(result.get('quantity', result.get('size', 1.0)) or 1.0),
+                strategy=str(result.get('strategy', 'unknown')),
+                confidence=float(result.get('confidence', 0.0) or 0.0),
             )
 
         self.database.save_portfolio_snapshot({
@@ -644,6 +662,10 @@ class AutonomousTradingLoop:
                     {'symbol': symbol, 'pnl': float(result.get('pnl', 0.0) or 0.0)},
                 )
             )
+            if self.milestone_system:
+                milestone = self.milestone_system.check_milestones()
+                if milestone:
+                    logger.info(f"Milestone reached in loop: ${milestone.milestone_amount:,.0f}")
 
         self.equity_persistence.save(
             _time.time(),
@@ -654,6 +676,87 @@ class AutonomousTradingLoop:
             metrics.get('sharpe_ratio', 0),
             metrics.get('win_rate', 0)
         )
+
+    def _run_reporting_tick(self):
+        if not self.reporting_scheduler:
+            return
+        try:
+            self.reporting_scheduler.tick()
+        except Exception as exc:
+            logger.warning(f"Reporting scheduler tick failed: {exc}")
+
+    def _apply_uncertainty_gate(self, signal: Dict[str, Any], tick: Dict[str, Any]) -> bool:
+        confidence = float(signal.get("confidence", 0.0) or 0.0)
+        edge = float(signal.get("edge", 0.0) or 0.0)
+        spread = float(signal.get("spread_pressure", 0.0) or 0.0)
+        expected_move = float(signal.get("expected_move", 0.0) or 0.0)
+        volatility = float(signal.get("volatility", tick.get("volatility", 0.0)) or 0.0)
+        signal_age = self._signal_age_seconds(signal)
+
+        regime_confidence_map = {
+            "trending": 0.85,
+            "ranging": 0.70,
+            "power_hour": 0.75,
+            "lunch_chop": 0.55,
+            "after_hours": 0.60,
+            "panic": 0.35,
+            "high_volatility": 0.40,
+        }
+        market_regime_confidence = regime_confidence_map.get(str(signal.get("regime", "")).lower(), 0.65)
+
+        if volatility <= 0:
+            volatility_score = 0.55
+        elif self.min_acceptable_volatility <= volatility <= self.max_acceptable_volatility:
+            volatility_score = 0.85
+        else:
+            volatility_score = 0.35
+
+        if signal_age <= 5:
+            freshness = 0.95
+        elif signal_age <= 30:
+            freshness = 0.75
+        else:
+            freshness = 0.45
+
+        historical_accuracy = float(self.performance_monitor.calculate_win_rate()) if self.performance_monitor.closed_trade_pnls else 0.5
+        edge_coverage = 0.9 if expected_move > max(spread * 2.0, 1e-6) else 0.5
+
+        assumptions = [
+            f"Regime remains {signal.get('regime', self.current_regime)} for execution horizon",
+            "Observed spread pressure remains stable during fill window",
+        ]
+        limitations = []
+        if volatility_score < 0.5:
+            limitations.append("Volatility regime is outside configured acceptance range")
+        if edge < float(getattr(TradingConfig, "MIN_EDGE", 0.15)):
+            limitations.append("Directional edge is near lower quality threshold")
+
+        approval = self.uncertainty_flagger.score_plan(
+            plan=f"Execute {signal.get('symbol', 'UNKNOWN')} {signal.get('decision', 'HOLD')}",
+            signal_strength=confidence,
+            market_regime=market_regime_confidence,
+            volatility_regime=volatility_score,
+            data_freshness=freshness,
+            historical_accuracy=historical_accuracy,
+            edge_case_coverage=edge_coverage,
+            assumptions=assumptions,
+            limitations=limitations,
+            edge_cases=["gap risk", "liquidity shock"],
+        )
+
+        signal["uncertainty_confidence"] = approval.confidence_score
+        signal["uncertainty_risk_level"] = approval.risk_level
+        signal["uncertainty_notes"] = approval.execution_notes
+        signal["uncertainty_size_multiplier"] = approval.suggested_position_size
+
+        if not approval.execution_approved:
+            logger.info(f"Uncertainty gate HOLD for {signal.get('symbol', '')}: {approval.execution_notes}")
+            return False
+
+        allocation = float(signal.get("allocation", signal.get("size", 0.1)) or 0.1)
+        scaled = allocation * float(approval.suggested_position_size)
+        signal["allocation"] = max(0.0, min(1.0, scaled))
+        return True
 
     async def _on_order_status(self, status_event: Dict[str, Any]):
         order_id = status_event.get('order_id')
@@ -895,5 +998,6 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
+
 
 

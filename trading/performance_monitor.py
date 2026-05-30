@@ -1,21 +1,46 @@
 import numpy as np
 from typing import Dict, List, Any
 from loguru import logger
+from runtime.performance_tracker import PerformanceTracker
 
 class PerformanceMonitor:
-    def __init__(self, database):
+    def __init__(self, database, starting_equity: float = 10000.0, goal_equity: float = 60000.0):
         self.database = database
         self.equity_curve = []
         self.closed_trade_pnls: List[float] = []
         self.holding_times: List[float] = []
+        db_path = getattr(database, 'db_path', 'data/trading.db')
+        self.tracker = PerformanceTracker(
+            db_path=db_path,
+            starting_equity=starting_equity,
+            goal_equity=goal_equity,
+        )
         logger.info('Performance Monitor initialized')
 
     async def update(self, portfolio_value: float):
         self.equity_curve.append(portfolio_value)
+        await self.tracker.update(float(portfolio_value))
 
-    def record_trade_close(self, pnl: float, holding_seconds: float = 0.0):
+    def record_trade_close(
+        self,
+        pnl: float,
+        holding_seconds: float = 0.0,
+        symbol: str = 'UNKNOWN',
+        price: float = 0.0,
+        quantity: float = 1.0,
+        strategy: str = 'unknown',
+        confidence: float = 0.0,
+    ):
         self.closed_trade_pnls.append(float(pnl))
         self.holding_times.append(float(max(0.0, holding_seconds)))
+        self.tracker.record_trade_close(
+            pnl=float(pnl),
+            symbol=symbol,
+            price=float(price),
+            quantity=float(quantity),
+            strategy=str(strategy),
+            confidence=float(confidence),
+        )
 
     def calculate_win_rate(self) -> float:
         if not self.closed_trade_pnls:
@@ -79,7 +104,7 @@ class PerformanceMonitor:
         return float(sortino)
 
     def get_metrics(self) -> Dict[str, Any]:
-        return {
+        base_metrics = {
             'sharpe_ratio': self.calculate_sharpe_ratio(),
             'max_drawdown': self.calculate_max_drawdown(),
             'sortino_ratio': self.calculate_sortino_ratio(),
@@ -87,4 +112,14 @@ class PerformanceMonitor:
             'win_rate': self.calculate_win_rate(),
             'profit_factor': self.calculate_profit_factor(),
             'avg_holding_seconds': self.calculate_average_holding_time(),
+        }
+        tracker_metrics = self.tracker.get_metrics()
+        return {
+            **base_metrics,
+            'tracker_sharpe_ratio': tracker_metrics.get('sharpe_ratio', 0.0),
+            'tracker_max_drawdown': tracker_metrics.get('max_drawdown', 0.0),
+            'tracker_total_return': tracker_metrics.get('total_return', 0.0),
+            'tracker_progress_percent': tracker_metrics.get('progress_percent', 0.0),
+            'tracker_current_equity': tracker_metrics.get('current_equity', 0.0),
+            'tracker_goal_equity': tracker_metrics.get('goal_equity', 0.0),
         }

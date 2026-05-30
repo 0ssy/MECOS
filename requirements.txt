@@ -8,6 +8,7 @@ loguru
 pandas
 scipy
 statsmodels
+requests
 alpaca-py
 ib_insync
 

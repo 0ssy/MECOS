@@ -3,8 +3,11 @@ from .crash_recovery import CrashRecovery
 from .drift_guard import DriftGuard
 from .execution_guard import ExecutionGuard
 from .health_monitor import HealthMonitor
+from .app_discovery import AppDiscovery, AppLearner
+from .performance_tracker import PerformanceTracker
 from .research_governor import ResearchGovernor
 from .state_checkpoint import StateCheckpoint
+from .uncertainty_flagger import UncertaintyFlagger
 from .watchdog import RuntimeWatchdog
 
 __all__ = [
@@ -13,7 +16,11 @@ __all__ = [
     "DriftGuard",
     "ExecutionGuard",
     "HealthMonitor",
+    "AppDiscovery",
+    "AppLearner",
+    "PerformanceTracker",
     "ResearchGovernor",
+    "UncertaintyFlagger",
     "RuntimeWatchdog",
     "StateCheckpoint",
 ]

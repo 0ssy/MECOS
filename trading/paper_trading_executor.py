@@ -37,6 +37,7 @@ def _realistic_fill_price(
         return float(bid - slip)
 
 from .broker.base_adapter import BrokerAdapter
+from .order_manager import OrderManager
 
 class PaperTradingExecutor:
     def __init__(

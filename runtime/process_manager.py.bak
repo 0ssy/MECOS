@@ -49,7 +49,7 @@ class ProcessManager:
     cannot affect CodingWorker or TradingWorker.
     """
 
-    HEARTBEAT_TIMEOUT = 300.0  # Must exceed longest worker cycle (evolution=180s)  # seconds before declaring worker dead
+    HEARTBEAT_TIMEOUT = 120.0  # seconds before declaring worker dead
 
     def __init__(self):
         self._workers: Dict[str, WorkerState] = {}
@@ -177,4 +177,3 @@ class ProcessManager:
             }
             for wid, state in self._workers.items()
         }
-

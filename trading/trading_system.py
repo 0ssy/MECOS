@@ -5,6 +5,15 @@ Wires up universe, data, execution, risk, adapters, and orchestrators.
 from typing import Optional, Dict, Any
 from loguru import logger
 
+from runtime import AppDiscovery, AppLearner, UncertaintyFlagger
+from reporting import (
+    AlertDispatcher,
+    DailyReportGenerator,
+    MilestoneAlertSystem,
+    ReportingScheduler,
+    WeeklyReviewGenerator,
+)
+
 from .universe_manager import UniverseManager
 from .universe_scanner import UniverseScanner
 from .market_data_stream import MarketDataStream
@@ -39,6 +48,38 @@ class TradingSystem:
         self.order_manager = OrderManager(self.db)
         self.risk_monitor = RiskMonitor()
         self.performance_monitor = PerformanceMonitor(self.db)
+        self.uncertainty_flagger = UncertaintyFlagger(
+            confidence_threshold=0.75,
+            track_assumptions=True,
+            flag_limitations=True,
+        )
+        self.alert_dispatcher = AlertDispatcher()
+        self.alert_dispatcher.register_callback("runtime_log", self._log_alert)
+        self.milestone_system = MilestoneAlertSystem(
+            self.performance_monitor.tracker,
+            self.alert_dispatcher,
+        )
+        self.daily_report_generator = DailyReportGenerator(
+            self.performance_monitor.tracker,
+            output_dir="reports/daily",
+            goal_equity=self.performance_monitor.tracker.goal_equity,
+        )
+        self.weekly_review_generator = WeeklyReviewGenerator(
+            self.performance_monitor.tracker,
+            self.uncertainty_flagger,
+            output_dir="reports/weekly",
+        )
+        self.reporting_scheduler = ReportingScheduler(
+            daily_generator=self.daily_report_generator,
+            weekly_generator=self.weekly_review_generator,
+            dispatcher=self.alert_dispatcher,
+            daily_hour=17,
+            weekly_day=4,
+            weekly_hour=18,
+        )
+        self.app_discovery = AppDiscovery(cache_dir="data/app_discovery")
+        self.app_learner = AppLearner(memory_dir="data/app_workflows")
+        self._initialize_app_learning()
 
         # Broker adapter (multi-broker live routing: IBKR + Alpaca + Binance)
         self.broker_adapter = broker_adapter or MultiBrokerAdapter()
@@ -70,6 +111,13 @@ class TradingSystem:
             'order_manager': self.order_manager,
             'risk_monitor': self.risk_monitor,
             'performance_monitor': self.performance_monitor,
+            'uncertainty_flagger': self.uncertainty_flagger,
+            'milestone_system': self.milestone_system,
+            'daily_report_generator': self.daily_report_generator,
+            'weekly_review_generator': self.weekly_review_generator,
+            'reporting_scheduler': self.reporting_scheduler,
+            'app_discovery': self.app_discovery,
+            'app_learner': self.app_learner,
             'executor': self.executor,
             'signal_generator': self.signal_generator,
             'broker_adapter': self.broker_adapter,
@@ -85,6 +133,9 @@ class TradingSystem:
             self.db,
             self.universe_manager,
             self.universe_scanner,
+            uncertainty_flagger=self.uncertainty_flagger,
+            milestone_system=self.milestone_system,
+            reporting_scheduler=self.reporting_scheduler,
             quant_mode=self.quant_mode,
         )
         await self.loop.start(use_starter_universe=use_starter_universe)
@@ -97,3 +148,27 @@ class TradingSystem:
         if hasattr(self, 'loop'):
             return self.loop.get_status()
         return {}
+
+    def _initialize_app_learning(self) -> None:
+        try:
+            apps = self.app_discovery.scan_installed_apps()
+            self.app_discovery.save_discovery()
+            if apps:
+                self.app_learner.record_workflow(
+                    app_name="MECOS",
+                    task_description="Daily trading reporting",
+                    steps=[
+                        "Scan app ecosystem",
+                        "Generate reports",
+                        "Dispatch milestone and summary alerts",
+                    ],
+                    success=True,
+                )
+                self.app_learner.save_workflows()
+            logger.info(f"App discovery initialized with {len(apps)} applications")
+        except Exception as exc:
+            logger.warning(f"App discovery initialization skipped: {exc}")
+
+    @staticmethod
+    def _log_alert(title: str, message: str, metadata: Optional[Dict[str, Any]]) -> None:
+        logger.info(f"ALERT: {title} | {message} | metadata={metadata or {}}")
