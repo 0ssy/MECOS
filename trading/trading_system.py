@@ -126,7 +126,7 @@ class TradingSystem:
             'broker_adapter': self.broker_adapter,
             'persona_engine': getattr(self.agent, "persona_engine", None),
             'openbb_adapter': self.openbb_adapter,
-            'cockpit_snapshot': self.get_cockpit_snapshot(),
+            'cockpit_snapshot': self.get_cockpit_snapshot,
         }
 
     async def start(self, use_starter_universe: bool = True):
