@@ -583,6 +583,10 @@ class UnifiedMECOSRuntime:
         if not _V3_LAYERS:
             logger.warning('v3.0 layers not available')
             return
+        performance_tracker = None
+        if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
+            performance_monitor = getattr(self.trading_system, "performance_monitor", None)
+            performance_tracker = getattr(performance_monitor, "tracker", None)
         try:
             self.uncertainty_flagger = UncertaintyFlagger(
                 confidence_threshold=0.60,
@@ -603,31 +607,40 @@ class UnifiedMECOSRuntime:
         except Exception as _e:
             logger.warning(f'AlertDispatcher failed: {_e}')
         try:
-            if self.alert_dispatcher:
-                from trading.trade_database import TradeDatabase
-                _db = TradeDatabase()
+            if self.alert_dispatcher and performance_tracker is not None:
                 self.milestone_system = MilestoneAlertSystem(
-                    performance_tracker=None,
+                    performance_tracker=performance_tracker,
                     alert_dispatcher=self.alert_dispatcher,
                 )
                 logger.info('MilestoneAlertSystem initialized')
+            elif self.alert_dispatcher:
+                logger.warning('MilestoneAlertSystem skipped: performance tracker unavailable')
         except Exception as _e:
             logger.warning(f'MilestoneAlertSystem failed: {_e}')
         try:
-            self.daily_reporter = DailyReportGenerator(
-                output_dir='reports/daily'
-            )
-            self._daily_report_task = asyncio.create_task(self._daily_report_loop())
-            logger.info('DailyReportGenerator initialized')
+            if performance_tracker is not None:
+                self.daily_reporter = DailyReportGenerator(
+                    performance_tracker=performance_tracker,
+                    output_dir='reports/daily',
+                    goal_equity=float(getattr(performance_tracker, "goal_equity", 60000.0)),
+                )
+                self._daily_report_task = asyncio.create_task(self._daily_report_loop())
+                logger.info('DailyReportGenerator initialized')
+            else:
+                logger.warning('DailyReportGenerator skipped: performance tracker unavailable')
         except Exception as _e:
             logger.warning(f'DailyReportGenerator failed: {_e}')
         try:
-            self.weekly_reviewer = WeeklyReviewGenerator(
-                uncertainty_flagger=self.uncertainty_flagger,
-                output_dir='reports/weekly'
-            )
-            self._weekly_review_task = asyncio.create_task(self._weekly_review_loop())
-            logger.info('WeeklyReviewGenerator initialized')
+            if performance_tracker is not None and self.uncertainty_flagger is not None:
+                self.weekly_reviewer = WeeklyReviewGenerator(
+                    performance_tracker=performance_tracker,
+                    uncertainty_flagger=self.uncertainty_flagger,
+                    output_dir='reports/weekly'
+                )
+                self._weekly_review_task = asyncio.create_task(self._weekly_review_loop())
+                logger.info('WeeklyReviewGenerator initialized')
+            else:
+                logger.warning('WeeklyReviewGenerator skipped: dependencies unavailable')
         except Exception as _e:
             logger.warning(f'WeeklyReviewGenerator failed: {_e}')
         try:

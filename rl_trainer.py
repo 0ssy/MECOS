@@ -41,6 +41,7 @@ class QTable:
         state_bucket[action] = float(new_q)
 
     def save(self, path: Path):
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(self.q_table))
 
     def load(self, path: Path):
@@ -48,7 +49,10 @@ class QTable:
             self.q_table = json.loads(path.read_text())
             logger.info(f"QTable loaded from {path}")
         else:
-            logger.warning(f"QTable file not found: {path}")
+            self.q_table = {}
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(self.q_table))
+            logger.info(f"QTable initialized at {path}")
 
 
 class ReplayBuffer:
@@ -75,6 +79,7 @@ class ReplayBuffer:
         return len(self.buffer)
 
     def save(self, path: Path):
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(list(self.buffer), default=str))
 
     def load(self, path: Path):

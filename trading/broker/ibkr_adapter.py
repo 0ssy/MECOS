@@ -52,7 +52,10 @@ class IbkrAdapter(BrokerAdapter):
                 last_error = exc
                 continue
 
-        raise RuntimeError(f'IBKR connection failed on all candidate ports: {last_error}')
+        raise RuntimeError(
+            f'IBKR connection failed on all candidate ports ({ordered_ports}): {last_error}. '
+            'Ensure TWS/Gateway is running, API access is enabled, and the configured port is open.'
+        )
 
     async def _resolve_contract(self, symbol: str):
         symbol = str(symbol).upper().strip()

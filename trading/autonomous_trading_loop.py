@@ -2,7 +2,6 @@ import asyncio
 from typing import List, Dict, Any, Optional
 from loguru import logger
 from datetime import datetime
-from pathlib import Path
 from .cooldown_manager import CooldownManager
 from .regime_detection import detect_regime
 from .exposure_manager import ExposureManager
@@ -138,8 +137,6 @@ class AutonomousTradingLoop:
 
         try:
             self.rl_trainer = RLTrainer(memory, domain='trading')
-            qtable_path = Path('data/qtable.json')  # Replace with actual path if different
-            self.rl_trainer.q_table.load(qtable_path)
             logger.info('Trading RL policy enabled (Q-learning + replay)')
         except Exception as exc:
             logger.error(f'Failed to initialize trading RL policy: {exc}')

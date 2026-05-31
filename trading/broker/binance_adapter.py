@@ -1,3 +1,4 @@
+import asyncio
 import hashlib
 import hmac
 import os
@@ -22,9 +23,22 @@ class BinanceAdapter(BrokerAdapter):
         self.ws_url = os.getenv('BINANCE_WS_URL', 'wss://stream.binance.com:9443').rstrip('/')
         if 'testnet.binance.vision' in self.base_url and 'testnet.binance.vision' not in self.ws_url:
             self.ws_url = 'wss://stream.testnet.binance.vision:9443'
+        self.ws_fallback_url = os.getenv('BINANCE_WS_FALLBACK_URL', 'wss://stream.binance.com:9443').rstrip('/')
 
         if not self.api_key or not self.secret_key:
             raise RuntimeError('Missing Binance API credentials (BINANCE_API_KEY/BINANCE_SECRET_KEY).')
+
+    def _ws_candidates(self) -> List[str]:
+        candidates = [self.ws_url, self.ws_fallback_url]
+        ordered = []
+        seen = set()
+        for candidate in candidates:
+            token = str(candidate or '').strip().rstrip('/')
+            if not token or token in seen:
+                continue
+            ordered.append(token)
+            seen.add(token)
+        return ordered
 
     @staticmethod
     def _safe_float(value: Any, default: float = 0.0) -> float:
@@ -165,40 +179,53 @@ class BinanceAdapter(BrokerAdapter):
             raise RuntimeError('No Binance symbols provided for streaming.')
 
         stream_path = '/'.join([f'{sym}@bookTicker' for sym in stream_symbols])
-        ws_endpoint = f'{self.ws_url}/stream?streams={stream_path}'
         logger.info(f'Starting Binance quote stream for: {symbols}')
+        connection_errors: List[str] = []
 
         async with aiohttp.ClientSession() as session:
-            async with session.ws_connect(ws_endpoint, heartbeat=20) as ws:
-                async for msg in ws:
-                    if msg.type != aiohttp.WSMsgType.TEXT:
-                        continue
-                    payload = msg.json()
-                    data = payload.get('data', {})
-                    if not data:
-                        continue
-                    binance_symbol = str(data.get('s', '')).upper()
-                    if not binance_symbol:
-                        continue
-                    bid = self._safe_float(data.get('b'))
-                    ask = self._safe_float(data.get('a'))
-                    bid_size = self._safe_float(data.get('B'))
-                    ask_size = self._safe_float(data.get('A'))
-                    close = (bid + ask) / 2.0 if bid > 0.0 and ask > 0.0 else max(bid, ask)
-                    if close <= 0.0:
-                        continue
-                    low_candidates = [x for x in (bid, ask, close) if x > 0.0]
-                    symbol = self._to_internal_symbol(binance_symbol)
-                    tick = {
-                        'symbol': symbol,
-                        'open': close,
-                        'high': max(close, bid, ask),
-                        'low': min(low_candidates) if low_candidates else close,
-                        'close': close,
-                        'volume': max(1.0, bid_size + ask_size),
-                        'timestamp': datetime.utcnow().isoformat(),
-                        'bid': bid,
-                        'ask': ask,
-                        'source': 'binance_bookticker',
-                    }
-                    await callback(symbol, tick)
+            for ws_base in self._ws_candidates():
+                ws_endpoint = f'{ws_base}/stream?streams={stream_path}'
+                try:
+                    logger.info(f'Connecting Binance quote stream: {ws_base}')
+                    async with session.ws_connect(ws_endpoint, heartbeat=20) as ws:
+                        async for msg in ws:
+                            if msg.type != aiohttp.WSMsgType.TEXT:
+                                continue
+                            payload = msg.json()
+                            data = payload.get('data', {})
+                            if not data:
+                                continue
+                            binance_symbol = str(data.get('s', '')).upper()
+                            if not binance_symbol:
+                                continue
+                            bid = self._safe_float(data.get('b'))
+                            ask = self._safe_float(data.get('a'))
+                            bid_size = self._safe_float(data.get('B'))
+                            ask_size = self._safe_float(data.get('A'))
+                            close = (bid + ask) / 2.0 if bid > 0.0 and ask > 0.0 else max(bid, ask)
+                            if close <= 0.0:
+                                continue
+                            low_candidates = [x for x in (bid, ask, close) if x > 0.0]
+                            symbol = self._to_internal_symbol(binance_symbol)
+                            tick = {
+                                'symbol': symbol,
+                                'open': close,
+                                'high': max(close, bid, ask),
+                                'low': min(low_candidates) if low_candidates else close,
+                                'close': close,
+                                'volume': max(1.0, bid_size + ask_size),
+                                'timestamp': datetime.utcnow().isoformat(),
+                                'bid': bid,
+                                'ask': ask,
+                                'source': 'binance_bookticker',
+                            }
+                            await callback(symbol, tick)
+                    return
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:
+                    logger.warning(f'Binance websocket failed on {ws_base}: {exc}')
+                    connection_errors.append(f'{ws_base}: {exc}')
+                    continue
+
+        raise RuntimeError(f'Binance websocket unavailable on all endpoints: {connection_errors}')
