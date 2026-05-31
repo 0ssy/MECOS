@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import asyncio
 import multiprocessing
+import sys
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional
@@ -52,6 +53,10 @@ class ProcessManager:
     HEARTBEAT_TIMEOUT = 300.0  # Must exceed longest worker cycle (evolution=180s)  # seconds before declaring worker dead
 
     def __init__(self):
+        # Use a single explicit spawn context on Windows/Python 3.14 to avoid
+        # mixed-context handle duplication failures in child bootstrap.
+        self._mp_ctx = multiprocessing.get_context("spawn")
+        multiprocessing.set_executable(sys.executable)
         self._workers: Dict[str, WorkerState] = {}
         self._running = False
         self._result_handlers: Dict[str, List[Callable]] = {}
@@ -75,12 +80,12 @@ class ProcessManager:
         logger.info(f"[ProcessManager] Started {len(self._workers)} workers")
 
     def _start_worker(self, state: WorkerState):
-        inbox  = multiprocessing.Queue(maxsize=100)
-        outbox = multiprocessing.Queue(maxsize=500)
-        proc   = multiprocessing.Process(
+        inbox  = self._mp_ctx.Queue(maxsize=100)
+        outbox = self._mp_ctx.Queue(maxsize=500)
+        proc   = self._mp_ctx.Process(
             target=state.spec.target_fn,
             args=(state.spec.worker_id, inbox, outbox, state.spec.cycle_interval),
-            daemon=True,
+            daemon=False,
             name=state.spec.worker_id,
         )
         proc.start()
@@ -142,6 +147,7 @@ class ProcessManager:
                 state.process.join(timeout=5)
             except Exception:
                 pass
+            self._close_state_queues(state)
             state.restarts += 1
             self._start_worker(state)
 
@@ -164,7 +170,24 @@ class ProcessManager:
             if state.process and state.process.is_alive():
                 state.process.terminate()
                 state.process.join(timeout=5)
+            self._close_state_queues(state)
         logger.info("[ProcessManager] All workers stopped")
+
+    @staticmethod
+    def _close_state_queues(state: WorkerState):
+        for queue_name in ("inbox", "outbox"):
+            queue_obj = getattr(state, queue_name, None)
+            if queue_obj is None:
+                continue
+            try:
+                queue_obj.close()
+            except Exception:
+                pass
+            try:
+                queue_obj.join_thread()
+            except Exception:
+                pass
+            setattr(state, queue_name, None)
 
     def status_summary(self) -> Dict[str, Any]:
         return {
