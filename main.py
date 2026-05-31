@@ -96,6 +96,7 @@ class UnifiedMECOSRuntime:
         # --- Advanced layer instances ---
         self.message_bus = None
         self.process_manager = None
+        self._process_monitor_task: Optional[asyncio.Task] = None
         self.knowledge_compressor = None
         self._compressor_task: Optional[asyncio.Task] = None
         self._dreaming_task: Optional[asyncio.Task] = None
@@ -147,7 +148,7 @@ class UnifiedMECOSRuntime:
                             runtime_orchestrator.attach_components({"latest_trading_metrics": trading_metrics})
                     await self.execution_guard.run(
                         "runtime_router_tick",
-                        runtime_router.route_request("maintain runtime health", "long_term_planning"),
+                        lambda: runtime_router.route_request("maintain runtime health", "long_term_planning"),
                         timeout_seconds=60.0,
                     )
                     await runtime_orchestrator.run_goal("Maintain MECOS subsystem coordination")
@@ -210,7 +211,7 @@ class UnifiedMECOSRuntime:
         tools = ToolOrchestrator()
         tools.web_perception = self.web
         action_engine = ActionExecutionEngine(tools, self.memory)
-        reasoner = await self.execution_guard.run("reasoner_init", asyncio.to_thread(Reasoner, self.memory))
+        reasoner = await self.execution_guard.run("reasoner_init", lambda: asyncio.to_thread(Reasoner, self.memory))
         runtime_sandbox = RuntimeSandboxExecutor()
         self.connection_state["reasoning"] = True
         self.components["tools"] = tools
@@ -355,48 +356,49 @@ class UnifiedMECOSRuntime:
         global_app_intelligence: Optional[GlobalAppIntelligence] = self.components.get("global_app_intelligence")
 
         background = asyncio.create_task(runtime_loop.start(["autonomous runtime", "recursive engineering"]))
-        if polyglot_coding:
-            await asyncio.to_thread(polyglot_coding.learn_language, "rust")
-            await asyncio.to_thread(polyglot_coding.solve_challenge, "rust", "two_sum_001")
-        if global_app_intelligence:
-            await asyncio.to_thread(global_app_intelligence.discover_app, "Fincept Terminal")
-        await self.execution_guard.run(
-            "runtime_research_analyze_repo",
-            runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
-        )
-        module_code = await runtime_coding.build_module("diagnostic_tool", "runtime health checks")
-        debug_result = {"success": True}
-        if module_code:
-            debug_result = await self.execution_guard.run(
-                "runtime_debugger_verify_and_repair",
-                runtime_debugger.verify_and_repair(module_code, "diagnostic_tool.py"),
-                timeout_seconds=180.0,
-            )
-
-        runtime_graph.add_node("mecos_core", "runtime", {"mode": "local-first"})
-        runtime_graph.add_node("sandbox", "component", {"purpose": "safe execution"})
-        runtime_graph.add_edge("mecos_core", "sandbox", "uses")
-
-        await self.execution_guard.run(
-            "runtime_router_route_request",
-            runtime_router.route_request("plan evolution", "long_term_planning"),
-        )
-        evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
-        planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
-        trading_metrics = {}
-        optimization_plan = {}
-        if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
-            trading_metrics = self.trading_system.performance_monitor.get_metrics()
-            if trading_metrics:
-                self.benchmark_harness.record_trading_metrics(trading_metrics)
-                optimization_plan = await runtime_evolution.ingest_trading_performance(trading_metrics)
-
-        runtime_loop.stop()
-        background.cancel()
         try:
-            await background
-        except asyncio.CancelledError:
-            pass
+            if polyglot_coding:
+                await asyncio.to_thread(polyglot_coding.learn_language, "rust")
+                await asyncio.to_thread(polyglot_coding.solve_challenge, "rust", "two_sum_001")
+            if global_app_intelligence:
+                await asyncio.to_thread(global_app_intelligence.discover_app, "Fincept Terminal")
+            await self.execution_guard.run(
+                "runtime_research_analyze_repo",
+                lambda: runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
+            )
+            module_code = await runtime_coding.build_module("diagnostic_tool", "runtime health checks")
+            debug_result = {"success": True}
+            if module_code:
+                debug_result = await self.execution_guard.run(
+                    "runtime_debugger_verify_and_repair",
+                    lambda: runtime_debugger.verify_and_repair(module_code, "diagnostic_tool.py"),
+                    timeout_seconds=180.0,
+                )
+
+            runtime_graph.add_node("mecos_core", "runtime", {"mode": "local-first"})
+            runtime_graph.add_node("sandbox", "component", {"purpose": "safe execution"})
+            runtime_graph.add_edge("mecos_core", "sandbox", "uses")
+
+            await self.execution_guard.run(
+                "runtime_router_route_request",
+                lambda: runtime_router.route_request("plan evolution", "long_term_planning"),
+            )
+            evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
+            planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
+            trading_metrics = {}
+            optimization_plan = {}
+            if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
+                trading_metrics = self.trading_system.performance_monitor.get_metrics()
+                if trading_metrics:
+                    self.benchmark_harness.record_trading_metrics(trading_metrics)
+                    optimization_plan = await runtime_evolution.ingest_trading_performance(trading_metrics)
+        finally:
+            runtime_loop.stop()
+            background.cancel()
+            try:
+                await background
+            except asyncio.CancelledError:
+                pass
 
         found = runtime_memory.search("runtime")
         memory_retrieval = await self.memory.retrieve_context("runtime health", n_results=5) if self.memory else {"metadatas": [[]]}
@@ -574,7 +576,7 @@ class UnifiedMECOSRuntime:
                 'research_result', self._on_research_result
             )
             self.process_manager.start_all()
-            asyncio.create_task(self.process_manager.monitor_loop())
+            self._process_monitor_task = asyncio.create_task(self.process_manager.monitor_loop())
             logger.info('Distributed worker processes started')
         except Exception as _e:
             logger.warning(f'ProcessManager failed: {_e}')
@@ -711,6 +713,29 @@ class UnifiedMECOSRuntime:
             logger.error(f'AppDiscovery error: {_e}')
 
     async def shutdown(self):
+        for task_attr in (
+            "_process_monitor_task",
+            "_compressor_task",
+            "_dreaming_task",
+            "_daily_report_task",
+            "_weekly_review_task",
+        ):
+            task = getattr(self, task_attr, None)
+            if task:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
+                setattr(self, task_attr, None)
+
+        if self.process_manager:
+            try:
+                await asyncio.to_thread(self.process_manager.stop_all)
+            except Exception as exc:
+                logger.warning(f"ProcessManager stop failed: {exc}")
+            self.process_manager = None
+
         await self._stop_runtime_background_loops()
         if self._heartbeat_task:
             self._heartbeat_task.cancel()

@@ -5,6 +5,7 @@ from loguru import logger
 from config import settings
 import time
 import json
+import asyncio
 from typing import Any, Dict, List, Optional, Tuple
 
 from memory_quality import MemoryQualityGate
@@ -14,7 +15,38 @@ class VectorMemory:
         self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         self.collection = self.client.get_or_create_collection(name="mecos_long_term")
+        self._op_lock = asyncio.Lock()
         logger.info("Vector Memory System Initialized.")
+
+    @staticmethod
+    def _is_transient_chroma_error(exc: Exception) -> bool:
+        msg = str(exc).lower()
+        return (
+            "compaction" in msg
+            or "hnsw" in msg
+            or "failed to apply logs" in msg
+            or "database is locked" in msg
+            or "temporarily unavailable" in msg
+            or "timeout" in msg
+        )
+
+    async def _run_collection_op(self, op_name: str, operation, retries: int = 3):
+        last_error = None
+        for attempt in range(1, retries + 1):
+            async with self._op_lock:
+                try:
+                    return await asyncio.to_thread(operation)
+                except Exception as exc:
+                    last_error = exc
+                    if not self._is_transient_chroma_error(exc) or attempt >= retries:
+                        raise
+                    backoff = 0.25 * attempt
+                    logger.warning(
+                        f"Transient Chroma error during {op_name} (attempt {attempt}/{retries}): {exc}. "
+                        f"Retrying in {backoff:.2f}s"
+                    )
+            await asyncio.sleep(backoff)
+        raise RuntimeError(f"Chroma operation failed for {op_name}: {last_error}")
 
     async def store(self, content: str, metadata: dict = None):
         """Store content with its embedding."""
@@ -28,24 +60,36 @@ class VectorMemory:
             else:
                 sanitized_metadata[key] = json.dumps(value, default=str)
         
-        self.collection.add(
-            documents=[content],
-            metadatas=[sanitized_metadata],
-            ids=[f"mem_{int(time.time() * 1000)}"]
-        )
+        def _add():
+            self.collection.add(
+                documents=[content],
+                metadatas=[sanitized_metadata],
+                ids=[f"mem_{int(time.time() * 1000)}"],
+            )
+
+        await self._run_collection_op("collection.add", _add)
         logger.debug(f"Stored memory: {content[:50]}...")
 
     async def query(self, text: str, n_results: int = 5):
         """Query the vector database for similar content."""
-        results = self.collection.query(
-            query_texts=[text],
-            n_results=n_results
-        )
+        def _query():
+            return self.collection.query(
+                query_texts=[text],
+                n_results=n_results,
+            )
+
+        results = await self._run_collection_op("collection.query", _query)
         return results
 
     def count(self):
         """Return the total number of items in the collection."""
-        return self.collection.count()
+        try:
+            return self.collection.count()
+        except Exception as exc:
+            if self._is_transient_chroma_error(exc):
+                logger.warning(f"Transient Chroma count error: {exc}")
+                return 0
+            raise
 
 
 class MemorySystem:

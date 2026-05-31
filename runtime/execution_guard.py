@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Awaitable, TypeVar
+from typing import Awaitable, Callable, TypeVar
 
 from loguru import logger
 
@@ -16,15 +16,21 @@ class ExecutionGuard:
     async def run(
         self,
         name: str,
-        awaitable: Awaitable[T],
+        awaitable_or_factory: Awaitable[T] | Callable[[], Awaitable[T]],
         timeout_seconds: float | None = None,
     ) -> T:
         timeout = float(timeout_seconds or self.default_timeout_seconds)
-        attempts = max(1, self.retries + 1)
+        can_retry = callable(awaitable_or_factory)
+        attempts = max(1, self.retries + 1) if can_retry else 1
+        if not can_retry and self.retries > 0:
+            logger.warning(
+                f"ExecutionGuard retries disabled for {name}: pass a coroutine factory (callable) instead of a coroutine object."
+            )
 
         last_error: Exception | None = None
         for attempt in range(1, attempts + 1):
             try:
+                awaitable = awaitable_or_factory() if can_retry else awaitable_or_factory
                 return await asyncio.wait_for(awaitable, timeout=timeout)
             except asyncio.TimeoutError as exc:
                 last_error = exc
