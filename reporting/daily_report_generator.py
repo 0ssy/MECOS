@@ -241,6 +241,32 @@ class DailyReportGenerator:
     
     def format_html(self, report: DailyReport) -> str:
         """Format report as HTML."""
+        trades_section = ""
+        if report.trades:
+            trade_rows = []
+            for i, trade in enumerate(report.trades, 1):
+                pnl_class = "positive" if float(trade["pnl"]) > 0 else "negative"
+                trade_rows.append(
+                    f"<tr><td>{i}</td><td>{trade['symbol']}</td><td>{trade['type']}</td>"
+                    f"<td>${trade['entry']:.2f}</td><td>${trade['exit']:.2f}</td>"
+                    f"<td>{trade['quantity']}</td><td class=\"{pnl_class}\">${trade['pnl']:+,.2f}</td>"
+                    f"<td>{trade['strategy']}</td><td>{trade['confidence']:.0%}</td></tr>"
+                )
+            trades_section = (
+                "<h2>Trades Executed Today</h2>\n"
+                "<table>\n"
+                "<tr><th>#</th><th>Symbol</th><th>Type</th><th>Entry</th><th>Exit</th>"
+                "<th>Qty</th><th>P&L</th><th>Strategy</th><th>Conf</th></tr>\n"
+                f"{''.join(trade_rows)}\n"
+                "</table>"
+            )
+
+        discoveries_section = ""
+        if report.discoveries:
+            discoveries_section = "<h2>Discoveries Today</h2>\n" + "".join(
+                f"<div class=\"discovery\">✓ {discovery}</div>" for discovery in report.discoveries
+            )
+
         html = f"""
 <!DOCTYPE html>
 <html>
@@ -437,14 +463,9 @@ class DailyReportGenerator:
             <div class="progress-fill">{report.progress_percent:.1f}%</div>
         </div>
         
-        {"<h2>Trades Executed Today</h2>" if report.trades else ""}
-        {"<table>" if report.trades else ""}
-        {"<tr><th>#</th><th>Symbol</th><th>Type</th><th>Entry</th><th>Exit</th><th>Qty</th><th>P&L</th><th>Strategy</th><th>Conf</th></tr>" if report.trades else ""}
-        {"".join(f"<tr><td>{i}</td><td>{t['symbol']}</td><td>{t['type']}</td><td>${t['entry']:.2f}</td><td>${t['exit']:.2f}</td><td>{t['quantity']}</td><td class=\"{'positive' if t['pnl'] > 0 else 'negative'}\">${t['pnl']:+,.2f}</td><td>{t['strategy']}</td><td>{t['confidence']:.0%}</td></tr>" for i, t in enumerate(report.trades, 1)) if report.trades else ""}
-        {"</table>" if report.trades else ""}
+        {trades_section}
         
-        {"<h2>Discoveries Today</h2>" if report.discoveries else ""}
-        {"".join(f"<div class=\"discovery\">✓ {d}</div>" for d in report.discoveries) if report.discoveries else ""}
+        {discoveries_section}
         
         <div class="footer">
             Generated: {datetime.now().isoformat()}
@@ -507,21 +528,21 @@ class DailyReportGenerator:
         
         if "markdown" in formats:
             md_path = self.output_dir / f"{report.date}_report.md"
-            with open(md_path, 'w') as f:
+            with open(md_path, 'w', encoding='utf-8', newline='\n') as f:
                 f.write(self.format_markdown(report))
             saved_files["markdown"] = str(md_path)
             logger.info(f"Saved Markdown report: {md_path}")
         
         if "html" in formats:
             html_path = self.output_dir / f"{report.date}_report.html"
-            with open(html_path, 'w') as f:
+            with open(html_path, 'w', encoding='utf-8', newline='\n') as f:
                 f.write(self.format_html(report))
             saved_files["html"] = str(html_path)
             logger.info(f"Saved HTML report: {html_path}")
         
         if "json" in formats:
             json_path = self.output_dir / f"{report.date}_report.json"
-            with open(json_path, 'w') as f:
+            with open(json_path, 'w', encoding='utf-8', newline='\n') as f:
                 f.write(self.format_json(report))
             saved_files["json"] = str(json_path)
             logger.info(f"Saved JSON report: {json_path}")

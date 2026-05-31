@@ -81,7 +81,7 @@ class UncertaintyFlagger:
     
     def __init__(
         self,
-        confidence_threshold: float = 0.75,
+        confidence_threshold: float = 0.60,
         track_assumptions: bool = True,
         flag_limitations: bool = True,
     ):
@@ -398,7 +398,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     
     # Example usage
-    flagger = UncertaintyFlagger(confidence_threshold=0.75)
+    flagger = UncertaintyFlagger(confidence_threshold=0.60)
     
     # Score a trading plan
     approval = flagger.score_plan(

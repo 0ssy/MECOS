@@ -11,6 +11,8 @@ statsmodels
 requests
 alpaca-py
 ib_insync
+openbb
+streamlit
 
 # Memory & Embeddings
 chromadb

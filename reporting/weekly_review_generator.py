@@ -470,14 +470,14 @@ class WeeklyReviewGenerator:
         
         if "markdown" in formats:
             md_path = self.output_dir / f"week_{review.week_end}_review.md"
-            with open(md_path, 'w') as f:
+            with open(md_path, 'w', encoding='utf-8', newline='\n') as f:
                 f.write(self.format_markdown(review))
             saved_files["markdown"] = str(md_path)
             logger.info(f"Saved Markdown review: {md_path}")
         
         if "json" in formats:
             json_path = self.output_dir / f"week_{review.week_end}_review.json"
-            with open(json_path, 'w') as f:
+            with open(json_path, 'w', encoding='utf-8', newline='\n') as f:
                 f.write(self.format_json(review))
             saved_files["json"] = str(json_path)
             logger.info(f"Saved JSON review: {json_path}")

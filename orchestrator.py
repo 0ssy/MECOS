@@ -79,6 +79,11 @@ class AutonomousOrchestrator:
 
     async def _dispatch_research(self, task: Task):
         research_agent = self.components.get("research_agent")
+        app_intelligence = self.components.get("global_app_intelligence")
+        metadata = task.metadata if isinstance(task.metadata, dict) else {}
+        app_name = metadata.get("app_name")
+        if app_intelligence and app_name:
+            await asyncio.to_thread(app_intelligence.discover_app, str(app_name))
         if not research_agent:
             await asyncio.sleep(0)
             return
@@ -103,6 +108,14 @@ class AutonomousOrchestrator:
 
     async def _dispatch_coding(self, task: Task):
         coding_agent = self.components.get("coding_agent")
+        polyglot_agent = self.components.get("polyglot_coding_agent")
+        metadata = task.metadata if isinstance(task.metadata, dict) else {}
+        language = metadata.get("language")
+        challenge_id = metadata.get("challenge_id")
+        if polyglot_agent and language:
+            await asyncio.to_thread(polyglot_agent.learn_language, str(language))
+            if challenge_id:
+                await asyncio.to_thread(polyglot_agent.solve_challenge, str(language), str(challenge_id))
         if not coding_agent:
             await asyncio.sleep(0)
             return

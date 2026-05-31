@@ -20,6 +20,7 @@ from continuous_loop import ContinuousResearchLoop
 from engineer import SandboxExecutor as RuntimeSandboxExecutor
 from knowledge_graph import KnowledgeGraph as RuntimeKnowledgeGraph
 from memory_system import MemorySystem
+from mecos_v35_implementation import GlobalAppIntelligence, PolyglotCodingAgent
 from model_router import ModelRouter
 from orchestrator import AutonomousOrchestrator
 from perception import PerceptionLayer
@@ -107,6 +108,8 @@ class UnifiedMECOSRuntime:
         self.app_discovery       = None
         self._daily_report_task: Optional[asyncio.Task] = None
         self._weekly_review_task: Optional[asyncio.Task] = None
+        self.polyglot_coding_agent: Optional[PolyglotCodingAgent] = None
+        self.global_app_intelligence: Optional[GlobalAppIntelligence] = None
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -217,15 +220,23 @@ class UnifiedMECOSRuntime:
 
         core_coding = CoreCodingAgent(self.memory, tools, sandbox_executor=runtime_sandbox)
         core_research = CoreResearchAgent(self.memory, self.web)
+        polyglot_coding = PolyglotCodingAgent(workspace="sandbox\\polyglot")
+        global_app_intelligence = GlobalAppIntelligence(registry_path="data\\app_registry.json")
         coordinator = AgentCoordinator(self.memory)
         self.connection_state["core_coding"] = True
         self.connection_state["core_research"] = True
         self.connection_state["agent_coordinator"] = True
         self.connection_state["agents"] = True
+        self.connection_state["polyglot_coding_agent"] = True
+        self.connection_state["global_app_intelligence"] = True
         self.components["core_coding_agent"] = core_coding
         self.components["core_research_agent"] = core_research
+        self.components["polyglot_coding_agent"] = polyglot_coding
+        self.components["global_app_intelligence"] = global_app_intelligence
         self.components["agent_coordinator"] = coordinator
         self.health_monitor.mark_started("agents")
+        self.polyglot_coding_agent = polyglot_coding
+        self.global_app_intelligence = global_app_intelligence
 
         runtime_memory = RuntimeVectorMemory()
         runtime_graph = RuntimeKnowledgeGraph()
@@ -283,6 +294,11 @@ class UnifiedMECOSRuntime:
             )
             self.connection_state["trading_system"] = True
             self.components["trading_system"] = self.trading_system
+            trading_components = self.trading_system.get_components()
+            self.components["trading_components"] = trading_components
+            self.components["trading_persona_engine"] = trading_components.get("persona_engine")
+            self.components["trading_openbb_adapter"] = trading_components.get("openbb_adapter")
+            self.components["trading_cockpit_snapshot"] = trading_components.get("cockpit_snapshot")
         except Exception as exc:
             logger.warning(f"TradingSystem init failed: {exc}")
             self.connection_state["trading_system"] = False
@@ -291,9 +307,14 @@ class UnifiedMECOSRuntime:
             {
                 "research_agent": core_research,
                 "coding_agent": core_coding,
+                "polyglot_coding_agent": polyglot_coding,
+                "global_app_intelligence": global_app_intelligence,
                 "memory": self.memory,
                 "evolution_agent": runtime_evolution,
                 "trading_system": self.trading_system,
+                "trading_persona_engine": self.components.get("trading_persona_engine"),
+                "trading_openbb_adapter": self.components.get("trading_openbb_adapter"),
+                "trading_cockpit_snapshot": self.components.get("trading_cockpit_snapshot"),
                 "runtime_router": runtime_router,
             }
         )
@@ -330,8 +351,15 @@ class UnifiedMECOSRuntime:
         runtime_evolution: EvolutionAgent = self.components["runtime_evolution"]
         runtime_router: ModelRouter = self.components["runtime_router"]
         runtime_loop: ContinuousResearchLoop = self.components["runtime_research_loop"]
+        polyglot_coding: Optional[PolyglotCodingAgent] = self.components.get("polyglot_coding_agent")
+        global_app_intelligence: Optional[GlobalAppIntelligence] = self.components.get("global_app_intelligence")
 
         background = asyncio.create_task(runtime_loop.start(["autonomous runtime", "recursive engineering"]))
+        if polyglot_coding:
+            await asyncio.to_thread(polyglot_coding.learn_language, "rust")
+            await asyncio.to_thread(polyglot_coding.solve_challenge, "rust", "two_sum_001")
+        if global_app_intelligence:
+            await asyncio.to_thread(global_app_intelligence.discover_app, "Fincept Terminal")
         await self.execution_guard.run(
             "runtime_research_analyze_repo",
             runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
@@ -557,7 +585,7 @@ class UnifiedMECOSRuntime:
             return
         try:
             self.uncertainty_flagger = UncertaintyFlagger(
-                confidence_threshold=0.75,
+                confidence_threshold=0.60,
                 track_assumptions=True,
                 flag_limitations=True,
             )

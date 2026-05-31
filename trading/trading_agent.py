@@ -20,6 +20,7 @@ from trading.statistical_arbitrage_engine import StatisticalArbitrageEngine
 from trading.sentiment_agent import SentimentAgent
 from trading.reinforcement_learning_optimizer import ReinforcementLearningOptimizer
 from trading.market_making_agent import MarketMakingAgent
+from trading.persona_engine import PersonaEngine
 
 
 class _OrderFlowProxyAgent:
@@ -123,6 +124,7 @@ class TradingAgent:
         self.sentiment_agent = SentimentAgent(memory)
         self.reinforcement_learning_agent = _ReinforcementLearningProxyAgent(memory)
         self.market_making_agent = MarketMakingAgent(memory)
+        self.persona_engine = PersonaEngine()
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
         self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
@@ -163,6 +165,9 @@ class TradingAgent:
             }
 
         logger.info(f"Analyzing {symbol}...")
+        sector = get_sector(symbol)
+        persona_asset_type = "crypto" if sector == "crypto" else "equity" if sector not in {"forex", "commodity_fx"} else "macro"
+        persona_context = self.persona_engine.get_prompt_injection(persona_asset_type)
         regime = await self.regime_detector.detect_regime(valid_data)
         features = await self.feature_engine.compute_features(valid_data)
         features["close"] = float(valid_data[-1].get("close", 0.0))
@@ -286,6 +291,8 @@ class TradingAgent:
             "expected_move": float(expected_move),
             "spread_pressure": float(spread_pressure),
             "regime": regime,
+            "persona_context": persona_context,
+            "sector": sector,
         }
 
     async def analyze_market(

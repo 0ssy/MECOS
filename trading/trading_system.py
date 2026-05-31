@@ -27,6 +27,8 @@ from .trade_database import TradeDatabase
 from .trading_agent import TradingAgent
 from .broker.multi_broker_adapter import MultiBrokerAdapter
 from .broker.base_adapter import BrokerAdapter
+from .openbb_adapter import OpenBBDataAdapter
+from .cockpit_app import build_cockpit_snapshot
 
 class TradingSystem:
     def __init__(
@@ -49,7 +51,7 @@ class TradingSystem:
         self.risk_monitor = RiskMonitor()
         self.performance_monitor = PerformanceMonitor(self.db)
         self.uncertainty_flagger = UncertaintyFlagger(
-            confidence_threshold=0.75,
+            confidence_threshold=0.60,
             track_assumptions=True,
             flag_limitations=True,
         )
@@ -94,6 +96,7 @@ class TradingSystem:
             execution_mode=self.execution_mode,
         )
         self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
+        self.openbb_adapter = OpenBBDataAdapter()
         logger.info(
             f"TradingSystem initialized with broker adapter: {type(self.broker_adapter).__name__} "
             f"| execution_mode={self.execution_mode.upper()}"
@@ -121,6 +124,9 @@ class TradingSystem:
             'executor': self.executor,
             'signal_generator': self.signal_generator,
             'broker_adapter': self.broker_adapter,
+            'persona_engine': getattr(self.agent, "persona_engine", None),
+            'openbb_adapter': self.openbb_adapter,
+            'cockpit_snapshot': self.get_cockpit_snapshot(),
         }
 
     async def start(self, use_starter_universe: bool = True):
@@ -148,6 +154,26 @@ class TradingSystem:
         if hasattr(self, 'loop'):
             return self.loop.get_status()
         return {}
+
+    def get_cockpit_snapshot(self) -> Dict[str, Any]:
+        return build_cockpit_snapshot(self)
+
+    def get_external_market_context(self, symbol: str, macro_indicator: str = "DGS10") -> Dict[str, Any]:
+        context = {
+            "symbol": symbol,
+            "macro_indicator": macro_indicator,
+            "market_data": self.openbb_adapter.safe_get_market_data(symbol),
+            "macro_data": None,
+        }
+        if self.openbb_adapter.available:
+            try:
+                context["macro_data"] = self.openbb_adapter.get_macro_data(macro_indicator)
+            except Exception as exc:
+                logger.warning(f"OpenBB macro data fetch failed for {macro_indicator}: {exc}")
+                context["macro_data"] = {"error": str(exc)}
+        else:
+            context["macro_data"] = {"available": False, "error": "openbb_not_installed"}
+        return context
 
     def _initialize_app_learning(self) -> None:
         try:
