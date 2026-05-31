@@ -147,10 +147,12 @@ class UniverseManager:
         
         starter.extend(['BTC/USD', 'ETH/USD', 'SOL/USD'])
         
+        starter.extend(['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'])
+        
         self.active_universe = set(starter)
         
         logger.info(f'Loaded starter universe: {len(starter)} assets')
-        logger.info(f'Stocks: 6 | ETFs: 3 | Crypto: 3')
+        logger.info(f'Stocks: 6 | ETFs: 3 | Crypto: 3 | Forex: 4')
         
         return starter
 

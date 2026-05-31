@@ -298,7 +298,9 @@ class UnifiedMECOSRuntime:
             trading_components = self.trading_system.get_components()
             self.components["trading_components"] = trading_components
             self.components["trading_persona_engine"] = trading_components.get("persona_engine")
+            self.components["trading_consensus_engine"] = trading_components.get("consensus_engine")
             self.components["trading_openbb_adapter"] = trading_components.get("openbb_adapter")
+            self.components["trading_forex_activation_status"] = trading_components.get("forex_activation_status")
             self.components["trading_cockpit_snapshot"] = trading_components.get("cockpit_snapshot")
         except Exception as exc:
             logger.warning(f"TradingSystem init failed: {exc}")
@@ -314,7 +316,9 @@ class UnifiedMECOSRuntime:
                 "evolution_agent": runtime_evolution,
                 "trading_system": self.trading_system,
                 "trading_persona_engine": self.components.get("trading_persona_engine"),
+                "trading_consensus_engine": self.components.get("trading_consensus_engine"),
                 "trading_openbb_adapter": self.components.get("trading_openbb_adapter"),
+                "trading_forex_activation_status": self.components.get("trading_forex_activation_status"),
                 "trading_cockpit_snapshot": self.components.get("trading_cockpit_snapshot"),
                 "runtime_router": runtime_router,
             }

@@ -21,6 +21,7 @@ from trading.sentiment_agent import SentimentAgent
 from trading.reinforcement_learning_optimizer import ReinforcementLearningOptimizer
 from trading.market_making_agent import MarketMakingAgent
 from trading.persona_engine import PersonaEngine
+from trading.mecos_consensus_engine import ConsensusEngine
 
 
 class _OrderFlowProxyAgent:
@@ -125,6 +126,7 @@ class TradingAgent:
         self.reinforcement_learning_agent = _ReinforcementLearningProxyAgent(memory)
         self.market_making_agent = MarketMakingAgent(memory)
         self.persona_engine = PersonaEngine()
+        self.consensus_engine = ConsensusEngine(self.persona_engine.get_personas())
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
         self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
@@ -166,7 +168,14 @@ class TradingAgent:
 
         logger.info(f"Analyzing {symbol}...")
         sector = get_sector(symbol)
-        persona_asset_type = "crypto" if sector == "crypto" else "equity" if sector not in {"forex", "commodity_fx"} else "macro"
+        if sector == "crypto":
+            persona_asset_type = "crypto"
+        elif sector == "forex":
+            persona_asset_type = "forex"
+        elif sector == "commodity_fx":
+            persona_asset_type = "macro"
+        else:
+            persona_asset_type = "equity"
         persona_context = self.persona_engine.get_prompt_injection(persona_asset_type)
         regime = await self.regime_detector.detect_regime(valid_data)
         features = await self.feature_engine.compute_features(valid_data)
@@ -206,6 +215,25 @@ class TradingAgent:
         edge = float(fused.get("edge", 0.0))
         if orchestrator_decision == "HOLD" and abs(edge) < 0.20:
             final_decision = "HOLD"
+
+        consensus = self.consensus_engine.coordinate_debate(
+            topic=symbol,
+            context={
+                "asset_type": persona_asset_type,
+                "regime": regime,
+                "base_decision": final_decision,
+                "base_confidence": confidence,
+                "features": features,
+                "edge": edge,
+            },
+        )
+        consensus_decision = str(consensus.get("final_decision", "HOLD")).upper()
+        if consensus_decision == "HOLD":
+            final_decision = "HOLD"
+            confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
+        else:
+            final_decision = consensus_decision
+            confidence = max(confidence, float(consensus.get("confidence_score", confidence)))
 
         if False: # Overridden for Testing
             final_decision = "HOLD"
@@ -292,6 +320,7 @@ class TradingAgent:
             "spread_pressure": float(spread_pressure),
             "regime": regime,
             "persona_context": persona_context,
+            "consensus": consensus,
             "sector": sector,
         }
 

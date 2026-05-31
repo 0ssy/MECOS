@@ -29,6 +29,8 @@ from .broker.multi_broker_adapter import MultiBrokerAdapter
 from .broker.base_adapter import BrokerAdapter
 from .openbb_adapter import OpenBBDataAdapter
 from .cockpit_app import build_cockpit_snapshot
+from .mecos_consensus_engine import ConsensusEngine
+from .mecos_forex_activation import ForexActivationEngine
 
 class TradingSystem:
     def __init__(
@@ -97,6 +99,13 @@ class TradingSystem:
         )
         self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
         self.openbb_adapter = OpenBBDataAdapter()
+        self.forex_activation_engine = ForexActivationEngine()
+        self.forex_activation_status = self.forex_activation_engine.activate(
+            persona_engine=self.agent.persona_engine,
+            universe_manager=self.universe_manager,
+            openbb_adapter=self.openbb_adapter,
+        )
+        self.agent.consensus_engine = ConsensusEngine(self.agent.persona_engine.get_personas())
         logger.info(
             f"TradingSystem initialized with broker adapter: {type(self.broker_adapter).__name__} "
             f"| execution_mode={self.execution_mode.upper()}"
@@ -125,7 +134,10 @@ class TradingSystem:
             'signal_generator': self.signal_generator,
             'broker_adapter': self.broker_adapter,
             'persona_engine': getattr(self.agent, "persona_engine", None),
+            'consensus_engine': getattr(self.agent, "consensus_engine", None),
             'openbb_adapter': self.openbb_adapter,
+            'forex_activation_engine': self.forex_activation_engine,
+            'forex_activation_status': self.forex_activation_status,
             'cockpit_snapshot': self.get_cockpit_snapshot,
         }
 

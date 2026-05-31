@@ -49,6 +49,8 @@ from .schemas import Signal, Decision, Order, Position, RiskState, MarketEvent
 from .openbb_adapter import OpenBBDataAdapter
 from .persona_engine import PersonaEngine
 from .cockpit_app import build_cockpit_snapshot
+from .mecos_consensus_engine import ConsensusEngine
+from .mecos_forex_activation import ForexActivationEngine
 
 __all__ = [
     'UniverseManager', 'UniverseScanner',
@@ -63,6 +65,7 @@ __all__ = [
     'TradeDatabase', 'OrderManager', 'OrderStatus', 'PositionManager', 'PerformanceMonitor',
     'RiskMonitor', 'TradingAgent', 'AutonomousTradingLoop', 'PaperTradingExecutor',
     'MarketDataStream', 'Signal', 'Decision', 'Order', 'Position', 'RiskState', 'MarketEvent',
-    'OpenBBDataAdapter', 'PersonaEngine', 'build_cockpit_snapshot'
+    'OpenBBDataAdapter', 'PersonaEngine', 'build_cockpit_snapshot',
+    'ConsensusEngine', 'ForexActivationEngine'
 ]
 
