@@ -59,6 +59,7 @@ class ProcessManager:
         multiprocessing.set_executable(sys.executable)
         self._workers: Dict[str, WorkerState] = {}
         self._running = False
+        self._stopping = False
         self._result_handlers: Dict[str, List[Callable]] = {}
 
     def register(self, spec: WorkerSpec):
@@ -74,6 +75,7 @@ class ProcessManager:
 
     def start_all(self):
         """Start all registered workers."""
+        self._stopping = False
         self._running = True
         for wid, state in self._workers.items():
             self._start_worker(state)
@@ -126,6 +128,8 @@ class ProcessManager:
 
     def _check_heartbeat(self, state: WorkerState):
         """Restart worker if heartbeat is stale or process has died."""
+        if self._stopping or not self._running:
+            return
         if state.process is None:
             return
         age = time.time() - state.last_hb
@@ -163,6 +167,7 @@ class ProcessManager:
     def stop_all(self):
         """Gracefully stop all workers."""
         self._running = False
+        self._stopping = True
         for wid, state in self._workers.items():
             self.send_command(wid, "stop", None)
         time.sleep(2)
@@ -170,6 +175,12 @@ class ProcessManager:
             if state.process and state.process.is_alive():
                 state.process.terminate()
                 state.process.join(timeout=5)
+            if state.process:
+                try:
+                    state.process.close()
+                except Exception:
+                    pass
+                state.process = None
             self._close_state_queues(state)
         logger.info("[ProcessManager] All workers stopped")
 

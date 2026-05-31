@@ -351,54 +351,45 @@ class UnifiedMECOSRuntime:
         runtime_orchestrator: AutonomousOrchestrator = self.components["runtime_orchestrator"]
         runtime_evolution: EvolutionAgent = self.components["runtime_evolution"]
         runtime_router: ModelRouter = self.components["runtime_router"]
-        runtime_loop: ContinuousResearchLoop = self.components["runtime_research_loop"]
         polyglot_coding: Optional[PolyglotCodingAgent] = self.components.get("polyglot_coding_agent")
         global_app_intelligence: Optional[GlobalAppIntelligence] = self.components.get("global_app_intelligence")
 
-        background = asyncio.create_task(runtime_loop.start(["autonomous runtime", "recursive engineering"]))
-        try:
-            if polyglot_coding:
-                await asyncio.to_thread(polyglot_coding.learn_language, "rust")
-                await asyncio.to_thread(polyglot_coding.solve_challenge, "rust", "two_sum_001")
-            if global_app_intelligence:
-                await asyncio.to_thread(global_app_intelligence.discover_app, "Fincept Terminal")
-            await self.execution_guard.run(
-                "runtime_research_analyze_repo",
-                lambda: runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
+        if polyglot_coding:
+            await asyncio.to_thread(polyglot_coding.learn_language, "rust")
+            await asyncio.to_thread(polyglot_coding.solve_challenge, "rust", "two_sum_001")
+        if global_app_intelligence:
+            await asyncio.to_thread(global_app_intelligence.discover_app, "Fincept Terminal")
+        await self.execution_guard.run(
+            "runtime_research_analyze_repo",
+            lambda: runtime_research.analyze_repo(str(Path(__file__).resolve().parent)),
+            timeout_seconds=45.0,
+        )
+        module_code = await runtime_coding.build_module("diagnostic_tool", "runtime health checks")
+        debug_result = {"success": True}
+        if module_code:
+            debug_result = await self.execution_guard.run(
+                "runtime_debugger_verify_and_repair",
+                lambda: runtime_debugger.verify_and_repair(module_code, "diagnostic_tool.py"),
+                timeout_seconds=180.0,
             )
-            module_code = await runtime_coding.build_module("diagnostic_tool", "runtime health checks")
-            debug_result = {"success": True}
-            if module_code:
-                debug_result = await self.execution_guard.run(
-                    "runtime_debugger_verify_and_repair",
-                    lambda: runtime_debugger.verify_and_repair(module_code, "diagnostic_tool.py"),
-                    timeout_seconds=180.0,
-                )
 
-            runtime_graph.add_node("mecos_core", "runtime", {"mode": "local-first"})
-            runtime_graph.add_node("sandbox", "component", {"purpose": "safe execution"})
-            runtime_graph.add_edge("mecos_core", "sandbox", "uses")
+        runtime_graph.add_node("mecos_core", "runtime", {"mode": "local-first"})
+        runtime_graph.add_node("sandbox", "component", {"purpose": "safe execution"})
+        runtime_graph.add_edge("mecos_core", "sandbox", "uses")
 
-            await self.execution_guard.run(
-                "runtime_router_route_request",
-                lambda: runtime_router.route_request("plan evolution", "long_term_planning"),
-            )
-            evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
-            planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
-            trading_metrics = {}
-            optimization_plan = {}
-            if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
-                trading_metrics = self.trading_system.performance_monitor.get_metrics()
-                if trading_metrics:
-                    self.benchmark_harness.record_trading_metrics(trading_metrics)
-                    optimization_plan = await runtime_evolution.ingest_trading_performance(trading_metrics)
-        finally:
-            runtime_loop.stop()
-            background.cancel()
-            try:
-                await background
-            except asyncio.CancelledError:
-                pass
+        await self.execution_guard.run(
+            "runtime_router_route_request",
+            lambda: runtime_router.route_request("plan evolution", "long_term_planning"),
+        )
+        evolution_result = await runtime_evolution.run_benchmark("coding_agent", {"success_rate": 0.85})
+        planning_summary = await runtime_orchestrator.run_goal("Evolve MECOS into sovereign autonomous runtime")
+        trading_metrics = {}
+        optimization_plan = {}
+        if self.trading_system and hasattr(self.trading_system, "performance_monitor"):
+            trading_metrics = self.trading_system.performance_monitor.get_metrics()
+            if trading_metrics:
+                self.benchmark_harness.record_trading_metrics(trading_metrics)
+                optimization_plan = await runtime_evolution.ingest_trading_performance(trading_metrics)
 
         found = runtime_memory.search("runtime")
         memory_retrieval = await self.memory.retrieve_context("runtime health", n_results=5) if self.memory else {"metadatas": [[]]}
@@ -724,8 +715,8 @@ class UnifiedMECOSRuntime:
             if task:
                 task.cancel()
                 try:
-                    await task
-                except asyncio.CancelledError:
+                    await asyncio.wait_for(task, timeout=5.0)
+                except (asyncio.CancelledError, asyncio.TimeoutError):
                     pass
                 setattr(self, task_attr, None)
 
@@ -816,10 +807,21 @@ async def main():
 
 
 if __name__ == "__main__":
+    import multiprocessing
+
     try:
-        import multiprocessing
         multiprocessing.freeze_support()
         asyncio.run(main())
     except KeyboardInterrupt:
-        pass
+        logger.warning("KeyboardInterrupt received; terminating active child processes.")
+        for child in multiprocessing.active_children():
+            try:
+                child.terminate()
+            except Exception:
+                pass
+        for child in multiprocessing.active_children():
+            try:
+                child.join(timeout=3)
+            except Exception:
+                pass
 
