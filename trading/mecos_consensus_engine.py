@@ -8,16 +8,32 @@ from loguru import logger
 class ConsensusEngine:
     """Multi-agent debate loop for final trade signal gating."""
 
-    def __init__(self, personas: Dict[str, str], minimum_support_ratio: float = 0.67):
+    def __init__(
+        self,
+        personas: Dict[str, str],
+        minimum_support_ratio: float = 1.0,
+        require_unanimous: bool = True,
+    ):
         self.personas = dict(personas or {})
         self.minimum_support_ratio = float(minimum_support_ratio)
+        self.require_unanimous = bool(require_unanimous)
 
     def coordinate_debate(self, topic: str, context: Dict[str, Any] | None = None) -> Dict[str, Any]:
         context = dict(context or {})
         logger.debug(f"[Consensus] Debate start: topic={topic}")
 
+        active_personas = context.get("active_personas")
+        if isinstance(active_personas, str):
+            active_personas = [active_personas]
+        if not isinstance(active_personas, list) or not active_personas:
+            selected = list(self.personas.keys())
+        else:
+            selected = [name for name in active_personas if name in self.personas]
+            if not selected:
+                selected = list(self.personas.keys())
+
         perspectives: Dict[str, Dict[str, str]] = {}
-        for name in self.personas.keys():
+        for name in selected:
             perspectives[name] = self._simulate_persona_analysis(name, context)
 
         conclusion = self._reach_consensus(perspectives)
@@ -78,7 +94,11 @@ class ConsensusEngine:
 
         majority_signal = max(counts, key=counts.get)
         support_ratio = float(counts[majority_signal]) / float(total_votes)
-        if majority_signal in {"BUY", "SELL"} and support_ratio >= self.minimum_support_ratio:
+        is_supported = support_ratio >= self.minimum_support_ratio
+        if self.require_unanimous:
+            is_supported = support_ratio >= 1.0
+
+        if majority_signal in {"BUY", "SELL"} and is_supported:
             final_decision = majority_signal
         else:
             final_decision = "HOLD"

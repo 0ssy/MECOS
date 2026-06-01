@@ -18,6 +18,7 @@ requests>=2.31
 # ── Trading Brokers ───────────────────────────────────────────────────────────
 alpaca-py>=0.20          # Stocks (paper + live)
 python-binance>=1.0.19   # Crypto (testnet + live)
+openbb>=4.3              # Optional: market + news context
 # ccxt>=4.0              # Optional: unified exchange interface
 
 # ── Memory & Embeddings ───────────────────────────────────────────────────────

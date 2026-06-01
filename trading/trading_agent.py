@@ -22,6 +22,7 @@ from trading.reinforcement_learning_optimizer import ReinforcementLearningOptimi
 from trading.market_making_agent import MarketMakingAgent
 from trading.persona_engine import PersonaEngine
 from trading.mecos_consensus_engine import ConsensusEngine
+from trading.openbb_adapter import OpenBBDataAdapter
 
 
 class _OrderFlowProxyAgent:
@@ -127,6 +128,7 @@ class TradingAgent:
         self.market_making_agent = MarketMakingAgent(memory)
         self.persona_engine = PersonaEngine()
         self.consensus_engine = ConsensusEngine(self.persona_engine.get_personas())
+        self.openbb_adapter = OpenBBDataAdapter()
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
         self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
@@ -176,11 +178,25 @@ class TradingAgent:
             persona_asset_type = "macro"
         else:
             persona_asset_type = "equity"
+        active_personas = self.persona_engine.get_active_personas(persona_asset_type)
+        primary_persona = self.persona_engine.get_primary_persona(persona_asset_type)
         persona_context = self.persona_engine.get_prompt_injection(persona_asset_type)
         regime = await self.regime_detector.detect_regime(valid_data)
         features = await self.feature_engine.compute_features(valid_data)
         features["close"] = float(valid_data[-1].get("close", 0.0))
         physics = await self.physics_engine.analyze(symbol, valid_data, features)
+        external_market_context = {
+            "market_data": self.openbb_adapter.safe_get_market_data(symbol),
+            "news": self.openbb_adapter.safe_get_news(symbol, limit=3),
+        }
+        macro_indicator = "DGS10" if persona_asset_type in {"equity", "macro"} else "DEXUSEU"
+        if self.openbb_adapter.available:
+            try:
+                external_market_context["macro_data"] = self.openbb_adapter.get_macro_data(macro_indicator)
+            except Exception as exc:
+                external_market_context["macro_data"] = {"error": str(exc)}
+        else:
+            external_market_context["macro_data"] = {"available": False, "error": "openbb_not_installed"}
 
         orchestrator_data = {symbol: valid_data}
         orchestrated = await self.meta_orchestrator.orchestrate_signals(
@@ -225,10 +241,15 @@ class TradingAgent:
                 "base_confidence": confidence,
                 "features": features,
                 "edge": edge,
+                "active_personas": active_personas,
+                "external_market_context": external_market_context,
             },
         )
         consensus_decision = str(consensus.get("final_decision", "HOLD")).upper()
-        if consensus_decision == "HOLD":
+        if consensus.get("dissenting_opinions"):
+            final_decision = "HOLD"
+            confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
+        elif consensus_decision == "HOLD":
             final_decision = "HOLD"
             confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
         else:
@@ -322,6 +343,9 @@ class TradingAgent:
             "persona_context": persona_context,
             "consensus": consensus,
             "sector": sector,
+            "primary_persona": primary_persona,
+            "active_personas": active_personas,
+            "external_market_context": external_market_context,
         }
 
     async def analyze_market(

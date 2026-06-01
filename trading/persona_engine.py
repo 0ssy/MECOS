@@ -18,6 +18,22 @@ class PersonaEngine:
     def get_personas(self):
         return dict(self.PERSONAS)
 
+    def get_active_personas(self, asset_type: str):
+        token = str(asset_type or "").strip().lower()
+        if token == "equity":
+            return ["Buffett", "Simons", "Dalio"]
+        if token == "crypto":
+            return ["Simons", "Dalio", "Buffett"]
+        if token in {"forex", "commodity_fx"}:
+            return ["Dalio", "Soros", "Simons"]
+        if token == "macro":
+            return ["Dalio", "Buffett", "Simons"]
+        return ["Dalio", "Buffett", "Simons"]
+
+    def get_primary_persona(self, asset_type: str) -> str:
+        active = self.get_active_personas(asset_type)
+        return active[0] if active else "Dalio"
+
     def get_prompt_injection(self, asset_type: str) -> str:
         token = str(asset_type or "").strip().lower()
         if token == "equity":

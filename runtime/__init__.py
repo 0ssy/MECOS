@@ -9,6 +9,7 @@ from .research_governor import ResearchGovernor
 from .state_checkpoint import StateCheckpoint
 from .uncertainty_flagger import UncertaintyFlagger
 from .watchdog import RuntimeWatchdog
+from .persona_engine import PersonaEngine
 
 __all__ = [
     "RuntimeBenchmarkHarness",
@@ -23,6 +24,7 @@ __all__ = [
     "UncertaintyFlagger",
     "RuntimeWatchdog",
     "StateCheckpoint",
+    "PersonaEngine",
 ]
 
 

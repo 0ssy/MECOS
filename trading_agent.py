@@ -11,7 +11,7 @@ Full implementation with:
 import asyncio
 import time
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 import numpy as np
@@ -41,6 +41,92 @@ try:
 except ImportError:
     _BINANCE_AVAILABLE = False
     logger.warning("python-binance not installed. Run: pip install python-binance")
+
+try:
+    import openbb  # type: ignore
+    _OPENBB_AVAILABLE = True
+except ImportError:
+    openbb = None
+    _OPENBB_AVAILABLE = False
+    logger.warning("openbb not installed. News updates disabled.")
+
+
+class OpenBBNewsAdapter:
+    """Optional OpenBB news adapter with resilient endpoint probing."""
+
+    def __init__(self):
+        self.available = _OPENBB_AVAILABLE
+
+    def get_news(self, symbol: str, limit: int = 3) -> Dict[str, Any]:
+        if not self.available or openbb is None:
+            return {"symbol": symbol, "available": False, "headlines": [], "error": "openbb_not_installed"}
+
+        obb = getattr(openbb, "obb", None)
+        attempts = [
+            lambda: obb.news.company(symbol=symbol, limit=limit) if obb else None,
+            lambda: obb.news.company(symbol) if obb else None,
+            lambda: obb.news.world(limit=limit) if obb else None,
+            lambda: openbb.news.company(symbol=symbol, limit=limit),
+            lambda: openbb.news.company(symbol),
+            lambda: openbb.news.world(limit=limit),
+        ]
+        last_error: Optional[Exception] = None
+        for fetch in attempts:
+            try:
+                raw = fetch()
+                headlines = self._extract_headlines(raw, limit)
+                if headlines:
+                    return {"symbol": symbol, "available": True, "headlines": headlines}
+            except Exception as exc:
+                last_error = exc
+                continue
+
+        return {
+            "symbol": symbol,
+            "available": True,
+            "headlines": [],
+            "error": str(last_error) if last_error else "no_news_returned",
+        }
+
+    @staticmethod
+    def _extract_headlines(raw: Any, limit: int) -> List[str]:
+        if raw is None:
+            return []
+
+        if hasattr(raw, "to_dataframe"):
+            try:
+                raw = raw.to_dataframe()
+            except Exception:
+                pass
+
+        records: List[Dict[str, Any]] = []
+        if hasattr(raw, "to_dict"):
+            try:
+                as_dict = raw.to_dict(orient="records")  # pandas
+                if isinstance(as_dict, list):
+                    records = [r for r in as_dict if isinstance(r, dict)]
+            except TypeError:
+                as_dict = raw.to_dict()
+                if isinstance(as_dict, dict):
+                    records = [as_dict]
+                elif isinstance(as_dict, list):
+                    records = [r for r in as_dict if isinstance(r, dict)]
+        elif isinstance(raw, dict):
+            records = [raw]
+        elif isinstance(raw, list):
+            records = [r for r in raw if isinstance(r, dict)]
+
+        headlines: List[str] = []
+        for rec in records:
+            for key in ("headline", "title", "summary", "text"):
+                value = rec.get(key)
+                if isinstance(value, str) and value.strip():
+                    cleaned = " ".join(value.strip().split())
+                    headlines.append(cleaned[:180])
+                    break
+            if len(headlines) >= limit:
+                break
+        return headlines
 
 
 # ── Signal dataclass ──────────────────────────────────────────────────────────
@@ -352,12 +438,14 @@ class TradingAgent:
     def __init__(self, memory: MemorySystem):
         self.memory = memory
         self.risk = RiskManager()
+        self.news = OpenBBNewsAdapter()
         self._metrics: Dict = {
             "analyses": 0,
             "signals_generated": 0,
             "actionable_signals": 0,
             "orders_placed": 0,
             "orders_blocked": 0,
+            "news_updates": 0,
         }
 
         # Broker clients (lazy, graceful)
@@ -397,6 +485,12 @@ class TradingAgent:
                 if prices.empty:
                     continue
                 signal = generate_signal(symbol, "alpaca", prices)
+                news = await asyncio.to_thread(self.news.get_news, symbol, 3)
+                headlines = news.get("headlines", []) if isinstance(news, dict) else []
+                if headlines:
+                    news_blurb = "; ".join(headlines[:2])
+                    signal.reason = f"{signal.reason} | NEWS: {news_blurb}"
+                    self._metrics["news_updates"] += len(headlines[:2])
                 signals.append(signal)
                 self._metrics["analyses"] += 1
                 logger.debug(f"Stock signal: {signal}")
@@ -520,6 +614,7 @@ class TradingAgent:
             "actionable_rate": actionable / max(total, 1),
             "orders_placed": self._metrics["orders_placed"],
             "orders_blocked": self._metrics["orders_blocked"],
+            "news_updates": self._metrics["news_updates"],
             "daily_pnl": self.risk.daily_pnl,
             "open_positions": dict(self.risk.open_positions),
         }
