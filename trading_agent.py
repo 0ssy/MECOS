@@ -25,6 +25,7 @@ try:
     from alpaca.trading.client import TradingClient
     from alpaca.trading.requests import MarketOrderRequest, LimitOrderRequest
     from alpaca.trading.enums import OrderSide, TimeInForce
+    from alpaca.data.enums import DataFeed
     from alpaca.data.historical import StockHistoricalDataClient, CryptoHistoricalDataClient
     from alpaca.data.requests import StockBarsRequest, CryptoBarsRequest
     from alpaca.data.timeframe import TimeFrame
@@ -254,9 +255,15 @@ class AlpacaAdapter:
         return float(acct.equity)
 
     def get_bars(self, symbol: str, limit: int = 60) -> pd.Series:
+        now_utc = pd.Timestamp.utcnow()
+        # Match the proven connector behavior: explicit time window + IEX feed.
+        start_utc = now_utc - pd.Timedelta(minutes=max(limit * 60 * 3, 60 * 100))
         req = StockBarsRequest(
             symbol_or_symbols=symbol,
             timeframe=TimeFrame.Hour,
+            start=start_utc.to_pydatetime(),
+            end=now_utc.to_pydatetime(),
+            feed=DataFeed.IEX,
             limit=limit,
         )
         bars = self.stock_data.get_stock_bars(req)

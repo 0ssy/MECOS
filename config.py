@@ -8,7 +8,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 class Settings(BaseSettings):
@@ -98,5 +98,4 @@ settings = Settings()
 # Ensure required directories exist
 for _path in [settings.DATA_DIR, settings.MEMORY_DIR, settings.LOGS_DIR]:
     _path.mkdir(parents=True, exist_ok=True)
-
 
