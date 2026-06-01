@@ -1,38 +1,45 @@
-# Core Dependencies
-asyncio
-aiohttp
-websockets
-python-dotenv
-pydantic
-loguru
-pandas
-scipy
-statsmodels
-requests
-alpaca-py
-ib_insync
-openbb
-streamlit
+# MECOS Requirements
+# Install with: pip install -r requirements.txt
 
-# Memory & Embeddings
-chromadb
-sentence-transformers
-numpy
-faiss-cpu
+# ── Core ──────────────────────────────────────────────────────────────────────
+aiohttp>=3.9
+websockets>=12.0
+python-dotenv>=1.0
+pydantic>=2.0
+pydantic-settings>=2.0
+loguru>=0.7
+pandas>=2.0
+numpy>=1.26
+scipy>=1.11
+statsmodels>=0.14
+requests>=2.31
+# Note: asyncio is stdlib in Python 3.4+; do NOT list it here
 
-# Perception
-playwright
-beautifulsoup4
-mss
-pytesseract
-Pillow
+# ── Trading Brokers ───────────────────────────────────────────────────────────
+alpaca-py>=0.20          # Stocks (paper + live)
+python-binance>=1.0.19   # Crypto (testnet + live)
+# ccxt>=4.0              # Optional: unified exchange interface
 
-# Intelligence & Agents
-torch
-transformers
-openai
+# ── Memory & Embeddings ───────────────────────────────────────────────────────
+chromadb>=0.4
+sentence-transformers>=2.7
+faiss-cpu>=1.7
 
-# Utilities
-pytest
-black
-isort
+# ── Perception ────────────────────────────────────────────────────────────────
+playwright>=1.40
+beautifulsoup4>=4.12
+mss>=9.0
+pytesseract>=0.3
+Pillow>=10.0
+
+# ── LLM / AI ─────────────────────────────────────────────────────────────────
+openai>=1.30             # Used as OpenAI-compatible client for local Ollama
+torch>=2.2
+transformers>=4.40
+
+# ── Dev / Test ────────────────────────────────────────────────────────────────
+pytest>=8.0
+pytest-asyncio>=0.23
+black>=24.0
+isort>=5.13
+

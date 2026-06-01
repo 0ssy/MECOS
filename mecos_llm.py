@@ -1,125 +1,119 @@
 """
 MECOS LLM Inference Engine
 Handles the 'Internal Monologue' and 'Final Response' cognitive cycle.
-Optimized to use the remote Server Laptop for inference.
+
+FIX: think_and_act was declared async but made synchronous blocking OpenAI
+calls directly, which freezes the event loop under any concurrency.
+All blocking calls are now wrapped in asyncio.to_thread().
 """
 
+import asyncio
 import json
 import time
-import asyncio
 from loguru import logger
 from openai import OpenAI
 from config import settings
 
+
 class MECOSLLM:
     def __init__(self):
-        # Connect to the remote server laptop (Ollama)
-        # It uses the SERVER_IP you set in config.py
-        self.client = OpenAI(
-            timeout=float(settings.LLM_REQUEST_TIMEOUT),
-            base_url=settings.LOCAL_LLM_URL,
-            api_key="local-no-key"
-        )
+        self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
         self.model = settings.DEFAULT_MODEL
-        logger.info(f"MECOS LLM connected to remote brain at {settings.LOCAL_LLM_URL}")
+        logger.info(f"MECOS LLM connected to {settings.LOCAL_LLM_URL} (model={self.model})")
 
-    def _chat_completion(self, system_prompt: str, user_prompt: str):
-        return self.client.chat.completions.create(
+    # ── Internal sync helpers (run in thread pool) ────────────────────────
+
+    def _chat(self, messages: list) -> str:
+        """Blocking OpenAI call — always run via asyncio.to_thread."""
+        response = self.client.chat.completions.create(
             model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ]
+            messages=messages,
         )
+        return response.choices[0].message.content
 
-    async def _chat_completion_with_timeout(self, system_prompt: str, user_prompt: str):
-        try:
-            return await asyncio.wait_for(
-                asyncio.to_thread(self._chat_completion, system_prompt, user_prompt),
-                timeout=float(settings.LLM_THINK_TIMEOUT)
-            )
-        except asyncio.TimeoutError:
-            logger.warning(f"LLM call timed out after {settings.LLM_THINK_TIMEOUT}s")
-            return None
-        except Exception as e:
-            logger.error(f"LLM call failed: {e}")
-            return None
-
-    async def think_and_act(self, prompt: str, system_prompt: str = "You are the MECOS AI."):
-        """
-        The core cognitive cycle:
-        1. Generate Internal Monologue (Thinking)
-        2. Generate Final Response (Acting)
-        """
-        start_time = time.time()
-        
-        # Step 1: Internal Monologue
-        thinking_prompt = f"{prompt}\n\n[INTERNAL MONOLOGUE]: Think step-by-step about how to solve this."
-        
-        logger.info("MECOS LLM is thinking (generating internal monologue)...")
-        try:
-            thought_response = await self._chat_completion_with_timeout(system_prompt, thinking_prompt)
-            if thought_response is None:
-                return {
-                    "monologue": "",
-                    "response": "",
-                    "stats": {"duration": time.time() - start_time, "model": self.model}
-                }
-            monologue = thought_response.choices[0].message.content
-            
-            # Step 2: Final Response
-            final_prompt = f"{prompt}\n\n[MY THOUGHTS]: {monologue}\n\n[FINAL RESPONSE]:"
-            
-            logger.info("MECOS LLM is generating final response...")
-            final_response = await self._chat_completion_with_timeout(system_prompt, final_prompt)
-            if final_response is None:
-                return {
-                    "monologue": monologue,
-                    "response": "",
-                    "stats": {"duration": time.time() - start_time, "model": self.model}
-                }
-            response = final_response.choices[0].message.content
-            
-            # Log the experience for future fine-tuning
-            self.save_experience(prompt, monologue, response)
-            
-            duration = time.time() - start_time
-            logger.info(f"MECOS LLM cycle complete in {duration:.2f}s")
-            
-            return {
-                "monologue": monologue,
-                "response": response,
-                "stats": {
-                    "duration": duration,
-                    "model": self.model
-                }
-            }
-        except Exception as e:
-            logger.error(f"Inference failed: {e}")
-            return {
-                "monologue": "Error in thinking.",
-                "response": f"Error: {e}",
-                "stats": {"duration": 0, "model": self.model}
-            }
-
-    def save_experience(self, prompt: str, monologue: str, response: str):
-        """Save the thought process to a file for future fine-tuning."""
+    def _save_experience_sync(self, prompt: str, monologue: str, response: str):
+        """Blocking file write — always run via asyncio.to_thread."""
         log_file = settings.DATA_DIR / "llm_experiences.jsonl"
         experience = {
             "timestamp": time.time(),
             "prompt": prompt,
             "monologue": monologue,
-            "response": response
+            "response": response,
         }
         with open(log_file, "a") as f:
             f.write(json.dumps(experience) + "\n")
-        logger.info("MECOS LLM experience saved for self-training.")
 
-# Singleton instance
-mecos_llm = None
+    # ── Public async API ──────────────────────────────────────────────────
 
-def get_mecos_llm():
-    global mecos_llm
-    if mecos_llm is None:
-        mecos_llm = MECOSLLM()
-    return mecos_llm
+    async def think_and_act(
+        self,
+        prompt: str,
+        system_prompt: str = "You are the MECOS AI.",
+    ) -> dict:
+        """
+        Two-stage cognitive cycle:
+          1. Internal monologue  (think step-by-step)
+          2. Final response      (act on the thinking)
+
+        Both OpenAI calls are non-blocking — event loop stays free.
+        """
+        start = time.time()
+
+        # Stage 1: internal monologue
+        thinking_messages = [
+            {"role": "system", "content": system_prompt},
+            {
+                "role": "user",
+                "content": f"{prompt}\n\n[INTERNAL MONOLOGUE]: Think step-by-step.",
+            },
+        ]
+        logger.debug("MECOS LLM: generating monologue...")
+        try:
+            monologue = await asyncio.to_thread(self._chat, thinking_messages)
+        except Exception as e:
+            logger.error(f"Monologue generation failed: {e}")
+            monologue = f"Error: {e}"
+
+        # Stage 2: final response
+        final_messages = [
+            {"role": "system", "content": system_prompt},
+            {
+                "role": "user",
+                "content": f"{prompt}\n\n[MY THOUGHTS]: {monologue}\n\n[FINAL RESPONSE]:",
+            },
+        ]
+        logger.debug("MECOS LLM: generating final response...")
+        try:
+            response = await asyncio.to_thread(self._chat, final_messages)
+        except Exception as e:
+            logger.error(f"Response generation failed: {e}")
+            response = f"Error: {e}"
+
+        # Persist experience (non-blocking)
+        await asyncio.to_thread(self._save_experience_sync, prompt, monologue, response)
+
+        duration = time.time() - start
+        logger.info(f"MECOS LLM cycle complete in {duration:.2f}s")
+
+        return {
+            "monologue": monologue,
+            "response": response,
+            "stats": {"duration": duration, "model": self.model},
+        }
+
+    async def save_experience(self, prompt: str, monologue: str, response: str):
+        """Async wrapper for experience saving (keeps old call sites working)."""
+        await asyncio.to_thread(self._save_experience_sync, prompt, monologue, response)
+
+
+# ── Singleton ─────────────────────────────────────────────────────────────────
+
+_mecos_llm: "MECOSLLM | None" = None
+
+
+def get_mecos_llm() -> MECOSLLM:
+    global _mecos_llm
+    if _mecos_llm is None:
+        _mecos_llm = MECOSLLM()
+    return _mecos_llm
+

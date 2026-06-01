@@ -1,127 +1,130 @@
-from __future__ import annotations
-
-import math
+"""
+MECOS Memory Quality Gate
+Filters and scores memories before they enter long-term storage.
+Prevents noise, duplicates, and low-value experiences from polluting the vector DB.
+"""
 import re
-import time
-from typing import Any, Dict, List, Optional, Sequence
+from typing import List, Dict, Any
 
 
 class MemoryQualityGate:
-    def __init__(self):
-        self.source_weights: Dict[str, float] = {
-            "reasoner": 0.95,
-            "research_agent": 0.9,
-            "action_execution": 0.85,
-            "coding_agent": 0.85,
-            "perception": 0.75,
-            "web_perception": 0.7,
-            "general": 0.6,
-        }
-        self.decay_half_life_seconds = 7 * 24 * 60 * 60  # 7 days
-        self.min_promotion_score = 0.45
-        self.min_retrieval_score = 0.20
+    """
+    Assesses whether a memory is worth storing in long-term vector memory.
 
-    @staticmethod
-    def _tokenize(text: str) -> List[str]:
-        return re.findall(r"[a-zA-Z0-9_]+", (text or "").lower())
+    Scoring factors:
+      - Source weight   (trading/reflection/benchmarking = high; general = low)
+      - Content length  (too short = noise; too long = chunking needed)
+      - Duplication     (near-duplicate of recent short-term buffer entry)
+      - Contradiction   (explicit negation of a recent stored fact)
+    """
 
-    @staticmethod
-    def _has_negation(text: str) -> bool:
-        lowered = (text or "").lower()
-        neg_terms = (" not ", " never ", " cannot ", " can't ", " no ", " false ", " wrong ")
-        padded = f" {lowered} "
-        return any(term in padded for term in neg_terms)
+    SOURCE_WEIGHTS: Dict[str, float] = {
+        "trading": 1.0,
+        "reflection": 0.9,
+        "benchmarking": 0.85,
+        "research": 0.8,
+        "coding": 0.75,
+        "general": 0.5,
+        "system": 0.4,
+    }
 
-    def _source_weight(self, source: str) -> float:
-        return float(self.source_weights.get((source or "general").lower(), 0.6))
+    MIN_QUALITY_SCORE: float = 0.35
+    min_retrieval_score: float = 0.2
 
-    def _base_content_score(self, content: str) -> float:
-        text = (content or "").strip()
-        if not text:
-            return 0.0
-        if len(text) < 12:
-            return 0.2
-        tokens = self._tokenize(text)
-        unique_ratio = len(set(tokens)) / max(1, len(tokens))
-        repetition_penalty = 0.25 if unique_ratio < 0.3 else 0.0
-        return max(0.0, min(1.0, 0.7 + (0.2 * unique_ratio) - repetition_penalty))
-
-    def _contradiction_penalty(
-        self,
-        content: str,
-        source: str,
-        metadata: Dict[str, Any],
-        short_term_buffer: Sequence[Dict[str, Any]],
-    ) -> float:
-        topic = str(metadata.get("topic", "")).lower()
-        tokens = set(self._tokenize(content))
-        if not tokens:
-            return 0.0
-
-        contradiction_hits = 0
-        window = list(short_term_buffer)[-40:]
-        for item in window:
-            if str(item.get("source", "")).lower() != str(source or "").lower():
-                continue
-            prior_topic = str(item.get("metadata", {}).get("topic", "")).lower()
-            if topic and prior_topic and topic != prior_topic:
-                continue
-
-            prior_content = str(item.get("content", ""))
-            prior_tokens = set(self._tokenize(prior_content))
-            overlap = len(tokens & prior_tokens) / max(1, len(tokens | prior_tokens))
-            if overlap < 0.35:
-                continue
-            if self._has_negation(content) != self._has_negation(prior_content):
-                contradiction_hits += 1
-
-        return min(0.45, contradiction_hits * 0.15)
+    # ── Public API ────────────────────────────────────────────────────────
 
     def assess(
         self,
         content: str,
         source: str,
-        metadata: Optional[Dict[str, Any]],
-        short_term_buffer: Sequence[Dict[str, Any]],
+        metadata: Dict[str, Any],
+        short_term_buffer: List[Dict],
     ) -> Dict[str, Any]:
-        md = dict(metadata or {})
-        source_weight = self._source_weight(source)
-        base_confidence = float(md.get("confidence", 0.65))
-        base_confidence = max(0.0, min(1.0, base_confidence))
-        content_score = self._base_content_score(content)
-        contradiction_penalty = self._contradiction_penalty(content, source, md, short_term_buffer)
+        """Return a quality dict; 'promote' key signals whether to persist."""
+        source_weight = self.SOURCE_WEIGHTS.get(source, 0.5)
 
-        score = (0.45 * base_confidence) + (0.35 * source_weight) + (0.20 * content_score) - contradiction_penalty
-        quality_score = max(0.0, min(1.0, score))
-        promote = quality_score >= self.min_promotion_score
+        length_score = self._length_score(content)
+        dup_penalty = self._duplication_penalty(content, short_term_buffer)
+        contra_penalty = self._contradiction_penalty(content, short_term_buffer)
+
+        quality_score = (
+            source_weight * 0.4
+            + length_score * 0.4
+            - dup_penalty * 0.15
+            - contra_penalty * 0.05
+        )
+        quality_score = max(0.0, min(1.0, quality_score))
 
         return {
-            "source_weight": source_weight,
-            "base_confidence": base_confidence,
-            "content_score": content_score,
-            "contradiction_penalty": contradiction_penalty,
             "quality_score": quality_score,
-            "promote": promote,
+            "source_weight": source_weight,
+            "length_score": length_score,
+            "duplication_penalty": dup_penalty,
+            "contradiction_penalty": contra_penalty,
+            "promote": quality_score >= self.MIN_QUALITY_SCORE,
         }
 
-    def decay_factor(self, timestamp: float) -> float:
-        age = max(0.0, time.time() - float(timestamp or time.time()))
-        if self.decay_half_life_seconds <= 0:
+    def retrieval_score(
+        self,
+        content: str,
+        query: str,
+        metadata: Dict[str, Any],
+    ) -> float:
+        """Score a retrieved memory for relevance at query time."""
+        base = metadata.get("quality_score", 0.5)
+        source_w = metadata.get("source_weight", 0.5)
+        # Recency boost: newer memories score slightly higher
+        age_boost = 0.0
+        ts = metadata.get("timestamp_unix")
+        if ts:
+            import time
+            age_hours = (time.time() - float(ts)) / 3600
+            age_boost = max(0.0, 0.1 - age_hours * 0.001)
+
+        score = base * 0.5 + source_w * 0.4 + age_boost
+        return min(1.0, score)
+
+    # ── Private helpers ───────────────────────────────────────────────────
+
+    @staticmethod
+    def _length_score(content: str) -> float:
+        n = len(content.strip())
+        if n < 20:
+            return 0.1
+        if n < 60:
+            return 0.5
+        if n <= 2000:
             return 1.0
-        return 0.5 ** (age / self.decay_half_life_seconds)
+        # Very long; still store but with mild penalty
+        return 0.7
 
-    def retrieval_score(self, content: str, query: str, metadata: Optional[Dict[str, Any]]) -> float:
-        md = metadata or {}
-        quality = float(md.get("quality_score", 0.5))
-        timestamp = float(md.get("timestamp_unix", time.time()))
-        decay = self.decay_factor(timestamp)
+    @staticmethod
+    def _duplication_penalty(content: str, buffer: List[Dict]) -> float:
+        """Simple token-overlap check against the last 20 buffer entries."""
+        if not buffer:
+            return 0.0
+        tokens = set(re.findall(r"\w+", content.lower()))
+        if not tokens:
+            return 0.0
+        recent = buffer[-20:]
+        max_overlap = 0.0
+        for entry in recent:
+            other_tokens = set(re.findall(r"\w+", entry.get("content", "").lower()))
+            if not other_tokens:
+                continue
+            overlap = len(tokens & other_tokens) / len(tokens | other_tokens)
+            if overlap > max_overlap:
+                max_overlap = overlap
+        # Only penalise if very similar (>80% overlap)
+        return max_overlap if max_overlap > 0.8 else 0.0
 
-        q_tokens = set(self._tokenize(query))
-        c_tokens = set(self._tokenize(content))
-        relevance = 1.0
-        if q_tokens:
-            relevance = len(q_tokens & c_tokens) / max(1, len(q_tokens))
-
-        score = (0.55 * quality) + (0.30 * relevance) + (0.15 * decay)
-        return max(0.0, min(1.0, score))
+    @staticmethod
+    def _contradiction_penalty(content: str, buffer: List[Dict]) -> float:
+        """Detect simple explicit negations (e.g. 'NOT' flipping a recent fact)."""
+        negation_words = {"not", "never", "false", "incorrect", "wrong", "no longer"}
+        tokens = set(re.findall(r"\w+", content.lower()))
+        if not (tokens & negation_words):
+            return 0.0
+        # A negation word is present — mild penalty to flag for review
+        return 0.5
 
