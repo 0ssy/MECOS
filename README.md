@@ -49,6 +49,20 @@ python -m pytest tests/test_mecos.py -v
 # 42 passed
 ```
 
+### 5. Knowledge Layer (Free Local Stack)
+
+```bash
+python -m mecos.learning_pipeline learn "Bitcoin"
+python -m mecos.learning_pipeline query "bitcoin"
+python -m mecos.learning_pipeline semantic "How does the Fed affect crypto?"
+```
+
+Install the NLP model once:
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
 ---
 
 ## Phase Details

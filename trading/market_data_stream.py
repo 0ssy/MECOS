@@ -36,10 +36,16 @@ class MarketDataStream:
         ts = self._parse_ts(data.get('timestamp'))
         if ts is not None:
             prev = self._last_timestamp_by_symbol.get(symbol)
-            if prev is not None and ts <= prev:
-                self.integrity_rejections['stale_or_duplicate'] += 1
-                return False
-            self._last_timestamp_by_symbol[symbol] = ts
+            if prev is not None:
+                lag_seconds = (prev - ts).total_seconds()
+                # Quote streams can arrive slightly out of order; reject only materially stale data.
+                if lag_seconds > 2.0:
+                    self.integrity_rejections['stale_or_duplicate'] += 1
+                    return False
+                if ts > prev:
+                    self._last_timestamp_by_symbol[symbol] = ts
+            else:
+                self._last_timestamp_by_symbol[symbol] = ts
 
         close_price = float(data.get('close', 0.0) or 0.0)
         if close_price <= 0:

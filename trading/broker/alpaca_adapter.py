@@ -71,9 +71,26 @@ class AlpacaAdapter(BrokerAdapter):
             'source': 'alpaca_quote',
         }
 
+    @staticmethod
+    def _is_crypto_symbol(symbol: str) -> bool:
+        s = str(symbol).upper()
+        if '/' not in s:
+            return False
+        base, quote = s.split('/', 1)
+        crypto_assets = {'BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'AVAX', 'LINK', 'XRP', 'BNB', 'DOT', 'LTC'}
+        return base in crypto_assets and quote in {'USD', 'USDT', 'USDC'}
+
+    @staticmethod
+    def _is_forex_symbol(symbol: str) -> bool:
+        s = str(symbol).upper()
+        if '/' not in s:
+            return False
+        left, right = s.split('/', 1)
+        return len(left) == 3 and len(right) == 3 and left.isalpha() and right.isalpha()
+
     async def stream_quotes(self, symbols: List[str], callback: Callable[[str, Dict[str, Any]], Awaitable[None]]) -> None:
         try:
-            from alpaca.data.live import StockDataStream
+            from alpaca.data.live import CryptoDataStream, StockDataStream
             from config import settings
         except ImportError:
             logger.error('Alpaca SDK not available. Please install alpaca-py.')
@@ -97,36 +114,69 @@ class AlpacaAdapter(BrokerAdapter):
             logger.error('Missing Alpaca API credentials.')
             raise RuntimeError('Missing Alpaca API credentials.')
 
-        reconnect_attempt = 0
-        while True:
-            data_stream = StockDataStream(api_key, secret_key)
+        stock_symbols: List[str] = []
+        crypto_symbols: List[str] = []
+        unsupported_symbols: List[str] = []
+        for symbol in symbols:
+            if self._is_crypto_symbol(symbol):
+                crypto_symbols.append(symbol)
+            elif self._is_forex_symbol(symbol):
+                unsupported_symbols.append(symbol)
+            else:
+                stock_symbols.append(symbol)
 
-            async def quote_handler(data):
-                if hasattr(data, '_raw'):
-                    raw = data._raw
-                elif isinstance(data, dict):
-                    raw = data
-                else:
-                    raw = dict(data)
-                symbol = str(getattr(data, 'symbol', None) or raw.get('symbol') or raw.get('S') or '')
-                if not symbol:
-                    return
+        if unsupported_symbols:
+            logger.warning(
+                f'Alpaca quote stream does not support forex symbols; skipping: {unsupported_symbols}'
+            )
 
-                tick = self._normalize_quote_to_tick(symbol, raw)
-                if tick:
-                    await callback(symbol, tick)
+        if not stock_symbols and not crypto_symbols:
+            raise RuntimeError('No Alpaca-streamable symbols in request.')
 
-            for symbol in symbols:
-                data_stream.subscribe_quotes(quote_handler, symbol)
+        async def quote_handler(data):
+            if hasattr(data, '_raw'):
+                raw = data._raw
+            elif isinstance(data, dict):
+                raw = data
+            else:
+                raw = dict(data)
+            symbol = str(getattr(data, 'symbol', None) or raw.get('symbol') or raw.get('S') or '')
+            if not symbol:
+                return
 
-            try:
-                logger.info(f'Starting Alpaca live quote stream for: {symbols}')
-                await data_stream._run_forever()
-                reconnect_attempt = 0
-            except Exception as exc:
-                if 'auth failed' in str(exc).lower():
-                    raise RuntimeError('Alpaca websocket auth failed. Check ALPACA_API_KEY/ALPACA_SECRET_KEY.') from exc
-                reconnect_attempt += 1
-                backoff = min(2 ** reconnect_attempt, 60)
-                logger.error(f'Alpaca quote stream disconnected (attempt {reconnect_attempt}): {exc}')
-                await asyncio.sleep(backoff)
+            tick = self._normalize_quote_to_tick(symbol, raw)
+            if tick:
+                await callback(symbol, tick)
+
+        async def run_stream(stream_name: str, stream_factory, stream_symbols: List[str]):
+            reconnect_attempt = 0
+            while True:
+                data_stream = stream_factory(api_key, secret_key)
+                for symbol in stream_symbols:
+                    data_stream.subscribe_quotes(quote_handler, symbol)
+
+                try:
+                    logger.info(f'Starting Alpaca {stream_name} quote stream for: {stream_symbols}')
+                    await data_stream._run_forever()
+                    reconnect_attempt = 0
+                except Exception as exc:
+                    if 'auth failed' in str(exc).lower():
+                        raise RuntimeError('Alpaca websocket auth failed. Check ALPACA_API_KEY/ALPACA_SECRET_KEY.') from exc
+                    reconnect_attempt += 1
+                    backoff = min(2 ** reconnect_attempt, 60)
+                    logger.error(
+                        f'Alpaca {stream_name} quote stream disconnected (attempt {reconnect_attempt}): {exc}'
+                    )
+                    await asyncio.sleep(backoff)
+
+        stream_tasks: List[asyncio.Task] = []
+        if stock_symbols:
+            stream_tasks.append(asyncio.create_task(run_stream('stock', StockDataStream, stock_symbols)))
+        if crypto_symbols:
+            stream_tasks.append(asyncio.create_task(run_stream('crypto', CryptoDataStream, crypto_symbols)))
+
+        try:
+            await asyncio.gather(*stream_tasks)
+        finally:
+            for task in stream_tasks:
+                task.cancel()

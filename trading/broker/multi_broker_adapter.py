@@ -8,6 +8,7 @@ from .alpaca_adapter import AlpacaAdapter
 from .base_adapter import BrokerAdapter
 from .binance_adapter import BinanceAdapter
 from .ibkr_adapter import IbkrAdapter
+from .oanda_adapter import OandaAdapter
 
 
 class MultiBrokerAdapter(BrokerAdapter):
@@ -15,13 +16,16 @@ class MultiBrokerAdapter(BrokerAdapter):
         self.ibkr = self._try_init('IBKR', IbkrAdapter)
         self.alpaca = self._try_init('Alpaca', AlpacaAdapter)
         self.binance = self._try_init('Binance', BinanceAdapter)
+        self.oanda = self._try_init('OANDA', OandaAdapter)
         self._degraded_stream_adapters = set()
 
-        if not any([self.ibkr, self.alpaca, self.binance]):
-            raise RuntimeError('No broker adapters available. Check IBKR/TWS and API keys.')
+        if not any([self.ibkr, self.alpaca, self.binance, self.oanda]):
+            raise RuntimeError('No broker adapters available. Check broker credentials and runtime connectivity.')
 
         logger.info(
-            f'MultiBrokerAdapter ready | ibkr={self.ibkr is not None} alpaca={self.alpaca is not None} binance={self.binance is not None}'
+            'MultiBrokerAdapter ready | '
+            f'ibkr={self.ibkr is not None} alpaca={self.alpaca is not None} '
+            f'binance={self.binance is not None} oanda={self.oanda is not None}'
         )
 
     @staticmethod
@@ -79,7 +83,7 @@ class MultiBrokerAdapter(BrokerAdapter):
         if self._is_crypto(symbol):
             preferred = [self.binance, self.ibkr, self.alpaca]
         elif self._is_forex(symbol):
-            preferred = [self.ibkr, self.alpaca]
+            preferred = [self.oanda, self.ibkr, self.alpaca]
         else:
             preferred = [self.ibkr, self.alpaca]
 
@@ -89,6 +93,8 @@ class MultiBrokerAdapter(BrokerAdapter):
         excluded = set(exclude or set())
         if self._is_crypto(symbol):
             preferred = [self.binance, self.ibkr, self.alpaca]
+        elif self._is_forex(symbol):
+            preferred = [self.oanda, self.ibkr]
         else:
             preferred = [self.ibkr, self.alpaca]
         return [a for a in self._unique_adapters(preferred) if a not in excluded]
@@ -143,7 +149,7 @@ class MultiBrokerAdapter(BrokerAdapter):
         raise RuntimeError(f'No broker adapter available for order: {symbol} | errors={errors}')
 
     async def cancel_order(self, order_id: str) -> Dict[str, Any]:
-        for adapter in [self.ibkr, self.alpaca, self.binance]:
+        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:
@@ -154,7 +160,7 @@ class MultiBrokerAdapter(BrokerAdapter):
 
     async def get_positions(self) -> List[Dict[str, Any]]:
         merged: List[Dict[str, Any]] = []
-        for adapter in [self.ibkr, self.alpaca, self.binance]:
+        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:
@@ -165,7 +171,7 @@ class MultiBrokerAdapter(BrokerAdapter):
 
     async def get_account(self) -> Dict[str, Any]:
         accounts = []
-        for adapter in [self.ibkr, self.alpaca, self.binance]:
+        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:

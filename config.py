@@ -48,6 +48,23 @@ class Settings(BaseSettings):
     # True = use Binance testnet (paper crypto trading)
     BINANCE_TESTNET: bool = os.getenv("BINANCE_TESTNET", "true").lower() == "true"
 
+    # ── OANDA (Forex) ──────────────────────────────────────────────────────
+    OANDA_API_KEY: str = os.getenv("OANDA_API_KEY", "")
+    OANDA_ACCOUNT_ID: str = os.getenv("OANDA_ACCOUNT_ID", "")
+    OANDA_ENV: str = os.getenv("OANDA_ENV", "practice")
+    OANDA_BASE_URL: str = os.getenv(
+        "OANDA_BASE_URL",
+        "https://api-fxpractice.oanda.com/v3"
+        if os.getenv("OANDA_ENV", "practice").lower() == "practice"
+        else "https://api-fxtrade.oanda.com/v3",
+    )
+    OANDA_STREAM_URL: str = os.getenv(
+        "OANDA_STREAM_URL",
+        "https://stream-fxpractice.oanda.com/v3"
+        if os.getenv("OANDA_ENV", "practice").lower() == "practice"
+        else "https://stream-fxtrade.oanda.com/v3",
+    )
+
     # ── Trading Safety ────────────────────────────────────────────────────
     # Hard kill-switch: if False, NO real orders are ever placed regardless of mode
     TRADING_ENABLED: bool = os.getenv("TRADING_ENABLED", "false").lower() == "true"

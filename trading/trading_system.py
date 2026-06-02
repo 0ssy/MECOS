@@ -175,16 +175,8 @@ class TradingSystem:
             "symbol": symbol,
             "macro_indicator": macro_indicator,
             "market_data": self.openbb_adapter.safe_get_market_data(symbol),
-            "macro_data": None,
+            "macro_data": self.openbb_adapter.safe_get_macro_data(macro_indicator),
         }
-        if self.openbb_adapter.available:
-            try:
-                context["macro_data"] = self.openbb_adapter.get_macro_data(macro_indicator)
-            except Exception as exc:
-                logger.warning(f"OpenBB macro data fetch failed for {macro_indicator}: {exc}")
-                context["macro_data"] = {"error": str(exc)}
-        else:
-            context["macro_data"] = {"available": False, "error": "openbb_not_installed"}
         return context
 
     def _initialize_app_learning(self) -> None:

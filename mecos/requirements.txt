@@ -1,0 +1,10 @@
+# MECOS Knowledge Layer - Free Stack
+
+spacy>=3.7
+requests>=2.31
+beautifulsoup4>=4.12
+networkx>=3.2
+chromadb>=0.4
+sentence-transformers>=2.6
+pypdf>=4.0
+schedule>=1.2

@@ -28,7 +28,7 @@ async def main():
     stream = MarketDataStream()
 
     stream.set_broker_adapter(MultiBrokerAdapter())
-    logger.info('Live broker adapter configured: MultiBroker (IBKR/Alpaca/Binance)')
+    logger.info('Live broker adapter configured: MultiBroker (IBKR/Alpaca/Binance/OANDA)')
 
     signal_gen = LiveSignalGenerator(agent, stream, memory)
     

@@ -13,6 +13,7 @@ numpy>=1.26
 scipy>=1.11
 statsmodels>=0.14
 requests>=2.31
+schedule>=1.2
 # Note: asyncio is stdlib in Python 3.4+; do NOT list it here
 
 # ── Trading Brokers ───────────────────────────────────────────────────────────
@@ -25,6 +26,9 @@ openbb>=4.3              # Optional: market + news context
 chromadb>=0.4
 sentence-transformers>=2.7
 faiss-cpu>=1.7
+networkx>=3.2
+spacy>=3.7
+pypdf>=4.0
 
 # ── Perception ────────────────────────────────────────────────────────────────
 playwright>=1.40

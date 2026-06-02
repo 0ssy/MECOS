@@ -1,3 +1,4 @@
+import os
 from trading.asset_profiles import get_sector
 from typing import Dict, Any, List, Optional, Tuple
 from loguru import logger
@@ -127,7 +128,16 @@ class TradingAgent:
         self.reinforcement_learning_agent = _ReinforcementLearningProxyAgent(memory)
         self.market_making_agent = MarketMakingAgent(memory)
         self.persona_engine = PersonaEngine()
-        self.consensus_engine = ConsensusEngine(self.persona_engine.get_personas())
+        require_unanimous = os.getenv("MECOS_REQUIRE_UNANIMOUS", "false").strip().lower() == "true"
+        min_support = float(os.getenv("MECOS_CONSENSUS_MIN_SUPPORT", "0.67"))
+        self.consensus_engine = ConsensusEngine(
+            self.persona_engine.get_personas(),
+            minimum_support_ratio=min_support,
+            require_unanimous=require_unanimous,
+        )
+        logger.info(
+            f"Consensus config | require_unanimous={require_unanimous} min_support={min_support:.2f}"
+        )
         self.openbb_adapter = OpenBBDataAdapter()
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
@@ -190,13 +200,7 @@ class TradingAgent:
             "news": self.openbb_adapter.safe_get_news(symbol, limit=3),
         }
         macro_indicator = "DGS10" if persona_asset_type in {"equity", "macro"} else "DEXUSEU"
-        if self.openbb_adapter.available:
-            try:
-                external_market_context["macro_data"] = self.openbb_adapter.get_macro_data(macro_indicator)
-            except Exception as exc:
-                external_market_context["macro_data"] = {"error": str(exc)}
-        else:
-            external_market_context["macro_data"] = {"available": False, "error": "openbb_not_installed"}
+        external_market_context["macro_data"] = self.openbb_adapter.safe_get_macro_data(macro_indicator)
 
         orchestrator_data = {symbol: valid_data}
         orchestrated = await self.meta_orchestrator.orchestrate_signals(

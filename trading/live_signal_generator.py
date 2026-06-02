@@ -22,6 +22,7 @@ class LiveSignalGenerator:
 
         # Track last signal time per symbol to calculate age
         self._last_signal_time: Dict[str, datetime] = {}
+        self._last_insufficient_log: Dict[str, datetime] = {}
 
         self.signal_stats = {
             'total_signals': 0,
@@ -37,9 +38,13 @@ class LiveSignalGenerator:
 
     async def on_market_data(self, symbol: str, tick: Dict[str, Any]):
         historical_data = self.data_stream.get_historical_cache(symbol, lookback=100)
-
-        if len(historical_data) < 50:
-            logger.debug(f'{symbol}: Insufficient data ({len(historical_data)} bars)')
+        min_bars = 35 if self._is_crypto_symbol(symbol) else 50
+        if len(historical_data) < min_bars:
+            now = datetime.now(timezone.utc)
+            last = self._last_insufficient_log.get(symbol)
+            if last is None or (now - last).total_seconds() >= 30:
+                logger.debug(f'{symbol}: Insufficient data ({len(historical_data)} bars, need {min_bars})')
+                self._last_insufficient_log[symbol] = now
             return None
 
         try:
@@ -163,3 +168,12 @@ class LiveSignalGenerator:
     def disable_live_mode(self):
         self.validation_mode = True
         logger.info('LIVE MODE DISABLED - VALIDATION MODE ENABLED')
+
+    @staticmethod
+    def _is_crypto_symbol(symbol: str) -> bool:
+        token = str(symbol).upper().strip()
+        if '/' not in token:
+            return False
+        base, quote = token.split('/', 1)
+        crypto_assets = {'BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'AVAX', 'LINK', 'XRP', 'BNB', 'DOT', 'LTC'}
+        return base in crypto_assets and quote in {'USD', 'USDT', 'USDC'}
