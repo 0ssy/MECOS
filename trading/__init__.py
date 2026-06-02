@@ -51,6 +51,20 @@ from .persona_engine import PersonaEngine
 from .cockpit_app import build_cockpit_snapshot
 from .mecos_consensus_engine import ConsensusEngine
 from .mecos_forex_activation import ForexActivationEngine
+from .financial_analytics import FinancialAnalytics
+from .macro_data import MacroDataProvider
+from .news_sentiment import NewsSentimentEngine
+from .portfolio_optimizer import PortfolioOptimizer
+from .regime_detector import RegimeDetector
+from .multi_timeframe import MultiTimeframeAnalyzer
+from .pipeline_runner import PipelineRunner
+from .terminal_ui import render_signal_dashboard
+from .events_calendar import EventsCalendar
+from .screener import StockScreener
+from .price_streamer import stream_binance_prices
+from .options_pricing import OptionsEngine
+from .backtester import SimpleBacktester
+from .risk_manager import RiskManager as PortfolioRiskManager
 
 __all__ = [
     'UniverseManager', 'UniverseScanner',
@@ -66,6 +80,11 @@ __all__ = [
     'RiskMonitor', 'TradingAgent', 'AutonomousTradingLoop', 'PaperTradingExecutor',
     'MarketDataStream', 'Signal', 'Decision', 'Order', 'Position', 'RiskState', 'MarketEvent',
     'OpenBBDataAdapter', 'PersonaEngine', 'build_cockpit_snapshot',
-    'ConsensusEngine', 'ForexActivationEngine'
+    'ConsensusEngine', 'ForexActivationEngine',
+    'FinancialAnalytics', 'MacroDataProvider', 'NewsSentimentEngine',
+    'PortfolioOptimizer', 'RegimeDetector', 'MultiTimeframeAnalyzer',
+    'PipelineRunner', 'render_signal_dashboard', 'EventsCalendar',
+    'StockScreener', 'stream_binance_prices',
+    'OptionsEngine', 'SimpleBacktester', 'PortfolioRiskManager'
 ]
 

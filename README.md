@@ -63,6 +63,24 @@ Install the NLP model once:
 python -m spacy download en_core_web_sm
 ```
 
+### 6. Trading Toolkit Utilities
+
+Use the trading utility CLI to run screeners, pipelines, events, and terminal dashboards:
+
+```bash
+# Fundamental screener
+python run_trading_tools.py screen --tickers AAPL MSFT NVDA --strategy value
+
+# JSON-defined pipeline execution
+python run_trading_tools.py pipeline --config pipeline.json --bars bars.json
+
+# Earnings + macro calendar snapshot
+python run_trading_tools.py calendar --tickers AAPL MSFT
+
+# Render terminal dashboard from decisions JSON
+python run_trading_tools.py dashboard --decisions decisions.json
+```
+
 ---
 
 ## Phase Details

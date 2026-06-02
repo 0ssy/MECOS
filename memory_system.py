@@ -13,7 +13,13 @@ from memory_quality import MemoryQualityGate
 class VectorMemory:
     def __init__(self):
         self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
+        try:
+            self.model = SentenceTransformer('all-MiniLM-L6-v2', local_files_only=True)
+        except Exception as exc:
+            raise RuntimeError(
+                "Missing local embedding model cache for all-MiniLM-L6-v2. "
+                "Run setup once with internet access to download the model."
+            ) from exc
         self.collection = self.client.get_or_create_collection(name="mecos_long_term")
         self._op_lock = asyncio.Lock()
         logger.info("Vector Memory System Initialized.")

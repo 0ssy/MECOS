@@ -63,6 +63,7 @@ COMMODITIES = [
 class UniverseManager:
     def __init__(self, memory_system):
         self.memory = memory_system
+        self.forex_enabled = True
         
         self.universe = {
             'stocks': {
@@ -126,6 +127,11 @@ class UniverseManager:
         logger.info('Universe Manager initialized')
         logger.info(f'Total universe size: {self.get_total_universe_size()}')
 
+    def set_forex_enabled(self, enabled: bool) -> None:
+        self.forex_enabled = bool(enabled)
+        state = "enabled" if self.forex_enabled else "disabled"
+        logger.info(f"Universe forex routing is {state}.")
+
     def get_total_universe_size(self) -> int:
         total = 0
         for category in self.universe.values():
@@ -147,12 +153,14 @@ class UniverseManager:
         
         starter.extend(['BTC/USD', 'ETH/USD', 'SOL/USD'])
         
-        starter.extend(['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'])
+        if self.forex_enabled:
+            starter.extend(['EUR/USD', 'GBP/USD', 'USD/JPY', 'AUD/USD'])
         
         self.active_universe = set(starter)
         
         logger.info(f'Loaded starter universe: {len(starter)} assets')
-        logger.info(f'Stocks: 6 | ETFs: 3 | Crypto: 3 | Forex: 4')
+        forex_count = 4 if self.forex_enabled else 0
+        logger.info(f'Stocks: 6 | ETFs: 3 | Crypto: 3 | Forex: {forex_count}')
         
         return starter
 
@@ -168,6 +176,8 @@ class UniverseManager:
                     all_assets.extend(subcategory)
             else:
                 all_assets.extend(category)
+        if not self.forex_enabled:
+            all_assets = [symbol for symbol in all_assets if symbol not in self.universe['forex']]
 
         unique_assets = []
         for symbol in all_assets:
@@ -210,7 +220,7 @@ class UniverseManager:
         if 'crypto' in preferred_classes:
             selected.extend(self.universe['crypto'][:self.rotation_config['max_crypto']])
 
-        if 'forex' in preferred_classes:
+        if self.forex_enabled and 'forex' in preferred_classes:
             selected.extend(self.universe['forex'][:self.rotation_config['max_forex']])
         
         if 'commodities' in preferred_classes:

@@ -1,6 +1,7 @@
 import os
 from trading.asset_profiles import get_sector
 from typing import Dict, Any, List, Optional, Tuple
+import numpy as np
 from loguru import logger
 
 from memory_system import MemorySystem
@@ -24,6 +25,15 @@ from trading.market_making_agent import MarketMakingAgent
 from trading.persona_engine import PersonaEngine
 from trading.mecos_consensus_engine import ConsensusEngine
 from trading.openbb_adapter import OpenBBDataAdapter
+from trading.financial_analytics import FinancialAnalytics
+from trading.macro_data import MacroDataProvider
+from trading.news_sentiment import NewsSentimentEngine
+from trading.portfolio_optimizer import PortfolioOptimizer
+from trading.regime_detector import RegimeDetector
+from trading.multi_timeframe import MultiTimeframeAnalyzer
+from trading.options_pricing import OptionsEngine
+from trading.backtester import SimpleBacktester
+from trading.risk_manager import RiskManager as PortfolioRiskManager
 
 
 class _OrderFlowProxyAgent:
@@ -139,6 +149,16 @@ class TradingAgent:
             f"Consensus config | require_unanimous={require_unanimous} min_support={min_support:.2f}"
         )
         self.openbb_adapter = OpenBBDataAdapter()
+        self.use_openbb_macro = os.getenv("MECOS_USE_OPENBB_MACRO", "false").strip().lower() == "true"
+        self.financial_analytics = FinancialAnalytics()
+        self.macro_data_provider = MacroDataProvider()
+        self.news_sentiment = NewsSentimentEngine()
+        self.portfolio_optimizer = PortfolioOptimizer()
+        self.rule_regime_detector = RegimeDetector()
+        self.multi_timeframe_analyzer = MultiTimeframeAnalyzer()
+        self.options_engine = OptionsEngine()
+        self.quick_backtester = SimpleBacktester(initial_cash=10_000.0, fee_bps=5.0)
+        self.portfolio_risk_manager = PortfolioRiskManager(account_balance=10_000.0, max_risk_per_trade=0.01)
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
         self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
@@ -200,7 +220,36 @@ class TradingAgent:
             "news": self.openbb_adapter.safe_get_news(symbol, limit=3),
         }
         macro_indicator = "DGS10" if persona_asset_type in {"equity", "macro"} else "DEXUSEU"
-        external_market_context["macro_data"] = self.openbb_adapter.safe_get_macro_data(macro_indicator)
+        if self.use_openbb_macro:
+            external_market_context["macro_data_openbb"] = self.openbb_adapter.safe_get_macro_data(macro_indicator)
+        else:
+            external_market_context["macro_data_openbb"] = {
+                "indicator": macro_indicator,
+                "available": False,
+                "error": "openbb_macro_disabled",
+            }
+        close_prices = [float(bar.get("close", 0.0) or 0.0) for bar in valid_data if "close" in bar]
+        analytics_summary = self.financial_analytics.summarize_prices(close_prices)
+        macro_snapshot = self.macro_data_provider.get_macro_snapshot(persona_asset_type)
+        news_snapshot = self.news_sentiment.analyze_symbol(symbol, limit=5)
+        mtf_snapshot = self.multi_timeframe_analyzer.analyze_bars(valid_data)
+        regime_snapshot = self.rule_regime_detector.detect_from_bars(close_prices)
+        optimizer_snapshot = self.portfolio_optimizer.recommend_single_asset(
+            prices=close_prices,
+            base_confidence=float(features.get("trend_strength", 0.0)),
+            edge=float(features.get("roc_20", 0.0)),
+            regime=str(regime_snapshot.get("regime", "unknown")),
+        )
+        option_snapshot = self._build_option_snapshot(close_prices, features)
+        backtest_snapshot = self._build_quick_backtest(valid_data)
+        external_market_context["macro_data"] = macro_snapshot
+        external_market_context["news_sentiment"] = news_snapshot
+        external_market_context["analytics"] = analytics_summary
+        external_market_context["multi_timeframe"] = mtf_snapshot
+        external_market_context["rule_regime"] = regime_snapshot
+        external_market_context["optimizer"] = optimizer_snapshot
+        external_market_context["options"] = option_snapshot
+        external_market_context["quick_backtest"] = backtest_snapshot
 
         orchestrator_data = {symbol: valid_data}
         orchestrated = await self.meta_orchestrator.orchestrate_signals(
@@ -219,11 +268,7 @@ class TradingAgent:
         _edge = float(fused.get("edge", 0.0))
         _conf = float(fused.get("confidence", 0.0))
         _vol = max(float(features.get("realized_volatility", 0.02)), 0.01)
-        _kelly = (
-            float(__import__("numpy").clip(0.5 * (_edge * _conf) / _vol, 0.01, 0.20))
-            if _edge > 0 and _conf > 0
-            else 0.01
-        )
+        _kelly = float(np.clip(0.5 * (_edge * _conf) / _vol, 0.01, 0.20)) if _edge > 0 and _conf > 0 else 0.01
         fused["kelly_fraction"] = _kelly
         fused["allocation"] = _kelly
         orchestrated = {**orchestrated, **fused}
@@ -260,6 +305,35 @@ class TradingAgent:
             final_decision = consensus_decision
             confidence = max(confidence, float(consensus.get("confidence_score", confidence)))
 
+        risk_gate_reason = ""
+        macro_regime = str(macro_snapshot.get("risk_regime", "neutral")).lower()
+        news_score = float(news_snapshot.get("sentiment_score", 0.0) or 0.0)
+        var_95 = float(analytics_summary.get("var_95", 0.0) or 0.0)
+        drawdown = float(analytics_summary.get("max_drawdown", 0.0) or 0.0)
+        if final_decision == "BUY":
+            if macro_regime == "risk_off" and confidence < 0.90:
+                risk_gate_reason = "macro_risk_off"
+            elif news_score <= -0.35 and confidence < 0.90:
+                risk_gate_reason = "negative_news_sentiment"
+            elif drawdown <= -0.12 and abs(var_95) >= 0.035 and confidence < 0.85:
+                risk_gate_reason = "high_drawdown_and_var"
+            elif str(regime_snapshot.get("regime", "unknown")) in {"bear", "panic"} and confidence < 0.92:
+                risk_gate_reason = "rule_regime_not_supporting_buy"
+        elif final_decision == "SELL":
+            if macro_regime == "risk_on" and news_score >= 0.35 and confidence < 0.90:
+                risk_gate_reason = "risk_on_with_bullish_news"
+        mtf_alignment = float(mtf_snapshot.get("alignment_score", 0.0) or 0.0)
+        if final_decision == "BUY" and mtf_alignment < -0.40 and confidence < 0.92:
+            risk_gate_reason = "multi_timeframe_bearish_alignment"
+        if final_decision == "SELL" and mtf_alignment > 0.40 and confidence < 0.92:
+            risk_gate_reason = "multi_timeframe_bullish_alignment"
+        bt_return = float(backtest_snapshot.get("total_return", 0.0) or 0.0)
+        if final_decision == "BUY" and bt_return < -0.03 and confidence < 0.90:
+            risk_gate_reason = "backtest_negative_expectancy"
+        if risk_gate_reason:
+            logger.info(f"Risk gate forced HOLD for {symbol}: {risk_gate_reason}")
+            final_decision = "HOLD"
+
         if False: # Overridden for Testing
             final_decision = "HOLD"
 
@@ -268,15 +342,22 @@ class TradingAgent:
         if final_decision != "HOLD":
             sizing = fused.get("sizing_multipliers", {})
             volatility = float(features.get("realized_volatility", 0.3) or 0.3)
+            optimizer_multiplier = float(optimizer_snapshot.get("allocation_multiplier", 1.0) or 1.0)
             position_size = await self.portfolio_engine.optimize_position_size(
                 signal_strength=confidence,
                 portfolio=self.paper_portfolio,
                 volatility=volatility,
-                confidence_multiplier=float(sizing.get("confidence_multiplier", 1.0)),
+                confidence_multiplier=float(sizing.get("confidence_multiplier", 1.0)) * optimizer_multiplier,
                 regime_multiplier=float(sizing.get("regime_multiplier", 1.0)),
                 liquidity_multiplier=float(sizing.get("microstructure_multiplier", 1.0)),
                 correlation_penalty=float(sizing.get("correlation_penalty", 1.0)),
             )
+            entry = float(valid_data[-1].get("close", 0.0) or 0.0)
+            atr = float(features.get("atr", 0.0) or 0.0)
+            default_stop = entry - max(atr * 2.0, entry * 0.01) if final_decision == "BUY" else entry + max(atr * 2.0, entry * 0.01)
+            risk_manager_size = self.portfolio_risk_manager.position_size(entry=entry, stop_loss=default_stop)
+            if risk_manager_size > 0.0:
+                position_size = max(0.01, min(position_size, risk_manager_size))
             trade = {
                 "symbol": symbol,
                 "side": final_decision,
@@ -315,8 +396,8 @@ class TradingAgent:
                         logger.debug(f"UncertaintyFlagger blocked {symbol}: conf={_uf_approval.confidence_score:.2f}")
                         final_decision = "HOLD"
                         confidence = _uf_approval.confidence_score
-                except Exception:
-                    pass
+                except Exception as exc:
+                    logger.warning(f"UncertaintyFlagger evaluation failed for {symbol}: {exc}")
             logger.info(f"Decision for {symbol}: {final_decision} (Confidence: {confidence:.2f})")
         spread_pressure = float(features.get("spread_pressure", 0.0))
         expected_move = float(max(abs(features.get("roc_5", 0.0)), abs(features.get("trend_strength", 0.0))))
@@ -350,6 +431,55 @@ class TradingAgent:
             "primary_persona": primary_persona,
             "active_personas": active_personas,
             "external_market_context": external_market_context,
+            "risk_gate_reason": risk_gate_reason,
+        }
+
+    def _build_option_snapshot(self, close_prices: List[float], features: Dict[str, Any]) -> Dict[str, Any]:
+        if not close_prices:
+            return {"available": False, "error": "no_prices"}
+        spot = float(close_prices[-1])
+        strike = spot
+        sigma = max(0.05, float(features.get("realized_volatility", 0.20) or 0.20))
+        maturity = 30.0 / 365.0
+        rate = float(getattr(TradingConfig, "RISK_FREE_RATE", 0.05))
+        call_price = self.options_engine.black_scholes(spot, strike, maturity, rate, sigma, "call")
+        put_price = self.options_engine.black_scholes(spot, strike, maturity, rate, sigma, "put")
+        greeks = self.options_engine.greeks(spot, strike, maturity, rate, sigma, "call")
+        return {
+            "available": True,
+            "spot": spot,
+            "strike": strike,
+            "call_price": float(call_price),
+            "put_price": float(put_price),
+            "call_greeks": greeks,
+        }
+
+    def _build_quick_backtest(self, data: List[Dict[str, Any]]) -> Dict[str, Any]:
+        closes = [float(d.get("close", 0.0) or 0.0) for d in data if "close" in d]
+        if len(closes) < 30:
+            return {"status": "SKIPPED", "reason": "insufficient_bars"}
+        bars = [{"close": c} for c in closes[-120:]]
+        signals: List[str] = []
+        for i in range(len(closes[-120:])):
+            window = closes[max(0, len(closes) - 120 + i - 19): len(closes) - 120 + i + 1]
+            if len(window) < 20:
+                signals.append("HOLD")
+                continue
+            ma20 = float(np.mean(window[-20:]))
+            price = float(window[-1])
+            if price > ma20 * 1.002:
+                signals.append("BUY")
+            elif price < ma20 * 0.998:
+                signals.append("SELL")
+            else:
+                signals.append("HOLD")
+        result = self.quick_backtester.run(bars=bars, signals=signals, size_fraction=0.15)
+        return {
+            "status": result.get("status", "SKIPPED"),
+            "total_return": float(result.get("total_return", 0.0) or 0.0),
+            "max_drawdown": float(result.get("max_drawdown", 0.0) or 0.0),
+            "sharpe": float(result.get("sharpe", 0.0) or 0.0),
+            "trades": int(result.get("trades", 0) or 0),
         }
 
     async def analyze_market(

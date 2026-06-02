@@ -3,6 +3,7 @@ from typing import Dict, Any, Callable, List
 from loguru import logger
 from datetime import datetime
 import numpy as np
+from trading.price_streamer import stream_binance_prices
 
 class MarketDataStream:
     def __init__(self, broker_adapter=None):
@@ -16,6 +17,7 @@ class MarketDataStream:
         self.max_reconnect_attempts = 8
         self._router_task = None
         self._heartbeat_task = None
+        self._public_stream_task = None
         self._last_timestamp_by_symbol = {}
         self.integrity_rejections = {
             'stale_or_duplicate': 0,
@@ -198,6 +200,46 @@ class MarketDataStream:
         if attempt >= self.max_reconnect_attempts:
             raise RuntimeError('Max reconnect attempts reached for live market stream.')
 
+    async def stream_public_crypto_data(self, symbols: List[str]):
+        """Stream public Binance crypto ticks without broker credentials."""
+        if not symbols:
+            raise ValueError('No symbols provided for public crypto stream.')
+
+        self.running = True
+        self.live_mode = True
+        normalized_map: Dict[str, str] = {}
+        for symbol in symbols:
+            token = str(symbol).upper().replace("/", "").replace("-", "")
+            if not token:
+                continue
+            normalized_map[token] = str(symbol)
+
+        async def _public_callback(tick: Dict[str, Any]):
+            raw_symbol = str(tick.get("symbol", "")).upper()
+            canonical_symbol = normalized_map.get(raw_symbol, raw_symbol)
+            price = float(tick.get("price", 0.0) or 0.0)
+            volume = float(tick.get("volume", 0.0) or 0.0)
+            bar = {
+                "symbol": canonical_symbol,
+                "open": price,
+                "close": price,
+                "high": price,
+                "low": price,
+                "volume": max(volume, 1.0),
+                "timestamp": datetime.now().isoformat(),
+            }
+            await self.emit_market_data(canonical_symbol, bar)
+
+        stream_symbols = list(normalized_map.keys())
+        if not stream_symbols:
+            raise ValueError('No valid symbols for Binance public stream.')
+        logger.info(f'Starting Binance public stream for {len(stream_symbols)} symbols')
+        self._public_stream_task = asyncio.current_task()
+        try:
+            await stream_binance_prices(stream_symbols, _public_callback)
+        finally:
+            self._public_stream_task = None
+
     def stop(self):
         self.running = False
         self.live_mode = False
@@ -209,6 +251,8 @@ class MarketDataStream:
         if self._heartbeat_task:
             self._heartbeat_task.cancel()
             self._heartbeat_task = None
-
+        if self._public_stream_task:
+            self._public_stream_task.cancel()
+            self._public_stream_task = None
         logger.info('Market stream stopped')
 

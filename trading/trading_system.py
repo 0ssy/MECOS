@@ -2,6 +2,7 @@
 Unified TradingSystem: Central entry point for all trading infrastructure.
 Wires up universe, data, execution, risk, adapters, and orchestrators.
 """
+import asyncio
 from typing import Optional, Dict, Any
 from loguru import logger
 
@@ -31,6 +32,10 @@ from .openbb_adapter import OpenBBDataAdapter
 from .cockpit_app import build_cockpit_snapshot
 from .mecos_consensus_engine import ConsensusEngine
 from .mecos_forex_activation import ForexActivationEngine
+from .pipeline_runner import PipelineRunner
+from .screener import StockScreener
+from .events_calendar import EventsCalendar
+from .terminal_ui import render_signal_dashboard
 
 class TradingSystem:
     def __init__(
@@ -81,13 +86,15 @@ class TradingSystem:
             weekly_day=4,
             weekly_hour=18,
         )
+        self._public_stream_task: Optional[asyncio.Task] = None
         self.app_discovery = AppDiscovery(cache_dir="data/app_discovery")
         self.app_learner = AppLearner(memory_dir="data/app_workflows")
         self._initialize_app_learning()
 
-        # Broker adapter (multi-broker live routing: IBKR + Alpaca + Binance)
+        # Broker adapter (multi-broker live routing: Alpaca + Binance + OANDA)
         self.broker_adapter = broker_adapter or MultiBrokerAdapter()
         self.stream.set_broker_adapter(self.broker_adapter)
+        self.universe_manager.set_forex_enabled(bool(getattr(self.broker_adapter, "oanda", None)))
         self.executor = PaperTradingExecutor(
             self.db,
             self.position_manager,
@@ -99,6 +106,9 @@ class TradingSystem:
         )
         self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
         self.openbb_adapter = OpenBBDataAdapter()
+        self.pipeline_runner = PipelineRunner()
+        self.stock_screener = StockScreener()
+        self.events_calendar = EventsCalendar()
         self.forex_activation_engine = ForexActivationEngine()
         self.forex_activation_status = self.forex_activation_engine.activate(
             persona_engine=self.agent.persona_engine,
@@ -138,6 +148,10 @@ class TradingSystem:
             'openbb_adapter': self.openbb_adapter,
             'forex_activation_engine': self.forex_activation_engine,
             'forex_activation_status': self.forex_activation_status,
+            'pipeline_runner': self.pipeline_runner,
+            'stock_screener': self.stock_screener,
+            'events_calendar': self.events_calendar,
+            'public_crypto_stream_task': self._public_stream_task,
             'cockpit_snapshot': self.get_cockpit_snapshot,
         }
 
@@ -159,6 +173,7 @@ class TradingSystem:
         await self.loop.start(use_starter_universe=use_starter_universe)
 
     def stop(self):
+        self.stop_public_crypto_stream()
         if hasattr(self, 'loop'):
             self.loop.stop()
 
@@ -178,6 +193,37 @@ class TradingSystem:
             "macro_data": self.openbb_adapter.safe_get_macro_data(macro_indicator),
         }
         return context
+
+    def run_pipeline(self, pipeline_config: Dict[str, Any], bars: list[Dict[str, Any]]) -> Dict[str, Any]:
+        return self.pipeline_runner.run(pipeline_config, bars)
+
+    def run_screener(self, tickers: list[str], strategy: str = "value") -> Dict[str, Any]:
+        return self.stock_screener.screen(tickers, strategy=strategy)
+
+    def get_events_snapshot(self, tickers: list[str]) -> Dict[str, Any]:
+        return {
+            "earnings": self.events_calendar.earnings_dates(tickers),
+            "economic_events": self.events_calendar.economic_events(),
+        }
+
+    @staticmethod
+    def render_dashboard(decisions: Dict[str, Dict[str, Any]]) -> str:
+        return render_signal_dashboard(decisions)
+
+    def start_public_crypto_stream(self, symbols: list[str]) -> None:
+        """Start Binance public stream in background for given crypto symbols."""
+        if self._public_stream_task and not self._public_stream_task.done():
+            logger.info('Public crypto stream already running')
+            return
+        if not symbols:
+            raise ValueError('symbols must be non-empty')
+        self._public_stream_task = asyncio.create_task(self.stream.stream_public_crypto_data(symbols))
+        logger.info(f'Public crypto stream task started for symbols={symbols}')
+
+    def stop_public_crypto_stream(self) -> None:
+        if self._public_stream_task and not self._public_stream_task.done():
+            self._public_stream_task.cancel()
+        self._public_stream_task = None
 
     def _initialize_app_learning(self) -> None:
         try:

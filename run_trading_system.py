@@ -28,7 +28,7 @@ async def main():
     stream = MarketDataStream()
 
     stream.set_broker_adapter(MultiBrokerAdapter())
-    logger.info('Live broker adapter configured: MultiBroker (IBKR/Alpaca/Binance/OANDA)')
+    logger.info('Live broker adapter configured: MultiBroker (Alpaca/Binance/OANDA)')
 
     signal_gen = LiveSignalGenerator(agent, stream, memory)
     
@@ -39,6 +39,9 @@ async def main():
     executor = PaperTradingExecutor(db, pos_mgr, risk_mon, memory)
     
     universe_mgr = UniverseManager(memory)
+    broker_adapter = stream.broker_adapter
+    forex_available = bool(getattr(broker_adapter, "oanda", None))
+    universe_mgr.set_forex_enabled(forex_available)
     
     scanner = UniverseScanner(universe_mgr, stream)
     

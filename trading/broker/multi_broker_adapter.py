@@ -1,5 +1,5 @@
 import asyncio
-import math
+import os
 from typing import Any, Awaitable, Callable, Dict, List
 
 from loguru import logger
@@ -7,24 +7,26 @@ from loguru import logger
 from .alpaca_adapter import AlpacaAdapter
 from .base_adapter import BrokerAdapter
 from .binance_adapter import BinanceAdapter
-from .ibkr_adapter import IbkrAdapter
 from .oanda_adapter import OandaAdapter
 
 
 class MultiBrokerAdapter(BrokerAdapter):
     def __init__(self):
-        self.ibkr = self._try_init('IBKR', IbkrAdapter)
         self.alpaca = self._try_init('Alpaca', AlpacaAdapter)
         self.binance = self._try_init('Binance', BinanceAdapter)
-        self.oanda = self._try_init('OANDA', OandaAdapter)
+        if os.getenv("OANDA_API_KEY") and os.getenv("OANDA_ACCOUNT_ID"):
+            self.oanda = self._try_init('OANDA', OandaAdapter)
+        else:
+            self.oanda = None
+            logger.info('OANDA disabled: credentials not set.')
         self._degraded_stream_adapters = set()
 
-        if not any([self.ibkr, self.alpaca, self.binance, self.oanda]):
+        if not any([self.alpaca, self.binance, self.oanda]):
             raise RuntimeError('No broker adapters available. Check broker credentials and runtime connectivity.')
 
         logger.info(
             'MultiBrokerAdapter ready | '
-            f'ibkr={self.ibkr is not None} alpaca={self.alpaca is not None} '
+            f'alpaca={self.alpaca is not None} '
             f'binance={self.binance is not None} oanda={self.oanda is not None}'
         )
 
@@ -81,22 +83,22 @@ class MultiBrokerAdapter(BrokerAdapter):
         excluded |= self._degraded_stream_adapters
 
         if self._is_crypto(symbol):
-            preferred = [self.binance, self.ibkr, self.alpaca]
+            preferred = [self.binance, self.alpaca]
         elif self._is_forex(symbol):
-            preferred = [self.oanda, self.ibkr, self.alpaca]
+            preferred = [self.oanda, self.alpaca]
         else:
-            preferred = [self.ibkr, self.alpaca]
+            preferred = [self.alpaca]
 
         return [a for a in self._unique_adapters(preferred) if a not in excluded]
 
     def _order_candidates_for_symbol(self, symbol: str, exclude=None):
         excluded = set(exclude or set())
         if self._is_crypto(symbol):
-            preferred = [self.binance, self.ibkr, self.alpaca]
+            preferred = [self.binance, self.alpaca]
         elif self._is_forex(symbol):
-            preferred = [self.oanda, self.ibkr]
+            preferred = [self.oanda]
         else:
-            preferred = [self.ibkr, self.alpaca]
+            preferred = [self.alpaca]
         return [a for a in self._unique_adapters(preferred) if a not in excluded]
 
     async def get_live_bars(self, symbol: str, timeframe: str = '1Min', limit: int = 200) -> List[Dict[str, Any]]:
@@ -114,30 +116,11 @@ class MultiBrokerAdapter(BrokerAdapter):
         if requested_qty <= 0.0:
             raise RuntimeError(f'Invalid order quantity: {requested_qty}')
 
-        is_equity_like = (not self._is_crypto(symbol)) and (not self._is_forex(symbol))
-        fractional_equity = is_equity_like and (not requested_qty.is_integer())
-
         candidates = self._order_candidates_for_symbol(symbol)
-        if fractional_equity and self.alpaca in candidates:
-            # IBKR rejects fractional stock API orders in this setup; prioritize Alpaca.
-            candidates = [self.alpaca] + [adapter for adapter in candidates if adapter is not self.alpaca]
 
         errors = []
         for adapter in candidates:
             adapter_qty = requested_qty
-            if is_equity_like and isinstance(adapter, IbkrAdapter):
-                adapter_qty = float(math.floor(requested_qty))
-                if adapter_qty < 1.0:
-                    msg = (
-                        f'Skipping IBKR for {symbol}: equity quantity {requested_qty} is fractional and below 1 share.'
-                    )
-                    logger.warning(msg)
-                    errors.append(f'IbkrAdapter: {msg}')
-                    continue
-                if adapter_qty != requested_qty:
-                    logger.warning(
-                        f'Adjusted IBKR order quantity for {symbol}: requested={requested_qty} -> rounded={adapter_qty}'
-                    )
             try:
                 return await adapter.submit_order(symbol, adapter_qty, side, order_type=order_type)
             except Exception as exc:
@@ -149,7 +132,7 @@ class MultiBrokerAdapter(BrokerAdapter):
         raise RuntimeError(f'No broker adapter available for order: {symbol} | errors={errors}')
 
     async def cancel_order(self, order_id: str) -> Dict[str, Any]:
-        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
+        for adapter in [self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:
@@ -160,7 +143,7 @@ class MultiBrokerAdapter(BrokerAdapter):
 
     async def get_positions(self) -> List[Dict[str, Any]]:
         merged: List[Dict[str, Any]] = []
-        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
+        for adapter in [self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:
@@ -171,7 +154,7 @@ class MultiBrokerAdapter(BrokerAdapter):
 
     async def get_account(self) -> Dict[str, Any]:
         accounts = []
-        for adapter in [self.ibkr, self.alpaca, self.binance, self.oanda]:
+        for adapter in [self.alpaca, self.binance, self.oanda]:
             if adapter is None:
                 continue
             try:
