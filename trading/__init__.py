@@ -65,6 +65,10 @@ from .price_streamer import stream_binance_prices
 from .options_pricing import OptionsEngine
 from .backtester import SimpleBacktester
 from .risk_manager import RiskManager as PortfolioRiskManager
+from .stability_layer import StabilityLayer, CircuitBreaker, PositionStateStore
+from .trade_journal import TradeJournal
+from .post_mortem import PostMortemEngine
+from .signal_weighter import SignalWeighter
 
 __all__ = [
     'UniverseManager', 'UniverseScanner',
@@ -85,6 +89,8 @@ __all__ = [
     'PortfolioOptimizer', 'RegimeDetector', 'MultiTimeframeAnalyzer',
     'PipelineRunner', 'render_signal_dashboard', 'EventsCalendar',
     'StockScreener', 'stream_binance_prices',
-    'OptionsEngine', 'SimpleBacktester', 'PortfolioRiskManager'
+    'OptionsEngine', 'SimpleBacktester', 'PortfolioRiskManager',
+    'StabilityLayer', 'CircuitBreaker', 'PositionStateStore',
+    'TradeJournal', 'PostMortemEngine', 'SignalWeighter',
 ]
 

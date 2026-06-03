@@ -3,13 +3,15 @@ from typing import Dict, Any, List, Optional
 from loguru import logger
 from datetime import datetime, timezone
 from trading.confidence_calibrator import ConfidenceCalibrator
+from trading.stability_layer import StabilityLayer
 
 
 class LiveSignalGenerator:
-    def __init__(self, trading_agent, data_stream, memory):
+    def __init__(self, trading_agent, data_stream, memory, stability_layer: StabilityLayer | None = None):
         self.trading_agent = trading_agent
         self.data_stream = data_stream
         self.memory = memory
+        self.stability_layer = stability_layer or StabilityLayer()
 
         self.signal_history: List[Dict] = []
         self.validation_mode = True
@@ -39,6 +41,7 @@ class LiveSignalGenerator:
     async def on_market_data(self, symbol: str, tick: Dict[str, Any]):
         historical_data = self.data_stream.get_historical_cache(symbol, lookback=100)
         min_bars = 35 if self._is_crypto_symbol(symbol) else 50
+        historical_data = self.stability_layer.sanitize_bars(symbol, historical_data, min_bars=min_bars)
         if len(historical_data) < min_bars:
             now = datetime.now(timezone.utc)
             last = self._last_insufficient_log.get(symbol)
@@ -107,6 +110,14 @@ class LiveSignalGenerator:
                 f'SIGNAL: {symbol} | {decision} | '
                 f'conf={calibrated_confidence:.3f} (raw={raw_confidence:.3f}) | '
                 f'edge={signal["edge"]:.3f} | regime={signal["regime"]}'
+            )
+            self.stability_layer.log_signal_decision(
+                symbol=symbol,
+                action=decision,
+                confidence=calibrated_confidence,
+                regime=str(signal.get("regime", "unknown")),
+                size=float(signal.get("allocation", 0.0) or 0.0),
+                rsi=signal.get("features", {}).get("rsi_14", signal.get("features", {}).get("rsi")),
             )
 
             return signal

@@ -22,6 +22,7 @@ from trading_agent import TradingAgent
 from meta_learner import MetaLearner
 from independence_manager import IndependenceManager
 from dreaming_engine import DreamingEngine
+from neural_brain_service import NeuralBrainService
 
 
 async def startup_checks(memory: MemorySystem) -> None:
@@ -54,6 +55,11 @@ async def main():
 
     # ── 2. Trading agent (must exist before IndependenceManager) ─────────
     trading_agent = TradingAgent(memory)
+    neural_brain_service = NeuralBrainService(memory_system=memory)
+    if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
+        trading_agent.neural_brain = neural_brain_service.brain
+        trading_agent.neural_brain_enabled = True
+        logger.info("Neural brain shared with root TradingAgent")
     logger.info("TradingAgent ready.")
 
     # ── 3. Reasoner ───────────────────────────────────────────────────────
@@ -92,6 +98,20 @@ async def main():
             trade_result = await trading_agent.run_cycle()
             logger.info(f"Trading: {trade_result['signals']} signals, "
                         f"{trade_result['actionable']} actionable")
+
+            if neural_brain_service.is_available:
+                insight = neural_brain_service.runtime_insight(
+                    {
+                        "runtime_health": 85.0,
+                        "success_rate": 0.9,
+                        "runtime_regime": "trending",
+                    }
+                )
+                if insight:
+                    logger.info(
+                        f"Global neural insight: action={insight.get('action')} "
+                        f"uncertainty={insight.get('uncertainty')}"
+                    )
 
             # Meta-learning cycle (every 5 main cycles)
             if cycle % 5 == 0:

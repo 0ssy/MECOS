@@ -21,6 +21,7 @@ from engineer import SandboxExecutor as RuntimeSandboxExecutor
 from knowledge_graph import KnowledgeGraph as RuntimeKnowledgeGraph
 from memory_system import MemorySystem
 from model_router import ModelRouter
+from neural_brain_service import NeuralBrainService
 from orchestrator import AutonomousOrchestrator
 from perception import PerceptionLayer
 from reasoner import Reasoner
@@ -68,6 +69,7 @@ class UnifiedMECOSRuntime:
         self._heartbeat_task: Optional[asyncio.Task] = None
         self._runtime_research_task: Optional[asyncio.Task] = None
         self._runtime_cognition_task: Optional[asyncio.Task] = None
+        self.neural_brain_service: Optional[NeuralBrainService] = None
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -94,6 +96,7 @@ class UnifiedMECOSRuntime:
             runtime_router: ModelRouter = self.components.get("runtime_router")
             runtime_orchestrator: AutonomousOrchestrator = self.components.get("runtime_orchestrator")
             runtime_evolution: EvolutionAgent = self.components.get("runtime_evolution")
+            neural_brain: NeuralBrainService = self.components.get("neural_brain_service")
             if runtime_router and runtime_orchestrator and runtime_evolution:
                 try:
                     trading_metrics = {}
@@ -110,6 +113,28 @@ class UnifiedMECOSRuntime:
                     )
                     await runtime_orchestrator.run_goal("Maintain MECOS subsystem coordination")
                     await runtime_evolution.run_benchmark("runtime_governance", {"success_rate": 0.9})
+                    if neural_brain and neural_brain.is_available:
+                        insight = neural_brain.runtime_insight(
+                            {
+                                "runtime_health": 85.0,
+                                "efficiency_delta": float(self.benchmark_harness.latest().get("score_delta", 0.0))
+                                if self.benchmark_harness.latest()
+                                else 0.0,
+                                "research_quality_index": float(
+                                    self.research_governor.evaluate({"useful_discoveries_per_hour": 0.0}).get(
+                                        "research_quality_index", 0.0
+                                    )
+                                ),
+                                "success_rate": 0.9,
+                                "runtime_regime": "trending",
+                            }
+                        )
+                        if insight:
+                            self.components["latest_neural_runtime_insight"] = insight
+                            logger.info(
+                                f"Neural runtime insight: action={insight.get('action')} "
+                                f"uncertainty={insight.get('uncertainty')}"
+                            )
                 except Exception as exc:
                     logger.warning(f"Runtime cognition tick failed: {exc}")
             await asyncio.sleep(120)
@@ -147,6 +172,8 @@ class UnifiedMECOSRuntime:
         self.connection_state["memory"] = True
         self.components["memory"] = self.memory
         self.health_monitor.mark_started("memory")
+        self.neural_brain_service = NeuralBrainService(memory_system=self.memory)
+        self.components["neural_brain_service"] = self.neural_brain_service
 
         app_controller = AppController()
         perception = PerceptionLayer(self.memory, app_controller)
@@ -242,6 +269,9 @@ class UnifiedMECOSRuntime:
                 quant_mode="balanced",
                 execution_mode=self.trading_execution_mode,
             )
+            if self.neural_brain_service and self.neural_brain_service.is_available:
+                self.trading_system.agent.neural_brain = self.neural_brain_service.brain
+                self.trading_system.agent.neural_brain_enabled = True
             self.connection_state["trading_system"] = True
             self.components["trading_system"] = self.trading_system
         except Exception as exc:
@@ -256,6 +286,7 @@ class UnifiedMECOSRuntime:
                 "evolution_agent": runtime_evolution,
                 "trading_system": self.trading_system,
                 "runtime_router": runtime_router,
+                "neural_brain_service": self.neural_brain_service,
             }
         )
 

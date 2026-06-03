@@ -34,6 +34,7 @@ from trading.multi_timeframe import MultiTimeframeAnalyzer
 from trading.options_pricing import OptionsEngine
 from trading.backtester import SimpleBacktester
 from trading.risk_manager import RiskManager as PortfolioRiskManager
+from trading.signal_weighter import SignalWeighter
 
 
 class _OrderFlowProxyAgent:
@@ -159,6 +160,18 @@ class TradingAgent:
         self.options_engine = OptionsEngine()
         self.quick_backtester = SimpleBacktester(initial_cash=10_000.0, fee_bps=5.0)
         self.portfolio_risk_manager = PortfolioRiskManager(account_balance=10_000.0, max_risk_per_trade=0.01)
+        self.signal_weighter = SignalWeighter()
+        self.neural_brain = None
+        self.neural_brain_enabled = os.getenv("MECOS_ENABLE_NEURAL_BRAIN", "false").strip().lower() == "true"
+        if self.neural_brain_enabled:
+            try:
+                from mecos_brain import MECOSBrain
+
+                self.neural_brain = MECOSBrain(memory_system=memory)
+                logger.info("Neural brain enabled for TradingAgent")
+            except Exception as exc:
+                self.neural_brain_enabled = False
+                logger.warning(f"Neural brain unavailable, continuing without it: {exc}")
 
         self.meta_orchestrator.register_agent("trend", self.trend_agent)
         self.meta_orchestrator.register_agent("mean_reversion", self.mean_reversion_agent)
@@ -334,6 +347,41 @@ class TradingAgent:
             logger.info(f"Risk gate forced HOLD for {symbol}: {risk_gate_reason}")
             final_decision = "HOLD"
 
+        rsi_value = float(features.get("rsi_14", features.get("rsi", 50.0)) or 50.0)
+        weighted_confidence = self.signal_weighter.score_opportunity(
+            {
+                "rsi": rsi_value,
+                "regime": str(regime_snapshot.get("regime", regime)),
+                "sentiment": news_score,
+                "macro": str(macro_snapshot.get("risk_regime", "neutral")),
+                "pattern": float(edge),
+                "timeframe": mtf_alignment,
+            }
+        )
+        confidence = float(np.clip(0.75 * confidence + 0.25 * weighted_confidence, 0.0, 1.0))
+        neural_context = self._run_neural_brain(
+            symbol=symbol,
+            bars=valid_data,
+            features=features,
+            regime=regime,
+            mtf_snapshot=mtf_snapshot,
+            macro_snapshot=macro_snapshot,
+            news_snapshot=news_snapshot,
+            edge=edge,
+        )
+        if neural_context:
+            neural_decision = str(neural_context.get("decision", "HOLD")).upper()
+            neural_uncertainty = float(neural_context.get("uncertainty", 1.0) or 1.0)
+            if neural_decision == final_decision and neural_uncertainty <= 0.5:
+                confidence = float(np.clip(confidence + 0.07, 0.0, 1.0))
+            elif final_decision == "HOLD" and neural_decision in {"BUY", "SELL"} and neural_uncertainty <= 0.35:
+                final_decision = neural_decision
+                confidence = float(np.clip(max(confidence, 1.0 - neural_uncertainty), 0.0, 1.0))
+            if neural_uncertainty >= 0.85 and confidence < 0.95 and final_decision != "HOLD":
+                risk_gate_reason = "neural_high_uncertainty"
+                final_decision = "HOLD"
+            external_market_context["neural_brain"] = neural_context
+
         if False: # Overridden for Testing
             final_decision = "HOLD"
 
@@ -425,6 +473,8 @@ class TradingAgent:
             "expected_move": float(expected_move),
             "spread_pressure": float(spread_pressure),
             "regime": regime,
+            "weighted_confidence": float(weighted_confidence),
+            "neural_brain": neural_context,
             "persona_context": persona_context,
             "consensus": consensus,
             "sector": sector,
@@ -433,6 +483,57 @@ class TradingAgent:
             "external_market_context": external_market_context,
             "risk_gate_reason": risk_gate_reason,
         }
+
+    def _run_neural_brain(
+        self,
+        symbol: str,
+        bars: List[Dict[str, Any]],
+        features: Dict[str, Any],
+        regime: str,
+        mtf_snapshot: Dict[str, Any],
+        macro_snapshot: Dict[str, Any],
+        news_snapshot: Dict[str, Any],
+        edge: float,
+    ) -> Dict[str, Any]:
+        if not self.neural_brain_enabled or self.neural_brain is None:
+            return {}
+        try:
+            base_rsi = float(features.get("rsi_14", features.get("rsi", 50.0)) or 50.0)
+            signals = {
+                "rsi": base_rsi,
+                "macd": float(features.get("macd", 0.0) or 0.0),
+                "atr": float(features.get("atr", 0.0) or 0.0),
+                "volume_ratio": float(features.get("volume_ratio", 1.0) or 1.0),
+                "news_sentiment": float(news_snapshot.get("sentiment_score", 0.0) or 0.0),
+                "regime": str(regime),
+                "portfolio_heat": float(self.paper_portfolio.get("total_value", 10_000.0) / 10_000.0),
+                "drawdown": float(features.get("drawdown", 0.0) or 0.0),
+                "win_rate": 0.5,
+                "fed_rate": float(macro_snapshot.get("policy_rate", 5.0) or 5.0),
+                "vix": float(macro_snapshot.get("vix", 20.0) or 20.0),
+                "rsi_1d": float(mtf_snapshot.get("rsi_daily", base_rsi) if isinstance(mtf_snapshot, dict) else base_rsi),
+                "rsi_4h": float(mtf_snapshot.get("rsi_4h", base_rsi) if isinstance(mtf_snapshot, dict) else base_rsi),
+                "rsi_1h": float(mtf_snapshot.get("rsi_1h", base_rsi) if isinstance(mtf_snapshot, dict) else base_rsi),
+                "pattern": float(edge),
+            }
+            regime_token = str(regime).lower()
+            signals["regime_bull"] = 1.0 if regime_token in {"bull", "trending"} else 0.0
+            signals["regime_bear"] = 1.0 if regime_token in {"bear", "panic"} else 0.0
+            signals["regime_sideways"] = 1.0 if regime_token in {"sideways", "ranging"} else 0.0
+            brain_out = self.neural_brain.process(symbol, signals, bars)
+            action = str(brain_out.get("action", "hold")).lower()
+            decision_map = {
+                "strong_buy": "BUY",
+                "buy": "BUY",
+                "hold": "HOLD",
+                "sell": "SELL",
+                "strong_sell": "SELL",
+            }
+            brain_out["decision"] = decision_map.get(action, "HOLD")
+            return brain_out
+        except Exception as exc:
+            logger.warning(f"Neural brain processing failed for {symbol}: {exc}")
+            return {}
 
     def _build_option_snapshot(self, close_prices: List[float], features: Dict[str, Any]) -> Dict[str, Any]:
         if not close_prices:

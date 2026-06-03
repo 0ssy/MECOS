@@ -38,6 +38,8 @@ def _realistic_fill_price(
 
 from .broker.base_adapter import BrokerAdapter
 from .order_manager import OrderManager
+from .stability_layer import StabilityLayer
+from .trade_journal import TradeJournal
 
 class PaperTradingExecutor:
     def __init__(
@@ -49,6 +51,8 @@ class PaperTradingExecutor:
         order_manager: Optional[OrderManager] = None,
         broker_adapter: Optional[BrokerAdapter] = None,
         execution_mode: str = 'paper',
+        stability_layer: Optional[StabilityLayer] = None,
+        trade_journal: Optional[TradeJournal] = None,
     ):
         self.database = database
         self.position_manager = position_manager
@@ -56,6 +60,8 @@ class PaperTradingExecutor:
         self.memory = memory
         self.order_manager = order_manager or OrderManager(database)
         self.broker_adapter = broker_adapter
+        self.stability_layer = stability_layer or StabilityLayer()
+        self.trade_journal = trade_journal or TradeJournal()
         self.execution_mode = str(execution_mode or 'paper').strip().lower()
         if self.execution_mode not in {'paper', 'live'}:
             raise ValueError(f'Unsupported execution_mode: {self.execution_mode}')
@@ -84,6 +90,7 @@ class PaperTradingExecutor:
         }
 
         self._restore_portfolio_state()
+        self.stability_layer.position_store.replace_from_positions(self.position_manager.positions)
         logger.info(
             f'Paper Trading Executor initialized | Capital: {self.paper_account["cash"]:.2f} '
             f'| Execution enabled: {self.execution_enabled} | Mode: {self.execution_mode.upper()}'
@@ -191,6 +198,13 @@ class PaperTradingExecutor:
             return {'status': 'REJECTED', 'reason': 'Missing symbol'}
 
         decision = signal['decision']
+        allowed, reason = self.stability_layer.can_place_order(symbol, decision)
+        if not allowed:
+            self.execution_stats['rejected_orders'] += 1
+            if "circuit_breaker_halted" in reason:
+                self.trigger_kill_switch(reason)
+            logger.warning(f'Stability layer rejected {decision} for {symbol}: {reason}')
+            return {'status': 'REJECTED', 'reason': reason}
         allocation = signal.get('allocation', signal.get('position_size', 0.1))
         price = signal.get('features', {}).get('close', 100.0)
         position_size = self.paper_account['cash'] * allocation
@@ -286,6 +300,31 @@ class PaperTradingExecutor:
                 'confidence': signal.get('confidence', 0.0),
                 'regime': signal.get('regime', 'unknown'),
             })
+            self.stability_layer.record_order_fill(
+                symbol=symbol,
+                side='BUY',
+                price=price,
+                size=shares,
+                metadata={
+                    'regime': signal.get('regime', 'unknown'),
+                    'confidence': float(signal.get('confidence', 0.0) or 0.0),
+                },
+            )
+            self.trade_journal.record_entry(
+                ticker=symbol,
+                action='BUY',
+                price=price,
+                size=shares,
+                reasoning={
+                    'rsi': signal.get('features', {}).get('rsi_14', signal.get('features', {}).get('rsi')),
+                    'regime': signal.get('regime', 'unknown'),
+                    'sentiment': signal.get('news_sentiment'),
+                    'macro': signal.get('macro_risk_regime'),
+                    'pattern': signal.get('edge', 0.0),
+                    'timeframe': signal.get('features', {}).get('timeframe_alignment'),
+                    'confidence': signal.get('confidence', 0.0),
+                },
+            )
             
             logger.info(f'EXECUTING BUY {symbol} | size=${position_size:.2f}')
             logger.info(f'Portfolio Cash: ${self.paper_account["cash"]:.2f}')
@@ -348,6 +387,23 @@ class PaperTradingExecutor:
             open_trade = self.database.get_open_trade_for_symbol(symbol)
             if open_trade:
                 self.database.close_trade(open_trade['id'], price, pnl, holding_seconds)
+            self.stability_layer.record_order_fill(symbol=symbol, side='SELL', price=price, size=sell_shares)
+            self.stability_layer.record_trade_close(
+                symbol=symbol,
+                pnl=pnl,
+                exit_reason=signal.get('exit_reason', ''),
+            )
+            open_journal_trade_id = self.trade_journal.get_open_trade_id(symbol)
+            if open_journal_trade_id:
+                self.trade_journal.record_exit(
+                    trade_id=open_journal_trade_id,
+                    exit_price=price,
+                    exit_reason=signal.get('exit_reason', ''),
+                    pnl=pnl,
+                    outcome='win' if pnl > 0 else 'loss' if pnl < 0 else 'flat',
+                )
+            if self.stability_layer.circuit_breaker.should_halt():
+                self.trigger_kill_switch('circuit_breaker_triggered_after_losses')
             
             self.execution_stats['executed_orders'] += 1
             
@@ -425,6 +481,32 @@ class PaperTradingExecutor:
                 'confidence': signal.get('confidence', 0.0),
                 'regime': signal.get('regime', 'unknown'),
             })
+            self.stability_layer.record_order_fill(
+                symbol=symbol,
+                side='BUY',
+                price=reference_price,
+                size=order_qty,
+                metadata={
+                    'regime': signal.get('regime', 'unknown'),
+                    'confidence': float(signal.get('confidence', 0.0) or 0.0),
+                    'live_execution': True,
+                },
+            )
+            self.trade_journal.record_entry(
+                ticker=symbol,
+                action='BUY',
+                price=reference_price,
+                size=order_qty,
+                reasoning={
+                    'rsi': signal.get('features', {}).get('rsi_14', signal.get('features', {}).get('rsi')),
+                    'regime': signal.get('regime', 'unknown'),
+                    'sentiment': signal.get('news_sentiment'),
+                    'macro': signal.get('macro_risk_regime'),
+                    'pattern': signal.get('edge', 0.0),
+                    'timeframe': signal.get('features', {}).get('timeframe_alignment'),
+                    'confidence': signal.get('confidence', 0.0),
+                },
+            )
             return {
                 'status': 'EXECUTED',
                 'order_id': order_id,
@@ -446,6 +528,23 @@ class PaperTradingExecutor:
         open_trade = self.database.get_open_trade_for_symbol(symbol)
         if open_trade:
             self.database.close_trade(open_trade['id'], reference_price, pnl, holding_seconds)
+        self.stability_layer.record_order_fill(symbol=symbol, side='SELL', price=reference_price, size=order_qty)
+        self.stability_layer.record_trade_close(
+            symbol=symbol,
+            pnl=pnl,
+            exit_reason=signal.get('exit_reason', ''),
+        )
+        open_journal_trade_id = self.trade_journal.get_open_trade_id(symbol)
+        if open_journal_trade_id:
+            self.trade_journal.record_exit(
+                trade_id=open_journal_trade_id,
+                exit_price=reference_price,
+                exit_reason=signal.get('exit_reason', ''),
+                pnl=pnl,
+                outcome='win' if pnl > 0 else 'loss' if pnl < 0 else 'flat',
+            )
+        if self.stability_layer.circuit_breaker.should_halt():
+            self.trigger_kill_switch('circuit_breaker_triggered_after_losses')
 
         return {
             'status': 'EXECUTED',

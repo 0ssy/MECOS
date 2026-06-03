@@ -10,6 +10,10 @@ from trading.pipeline_runner import PipelineRunner
 from trading.portfolio_optimizer import PortfolioOptimizer
 from trading.regime_detector import RegimeDetector
 from trading.risk_manager import RiskManager
+from trading.stability_layer import StabilityLayer
+from trading.trade_journal import TradeJournal
+from trading.post_mortem import PostMortemEngine
+from trading.signal_weighter import SignalWeighter
 from trading.terminal_ui import render_signal_dashboard
 
 
@@ -88,3 +92,68 @@ async def test_public_price_stream_routes_to_market_cache(monkeypatch):
     assert len(cache) == 1
     assert float(cache[0]["close"]) == 101.5
     assert float(cache[0]["volume"]) > 0
+
+
+def test_stability_layer_data_sanitize_and_circuit_breaker(tmp_path: Path):
+    layer = StabilityLayer(
+        state_path=str(tmp_path / "state.json"),
+        max_losses=2,
+        window_hours=24,
+        cooldown_minutes=30,
+    )
+    bars = [
+        {"close": 100.0, "open": 99.5, "high": 101.0, "low": 99.0, "volume": 10.0},
+        {"close": float("nan"), "open": 100.0, "high": 101.0, "low": 99.0, "volume": 8.0},
+        {"close": 101.0, "open": 100.5, "high": 101.5, "low": 100.2, "volume": 12.0},
+    ]
+    cleaned = layer.sanitize_bars("BTC/USDT", bars, min_bars=2)
+    assert len(cleaned) == 2
+    layer.record_trade_close("BTC/USDT", pnl=-5.0)
+    layer.record_trade_close("BTC/USDT", pnl=-2.0)
+    assert layer.circuit_breaker.should_halt() is True
+
+
+def test_trade_journal_post_mortem_and_signal_weighter(tmp_path: Path):
+    journal_path = tmp_path / "trade_journal.jsonl"
+    state_path = tmp_path / "trade_journal_state.json"
+    weights_path = tmp_path / "signal_weights.json"
+
+    journal = TradeJournal(journal_file=str(journal_path), state_file=str(state_path))
+    trade_id_1 = journal.record_entry(
+        ticker="BTC-USD",
+        action="BUY",
+        price=100.0,
+        size=1.0,
+        reasoning={"rsi": 32, "regime": "bull", "sentiment": 0.6},
+    )
+    journal.record_exit(trade_id_1, exit_price=105.0, exit_reason="take_profit", pnl=5.0, outcome="win")
+
+    trade_id_2 = journal.record_entry(
+        ticker="ETH-USD",
+        action="BUY",
+        price=50.0,
+        size=2.0,
+        reasoning={"rsi": 70, "regime": "bear", "sentiment": -0.4},
+    )
+    journal.record_exit(trade_id_2, exit_price=48.0, exit_reason="stop_loss", pnl=-4.0, outcome="loss")
+
+    post = PostMortemEngine(journal_file=str(journal_path))
+    accuracy = post.analyse_signal_accuracy()
+    assert "rsi" in accuracy and accuracy["rsi"]["sample_size"] == 2
+    worst = post.worst_trades(1)
+    assert len(worst) == 1 and worst[0]["pnl"] < 0
+
+    weighter = SignalWeighter(weights_file=str(weights_path))
+    old_weights = dict(weighter.weights)
+    weighter.update_from_postmortem(
+        {
+            "rsi": {"win_rate": 0.75, "sample_size": 25},
+            "sentiment": {"win_rate": 0.30, "sample_size": 25},
+        }
+    )
+    assert weighter.weights["rsi"] > old_weights["rsi"]
+    assert weighter.weights["sentiment"] < old_weights["sentiment"]
+    score = weighter.score_opportunity(
+        {"rsi": 35, "regime": "bull", "sentiment": 0.7, "macro": "risk_on", "pattern": 0.4, "timeframe": 0.6}
+    )
+    assert 0.0 <= score <= 1.0

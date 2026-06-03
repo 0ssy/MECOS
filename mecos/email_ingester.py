@@ -12,8 +12,30 @@ import os
 from dataclasses import dataclass
 from email.header import decode_header
 from io import BytesIO
+from pathlib import Path
+
+try:
+    from dotenv import find_dotenv, load_dotenv
+except ImportError:
+    find_dotenv = None
+    load_dotenv = None
 
 logger = logging.getLogger(__name__)
+
+
+def _load_email_env() -> None:
+    """Load .env so email creds are available even when config.py is not imported."""
+    if load_dotenv is None:
+        return
+
+    dotenv_path = find_dotenv(usecwd=True) if find_dotenv else ""
+    if dotenv_path:
+        load_dotenv(dotenv_path=dotenv_path, override=False)
+        return
+
+    repo_root_env = Path(__file__).resolve().parents[1] / ".env"
+    if repo_root_env.exists():
+        load_dotenv(dotenv_path=repo_root_env, override=False)
 
 
 @dataclass
@@ -39,8 +61,12 @@ class EmailIngester:
         imap_host: str = "imap.gmail.com",
         mailbox: str = "INBOX",
     ):
-        self.email_address = email_address or os.environ.get("MECOS_EMAIL", "")
-        self.password = password or os.environ.get("MECOS_EMAIL_APP_PASSWORD", "")
+        _load_email_env()
+        env_email = os.environ.get("MECOS_EMAIL", "")
+        env_password = os.environ.get("MECOS_EMAIL_APP_PASSWORD", "") or os.environ.get("MECOS_EMAIL_PASSWORD", "")
+
+        self.email_address = email_address or env_email.strip()
+        self.password = password or env_password.strip()
         self.imap_host = imap_host
         self.mailbox = mailbox
 

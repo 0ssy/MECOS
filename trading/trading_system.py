@@ -36,6 +36,9 @@ from .pipeline_runner import PipelineRunner
 from .screener import StockScreener
 from .events_calendar import EventsCalendar
 from .terminal_ui import render_signal_dashboard
+from .stability_layer import StabilityLayer
+from .trade_journal import TradeJournal
+from .post_mortem import PostMortemEngine
 
 class TradingSystem:
     def __init__(
@@ -50,6 +53,9 @@ class TradingSystem:
         self.execution_mode = str(execution_mode or 'paper').strip().lower()
         self.db = TradeDatabase()
         self.agent = TradingAgent(self.memory, quant_mode=self.quant_mode)
+        self.stability_layer = StabilityLayer()
+        self.trade_journal = TradeJournal()
+        self.post_mortem_engine = PostMortemEngine()
         self.stream = MarketDataStream()
         self.universe_manager = UniverseManager(self.memory)
         self.universe_scanner = UniverseScanner(self.universe_manager, self.stream)
@@ -103,8 +109,15 @@ class TradingSystem:
             self.order_manager,
             broker_adapter=self.broker_adapter,
             execution_mode=self.execution_mode,
+            stability_layer=self.stability_layer,
+            trade_journal=self.trade_journal,
         )
-        self.signal_generator = LiveSignalGenerator(self.agent, self.stream, self.memory)
+        self.signal_generator = LiveSignalGenerator(
+            self.agent,
+            self.stream,
+            self.memory,
+            stability_layer=self.stability_layer,
+        )
         self.openbb_adapter = OpenBBDataAdapter()
         self.pipeline_runner = PipelineRunner()
         self.stock_screener = StockScreener()
@@ -120,6 +133,10 @@ class TradingSystem:
             f"TradingSystem initialized with broker adapter: {type(self.broker_adapter).__name__} "
             f"| execution_mode={self.execution_mode.upper()}"
         )
+        if getattr(self.agent, "neural_brain_enabled", False):
+            logger.info("TradingSystem neural brain integration: ENABLED")
+        else:
+            logger.info("TradingSystem neural brain integration: DISABLED")
 
     def get_components(self) -> Dict[str, Any]:
         return {
@@ -151,6 +168,11 @@ class TradingSystem:
             'pipeline_runner': self.pipeline_runner,
             'stock_screener': self.stock_screener,
             'events_calendar': self.events_calendar,
+            'stability_layer': self.stability_layer,
+            'trade_journal': self.trade_journal,
+            'post_mortem_engine': self.post_mortem_engine,
+            'neural_brain_enabled': bool(getattr(self.agent, "neural_brain_enabled", False)),
+            'neural_brain': getattr(self.agent, "neural_brain", None),
             'public_crypto_stream_task': self._public_stream_task,
             'cockpit_snapshot': self.get_cockpit_snapshot,
         }
@@ -205,6 +227,23 @@ class TradingSystem:
             "earnings": self.events_calendar.earnings_dates(tickers),
             "economic_events": self.events_calendar.economic_events(),
         }
+
+    def run_learning_cycle(self) -> Dict[str, Any]:
+        accuracy = self.post_mortem_engine.analyse_signal_accuracy()
+        self.agent.signal_weighter.update_from_postmortem(accuracy)
+        return {
+            "signal_accuracy": accuracy,
+            "best_conditions": self.post_mortem_engine.best_conditions(),
+            "worst_trades": self.post_mortem_engine.worst_trades(5),
+            "weights": dict(self.agent.signal_weighter.weights),
+        }
+
+    def pretrain_neural_brain(self, price_df, episodes: int = 200) -> Dict[str, Any]:
+        brain = getattr(self.agent, "neural_brain", None)
+        if brain is None:
+            raise RuntimeError("Neural brain is not enabled. Set MECOS_ENABLE_NEURAL_BRAIN=true.")
+        brain.pretrain_on_history(price_df=price_df, n_episodes=int(episodes))
+        return {"status": "OK", "episodes": int(episodes)}
 
     @staticmethod
     def render_dashboard(decisions: Dict[str, Dict[str, Any]]) -> str:
