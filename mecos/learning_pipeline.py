@@ -54,6 +54,7 @@ class LearningPipeline:
             return {"topic": topic, "results": 0, "triplets": 0}
 
         total_triplets = 0
+        triplets_collected: list[tuple] = []
         for result in results:
             if not result.snippet:
                 continue
@@ -63,6 +64,7 @@ class LearningPipeline:
             triplets = extract_triplets(text)
             self.graph.add_triplets(triplets, source=result.url)
             total_triplets += len(triplets)
+            triplets_collected.extend(triplets)
 
             doc_id = hashlib.md5(result.url.encode()).hexdigest()[:12]
             self.vectors.add(
@@ -82,7 +84,12 @@ class LearningPipeline:
 
         self.graph.save()
         logger.info("Learned '%s': %d sources, %d triplets added", topic, len(results), total_triplets)
-        return {"topic": topic, "results": len(results), "triplets": total_triplets}
+        return {
+            "topic": topic,
+            "results": len(results),
+            "triplets": total_triplets,
+            "triplets_list": triplets_collected,
+        }
 
     def query_graph(self, concept: str) -> list[dict]:
         """Get all known relationships for a concept."""

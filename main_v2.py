@@ -21,6 +21,7 @@ from engineer import SandboxExecutor as RuntimeSandboxExecutor
 from knowledge_graph import KnowledgeGraph as RuntimeKnowledgeGraph
 from memory_system import MemorySystem
 from model_router import ModelRouter
+from mecos.domain_expansion import DomainExpansionController
 from neural_brain_service import NeuralBrainService
 from orchestrator import AutonomousOrchestrator
 from perception import PerceptionLayer
@@ -69,7 +70,14 @@ class UnifiedMECOSRuntime:
         self._heartbeat_task: Optional[asyncio.Task] = None
         self._runtime_research_task: Optional[asyncio.Task] = None
         self._runtime_cognition_task: Optional[asyncio.Task] = None
+        self._domain_expansion_task: Optional[asyncio.Task] = None
         self.neural_brain_service: Optional[NeuralBrainService] = None
+        self.domain_expansion_controller: Optional[DomainExpansionController] = None
+        self.domain_expansion_enabled = os.getenv("MECOS_ENABLE_DOMAIN_EXPANSION", "false").strip().lower() == "true"
+        self.domain_expansion_tick_seconds = max(
+            60,
+            int(float(os.getenv("MECOS_DOMAIN_EXPANSION_TICK_SECONDS", "600"))),
+        )
 
     async def _on_stale_component(self, component: str, stale_for_seconds: float):
         logger.warning(f"Recovery signal: component={component} stale_for={stale_for_seconds:.1f}s")
@@ -147,12 +155,18 @@ class UnifiedMECOSRuntime:
             )
         if not self._runtime_cognition_task or self._runtime_cognition_task.done():
             self._runtime_cognition_task = asyncio.create_task(self._runtime_cognition_loop())
+        if (
+            self.domain_expansion_enabled
+            and self.domain_expansion_controller is not None
+            and (not self._domain_expansion_task or self._domain_expansion_task.done())
+        ):
+            self._domain_expansion_task = asyncio.create_task(self._domain_expansion_loop())
 
     async def _stop_runtime_background_loops(self):
         runtime_loop: ContinuousResearchLoop = self.components.get("runtime_research_loop")
         if runtime_loop:
             runtime_loop.stop()
-        for task in (self._runtime_research_task, self._runtime_cognition_task):
+        for task in (self._runtime_research_task, self._runtime_cognition_task, self._domain_expansion_task):
             if task and not task.done():
                 task.cancel()
                 try:
@@ -161,6 +175,22 @@ class UnifiedMECOSRuntime:
                     pass
         self._runtime_research_task = None
         self._runtime_cognition_task = None
+        self._domain_expansion_task = None
+
+    async def _domain_expansion_loop(self):
+        while True:
+            if self.domain_expansion_controller is None:
+                await asyncio.sleep(self.domain_expansion_tick_seconds)
+                continue
+            try:
+                await self.execution_guard.run(
+                    "domain_expansion_tick",
+                    asyncio.to_thread(self.domain_expansion_controller.learn_next),
+                    timeout_seconds=max(180.0, float(self.domain_expansion_tick_seconds)),
+                )
+            except Exception as exc:
+                logger.warning(f"Domain expansion tick failed: {exc}")
+            await asyncio.sleep(self.domain_expansion_tick_seconds)
 
     async def startup(self):
         self.drift_guard.add_anchor("Stability before expansion", source="operator_policy")
@@ -174,6 +204,19 @@ class UnifiedMECOSRuntime:
         self.health_monitor.mark_started("memory")
         self.neural_brain_service = NeuralBrainService(memory_system=self.memory)
         self.components["neural_brain_service"] = self.neural_brain_service
+        try:
+            self.domain_expansion_controller = DomainExpansionController()
+            self.components["domain_expansion_controller"] = self.domain_expansion_controller
+            self.connection_state["domain_expansion"] = True
+            logger.info(
+                "Domain expansion controller initialized | enabled={} tick={}s",
+                self.domain_expansion_enabled,
+                self.domain_expansion_tick_seconds,
+            )
+        except Exception as exc:
+            self.domain_expansion_controller = None
+            self.connection_state["domain_expansion"] = False
+            logger.warning(f"Domain expansion controller init failed: {exc}")
 
         app_controller = AppController()
         perception = PerceptionLayer(self.memory, app_controller)
@@ -287,6 +330,7 @@ class UnifiedMECOSRuntime:
                 "trading_system": self.trading_system,
                 "runtime_router": runtime_router,
                 "neural_brain_service": self.neural_brain_service,
+                "domain_expansion_controller": self.domain_expansion_controller,
             }
         )
 

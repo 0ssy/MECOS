@@ -28,6 +28,7 @@ openbb>=4.3              # Optional: market + news context
 # ── Memory & Embeddings ───────────────────────────────────────────────────────
 chromadb>=0.4
 sentence-transformers>=2.7
+scikit-learn>=1.4
 faiss-cpu>=1.7
 networkx>=3.2
 spacy>=3.7

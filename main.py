@@ -13,6 +13,7 @@ Fixes applied:
 """
 
 import asyncio
+import os
 from loguru import logger
 
 from config import settings
@@ -23,6 +24,7 @@ from meta_learner import MetaLearner
 from independence_manager import IndependenceManager
 from dreaming_engine import DreamingEngine
 from neural_brain_service import NeuralBrainService
+from mecos.domain_expansion import DomainExpansionController
 
 
 async def startup_checks(memory: MemorySystem) -> None:
@@ -56,6 +58,18 @@ async def main():
     # ── 2. Trading agent (must exist before IndependenceManager) ─────────
     trading_agent = TradingAgent(memory)
     neural_brain_service = NeuralBrainService(memory_system=memory)
+    domain_expansion_enabled = os.getenv("MECOS_ENABLE_DOMAIN_EXPANSION", "false").strip().lower() == "true"
+    domain_expansion_every = max(1, int(os.getenv("MECOS_DOMAIN_EXPANSION_MAIN_CYCLES", "20")))
+    domain_expansion_controller = None
+    if domain_expansion_enabled:
+        try:
+            domain_expansion_controller = DomainExpansionController()
+            logger.info(
+                "Domain expansion controller wired in main loop | every {} cycles",
+                domain_expansion_every,
+            )
+        except Exception as exc:
+            logger.warning(f"Domain expansion controller unavailable in main loop: {exc}")
     if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
         trading_agent.neural_brain = neural_brain_service.brain
         trading_agent.neural_brain_enabled = True
@@ -126,6 +140,8 @@ async def main():
             if cycle % 20 == 0:
                 readiness = await independence.check_readiness()
                 logger.info(f"Governance readiness: {readiness}")
+            if domain_expansion_controller and cycle % domain_expansion_every == 0:
+                await asyncio.to_thread(domain_expansion_controller.learn_next)
 
         except Exception as e:
             logger.error(f"Cycle #{cycle} error: {e}")
