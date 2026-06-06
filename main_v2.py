@@ -225,6 +225,20 @@ class UnifiedMECOSRuntime:
         self.components["perception"] = perception
         self.health_monitor.mark_started("perception")
 
+        try:
+            await perception.start_background_observation(
+                data_dir=str(Path("data")),
+                app_interval_seconds=max(5, int(float(os.getenv("MECOS_APP_OBSERVATION_INTERVAL", "30")))),
+                screen_interval_seconds=max(10, int(float(os.getenv("MECOS_SCREEN_OBSERVATION_INTERVAL", "45")))),
+                watch_files=os.getenv("MECOS_ENABLE_FILE_WATCHER", "true").strip().lower() == "true",
+            )
+            self.connection_state["screen_perception"] = True
+            self.connection_state["file_watcher"] = True
+        except Exception as exc:
+            logger.warning(f"Perception background startup failed: {exc}")
+            self.connection_state["screen_perception"] = False
+            self.connection_state["file_watcher"] = False
+
         self.web = WebPerception(self.memory)
         try:
             await self.web.startup()
@@ -510,6 +524,12 @@ class UnifiedMECOSRuntime:
                 await self.web.shutdown()
             except Exception:
                 pass
+        perception: PerceptionLayer = self.components.get("perception")
+        if perception:
+            try:
+                await perception.stop_background_observation()
+            except Exception as exc:
+                logger.warning(f"Perception shutdown warning: {exc}")
         await self.state_checkpoint.save_runtime_state(
             {
                 "connection_state": self.connection_state,

@@ -23,12 +23,20 @@ class UniverseScanner:
         for symbol in symbols:
             try:
                 historical = self.market_stream.get_historical_cache(symbol, lookback=100)
-                
+                used_fallback = False
                 if len(historical) < 20:
+                    historical = await self._fetch_historical_fallback(symbol, min_bars=20, lookback=100)
+                    used_fallback = len(historical) >= 20
+
+                if len(historical) < 20:
+                    results[symbol] = self._empty_metrics(symbol)
                     continue
-                
+
                 closes = np.array([d['close'] for d in historical])
                 volumes = np.array([d['volume'] for d in historical])
+                if closes.size < 2 or np.mean(closes) <= 0:
+                    results[symbol] = self._empty_metrics(symbol)
+                    continue
                 
                 returns = np.diff(np.log(closes + 1e-10))
                 volatility = np.std(returns) * np.sqrt(252)
@@ -48,18 +56,72 @@ class UniverseScanner:
                     'momentum': float(momentum),
                     'volume': float(avg_volume),
                     'spread': float(avg_spread),
-                    'liquidity_score': float(liquidity_score)
+                    'liquidity_score': float(liquidity_score),
+                    'data_quality': 'fallback' if used_fallback else 'full',
                 }
                 
             except Exception as e:
                 logger.debug(f'Scan error for {symbol}: {e}')
-                continue
+                results[symbol] = self._empty_metrics(symbol)
         
         self.scan_results = results
         
-        logger.info(f'Scan complete: {len(results)}/{len(symbols)} assets analyzed')
-        
+        full_count = sum(1 for m in results.values() if m.get('data_quality') == 'full')
+        fallback_count = sum(1 for m in results.values() if m.get('data_quality') == 'fallback')
+        logger.info(
+            f'Scan complete: {len(results)}/{len(symbols)} assets analyzed '
+            f'({full_count} full, {fallback_count} fallback)'
+        )
+
         return results
+
+    @staticmethod
+    def _empty_metrics(symbol: str) -> Dict[str, Any]:
+        return {
+            'price': 0.0,
+            'volatility': 0.0,
+            'momentum': 0.0,
+            'volume': 0.0,
+            'spread': 1.0,
+            'liquidity_score': 0.0,
+            'data_quality': 'fallback',
+            'symbol': symbol,
+        }
+
+    async def _fetch_historical_fallback(self, symbol: str, min_bars: int = 20, lookback: int = 100) -> List[Dict[str, Any]]:
+        """
+        Backfill bars directly from broker adapters when local cache is still cold.
+        """
+        adapter = getattr(self.market_stream, "broker_adapter", None)
+        if adapter is None or not hasattr(adapter, "get_live_bars"):
+            return []
+
+        try:
+            bars = await adapter.get_live_bars(symbol, timeframe='1Min', limit=max(min_bars, lookback))
+        except Exception as e:
+            logger.debug(f'Fallback bars unavailable for {symbol}: {e}')
+            return []
+
+        normalized: List[Dict[str, Any]] = []
+        for row in bars or []:
+            try:
+                close = float(row.get('close', 0.0) or 0.0)
+                high = float(row.get('high', close) or close)
+                low = float(row.get('low', close) or close)
+                volume = float(row.get('volume', 0.0) or 0.0)
+                if close <= 0.0:
+                    continue
+                normalized.append(
+                    {
+                        'close': close,
+                        'high': max(high, close),
+                        'low': min(low, close),
+                        'volume': max(volume, 1.0),
+                    }
+                )
+            except Exception:
+                continue
+        return normalized[-lookback:]
 
     async def continuous_scanning(self, symbols: List[str]):
         '''Continuously scan universe at intervals'''

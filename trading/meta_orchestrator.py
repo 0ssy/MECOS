@@ -132,7 +132,12 @@ class MetaOrchestrator:
                 hold_score += confidence * weight
             total_weight += weight
 
-        consensus_confidence = (buy_score + sell_score) / total_weight if total_weight > 0 else 0.0
+        if total_weight > 0 and buy_score > sell_score:
+            consensus_confidence = buy_score / total_weight
+        elif total_weight > 0 and sell_score > buy_score:
+            consensus_confidence = sell_score / total_weight
+        else:
+            consensus_confidence = 0.0
         final_decision = "HOLD"
         if buy_score > sell_score and consensus_confidence >= TradingConfig.MIN_CONFIDENCE:
             final_decision = "BUY"

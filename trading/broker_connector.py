@@ -1,6 +1,9 @@
 import os
+import asyncio
+import logging
 import pandas as pd
 from typing import Dict, List, Any
+import yfinance as yf
 
 from loguru import logger
 from dotenv import load_dotenv
@@ -23,6 +26,7 @@ class BrokerConnector:
 
     def __init__(self):
         load_dotenv(override=True)
+        logging.getLogger("yfinance").setLevel(logging.ERROR)
 
         self.api_key = self._resolve_credential("ALPACA_API_KEY", "APCA_API_KEY_ID")
         self.secret_key = self._resolve_credential("ALPACA_SECRET_KEY", "APCA_API_SECRET_KEY")
@@ -53,6 +57,11 @@ class BrokerConnector:
         )
 
         self._validate_auth_or_retry_mode()
+        feed_mode = str(os.getenv("MECOS_ALPACA_STOCK_FEED", "auto")).strip().lower()
+        if feed_mode not in {"auto", "iex", "sip"}:
+            feed_mode = "auto"
+        self._alpaca_feed_mode = feed_mode
+        self._sip_entitlement_unavailable = False
         logger.info(f"BrokerConnector initialized | paper_mode={self.paper_mode}")
 
     @staticmethod
@@ -117,6 +126,10 @@ class BrokerConnector:
         timeframe: str = "1Hour",
         limit: int = 200
     ) -> List[Dict]:
+        symbol_token = self._normalize_symbol(symbol)
+        if not symbol_token:
+            logger.warning(f"Market data request with invalid symbol: {symbol}")
+            return []
 
         tf_map = {
             "1Min": TimeFrame(1, TimeFrameUnit.Minute),
@@ -137,28 +150,26 @@ class BrokerConnector:
         lookback_minutes = max(limit * bar_minutes[tf_key] * 3, bar_minutes[tf_key] * 100)
         start_utc = now_utc - pd.Timedelta(minutes=lookback_minutes)
 
-        request = StockBarsRequest(
-            symbol_or_symbols=symbol,
-            timeframe=tf_map[tf_key],
-            start=start_utc.to_pydatetime(),
-            end=now_utc.to_pydatetime(),
-            feed=DataFeed.IEX,
+        df = self._fetch_alpaca_bars(
+            symbol=symbol_token,
+            timeframe_key=tf_key,
+            start_utc=start_utc,
+            end_utc=now_utc,
             limit=limit,
+            tf_map=tf_map,
         )
-        try:
-            bars = self.data_client.get_stock_bars(request)
-        except APIError as exc:
-            logger.error(f"Failed to fetch market data for {symbol}: {exc}")
-            return []
-        if bars.df.empty:
-            logger.warning(f"No market data returned for {symbol} ({tf_key}).")
-            return []
-
-        df = bars.df.reset_index()
+        if df is None or df.empty:
+            df = await asyncio.to_thread(self._fetch_yfinance_bars, symbol_token, tf_key, limit)
+            if df is None or df.empty:
+                await asyncio.sleep(0.2)
+                df = await asyncio.to_thread(self._fetch_yfinance_bars, symbol_token, tf_key, limit)
+            if df is None or df.empty:
+                logger.warning(f"No market data returned for {symbol_token} ({tf_key}).")
+                return []
         required_columns = {"timestamp", "open", "high", "low", "close", "volume"}
         if not required_columns.issubset(set(df.columns)):
             logger.warning(
-                f"Unexpected bars schema for {symbol}: {list(df.columns)}"
+                f"Unexpected bars schema for {symbol_token}: {list(df.columns)}"
             )
             return []
 
@@ -178,6 +189,125 @@ class BrokerConnector:
             })
 
         return formatted[-limit:]
+
+    @staticmethod
+    def _normalize_symbol(symbol: str) -> str:
+        token = str(symbol or "").strip().upper().lstrip("$")
+        return token
+
+    def _candidate_stock_feeds(self) -> List[DataFeed]:
+        if self._alpaca_feed_mode == "iex":
+            return [DataFeed.IEX]
+        if self._alpaca_feed_mode == "sip":
+            return [DataFeed.SIP]
+        if self._sip_entitlement_unavailable:
+            return [DataFeed.IEX]
+        # Auto mode: prefer IEX first to avoid avoidable SIP entitlement errors.
+        return [DataFeed.IEX, DataFeed.SIP]
+
+    def _fetch_alpaca_bars(
+        self,
+        symbol: str,
+        timeframe_key: str,
+        start_utc: pd.Timestamp,
+        end_utc: pd.Timestamp,
+        limit: int,
+        tf_map: Dict[str, TimeFrame],
+    ) -> pd.DataFrame | None:
+        feeds = self._candidate_stock_feeds()
+        last_error: Exception | None = None
+        for feed in feeds:
+            request = StockBarsRequest(
+                symbol_or_symbols=symbol,
+                timeframe=tf_map[timeframe_key],
+                start=start_utc.to_pydatetime(),
+                end=end_utc.to_pydatetime(),
+                feed=feed,
+                limit=limit,
+            )
+            try:
+                bars = self.data_client.get_stock_bars(request)
+                if bars.df is not None and not bars.df.empty:
+                    if feed == DataFeed.IEX:
+                        logger.debug(f"Using IEX feed for {symbol}")
+                    return bars.df.reset_index()
+            except APIError as exc:
+                last_error = exc
+                error_text = str(exc)
+                if (
+                    feed == DataFeed.SIP
+                    and "subscription does not permit querying recent SIP data" in error_text
+                ):
+                    self._sip_entitlement_unavailable = True
+                    if self._alpaca_feed_mode == "auto":
+                        logger.info("Alpaca SIP entitlement unavailable; using IEX feed for subsequent requests.")
+                continue
+
+        if last_error is not None:
+            logger.debug(f"Alpaca bars unavailable for {symbol}: {last_error}")
+        return None
+
+    @staticmethod
+    def _fetch_yfinance_bars(symbol: str, timeframe_key: str, limit: int) -> pd.DataFrame | None:
+        interval_map = {
+            "1Min": ("1m", "5d"),
+            "5Min": ("5m", "30d"),
+            "15Min": ("15m", "60d"),
+            "1Hour": ("60m", "730d"),
+            "1Day": ("1d", "max"),
+        }
+        interval, period = interval_map.get(timeframe_key, ("60m", "730d"))
+        ticker_symbol = BrokerConnector._normalize_symbol(symbol)
+        if not ticker_symbol:
+            return None
+        if "/" in ticker_symbol:
+            left, right = ticker_symbol.split("/", 1)
+            if len(left) == 3 and len(right) == 3 and left.isalpha() and right.isalpha():
+                ticker_symbol = f"{left}{right}=X"
+        try:
+            history = yf.Ticker(ticker_symbol).history(
+                period=period,
+                interval=interval,
+                auto_adjust=False,
+                prepost=True,
+                raise_errors=True,
+            )
+            if history is None or history.empty:
+                return None
+            history = history.tail(max(5, int(limit))).reset_index()
+            history.columns = [str(c).lower() for c in history.columns]
+            rename_map = {}
+            if "datetime" in history.columns:
+                rename_map["datetime"] = "timestamp"
+            if "date" in history.columns:
+                rename_map["date"] = "timestamp"
+            if rename_map:
+                history = history.rename(columns=rename_map)
+            return history
+        except TypeError:
+            try:
+                history = yf.Ticker(ticker_symbol).history(
+                    period=period,
+                    interval=interval,
+                    auto_adjust=False,
+                    prepost=True,
+                )
+                if history is None or history.empty:
+                    return None
+                history = history.tail(max(5, int(limit))).reset_index()
+                history.columns = [str(c).lower() for c in history.columns]
+                rename_map = {}
+                if "datetime" in history.columns:
+                    rename_map["datetime"] = "timestamp"
+                if "date" in history.columns:
+                    rename_map["date"] = "timestamp"
+                if rename_map:
+                    history = history.rename(columns=rename_map)
+                return history
+            except Exception:
+                return None
+        except Exception:
+            return None
 
     async def place_order(
         self,

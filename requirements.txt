@@ -40,6 +40,8 @@ beautifulsoup4>=4.12
 mss>=9.0
 pytesseract>=0.3
 Pillow>=10.0
+pywinauto>=0.6.8
+watchdog>=4.0
 
 # ── LLM / AI ─────────────────────────────────────────────────────────────────
 openai>=1.30             # Used as OpenAI-compatible client for local Ollama

@@ -2,12 +2,15 @@ import asyncio
 import hashlib
 import hmac
 import os
+import socket
+import ssl
 import time
 from datetime import datetime
 from typing import Any, Awaitable, Callable, Dict, List
 from urllib.parse import urlencode
 
 import aiohttp
+from aiohttp.resolver import ThreadedResolver
 from dotenv import load_dotenv
 from loguru import logger
 
@@ -27,6 +30,17 @@ class BinanceAdapter(BrokerAdapter):
 
         if not self.api_key or not self.secret_key:
             raise RuntimeError('Missing Binance API credentials (BINANCE_API_KEY/BINANCE_SECRET_KEY).')
+
+    @staticmethod
+    def _ipv4_connector() -> aiohttp.TCPConnector:
+        # Some networks resolve Binance with NAT64 addresses that break websocket handshakes.
+        # Force IPv4 and use system DNS (ThreadedResolver) for both REST and websocket traffic.
+        # This avoids aiodns/c-ares "Could not contact DNS servers" errors on some networks.
+        return aiohttp.TCPConnector(
+            family=socket.AF_INET,
+            ssl=ssl.create_default_context(),
+            resolver=ThreadedResolver(),
+        )
 
     def _ws_candidates(self) -> List[str]:
         candidates = [self.ws_url, self.ws_fallback_url]
@@ -86,7 +100,7 @@ class BinanceAdapter(BrokerAdapter):
         final_params = self._signed_params(params) if signed else params
         url = f'{self.base_url}{path}'
 
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(connector=self._ipv4_connector()) as session:
             async with session.request(method.upper(), url, params=final_params, headers=headers, timeout=20) as resp:
                 text = await resp.text()
                 if resp.status >= 400:
@@ -182,7 +196,7 @@ class BinanceAdapter(BrokerAdapter):
         logger.info(f'Starting Binance quote stream for: {symbols}')
         connection_errors: List[str] = []
 
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(connector=self._ipv4_connector()) as session:
             for ws_base in self._ws_candidates():
                 ws_endpoint = f'{ws_base}/stream?streams={stream_path}'
                 try:
