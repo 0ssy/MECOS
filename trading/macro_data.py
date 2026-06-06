@@ -5,7 +5,12 @@ from typing import Any, Dict
 
 from loguru import logger
 import pandas as pd
-import pandas_datareader.data as web
+try:
+    import pandas_datareader.data as web
+    _PANDAS_DATAREADER_IMPORT_ERROR: Exception | None = None
+except Exception as exc:
+    web = None
+    _PANDAS_DATAREADER_IMPORT_ERROR = exc
 
 
 class MacroDataProvider:
@@ -62,6 +67,12 @@ class MacroDataProvider:
         cached = self._read_cache(key)
         if cached is not None:
             return cached
+        if web is None and _PANDAS_DATAREADER_IMPORT_ERROR is not None:
+            self._warn_once(
+                "macro-web-unavailable",
+                "pandas_datareader unavailable/incompatible; using direct FRED CSV fallback only: "
+                f"{_PANDAS_DATAREADER_IMPORT_ERROR}",
+            )
 
         try:
             fed_funds = self._fetch_fred("FEDFUNDS")
@@ -125,10 +136,12 @@ class MacroDataProvider:
 
     @staticmethod
     def _fetch_fred(series_id: str) -> Any:
-        try:
-            return web.DataReader(series_id, "fred")
-        except Exception:
-            return MacroDataProvider._fetch_fred_csv(series_id)
+        if web is not None:
+            try:
+                return web.DataReader(series_id, "fred")
+            except Exception:
+                pass
+        return MacroDataProvider._fetch_fred_csv(series_id)
 
     @staticmethod
     def _fetch_fred_csv(series_id: str) -> Any:
