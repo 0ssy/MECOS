@@ -139,7 +139,7 @@ class TradingAgent:
         self.reinforcement_learning_agent = _ReinforcementLearningProxyAgent(memory)
         self.market_making_agent = MarketMakingAgent(memory)
         self.persona_engine = PersonaEngine()
-        require_unanimous = os.getenv("MECOS_REQUIRE_UNANIMOUS", "false").strip().lower() == "true"
+        require_unanimous = False
         min_support = float(os.getenv("MECOS_CONSENSUS_MIN_SUPPORT", "0.67"))
         self.consensus_engine = ConsensusEngine(
             self.persona_engine.get_personas(),

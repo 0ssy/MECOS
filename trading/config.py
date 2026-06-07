@@ -8,8 +8,8 @@ class TradingConfig:
 
     # --- Meta-Orchestrator ---
     # Minimum calibrated confidence to act on a signal.
-    # 0.45 = only signals where the ensemble genuinely agrees pass through.
-    MIN_CONFIDENCE = 0.45
+    # 0.30 = allow valid sideways-regime signals to pass.
+    MIN_CONFIDENCE = 0.30
 
     # Minimum directional edge from QuantSignalFusion to execute a trade.
     # Edge = (buy_score - sell_score) / total_score. Must exceed costs.

@@ -5,6 +5,7 @@ from datetime import datetime
 import numpy as np
 from trading.price_streamer import stream_binance_prices
 
+
 class MarketDataStream:
     def __init__(self, broker_adapter=None):
         self.subscribers = {}
@@ -26,6 +27,10 @@ class MarketDataStream:
         }
         logger.info('Market Data Stream initialized')
 
+    # ------------------------------------------------------------------ #
+    #  Validation                                                          #
+    # ------------------------------------------------------------------ #
+
     def _parse_ts(self, ts_value):
         if not ts_value:
             return None
@@ -40,7 +45,6 @@ class MarketDataStream:
             prev = self._last_timestamp_by_symbol.get(symbol)
             if prev is not None:
                 lag_seconds = (prev - ts).total_seconds()
-                # Quote streams can arrive slightly out of order; reject only materially stale data.
                 if lag_seconds > 2.0:
                     self.integrity_rejections['stale_or_duplicate'] += 1
                     return False
@@ -61,6 +65,10 @@ class MarketDataStream:
 
         return True
 
+    # ------------------------------------------------------------------ #
+    #  Subscription                                                        #
+    # ------------------------------------------------------------------ #
+
     def subscribe(self, symbol: str, callback: Callable):
         if symbol not in self.subscribers:
             self.subscribers[symbol] = []
@@ -75,6 +83,10 @@ class MarketDataStream:
     def has_live_adapter(self) -> bool:
         return self.broker_adapter is not None
 
+    # ------------------------------------------------------------------ #
+    #  Data emission                                                       #
+    # ------------------------------------------------------------------ #
+
     async def emit_market_data(self, symbol: str, data: Dict[str, Any]):
         if not self._validate_tick(symbol, data):
             logger.debug(f'Data integrity reject for {symbol}: {data}')
@@ -82,12 +94,12 @@ class MarketDataStream:
 
         if symbol not in self.market_data_cache:
             self.market_data_cache[symbol] = []
-        
+
         self.market_data_cache[symbol].append(data)
-        
+
         if len(self.market_data_cache[symbol]) > 1000:
             self.market_data_cache[symbol] = self.market_data_cache[symbol][-1000:]
-        
+
         if symbol in self.subscribers:
             for callback in self.subscribers[symbol]:
                 try:
@@ -100,69 +112,86 @@ class MarketDataStream:
             return []
         return self.market_data_cache[symbol][-lookback:]
 
-    async def simulate_market_stream(self, symbols: List[str]):
-        self.running = True
-        self.live_mode = False
-        logger.info(f'Starting simulated market stream for {symbols}')
-        
-        prices = {sym: 100.0 for sym in symbols}
-        
-        while self.running:
-            for symbol in symbols:
-                drift = np.random.normal(0, 0.0002)
-                vol = np.random.normal(0, 0.001)
+    # ------------------------------------------------------------------ #
+    #  Cache pre-seeding                                                   #
+    # ------------------------------------------------------------------ #
 
-                prev_price = prices[symbol]
-                prices[symbol] = prices[symbol] * (1 + drift + vol)
-                prices[symbol] = max(prices[symbol], 1.0)
+    async def preseed_cache(self, symbols: List[str], lookback: int = 100):
+        """
+        Pre-fill the historical cache with yfinance data on startup.
+        Eliminates the warmup wait — signals fire from the first tick
+        instead of waiting for 35-50 live bars to accumulate.
+        """
+        import yfinance as yf
 
-                # Simulate open as previous close, or same as close for first tick
-                open_price = prev_price if prev_price else prices[symbol]
+        CRYPTO_BASES = {
+            "BTC", "ETH", "SOL", "AVAX", "LINK", "DOGE",
+            "ADA", "BNB", "XRP", "DOT", "MATIC", "LTC",
+        }
 
-                tick = {
-                    'symbol': symbol,
-                    'open': float(open_price),
-                    'close': float(prices[symbol]),
-                    'high': float(max(open_price, prices[symbol]) * 1.001),
-                    'low': float(min(open_price, prices[symbol]) * 0.999),
-                    'volume': float(np.random.randint(1000, 10000)),
-                    'timestamp': datetime.now().isoformat()
-                }
+        logger.info(f"Pre-seeding cache for {len(symbols)} symbols...")
 
-                await self.emit_market_data(symbol, tick)
+        for symbol in symbols:
+            try:
+                # Convert symbol to yfinance format
+                if "/" in symbol:
+                    base, quote = symbol.split("/", 1)
+                    if base.upper() in CRYPTO_BASES:
+                        yf_symbol = f"{base}-{quote}"       # BTC/USD -> BTC-USD
+                    else:
+                        yf_symbol = f"{base}{quote}=X"      # EUR/USD -> EURUSD=X
+                else:
+                    yf_symbol = symbol                      # AAPL -> AAPL
 
-            await asyncio.sleep(1)
+                ticker = yf.Ticker(yf_symbol)
 
-    async def _router_loop(self, symbols: List[str]):
-        while self.running:
-            for symbol in symbols:
-                queue = self.quote_queues.get(symbol)
-                if queue is None:
+                # Try 5-minute bars first (more granular, better for signals)
+                df = ticker.history(period="5d", interval="5m", auto_adjust=True)
+
+                # Fall back to hourly if 5m not available
+                if df.empty:
+                    df = ticker.history(period="30d", interval="1h", auto_adjust=True)
+
+                if df.empty:
+                    logger.warning(f"Could not preseed {symbol} ({yf_symbol})")
                     continue
 
-                while not queue.empty():
-                    tick = await queue.get()
-                    await self.emit_market_data(symbol, tick)
+                bars = []
+                for ts, row in df.iterrows():
+                    close = float(row.get("Close", 0) or 0)
+                    if close <= 0:
+                        continue
+                    bars.append({
+                        "symbol":    symbol,
+                        "open":      float(row.get("Open",   close) or close),
+                        "close":     close,
+                        "high":      float(row.get("High",   close) or close),
+                        "low":       float(row.get("Low",    close) or close),
+                        "volume":    float(row.get("Volume", 1)     or 1),
+                        "timestamp": str(ts),
+                    })
 
-            await asyncio.sleep(0.01)
+                if bars:
+                    # Directly populate cache — bypass validate_tick
+                    # since yfinance data can have older timestamps
+                    self.market_data_cache[symbol] = bars[-lookback:]
+                    logger.info(
+                        f"Pre-seeded {symbol}: {len(self.market_data_cache[symbol])} bars "
+                        f"(latest close: {bars[-1]['close']:.4f})"
+                    )
 
-    async def _heartbeat_loop(self):
-        while self.running and self.live_mode:
-            logger.debug('Market data heartbeat: live router active')
-            await asyncio.sleep(self.heartbeat_interval)
+            except Exception as e:
+                logger.warning(f"Preseed failed for {symbol}: {e}")
 
-    async def _quote_callback(self, symbol: str, tick: Dict[str, Any]):
-        queue = self.quote_queues.setdefault(symbol, asyncio.Queue(maxsize=1000))
+        seeded = sum(1 for s in symbols if s in self.market_data_cache and self.market_data_cache[s])
+        logger.info(f"Cache pre-seeding complete: {seeded}/{len(symbols)} symbols ready")
 
-        if queue.full():
-            try:
-                queue.get_nowait()
-            except asyncio.QueueEmpty:
-                pass
-
-        queue.put_nowait(tick)
+    # ------------------------------------------------------------------ #
+    #  Live streaming                                                      #
+    # ------------------------------------------------------------------ #
 
     async def stream_live_market_data(self, symbols: List[str]):
+        """Stream live market data from broker adapters (Alpaca + Binance)."""
         if not self.broker_adapter:
             raise RuntimeError('No broker adapter configured; live market data is required.')
 
@@ -172,8 +201,8 @@ class MarketDataStream:
         for symbol in symbols:
             self.quote_queues.setdefault(symbol, asyncio.Queue(maxsize=1000))
 
-        self._router_task = asyncio.create_task(self._router_loop(symbols))
-        self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
+        self._router_task     = asyncio.create_task(self._router_loop(symbols))
+        self._heartbeat_task  = asyncio.create_task(self._heartbeat_loop())
 
         attempt = 0
         while self.running and attempt < self.max_reconnect_attempts:
@@ -194,7 +223,9 @@ class MarketDataStream:
             except Exception as e:
                 attempt += 1
                 backoff = min(2 ** attempt, 60)
-                logger.error(f'Live stream error (attempt {attempt}/{self.max_reconnect_attempts}): {e}')
+                logger.error(
+                    f'Live stream error (attempt {attempt}/{self.max_reconnect_attempts}): {e}'
+                )
                 await asyncio.sleep(backoff)
 
         if attempt >= self.max_reconnect_attempts:
@@ -207,25 +238,25 @@ class MarketDataStream:
 
         self.running = True
         self.live_mode = True
+
         normalized_map: Dict[str, str] = {}
         for symbol in symbols:
             token = str(symbol).upper().replace("/", "").replace("-", "")
-            if not token:
-                continue
-            normalized_map[token] = str(symbol)
+            if token:
+                normalized_map[token] = str(symbol)
 
         async def _public_callback(tick: Dict[str, Any]):
-            raw_symbol = str(tick.get("symbol", "")).upper()
+            raw_symbol      = str(tick.get("symbol", "")).upper()
             canonical_symbol = normalized_map.get(raw_symbol, raw_symbol)
-            price = float(tick.get("price", 0.0) or 0.0)
+            price  = float(tick.get("price",  0.0) or 0.0)
             volume = float(tick.get("volume", 0.0) or 0.0)
             bar = {
-                "symbol": canonical_symbol,
-                "open": price,
-                "close": price,
-                "high": price,
-                "low": price,
-                "volume": max(volume, 1.0),
+                "symbol":    canonical_symbol,
+                "open":      price,
+                "close":     price,
+                "high":      price,
+                "low":       price,
+                "volume":    max(volume, 1.0),
                 "timestamp": datetime.now().isoformat(),
             }
             await self.emit_market_data(canonical_symbol, bar)
@@ -233,6 +264,7 @@ class MarketDataStream:
         stream_symbols = list(normalized_map.keys())
         if not stream_symbols:
             raise ValueError('No valid symbols for Binance public stream.')
+
         logger.info(f'Starting Binance public stream for {len(stream_symbols)} symbols')
         self._public_stream_task = asyncio.current_task()
         try:
@@ -240,8 +272,75 @@ class MarketDataStream:
         finally:
             self._public_stream_task = None
 
+    # ------------------------------------------------------------------ #
+    #  Simulated stream (fallback / testing only)                          #
+    # ------------------------------------------------------------------ #
+
+    async def simulate_market_stream(self, symbols: List[str]):
+        """Simulated stream for testing. Not used in live trading."""
+        self.running = True
+        self.live_mode = False
+        logger.info(f'Starting simulated market stream for {symbols}')
+
+        prices = {sym: 100.0 for sym in symbols}
+
+        while self.running:
+            for symbol in symbols:
+                drift = np.random.normal(0, 0.0002)
+                vol   = np.random.normal(0, 0.001)
+
+                prev_price      = prices[symbol]
+                prices[symbol]  = max(prices[symbol] * (1 + drift + vol), 1.0)
+                open_price      = prev_price
+
+                tick = {
+                    'symbol':    symbol,
+                    'open':      float(open_price),
+                    'close':     float(prices[symbol]),
+                    'high':      float(max(open_price, prices[symbol]) * 1.001),
+                    'low':       float(min(open_price, prices[symbol]) * 0.999),
+                    'volume':    float(np.random.randint(1000, 10000)),
+                    'timestamp': datetime.now().isoformat(),
+                }
+                await self.emit_market_data(symbol, tick)
+
+            await asyncio.sleep(1)
+
+    # ------------------------------------------------------------------ #
+    #  Internal loops                                                      #
+    # ------------------------------------------------------------------ #
+
+    async def _router_loop(self, symbols: List[str]):
+        while self.running:
+            for symbol in symbols:
+                queue = self.quote_queues.get(symbol)
+                if queue is None:
+                    continue
+                while not queue.empty():
+                    tick = await queue.get()
+                    await self.emit_market_data(symbol, tick)
+            await asyncio.sleep(0.01)
+
+    async def _heartbeat_loop(self):
+        while self.running and self.live_mode:
+            logger.debug('Market data heartbeat: live router active')
+            await asyncio.sleep(self.heartbeat_interval)
+
+    async def _quote_callback(self, symbol: str, tick: Dict[str, Any]):
+        queue = self.quote_queues.setdefault(symbol, asyncio.Queue(maxsize=1000))
+        if queue.full():
+            try:
+                queue.get_nowait()
+            except asyncio.QueueEmpty:
+                pass
+        queue.put_nowait(tick)
+
+    # ------------------------------------------------------------------ #
+    #  Stop                                                                #
+    # ------------------------------------------------------------------ #
+
     def stop(self):
-        self.running = False
+        self.running  = False
         self.live_mode = False
 
         if self._router_task:
@@ -251,8 +350,9 @@ class MarketDataStream:
         if self._heartbeat_task:
             self._heartbeat_task.cancel()
             self._heartbeat_task = None
+
         if self._public_stream_task:
             self._public_stream_task.cancel()
             self._public_stream_task = None
-        logger.info('Market stream stopped')
 
+        logger.info('Market stream stopped')

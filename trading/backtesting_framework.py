@@ -3,6 +3,7 @@ from typing import Dict, List, Any
 from loguru import logger
 
 
+
 class BacktestingFramework:
     def __init__(self, memory):
         self.memory = memory

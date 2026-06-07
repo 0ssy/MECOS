@@ -31460,6 +31460,4176 @@ graph [
     label "89%"
     added "2026-06-06T19:12:48.342786"
   ]
+  node [
+    id 6292
+    label "bcis"
+    added "2026-06-06T19:22:56.753068"
+  ]
+  node [
+    id 6293
+    label "often directed at researching"
+    added "2026-06-06T19:22:56.753128"
+  ]
+  node [
+    id 6294
+    label "often conceptualized as a human"
+    added "2026-06-06T19:22:56.753167"
+  ]
+  node [
+    id 6295
+    label "brain computer interfaces"
+    added "2026-06-06T19:22:56.909274"
+  ]
+  node [
+    id 6296
+    label "bmi"
+    added "2026-06-06T19:22:56.909328"
+  ]
+  node [
+    id 6297
+    label "bci"
+    added "2026-06-06T19:22:56.909359"
+  ]
+  node [
+    id 6298
+    label "simulation"
+    added "2026-06-06T19:22:56.947061"
+  ]
+  node [
+    id 6299
+    label "mind uploading"
+    added "2026-06-06T19:22:56.947131"
+  ]
+  node [
+    id 6300
+    label "hypothetical process of whole brain emul"
+    added "2026-06-06T19:22:56.947147"
+  ]
+  node [
+    id 6301
+    label "ation in which a brain scan"
+    added "2026-06-06T19:22:56.947178"
+  ]
+  node [
+    id 6302
+    label "used to completely emulate a person"
+    added "2026-06-06T19:22:56.947192"
+  ]
+  node [
+    id 6303
+    label "brain interface"
+    added "2026-06-06T19:22:57.111025"
+  ]
+  node [
+    id 6304
+    label "direct communication pathway between the"
+    added "2026-06-06T19:22:57.111064"
+  ]
+  node [
+    id 6305
+    label "the overall process"
+    added "2026-06-06T19:33:06.210651"
+  ]
+  node [
+    id 6306
+    label "called direct air carbon capture and seq"
+    added "2026-06-06T19:33:06.210708"
+  ]
+  node [
+    id 6307
+    label "systems that engage in such a process"
+    added "2026-06-06T19:33:06.210745"
+  ]
+  node [
+    id 6308
+    label "referred to as negative emissions techno"
+    added "2026-06-06T19:33:06.210753"
+  ]
+  node [
+    id 6309
+    label "carbon capture technology"
+    added "2026-06-06T19:33:06.351136"
+  ]
+  node [
+    id 6310
+    label "dac"
+    added "2026-06-06T19:33:06.351175"
+  ]
+  node [
+    id 6311
+    label "co2"
+    added "2026-06-06T19:33:06.351210"
+  ]
+  node [
+    id 6312
+    label "daccs"
+    added "2026-06-06T19:33:06.351238"
+  ]
+  node [
+    id 6313
+    label "dustrial installations or natural sources"
+    added "2026-06-06T19:33:06.399408"
+  ]
+  node [
+    id 6314
+    label "separated before it is released into the"
+    added "2026-06-06T19:33:06.399448"
+  ]
+  node [
+    id 6315
+    label "uch as a natural gas processing plant and"
+    added "2026-06-06T19:33:06.399481"
+  ]
+  node [
+    id 6316
+    label "typically stored in a deep geological fo"
+    added "2026-06-06T19:33:06.399493"
+  ]
+  node [
+    id 6317
+    label "captured annually"
+    added "2026-06-06T19:33:06.399520"
+  ]
+  node [
+    id 6318
+    label "used for enhanced oil recovery"
+    added "2026-06-06T19:33:06.399532"
+  ]
+  node [
+    id 6319
+    label "around 80%"
+    added "2026-06-06T19:33:06.546713"
+  ]
+  node [
+    id 6320
+    label "tonnes"
+    added "2026-06-06T19:33:06.593318"
+  ]
+  node [
+    id 6321
+    label "ccs"
+    added "2026-06-06T19:33:06.593338"
+  ]
+  node [
+    id 6322
+    label "thousandth"
+    added "2026-06-06T19:33:06.593346"
+  ]
+  node [
+    id 6323
+    label "per year capacity of ccs"
+    added "2026-06-06T19:33:06.593361"
+  ]
+  node [
+    id 6324
+    label "in operation with"
+    added "2026-06-06T19:33:06.593370"
+  ]
+  node [
+    id 6325
+    label "the global ccs institute"
+    added "2026-06-06T19:33:06.753895"
+  ]
+  node [
+    id 6326
+    label "some 40 million tons"
+    added "2026-06-06T19:33:06.753967"
+  ]
+  node [
+    id 6327
+    label "50 million tons"
+    added "2026-06-06T19:33:06.754005"
+  ]
+  node [
+    id 6328
+    label "about 38 billion tonnes"
+    added "2026-06-06T19:33:06.754029"
+  ]
+  node [
+    id 6329
+    label "stock markets equities and society"
+    added "2026-06-06T19:53:26.599009"
+  ]
+  node [
+    id 6330
+    label "row definition of supply chain management"
+    added "2026-06-06T20:03:35.556922"
+  ]
+  node [
+    id 6331
+    label "the mission of the organization"
+    added "2026-06-06T20:03:35.792974"
+  ]
+  node [
+    id 6332
+    label "to advance end"
+    added "2026-06-06T20:03:35.793028"
+  ]
+  node [
+    id 6333
+    label "supply chain logistics and society"
+    added "2026-06-06T20:03:35.990070"
+  ]
+  node [
+    id 6334
+    label "the association for supply chain management"
+    added "2026-06-06T20:03:35.990121"
+  ]
+  node [
+    id 6335
+    label "the &#34;american production and"
+    added "2026-06-06T20:03:35.990186"
+  ]
+  node [
+    id 6336
+    label "inventory control society"
+    added "2026-06-06T20:03:35.990217"
+  ]
+  node [
+    id 6337
+    label "apics"
+    added "2026-06-06T20:03:35.990255"
+  ]
+  node [
+    id 6338
+    label "the supply chain council"
+    added "2026-06-06T20:03:35.990285"
+  ]
+  node [
+    id 6339
+    label "the american society of transp"
+    added "2026-06-06T20:03:35.990343"
+  ]
+  node [
+    id 6340
+    label "marine engineering ships and society"
+    added "2026-06-06T20:13:44.190061"
+  ]
+  node [
+    id 6341
+    label "society"
+    added "2026-06-06T20:13:44.502824"
+  ]
+  node [
+    id 6342
+    label "and professionals amongst its members and"
+    added "2026-06-06T20:13:44.502881"
+  ]
+  node [
+    id 6343
+    label "dedicated to advancing the art"
+    added "2026-06-06T20:13:44.502894"
+  ]
+  node [
+    id 6344
+    label "the society"
+    added "2026-06-06T20:13:44.502919"
+  ]
+  node [
+    id 6345
+    label "all types of engineers and professionals"
+    added "2026-06-06T20:13:44.502930"
+  ]
+  node [
+    id 6346
+    label "society of naval architects"
+    added "2026-06-06T20:13:44.690078"
+  ]
+  node [
+    id 6347
+    label "marine engineers"
+    added "2026-06-06T20:13:44.690144"
+  ]
+  node [
+    id 6348
+    label "the society of naval architects"
+    added "2026-06-06T20:13:44.690175"
+  ]
+  node [
+    id 6349
+    label "policies"
+    added "2026-06-06T20:23:53.434216"
+  ]
+  node [
+    id 6350
+    label "public policy"
+    added "2026-06-06T20:23:53.434259"
+  ]
+  node [
+    id 6351
+    label "n institutionalized proposal or a decide"
+    added "2026-06-06T20:23:53.434266"
+  ]
+  node [
+    id 6352
+    label "the implementation of public policy"
+    added "2026-06-06T20:23:53.434281"
+  ]
+  node [
+    id 6353
+    label "known as public administration"
+    added "2026-06-06T20:23:53.434290"
+  ]
+  node [
+    id 6354
+    label "institutions"
+    added "2026-06-06T20:23:53.669306"
+  ]
+  node [
+    id 6355
+    label "affairs"
+    added "2026-06-06T20:23:53.669351"
+  ]
+  node [
+    id 6356
+    label "good governance"
+    added "2026-06-06T20:23:53.669395"
+  ]
+  node [
+    id 6357
+    label "process of measuring how public institut"
+    added "2026-06-06T20:23:53.669407"
+  ]
+  node [
+    id 6358
+    label "making and the process by which decisions"
+    added "2026-06-06T20:23:53.669431"
+  ]
+  node [
+    id 6359
+    label "implemented"
+    added "2026-06-06T20:23:53.669443"
+  ]
+  node [
+    id 6360
+    label "sociology society culture and society"
+    added "2026-06-06T20:34:02.387418"
+  ]
+  node [
+    id 6361
+    label "guilt"
+    added "2026-06-06T20:34:02.640213"
+  ]
+  node [
+    id 6362
+    label "spectrum"
+    added "2026-06-06T20:34:02.640266"
+  ]
+  node [
+    id 6363
+    label "the differences can apply to how behavior"
+    added "2026-06-06T20:34:02.640311"
+  ]
+  node [
+    id 6364
+    label "governed with respect to government laws"
+    added "2026-06-06T20:34:02.640334"
+  ]
+  node [
+    id 6365
+    label "this classification"
+    added "2026-06-06T20:34:02.640361"
+  ]
+  node [
+    id 6366
+    label "pplied especially to what anthropologist"
+    added "2026-06-06T20:34:02.640372"
+  ]
+  node [
+    id 6367
+    label "ruth benedict"
+    added "2026-06-06T20:34:02.856879"
+  ]
+  node [
+    id 6368
+    label "instances"
+    added "2026-06-06T20:44:12.154192"
+  ]
+  node [
+    id 6369
+    label "a commodity"
+    added "2026-06-06T20:44:12.154259"
+  ]
+  node [
+    id 6370
+    label "n economic good"
+    added "2026-06-06T20:44:12.154271"
+  ]
+  node [
+    id 6371
+    label "commodity fetishism"
+    added "2026-06-06T20:44:12.342703"
+  ]
+  node [
+    id 6372
+    label "belief that social aspects of economic g"
+    added "2026-06-06T20:44:12.342752"
+  ]
+  node [
+    id 6373
+    label "oods"
+    added "2026-06-06T20:44:12.342784"
+  ]
+  node [
+    id 6374
+    label "inherent to them"
+    added "2026-06-06T20:44:12.342808"
+  ]
+  node [
+    id 6375
+    label "n which goods and their underlying labour"
+    added "2026-06-06T20:44:12.342832"
+  ]
+  node [
+    id 6376
+    label "exchanged"
+    added "2026-06-06T20:44:12.342844"
+  ]
+  node [
+    id 6377
+    label "wages and rent"
+    added "2026-06-06T20:44:12.342869"
+  ]
+  node [
+    id 6378
+    label "reified while people who determine them"
+    added "2026-06-06T20:44:12.342881"
+  ]
+  node [
+    id 6379
+    label "crucial to karl marx"
+    added "2026-06-06T20:44:12.342905"
+  ]
+  node [
+    id 6380
+    label "commodities trading gold oil and society"
+    added "2026-06-06T20:44:12.533451"
+  ]
+  node [
+    id 6381
+    label "karl marx's"
+    added "2026-06-06T20:44:12.533519"
+  ]
+  node [
+    id 6382
+    label "the speculative society"
+    added "2026-06-06T20:54:21.080359"
+  ]
+  node [
+    id 6383
+    label "scottish enlightenment society dedicated"
+    added "2026-06-06T20:54:21.080390"
+  ]
+  node [
+    id 6384
+    label "the formal purpose of the society"
+    added "2026-06-06T20:54:21.080416"
+  ]
+  node [
+    id 6385
+    label "s a place for social interchange and for"
+    added "2026-06-06T20:54:21.080425"
+  ]
+  node [
+    id 6386
+    label "public speaking presentation and society"
+    added "2026-06-06T20:54:21.236072"
+  ]
+  node [
+    id 6387
+    label "scottish"
+    added "2026-06-06T20:54:21.236159"
+  ]
+  node [
+    id 6388
+    label "1764"
+    added "2026-06-06T20:54:21.236192"
+  ]
+  node [
+    id 6389
+    label "edinburgh university"
+    added "2026-06-06T20:54:21.236219"
+  ]
+  node [
+    id 6390
+    label "old college"
+    added "2026-06-06T20:54:21.236272"
+  ]
+  node [
+    id 6391
+    label "lin"
+    added "2026-06-06T20:54:21.236307"
+  ]
+  node [
+    id 6392
+    label "a humorist"
+    added "2026-06-06T20:54:21.256738"
+  ]
+  node [
+    id 6393
+    label "n intellectual who uses irony or wit in"
+    added "2026-06-06T20:54:21.256763"
+  ]
+  node [
+    id 6394
+    label "a raconteur"
+    added "2026-06-06T20:54:21.256784"
+  ]
+  node [
+    id 6395
+    label "one who tells anecdotes in a skillful an"
+    added "2026-06-06T20:54:21.256792"
+  ]
+  node [
+    id 6396
+    label "a humorist is an intellectual who"
+    added "2026-06-06T20:54:21.256807"
+  ]
+  node [
+    id 6397
+    label "irony or wit in writing and speaking"
+    added "2026-06-06T20:54:21.256815"
+  ]
+  node [
+    id 6398
+    label "investment analysis valuation and society"
+    added "2026-06-06T21:04:30.159883"
+  ]
+  node [
+    id 6399
+    label "estate transactions"
+    added "2026-06-06T21:04:30.502007"
+  ]
+  node [
+    id 6400
+    label "appraisals"
+    added "2026-06-06T21:04:30.502045"
+  ]
+  node [
+    id 6401
+    label "property valuation or land valuation"
+    added "2026-06-06T21:04:30.502077"
+  ]
+  node [
+    id 6402
+    label "process of assessing the value of real p"
+    added "2026-06-06T21:04:30.502090"
+  ]
+  node [
+    id 6403
+    label "the appraisal"
+    added "2026-06-06T21:04:30.502115"
+  ]
+  node [
+    id 6404
+    label "conducted by a licensed appraiser"
+    added "2026-06-06T21:04:30.502128"
+  ]
+  node [
+    id 6405
+    label "list of stock market crashes and bear ma"
+    added "2026-06-06T21:14:38.897978"
+  ]
+  node [
+    id 6406
+    label "stock market crashes"
+    added "2026-06-06T21:14:38.898016"
+  ]
+  node [
+    id 6407
+    label "quick and brief"
+    added "2026-06-06T21:14:38.898024"
+  ]
+  node [
+    id 6408
+    label "while bear markets"
+    added "2026-06-06T21:14:38.898038"
+  ]
+  node [
+    id 6409
+    label "slow and prolonged"
+    added "2026-06-06T21:14:38.898045"
+  ]
+  node [
+    id 6410
+    label "the difference between the two"
+    added "2026-06-06T21:14:38.898058"
+  ]
+  node [
+    id 6411
+    label "speed and length"
+    added "2026-06-06T21:14:38.898064"
+  ]
+  node [
+    id 6412
+    label "stock markets equities in emerging markets"
+    added "2026-06-06T21:14:39.327179"
+  ]
+  node [
+    id 6413
+    label "markets tradeweb inc."
+    added "2026-06-06T21:14:39.552051"
+  ]
+  node [
+    id 6414
+    label "trading platforms"
+    added "2026-06-06T21:14:39.552090"
+  ]
+  node [
+    id 6415
+    label "s revenue"
+    added "2026-06-06T21:14:39.552120"
+  ]
+  node [
+    id 6416
+    label "from transaction fees and commissions an"
+    added "2026-06-06T21:14:39.552131"
+  ]
+  node [
+    id 6417
+    label "tradeweb markets inc."
+    added "2026-06-06T21:14:39.765834"
+  ]
+  node [
+    id 6418
+    label "over 3,000"
+    added "2026-06-06T21:14:39.765915"
+  ]
+  node [
+    id 6419
+    label "83%"
+    added "2026-06-06T21:14:39.765957"
+  ]
+  node [
+    id 6420
+    label "17%"
+    added "2026-06-06T21:14:39.765981"
+  ]
+  node [
+    id 6421
+    label "52%"
+    added "2026-06-06T21:14:39.766005"
+  ]
+  node [
+    id 6422
+    label "27%"
+    added "2026-06-06T21:14:39.766027"
+  ]
+  node [
+    id 6423
+    label "deutsche post"
+    added "2026-06-06T21:24:49.606703"
+  ]
+  node [
+    id 6424
+    label "employees"
+    added "2026-06-06T21:24:49.606730"
+  ]
+  node [
+    id 6425
+    label "dhl supply chain"
+    added "2026-06-06T21:24:49.606750"
+  ]
+  node [
+    id 6426
+    label "division of deutsche post dhl and is aff"
+    added "2026-06-06T21:24:49.606757"
+  ]
+  node [
+    id 6427
+    label "supply chain logistics in emerging markets"
+    added "2026-06-06T21:24:49.743023"
+  ]
+  node [
+    id 6428
+    label "supply chain"
+    added "2026-06-06T21:24:49.743149"
+  ]
+  node [
+    id 6429
+    label "dhl"
+    added "2026-06-06T21:24:49.743212"
+  ]
+  node [
+    id 6430
+    label "bonn"
+    added "2026-06-06T21:24:49.743238"
+  ]
+  node [
+    id 6431
+    label "510,000"
+    added "2026-06-06T21:24:49.743262"
+  ]
+  node [
+    id 6432
+    label "sae international"
+    added "2026-06-06T21:34:58.840035"
+  ]
+  node [
+    id 6433
+    label "global professional association and stan"
+    added "2026-06-06T21:34:58.840046"
+  ]
+  node [
+    id 6434
+    label "automotive engineering vehicles and society"
+    added "2026-06-06T21:34:59.087696"
+  ]
+  node [
+    id 6435
+    label "warrendale"
+    added "2026-06-06T21:34:59.087770"
+  ]
+  node [
+    id 6436
+    label "pennsylvania"
+    added "2026-06-06T21:34:59.087804"
+  ]
+  node [
+    id 6437
+    label "the society of automotive engineers"
+    added "2026-06-06T21:34:59.087849"
+  ]
+  node [
+    id 6438
+    label "vehicle dynamics"
+    added "2026-06-06T21:34:59.121161"
+  ]
+  node [
+    id 6439
+    label "study of vehicle motion"
+    added "2026-06-06T21:34:59.121187"
+  ]
+  node [
+    id 6440
+    label "part of engineering primarily based on c"
+    added "2026-06-06T21:34:59.121207"
+  ]
+  node [
+    id 6441
+    label "vehicle"
+    added "2026-06-06T21:34:59.294349"
+  ]
+  node [
+    id 6442
+    label "practitioners of accounting"
+    added "2026-06-06T21:45:07.289066"
+  ]
+  node [
+    id 6443
+    label "known as accountants"
+    added "2026-06-06T21:45:07.289100"
+  ]
+  node [
+    id 6444
+    label "a bank statement"
+    added "2026-06-06T21:45:07.773647"
+  ]
+  node [
+    id 6445
+    label "n official summary of financial transact"
+    added "2026-06-06T21:45:07.773677"
+  ]
+  node [
+    id 6446
+    label "such statements"
+    added "2026-06-06T21:45:07.773698"
+  ]
+  node [
+    id 6447
+    label "prepared by the financial institution"
+    added "2026-06-06T21:45:07.773705"
+  ]
+  node [
+    id 6448
+    label "such as how much"
+    added "2026-06-06T21:45:07.773719"
+  ]
+  node [
+    id 6449
+    label "payable by a certain date"
+    added "2026-06-06T21:45:07.773727"
+  ]
+  node [
+    id 6450
+    label "the start date of the statement period"
+    added "2026-06-06T21:45:07.773740"
+  ]
+  node [
+    id 6451
+    label "usually the day after the end of the pre"
+    added "2026-06-06T21:45:07.773747"
+  ]
+  node [
+    id 6452
+    label "accounting financial statements and society"
+    added "2026-06-06T21:45:07.948907"
+  ]
+  node [
+    id 6453
+    label "bank"
+    added "2026-06-06T21:45:07.948954"
+  ]
+  node [
+    id 6454
+    label "the day"
+    added "2026-06-06T21:45:07.948990"
+  ]
+  node [
+    id 6455
+    label "income statement"
+    added "2026-06-06T21:45:07.999014"
+  ]
+  node [
+    id 6456
+    label "financial statement analysis"
+    added "2026-06-06T21:45:07.999090"
+  ]
+  node [
+    id 6457
+    label "process of reviewing and analyzing a com"
+    added "2026-06-06T21:45:07.999120"
+  ]
+  node [
+    id 6458
+    label "method or process involving specific tec"
+    added "2026-06-06T21:45:07.999152"
+  ]
+  node [
+    id 6459
+    label "anthropology human civilization and society"
+    added "2026-06-06T21:55:16.985889"
+  ]
+  node [
+    id 6460
+    label "causes"
+    added "2026-06-06T21:55:17.039594"
+  ]
+  node [
+    id 6461
+    label "catastrophe"
+    added "2026-06-06T21:55:17.039630"
+  ]
+  node [
+    id 6462
+    label "societal collapse"
+    added "2026-06-06T21:55:17.039654"
+  ]
+  node [
+    id 6463
+    label "fall of a complex human society characte"
+    added "2026-06-06T21:55:17.039662"
+  ]
+  node [
+    id 6464
+    label "neolithic revolution"
+    added "2026-06-06T21:55:17.282831"
+  ]
+  node [
+    id 6465
+    label "300,000 years ago"
+    added "2026-06-06T21:55:17.467690"
+  ]
+  node [
+    id 6466
+    label "antarctica"
+    added "2026-06-06T21:55:17.467741"
+  ]
+  node [
+    id 6467
+    label "12,000 years ago"
+    added "2026-06-06T21:55:17.467765"
+  ]
+  node [
+    id 6468
+    label "west asia"
+    added "2026-06-06T21:55:17.467803"
+  ]
+  node [
+    id 6469
+    label "markets"
+    added "2026-06-06T22:05:25.891864"
+  ]
+  node [
+    id 6470
+    label "exchanges"
+    added "2026-06-06T22:05:25.891911"
+  ]
+  node [
+    id 6471
+    label "om emerging markets where such attributes"
+    added "2026-06-06T22:05:25.891930"
+  ]
+  node [
+    id 6472
+    label "less establi"
+    added "2026-06-06T22:05:25.891937"
+  ]
+  node [
+    id 6473
+    label "foci"
+    added "2026-06-06T22:05:26.124424"
+  ]
+  node [
+    id 6474
+    label "investing with esg considerations"
+    added "2026-06-06T22:05:26.124481"
+  ]
+  node [
+    id 6475
+    label "sometimes referred to as responsible inv"
+    added "2026-06-06T22:05:26.124494"
+  ]
+  node [
+    id 6476
+    label "lso frequently used interchangeably with"
+    added "2026-06-06T22:05:26.124520"
+  ]
+  node [
+    id 6477
+    label "public policy governance in emerging markets"
+    added "2026-06-06T22:05:26.278045"
+  ]
+  node [
+    id 6478
+    label "esg"
+    added "2026-06-06T22:05:26.278087"
+  ]
+  node [
+    id 6479
+    label "architectural photography"
+    added "2026-06-06T22:15:33.835938"
+  ]
+  node [
+    id 6480
+    label "subgenre of the photography discipline w"
+    added "2026-06-06T22:15:33.835974"
+  ]
+  node [
+    id 6481
+    label "here the primary emphasis"
+    added "2026-06-06T22:15:33.835996"
+  ]
+  node [
+    id 6482
+    label "made to capturing photographs of buildin"
+    added "2026-06-06T22:15:33.836004"
+  ]
+  node [
+    id 6483
+    label "and similar architectural structures that"
+    added "2026-06-06T22:15:33.836034"
+  ]
+  node [
+    id 6484
+    label "both aesthetically pleasing and accurate"
+    added "2026-06-06T22:15:33.836047"
+  ]
+  node [
+    id 6485
+    label "architectural photographers"
+    added "2026-06-06T22:15:33.836063"
+  ]
+  node [
+    id 6486
+    label "usually skilled in the use of specialize"
+    added "2026-06-06T22:15:33.836071"
+  ]
+  node [
+    id 6487
+    label "sharon calahan"
+    added "2026-06-06T22:15:34.244407"
+  ]
+  node [
+    id 6488
+    label "n american cinematographer who was direc"
+    added "2026-06-06T22:15:34.244437"
+  ]
+  node [
+    id 6489
+    label "lighting director for ratatouille"
+    added "2026-06-06T22:15:34.244458"
+  ]
+  node [
+    id 6490
+    label "calahan"
+    added "2026-06-06T22:15:34.244481"
+  ]
+  node [
+    id 6491
+    label "first member of the american society of"
+    added "2026-06-06T22:15:34.244489"
+  ]
+  node [
+    id 6492
+    label "cinematographers who"
+    added "2026-06-06T22:15:34.244503"
+  ]
+  node [
+    id 6493
+    label "invited to join on the basis of a ca"
+    added "2026-06-06T22:15:34.244510"
+  ]
+  node [
+    id 6494
+    label "photography composition lighting and society"
+    added "2026-06-06T22:15:34.415910"
+  ]
+  node [
+    id 6495
+    label "pixar"
+    added "2026-06-06T22:15:34.416026"
+  ]
+  node [
+    id 6496
+    label "bug's life"
+    added "2026-06-06T22:15:34.416057"
+  ]
+  node [
+    id 6497
+    label "1998"
+    added "2026-06-06T22:15:34.416085"
+  ]
+  node [
+    id 6498
+    label "toy story 2"
+    added "2026-06-06T22:15:34.416111"
+  ]
+  node [
+    id 6499
+    label "finding nemo"
+    added "2026-06-06T22:15:34.416156"
+  ]
+  node [
+    id 6500
+    label "ratatouille"
+    added "2026-06-06T22:15:34.416196"
+  ]
+  node [
+    id 6501
+    label "cars 2 (2011"
+    added "2026-06-06T22:15:34.416235"
+  ]
+  node [
+    id 6502
+    label "the good dinosaur"
+    added "2026-06-06T22:15:34.416257"
+  ]
+  node [
+    id 6503
+    label "the american society of cinematographers"
+    added "2026-06-06T22:15:34.416324"
+  ]
+  node [
+    id 6504
+    label "cinematography"
+    added "2026-06-06T22:15:34.430004"
+  ]
+  node [
+    id 6505
+    label "art of motion picture photography"
+    added "2026-06-06T22:15:34.430035"
+  ]
+  node [
+    id 6506
+    label "the goal of cm"
+    added "2026-06-06T22:25:43.592142"
+  ]
+  node [
+    id 6507
+    label "to control a project"
+    added "2026-06-06T22:25:43.592167"
+  ]
+  node [
+    id 6508
+    label "construction engineering projects and society"
+    added "2026-06-06T22:25:43.781895"
+  ]
+  node [
+    id 6509
+    label "cm"
+    added "2026-06-06T22:25:43.781941"
+  ]
+  node [
+    id 6510
+    label "international structural engineering and construction society"
+    added "2026-06-06T22:25:44.000605"
+  ]
+  node [
+    id 6511
+    label "the international structural engineering and construction society"
+    added "2026-06-06T22:25:44.000655"
+  ]
+  node [
+    id 6512
+    label "fargo"
+    added "2026-06-06T22:25:44.000694"
+  ]
+  node [
+    id 6513
+    label "north dakota"
+    added "2026-06-06T22:25:44.000717"
+  ]
+  node [
+    id 6514
+    label "region in northern california that is a"
+    added "2026-06-06T22:35:52.109636"
+  ]
+  node [
+    id 6515
+    label "startup ecosystem venture capital and society"
+    added "2026-06-06T22:35:52.455214"
+  ]
+  node [
+    id 6516
+    label "northern california"
+    added "2026-06-06T22:35:52.455274"
+  ]
+  node [
+    id 6517
+    label "the san francisco bay area"
+    added "2026-06-06T22:35:52.455290"
+  ]
+  node [
+    id 6518
+    label "the santa clara valley"
+    added "2026-06-06T22:35:52.455303"
+  ]
+  node [
+    id 6519
+    label "sequoia capital"
+    added "2026-06-06T22:35:52.650572"
+  ]
+  node [
+    id 6520
+    label "sequoia capital operations"
+    added "2026-06-06T22:35:52.650637"
+  ]
+  node [
+    id 6521
+    label "llc"
+    added "2026-06-06T22:35:52.650675"
+  ]
+  node [
+    id 6522
+    label "sequoia"
+    added "2026-06-06T22:35:52.650704"
+  ]
+  node [
+    id 6523
+    label "menlo park"
+    added "2026-06-06T22:35:52.650759"
+  ]
+  node [
+    id 6524
+    label "january 2025"
+    added "2026-06-06T22:35:52.650841"
+  ]
+  node [
+    id 6525
+    label "approximately us$56 billion"
+    added "2026-06-06T22:35:52.650877"
+  ]
+  node [
+    id 6526
+    label "deep technology"
+    added "2026-06-06T22:35:52.694416"
+  ]
+  node [
+    id 6527
+    label "classification of organization"
+    added "2026-06-06T22:35:52.694451"
+  ]
+  node [
+    id 6528
+    label "their primary risk"
+    added "2026-06-06T22:35:52.694481"
+  ]
+  node [
+    id 6529
+    label "technical risk"
+    added "2026-06-06T22:35:52.694493"
+  ]
+  node [
+    id 6530
+    label "while market risk"
+    added "2026-06-06T22:35:52.694515"
+  ]
+  node [
+    id 6531
+    label "often significantly lower due to the cle"
+    added "2026-06-06T22:35:52.694527"
+  ]
+  node [
+    id 6532
+    label "faculties"
+    added "2026-06-06T22:46:02.448660"
+  ]
+  node [
+    id 6533
+    label "perception"
+    added "2026-06-06T22:46:02.448701"
+  ]
+  node [
+    id 6534
+    label "cognitive science"
+    added "2026-06-06T22:46:02.448729"
+  ]
+  node [
+    id 6535
+    label "interdisciplinary"
+    added "2026-06-06T22:46:02.448748"
+  ]
+  node [
+    id 6536
+    label "cognitive science thinking memory and society"
+    added "2026-06-06T22:46:02.851299"
+  ]
+  node [
+    id 6537
+    label "sociology society culture in emerging markets"
+    added "2026-06-06T22:56:11.556937"
+  ]
+  node [
+    id 6538
+    label "economic sociology"
+    added "2026-06-06T22:56:11.577690"
+  ]
+  node [
+    id 6539
+    label "study of the social cause and effect of"
+    added "2026-06-06T22:56:11.577716"
+  ]
+  node [
+    id 6540
+    label "entrepreneurship startups founding and society"
+    added "2026-06-06T23:06:20.744563"
+  ]
+  node [
+    id 6541
+    label "legatum co"
+    added "2026-06-06T23:06:20.941463"
+  ]
+  node [
+    id 6542
+    label "gb broadcaster news"
+    added "2026-06-06T23:06:20.941525"
+  ]
+  node [
+    id 6543
+    label "legatum limited"
+    added "2026-06-06T23:06:20.941561"
+  ]
+  node [
+    id 6544
+    label "private investment firm"
+    added "2026-06-06T23:06:20.941576"
+  ]
+  node [
+    id 6545
+    label "legatum"
+    added "2026-06-06T23:06:20.941602"
+  ]
+  node [
+    id 6546
+    label "dubai"
+    added "2026-06-06T23:06:21.128863"
+  ]
+  node [
+    id 6547
+    label "united arab emirates"
+    added "2026-06-06T23:06:21.128890"
+  ]
+  node [
+    id 6548
+    label "new zealand"
+    added "2026-06-06T23:06:21.128943"
+  ]
+  node [
+    id 6549
+    label "christopher chandler"
+    added "2026-06-06T23:06:21.128971"
+  ]
+  node [
+    id 6550
+    label "gb news"
+    added "2026-06-06T23:06:21.129009"
+  ]
+  node [
+    id 6551
+    label "politics"
+    added "2026-06-06T23:16:30.008281"
+  ]
+  node [
+    id 6552
+    label "activity of settling affairs in an organ"
+    added "2026-06-06T23:16:30.008308"
+  ]
+  node [
+    id 6553
+    label "usually concerned with resolving issues"
+    added "2026-06-06T23:16:30.008327"
+  ]
+  node [
+    id 6554
+    label "politicians"
+    added "2026-06-06T23:16:30.008341"
+  ]
+  node [
+    id 6555
+    label "individuals engaged in the activity of p"
+    added "2026-06-06T23:16:30.008349"
+  ]
+  node [
+    id 6556
+    label "ence that studies politics and government"
+    added "2026-06-06T23:16:30.008364"
+  ]
+  node [
+    id 6557
+    label "referred to as political science"
+    added "2026-06-06T23:16:30.008371"
+  ]
+  node [
+    id 6558
+    label "democracy"
+    added "2026-06-06T23:16:30.167858"
+  ]
+  node [
+    id 6559
+    label "form of government in which political po"
+    added "2026-06-06T23:16:30.167930"
+  ]
+  node [
+    id 6560
+    label "wer"
+    added "2026-06-06T23:16:30.167967"
+  ]
+  node [
+    id 6561
+    label "vested in the people or the population o"
+    added "2026-06-06T23:16:30.167983"
+  ]
+  node [
+    id 6562
+    label "rulers"
+    added "2026-06-06T23:16:30.168015"
+  ]
+  node [
+    id 6563
+    label "elected through competitive elections wh"
+    added "2026-06-06T23:16:30.168058"
+  ]
+  node [
+    id 6564
+    label "an emerging market"
+    added "2026-06-06T23:46:56.576577"
+  ]
+  node [
+    id 6565
+    label "market that has some characteristics of"
+    added "2026-06-06T23:46:56.576629"
+  ]
+  node [
+    id 6566
+    label "become developed markets in the future or"
+    added "2026-06-06T23:46:56.576667"
+  ]
+  node [
+    id 6567
+    label "in the past"
+    added "2026-06-06T23:46:56.576684"
+  ]
+  node [
+    id 6568
+    label "markets that may become developed market"
+    added "2026-06-06T23:46:56.576711"
+  ]
+  node [
+    id 6569
+    label "credit rating"
+    added "2026-06-06T23:46:56.745653"
+  ]
+  node [
+    id 6570
+    label "creditworthiness"
+    added "2026-06-06T23:46:56.745701"
+  ]
+  node [
+    id 6571
+    label "the ratings"
+    added "2026-06-06T23:46:56.745734"
+  ]
+  node [
+    id 6572
+    label "published by credit rating agencies and"
+    added "2026-06-06T23:46:56.745746"
+  ]
+  node [
+    id 6573
+    label "industry"
+    added "2026-06-06T23:57:06.457984"
+  ]
+  node [
+    id 6574
+    label "automotive engineering vehicles in emerging markets"
+    added "2026-06-06T23:57:06.586064"
+  ]
+  node [
+    id 6575
+    label "~$2.75"
+    added "2026-06-06T23:57:06.586097"
+  ]
+  node [
+    id 6576
+    label "the automotive industry in china"
+    added "2026-06-06T23:57:06.613287"
+  ]
+  node [
+    id 6577
+    label "largest in the world measured by automob"
+    added "2026-06-06T23:57:06.613319"
+  ]
+  node [
+    id 6578
+    label "lso the world"
+    added "2026-06-06T23:57:06.613349"
+  ]
+  node [
+    id 6579
+    label "he growth of automotive industry in india"
+    added "2026-06-06T23:57:06.902004"
+  ]
+  node [
+    id 6580
+    label "fueled by the country"
+    added "2026-06-06T23:57:06.902033"
+  ]
+  node [
+    id 6581
+    label "us$250 billion"
+    added "2026-06-06T23:57:07.037506"
+  ]
+  node [
+    id 6582
+    label "8%"
+    added "2026-06-06T23:57:07.037598"
+  ]
+  node [
+    id 6583
+    label "7.1%"
+    added "2026-06-06T23:57:07.037630"
+  ]
+  node [
+    id 6584
+    label "securities"
+    added "2026-06-07T00:07:17.065010"
+  ]
+  node [
+    id 6585
+    label "a financial market"
+    added "2026-06-07T00:07:17.065096"
+  ]
+  node [
+    id 6586
+    label "market in which people trade financial s"
+    added "2026-06-07T00:07:17.065104"
+  ]
+  node [
+    id 6587
+    label "known in the financial markets as commod"
+    added "2026-06-07T00:07:17.065126"
+  ]
+  node [
+    id 6588
+    label "accounting financial statements in emerging markets"
+    added "2026-06-07T00:07:17.334251"
+  ]
+  node [
+    id 6589
+    label "the generally accepted accounting principles"
+    added "2026-06-07T00:07:17.334323"
+  ]
+  node [
+    id 6590
+    label "financial risk"
+    added "2026-06-07T00:07:17.365006"
+  ]
+  node [
+    id 6591
+    label "ny of various types of risk associated w"
+    added "2026-06-07T00:07:17.365037"
+  ]
+  node [
+    id 6592
+    label "often it"
+    added "2026-06-07T00:07:17.365065"
+  ]
+  node [
+    id 6593
+    label "understood to include only downside risk"
+    added "2026-06-07T00:07:17.365077"
+  ]
+  node [
+    id 6594
+    label "most abundant and widespread species of"
+    added "2026-06-07T00:17:25.148398"
+  ]
+  node [
+    id 6595
+    label "highly social beings and tend to live in"
+    added "2026-06-07T00:17:25.148429"
+  ]
+  node [
+    id 6596
+    label "anthropology human civilization in emerging markets"
+    added "2026-06-07T00:17:25.489996"
+  ]
+  node [
+    id 6597
+    label "reliability engineering failure analysis and society"
+    added "2026-06-07T00:27:33.665646"
+  ]
+  node [
+    id 6598
+    label "fmeca"
+    added "2026-06-07T00:27:33.704272"
+  ]
+  node [
+    id 6599
+    label "criticality analysis"
+    added "2026-06-07T00:27:33.704308"
+  ]
+  node [
+    id 6600
+    label "photography composition lighting in emerging markets"
+    added "2026-06-07T00:37:41.715332"
+  ]
+  node [
+    id 6601
+    label "restrepo brothers"
+    added "2026-06-07T00:37:41.768054"
+  ]
+  node [
+    id 6602
+    label "collodion process"
+    added "2026-06-07T00:37:41.768085"
+  ]
+  node [
+    id 6603
+    label "reportage"
+    added "2026-06-07T00:37:41.768113"
+  ]
+  node [
+    id 6604
+    label "colombia"
+    added "2026-06-07T00:37:41.949443"
+  ]
+  node [
+    id 6605
+    label "gros"
+    added "2026-06-07T00:37:41.949498"
+  ]
+  node [
+    id 6606
+    label "1841"
+    added "2026-06-07T00:37:41.949522"
+  ]
+  node [
+    id 6607
+    label "luis garc&#237;a hevia"
+    added "2026-06-07T00:37:41.949561"
+  ]
+  node [
+    id 6608
+    label "ferm&#237;n isaza"
+    added "2026-06-07T00:37:41.949584"
+  ]
+  node [
+    id 6609
+    label "demetrio paredes"
+    added "2026-06-07T00:37:41.949606"
+  ]
+  node [
+    id 6610
+    label "restrepo"
+    added "2026-06-07T00:37:41.949629"
+  ]
+  node [
+    id 6611
+    label "the beginning of the 20th century"
+    added "2026-06-07T00:37:41.949652"
+  ]
+  node [
+    id 6612
+    label "melit&#243;n rodr&#237;guez"
+    added "2026-06-07T00:37:41.949689"
+  ]
+  node [
+    id 6613
+    label "leo matiz"
+    added "2026-06-07T00:37:41.949713"
+  ]
+  node [
+    id 6614
+    label "luis benito ramos"
+    added "2026-06-07T00:37:41.949735"
+  ]
+  node [
+    id 6615
+    label "monochrome photography"
+    added "2026-06-07T00:37:41.977006"
+  ]
+  node [
+    id 6616
+    label "channel"
+    added "2026-06-07T00:37:41.977037"
+  ]
+  node [
+    id 6617
+    label "color photography"
+    added "2026-06-07T00:37:41.977065"
+  ]
+  node [
+    id 6618
+    label "photography that uses media capable of c"
+    added "2026-06-07T00:37:41.977077"
+  ]
+  node [
+    id 6619
+    label "color photography is photography that"
+    added "2026-06-07T00:37:41.977100"
+  ]
+  node [
+    id 6620
+    label "media capable of capturing and reproduci"
+    added "2026-06-07T00:37:41.977112"
+  ]
+  node [
+    id 6621
+    label "media capable only of showing shades of"
+    added "2026-06-07T00:37:41.977135"
+  ]
+  node [
+    id 6622
+    label "entrepreneurship startups founding in emerging markets"
+    added "2026-06-07T00:47:49.788641"
+  ]
+  node [
+    id 6623
+    label "fourth"
+    added "2026-06-07T00:47:49.788678"
+  ]
+  node [
+    id 6624
+    label "the business model canvas"
+    added "2026-06-07T00:47:49.788726"
+  ]
+  node [
+    id 6625
+    label "alexander osterwalder"
+    added "2026-06-07T00:47:49.788753"
+  ]
+  node [
+    id 6626
+    label "yves pigneur"
+    added "2026-06-07T00:47:49.788780"
+  ]
+  node [
+    id 6627
+    label "venture capitalists"
+    added "2026-06-07T00:47:49.841982"
+  ]
+  node [
+    id 6628
+    label "venture"
+    added "2026-06-07T00:47:49.959329"
+  ]
+  node [
+    id 6629
+    label "vc"
+    added "2026-06-07T00:47:49.959378"
+  ]
+  node [
+    id 6630
+    label "solvespace"
+    added "2026-06-07T00:57:57.974706"
+  ]
+  node [
+    id 6631
+    label "computer science fundamentals and operating systems linux windows intersection"
+    added "2026-06-07T00:57:58.201383"
+  ]
+  node [
+    id 6632
+    label "2d/3d"
+    added "2026-06-07T00:57:58.201442"
+  ]
+  node [
+    id 6633
+    label "a touchscreen"
+    added "2026-06-07T00:57:58.381272"
+  ]
+  node [
+    id 6634
+    label "type of display that can detect touch in"
+    added "2026-06-07T00:57:58.381319"
+  ]
+  node [
+    id 6635
+    label "the touch panel"
+    added "2026-06-07T00:57:58.381360"
+  ]
+  node [
+    id 6636
+    label "typically layered on the top of the elec"
+    added "2026-06-07T00:57:58.381376"
+  ]
+  node [
+    id 6637
+    label "touchscreens"
+    added "2026-06-07T00:57:58.381404"
+  ]
+  node [
+    id 6638
+    label "commonly found in smartphones"
+    added "2026-06-07T00:57:58.381415"
+  ]
+  node [
+    id 6639
+    label "the display"
+    added "2026-06-07T00:57:58.381439"
+  ]
+  node [
+    id 6640
+    label "often an lcd"
+    added "2026-06-07T00:57:58.381450"
+  ]
+  node [
+    id 6641
+    label "lcd"
+    added "2026-06-07T00:57:58.546707"
+  ]
+  node [
+    id 6642
+    label "statistical arbitrage"
+    added "2026-06-07T01:08:06.449570"
+  ]
+  node [
+    id 6643
+    label "class of short"
+    added "2026-06-07T01:08:06.449594"
+  ]
+  node [
+    id 6644
+    label "these strategies"
+    added "2026-06-07T01:08:06.449613"
+  ]
+  node [
+    id 6645
+    label "supported by substantial mathematical"
+    added "2026-06-07T01:08:06.449621"
+  ]
+  node [
+    id 6646
+    label "arbitrage"
+    added "2026-06-07T01:08:06.578184"
+  ]
+  node [
+    id 6647
+    label "effect"
+    added "2026-06-07T01:08:06.578236"
+  ]
+  node [
+    id 6648
+    label "practice of taking advantage of a differ"
+    added "2026-06-07T01:08:06.578270"
+  ]
+  node [
+    id 6649
+    label "tween the market prices at which the unit"
+    added "2026-06-07T01:08:06.578298"
+  ]
+  node [
+    id 6650
+    label "traded"
+    added "2026-06-07T01:08:06.578311"
+  ]
+  node [
+    id 6651
+    label "alternative risk premia"
+    added "2026-06-07T01:18:15.214785"
+  ]
+  node [
+    id 6652
+    label "systematica investments"
+    added "2026-06-07T01:18:15.214817"
+  ]
+  node [
+    id 6653
+    label "systematica"
+    added "2026-06-07T01:18:15.214840"
+  ]
+  node [
+    id 6654
+    label "alternative beta"
+    added "2026-06-07T01:18:15.237118"
+  ]
+  node [
+    id 6655
+    label "concept of managing volatile"
+    added "2026-06-07T01:18:15.237168"
+  ]
+  node [
+    id 6656
+    label "often also referred to as"
+    added "2026-06-07T01:18:15.237213"
+  ]
+  node [
+    id 6657
+    label "neutral measure"
+    added "2026-06-07T01:18:15.346947"
+  ]
+  node [
+    id 6658
+    label "probability measure such that each share"
+    added "2026-06-07T01:18:15.346986"
+  ]
+  node [
+    id 6659
+    label "price"
+    added "2026-06-07T01:18:15.347016"
+  ]
+  node [
+    id 6660
+    label "exactly equal to the discounted expectat"
+    added "2026-06-07T01:18:15.347030"
+  ]
+  node [
+    id 6661
+    label "constructions"
+    added "2026-06-07T01:28:22.840118"
+  ]
+  node [
+    id 6662
+    label "standards"
+    added "2026-06-07T01:28:22.840151"
+  ]
+  node [
+    id 6663
+    label "based cryptography"
+    added "2026-06-07T01:28:22.840171"
+  ]
+  node [
+    id 6664
+    label "generic term for constructions of crypto"
+    added "2026-06-07T01:28:22.840179"
+  ]
+  node [
+    id 6665
+    label "lattice-based cryptography"
+    added "2026-06-07T01:28:22.962498"
+  ]
+  node [
+    id 6666
+    label "rsa"
+    added "2026-06-07T01:28:22.962531"
+  ]
+  node [
+    id 6667
+    label "diffie-hellman"
+    added "2026-06-07T01:28:22.962562"
+  ]
+  node [
+    id 6668
+    label "shor"
+    added "2026-06-07T01:28:22.962588"
+  ]
+  node [
+    id 6669
+    label "cryptosystem"
+    added "2026-06-07T01:28:23.182180"
+  ]
+  node [
+    id 6670
+    label "variant"
+    added "2026-06-07T01:28:23.182231"
+  ]
+  node [
+    id 6671
+    label "th future powerful quantum computers that"
+    added "2026-06-07T01:28:23.182259"
+  ]
+  node [
+    id 6672
+    label "standardized in"
+    added "2026-06-07T01:28:23.182272"
+  ]
+  node [
+    id 6673
+    label "this asymmetric cryptosystem"
+    added "2026-06-07T01:28:23.182296"
+  ]
+  node [
+    id 6674
+    label "a variant of the learning with errors la"
+    added "2026-06-07T01:28:23.182308"
+  ]
+  node [
+    id 6675
+    label "ml-kem"
+    added "2026-06-07T01:28:23.299673"
+  ]
+  node [
+    id 6676
+    label "kyber"
+    added "2026-06-07T01:28:23.299788"
+  ]
+  node [
+    id 6677
+    label "kem"
+    added "2026-06-07T01:28:23.299819"
+  ]
+  node [
+    id 6678
+    label "ind-cca2"
+    added "2026-06-07T01:28:23.299873"
+  ]
+  node [
+    id 6679
+    label "nist"
+    added "2026-06-07T01:28:23.299897"
+  ]
+  node [
+    id 6680
+    label "elliptic curve cryptography"
+    added "2026-06-07T01:38:31.075712"
+  ]
+  node [
+    id 6681
+    label "elgamal"
+    added "2026-06-07T01:38:31.075782"
+  ]
+  node [
+    id 6682
+    label "an elliptic curve"
+    added "2026-06-07T01:38:31.116296"
+  ]
+  node [
+    id 6683
+    label "smooth"
+    added "2026-06-07T01:38:31.116331"
+  ]
+  node [
+    id 6684
+    label "on which there"
+    added "2026-06-07T01:38:31.116359"
+  ]
+  node [
+    id 6685
+    label "specified point o"
+    added "2026-06-07T01:38:31.116371"
+  ]
+  node [
+    id 6686
+    label "defined over a field k and describes poi"
+    added "2026-06-07T01:38:31.116396"
+  ]
+  node [
+    id 6687
+    label "s characteristic"
+    added "2026-06-07T01:38:31.116418"
+  ]
+  node [
+    id 6688
+    label "different from"
+    added "2026-06-07T01:38:31.116430"
+  ]
+  node [
+    id 6689
+    label "escribed as a plane algebraic curve which"
+    added "2026-06-07T01:38:31.116452"
+  ]
+  node [
+    id 6690
+    label "solutions"
+    added "2026-06-07T01:38:31.116463"
+  ]
+  node [
+    id 6691
+    label "k2"
+    added "2026-06-07T01:38:31.218686"
+  ]
+  node [
+    id 6692
+    label "cartesian"
+    added "2026-06-07T01:38:31.218738"
+  ]
+  node [
+    id 6693
+    label "signature algorithm"
+    added "2026-06-07T01:38:31.239319"
+  ]
+  node [
+    id 6694
+    label "elliptic"
+    added "2026-06-07T01:38:31.239368"
+  ]
+  node [
+    id 6695
+    label "elliptic curve digital signature algorithm"
+    added "2026-06-07T01:38:31.318801"
+  ]
+  node [
+    id 6696
+    label "the elliptic curve digital signature algorithm"
+    added "2026-06-07T01:38:31.318852"
+  ]
+  node [
+    id 6697
+    label "the digital signature algorithm"
+    added "2026-06-07T01:38:31.318877"
+  ]
+  node [
+    id 6698
+    label "dsa"
+    added "2026-06-07T01:38:31.318900"
+  ]
+  node [
+    id 6699
+    label "advanced advanced ci/cd pipelines"
+    added "2026-06-07T01:48:39.245218"
+  ]
+  node [
+    id 6700
+    label "ci/cd pipelines mathematics theory"
+    added "2026-06-07T01:58:47.356779"
+  ]
+  node [
+    id 6701
+    label "ci/cd pipelines theory theory theory"
+    added "2026-06-07T02:08:55.592018"
+  ]
+  node [
+    id 6702
+    label "advanced data structures trees graphs"
+    added "2026-06-07T02:19:04.066355"
+  ]
+  node [
+    id 6703
+    label "a data structure"
+    added "2026-06-07T02:19:04.108433"
+  ]
+  node [
+    id 6704
+    label "way to organize and store data that is u"
+    added "2026-06-07T02:19:04.108451"
+  ]
+  node [
+    id 6705
+    label "physical implementation of a data type"
+    added "2026-06-07T02:19:04.108479"
+  ]
+  node [
+    id 6706
+    label "data structures"
+    added "2026-06-07T02:19:04.108506"
+  ]
+  node [
+    id 6707
+    label "closely related to abstract data types"
+    added "2026-06-07T02:19:04.108520"
+  ]
+  node [
+    id 6708
+    label "tion of data in memory and how operations"
+    added "2026-06-07T02:19:04.108545"
+  ]
+  node [
+    id 6709
+    label "carried"
+    added "2026-06-07T02:19:04.108557"
+  ]
+  node [
+    id 6710
+    label "advanced ci/cd pipelines theory theory"
+    added "2026-06-07T02:29:12.824188"
+  ]
+  node [
+    id 6711
+    label "computer architecture cpu memory theory"
+    added "2026-06-07T02:39:21.842576"
+  ]
+  node [
+    id 6712
+    label "risc computer"
+    added "2026-06-07T02:39:21.883188"
+  ]
+  node [
+    id 6713
+    label "machine code"
+    added "2026-06-07T02:39:21.883237"
+  ]
+  node [
+    id 6714
+    label "instructions"
+    added "2026-06-07T02:39:21.883265"
+  ]
+  node [
+    id 6715
+    label "a reduced instruction set computer"
+    added "2026-06-07T02:39:21.883295"
+  ]
+  node [
+    id 6716
+    label "computer architecture designed to simpli"
+    added "2026-06-07T02:39:21.883305"
+  ]
+  node [
+    id 6717
+    label "the goal"
+    added "2026-06-07T02:39:21.883328"
+  ]
+  node [
+    id 6718
+    label "to offset the need to process more instr"
+    added "2026-06-07T02:39:21.883340"
+  ]
+  node [
+    id 6719
+    label "a memory address"
+    added "2026-06-07T02:39:22.033641"
+  ]
+  node [
+    id 6720
+    label "reference to a specific memory location"
+    added "2026-06-07T02:39:22.033679"
+  ]
+  node [
+    id 6721
+    label "these addresses"
+    added "2026-06-07T02:39:22.033710"
+  ]
+  node [
+    id 6722
+    label "fixed"
+    added "2026-06-07T02:39:22.033722"
+  ]
+  node [
+    id 6723
+    label "this numerical representation"
+    added "2026-06-07T02:39:22.033746"
+  ]
+  node [
+    id 6724
+    label "based on the features of cpu"
+    added "2026-06-07T02:39:22.033757"
+  ]
+  node [
+    id 6725
+    label "linear algebra matrices vectors mathematics"
+    added "2026-06-07T02:49:29.892170"
+  ]
+  node [
+    id 6726
+    label "advanced reverse engineering software theory"
+    added "2026-06-07T02:59:38.537642"
+  ]
+  node [
+    id 6727
+    label "reverse computation"
+    added "2026-06-07T02:59:38.551679"
+  ]
+  node [
+    id 6728
+    label "software application of the concept of r"
+    added "2026-06-07T02:59:38.551703"
+  ]
+  node [
+    id 6729
+    label "headquarters"
+    added "2026-06-07T03:09:46.621971"
+  ]
+  node [
+    id 6730
+    label "advanced advanced ci/cd pipelines mathematics"
+    added "2026-06-07T03:09:46.714756"
+  ]
+  node [
+    id 6731
+    label "amsterdam"
+    added "2026-06-07T03:09:46.714806"
+  ]
+  node [
+    id 6732
+    label "frontend development html css javascript mathematics"
+    added "2026-06-07T03:19:52.967335"
+  ]
+  node [
+    id 6733
+    label "gnu emacs"
+    added "2026-06-07T03:19:52.996576"
+  ]
+  node [
+    id 6734
+    label "text editor and suite of free software t"
+    added "2026-06-07T03:19:52.996605"
+  ]
+  node [
+    id 6735
+    label "central component of the gnu project and"
+    added "2026-06-07T03:19:52.996634"
+  ]
+  node [
+    id 6736
+    label "emacs"
+    added "2026-06-07T03:19:53.095290"
+  ]
+  node [
+    id 6737
+    label "gnu project"
+    added "2026-06-07T03:19:53.095374"
+  ]
+  node [
+    id 6738
+    label "richard stallman"
+    added "2026-06-07T03:19:53.095398"
+  ]
+  node [
+    id 6739
+    label "software design patterns and devops practices"
+    added "2026-06-07T03:30:01.191904"
+  ]
+  node [
+    id 6740
+    label "scm"
+    added "2026-06-07T03:30:01.224064"
+  ]
+  node [
+    id 6741
+    label "version control"
+    added "2026-06-07T03:30:01.224100"
+  ]
+  node [
+    id 6742
+    label "version control and the establishment of"
+    added "2026-06-07T03:30:01.224130"
+  ]
+  node [
+    id 6743
+    label "a.k.a."
+    added "2026-06-07T03:30:01.321059"
+  ]
+  node [
+    id 6744
+    label "computer networking and 3d modeling rendering"
+    added "2026-06-07T03:40:09.456689"
+  ]
+  node [
+    id 6745
+    label "gaussian splatting"
+    added "2026-06-07T03:40:09.652742"
+  ]
+  node [
+    id 6746
+    label "volume rendering technique that deals wi"
+    added "2026-06-07T03:40:09.652773"
+  ]
+  node [
+    id 6747
+    label "the technique"
+    added "2026-06-07T03:40:09.652801"
+  ]
+  node [
+    id 6748
+    label "originally introduced as splatting by le"
+    added "2026-06-07T03:40:09.652813"
+  ]
+  node [
+    id 6749
+    label "gaussian"
+    added "2026-06-07T03:40:09.734648"
+  ]
+  node [
+    id 6750
+    label "lee westover"
+    added "2026-06-07T03:40:09.734726"
+  ]
+  node [
+    id 6751
+    label "the early 1990s"
+    added "2026-06-07T03:40:09.734753"
+  ]
+  node [
+    id 6752
+    label "electronics engineering components and object-oriented programming"
+    added "2026-06-07T04:00:21.222334"
+  ]
+  node [
+    id 6753
+    label "quantum sensor"
+    added "2026-06-07T04:10:29.087462"
+  ]
+  node [
+    id 6754
+    label "measurements"
+    added "2026-06-07T04:10:29.087512"
+  ]
+  node [
+    id 6755
+    label "if a quantum system"
+    added "2026-06-07T04:10:29.087531"
+  ]
+  node [
+    id 6756
+    label "measurable"
+    added "2026-06-07T04:10:29.087538"
+  ]
+  node [
+    id 6757
+    label "quantum sensing"
+    added "2026-06-07T04:10:29.195672"
+  ]
+  node [
+    id 6758
+    label "type"
+    added "2026-06-07T04:10:29.218854"
+  ]
+  node [
+    id 6759
+    label "quantum engineering"
+    added "2026-06-07T04:10:29.218900"
+  ]
+  node [
+    id 6760
+    label "development of technology that capitaliz"
+    added "2026-06-07T04:10:29.218912"
+  ]
+  node [
+    id 6761
+    label "this type of engineering"
+    added "2026-06-07T04:10:29.218935"
+  ]
+  node [
+    id 6762
+    label "quantum mechanics to develop technologie"
+    added "2026-06-07T04:10:29.218946"
+  ]
+  node [
+    id 6763
+    label "quantum computing and communication"
+    added "2026-06-07T04:10:29.360094"
+  ]
+  node [
+    id 6764
+    label "two sub"
+    added "2026-06-07T04:10:29.360129"
+  ]
+  node [
+    id 6765
+    label "fundamental unit of classical information"
+    added "2026-06-07T04:10:29.360157"
+  ]
+  node [
+    id 6766
+    label "bit"
+    added "2026-06-07T04:10:29.360168"
+  ]
+  node [
+    id 6767
+    label "the basic unit of quantum information"
+    added "2026-06-07T04:10:29.360191"
+  ]
+  node [
+    id 6768
+    label "qubit"
+    added "2026-06-07T04:10:29.360202"
+  ]
+  node [
+    id 6769
+    label "third main sub"
+    added "2026-06-07T04:10:29.360226"
+  ]
+  node [
+    id 6770
+    label "utonomous in that it can independently s"
+    added "2026-06-07T04:20:37.189364"
+  ]
+  node [
+    id 6771
+    label "most military drones and military robots"
+    added "2026-06-07T04:20:37.189411"
+  ]
+  node [
+    id 6772
+    label "not truly autonomous"
+    added "2026-06-07T04:20:37.189419"
+  ]
+  node [
+    id 6773
+    label "autonomous weapons systems"
+    added "2026-06-07T04:20:37.324992"
+  ]
+  node [
+    id 6774
+    label "military robots"
+    added "2026-06-07T04:20:37.348338"
+  ]
+  node [
+    id 6775
+    label "utonomous robots or remote"
+    added "2026-06-07T04:20:37.348375"
+  ]
+  node [
+    id 6776
+    label "questions"
+    added "2026-06-07T04:20:37.494474"
+  ]
+  node [
+    id 6777
+    label "governmental experts"
+    added "2026-06-07T04:20:37.614398"
+  ]
+  node [
+    id 6778
+    label "lethal autonomous weapons systems"
+    added "2026-06-07T04:20:37.614463"
+  ]
+  node [
+    id 6779
+    label "the group of governmental experts on"
+    added "2026-06-07T04:20:37.614490"
+  ]
+  node [
+    id 6780
+    label "the convention on certain conventional weapons (ccw"
+    added "2026-06-07T04:20:37.614516"
+  ]
+  node [
+    id 6781
+    label "united nations"
+    added "2026-06-07T04:20:37.614544"
+  ]
+  node [
+    id 6782
+    label "temperature superconductor"
+    added "2026-06-07T04:30:45.132945"
+  ]
+  node [
+    id 6783
+    label "hypothetical material capable of display"
+    added "2026-06-07T04:30:45.132970"
+  ]
+  node [
+    id 6784
+    label "operating temperatures which"
+    added "2026-06-07T04:30:45.132989"
+  ]
+  node [
+    id 6785
+    label "commonly encountered in everyday setting"
+    added "2026-06-07T04:30:45.132996"
+  ]
+  node [
+    id 6786
+    label "hest accepted superconducting temperature"
+    added "2026-06-07T04:30:45.133009"
+  ]
+  node [
+    id 6787
+    label "highly pressurized lanthanum decahydride"
+    added "2026-06-07T04:30:45.133016"
+  ]
+  node [
+    id 6788
+    label "whose transition temperature"
+    added "2026-06-07T04:30:45.133031"
+  ]
+  node [
+    id 6789
+    label "pproximately"
+    added "2026-06-07T04:30:45.133037"
+  ]
+  node [
+    id 6790
+    label "room temperature superconductors"
+    added "2026-06-07T04:30:45.235928"
+  ]
+  node [
+    id 6791
+    label "temperature superconductivity"
+    added "2026-06-07T04:30:45.281030"
+  ]
+  node [
+    id 6792
+    label "superconductivity in materials with a cr"
+    added "2026-06-07T04:30:45.281061"
+  ]
+  node [
+    id 6793
+    label "discovered in"
+    added "2026-06-07T04:30:45.281091"
+  ]
+  node [
+    id 6794
+    label "although the critical temperature"
+    added "2026-06-07T04:30:45.281116"
+  ]
+  node [
+    id 6795
+    label "round"
+    added "2026-06-07T04:30:45.281128"
+  ]
+  node [
+    id 6796
+    label "this material"
+    added "2026-06-07T04:30:45.281152"
+  ]
+  node [
+    id 6797
+    label "modified by ching"
+    added "2026-06-07T04:30:45.281163"
+  ]
+  node [
+    id 6798
+    label "georg bednorz"
+    added "2026-06-07T04:30:45.407317"
+  ]
+  node [
+    id 6799
+    label "k. alex m&#252;ller"
+    added "2026-06-07T04:30:45.407345"
+  ]
+  node [
+    id 6800
+    label "ching-wu chu"
+    added "2026-06-07T04:30:45.407370"
+  ]
+  node [
+    id 6801
+    label "korea university"
+    added "2026-06-07T04:30:45.566522"
+  ]
+  node [
+    id 6802
+    label "lee sukbae"
+    added "2026-06-07T04:30:45.566586"
+  ]
+  node [
+    id 6803
+    label "kim ji-hoon"
+    added "2026-06-07T04:30:45.566613"
+  ]
+  node [
+    id 6804
+    label "july 2023"
+    added "2026-06-07T04:30:45.566637"
+  ]
+  node [
+    id 6805
+    label "up to"
+    added "2026-06-07T04:30:45.566660"
+  ]
+  node [
+    id 6806
+    label "400"
+    added "2026-06-07T04:30:45.566683"
+  ]
+  node [
+    id 6807
+    label "risk parity and society"
+    added "2026-06-07T04:50:59.667299"
+  ]
+  node [
+    id 6808
+    label "gravidity and parity"
+    added "2026-06-07T04:50:59.716205"
+  ]
+  node [
+    id 6809
+    label "number of times a female has been pregna"
+    added "2026-06-07T04:50:59.716246"
+  ]
+  node [
+    id 6810
+    label "these two terms"
+    added "2026-06-07T04:50:59.716279"
+  ]
+  node [
+    id 6811
+    label "usually coupled"
+    added "2026-06-07T04:50:59.716292"
+  ]
+  node [
+    id 6812
+    label "da indicates the number of times a female"
+    added "2026-06-07T04:50:59.716318"
+  ]
+  node [
+    id 6813
+    label "or has been pregnant"
+    added "2026-06-07T04:50:59.716331"
+  ]
+  node [
+    id 6814
+    label "raid system"
+    added "2026-06-07T04:50:59.891790"
+  ]
+  node [
+    id 6815
+    label "raid"
+    added "2026-06-07T04:50:59.891822"
+  ]
+  node [
+    id 6816
+    label "n orchestrated approach to computer data"
+    added "2026-06-07T04:50:59.891834"
+  ]
+  node [
+    id 6817
+    label "storage in which data"
+    added "2026-06-07T04:50:59.891858"
+  ]
+  node [
+    id 6818
+    label "written to more than one secondary stora"
+    added "2026-06-07T04:50:59.891869"
+  ]
+  node [
+    id 6819
+    label "several possible ways of doing this"
+    added "2026-06-07T04:50:59.891905"
+  ]
+  node [
+    id 6820
+    label "and those various configurations"
+    added "2026-06-07T04:50:59.891929"
+  ]
+  node [
+    id 6821
+    label "called raid levels"
+    added "2026-06-07T04:50:59.891940"
+  ]
+  node [
+    id 6822
+    label "process in which new neurons are born an"
+    added "2026-06-07T05:01:07.710480"
+  ]
+  node [
+    id 6823
+    label "avian species including songbirds"
+    added "2026-06-07T05:01:07.710538"
+  ]
+  node [
+    id 6824
+    label "mong vertebrate species that demonstrate"
+    added "2026-06-07T05:01:07.710553"
+  ]
+  node [
+    id 6825
+    label "he more limited neurogenic potential that"
+    added "2026-06-07T05:01:07.710583"
+  ]
+  node [
+    id 6826
+    label "observed in adult mammals after birth"
+    added "2026-06-07T05:01:07.710594"
+  ]
+  node [
+    id 6827
+    label "adult neurogenesis in songbirds"
+    added "2026-06-07T05:01:07.710617"
+  ]
+  node [
+    id 6828
+    label "observed in brain circuits that underlie"
+    added "2026-06-07T05:01:07.710628"
+  ]
+  node [
+    id 6829
+    label "neurogenesis and society"
+    added "2026-06-07T05:01:07.822181"
+  ]
+  node [
+    id 6830
+    label "avian"
+    added "2026-06-07T05:01:07.822215"
+  ]
+  node [
+    id 6831
+    label "a specialization of this field"
+    added "2026-06-07T05:11:15.500137"
+  ]
+  node [
+    id 6832
+    label "nano"
+    added "2026-06-07T05:11:15.500148"
+  ]
+  node [
+    id 6833
+    label "optogenetics and society"
+    added "2026-06-07T05:11:15.716783"
+  ]
+  node [
+    id 6834
+    label "gero miesenb&#246;ck"
+    added "2026-06-07T05:11:15.838944"
+  ]
+  node [
+    id 6835
+    label "andreas miesenb&#246;ck"
+    added "2026-06-07T05:11:15.838997"
+  ]
+  node [
+    id 6836
+    label "austrian"
+    added "2026-06-07T05:11:15.839021"
+  ]
+  node [
+    id 6837
+    label "waynflete"
+    added "2026-06-07T05:11:15.839044"
+  ]
+  node [
+    id 6838
+    label "the centre for neural circuits and behaviour (cncb"
+    added "2026-06-07T05:11:15.839067"
+  ]
+  node [
+    id 6839
+    label "the university of oxford"
+    added "2026-06-07T05:11:15.839091"
+  ]
+  node [
+    id 6840
+    label "magdalen college"
+    added "2026-06-07T05:11:15.839116"
+  ]
+  node [
+    id 6841
+    label "tolerance"
+    added "2026-06-07T05:21:24.249137"
+  ]
+  node [
+    id 6842
+    label "right"
+    added "2026-06-07T05:21:24.249176"
+  ]
+  node [
+    id 6843
+    label "the paradox of tolerance"
+    added "2026-06-07T05:21:24.249194"
+  ]
+  node [
+    id 6844
+    label "philosophical concept suggesting that if"
+    added "2026-06-07T05:21:24.249202"
+  ]
+  node [
+    id 6845
+    label "a society extends tolerance to those who"
+    added "2026-06-07T05:21:24.249216"
+  ]
+  node [
+    id 6846
+    label "intolerant"
+    added "2026-06-07T05:21:24.249222"
+  ]
+  node [
+    id 6847
+    label "this paradox"
+    added "2026-06-07T05:21:24.249236"
+  ]
+  node [
+    id 6848
+    label "rticulated by philosopher karl popper in"
+    added "2026-06-07T05:21:24.249242"
+  ]
+  node [
+    id 6849
+    label "auction theory and society"
+    added "2026-06-07T05:21:24.367551"
+  ]
+  node [
+    id 6850
+    label "karl popper"
+    added "2026-06-07T05:21:24.367583"
+  ]
+  node [
+    id 6851
+    label "the open society"
+    added "2026-06-07T05:21:24.367611"
+  ]
+  node [
+    id 6852
+    label "george loewenstein"
+    added "2026-06-07T05:31:32.408819"
+  ]
+  node [
+    id 6853
+    label "n american educator and economist"
+    added "2026-06-07T05:31:32.408855"
+  ]
+  node [
+    id 6854
+    label "neuroeconomics and society"
+    added "2026-06-07T05:31:32.518219"
+  ]
+  node [
+    id 6855
+    label "the herbert a. simon professor"
+    added "2026-06-07T05:31:32.518341"
+  ]
+  node [
+    id 6856
+    label "economics and psychology"
+    added "2026-06-07T05:31:32.518368"
+  ]
+  node [
+    id 6857
+    label "carnegie mellon university"
+    added "2026-06-07T05:31:32.518393"
+  ]
+  node [
+    id 6858
+    label "the center for behavioral decision research"
+    added "2026-06-07T05:31:32.518418"
+  ]
+  node [
+    id 6859
+    label "judgment and decision making"
+    added "2026-06-07T05:31:32.518443"
+  ]
+  node [
+    id 6860
+    label "interior design"
+    added "2026-06-07T05:41:40.930156"
+  ]
+  node [
+    id 6861
+    label "art and science of enhancing the interio"
+    added "2026-06-07T05:41:40.930187"
+  ]
+  node [
+    id 6862
+    label "an interior designer"
+    added "2026-06-07T05:41:40.930216"
+  ]
+  node [
+    id 6863
+    label "someone who plans"
+    added "2026-06-07T05:41:40.930227"
+  ]
+  node [
+    id 6864
+    label "multifaceted profession that includes co"
+    added "2026-06-07T05:41:40.930251"
+  ]
+  node [
+    id 6865
+    label "design is a multifaceted profession that"
+    added "2026-06-07T05:41:40.930274"
+  ]
+  node [
+    id 6866
+    label "conceptual development"
+    added "2026-06-07T05:41:40.930286"
+  ]
+  node [
+    id 6867
+    label "mechanism design and society"
+    added "2026-06-07T05:41:41.033360"
+  ]
+  node [
+    id 6868
+    label "interior"
+    added "2026-06-07T05:41:41.033401"
+  ]
+  node [
+    id 6869
+    label "the antikythera mechanism"
+    added "2026-06-07T05:41:41.066947"
+  ]
+  node [
+    id 6870
+    label "n ancient greek hand"
+    added "2026-06-07T05:41:41.066982"
+  ]
+  node [
+    id 6871
+    label "antikythera"
+    added "2026-06-07T05:41:41.161634"
+  ]
+  node [
+    id 6872
+    label "four-year"
+    added "2026-06-07T05:41:41.161719"
+  ]
+  node [
+    id 6873
+    label "olympic games"
+    added "2026-06-07T05:41:41.161742"
+  ]
+  node [
+    id 6874
+    label "f concern recognized by sri practitioners"
+    added "2026-06-07T05:51:49.185052"
+  ]
+  node [
+    id 6875
+    label "often linked to environmental"
+    added "2026-06-07T05:51:49.185095"
+  ]
+  node [
+    id 6876
+    label "ng can be considered a subset of sri that"
+    added "2026-06-07T05:51:49.185122"
+  ]
+  node [
+    id 6877
+    label "generally more proactive and focused on"
+    added "2026-06-07T05:51:49.185133"
+  ]
+  node [
+    id 6878
+    label "investing"
+    added "2026-06-07T05:51:49.185152"
+  ]
+  node [
+    id 6879
+    label "sri with a focus on environm"
+    added "2026-06-07T05:51:49.185162"
+  ]
+  node [
+    id 6880
+    label "factor investing and society"
+    added "2026-06-07T05:51:49.327094"
+  ]
+  node [
+    id 6881
+    label "estate investing"
+    added "2026-06-07T05:51:49.366952"
+  ]
+  node [
+    id 6882
+    label "purchasing"
+    added "2026-06-07T05:51:49.366982"
+  ]
+  node [
+    id 6883
+    label "investors"
+    added "2026-06-07T05:51:49.367010"
+  ]
+  node [
+    id 6884
+    label "estate projects"
+    added "2026-06-07T05:51:49.367022"
+  ]
+  node [
+    id 6885
+    label "the primary goal of real estate investing"
+    added "2026-06-07T05:51:49.367063"
+  ]
+  node [
+    id 6886
+    label "to increase value or generate a profit t"
+    added "2026-06-07T05:51:49.367087"
+  ]
+  node [
+    id 6887
+    label "as each type"
+    added "2026-06-07T05:51:49.367110"
+  ]
+  node [
+    id 6888
+    label "a unique investment strategy"
+    added "2026-06-07T05:51:49.367121"
+  ]
+  node [
+    id 6889
+    label "evidence for this synergy"
+    added "2026-06-07T06:01:57.630587"
+  ]
+  node [
+    id 6890
+    label "found since humanity first started using"
+    added "2026-06-07T06:01:57.630606"
+  ]
+  node [
+    id 6891
+    label "legal technology and society"
+    added "2026-06-07T06:01:57.750785"
+  ]
+  node [
+    id 6892
+    label "volatility"
+    added "2026-06-07T06:12:05.709205"
+  ]
+  node [
+    id 6893
+    label "tendency"
+    added "2026-06-07T06:12:05.709236"
+  ]
+  node [
+    id 6894
+    label "material quality which describes how rea"
+    added "2026-06-07T06:12:05.709257"
+  ]
+  node [
+    id 6895
+    label "a substance with high volatility"
+    added "2026-06-07T06:12:05.709273"
+  ]
+  node [
+    id 6896
+    label "more likely to exist as a vapour"
+    added "2026-06-07T06:12:05.709281"
+  ]
+  node [
+    id 6897
+    label "while a substance with low volatility"
+    added "2026-06-07T06:12:05.709296"
+  ]
+  node [
+    id 6898
+    label "more likely to be a liquid or solid"
+    added "2026-06-07T06:12:05.709304"
+  ]
+  node [
+    id 6899
+    label "volatility surface and society"
+    added "2026-06-07T06:12:06.064457"
+  ]
+  node [
+    id 6900
+    label "third planet from the sun and the only a"
+    added "2026-06-07T06:12:06.116656"
+  ]
+  node [
+    id 6901
+    label "made possible by earth being an ocean wo"
+    added "2026-06-07T06:12:06.116712"
+  ]
+  node [
+    id 6902
+    label "s water"
+    added "2026-06-07T06:12:06.116739"
+  ]
+  node [
+    id 6903
+    label "contained in its oceans"
+    added "2026-06-07T06:12:06.116753"
+  ]
+  node [
+    id 6904
+    label "s crust"
+    added "2026-06-07T06:12:06.116781"
+  ]
+  node [
+    id 6905
+    label "land"
+    added "2026-06-07T06:12:06.116793"
+  ]
+  node [
+    id 6906
+    label "most of which"
+    added "2026-06-07T06:12:06.116818"
+  ]
+  node [
+    id 6907
+    label "located in the form of continental landm"
+    added "2026-06-07T06:12:06.116830"
+  ]
+  node [
+    id 6908
+    label "s land"
+    added "2026-06-07T06:12:06.116854"
+  ]
+  node [
+    id 6909
+    label "t least somewhat humid and cover"
+    added "2026-06-07T06:12:06.116866"
+  ]
+  node [
+    id 6910
+    label "70.8%"
+    added "2026-06-07T06:12:06.230828"
+  ]
+  node [
+    id 6911
+    label "29.2%"
+    added "2026-06-07T06:12:06.230859"
+  ]
+  node [
+    id 6912
+    label "risk parity in emerging markets"
+    added "2026-06-07T06:22:14.493620"
+  ]
+  node [
+    id 6913
+    label "interest rates"
+    added "2026-06-07T06:22:14.688879"
+  ]
+  node [
+    id 6914
+    label "condition"
+    added "2026-06-07T06:22:14.688955"
+  ]
+  node [
+    id 6915
+    label "allows"
+    added "2026-06-07T06:22:14.688969"
+  ]
+  node [
+    id 6916
+    label "sumptions central to interest rate parity"
+    added "2026-06-07T06:22:14.688994"
+  ]
+  node [
+    id 6917
+    label "capital mobility and perfect substitutab"
+    added "2026-06-07T06:22:14.689006"
+  ]
+  node [
+    id 6918
+    label "h the indiscriminate process of summation"
+    added "2026-06-07T06:32:22.690097"
+  ]
+  node [
+    id 6919
+    label "seen"
+    added "2026-06-07T06:32:22.690129"
+  ]
+  node [
+    id 6920
+    label "resonance or thalamocortical oscillation"
+    added "2026-06-07T06:32:22.902041"
+  ]
+  node [
+    id 6921
+    label "n observed phenomenon of oscillatory neu"
+    added "2026-06-07T06:32:22.902074"
+  ]
+  node [
+    id 6922
+    label "thalamocortical oscillation"
+    added "2026-06-07T06:32:22.902102"
+  ]
+  node [
+    id 6923
+    label "proposed to be a mechanism of synchroniz"
+    added "2026-06-07T06:32:22.902114"
+  ]
+  node [
+    id 6924
+    label "neural oscillations and society"
+    added "2026-06-07T06:32:23.037324"
+  ]
+  node [
+    id 6925
+    label "rodolfo llinas"
+    added "2026-06-07T06:32:23.037358"
+  ]
+  node [
+    id 6926
+    label "chinese nobility"
+    added "2026-06-07T06:42:31.643856"
+  ]
+  node [
+    id 6927
+    label "the powerful government offices"
+    added "2026-06-07T06:42:31.643877"
+  ]
+  node [
+    id 6928
+    label "not hereditary"
+    added "2026-06-07T06:42:31.643886"
+  ]
+  node [
+    id 6929
+    label "selected through the imperial examinatio"
+    added "2026-06-07T06:42:31.643900"
+  ]
+  node [
+    id 6930
+    label "structured products and society"
+    added "2026-06-07T06:42:31.782367"
+  ]
+  node [
+    id 6931
+    label "imperial china"
+    added "2026-06-07T06:42:31.782445"
+  ]
+  node [
+    id 6932
+    label "confucian"
+    added "2026-06-07T06:42:31.782498"
+  ]
+  node [
+    id 6933
+    label "best stores"
+    added "2026-06-07T06:42:31.827277"
+  ]
+  node [
+    id 6934
+    label "order service"
+    added "2026-06-07T06:42:31.827327"
+  ]
+  node [
+    id 6935
+    label "in existence for four decades"
+    added "2026-06-07T06:42:31.827352"
+  ]
+  node [
+    id 6936
+    label "best products"
+    added "2026-06-07T06:42:31.827377"
+  ]
+  node [
+    id 6937
+    label "traded on the nasdaq exchange as"
+    added "2026-06-07T06:42:31.827389"
+  ]
+  node [
+    id 6938
+    label "best products company, inc."
+    added "2026-06-07T06:42:31.974458"
+  ]
+  node [
+    id 6939
+    label "sydney"
+    added "2026-06-07T06:42:31.974489"
+  ]
+  node [
+    id 6940
+    label "frances lewis"
+    added "2026-06-07T06:42:31.974504"
+  ]
+  node [
+    id 6941
+    label "richmond"
+    added "2026-06-07T06:42:31.974529"
+  ]
+  node [
+    id 6942
+    label "four decades"
+    added "2026-06-07T06:42:31.974553"
+  ]
+  node [
+    id 6943
+    label "1996"
+    added "2026-06-07T06:42:31.974579"
+  ]
+  node [
+    id 6944
+    label "169"
+    added "2026-06-07T06:42:31.974593"
+  ]
+  node [
+    id 6945
+    label "11"
+    added "2026-06-07T06:42:31.974617"
+  ]
+  node [
+    id 6946
+    label "best jewelry"
+    added "2026-06-07T06:42:31.974640"
+  ]
+  node [
+    id 6947
+    label "bestq"
+    added "2026-06-07T06:42:31.974709"
+  ]
+  node [
+    id 6948
+    label "tensor product  of two vector spaces  and"
+    added "2026-06-07T06:42:32.003883"
+  ]
+  node [
+    id 6949
+    label "vector space to which is associated a bi"
+    added "2026-06-07T06:42:32.003917"
+  ]
+  node [
+    id 6950
+    label "corpora cavernosa"
+    added "2026-06-07T06:52:40.098094"
+  ]
+  node [
+    id 6951
+    label "inhibitor"
+    added "2026-06-07T06:52:40.098131"
+  ]
+  node [
+    id 6952
+    label "vasodilating drug that works by blocking"
+    added "2026-06-07T06:52:40.098139"
+  ]
+  node [
+    id 6953
+    label "used in the treatment of erectile dysfun"
+    added "2026-06-07T06:52:40.098154"
+  ]
+  node [
+    id 6954
+    label "sildenafil"
+    added "2026-06-07T06:52:40.098170"
+  ]
+  node [
+    id 6955
+    label "first effective oral treatment available"
+    added "2026-06-07T06:52:40.098177"
+  ]
+  node [
+    id 6956
+    label "neurogenesis in emerging markets"
+    added "2026-06-07T06:52:40.242199"
+  ]
+  node [
+    id 6957
+    label "gmp"
+    added "2026-06-07T06:52:40.242256"
+  ]
+  node [
+    id 6958
+    label "ed"
+    added "2026-06-07T06:52:40.242310"
+  ]
+  node [
+    id 6959
+    label "the pharmacology of antidepressants"
+    added "2026-06-07T06:52:40.258476"
+  ]
+  node [
+    id 6960
+    label "not entirely clear"
+    added "2026-06-07T06:52:40.258504"
+  ]
+  node [
+    id 6961
+    label "royal jelly is a honey bee secretion that"
+    added "2026-06-07T06:52:40.373250"
+  ]
+  node [
+    id 6962
+    label "used in the nutrition of larvae and adul"
+    added "2026-06-07T06:52:40.373286"
+  ]
+  node [
+    id 6963
+    label "royal jelly"
+    added "2026-06-07T06:52:40.486014"
+  ]
+  node [
+    id 6964
+    label "fed"
+    added "2026-06-07T06:52:40.486094"
+  ]
+  node [
+    id 6965
+    label "appointment"
+    added "2026-06-07T07:02:49.745980"
+  ]
+  node [
+    id 6966
+    label "applied genetic technologies corporation"
+    added "2026-06-07T07:02:49.746044"
+  ]
+  node [
+    id 6967
+    label "publicly traded biotechnology company th"
+    added "2026-06-07T07:02:49.746053"
+  ]
+  node [
+    id 6968
+    label "optogenetics in emerging markets"
+    added "2026-06-07T07:02:49.903008"
+  ]
+  node [
+    id 6969
+    label "the applied genetic technologies corporation"
+    added "2026-06-07T07:02:49.903077"
+  ]
+  node [
+    id 6970
+    label "nasdaq biotechnology"
+    added "2026-06-07T07:02:49.903102"
+  ]
+  node [
+    id 6971
+    label "alachua"
+    added "2026-06-07T07:02:49.903140"
+  ]
+  node [
+    id 6972
+    label "florida"
+    added "2026-06-07T07:02:49.903162"
+  ]
+  node [
+    id 6973
+    label "late june 2019"
+    added "2026-06-07T07:02:49.903186"
+  ]
+  node [
+    id 6974
+    label "global clinical and medical affairs veteran"
+    added "2026-06-07T07:02:49.903208"
+  ]
+  node [
+    id 6975
+    label "m.d."
+    added "2026-06-07T07:02:49.903231"
+  ]
+  node [
+    id 6976
+    label "flavin"
+    added "2026-06-07T07:02:49.949346"
+  ]
+  node [
+    id 6977
+    label "dinucleotide"
+    added "2026-06-07T07:02:49.949376"
+  ]
+  node [
+    id 6978
+    label "involved with several enzymatic reaction"
+    added "2026-06-07T07:02:49.949405"
+  ]
+  node [
+    id 6979
+    label "a flavoprotein"
+    added "2026-06-07T07:02:49.949430"
+  ]
+  node [
+    id 6980
+    label "protein that contains a flavin group"
+    added "2026-06-07T07:02:49.949442"
+  ]
+  node [
+    id 6981
+    label "many flavoproteins"
+    added "2026-06-07T07:02:49.949464"
+  ]
+  node [
+    id 6982
+    label "fad"
+    added "2026-06-07T07:02:50.072000"
+  ]
+  node [
+    id 6983
+    label "bioconvergence"
+    added "2026-06-07T07:02:50.103620"
+  ]
+  node [
+    id 6984
+    label "multidisciplinary industry that leverage"
+    added "2026-06-07T07:02:50.103671"
+  ]
+  node [
+    id 6985
+    label "house"
+    added "2026-06-07T07:12:58.089538"
+  ]
+  node [
+    id 6986
+    label "petitions"
+    added "2026-06-07T07:12:58.089568"
+  ]
+  node [
+    id 6987
+    label "the uk parliament petitions website"
+    added "2026-06-07T07:12:58.089587"
+  ]
+  node [
+    id 6988
+    label "n official online petition platform run"
+    added "2026-06-07T07:12:58.089594"
+  ]
+  node [
+    id 6989
+    label "the government"
+    added "2026-06-07T07:12:58.089608"
+  ]
+  node [
+    id 6990
+    label "required to resp"
+    added "2026-06-07T07:12:58.089615"
+  ]
+  node [
+    id 6991
+    label "threshold signatures and society"
+    added "2026-06-07T07:12:58.230810"
+  ]
+  node [
+    id 6992
+    label "uk"
+    added "2026-06-07T07:12:58.230846"
+  ]
+  node [
+    id 6993
+    label "the government of the united kingdom"
+    added "2026-06-07T07:12:58.230878"
+  ]
+  node [
+    id 6994
+    label "the parliament of the united kingdom"
+    added "2026-06-07T07:12:58.230905"
+  ]
+  node [
+    id 6995
+    label "the house of commons"
+    added "2026-06-07T07:12:58.230943"
+  ]
+  node [
+    id 6996
+    label "the house of commons' petitions committee"
+    added "2026-06-07T07:12:58.230970"
+  ]
+  node [
+    id 6997
+    label "percolation"
+    added "2026-06-07T07:12:58.273761"
+  ]
+  node [
+    id 6998
+    label "the percolation threshold"
+    added "2026-06-07T07:12:58.273812"
+  ]
+  node [
+    id 6999
+    label "mathematical concept in percolation theo"
+    added "2026-06-07T07:12:58.273825"
+  ]
+  node [
+    id 7000
+    label "yadan"
+    added "2026-06-07T07:12:58.500462"
+  ]
+  node [
+    id 7001
+    label "bill 575"
+    added "2026-06-07T07:12:58.500511"
+  ]
+  node [
+    id 7002
+    label "caroline yadan"
+    added "2026-06-07T07:12:58.500553"
+  ]
+  node [
+    id 7003
+    label "smith"
+    added "2026-06-07T07:23:06.070890"
+  ]
+  node [
+    id 7004
+    label "vernon lomax smith"
+    added "2026-06-07T07:23:06.070960"
+  ]
+  node [
+    id 7005
+    label "n american economist who is currently a"
+    added "2026-06-07T07:23:06.070975"
+  ]
+  node [
+    id 7006
+    label "neuroeconomics in emerging markets"
+    added "2026-06-07T07:23:06.192641"
+  ]
+  node [
+    id 7007
+    label "vernon l. smith"
+    added "2026-06-07T07:23:06.192675"
+  ]
+  node [
+    id 7008
+    label "chapman university"
+    added "2026-06-07T07:23:06.192736"
+  ]
+  node [
+    id 7009
+    label "the university of arizona"
+    added "2026-06-07T07:23:06.192761"
+  ]
+  node [
+    id 7010
+    label "george mason university"
+    added "2026-06-07T07:23:06.192786"
+  ]
+  node [
+    id 7011
+    label "the mercatus center"
+    added "2026-06-07T07:23:06.192812"
+  ]
+  node [
+    id 7012
+    label "daniel kahneman"
+    added "2026-06-07T07:23:06.192837"
+  ]
+  node [
+    id 7013
+    label "nobel memorial prize in economic sciences"
+    added "2026-06-07T07:23:06.192896"
+  ]
+  node [
+    id 7014
+    label "music theory composition and society"
+    added "2026-06-07T07:33:14.453741"
+  ]
+  node [
+    id 7015
+    label "music software"
+    added "2026-06-07T07:33:14.474506"
+  ]
+  node [
+    id 7016
+    label "algorithmic composition"
+    added "2026-06-07T07:33:14.562687"
+  ]
+  node [
+    id 7017
+    label "technique of using algorithms to create"
+    added "2026-06-07T07:33:14.562720"
+  ]
+  node [
+    id 7018
+    label "market design"
+    added "2026-06-07T07:43:23.998161"
+  ]
+  node [
+    id 7019
+    label "branch of economics that focuses on esta"
+    added "2026-06-07T07:43:23.998209"
+  ]
+  node [
+    id 7020
+    label "concerned with the workings of particula"
+    added "2026-06-07T07:43:23.998241"
+  ]
+  node [
+    id 7021
+    label "r markets in order to fix them when they"
+    added "2026-06-07T07:43:23.998266"
+  ]
+  node [
+    id 7022
+    label "broken or to build markets when they are"
+    added "2026-06-07T07:43:23.998281"
+  ]
+  node [
+    id 7023
+    label "mechanism design in emerging markets"
+    added "2026-06-07T07:43:24.133571"
+  ]
+  node [
+    id 7024
+    label "alvin roth"
+    added "2026-06-07T07:43:24.133612"
+  ]
+  node [
+    id 7025
+    label "actors such as individuals"
+    added "2026-06-07T07:43:24.166470"
+  ]
+  node [
+    id 7026
+    label "research area"
+    added "2026-06-07T07:43:24.396185"
+  ]
+  node [
+    id 7027
+    label "factor investing in emerging markets"
+    added "2026-06-07T07:53:33.769174"
+  ]
+  node [
+    id 7028
+    label "assets"
+    added "2026-06-07T08:03:42.761760"
+  ]
+  node [
+    id 7029
+    label "regulation in european union"
+    added "2026-06-07T08:03:42.761793"
+  ]
+  node [
+    id 7030
+    label "legal technology in emerging markets"
+    added "2026-06-07T08:03:42.881167"
+  ]
+  node [
+    id 7031
+    label "european union"
+    added "2026-06-07T08:03:42.881205"
+  ]
+  node [
+    id 7032
+    label "dlt"
+    added "2026-06-07T08:03:42.881336"
+  ]
+  node [
+    id 7033
+    label "a market"
+    added "2026-06-07T08:13:51.684566"
+  ]
+  node [
+    id 7034
+    label "composition of systems"
+    added "2026-06-07T08:13:51.684586"
+  ]
+  node [
+    id 7035
+    label "it can be said that a market"
+    added "2026-06-07T08:13:51.684613"
+  ]
+  node [
+    id 7036
+    label "process by which the value of goods and"
+    added "2026-06-07T08:13:51.684626"
+  ]
+  node [
+    id 7037
+    label "established"
+    added "2026-06-07T08:13:51.684650"
+  ]
+  node [
+    id 7038
+    label "volatility surface in emerging markets"
+    added "2026-06-07T08:13:51.920561"
+  ]
+  node [
+    id 7039
+    label "veeco"
+    added "2026-06-07T08:13:51.920605"
+  ]
+  node [
+    id 7040
+    label "veeco instruments inc."
+    added "2026-06-07T08:13:51.920639"
+  ]
+  node [
+    id 7041
+    label "plainview"
+    added "2026-06-07T08:13:51.920747"
+  ]
+  node [
+    id 7042
+    label "new york"
+    added "2026-06-07T08:13:51.920777"
+  ]
+  node [
+    id 7043
+    label "financial economics"
+    added "2026-06-07T08:13:51.974396"
+  ]
+  node [
+    id 7044
+    label "branch of economics characterized by a"
+    added "2026-06-07T08:13:51.974446"
+  ]
+  node [
+    id 7045
+    label "money of one type or another"
+    added "2026-06-07T08:13:51.974488"
+  ]
+  node [
+    id 7046
+    label "likely to appear on both sides of a trad"
+    added "2026-06-07T08:13:51.974503"
+  ]
+  node [
+    id 7047
+    label "its concern"
+    added "2026-06-07T08:13:51.974531"
+  ]
+  node [
+    id 7048
+    label "thus the interrelation of financial vari"
+    added "2026-06-07T08:13:51.974545"
+  ]
+  node [
+    id 7049
+    label "image processing"
+    added "2026-06-07T08:24:00.696118"
+  ]
+  node [
+    id 7050
+    label "with the difference that communication"
+    added "2026-06-07T08:24:00.696178"
+  ]
+  node [
+    id 7051
+    label "llowed between neighbouring units only"
+    added "2026-06-07T08:24:00.696192"
+  ]
+  node [
+    id 7052
+    label "neural oscillations in emerging markets"
+    added "2026-06-07T08:24:00.794956"
+  ]
+  node [
+    id 7053
+    label "cellular neural networks"
+    added "2026-06-07T08:24:00.794995"
+  ]
+  node [
+    id 7054
+    label "cnn"
+    added "2026-06-07T08:24:00.795032"
+  ]
+  node [
+    id 7055
+    label "cellular nonlinear networks"
+    added "2026-06-07T08:24:00.795062"
+  ]
+  node [
+    id 7056
+    label "electroencephalography"
+    added "2026-06-07T08:24:00.966090"
+  ]
+  node [
+    id 7057
+    label "depicts how firms"
+    added "2026-06-07T08:34:09.936788"
+  ]
+  node [
+    id 7058
+    label "differentiated and categorised based on"
+    added "2026-06-07T08:34:09.936819"
+  ]
+  node [
+    id 7059
+    label "and how their operations"
+    added "2026-06-07T08:34:09.936846"
+  ]
+  node [
+    id 7060
+    label "ffected by external factors and elements"
+    added "2026-06-07T08:34:09.936858"
+  ]
+  node [
+    id 7061
+    label "msci"
+    added "2026-06-07T08:34:10.075238"
+  ]
+  node [
+    id 7062
+    label "global provider of equity"
+    added "2026-06-07T08:34:10.075278"
+  ]
+  node [
+    id 7063
+    label "structured products in emerging markets"
+    added "2026-06-07T08:34:10.173465"
+  ]
+  node [
+    id 7064
+    label "msci inc."
+    added "2026-06-07T08:34:10.173517"
+  ]
+  node [
+    id 7065
+    label "the msci world"
+    added "2026-06-07T08:34:10.173597"
+  ]
+  node [
+    id 7066
+    label "msci emerging markets"
+    added "2026-06-07T08:34:10.173622"
+  ]
+  node [
+    id 7067
+    label "msci all country world"
+    added "2026-06-07T08:34:10.173645"
+  ]
+  node [
+    id 7068
+    label "goldentree asset management"
+    added "2026-06-07T08:34:10.203349"
+  ]
+  node [
+    id 7069
+    label "n american asset management firm that wa"
+    added "2026-06-07T08:34:10.203367"
+  ]
+  node [
+    id 7070
+    label "west palm beach"
+    added "2026-06-07T08:34:10.290860"
+  ]
+  node [
+    id 7071
+    label "charlotte"
+    added "2026-06-07T08:34:10.290903"
+  ]
+  node [
+    id 7072
+    label "north carolina"
+    added "2026-06-07T08:34:10.290926"
+  ]
+  node [
+    id 7073
+    label "dublin"
+    added "2026-06-07T08:34:10.290949"
+  ]
+  node [
+    id 7074
+    label "london"
+    added "2026-06-07T08:34:10.290971"
+  ]
+  node [
+    id 7075
+    label "singapore"
+    added "2026-06-07T08:34:10.291009"
+  ]
+  node [
+    id 7076
+    label "tokyo"
+    added "2026-06-07T08:34:10.291045"
+  ]
+  node [
+    id 7077
+    label "signature bank"
+    added "2026-06-07T08:44:19.149076"
+  ]
+  node [
+    id 7078
+    label "n american full"
+    added "2026-06-07T08:44:19.149096"
+  ]
+  node [
+    id 7079
+    label "threshold signatures in emerging markets"
+    added "2026-06-07T08:44:19.272879"
+  ]
+  node [
+    id 7080
+    label "connecticut"
+    added "2026-06-07T08:44:19.273007"
+  ]
+  node [
+    id 7081
+    label "the end of 2022"
+    added "2026-06-07T08:44:19.273168"
+  ]
+  node [
+    id 7082
+    label "management approach"
+    added "2026-06-07T08:44:19.329469"
+  ]
+  node [
+    id 7083
+    label "certco"
+    added "2026-06-07T08:44:19.456297"
+  ]
+  node [
+    id 7084
+    label "certco, inc."
+    added "2026-06-07T08:44:19.456365"
+  ]
+  node [
+    id 7085
+    label "bankers trust"
+    added "2026-06-07T08:44:19.456394"
+  ]
+  node [
+    id 7086
+    label "pki"
+    added "2026-06-07T08:44:19.456512"
+  ]
+  node [
+    id 7087
+    label "identity warranty"
+    added "2026-06-07T08:44:19.456538"
+  ]
+  node [
+    id 7088
+    label "ocsp"
+    added "2026-06-07T08:44:19.456564"
+  ]
+  node [
+    id 7089
+    label "spring 2"
+    added "2026-06-07T08:44:19.456590"
+  ]
+  node [
+    id 7090
+    label "philippines"
+    added "2026-06-07T08:44:19.624875"
+  ]
+  node [
+    id 7091
+    label "bongbong marcos"
+    added "2026-06-07T08:44:19.624945"
+  ]
+  node [
+    id 7092
+    label "billions"
+    added "2026-06-07T08:44:19.624969"
+  ]
+  node [
+    id 7093
+    label "music theory composition in emerging markets"
+    added "2026-06-07T08:54:28.434483"
+  ]
+  node [
+    id 7094
+    label "melody"
+    added "2026-06-07T08:54:28.480591"
+  ]
+  node [
+    id 7095
+    label "songs"
+    added "2026-06-07T08:54:28.480661"
+  ]
+  node [
+    id 7096
+    label "a song"
+    added "2026-06-07T08:54:28.480689"
+  ]
+  node [
+    id 7097
+    label "musical composition performed by the hum"
+    added "2026-06-07T08:54:28.480723"
+  ]
+  node [
+    id 7098
+    label "and are usually made of sections that"
+    added "2026-06-07T08:54:28.480758"
+  ]
+  node [
+    id 7099
+    label "repeated or performed with variation lat"
+    added "2026-06-07T08:54:28.480772"
+  ]
+  node [
+    id 7100
+    label "a song without instruments"
+    added "2026-06-07T08:54:28.480799"
+  ]
+  node [
+    id 7101
+    label "said to be a cappella"
+    added "2026-06-07T08:54:28.480812"
+  ]
+  node [
+    id 7102
+    label "aba"
+    added "2026-06-07T08:54:28.585210"
+  ]
+  node [
+    id 7103
+    label "the music industry"
+    added "2026-06-07T08:54:28.642182"
+  ]
+  node [
+    id 7104
+    label "individuals and organizations that earn"
+    added "2026-06-07T08:54:28.642230"
+  ]
+  node [
+    id 7105
+    label "dividing budgets"
+    added "2026-06-07T09:04:36.785428"
+  ]
+  node [
+    id 7106
+    label "gender budgeting"
+    added "2026-06-07T09:04:36.785468"
+  ]
+  node [
+    id 7107
+    label "feminist policy with a primary goal of r"
+    added "2026-06-07T09:04:36.785478"
+  ]
+  node [
+    id 7108
+    label "outline"
+    added "2026-06-07T09:04:36.943360"
+  ]
+  node [
+    id 7109
+    label "guide"
+    added "2026-06-07T09:04:36.943384"
+  ]
+  node [
+    id 7110
+    label "geometry shapes space in emerging markets and society"
+    added "2026-06-07T09:14:45.209684"
+  ]
+  node [
+    id 7111
+    label "ket segmentation or customer segmentation"
+    added "2026-06-07T09:24:54.234023"
+  ]
+  node [
+    id 7112
+    label "process of dividing a consumer or busine"
+    added "2026-06-07T09:24:54.234063"
+  ]
+  node [
+    id 7113
+    label "the objective"
+    added "2026-06-07T09:24:54.234092"
+  ]
+  node [
+    id 7114
+    label "to identify profitable and growing segme"
+    added "2026-06-07T09:24:54.234105"
+  ]
+  node [
+    id 7115
+    label "statistics data analysis in emerging markets in emerging markets"
+    added "2026-06-07T09:24:54.510557"
+  ]
+  node [
+    id 7116
+    label "list of emerging technologies"
+    added "2026-06-07T09:35:03.262407"
+  ]
+  node [
+    id 7117
+    label "the criteria for this list"
+    added "2026-06-07T09:35:03.262471"
+  ]
+  node [
+    id 7118
+    label "that the technology must"
+    added "2026-06-07T09:35:03.262499"
+  ]
+  node [
+    id 7119
+    label "being actively researched and prototyped"
+    added "2026-06-07T09:35:03.262515"
+  ]
+  node [
+    id 7120
+    label "cceptable"
+    added "2026-06-07T09:35:03.262528"
+  ]
+  node [
+    id 7121
+    label "biology living organisms in emerging markets in emerging markets"
+    added "2026-06-07T09:35:03.411910"
+  ]
+  node [
+    id 7122
+    label "the pharmaceutical industry"
+    added "2026-06-07T09:45:13.908244"
+  ]
+  node [
+    id 7123
+    label "medical industry that discovers"
+    added "2026-06-07T09:45:13.908277"
+  ]
+  node [
+    id 7124
+    label "medications"
+    added "2026-06-07T09:45:13.908309"
+  ]
+  node [
+    id 7125
+    label "n administered to patients for curing or"
+    added "2026-06-07T09:45:13.908324"
+  ]
   edge [
     source 0
     target 1
@@ -31682,14 +35852,14 @@ graph [
     target 2971
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:25:12.373286"
+    added "2026-06-07T00:27:33.535062"
   ]
   edge [
     source 24
     target 3041
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:42:46.665857"
+    added "2026-06-06T21:04:29.720172"
   ]
   edge [
     source 24
@@ -31776,6 +35946,20 @@ graph [
     added "2026-06-04T05:09:14.185710"
   ]
   edge [
+    source 24
+    target 6819
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891916"
+  ]
+  edge [
+    source 24
+    target 6926
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.643867"
+  ]
+  edge [
     source 26
     target 27
     predicate "IS"
@@ -31836,21 +36020,21 @@ graph [
     target 31
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:09:02.719757"
+    added "2026-06-07T02:49:29.780497"
   ]
   edge [
     source 32
     target 33
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:23:02.155249"
+    added "2026-06-07T09:45:13.761782"
   ]
   edge [
     source 34
     target 35
     predicate "RELIES_ON"
     confidence 1.0
-    added "2026-06-04T01:23:02.155284"
+    added "2026-06-07T09:45:13.761835"
   ]
   edge [
     source 36
@@ -31864,7 +36048,7 @@ graph [
     target 42
     predicate "EXAMINE"
     confidence 1.0
-    added "2026-06-06T16:08:33.808150"
+    added "2026-06-07T09:45:13.595008"
   ]
   edge [
     source 36
@@ -31923,11 +36107,18 @@ graph [
     added "2026-06-04T01:03:58.334701"
   ]
   edge [
+    source 42
+    target 2863
+    predicate "ESTABLISH"
+    confidence 1.0
+    added "2026-06-07T00:17:25.148355"
+  ]
+  edge [
     source 43
     target 44
     predicate "ALTER"
     confidence 1.0
-    added "2026-06-06T16:08:33.808357"
+    added "2026-06-07T09:45:13.595041"
   ]
   edge [
     source 44
@@ -31941,14 +36132,14 @@ graph [
     target 46
     predicate "IS"
     confidence 1.0
-    added "2026-06-06T16:08:33.808391"
+    added "2026-06-07T09:45:13.595053"
   ]
   edge [
     source 47
     target 48
     predicate "ARE"
     confidence 1.0
-    added "2026-06-06T16:08:33.808414"
+    added "2026-06-07T09:45:13.595063"
   ]
   edge [
     source 49
@@ -32032,14 +36223,14 @@ graph [
     target 4803
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:44:02.414255"
+    added "2026-06-07T03:30:01.080723"
   ]
   edge [
     source 63
     target 4804
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:44:02.414293"
+    added "2026-06-07T03:30:01.080738"
   ]
   edge [
     source 65
@@ -32357,6 +36548,13 @@ graph [
     added "2026-06-06T16:18:45.829263"
   ]
   edge [
+    source 109
+    target 6476
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.506606"
+  ]
+  edge [
     source 111
     target 112
     predicate "ARE"
@@ -32494,7 +36692,7 @@ graph [
     target 3176
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T21:06:31.111270"
+    added "2026-06-06T22:46:02.058130"
   ]
   edge [
     source 131
@@ -32553,6 +36751,20 @@ graph [
     added "2026-06-06T19:12:47.848583"
   ]
   edge [
+    source 131
+    target 6294
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T19:22:56.753185"
+  ]
+  edge [
+    source 131
+    target 6929
+    predicate "WERE"
+    confidence 1.0
+    added "2026-06-07T06:42:31.643907"
+  ]
+  edge [
     source 133
     target 134
     predicate "MENTIONS"
@@ -32586,6 +36798,13 @@ graph [
     predicate "INCLUDE"
     confidence 1.0
     added "2026-06-04T01:17:26.044330"
+  ]
+  edge [
+    source 135
+    target 6558
+    predicate "LINK"
+    confidence 1.0
+    added "2026-06-06T23:16:30.167901"
   ]
   edge [
     source 137
@@ -33075,7 +37294,7 @@ graph [
     target 2966
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:25:12.172805"
+    added "2026-06-07T00:27:33.228368"
   ]
   edge [
     source 210
@@ -33288,6 +37507,34 @@ graph [
     added "2026-06-06T18:00:56.149087"
   ]
   edge [
+    source 210
+    target 6587
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T00:07:17.065134"
+  ]
+  edge [
+    source 210
+    target 6694
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-07T01:38:31.239380"
+  ]
+  edge [
+    source 210
+    target 6770
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.189398"
+  ]
+  edge [
+    source 210
+    target 6978
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.949416"
+  ]
+  edge [
     source 212
     target 213
     predicate "IS"
@@ -33299,7 +37546,7 @@ graph [
     target 215
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:02:12.215604"
+    added "2026-06-07T04:00:21.467077"
   ]
   edge [
     source 217
@@ -33523,7 +37770,7 @@ graph [
     target 1250
     predicate "SHAPE"
     confidence 1.0
-    added "2026-06-04T00:34:34.655882"
+    added "2026-06-07T07:23:05.778372"
   ]
   edge [
     source 251
@@ -33824,7 +38071,7 @@ graph [
     target 4439
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:51:35.765345"
+    added "2026-06-07T03:19:52.841068"
   ]
   edge [
     source 274
@@ -33866,21 +38113,21 @@ graph [
     target 5176
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:33:14.931898"
+    added "2026-06-07T05:11:15.500123"
   ]
   edge [
     source 274
     target 5459
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:54:40.693225"
+    added "2026-06-07T02:29:12.965118"
   ]
   edge [
     source 274
     target 5477
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:04:43.051502"
+    added "2026-06-07T03:09:46.385923"
   ]
   edge [
     source 274
@@ -33902,6 +38149,34 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-04T07:11:56.026492"
+  ]
+  edge [
+    source 274
+    target 6405
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:14:38.898004"
+  ]
+  edge [
+    source 274
+    target 6568
+    predicate "INCLUDES"
+    confidence 1.0
+    added "2026-06-07T07:53:33.478711"
+  ]
+  edge [
+    source 274
+    target 7025
+    predicate "INCLUDES"
+    confidence 1.0
+    added "2026-06-07T07:43:24.166517"
+  ]
+  edge [
+    source 274
+    target 7116
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:35:03.262454"
   ]
   edge [
     source 276
@@ -34020,28 +38295,28 @@ graph [
     target 308
     predicate "SPACE"
     confidence 1.0
-    added "2026-06-03T18:28:49.295282"
+    added "2026-06-07T02:49:29.950905"
   ]
   edge [
     source 309
     target 310
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T18:28:49.295311"
+    added "2026-06-07T02:49:29.950950"
   ]
   edge [
     source 311
     target 312
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T18:28:49.295321"
+    added "2026-06-07T02:49:29.950967"
   ]
   edge [
     source 313
     target 314
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T18:28:49.295329"
+    added "2026-06-07T02:49:29.950982"
   ]
   edge [
     source 319
@@ -34275,6 +38550,13 @@ graph [
     added "2026-06-04T00:07:42.125641"
   ]
   edge [
+    source 358
+    target 977
+    predicate "PROVIDE"
+    confidence 1.0
+    added "2026-06-06T19:33:06.593282"
+  ]
+  edge [
     source 360
     target 361
     predicate "INCLUDES"
@@ -34336,6 +38618,13 @@ graph [
     predicate "MENTIONS"
     confidence 1.0
     added "2026-06-02T15:21:30.503343"
+  ]
+  edge [
+    source 370
+    target 6900
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116692"
   ]
   edge [
     source 371
@@ -34538,14 +38827,14 @@ graph [
     target 2446
     predicate "IS"
     confidence 1.0
-    added "2026-06-06T17:20:02.107767"
+    added "2026-06-07T05:21:24.407660"
   ]
   edge [
     source 395
     target 2449
     predicate "WAS"
     confidence 1.0
-    added "2026-06-06T17:20:02.107808"
+    added "2026-06-07T05:21:24.407690"
   ]
   edge [
     source 395
@@ -34651,6 +38940,27 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-04T07:01:45.634987"
+  ]
+  edge [
+    source 395
+    target 6489
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.244465"
+  ]
+  edge [
+    source 395
+    target 6621
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-07T00:37:41.977145"
+  ]
+  edge [
+    source 395
+    target 6953
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T06:52:40.098160"
   ]
   edge [
     source 398
@@ -34902,7 +39212,7 @@ graph [
     target 442
     predicate "HOLD"
     confidence 1.0
-    added "2026-06-03T21:30:10.130086"
+    added "2026-06-06T20:54:20.600085"
   ]
   edge [
     source 442
@@ -34916,7 +39226,7 @@ graph [
     target 444
     predicate "UTILIZE"
     confidence 1.0
-    added "2026-06-03T21:30:10.130122"
+    added "2026-06-06T20:54:20.600134"
   ]
   edge [
     source 445
@@ -35311,6 +39621,13 @@ graph [
     added "2026-06-04T01:26:25.943314"
   ]
   edge [
+    source 527
+    target 6603
+    predicate "PROMOTE"
+    confidence 1.0
+    added "2026-06-07T00:37:41.768124"
+  ]
+  edge [
     source 528
     target 6210
     predicate "REFLECT"
@@ -35329,42 +39646,42 @@ graph [
     target 533
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:44:07.570811"
+    added "2026-06-07T07:53:33.804448"
   ]
   edge [
     source 534
     target 535
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:44:07.570835"
+    added "2026-06-07T07:53:33.804491"
   ]
   edge [
     source 536
     target 537
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:44:07.570846"
+    added "2026-06-07T07:53:33.804543"
   ]
   edge [
     source 538
     target 539
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:44:07.570854"
+    added "2026-06-07T07:53:33.804562"
   ]
   edge [
     source 540
     target 541
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:44:07.712196"
+    added "2026-06-06T19:53:26.199718"
   ]
   edge [
     source 542
     target 543
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:44:07.712230"
+    added "2026-06-06T19:53:26.199788"
   ]
   edge [
     source 544
@@ -35658,14 +39975,14 @@ graph [
     target 587
     predicate "INVOLVE"
     confidence 1.0
-    added "2026-06-02T17:33:29.062651"
+    added "2026-06-06T23:46:56.941680"
   ]
   edge [
     source 586
     target 588
     predicate "IS"
     confidence 1.0
-    added "2026-06-02T17:33:29.062683"
+    added "2026-06-06T23:46:56.941738"
   ]
   edge [
     source 587
@@ -35679,14 +39996,14 @@ graph [
     target 590
     predicate "ARE"
     confidence 1.0
-    added "2026-06-02T17:33:29.062720"
+    added "2026-06-06T23:46:56.941757"
   ]
   edge [
     source 591
     target 292
     predicate "GAIN"
     confidence 1.0
-    added "2026-06-03T18:44:54.081509"
+    added "2026-06-07T09:04:37.063615"
   ]
   edge [
     source 592
@@ -35777,14 +40094,14 @@ graph [
     target 2485
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:15:45.492503"
+    added "2026-06-07T09:14:45.255209"
   ]
   edge [
     source 609
     target 2486
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:15:45.492529"
+    added "2026-06-07T09:14:45.255259"
   ]
   edge [
     source 610
@@ -36043,7 +40360,7 @@ graph [
     target 1000
     predicate "WERE"
     confidence 1.0
-    added "2026-06-04T02:10:19.322322"
+    added "2026-06-07T02:39:21.714797"
   ]
   edge [
     source 644
@@ -36100,6 +40417,13 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-06T18:42:20.879151"
+  ]
+  edge [
+    source 644
+    target 6901
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116724"
   ]
   edge [
     source 646
@@ -36375,6 +40699,13 @@ graph [
     added "2026-06-03T21:51:29.942602"
   ]
   edge [
+    source 688
+    target 961
+    predicate "DESCRIBE"
+    confidence 1.0
+    added "2026-06-07T02:19:04.108378"
+  ]
+  edge [
     source 689
     target 690
     predicate "REQUIRE"
@@ -36431,6 +40762,41 @@ graph [
     added "2026-06-04T00:50:47.780114"
   ]
   edge [
+    source 691
+    target 6729
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T03:09:46.622006"
+  ]
+  edge [
+    source 691
+    target 6933
+    predicate "OPERATE"
+    confidence 1.0
+    added "2026-06-07T06:42:31.827310"
+  ]
+  edge [
+    source 691
+    target 6934
+    predicate "OPERATE"
+    confidence 1.0
+    added "2026-06-07T06:42:31.827339"
+  ]
+  edge [
+    source 691
+    target 6965
+    predicate "ANNOUNCE"
+    confidence 1.0
+    added "2026-06-07T07:02:49.746007"
+  ]
+  edge [
+    source 691
+    target 7082
+    predicate "PIONEER"
+    confidence 1.0
+    added "2026-06-07T08:44:19.329502"
+  ]
+  edge [
     source 692
     target 1073
     predicate "MEET"
@@ -36442,35 +40808,35 @@ graph [
     target 44
     predicate "PERFORM"
     confidence 1.0
-    added "2026-06-03T20:25:12.172648"
+    added "2026-06-07T00:27:33.228280"
   ]
   edge [
     source 694
     target 695
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:14:55.747961"
+    added "2026-06-07T04:00:21.065288"
   ]
   edge [
     source 696
     target 697
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:14:55.747985"
+    added "2026-06-07T04:00:21.065323"
   ]
   edge [
     source 698
     target 699
     predicate "ARE"
     confidence 1.0
-    added "2026-06-04T02:14:55.747995"
+    added "2026-06-07T04:00:21.065334"
   ]
   edge [
     source 700
     target 701
     predicate "CONSISTS_OF"
     confidence 1.0
-    added "2026-06-04T02:14:55.748004"
+    added "2026-06-07T04:00:21.065343"
   ]
   edge [
     source 702
@@ -36974,7 +41340,7 @@ graph [
     target 1421
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T23:24:46.132739"
+    added "2026-06-07T03:40:09.341932"
   ]
   edge [
     source 788
@@ -37241,6 +41607,13 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-04T01:25:18.491087"
+  ]
+  edge [
+    source 811
+    target 6935
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.827363"
   ]
   edge [
     source 814
@@ -37625,49 +41998,49 @@ graph [
     target 900
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T20:49:32.139416"
+    added "2026-06-07T00:47:49.525786"
   ]
   edge [
     source 899
     target 917
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:49:32.283331"
+    added "2026-06-06T23:06:20.765825"
   ]
   edge [
     source 901
     target 902
     predicate "FACE"
     confidence 1.0
-    added "2026-06-03T20:49:32.139440"
+    added "2026-06-07T00:47:49.525817"
   ]
   edge [
     source 901
     target 905
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:49:32.139458"
+    added "2026-06-07T00:47:49.525839"
   ]
   edge [
     source 903
     target 904
     predicate "ACHIEVE"
     confidence 1.0
-    added "2026-06-03T20:49:32.139450"
+    added "2026-06-07T00:47:49.525829"
   ]
   edge [
     source 906
     target 907
     predicate "INCLUDES"
     confidence 1.0
-    added "2026-06-03T20:49:32.139466"
+    added "2026-06-07T00:47:49.525847"
   ]
   edge [
     source 908
     target 909
     predicate "HELP"
     confidence 1.0
-    added "2026-06-03T20:49:32.404107"
+    added "2026-06-06T23:06:20.364829"
   ]
   edge [
     source 910
@@ -37709,7 +42082,7 @@ graph [
     target 919
     predicate "REQUIRES"
     confidence 1.0
-    added "2026-06-03T20:49:32.283350"
+    added "2026-06-06T23:06:20.765862"
   ]
   edge [
     source 920
@@ -38006,6 +42379,13 @@ graph [
     added "2026-06-03T18:18:26.835107"
   ]
   edge [
+    source 965
+    target 4261
+    predicate "PROVIDE"
+    confidence 1.0
+    added "2026-06-07T01:38:30.970156"
+  ]
+  edge [
     source 967
     target 968
     predicate "ARE"
@@ -38185,7 +42565,7 @@ graph [
     target 999
     predicate "DESCRIBE"
     confidence 1.0
-    added "2026-06-04T02:10:19.322268"
+    added "2026-06-07T02:39:21.714746"
   ]
   edge [
     source 1001
@@ -38755,6 +43135,13 @@ graph [
     added "2026-06-03T19:20:50.540856"
   ]
   edge [
+    source 1094
+    target 6578
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:57:06.613361"
+  ]
+  edge [
     source 1095
     target 1096
     predicate "IS"
@@ -39000,6 +43387,13 @@ graph [
     added "2026-06-03T21:15:31.024125"
   ]
   edge [
+    source 1121
+    target 6473
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T05:51:49.506545"
+  ]
+  edge [
     source 1122
     target 1123
     predicate "IS"
@@ -39158,7 +43552,7 @@ graph [
     target 1158
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T22:27:31.477880"
+    added "2026-06-07T09:14:45.393858"
   ]
   edge [
     source 1159
@@ -39217,6 +43611,13 @@ graph [
     added "2026-06-04T01:24:09.235407"
   ]
   edge [
+    source 1167
+    target 7049
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-07T08:24:00.696157"
+  ]
+  edge [
     source 1169
     target 1170
     predicate "INCLUDE"
@@ -39229,6 +43630,20 @@ graph [
     predicate "INCLUDE"
     confidence 1.0
     added "2026-06-04T00:37:17.474983"
+  ]
+  edge [
+    source 1170
+    target 7037
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.684661"
+  ]
+  edge [
+    source 1170
+    target 1170
+    predicate "PROVIDE"
+    confidence 1.0
+    added "2026-06-07T08:44:19.149027"
   ]
   edge [
     source 1171
@@ -39522,7 +43937,7 @@ graph [
     target 1963
     predicate "INFLUENCE"
     confidence 1.0
-    added "2026-06-03T21:08:45.667897"
+    added "2026-06-06T21:55:16.770418"
   ]
   edge [
     source 1229
@@ -39928,14 +44343,14 @@ graph [
     target 1307
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:18:25.943691"
+    added "2026-06-06T21:34:58.352701"
   ]
   edge [
     source 1308
     target 1309
     predicate "INCLUDES"
     confidence 1.0
-    added "2026-06-03T20:18:25.943726"
+    added "2026-06-06T21:34:58.352736"
   ]
   edge [
     source 1308
@@ -40173,7 +44588,7 @@ graph [
     target 3195
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:07:38.304435"
+    added "2026-06-06T22:56:11.763594"
   ]
   edge [
     source 1352
@@ -40258,6 +44673,13 @@ graph [
     predicate "SHRM"
     confidence 1.0
     added "2026-06-03T21:00:54.555383"
+  ]
+  edge [
+    source 1368
+    target 3130
+    predicate "ADOPT"
+    confidence 1.0
+    added "2026-06-06T21:34:58.839999"
   ]
   edge [
     source 1370
@@ -40432,7 +44854,7 @@ graph [
     target 604
     predicate "ENCOMPASS"
     confidence 1.0
-    added "2026-06-04T03:55:14.254919"
+    added "2026-06-07T09:35:03.654724"
   ]
   edge [
     source 1393
@@ -40519,6 +44941,13 @@ graph [
     added "2026-06-03T18:10:15.753339"
   ]
   edge [
+    source 1404
+    target 2896
+    predicate "SIMULATE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.341167"
+  ]
+  edge [
     source 1406
     target 1407
     predicate "IS"
@@ -40544,7 +44973,7 @@ graph [
     target 1413
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:30:54.578649"
+    added "2026-06-07T00:57:58.229304"
   ]
   edge [
     source 1414
@@ -40579,14 +45008,14 @@ graph [
     target 1420
     predicate "MEAN"
     confidence 1.0
-    added "2026-06-03T23:24:46.132703"
+    added "2026-06-07T03:40:09.341895"
   ]
   edge [
     source 1422
     target 1423
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:24:46.132756"
+    added "2026-06-07T03:40:09.341945"
   ]
   edge [
     source 1424
@@ -40656,14 +45085,14 @@ graph [
     target 1428
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:35:29.272691"
+    added "2026-06-07T03:40:09.500903"
   ]
   edge [
     source 1429
     target 1430
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:35:29.272718"
+    added "2026-06-07T03:40:09.500949"
   ]
   edge [
     source 1431
@@ -40691,21 +45120,21 @@ graph [
     target 1435
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:21:08.076245"
+    added "2026-06-06T20:13:43.999805"
   ]
   edge [
     source 1434
     target 1438
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:21:08.076279"
+    added "2026-06-06T20:13:43.999890"
   ]
   edge [
     source 1436
     target 1437
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:21:08.076269"
+    added "2026-06-06T20:13:43.999874"
   ]
   edge [
     source 1439
@@ -40782,7 +45211,7 @@ graph [
     target 37
     predicate "INVOLVE"
     confidence 1.0
-    added "2026-06-03T20:21:08.220721"
+    added "2026-06-06T20:13:44.242402"
   ]
   edge [
     source 1450
@@ -41055,7 +45484,7 @@ graph [
     target 1504
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:11:43.574368"
+    added "2026-06-06T23:16:29.401575"
   ]
   edge [
     source 1503
@@ -41566,7 +45995,7 @@ graph [
     target 1606
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T20:46:50.040773"
+    added "2026-06-06T20:44:11.645591"
   ]
   edge [
     source 1606
@@ -41587,42 +46016,42 @@ graph [
     target 1608
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T20:46:50.040812"
+    added "2026-06-06T20:44:11.645650"
   ]
   edge [
     source 1608
     target 5383
     predicate "GAIN"
     confidence 1.0
-    added "2026-06-04T01:47:56.048399"
+    added "2026-06-07T01:08:06.721335"
   ]
   edge [
     source 1609
     target 1610
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:46:50.040824"
+    added "2026-06-06T20:44:11.645671"
   ]
   edge [
     source 1611
     target 1612
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:46:50.040833"
+    added "2026-06-06T20:44:11.645691"
   ]
   edge [
     source 1613
     target 1614
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:46:50.040842"
+    added "2026-06-06T20:44:11.645707"
   ]
   edge [
     source 1615
     target 1616
     predicate "INCLUDES"
     confidence 1.0
-    added "2026-06-03T20:46:50.040850"
+    added "2026-06-06T20:44:11.645723"
   ]
   edge [
     source 1617
@@ -41825,7 +46254,7 @@ graph [
     target 1660
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:21:09.058584"
+    added "2026-06-07T00:17:24.994388"
   ]
   edge [
     source 1661
@@ -42098,7 +46527,14 @@ graph [
     target 3811
     predicate "COMPRISE"
     confidence 1.0
-    added "2026-06-03T22:33:10.067330"
+    added "2026-06-07T03:30:01.345130"
+  ]
+  edge [
+    source 1705
+    target 114
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T06:42:31.643823"
   ]
   edge [
     source 1706
@@ -42119,7 +46555,7 @@ graph [
     target 1737
     predicate "USE"
     confidence 1.0
-    added "2026-06-03T21:06:31.376485"
+    added "2026-06-06T22:46:02.652899"
   ]
   edge [
     source 1710
@@ -42532,28 +46968,28 @@ graph [
     target 1785
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:30:36.293212"
+    added "2026-06-06T23:26:38.953773"
   ]
   edge [
     source 1784
     target 199
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:30:36.293245"
+    added "2026-06-06T23:26:38.953812"
   ]
   edge [
     source 1786
     target 580
     predicate "TAKE"
     confidence 1.0
-    added "2026-06-03T20:30:36.420923"
+    added "2026-06-06T23:26:39.133689"
   ]
   edge [
     source 1786
     target 1787
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:30:36.420956"
+    added "2026-06-06T23:26:39.133741"
   ]
   edge [
     source 1788
@@ -43204,35 +47640,35 @@ graph [
     target 1894
     predicate "DESCRIBE"
     confidence 1.0
-    added "2026-06-03T21:36:55.082007"
+    added "2026-06-07T07:33:14.311947"
   ]
   edge [
     source 1895
     target 1896
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:36:55.082033"
+    added "2026-06-07T07:33:14.311998"
   ]
   edge [
     source 1897
     target 1898
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:36:55.082043"
+    added "2026-06-07T07:33:14.312010"
   ]
   edge [
     source 1899
     target 199
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:36:55.082051"
+    added "2026-06-07T07:33:14.312020"
   ]
   edge [
     source 1900
     target 1901
     predicate "USES"
     confidence 1.0
-    added "2026-06-03T21:36:55.082060"
+    added "2026-06-07T07:33:14.312033"
   ]
   edge [
     source 1903
@@ -43554,21 +47990,21 @@ graph [
     target 1962
     predicate "STUDY"
     confidence 1.0
-    added "2026-06-03T21:08:45.667846"
+    added "2026-06-06T21:55:16.770377"
   ]
   edge [
     source 1961
     target 1964
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:08:45.667918"
+    added "2026-06-06T21:55:16.770433"
   ]
   edge [
     source 1965
     target 1966
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:08:45.667934"
+    added "2026-06-06T21:55:16.770443"
   ]
   edge [
     source 1967
@@ -43918,28 +48354,28 @@ graph [
     target 2033
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:51:29.653350"
+    added "2026-06-07T02:19:03.907842"
   ]
   edge [
     source 2034
     target 2035
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:51:29.653378"
+    added "2026-06-07T02:19:03.907914"
   ]
   edge [
     source 2036
     target 2037
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:51:29.653390"
+    added "2026-06-07T02:19:03.907927"
   ]
   edge [
     source 2038
     target 2039
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T21:51:29.653400"
+    added "2026-06-07T02:19:03.907938"
   ]
   edge [
     source 2040
@@ -44275,7 +48711,7 @@ graph [
     target 2096
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:16:03.831501"
+    added "2026-06-07T03:09:46.491451"
   ]
   edge [
     source 2099
@@ -44429,14 +48865,14 @@ graph [
     target 3359
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T21:31:17.992578"
+    added "2026-06-06T23:36:48.243079"
   ]
   edge [
     source 2124
     target 1421
     predicate "INCLUDE"
     confidence 1.0
-    added "2026-06-03T21:31:17.992594"
+    added "2026-06-06T23:36:48.243117"
   ]
   edge [
     source 2128
@@ -45122,14 +49558,14 @@ graph [
     target 2270
     predicate "MEAN"
     confidence 1.0
-    added "2026-06-04T02:11:29.695306"
+    added "2026-06-07T02:59:38.412039"
   ]
   edge [
     source 2271
     target 2272
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:11:29.695355"
+    added "2026-06-07T02:59:38.412145"
   ]
   edge [
     source 2274
@@ -45892,21 +50328,21 @@ graph [
     target 2444
     predicate "ADDRESS"
     confidence 1.0
-    added "2026-06-06T17:20:02.107703"
+    added "2026-06-07T05:21:24.407606"
   ]
   edge [
     source 2443
     target 2445
     predicate "IS"
     confidence 1.0
-    added "2026-06-06T17:20:02.107748"
+    added "2026-06-07T05:21:24.407643"
   ]
   edge [
     source 2447
     target 2448
     predicate "ARE"
     confidence 1.0
-    added "2026-06-06T17:20:02.107793"
+    added "2026-06-07T05:21:24.407676"
   ]
   edge [
     source 2450
@@ -45970,6 +50406,13 @@ graph [
     predicate "USE"
     confidence 1.0
     added "2026-06-03T18:40:22.776869"
+  ]
+  edge [
+    source 2458
+    target 6455
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-06T21:45:07.999055"
   ]
   edge [
     source 2459
@@ -47155,6 +51598,13 @@ graph [
     added "2026-06-03T19:18:05.755264"
   ]
   edge [
+    source 2690
+    target 6320
+    predicate "EMIT"
+    confidence 1.0
+    added "2026-06-06T19:33:06.593328"
+  ]
+  edge [
     source 2691
     target 1625
     predicate "MENTIONS"
@@ -47432,7 +51882,7 @@ graph [
     target 68
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:19:38.250431"
+    added "2026-06-07T09:14:45.094972"
   ]
   edge [
     source 2728
@@ -47754,7 +52204,7 @@ graph [
     target 2806
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:44:34.992925"
+    added "2026-06-07T05:31:32.561352"
   ]
   edge [
     source 2807
@@ -48132,7 +52582,7 @@ graph [
     target 2888
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:15:11.330080"
+    added "2026-06-06T23:26:39.291238"
   ]
   edge [
     source 2889
@@ -48238,6 +52688,20 @@ graph [
     predicate "RECOGNIZE"
     confidence 1.0
     added "2026-06-03T22:27:31.800892"
+  ]
+  edge [
+    source 2901
+    target 6594
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T00:17:25.148413"
+  ]
+  edge [
+    source 2901
+    target 6595
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T00:17:25.148439"
   ]
   edge [
     source 2903
@@ -48531,35 +52995,35 @@ graph [
     target 199
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:25:12.172714"
+    added "2026-06-07T00:27:33.228328"
   ]
   edge [
     source 2963
     target 2964
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:25:12.172758"
+    added "2026-06-07T00:27:33.228345"
   ]
   edge [
     source 2963
     target 2965
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:25:12.172789"
+    added "2026-06-07T00:27:33.228357"
   ]
   edge [
     source 2967
     target 2968
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:25:12.373247"
+    added "2026-06-07T00:27:33.535022"
   ]
   edge [
     source 2969
     target 2970
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:25:12.373271"
+    added "2026-06-07T00:27:33.535051"
   ]
   edge [
     source 2972
@@ -48608,14 +53072,14 @@ graph [
     target 2980
     predicate "LEARN"
     confidence 1.0
-    added "2026-06-03T20:26:33.510418"
+    added "2026-06-06T22:25:43.161557"
   ]
   edge [
     source 2981
     target 2982
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T20:26:33.510442"
+    added "2026-06-06T22:25:43.161609"
   ]
   edge [
     source 2983
@@ -48888,7 +53352,7 @@ graph [
     target 3040
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:42:46.665835"
+    added "2026-06-06T21:04:29.720125"
   ]
   edge [
     source 3042
@@ -48958,14 +53422,14 @@ graph [
     target 3054
     predicate "TERM"
     confidence 1.0
-    added "2026-06-03T20:42:46.950298"
+    added "2026-06-06T21:04:30.200861"
   ]
   edge [
     source 3053
     target 3055
     predicate "EXAMINE"
     confidence 1.0
-    added "2026-06-03T20:42:46.950324"
+    added "2026-06-06T21:04:30.200900"
   ]
   edge [
     source 3056
@@ -48973,6 +53437,13 @@ graph [
     predicate "DETERMINE"
     confidence 1.0
     added "2026-06-03T20:45:28.509414"
+  ]
+  edge [
+    source 3056
+    target 6368
+    predicate "TREAT"
+    confidence 1.0
+    added "2026-06-06T20:44:12.154232"
   ]
   edge [
     source 3058
@@ -49325,6 +53796,13 @@ graph [
     added "2026-06-03T20:53:35.849038"
   ]
   edge [
+    source 3120
+    target 6776
+    predicate "EXAMINE"
+    confidence 1.0
+    added "2026-06-07T04:20:37.494507"
+  ]
+  edge [
     source 3122
     target 3123
     predicate "UTILIZE"
@@ -49399,14 +53877,14 @@ graph [
     target 3147
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T20:59:47.231766"
+    added "2026-06-06T21:24:49.174145"
   ]
   edge [
     source 3148
     target 3149
     predicate "CONSISTS_OF"
     confidence 1.0
-    added "2026-06-03T20:59:47.231786"
+    added "2026-06-06T21:24:49.174179"
   ]
   edge [
     source 3150
@@ -49539,7 +54017,7 @@ graph [
     target 3175
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T21:06:31.111253"
+    added "2026-06-06T22:46:02.058067"
   ]
   edge [
     source 3177
@@ -49588,49 +54066,49 @@ graph [
     target 3186
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:06:31.376525"
+    added "2026-06-06T22:46:02.652950"
   ]
   edge [
     source 3187
     target 3188
     predicate "WERE"
     confidence 1.0
-    added "2026-06-03T21:06:31.376547"
+    added "2026-06-06T22:46:02.652968"
   ]
   edge [
     source 3191
     target 3192
     predicate "CONCERN"
     confidence 1.0
-    added "2026-06-03T21:07:38.304395"
+    added "2026-06-06T22:56:11.763520"
   ]
   edge [
     source 3191
     target 1158
     predicate "USE"
     confidence 1.0
-    added "2026-06-03T21:07:38.457969"
+    added "2026-06-06T22:56:11.098769"
   ]
   edge [
     source 3191
     target 3198
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:07:38.458011"
+    added "2026-06-06T22:56:11.098801"
   ]
   edge [
     source 3191
     target 3201
     predicate "USES"
     confidence 1.0
-    added "2026-06-03T21:07:38.458048"
+    added "2026-06-06T22:56:11.098823"
   ]
   edge [
     source 3192
     target 3744
     predicate "OFFER"
     confidence 1.0
-    added "2026-06-03T22:26:23.759777"
+    added "2026-06-07T09:24:54.552492"
   ]
   edge [
     source 3192
@@ -49644,7 +54122,7 @@ graph [
     target 3194
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T21:07:38.304420"
+    added "2026-06-06T22:56:11.763572"
   ]
   edge [
     source 3196
@@ -49665,7 +54143,7 @@ graph [
     target 3200
     predicate "WAS"
     confidence 1.0
-    added "2026-06-03T21:07:38.458034"
+    added "2026-06-06T22:56:11.098814"
   ]
   edge [
     source 3205
@@ -49735,7 +54213,7 @@ graph [
     target 3227
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:12:08.969752"
+    added "2026-06-06T22:05:25.339901"
   ]
   edge [
     source 3228
@@ -50330,42 +54808,49 @@ graph [
     target 3353
     predicate "REACH"
     confidence 1.0
-    added "2026-06-03T21:31:17.807005"
+    added "2026-06-06T23:36:47.962589"
   ]
   edge [
     source 3354
     target 689
     predicate "USE"
     confidence 1.0
-    added "2026-06-03T21:31:17.807022"
+    added "2026-06-06T23:36:47.962634"
   ]
   edge [
     source 3355
     target 3356
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:17.807041"
+    added "2026-06-06T23:36:47.962667"
   ]
   edge [
     source 3357
     target 3358
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:17.807061"
+    added "2026-06-06T23:36:47.962681"
   ]
   edge [
     source 3360
     target 3361
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:17.992620"
+    added "2026-06-06T23:36:48.243128"
   ]
   edge [
     source 3362
     target 3363
     predicate "INVOLVE"
     confidence 1.0
-    added "2026-06-03T21:31:18.107814"
+    added "2026-06-06T23:36:48.419629"
+  ]
+  edge [
+    source 3362
+    target 7105
+    predicate "ENTAIL"
+    confidence 1.0
+    added "2026-06-07T09:04:36.785456"
   ]
   edge [
     source 3363
@@ -50379,21 +54864,21 @@ graph [
     target 3365
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:18.107840"
+    added "2026-06-06T23:36:48.419696"
   ]
   edge [
     source 3364
     target 3366
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:18.107855"
+    added "2026-06-06T23:36:48.419721"
   ]
   edge [
     source 3367
     target 3368
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:31:18.107875"
+    added "2026-06-06T23:36:48.419744"
   ]
   edge [
     source 3367
@@ -50729,14 +55214,14 @@ graph [
     target 3420
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:51:29.799682"
+    added "2026-06-07T02:19:04.288595"
   ]
   edge [
     source 3421
     target 3422
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T21:51:29.799707"
+    added "2026-06-07T02:19:04.288635"
   ]
   edge [
     source 3425
@@ -51758,21 +56243,21 @@ graph [
     target 446
     predicate "REFLECT"
     confidence 1.0
-    added "2026-06-03T22:09:29.643767"
+    added "2026-06-07T09:24:54.384453"
   ]
   edge [
     source 3549
     target 3550
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:09:29.643796"
+    added "2026-06-07T09:24:54.384501"
   ]
   edge [
     source 3551
     target 3552
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:09:29.643819"
+    added "2026-06-07T09:24:54.384515"
   ]
   edge [
     source 3553
@@ -52500,21 +56985,21 @@ graph [
     target 3681
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:19:38.250472"
+    added "2026-06-07T09:14:45.095020"
   ]
   edge [
     source 3682
     target 3683
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:19:38.250494"
+    added "2026-06-07T09:14:45.095036"
   ]
   edge [
     source 3684
     target 3685
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:19:38.250521"
+    added "2026-06-07T09:14:45.095047"
   ]
   edge [
     source 3686
@@ -52822,21 +57307,21 @@ graph [
     target 3746
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:26:23.759823"
+    added "2026-06-07T09:24:54.552544"
   ]
   edge [
     source 3747
     target 3748
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:26:23.759872"
+    added "2026-06-07T09:24:54.552568"
   ]
   edge [
     source 3749
     target 3750
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T22:26:23.759893"
+    added "2026-06-07T09:24:54.552585"
   ]
   edge [
     source 3751
@@ -53151,7 +57636,7 @@ graph [
     target 3813
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:33:10.067367"
+    added "2026-06-07T03:30:01.345177"
   ]
   edge [
     source 3814
@@ -53256,21 +57741,21 @@ graph [
     target 3832
     predicate "ACHIEVE"
     confidence 1.0
-    added "2026-06-03T22:36:32.219666"
+    added "2026-06-07T06:22:14.362586"
   ]
   edge [
     source 3833
     target 3834
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:36:32.219699"
+    added "2026-06-07T06:22:14.362621"
   ]
   edge [
     source 3833
     target 3837
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:36:32.219740"
+    added "2026-06-07T06:22:14.362642"
   ]
   edge [
     source 3833
@@ -53340,21 +57825,21 @@ graph [
     target 3836
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T22:36:32.219727"
+    added "2026-06-07T06:22:14.362632"
   ]
   edge [
     source 3840
     target 609
     predicate "APPLY"
     confidence 1.0
-    added "2026-06-03T22:36:32.356037"
+    added "2026-06-07T06:22:14.530729"
   ]
   edge [
     source 3841
     target 3842
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:36:32.356078"
+    added "2026-06-07T06:22:14.530768"
   ]
   edge [
     source 3849
@@ -53396,7 +57881,14 @@ graph [
     target 3861
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:37:39.830257"
+    added "2026-06-07T05:01:07.549953"
+  ]
+  edge [
+    source 3860
+    target 6822
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:01:07.710516"
   ]
   edge [
     source 3862
@@ -53571,21 +58063,21 @@ graph [
     target 3888
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:39:54.457987"
+    added "2026-06-07T05:21:23.967819"
   ]
   edge [
     source 3889
     target 3890
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T22:39:54.458024"
+    added "2026-06-07T05:21:23.967865"
   ]
   edge [
     source 3891
     target 3892
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:39:54.458059"
+    added "2026-06-07T05:21:23.967877"
   ]
   edge [
     source 3893
@@ -53620,14 +58112,14 @@ graph [
     target 3906
     predicate "KNOW"
     confidence 1.0
-    added "2026-06-03T22:41:01.184607"
+    added "2026-06-07T05:41:40.757627"
   ]
   edge [
     source 3907
     target 3908
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:41:01.184629"
+    added "2026-06-07T05:41:40.757660"
   ]
   edge [
     source 3907
@@ -53826,6 +58318,13 @@ graph [
     added "2026-06-04T06:31:14.345069"
   ]
   edge [
+    source 3924
+    target 6729
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T08:34:10.203305"
+  ]
+  edge [
     source 3926
     target 3927
     predicate "IS"
@@ -53844,21 +58343,21 @@ graph [
     target 3933
     predicate "SHARE"
     confidence 1.0
-    added "2026-06-03T22:42:08.397920"
+    added "2026-06-07T07:53:33.647503"
   ]
   edge [
     source 3934
     target 3935
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T22:42:08.397959"
+    added "2026-06-07T07:53:33.647560"
   ]
   edge [
     source 3936
     target 3937
     predicate "WERE"
     confidence 1.0
-    added "2026-06-03T22:42:08.397991"
+    added "2026-06-07T07:53:33.647589"
   ]
   edge [
     source 3945
@@ -54229,7 +58728,7 @@ graph [
     target 4012
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T22:47:42.597387"
+    added "2026-06-07T06:12:05.955943"
   ]
   edge [
     source 4013
@@ -54285,7 +58784,7 @@ graph [
     target 4026
     predicate "GENERATE"
     confidence 1.0
-    added "2026-06-03T22:49:55.773088"
+    added "2026-06-07T06:32:22.535397"
   ]
   edge [
     source 4027
@@ -54334,7 +58833,7 @@ graph [
     target 4037
     predicate "IS"
     confidence 1.0
-    added "2026-06-06T16:39:11.347322"
+    added "2026-06-07T07:23:05.938710"
   ]
   edge [
     source 4036
@@ -54775,21 +59274,21 @@ graph [
     target 4123
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:54:40.420746"
+    added "2026-06-07T02:29:12.534258"
   ]
   edge [
     source 4124
     target 4125
     predicate "ARE"
     confidence 1.0
-    added "2026-06-04T01:54:40.420772"
+    added "2026-06-07T02:29:12.534309"
   ]
   edge [
     source 4126
     target 4127
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:54:40.420785"
+    added "2026-06-07T02:29:12.534329"
   ]
   edge [
     source 4128
@@ -54824,7 +59323,7 @@ graph [
     target 4132
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T02:04:43.168126"
+    added "2026-06-07T01:58:47.252149"
   ]
   edge [
     source 4134
@@ -55048,42 +59547,42 @@ graph [
     target 4172
     predicate "AUTOMATE"
     confidence 1.0
-    added "2026-06-03T23:03:18.813527"
+    added "2026-06-07T01:48:39.299034"
   ]
   edge [
     source 4173
     target 4174
     predicate "REQUEST"
     confidence 1.0
-    added "2026-06-03T23:03:18.813564"
+    added "2026-06-07T01:48:39.299088"
   ]
   edge [
     source 4175
     target 4176
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:03:18.813595"
+    added "2026-06-07T01:48:39.299106"
   ]
   edge [
     source 4175
     target 4177
     predicate "IS"
     confidence 1.0
-    added "2026-06-03T23:03:18.813616"
+    added "2026-06-07T01:48:39.299122"
   ]
   edge [
     source 4180
     target 4181
     predicate "ARE"
     confidence 1.0
-    added "2026-06-03T23:03:18.984862"
+    added "2026-06-07T01:48:39.458523"
   ]
   edge [
     source 4182
     target 4183
     predicate "ARE"
     confidence 1.0
-    added "2026-06-06T15:27:53.130335"
+    added "2026-06-07T01:28:23.006431"
   ]
   edge [
     source 4184
@@ -55756,6 +60255,13 @@ graph [
     predicate "HOLD"
     confidence 1.0
     added "2026-06-03T23:18:05.076302"
+  ]
+  edge [
+    source 4270
+    target 278
+    predicate "EXCHANGE"
+    confidence 1.0
+    added "2026-06-07T08:13:51.684519"
   ]
   edge [
     source 4272
@@ -59276,14 +63782,14 @@ graph [
     target 1737
     predicate "GUIDE"
     confidence 1.0
-    added "2026-06-04T00:34:34.655956"
+    added "2026-06-07T07:23:05.778411"
   ]
   edge [
     source 4698
     target 4699
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:34:34.655993"
+    added "2026-06-07T07:23:05.778427"
   ]
   edge [
     source 4698
@@ -59528,14 +64034,21 @@ graph [
     target 493
     predicate "ENCOMPASS"
     confidence 1.0
-    added "2026-06-04T00:37:17.066861"
+    added "2026-06-07T08:03:42.565223"
+  ]
+  edge [
+    source 4733
+    target 1920
+    predicate "REFER"
+    confidence 1.0
+    added "2026-06-07T06:01:57.630532"
   ]
   edge [
     source 4734
     target 4735
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:37:17.253173"
+    added "2026-06-07T06:01:57.766705"
   ]
   edge [
     source 4738
@@ -59818,6 +64331,20 @@ graph [
     added "2026-06-04T04:18:02.780087"
   ]
   edge [
+    source 4782
+    target 6298
+    predicate "RUN"
+    confidence 1.0
+    added "2026-06-06T19:22:56.947098"
+  ]
+  edge [
+    source 4782
+    target 686
+    predicate "WRITE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891752"
+  ]
+  edge [
     source 4783
     target 4784
     predicate "IS"
@@ -59885,21 +64412,21 @@ graph [
     target 419
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T00:44:02.414216"
+    added "2026-06-07T03:30:01.080684"
   ]
   edge [
     source 4805
     target 4806
     predicate "INCLUDES"
     confidence 1.0
-    added "2026-06-04T00:44:02.414342"
+    added "2026-06-07T03:30:01.080748"
   ]
   edge [
     source 4807
     target 4808
     predicate "INCLUDES"
     confidence 1.0
-    added "2026-06-04T00:44:02.414388"
+    added "2026-06-07T03:30:01.080758"
   ]
   edge [
     source 4809
@@ -61327,7 +65854,7 @@ graph [
     target 5059
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:14:03.240081"
+    added "2026-06-07T09:35:03.432219"
   ]
   edge [
     source 5060
@@ -62097,7 +66624,7 @@ graph [
     target 5175
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:33:14.931880"
+    added "2026-06-07T05:11:15.500068"
   ]
   edge [
     source 5174
@@ -62195,14 +66722,14 @@ graph [
     target 5178
     predicate "STUDY"
     confidence 1.0
-    added "2026-06-04T01:33:15.115251"
+    added "2026-06-07T05:11:15.630104"
   ]
   edge [
     source 5177
     target 5179
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:33:15.115281"
+    added "2026-06-07T05:11:15.630141"
   ]
   edge [
     source 5182
@@ -62779,6 +67306,13 @@ graph [
     added "2026-06-04T05:40:02.440857"
   ]
   edge [
+    source 5299
+    target 6379
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:44:12.342916"
+  ]
+  edge [
     source 5301
     target 5302
     predicate "IS"
@@ -62825,7 +67359,7 @@ graph [
     target 5444
     predicate "STAR"
     confidence 1.0
-    added "2026-06-04T01:58:00.665735"
+    added "2026-06-07T02:08:55.625710"
   ]
   edge [
     source 5315
@@ -63091,21 +67625,21 @@ graph [
     target 5385
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:47:56.048425"
+    added "2026-06-07T01:08:06.721375"
   ]
   edge [
     source 5384
     target 5386
     predicate "HAS_BEEN"
     confidence 1.0
-    added "2026-06-04T01:47:56.048442"
+    added "2026-06-07T01:08:06.721400"
   ]
   edge [
     source 5387
     target 5388
     predicate "WAS"
     confidence 1.0
-    added "2026-06-04T01:47:56.048464"
+    added "2026-06-07T01:08:06.721415"
   ]
   edge [
     source 5389
@@ -63518,7 +68052,7 @@ graph [
     target 5446
     predicate "IS"
     confidence 1.0
-    added "2026-06-04T01:58:00.665772"
+    added "2026-06-07T02:08:55.625744"
   ]
   edge [
     source 5458
@@ -66069,6 +70603,13 @@ graph [
     added "2026-06-04T04:48:44.847305"
   ]
   edge [
+    source 5795
+    target 6514
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.109669"
+  ]
+  edge [
     source 5802
     target 5803
     predicate "MENTIONS"
@@ -66895,6 +71436,13 @@ graph [
     added "2026-06-04T06:41:23.746815"
   ]
   edge [
+    source 5948
+    target 6584
+    predicate "TRADE"
+    confidence 1.0
+    added "2026-06-07T00:07:17.065052"
+  ]
+  edge [
     source 5950
     target 5951
     predicate "IS"
@@ -67257,6 +71805,13 @@ graph [
     predicate "MAKE"
     confidence 1.0
     added "2026-06-06T15:17:52.635888"
+  ]
+  edge [
+    source 6012
+    target 6210
+    predicate "EARN"
+    confidence 1.0
+    added "2026-06-06T21:45:07.998952"
   ]
   edge [
     source 6013
@@ -67712,6 +72267,13 @@ graph [
     predicate "AFFECT"
     confidence 1.0
     added "2026-06-06T16:08:32.490042"
+  ]
+  edge [
+    source 6068
+    target 6950
+    predicate "DILATE"
+    confidence 1.0
+    added "2026-06-07T06:52:40.098118"
   ]
   edge [
     source 6070
@@ -68965,5 +73527,5696 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-06T19:12:48.191520"
+  ]
+  edge [
+    source 6292
+    target 6293
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T19:22:56.753144"
+  ]
+  edge [
+    source 6295
+    target 2808
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:22:57.211282"
+  ]
+  edge [
+    source 6295
+    target 6296
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:22:56.909341"
+  ]
+  edge [
+    source 6295
+    target 6297
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:22:56.909370"
+  ]
+  edge [
+    source 6295
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:22:57.211319"
+  ]
+  edge [
+    source 6299
+    target 6300
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:22:56.947162"
+  ]
+  edge [
+    source 6301
+    target 6302
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:22:56.947206"
+  ]
+  edge [
+    source 6303
+    target 6304
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:22:57.111078"
+  ]
+  edge [
+    source 6305
+    target 6306
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.210730"
+  ]
+  edge [
+    source 6307
+    target 6308
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T19:33:06.210760"
+  ]
+  edge [
+    source 6309
+    target 6310
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.351189"
+  ]
+  edge [
+    source 6309
+    target 6311
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.754059"
+  ]
+  edge [
+    source 6309
+    target 6312
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.351250"
+  ]
+  edge [
+    source 6309
+    target 6319
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.546736"
+  ]
+  edge [
+    source 6309
+    target 1646
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.546755"
+  ]
+  edge [
+    source 6309
+    target 6325
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.753929"
+  ]
+  edge [
+    source 6309
+    target 1950
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.753949"
+  ]
+  edge [
+    source 6309
+    target 6326
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.753979"
+  ]
+  edge [
+    source 6309
+    target 6321
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.754078"
+  ]
+  edge [
+    source 6309
+    target 6327
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.754016"
+  ]
+  edge [
+    source 6309
+    target 6328
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.754042"
+  ]
+  edge [
+    source 6309
+    target 3870
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.754096"
+  ]
+  edge [
+    source 6313
+    target 6314
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.399463"
+  ]
+  edge [
+    source 6315
+    target 6316
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.399506"
+  ]
+  edge [
+    source 6317
+    target 6318
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.399544"
+  ]
+  edge [
+    source 6321
+    target 6322
+    predicate "CAPTURE"
+    confidence 1.0
+    added "2026-06-06T19:33:06.593353"
+  ]
+  edge [
+    source 6323
+    target 6324
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-06T19:33:06.593377"
+  ]
+  edge [
+    source 6329
+    target 545
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599063"
+  ]
+  edge [
+    source 6329
+    target 540
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599087"
+  ]
+  edge [
+    source 6329
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.985899"
+  ]
+  edge [
+    source 6329
+    target 547
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599130"
+  ]
+  edge [
+    source 6329
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599139"
+  ]
+  edge [
+    source 6329
+    target 548
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599149"
+  ]
+  edge [
+    source 6329
+    target 549
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599165"
+  ]
+  edge [
+    source 6329
+    target 550
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.599180"
+  ]
+  edge [
+    source 6329
+    target 551
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.985833"
+  ]
+  edge [
+    source 6329
+    target 552
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.985883"
+  ]
+  edge [
+    source 6329
+    target 553
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T19:53:26.985915"
+  ]
+  edge [
+    source 6330
+    target 286
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.781840"
+  ]
+  edge [
+    source 6331
+    target 6332
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.793049"
+  ]
+  edge [
+    source 6333
+    target 6334
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990140"
+  ]
+  edge [
+    source 6333
+    target 6094
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990168"
+  ]
+  edge [
+    source 6333
+    target 6335
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990200"
+  ]
+  edge [
+    source 6333
+    target 6336
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990232"
+  ]
+  edge [
+    source 6333
+    target 6337
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990270"
+  ]
+  edge [
+    source 6333
+    target 6338
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990297"
+  ]
+  edge [
+    source 6333
+    target 3096
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990315"
+  ]
+  edge [
+    source 6333
+    target 6339
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:03:35.990361"
+  ]
+  edge [
+    source 6340
+    target 1440
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:13:44.190111"
+  ]
+  edge [
+    source 6340
+    target 6346
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:13:44.690121"
+  ]
+  edge [
+    source 6340
+    target 6347
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:13:44.690157"
+  ]
+  edge [
+    source 6340
+    target 6348
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:13:44.690189"
+  ]
+  edge [
+    source 6341
+    target 788
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-06T20:13:44.502858"
+  ]
+  edge [
+    source 6341
+    target 6841
+    predicate "EXTEND"
+    confidence 1.0
+    added "2026-06-07T05:21:24.249163"
+  ]
+  edge [
+    source 6341
+    target 6842
+    predicate "RETAIN"
+    confidence 1.0
+    added "2026-06-07T05:21:24.249184"
+  ]
+  edge [
+    source 6342
+    target 6343
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:13:44.502905"
+  ]
+  edge [
+    source 6344
+    target 6345
+    predicate "INCLUDES"
+    confidence 1.0
+    added "2026-06-06T20:13:44.502942"
+  ]
+  edge [
+    source 6349
+    target 1302
+    predicate "GOVERN"
+    confidence 1.0
+    added "2026-06-06T20:23:53.434245"
+  ]
+  edge [
+    source 6350
+    target 6351
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:23:53.434273"
+  ]
+  edge [
+    source 6352
+    target 6353
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:23:53.434299"
+  ]
+  edge [
+    source 6354
+    target 6355
+    predicate "CONDUCT"
+    confidence 1.0
+    added "2026-06-06T20:23:53.669371"
+  ]
+  edge [
+    source 6356
+    target 6357
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:23:53.669418"
+  ]
+  edge [
+    source 6358
+    target 6359
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T20:23:53.669455"
+  ]
+  edge [
+    source 6360
+    target 3197
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:34:02.387448"
+  ]
+  edge [
+    source 6360
+    target 3202
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:34:02.589102"
+  ]
+  edge [
+    source 6360
+    target 6367
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:34:02.856913"
+  ]
+  edge [
+    source 6361
+    target 6362
+    predicate "FEAR"
+    confidence 1.0
+    added "2026-06-06T20:34:02.640288"
+  ]
+  edge [
+    source 6363
+    target 6364
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:34:02.640347"
+  ]
+  edge [
+    source 6365
+    target 6366
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-06T20:34:02.640383"
+  ]
+  edge [
+    source 6369
+    target 6370
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:44:12.154281"
+  ]
+  edge [
+    source 6371
+    target 6372
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:44:12.342765"
+  ]
+  edge [
+    source 6373
+    target 6374
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T20:44:12.342819"
+  ]
+  edge [
+    source 6375
+    target 6376
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T20:44:12.342856"
+  ]
+  edge [
+    source 6377
+    target 6378
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T20:44:12.342892"
+  ]
+  edge [
+    source 6380
+    target 5740
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:44:12.533491"
+  ]
+  edge [
+    source 6380
+    target 6381
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:44:12.533532"
+  ]
+  edge [
+    source 6382
+    target 6383
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.080400"
+  ]
+  edge [
+    source 6384
+    target 6385
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.080432"
+  ]
+  edge [
+    source 6386
+    target 6382
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236131"
+  ]
+  edge [
+    source 6386
+    target 6387
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236175"
+  ]
+  edge [
+    source 6386
+    target 6388
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236204"
+  ]
+  edge [
+    source 6386
+    target 6389
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236232"
+  ]
+  edge [
+    source 6386
+    target 6341
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236255"
+  ]
+  edge [
+    source 6386
+    target 6390
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236286"
+  ]
+  edge [
+    source 6386
+    target 6391
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.236322"
+  ]
+  edge [
+    source 6392
+    target 6393
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.256772"
+  ]
+  edge [
+    source 6394
+    target 6395
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T20:54:21.256799"
+  ]
+  edge [
+    source 6396
+    target 6397
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-06T20:54:21.256823"
+  ]
+  edge [
+    source 6398
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:04:30.159910"
+  ]
+  edge [
+    source 6399
+    target 6400
+    predicate "REQUIRE"
+    confidence 1.0
+    added "2026-06-06T21:04:30.502060"
+  ]
+  edge [
+    source 6401
+    target 6402
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:04:30.502101"
+  ]
+  edge [
+    source 6403
+    target 6404
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:04:30.502140"
+  ]
+  edge [
+    source 6406
+    target 6407
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T21:14:38.898031"
+  ]
+  edge [
+    source 6408
+    target 6409
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T21:14:38.898051"
+  ]
+  edge [
+    source 6410
+    target 6411
+    predicate "RELIES_ON"
+    confidence 1.0
+    added "2026-06-06T21:14:38.898070"
+  ]
+  edge [
+    source 6412
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.327211"
+  ]
+  edge [
+    source 6412
+    target 6417
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765875"
+  ]
+  edge [
+    source 6412
+    target 549
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765898"
+  ]
+  edge [
+    source 6412
+    target 6418
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765928"
+  ]
+  edge [
+    source 6412
+    target 2708
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765942"
+  ]
+  edge [
+    source 6412
+    target 6419
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765968"
+  ]
+  edge [
+    source 6412
+    target 6420
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.765992"
+  ]
+  edge [
+    source 6412
+    target 6421
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.766016"
+  ]
+  edge [
+    source 6412
+    target 6422
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.766038"
+  ]
+  edge [
+    source 6413
+    target 6414
+    predicate "OPERATE"
+    confidence 1.0
+    added "2026-06-06T21:14:39.552102"
+  ]
+  edge [
+    source 6415
+    target 6416
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-06T21:14:39.552142"
+  ]
+  edge [
+    source 6423
+    target 6424
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-06T21:24:49.606739"
+  ]
+  edge [
+    source 6425
+    target 6426
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.606763"
+  ]
+  edge [
+    source 6427
+    target 6425
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743101"
+  ]
+  edge [
+    source 6427
+    target 6428
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743174"
+  ]
+  edge [
+    source 6427
+    target 6423
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743196"
+  ]
+  edge [
+    source 6427
+    target 6429
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743224"
+  ]
+  edge [
+    source 6427
+    target 6430
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743250"
+  ]
+  edge [
+    source 6427
+    target 6431
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:24:49.743273"
+  ]
+  edge [
+    source 6432
+    target 6433
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:34:58.840052"
+  ]
+  edge [
+    source 6434
+    target 6432
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087743"
+  ]
+  edge [
+    source 6434
+    target 6435
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087787"
+  ]
+  edge [
+    source 6434
+    target 6436
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087818"
+  ]
+  edge [
+    source 6434
+    target 653
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087832"
+  ]
+  edge [
+    source 6434
+    target 6437
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087863"
+  ]
+  edge [
+    source 6434
+    target 4685
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.087880"
+  ]
+  edge [
+    source 6434
+    target 6441
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.294386"
+  ]
+  edge [
+    source 6438
+    target 6439
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.121196"
+  ]
+  edge [
+    source 6438
+    target 6440
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:34:59.121215"
+  ]
+  edge [
+    source 6442
+    target 6443
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T21:45:07.289107"
+  ]
+  edge [
+    source 6444
+    target 6445
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.773685"
+  ]
+  edge [
+    source 6446
+    target 6447
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T21:45:07.773711"
+  ]
+  edge [
+    source 6448
+    target 6449
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.773733"
+  ]
+  edge [
+    source 6450
+    target 6451
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.773754"
+  ]
+  edge [
+    source 6452
+    target 6453
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.948969"
+  ]
+  edge [
+    source 6452
+    target 6454
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.949004"
+  ]
+  edge [
+    source 6456
+    target 6457
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.999135"
+  ]
+  edge [
+    source 6456
+    target 6458
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:45:07.999164"
+  ]
+  edge [
+    source 6459
+    target 106
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:16.985925"
+  ]
+  edge [
+    source 6459
+    target 4923
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467640"
+  ]
+  edge [
+    source 6459
+    target 6465
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467710"
+  ]
+  edge [
+    source 6459
+    target 1689
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467725"
+  ]
+  edge [
+    source 6459
+    target 6466
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467753"
+  ]
+  edge [
+    source 6459
+    target 6467
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467776"
+  ]
+  edge [
+    source 6459
+    target 125
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467789"
+  ]
+  edge [
+    source 6459
+    target 6468
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467813"
+  ]
+  edge [
+    source 6459
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.467826"
+  ]
+  edge [
+    source 6460
+    target 6461
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-06T21:55:17.039643"
+  ]
+  edge [
+    source 6462
+    target 6463
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T21:55:17.039668"
+  ]
+  edge [
+    source 6464
+    target 113
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-07T00:17:25.353779"
+  ]
+  edge [
+    source 6469
+    target 6470
+    predicate "FEATURE"
+    confidence 1.0
+    added "2026-06-07T08:03:42.920666"
+  ]
+  edge [
+    source 6471
+    target 6472
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T08:03:42.920741"
+  ]
+  edge [
+    source 6474
+    target 6475
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.506587"
+  ]
+  edge [
+    source 6477
+    target 6478
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:05:26.278101"
+  ]
+  edge [
+    source 6479
+    target 6480
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:15:33.835982"
+  ]
+  edge [
+    source 6481
+    target 6482
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:15:33.836018"
+  ]
+  edge [
+    source 6483
+    target 6484
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T22:15:33.836054"
+  ]
+  edge [
+    source 6485
+    target 6486
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T22:15:33.836079"
+  ]
+  edge [
+    source 6487
+    target 6488
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.244446"
+  ]
+  edge [
+    source 6490
+    target 6491
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.244496"
+  ]
+  edge [
+    source 6492
+    target 6493
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.244516"
+  ]
+  edge [
+    source 6494
+    target 6487
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.415969"
+  ]
+  edge [
+    source 6494
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416001"
+  ]
+  edge [
+    source 6494
+    target 6495
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416043"
+  ]
+  edge [
+    source 6494
+    target 6496
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416069"
+  ]
+  edge [
+    source 6494
+    target 6497
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416098"
+  ]
+  edge [
+    source 6494
+    target 6498
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416121"
+  ]
+  edge [
+    source 6494
+    target 4660
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416136"
+  ]
+  edge [
+    source 6494
+    target 6499
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416167"
+  ]
+  edge [
+    source 6494
+    target 5044
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416180"
+  ]
+  edge [
+    source 6494
+    target 6500
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416206"
+  ]
+  edge [
+    source 6494
+    target 1333
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416219"
+  ]
+  edge [
+    source 6494
+    target 6501
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416245"
+  ]
+  edge [
+    source 6494
+    target 6502
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416268"
+  ]
+  edge [
+    source 6494
+    target 2230
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416280"
+  ]
+  edge [
+    source 6494
+    target 6490
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416296"
+  ]
+  edge [
+    source 6494
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416309"
+  ]
+  edge [
+    source 6494
+    target 6503
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.416335"
+  ]
+  edge [
+    source 6494
+    target 6504
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:15:34.569924"
+  ]
+  edge [
+    source 6504
+    target 6505
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.602718"
+  ]
+  edge [
+    source 6506
+    target 6507
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:25:43.592176"
+  ]
+  edge [
+    source 6508
+    target 6509
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:43.781958"
+  ]
+  edge [
+    source 6508
+    target 6510
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:44.000636"
+  ]
+  edge [
+    source 6508
+    target 6511
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:44.000667"
+  ]
+  edge [
+    source 6508
+    target 1953
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:44.000680"
+  ]
+  edge [
+    source 6508
+    target 6512
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:44.000705"
+  ]
+  edge [
+    source 6508
+    target 6513
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:25:44.000728"
+  ]
+  edge [
+    source 6515
+    target 5795
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.455242"
+  ]
+  edge [
+    source 6515
+    target 6516
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.455281"
+  ]
+  edge [
+    source 6515
+    target 6517
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.455296"
+  ]
+  edge [
+    source 6515
+    target 6518
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.455309"
+  ]
+  edge [
+    source 6515
+    target 6519
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650612"
+  ]
+  edge [
+    source 6515
+    target 6520
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650653"
+  ]
+  edge [
+    source 6515
+    target 6521
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650690"
+  ]
+  edge [
+    source 6515
+    target 6522
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650724"
+  ]
+  edge [
+    source 6515
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650742"
+  ]
+  edge [
+    source 6515
+    target 6523
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650775"
+  ]
+  edge [
+    source 6515
+    target 1841
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650793"
+  ]
+  edge [
+    source 6515
+    target 6524
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650859"
+  ]
+  edge [
+    source 6515
+    target 6525
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.650892"
+  ]
+  edge [
+    source 6526
+    target 6527
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.694464"
+  ]
+  edge [
+    source 6528
+    target 6529
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.694503"
+  ]
+  edge [
+    source 6530
+    target 6531
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:35:52.694537"
+  ]
+  edge [
+    source 6532
+    target 6533
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-06T22:46:02.448710"
+  ]
+  edge [
+    source 6534
+    target 6535
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:46:02.448757"
+  ]
+  edge [
+    source 6536
+    target 3189
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:46:02.851332"
+  ]
+  edge [
+    source 6536
+    target 3190
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:46:02.851351"
+  ]
+  edge [
+    source 6537
+    target 3202
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:56:11.556978"
+  ]
+  edge [
+    source 6537
+    target 3197
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T22:56:11.912405"
+  ]
+  edge [
+    source 6538
+    target 6539
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T22:56:11.577724"
+  ]
+  edge [
+    source 6540
+    target 911
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.744608"
+  ]
+  edge [
+    source 6540
+    target 912
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.744628"
+  ]
+  edge [
+    source 6540
+    target 913
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.744639"
+  ]
+  edge [
+    source 6540
+    target 914
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.744656"
+  ]
+  edge [
+    source 6540
+    target 915
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.744669"
+  ]
+  edge [
+    source 6540
+    target 6545
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128808"
+  ]
+  edge [
+    source 6540
+    target 6543
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128847"
+  ]
+  edge [
+    source 6540
+    target 6546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128877"
+  ]
+  edge [
+    source 6540
+    target 6547
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128901"
+  ]
+  edge [
+    source 6540
+    target 4685
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128915"
+  ]
+  edge [
+    source 6540
+    target 6548
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128956"
+  ]
+  edge [
+    source 6540
+    target 6549
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128982"
+  ]
+  edge [
+    source 6540
+    target 1687
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.128995"
+  ]
+  edge [
+    source 6540
+    target 6550
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:06:21.129020"
+  ]
+  edge [
+    source 6541
+    target 6542
+    predicate "OWN"
+    confidence 1.0
+    added "2026-06-06T23:06:20.941542"
+  ]
+  edge [
+    source 6543
+    target 6544
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.941589"
+  ]
+  edge [
+    source 6545
+    target 1836
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-06T23:06:20.941614"
+  ]
+  edge [
+    source 6551
+    target 6552
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:16:30.008316"
+  ]
+  edge [
+    source 6551
+    target 6553
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:16:30.008333"
+  ]
+  edge [
+    source 6554
+    target 6555
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T23:16:30.008356"
+  ]
+  edge [
+    source 6556
+    target 6557
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:16:30.008377"
+  ]
+  edge [
+    source 6558
+    target 6559
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:16:30.167948"
+  ]
+  edge [
+    source 6560
+    target 6561
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:16:30.167997"
+  ]
+  edge [
+    source 6562
+    target 6563
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T23:16:30.168075"
+  ]
+  edge [
+    source 6564
+    target 6565
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.478600"
+  ]
+  edge [
+    source 6566
+    target 6567
+    predicate "WERE"
+    confidence 1.0
+    added "2026-06-07T07:53:33.478687"
+  ]
+  edge [
+    source 6569
+    target 6570
+    predicate "REPRESENT"
+    confidence 1.0
+    added "2026-06-06T23:46:56.745715"
+  ]
+  edge [
+    source 6571
+    target 6572
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-06T23:46:56.745757"
+  ]
+  edge [
+    source 6573
+    target 604
+    predicate "COMPRISE"
+    confidence 1.0
+    added "2026-06-06T23:57:06.458029"
+  ]
+  edge [
+    source 6574
+    target 6575
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:06.586112"
+  ]
+  edge [
+    source 6574
+    target 1314
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037437"
+  ]
+  edge [
+    source 6574
+    target 1094
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037553"
+  ]
+  edge [
+    source 6574
+    target 3009
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:06.843270"
+  ]
+  edge [
+    source 6574
+    target 2708
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:06.843290"
+  ]
+  edge [
+    source 6574
+    target 1625
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037391"
+  ]
+  edge [
+    source 6574
+    target 356
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037458"
+  ]
+  edge [
+    source 6574
+    target 1163
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037484"
+  ]
+  edge [
+    source 6574
+    target 6581
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037521"
+  ]
+  edge [
+    source 6574
+    target 550
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037535"
+  ]
+  edge [
+    source 6574
+    target 2650
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037575"
+  ]
+  edge [
+    source 6574
+    target 6582
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037611"
+  ]
+  edge [
+    source 6574
+    target 6583
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-06T23:57:07.037650"
+  ]
+  edge [
+    source 6576
+    target 6577
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-06T23:57:06.613332"
+  ]
+  edge [
+    source 6579
+    target 6580
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-06T23:57:06.902040"
+  ]
+  edge [
+    source 6585
+    target 6586
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.065111"
+  ]
+  edge [
+    source 6588
+    target 653
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.334300"
+  ]
+  edge [
+    source 6588
+    target 6589
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.334336"
+  ]
+  edge [
+    source 6588
+    target 550
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.334350"
+  ]
+  edge [
+    source 6590
+    target 6591
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.365049"
+  ]
+  edge [
+    source 6592
+    target 6593
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:07:17.365088"
+  ]
+  edge [
+    source 6596
+    target 4923
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490042"
+  ]
+  edge [
+    source 6596
+    target 6465
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490066"
+  ]
+  edge [
+    source 6596
+    target 1689
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490085"
+  ]
+  edge [
+    source 6596
+    target 6466
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490100"
+  ]
+  edge [
+    source 6596
+    target 6467
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490115"
+  ]
+  edge [
+    source 6596
+    target 125
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490129"
+  ]
+  edge [
+    source 6596
+    target 6468
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490144"
+  ]
+  edge [
+    source 6596
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:17:25.490158"
+  ]
+  edge [
+    source 6597
+    target 2973
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:27:33.815949"
+  ]
+  edge [
+    source 6597
+    target 2974
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:27:33.665699"
+  ]
+  edge [
+    source 6597
+    target 6598
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:27:33.815994"
+  ]
+  edge [
+    source 6598
+    target 6599
+    predicate "ADD"
+    confidence 1.0
+    added "2026-06-07T00:27:33.704322"
+  ]
+  edge [
+    source 6600
+    target 6504
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.715372"
+  ]
+  edge [
+    source 6600
+    target 6604
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949480"
+  ]
+  edge [
+    source 6600
+    target 6605
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949509"
+  ]
+  edge [
+    source 6600
+    target 6606
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949533"
+  ]
+  edge [
+    source 6600
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949546"
+  ]
+  edge [
+    source 6600
+    target 6607
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949571"
+  ]
+  edge [
+    source 6600
+    target 6608
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949594"
+  ]
+  edge [
+    source 6600
+    target 6609
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949617"
+  ]
+  edge [
+    source 6600
+    target 6610
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949639"
+  ]
+  edge [
+    source 6600
+    target 6611
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949662"
+  ]
+  edge [
+    source 6600
+    target 6612
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949700"
+  ]
+  edge [
+    source 6600
+    target 6613
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949723"
+  ]
+  edge [
+    source 6600
+    target 6614
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.949745"
+  ]
+  edge [
+    source 6601
+    target 6602
+    predicate "INTRODUCE"
+    confidence 1.0
+    added "2026-06-07T00:37:41.768097"
+  ]
+  edge [
+    source 6615
+    target 6616
+    predicate "RECORD"
+    confidence 1.0
+    added "2026-06-07T00:37:41.977050"
+  ]
+  edge [
+    source 6617
+    target 6618
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:37:41.977088"
+  ]
+  edge [
+    source 6619
+    target 6620
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-07T00:37:41.977122"
+  ]
+  edge [
+    source 6622
+    target 6623
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.788705"
+  ]
+  edge [
+    source 6622
+    target 6624
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.788738"
+  ]
+  edge [
+    source 6622
+    target 6625
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.788765"
+  ]
+  edge [
+    source 6622
+    target 6626
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.788793"
+  ]
+  edge [
+    source 6622
+    target 6628
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.959360"
+  ]
+  edge [
+    source 6622
+    target 6629
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.959406"
+  ]
+  edge [
+    source 6622
+    target 1163
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:47:49.959420"
+  ]
+  edge [
+    source 6627
+    target 5323
+    predicate "TAKE"
+    confidence 1.0
+    added "2026-06-07T00:47:49.842048"
+  ]
+  edge [
+    source 6630
+    target 1428
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:57:57.974745"
+  ]
+  edge [
+    source 6631
+    target 6630
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.201421"
+  ]
+  edge [
+    source 6631
+    target 6632
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.201454"
+  ]
+  edge [
+    source 6631
+    target 3404
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.201469"
+  ]
+  edge [
+    source 6631
+    target 402
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.201491"
+  ]
+  edge [
+    source 6631
+    target 18
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.201507"
+  ]
+  edge [
+    source 6631
+    target 6637
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.546670"
+  ]
+  edge [
+    source 6631
+    target 6641
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.546723"
+  ]
+  edge [
+    source 6633
+    target 6634
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.381338"
+  ]
+  edge [
+    source 6635
+    target 6636
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.381389"
+  ]
+  edge [
+    source 6637
+    target 6638
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T00:57:58.381426"
+  ]
+  edge [
+    source 6639
+    target 6640
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T00:57:58.381461"
+  ]
+  edge [
+    source 6642
+    target 6643
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.449603"
+  ]
+  edge [
+    source 6642
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.677390"
+  ]
+  edge [
+    source 6642
+    target 5390
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.833986"
+  ]
+  edge [
+    source 6642
+    target 824
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.834021"
+  ]
+  edge [
+    source 6642
+    target 5391
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.834036"
+  ]
+  edge [
+    source 6642
+    target 3076
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.834050"
+  ]
+  edge [
+    source 6644
+    target 6645
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T01:08:06.449627"
+  ]
+  edge [
+    source 6646
+    target 6647
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T01:08:06.578250"
+  ]
+  edge [
+    source 6646
+    target 6648
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.578283"
+  ]
+  edge [
+    source 6649
+    target 6650
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:08:06.578323"
+  ]
+  edge [
+    source 6651
+    target 6652
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.214827"
+  ]
+  edge [
+    source 6651
+    target 6653
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.214848"
+  ]
+  edge [
+    source 6654
+    target 6655
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.237189"
+  ]
+  edge [
+    source 6654
+    target 6656
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.237226"
+  ]
+  edge [
+    source 6657
+    target 6658
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.346998"
+  ]
+  edge [
+    source 6659
+    target 6660
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:18:15.347041"
+  ]
+  edge [
+    source 6661
+    target 6662
+    predicate "SUPPORT"
+    confidence 1.0
+    added "2026-06-07T01:28:22.840161"
+  ]
+  edge [
+    source 6663
+    target 6664
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:28:22.840185"
+  ]
+  edge [
+    source 6665
+    target 6666
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:22.962543"
+  ]
+  edge [
+    source 6665
+    target 6667
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:22.962574"
+  ]
+  edge [
+    source 6665
+    target 6668
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:22.962602"
+  ]
+  edge [
+    source 6665
+    target 4185
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.137940"
+  ]
+  edge [
+    source 6665
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.137994"
+  ]
+  edge [
+    source 6665
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.138014"
+  ]
+  edge [
+    source 6665
+    target 6675
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299710"
+  ]
+  edge [
+    source 6665
+    target 6676
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299804"
+  ]
+  edge [
+    source 6665
+    target 6677
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299830"
+  ]
+  edge [
+    source 6665
+    target 2708
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299843"
+  ]
+  edge [
+    source 6665
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299857"
+  ]
+  edge [
+    source 6665
+    target 6678
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299884"
+  ]
+  edge [
+    source 6665
+    target 6679
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.299908"
+  ]
+  edge [
+    source 6669
+    target 6670
+    predicate "USE"
+    confidence 1.0
+    added "2026-06-07T01:28:23.182243"
+  ]
+  edge [
+    source 6671
+    target 6672
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T01:28:23.182283"
+  ]
+  edge [
+    source 6673
+    target 6674
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-07T01:28:23.182318"
+  ]
+  edge [
+    source 6680
+    target 6666
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.075756"
+  ]
+  edge [
+    source 6680
+    target 6681
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.075796"
+  ]
+  edge [
+    source 6680
+    target 6691
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.218719"
+  ]
+  edge [
+    source 6680
+    target 6692
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.218751"
+  ]
+  edge [
+    source 6680
+    target 939
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.218764"
+  ]
+  edge [
+    source 6680
+    target 1589
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.218778"
+  ]
+  edge [
+    source 6680
+    target 6695
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.318833"
+  ]
+  edge [
+    source 6680
+    target 6696
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.318864"
+  ]
+  edge [
+    source 6680
+    target 6697
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.318888"
+  ]
+  edge [
+    source 6680
+    target 6698
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.318910"
+  ]
+  edge [
+    source 6682
+    target 6683
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.116344"
+  ]
+  edge [
+    source 6682
+    target 6686
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.116406"
+  ]
+  edge [
+    source 6684
+    target 6685
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.116382"
+  ]
+  edge [
+    source 6687
+    target 6688
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T01:38:31.116441"
+  ]
+  edge [
+    source 6689
+    target 6690
+    predicate "CONSISTS_OF"
+    confidence 1.0
+    added "2026-06-07T01:38:31.116473"
+  ]
+  edge [
+    source 6693
+    target 6670
+    predicate "OFFER"
+    confidence 1.0
+    added "2026-06-07T01:38:31.239349"
+  ]
+  edge [
+    source 6699
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.245256"
+  ]
+  edge [
+    source 6699
+    target 4175
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436326"
+  ]
+  edge [
+    source 6699
+    target 805
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436367"
+  ]
+  edge [
+    source 6699
+    target 808
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436388"
+  ]
+  edge [
+    source 6699
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436402"
+  ]
+  edge [
+    source 6699
+    target 4178
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436417"
+  ]
+  edge [
+    source 6699
+    target 4179
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436432"
+  ]
+  edge [
+    source 6699
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:48:39.436445"
+  ]
+  edge [
+    source 6700
+    target 1404
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.356829"
+  ]
+  edge [
+    source 6700
+    target 5445
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509409"
+  ]
+  edge [
+    source 6700
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509449"
+  ]
+  edge [
+    source 6700
+    target 5447
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509466"
+  ]
+  edge [
+    source 6700
+    target 5448
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509481"
+  ]
+  edge [
+    source 6700
+    target 5449
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509494"
+  ]
+  edge [
+    source 6700
+    target 5450
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509508"
+  ]
+  edge [
+    source 6700
+    target 5451
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509524"
+  ]
+  edge [
+    source 6700
+    target 5452
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509539"
+  ]
+  edge [
+    source 6700
+    target 5453
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509552"
+  ]
+  edge [
+    source 6700
+    target 5454
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509566"
+  ]
+  edge [
+    source 6700
+    target 5455
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509580"
+  ]
+  edge [
+    source 6700
+    target 5456
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509593"
+  ]
+  edge [
+    source 6700
+    target 5457
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T01:58:47.509607"
+  ]
+  edge [
+    source 6701
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.592056"
+  ]
+  edge [
+    source 6701
+    target 5445
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723181"
+  ]
+  edge [
+    source 6701
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723236"
+  ]
+  edge [
+    source 6701
+    target 5447
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723257"
+  ]
+  edge [
+    source 6701
+    target 5448
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723272"
+  ]
+  edge [
+    source 6701
+    target 5449
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723285"
+  ]
+  edge [
+    source 6701
+    target 5450
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723301"
+  ]
+  edge [
+    source 6701
+    target 5451
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723319"
+  ]
+  edge [
+    source 6701
+    target 5452
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723336"
+  ]
+  edge [
+    source 6701
+    target 5453
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723353"
+  ]
+  edge [
+    source 6701
+    target 5454
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723368"
+  ]
+  edge [
+    source 6701
+    target 5455
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723384"
+  ]
+  edge [
+    source 6701
+    target 5456
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723398"
+  ]
+  edge [
+    source 6701
+    target 5457
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:08:55.723425"
+  ]
+  edge [
+    source 6702
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:19:04.066386"
+  ]
+  edge [
+    source 6702
+    target 3423
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:19:04.417268"
+  ]
+  edge [
+    source 6702
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:19:04.417299"
+  ]
+  edge [
+    source 6703
+    target 6704
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:19:04.108463"
+  ]
+  edge [
+    source 6703
+    target 6705
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:19:04.108490"
+  ]
+  edge [
+    source 6706
+    target 6707
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T02:19:04.108532"
+  ]
+  edge [
+    source 6708
+    target 6709
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T02:19:04.108569"
+  ]
+  edge [
+    source 6710
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:29:12.824229"
+  ]
+  edge [
+    source 6711
+    target 1002
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842608"
+  ]
+  edge [
+    source 6711
+    target 1003
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842627"
+  ]
+  edge [
+    source 6711
+    target 1004
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842640"
+  ]
+  edge [
+    source 6711
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842653"
+  ]
+  edge [
+    source 6711
+    target 1005
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842667"
+  ]
+  edge [
+    source 6711
+    target 1006
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842681"
+  ]
+  edge [
+    source 6711
+    target 1007
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842694"
+  ]
+  edge [
+    source 6711
+    target 1008
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842707"
+  ]
+  edge [
+    source 6711
+    target 1009
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842720"
+  ]
+  edge [
+    source 6711
+    target 1010
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.842734"
+  ]
+  edge [
+    source 6711
+    target 346
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:39:22.136459"
+  ]
+  edge [
+    source 6712
+    target 6713
+    predicate "REQUIRE"
+    confidence 1.0
+    added "2026-06-07T02:39:21.883249"
+  ]
+  edge [
+    source 6714
+    target 770
+    predicate "PERFORM"
+    confidence 1.0
+    added "2026-06-07T02:39:21.883277"
+  ]
+  edge [
+    source 6715
+    target 6716
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.883316"
+  ]
+  edge [
+    source 6717
+    target 6718
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:39:21.883351"
+  ]
+  edge [
+    source 6719
+    target 6720
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:39:22.033692"
+  ]
+  edge [
+    source 6721
+    target 6722
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T02:39:22.033733"
+  ]
+  edge [
+    source 6723
+    target 6724
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:39:22.033768"
+  ]
+  edge [
+    source 6725
+    target 29
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:29.892213"
+  ]
+  edge [
+    source 6725
+    target 315
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:30.091361"
+  ]
+  edge [
+    source 6725
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:30.091407"
+  ]
+  edge [
+    source 6725
+    target 316
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:30.091428"
+  ]
+  edge [
+    source 6725
+    target 317
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:30.091451"
+  ]
+  edge [
+    source 6725
+    target 307
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:49:30.091470"
+  ]
+  edge [
+    source 6726
+    target 620
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:59:38.537675"
+  ]
+  edge [
+    source 6726
+    target 4440
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:59:38.775238"
+  ]
+  edge [
+    source 6726
+    target 4441
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:59:38.775275"
+  ]
+  edge [
+    source 6726
+    target 4442
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T02:59:38.775286"
+  ]
+  edge [
+    source 6727
+    target 6728
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T02:59:38.551711"
+  ]
+  edge [
+    source 6730
+    target 808
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:09:46.714787"
+  ]
+  edge [
+    source 6730
+    target 6731
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:09:46.714819"
+  ]
+  edge [
+    source 6730
+    target 1094
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:09:46.714833"
+  ]
+  edge [
+    source 6730
+    target 1092
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:09:46.714847"
+  ]
+  edge [
+    source 6730
+    target 550
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:09:46.714861"
+  ]
+  edge [
+    source 6732
+    target 4440
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:52.967373"
+  ]
+  edge [
+    source 6732
+    target 4441
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:52.967393"
+  ]
+  edge [
+    source 6732
+    target 4442
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:53.095434"
+  ]
+  edge [
+    source 6732
+    target 6736
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:53.095421"
+  ]
+  edge [
+    source 6732
+    target 3640
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:53.095353"
+  ]
+  edge [
+    source 6732
+    target 6737
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:53.095385"
+  ]
+  edge [
+    source 6732
+    target 6738
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:19:53.095409"
+  ]
+  edge [
+    source 6733
+    target 6734
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T03:19:52.996618"
+  ]
+  edge [
+    source 6733
+    target 6735
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-07T03:19:52.996646"
+  ]
+  edge [
+    source 6739
+    target 620
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:30:01.447537"
+  ]
+  edge [
+    source 6739
+    target 6740
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:30:01.321043"
+  ]
+  edge [
+    source 6739
+    target 6743
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:30:01.321074"
+  ]
+  edge [
+    source 6739
+    target 6509
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:30:01.321087"
+  ]
+  edge [
+    source 6740
+    target 6741
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-07T03:30:01.224113"
+  ]
+  edge [
+    source 6740
+    target 6742
+    predicate "INCLUDES"
+    confidence 1.0
+    added "2026-06-07T03:30:01.224141"
+  ]
+  edge [
+    source 6744
+    target 18
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625657"
+  ]
+  edge [
+    source 6744
+    target 106
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.456741"
+  ]
+  edge [
+    source 6744
+    target 1427
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625584"
+  ]
+  edge [
+    source 6744
+    target 1431
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625600"
+  ]
+  edge [
+    source 6744
+    target 1432
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625615"
+  ]
+  edge [
+    source 6744
+    target 1433
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625628"
+  ]
+  edge [
+    source 6744
+    target 402
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.625642"
+  ]
+  edge [
+    source 6744
+    target 6749
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.734698"
+  ]
+  edge [
+    source 6744
+    target 6750
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.734739"
+  ]
+  edge [
+    source 6744
+    target 6751
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.734766"
+  ]
+  edge [
+    source 6745
+    target 6746
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.652786"
+  ]
+  edge [
+    source 6747
+    target 6748
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T03:40:09.652823"
+  ]
+  edge [
+    source 6752
+    target 703
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:00:21.222375"
+  ]
+  edge [
+    source 6752
+    target 5560
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:00:21.428524"
+  ]
+  edge [
+    source 6752
+    target 216
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:00:21.575434"
+  ]
+  edge [
+    source 6753
+    target 2531
+    predicate "UTILIZE"
+    confidence 1.0
+    added "2026-06-07T04:10:29.087492"
+  ]
+  edge [
+    source 6754
+    target 446
+    predicate "PROVIDE"
+    confidence 1.0
+    added "2026-06-07T04:10:29.087521"
+  ]
+  edge [
+    source 6755
+    target 6756
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.087545"
+  ]
+  edge [
+    source 6757
+    target 2243
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.479804"
+  ]
+  edge [
+    source 6757
+    target 6769
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.360237"
+  ]
+  edge [
+    source 6757
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.479854"
+  ]
+  edge [
+    source 6757
+    target 356
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.479871"
+  ]
+  edge [
+    source 6758
+    target 2532
+    predicate "USE"
+    confidence 1.0
+    added "2026-06-07T04:10:29.218884"
+  ]
+  edge [
+    source 6758
+    target 3925
+    predicate "REQUIRE"
+    confidence 1.0
+    added "2026-06-07T05:51:49.367049"
+  ]
+  edge [
+    source 6759
+    target 6760
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.218923"
+  ]
+  edge [
+    source 6761
+    target 6762
+    predicate "USES"
+    confidence 1.0
+    added "2026-06-07T04:10:29.218956"
+  ]
+  edge [
+    source 6763
+    target 6764
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:10:29.360141"
+  ]
+  edge [
+    source 6765
+    target 6766
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.360179"
+  ]
+  edge [
+    source 6767
+    target 6768
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:10:29.360213"
+  ]
+  edge [
+    source 6771
+    target 6772
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:20:37.189427"
+  ]
+  edge [
+    source 6773
+    target 1314
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.325047"
+  ]
+  edge [
+    source 6773
+    target 6777
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.614442"
+  ]
+  edge [
+    source 6773
+    target 6778
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.614475"
+  ]
+  edge [
+    source 6773
+    target 6779
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.614502"
+  ]
+  edge [
+    source 6773
+    target 6780
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.614530"
+  ]
+  edge [
+    source 6773
+    target 6781
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:20:37.614556"
+  ]
+  edge [
+    source 6774
+    target 6775
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:20:37.348390"
+  ]
+  edge [
+    source 6782
+    target 6783
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.132979"
+  ]
+  edge [
+    source 6782
+    target 6793
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.281102"
+  ]
+  edge [
+    source 6784
+    target 6785
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:30:45.133002"
+  ]
+  edge [
+    source 6786
+    target 6787
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.133023"
+  ]
+  edge [
+    source 6788
+    target 6789
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.133044"
+  ]
+  edge [
+    source 6790
+    target 317
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.235954"
+  ]
+  edge [
+    source 6790
+    target 1989
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.235968"
+  ]
+  edge [
+    source 6790
+    target 4035
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.235986"
+  ]
+  edge [
+    source 6790
+    target 315
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407226"
+  ]
+  edge [
+    source 6790
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407265"
+  ]
+  edge [
+    source 6790
+    target 4598
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407281"
+  ]
+  edge [
+    source 6790
+    target 583
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407302"
+  ]
+  edge [
+    source 6790
+    target 6798
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407331"
+  ]
+  edge [
+    source 6790
+    target 6799
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407357"
+  ]
+  edge [
+    source 6790
+    target 6800
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.407380"
+  ]
+  edge [
+    source 6790
+    target 6801
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566559"
+  ]
+  edge [
+    source 6790
+    target 6802
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566600"
+  ]
+  edge [
+    source 6790
+    target 6803
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566624"
+  ]
+  edge [
+    source 6790
+    target 6804
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566648"
+  ]
+  edge [
+    source 6790
+    target 6805
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566670"
+  ]
+  edge [
+    source 6790
+    target 6806
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.566694"
+  ]
+  edge [
+    source 6791
+    target 6792
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.281074"
+  ]
+  edge [
+    source 6794
+    target 6795
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.281139"
+  ]
+  edge [
+    source 6796
+    target 6797
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T04:30:45.281173"
+  ]
+  edge [
+    source 6807
+    target 3067
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667342"
+  ]
+  edge [
+    source 6807
+    target 3843
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667366"
+  ]
+  edge [
+    source 6807
+    target 3844
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667382"
+  ]
+  edge [
+    source 6807
+    target 3845
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667396"
+  ]
+  edge [
+    source 6807
+    target 3846
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667411"
+  ]
+  edge [
+    source 6807
+    target 3847
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667426"
+  ]
+  edge [
+    source 6807
+    target 3848
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.667440"
+  ]
+  edge [
+    source 6807
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:51:00.030578"
+  ]
+  edge [
+    source 6807
+    target 75
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T04:51:00.030524"
+  ]
+  edge [
+    source 6808
+    target 6809
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.716260"
+  ]
+  edge [
+    source 6810
+    target 6811
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.716303"
+  ]
+  edge [
+    source 6812
+    target 6813
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.716343"
+  ]
+  edge [
+    source 6814
+    target 686
+    predicate "DISTRIBUTE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891808"
+  ]
+  edge [
+    source 6815
+    target 6816
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891845"
+  ]
+  edge [
+    source 6817
+    target 6818
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891892"
+  ]
+  edge [
+    source 6820
+    target 6821
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T04:50:59.891951"
+  ]
+  edge [
+    source 6823
+    target 6824
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T05:01:07.710568"
+  ]
+  edge [
+    source 6825
+    target 6826
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T05:01:07.710605"
+  ]
+  edge [
+    source 6827
+    target 6828
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:01:07.710638"
+  ]
+  edge [
+    source 6829
+    target 6830
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:01:07.822223"
+  ]
+  edge [
+    source 6829
+    target 2805
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:01:07.980167"
+  ]
+  edge [
+    source 6831
+    target 6832
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.500155"
+  ]
+  edge [
+    source 6833
+    target 5180
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.716818"
+  ]
+  edge [
+    source 6833
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.716840"
+  ]
+  edge [
+    source 6833
+    target 5181
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.716856"
+  ]
+  edge [
+    source 6833
+    target 5177
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.716872"
+  ]
+  edge [
+    source 6833
+    target 6834
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.838977"
+  ]
+  edge [
+    source 6833
+    target 6835
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839008"
+  ]
+  edge [
+    source 6833
+    target 6836
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839032"
+  ]
+  edge [
+    source 6833
+    target 6837
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839054"
+  ]
+  edge [
+    source 6833
+    target 6838
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839078"
+  ]
+  edge [
+    source 6833
+    target 6839
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839101"
+  ]
+  edge [
+    source 6833
+    target 6840
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839128"
+  ]
+  edge [
+    source 6833
+    target 5901
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:11:15.839144"
+  ]
+  edge [
+    source 6843
+    target 6844
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.249208"
+  ]
+  edge [
+    source 6845
+    target 6846
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T05:21:24.249229"
+  ]
+  edge [
+    source 6847
+    target 6848
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.249248"
+  ]
+  edge [
+    source 6849
+    target 6850
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.367595"
+  ]
+  edge [
+    source 6849
+    target 6851
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.367622"
+  ]
+  edge [
+    source 6849
+    target 1007
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.367635"
+  ]
+  edge [
+    source 6849
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.519301"
+  ]
+  edge [
+    source 6849
+    target 315
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.519343"
+  ]
+  edge [
+    source 6849
+    target 2451
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:21:24.519378"
+  ]
+  edge [
+    source 6852
+    target 6853
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.408868"
+  ]
+  edge [
+    source 6854
+    target 6852
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518289"
+  ]
+  edge [
+    source 6854
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518322"
+  ]
+  edge [
+    source 6854
+    target 6855
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518354"
+  ]
+  edge [
+    source 6854
+    target 6856
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518379"
+  ]
+  edge [
+    source 6854
+    target 6857
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518405"
+  ]
+  edge [
+    source 6854
+    target 6858
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518429"
+  ]
+  edge [
+    source 6854
+    target 6859
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.518455"
+  ]
+  edge [
+    source 6854
+    target 2805
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:31:32.694044"
+  ]
+  edge [
+    source 6860
+    target 6861
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:41:40.930199"
+  ]
+  edge [
+    source 6860
+    target 6864
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:41:40.930262"
+  ]
+  edge [
+    source 6862
+    target 6863
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:41:40.930238"
+  ]
+  edge [
+    source 6865
+    target 6866
+    predicate "INCLUDES"
+    confidence 1.0
+    added "2026-06-07T05:41:40.930296"
+  ]
+  edge [
+    source 6867
+    target 6868
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.033418"
+  ]
+  edge [
+    source 6867
+    target 6871
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.161663"
+  ]
+  edge [
+    source 6867
+    target 1568
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.161682"
+  ]
+  edge [
+    source 6867
+    target 3715
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.161698"
+  ]
+  edge [
+    source 6867
+    target 6872
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.161729"
+  ]
+  edge [
+    source 6867
+    target 6873
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.161753"
+  ]
+  edge [
+    source 6869
+    target 6870
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:41:41.066994"
+  ]
+  edge [
+    source 6874
+    target 6875
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T05:51:49.185106"
+  ]
+  edge [
+    source 6876
+    target 6877
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.185143"
+  ]
+  edge [
+    source 6878
+    target 6879
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.185171"
+  ]
+  edge [
+    source 6880
+    target 6478
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.621581"
+  ]
+  edge [
+    source 6881
+    target 6882
+    predicate "INVOLVE"
+    confidence 1.0
+    added "2026-06-07T05:51:49.366994"
+  ]
+  edge [
+    source 6883
+    target 6884
+    predicate "ANALYZE"
+    confidence 1.0
+    added "2026-06-07T05:51:49.367034"
+  ]
+  edge [
+    source 6883
+    target 6913
+    predicate "COMPARE"
+    confidence 1.0
+    added "2026-06-07T06:22:14.688931"
+  ]
+  edge [
+    source 6885
+    target 6886
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T05:51:49.367097"
+  ]
+  edge [
+    source 6887
+    target 6888
+    predicate "REQUIRES"
+    confidence 1.0
+    added "2026-06-07T05:51:49.367132"
+  ]
+  edge [
+    source 6889
+    target 6890
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-07T06:01:57.630618"
+  ]
+  edge [
+    source 6891
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:01:57.750837"
+  ]
+  edge [
+    source 6892
+    target 6893
+    predicate "DESCRIBE"
+    confidence 1.0
+    added "2026-06-07T06:12:05.709245"
+  ]
+  edge [
+    source 6892
+    target 6894
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:05.709264"
+  ]
+  edge [
+    source 6895
+    target 6896
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:05.709288"
+  ]
+  edge [
+    source 6897
+    target 6898
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:05.709311"
+  ]
+  edge [
+    source 6899
+    target 4014
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.064488"
+  ]
+  edge [
+    source 6899
+    target 370
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230716"
+  ]
+  edge [
+    source 6899
+    target 356
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230765"
+  ]
+  edge [
+    source 6899
+    target 2581
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230784"
+  ]
+  edge [
+    source 6899
+    target 1577
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230810"
+  ]
+  edge [
+    source 6899
+    target 6910
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230843"
+  ]
+  edge [
+    source 6899
+    target 6911
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.230872"
+  ]
+  edge [
+    source 6902
+    target 6903
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116766"
+  ]
+  edge [
+    source 6904
+    target 6905
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116805"
+  ]
+  edge [
+    source 6906
+    target 6907
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116841"
+  ]
+  edge [
+    source 6908
+    target 6909
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:12:06.116878"
+  ]
+  edge [
+    source 6912
+    target 3838
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.493654"
+  ]
+  edge [
+    source 6912
+    target 3839
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.493677"
+  ]
+  edge [
+    source 6912
+    target 3067
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649393"
+  ]
+  edge [
+    source 6912
+    target 3843
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649432"
+  ]
+  edge [
+    source 6912
+    target 3844
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649448"
+  ]
+  edge [
+    source 6912
+    target 3845
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649462"
+  ]
+  edge [
+    source 6912
+    target 3846
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649478"
+  ]
+  edge [
+    source 6912
+    target 3847
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649492"
+  ]
+  edge [
+    source 6912
+    target 3848
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.649505"
+  ]
+  edge [
+    source 6912
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:22:14.800837"
+  ]
+  edge [
+    source 6914
+    target 6915
+    predicate "HOLD"
+    confidence 1.0
+    added "2026-06-07T06:22:14.688981"
+  ]
+  edge [
+    source 6916
+    target 6917
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T06:22:14.689016"
+  ]
+  edge [
+    source 6918
+    target 6919
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:32:22.690141"
+  ]
+  edge [
+    source 6920
+    target 6921
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:32:22.902086"
+  ]
+  edge [
+    source 6922
+    target 6923
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:32:22.902125"
+  ]
+  edge [
+    source 6924
+    target 6925
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:32:23.037370"
+  ]
+  edge [
+    source 6927
+    target 6928
+    predicate "WERE"
+    confidence 1.0
+    added "2026-06-07T06:42:31.643892"
+  ]
+  edge [
+    source 6930
+    target 1094
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.782420"
+  ]
+  edge [
+    source 6930
+    target 6931
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.782458"
+  ]
+  edge [
+    source 6930
+    target 2993
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.782473"
+  ]
+  edge [
+    source 6930
+    target 6932
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.782514"
+  ]
+  edge [
+    source 6930
+    target 6936
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974421"
+  ]
+  edge [
+    source 6930
+    target 6938
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974469"
+  ]
+  edge [
+    source 6930
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974480"
+  ]
+  edge [
+    source 6930
+    target 6939
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974496"
+  ]
+  edge [
+    source 6930
+    target 6940
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974511"
+  ]
+  edge [
+    source 6930
+    target 6094
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974519"
+  ]
+  edge [
+    source 6930
+    target 6941
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974536"
+  ]
+  edge [
+    source 6930
+    target 1959
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974545"
+  ]
+  edge [
+    source 6930
+    target 6942
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974560"
+  ]
+  edge [
+    source 6930
+    target 6497
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974570"
+  ]
+  edge [
+    source 6930
+    target 6943
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974586"
+  ]
+  edge [
+    source 6930
+    target 6944
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974601"
+  ]
+  edge [
+    source 6930
+    target 6945
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974628"
+  ]
+  edge [
+    source 6930
+    target 6946
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974652"
+  ]
+  edge [
+    source 6930
+    target 633
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974675"
+  ]
+  edge [
+    source 6930
+    target 545
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974693"
+  ]
+  edge [
+    source 6930
+    target 6947
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.974721"
+  ]
+  edge [
+    source 6930
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:42:32.092373"
+  ]
+  edge [
+    source 6936
+    target 6937
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T06:42:31.827401"
+  ]
+  edge [
+    source 6948
+    target 6949
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:42:32.003930"
+  ]
+  edge [
+    source 6951
+    target 6952
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.098145"
+  ]
+  edge [
+    source 6954
+    target 6955
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.098184"
+  ]
+  edge [
+    source 6956
+    target 937
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.242236"
+  ]
+  edge [
+    source 6956
+    target 6957
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.242268"
+  ]
+  edge [
+    source 6956
+    target 6954
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.242282"
+  ]
+  edge [
+    source 6956
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.242296"
+  ]
+  edge [
+    source 6956
+    target 6958
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.242321"
+  ]
+  edge [
+    source 6956
+    target 6963
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.486063"
+  ]
+  edge [
+    source 6956
+    target 6964
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.486109"
+  ]
+  edge [
+    source 6959
+    target 6960
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.258516"
+  ]
+  edge [
+    source 6961
+    target 6962
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T06:52:40.373299"
+  ]
+  edge [
+    source 6966
+    target 6967
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.746060"
+  ]
+  edge [
+    source 6968
+    target 6966
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903056"
+  ]
+  edge [
+    source 6968
+    target 6969
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903089"
+  ]
+  edge [
+    source 6968
+    target 6970
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903114"
+  ]
+  edge [
+    source 6968
+    target 4660
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903127"
+  ]
+  edge [
+    source 6968
+    target 6971
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903150"
+  ]
+  edge [
+    source 6968
+    target 6972
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903173"
+  ]
+  edge [
+    source 6968
+    target 6973
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903196"
+  ]
+  edge [
+    source 6968
+    target 6974
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903218"
+  ]
+  edge [
+    source 6968
+    target 6975
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.903242"
+  ]
+  edge [
+    source 6968
+    target 6976
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:50.071962"
+  ]
+  edge [
+    source 6968
+    target 6982
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:50.072015"
+  ]
+  edge [
+    source 6968
+    target 5728
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:02:50.198573"
+  ]
+  edge [
+    source 6976
+    target 6977
+    predicate "ADENINE"
+    confidence 1.0
+    added "2026-06-07T07:02:49.949389"
+  ]
+  edge [
+    source 6979
+    target 6980
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:02:49.949452"
+  ]
+  edge [
+    source 6981
+    target 924
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T07:02:49.949476"
+  ]
+  edge [
+    source 6983
+    target 1167
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T07:02:50.103653"
+  ]
+  edge [
+    source 6983
+    target 6984
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:02:50.103682"
+  ]
+  edge [
+    source 6985
+    target 6986
+    predicate "REVIEW"
+    confidence 1.0
+    added "2026-06-07T07:12:58.089576"
+  ]
+  edge [
+    source 6987
+    target 6988
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.089600"
+  ]
+  edge [
+    source 6989
+    target 6990
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.089621"
+  ]
+  edge [
+    source 6991
+    target 6992
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230859"
+  ]
+  edge [
+    source 6991
+    target 6993
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230892"
+  ]
+  edge [
+    source 6991
+    target 6994
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230916"
+  ]
+  edge [
+    source 6991
+    target 1687
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230929"
+  ]
+  edge [
+    source 6991
+    target 6995
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230956"
+  ]
+  edge [
+    source 6991
+    target 6996
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230982"
+  ]
+  edge [
+    source 6991
+    target 1595
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.230995"
+  ]
+  edge [
+    source 6991
+    target 3205
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.231009"
+  ]
+  edge [
+    source 6991
+    target 7000
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.500492"
+  ]
+  edge [
+    source 6991
+    target 7001
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.500523"
+  ]
+  edge [
+    source 6991
+    target 950
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.500538"
+  ]
+  edge [
+    source 6991
+    target 7002
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.500563"
+  ]
+  edge [
+    source 6997
+    target 6209
+    predicate "REPRESENT"
+    confidence 1.0
+    added "2026-06-07T07:12:58.273794"
+  ]
+  edge [
+    source 6998
+    target 6999
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:12:58.273836"
+  ]
+  edge [
+    source 7003
+    target 3933
+    predicate "WIN"
+    confidence 1.0
+    added "2026-06-07T07:23:06.070933"
+  ]
+  edge [
+    source 7004
+    target 7005
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.070988"
+  ]
+  edge [
+    source 7006
+    target 7007
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192688"
+  ]
+  edge [
+    source 7006
+    target 7004
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192705"
+  ]
+  edge [
+    source 7006
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192720"
+  ]
+  edge [
+    source 7006
+    target 7008
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192748"
+  ]
+  edge [
+    source 7006
+    target 7009
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192772"
+  ]
+  edge [
+    source 7006
+    target 7010
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192798"
+  ]
+  edge [
+    source 7006
+    target 7011
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192824"
+  ]
+  edge [
+    source 7006
+    target 7012
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192849"
+  ]
+  edge [
+    source 7006
+    target 7003
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192862"
+  ]
+  edge [
+    source 7006
+    target 2186
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192875"
+  ]
+  edge [
+    source 7006
+    target 7013
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:23:06.192911"
+  ]
+  edge [
+    source 7014
+    target 1902
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.453776"
+  ]
+  edge [
+    source 7014
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.453795"
+  ]
+  edge [
+    source 7014
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.453811"
+  ]
+  edge [
+    source 7014
+    target 547
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.453840"
+  ]
+  edge [
+    source 7014
+    target 356
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.453856"
+  ]
+  edge [
+    source 7014
+    target 1404
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.550628"
+  ]
+  edge [
+    source 7015
+    target 5922
+    predicate "UTILIZE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.341125"
+  ]
+  edge [
+    source 7016
+    target 7017
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:33:14.562732"
+  ]
+  edge [
+    source 7018
+    target 7019
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:43:23.998222"
+  ]
+  edge [
+    source 7018
+    target 7020
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T07:43:23.998253"
+  ]
+  edge [
+    source 7021
+    target 7022
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T07:43:23.998296"
+  ]
+  edge [
+    source 7023
+    target 7024
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:43:24.133626"
+  ]
+  edge [
+    source 7026
+    target 1144
+    predicate "COMBINE"
+    confidence 1.0
+    added "2026-06-07T07:43:24.396240"
+  ]
+  edge [
+    source 7027
+    target 950
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769202"
+  ]
+  edge [
+    source 7027
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769218"
+  ]
+  edge [
+    source 7027
+    target 3938
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769229"
+  ]
+  edge [
+    source 7027
+    target 3939
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769239"
+  ]
+  edge [
+    source 7027
+    target 3940
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769248"
+  ]
+  edge [
+    source 7027
+    target 3941
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769257"
+  ]
+  edge [
+    source 7027
+    target 3932
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769266"
+  ]
+  edge [
+    source 7027
+    target 3942
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769275"
+  ]
+  edge [
+    source 7027
+    target 3943
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769283"
+  ]
+  edge [
+    source 7027
+    target 3944
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T07:53:33.769292"
+  ]
+  edge [
+    source 7028
+    target 7029
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:03:42.761806"
+  ]
+  edge [
+    source 7030
+    target 7031
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:03:42.881219"
+  ]
+  edge [
+    source 7030
+    target 6238
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:03:42.881240"
+  ]
+  edge [
+    source 7030
+    target 7032
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:03:42.881351"
+  ]
+  edge [
+    source 7033
+    target 7034
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.684598"
+  ]
+  edge [
+    source 7035
+    target 7036
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.684636"
+  ]
+  edge [
+    source 7038
+    target 7039
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.920618"
+  ]
+  edge [
+    source 7038
+    target 7040
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.920652"
+  ]
+  edge [
+    source 7038
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.920666"
+  ]
+  edge [
+    source 7038
+    target 7041
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.920762"
+  ]
+  edge [
+    source 7038
+    target 7042
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.920788"
+  ]
+  edge [
+    source 7038
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:52.092977"
+  ]
+  edge [
+    source 7038
+    target 11
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:52.093127"
+  ]
+  edge [
+    source 7038
+    target 126
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:13:52.093146"
+  ]
+  edge [
+    source 7043
+    target 7044
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.974465"
+  ]
+  edge [
+    source 7045
+    target 7046
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.974516"
+  ]
+  edge [
+    source 7047
+    target 7048
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:13:51.974559"
+  ]
+  edge [
+    source 7050
+    target 7051
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.696205"
+  ]
+  edge [
+    source 7052
+    target 7053
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.795009"
+  ]
+  edge [
+    source 7052
+    target 7054
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.795047"
+  ]
+  edge [
+    source 7052
+    target 7055
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.795073"
+  ]
+  edge [
+    source 7052
+    target 18
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.795091"
+  ]
+  edge [
+    source 7052
+    target 7056
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.966132"
+  ]
+  edge [
+    source 7052
+    target 4062
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:24:00.966158"
+  ]
+  edge [
+    source 7057
+    target 7058
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T08:34:09.936831"
+  ]
+  edge [
+    source 7059
+    target 7060
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T08:34:09.936869"
+  ]
+  edge [
+    source 7061
+    target 7062
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.075290"
+  ]
+  edge [
+    source 7063
+    target 7061
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173569"
+  ]
+  edge [
+    source 7063
+    target 7064
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173528"
+  ]
+  edge [
+    source 7063
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290810"
+  ]
+  edge [
+    source 7063
+    target 549
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290844"
+  ]
+  edge [
+    source 7063
+    target 6478
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173583"
+  ]
+  edge [
+    source 7063
+    target 7065
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173608"
+  ]
+  edge [
+    source 7063
+    target 7066
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173633"
+  ]
+  edge [
+    source 7063
+    target 7067
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.173658"
+  ]
+  edge [
+    source 7063
+    target 7068
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290766"
+  ]
+  edge [
+    source 7063
+    target 159
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290829"
+  ]
+  edge [
+    source 7063
+    target 7070
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290874"
+  ]
+  edge [
+    source 7063
+    target 6972
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290889"
+  ]
+  edge [
+    source 7063
+    target 7071
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290914"
+  ]
+  edge [
+    source 7063
+    target 7072
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290937"
+  ]
+  edge [
+    source 7063
+    target 7073
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290960"
+  ]
+  edge [
+    source 7063
+    target 7074
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.290996"
+  ]
+  edge [
+    source 7063
+    target 7075
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.291019"
+  ]
+  edge [
+    source 7063
+    target 6939
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.291032"
+  ]
+  edge [
+    source 7063
+    target 7076
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.291055"
+  ]
+  edge [
+    source 7063
+    target 6546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.291068"
+  ]
+  edge [
+    source 7068
+    target 7069
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:34:10.203380"
+  ]
+  edge [
+    source 7077
+    target 7078
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.149109"
+  ]
+  edge [
+    source 7079
+    target 546
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.272928"
+  ]
+  edge [
+    source 7079
+    target 549
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456443"
+  ]
+  edge [
+    source 7079
+    target 4033
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.272972"
+  ]
+  edge [
+    source 7079
+    target 7042
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.272989"
+  ]
+  edge [
+    source 7079
+    target 7080
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.273018"
+  ]
+  edge [
+    source 7079
+    target 1841
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.273033"
+  ]
+  edge [
+    source 7079
+    target 652
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.273137"
+  ]
+  edge [
+    source 7079
+    target 7072
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.273154"
+  ]
+  edge [
+    source 7079
+    target 7081
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.273180"
+  ]
+  edge [
+    source 7079
+    target 7083
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456342"
+  ]
+  edge [
+    source 7079
+    target 7084
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456378"
+  ]
+  edge [
+    source 7079
+    target 7085
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456406"
+  ]
+  edge [
+    source 7079
+    target 3602
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456421"
+  ]
+  edge [
+    source 7079
+    target 4599
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456461"
+  ]
+  edge [
+    source 7079
+    target 3674
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456477"
+  ]
+  edge [
+    source 7079
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456496"
+  ]
+  edge [
+    source 7079
+    target 7086
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456524"
+  ]
+  edge [
+    source 7079
+    target 7087
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456550"
+  ]
+  edge [
+    source 7079
+    target 7088
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456575"
+  ]
+  edge [
+    source 7079
+    target 7089
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.456602"
+  ]
+  edge [
+    source 7079
+    target 7090
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.624908"
+  ]
+  edge [
+    source 7079
+    target 2708
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.624928"
+  ]
+  edge [
+    source 7079
+    target 7091
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.624956"
+  ]
+  edge [
+    source 7079
+    target 7092
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:44:19.624980"
+  ]
+  edge [
+    source 7093
+    target 1404
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:54:28.434520"
+  ]
+  edge [
+    source 7093
+    target 7102
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T08:54:28.585254"
+  ]
+  edge [
+    source 7094
+    target 1962
+    predicate "USE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.480641"
+  ]
+  edge [
+    source 7095
+    target 1705
+    predicate "HAVE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.480674"
+  ]
+  edge [
+    source 7096
+    target 7097
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:54:28.480737"
+  ]
+  edge [
+    source 7098
+    target 7099
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.480784"
+  ]
+  edge [
+    source 7100
+    target 7101
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T08:54:28.480823"
+  ]
+  edge [
+    source 7103
+    target 7104
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T08:54:28.642244"
+  ]
+  edge [
+    source 7106
+    target 7107
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:04:36.785487"
+  ]
+  edge [
+    source 7108
+    target 7109
+    predicate "PROVIDE"
+    confidence 1.0
+    added "2026-06-07T09:04:36.943392"
+  ]
+  edge [
+    source 7110
+    target 68
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T09:14:45.209717"
+  ]
+  edge [
+    source 7110
+    target 155
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T09:14:45.209736"
+  ]
+  edge [
+    source 7111
+    target 7112
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:24:54.234076"
+  ]
+  edge [
+    source 7113
+    target 7114
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:24:54.234116"
+  ]
+  edge [
+    source 7115
+    target 3554
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T09:24:54.510594"
+  ]
+  edge [
+    source 7117
+    target 7118
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:35:03.262506"
+  ]
+  edge [
+    source 7119
+    target 7120
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T09:35:03.262537"
+  ]
+  edge [
+    source 7121
+    target 355
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-07T09:35:03.411957"
+  ]
+  edge [
+    source 7122
+    target 7123
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-07T09:45:13.908290"
+  ]
+  edge [
+    source 7124
+    target 7125
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-07T09:45:13.908335"
   ]
 ]

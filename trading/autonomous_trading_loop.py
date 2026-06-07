@@ -364,6 +364,9 @@ class AutonomousTradingLoop:
                 )
             )
         
+        # Pre-seed cache so signals fire immediately without warmup wait
+        await self.market_stream.preseed_cache(self.symbols)
+
         await self.market_stream.stream_live_market_data(self.symbols)
 
     async def _on_market_tick(self, symbol: str, tick: Dict[str, Any]):
