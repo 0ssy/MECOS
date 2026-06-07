@@ -291,7 +291,7 @@ class TradingAgent:
         final_decision = str(fused.get("decision", orchestrator_decision)).upper()
         confidence = float(fused.get("confidence", orchestrated.get("confidence", 0.0)))
         edge = float(fused.get("edge", 0.0))
-        if orchestrator_decision == "HOLD" and abs(edge) < 0.20:
+        if orchestrator_decision == "HOLD" and abs(edge) < 0.05:
             final_decision = "HOLD"
 
         consensus = self.consensus_engine.coordinate_debate(
@@ -308,7 +308,7 @@ class TradingAgent:
             },
         )
         consensus_decision = str(consensus.get("final_decision", "HOLD")).upper()
-        if consensus.get("dissenting_opinions"):
+        if len(consensus.get("dissenting_opinions", [])) > len(consensus.get("perspectives", {}) or {}) // 2:
             final_decision = "HOLD"
             confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
         elif consensus_decision == "HOLD":
@@ -324,24 +324,24 @@ class TradingAgent:
         var_95 = float(analytics_summary.get("var_95", 0.0) or 0.0)
         drawdown = float(analytics_summary.get("max_drawdown", 0.0) or 0.0)
         if final_decision == "BUY":
-            if macro_regime == "risk_off" and confidence < 0.90:
+            if macro_regime == "risk_off" and confidence < 0.50:
                 risk_gate_reason = "macro_risk_off"
-            elif news_score <= -0.35 and confidence < 0.90:
+            elif news_score <= -0.35 and confidence < 0.45:
                 risk_gate_reason = "negative_news_sentiment"
-            elif drawdown <= -0.12 and abs(var_95) >= 0.035 and confidence < 0.85:
+            elif drawdown <= -0.12 and abs(var_95) >= 0.035 and confidence < 0.50:
                 risk_gate_reason = "high_drawdown_and_var"
-            elif str(regime_snapshot.get("regime", "unknown")) in {"bear", "panic"} and confidence < 0.92:
+            elif str(regime_snapshot.get("regime", "unknown")) in {"bear", "panic"} and confidence < 0.55:
                 risk_gate_reason = "rule_regime_not_supporting_buy"
         elif final_decision == "SELL":
-            if macro_regime == "risk_on" and news_score >= 0.35 and confidence < 0.90:
+            if macro_regime == "risk_on" and news_score >= 0.35 and confidence < 0.50:
                 risk_gate_reason = "risk_on_with_bullish_news"
         mtf_alignment = float(mtf_snapshot.get("alignment_score", 0.0) or 0.0)
-        if final_decision == "BUY" and mtf_alignment < -0.40 and confidence < 0.92:
+        if final_decision == "BUY" and mtf_alignment < -0.40 and confidence < 0.55:
             risk_gate_reason = "multi_timeframe_bearish_alignment"
-        if final_decision == "SELL" and mtf_alignment > 0.40 and confidence < 0.92:
+        if final_decision == "SELL" and mtf_alignment > 0.40 and confidence < 0.55:
             risk_gate_reason = "multi_timeframe_bullish_alignment"
         bt_return = float(backtest_snapshot.get("total_return", 0.0) or 0.0)
-        if final_decision == "BUY" and bt_return < -0.03 and confidence < 0.90:
+        if final_decision == "BUY" and bt_return < -0.03 and confidence < 0.45:
             risk_gate_reason = "backtest_negative_expectancy"
         if risk_gate_reason:
             logger.info(f"Risk gate forced HOLD for {symbol}: {risk_gate_reason}")
@@ -600,6 +600,18 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

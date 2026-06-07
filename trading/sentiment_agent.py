@@ -28,10 +28,10 @@ class SentimentAgent:
         sentiment_score = price_sentiment + volume_sentiment * 0.3
         
         # Classify sentiment
-        if sentiment_score > 0.05:
+        if sentiment_score > 0.01:
             sentiment = "BULLISH"
             signal = "BUY"
-        elif sentiment_score < -0.05:
+        elif sentiment_score < -0.01:
             sentiment = "BEARISH"
             signal = "SELL"
         else:
@@ -57,3 +57,5 @@ class SentimentAgent:
             "sentiment_score": float(sentiment_score),
             "reason": f"Sentiment: {sentiment}, Score: {sentiment_score:.3f}"
         }
+
+

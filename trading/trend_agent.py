@@ -86,11 +86,16 @@ def get_trend_signal(
             score -= 0.35
         score += float(np.tanh(slope * 14.0) * 0.25)
 
-        if score > 0.25:
+        if score > 0.12:
             return "BUY", float(score)
-        if score < -0.25:
+        if score < -0.12:
             return "SELL", float(score)
         return "HOLD", float(score)
     except Exception as e:
         print(f"Trend calculation failed: {e}")
         return "HOLD", 0.0
+
+
+
+
+

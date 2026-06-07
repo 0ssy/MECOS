@@ -20,7 +20,7 @@ async def main():
     
     memory = MemorySystem()
     db = TradeDatabase()
-    quant_mode = os.getenv('MECOS_QUANT_MODE', 'balanced')
+    quant_mode = os.getenv('MECOS_QUANT_MODE', 'aggressive_research')
     logger.info(f'Quant mode selected: {quant_mode}')
 
     agent = TradingAgent(memory, quant_mode=quant_mode)
@@ -87,3 +87,5 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+
+

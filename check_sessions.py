@@ -1,0 +1,3 @@
+import inspect
+from trading.autonomous_trading_loop import SESSION_THRESHOLD_PROFILES
+print(SESSION_THRESHOLD_PROFILES)

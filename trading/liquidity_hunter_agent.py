@@ -44,8 +44,8 @@ class LiquidityHunterAgent:
                 confidence = min(volume_ratio / 5.0, 0.8)
         
         # Normal liquidity conditions
-        elif liquidity_score > 1.5:
-            signal = "FAVORABLE"  # Good conditions to trade
+        elif liquidity_score > 0.8:
+            signal = "BUY"  # Good conditions to trade
             confidence = 0.6
         
         return {
@@ -55,3 +55,5 @@ class LiquidityHunterAgent:
             "volume_ratio": float(volume_ratio),
             "reason": f"Liquidity: {liquidity_score:.2f}, Volume: {volume_ratio:.2f}x"
         }
+
+

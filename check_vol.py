@@ -1,0 +1,3 @@
+import inspect
+from trading.volatility_arbitrage_agent import VolatilityArbitrageAgent
+print(inspect.getsource(VolatilityArbitrageAgent.analyze))

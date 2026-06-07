@@ -31,8 +31,8 @@ SESSION_THRESHOLD_PROFILES = {
     },
     'aggressive_research': {
         'market_hours': 0.50,
-        'after_hours': 0.52,
-        'crypto_weekend': 0.50,
+        'after_hours': 0.30,
+        'crypto_weekend': 0.28,
     },
 }
 
@@ -91,16 +91,16 @@ class AutonomousTradingLoop:
         self.symbols = []
         self.current_regime = 'trending'
         self.cycle_interval_seconds = 10.0
-        self.symbol_cooldown_seconds = 300
+        self.symbol_cooldown_seconds = 60
         self._last_symbol_cycle_time = {}
         self._signal_persistence: Dict[str, Dict[str, Any]] = {}
         self.max_correlated_positions = 3
         self.min_acceptable_volatility = 0.0
-        self.max_acceptable_volatility = 0.050
+        self.max_acceptable_volatility = 0.15
         self.enable_trade_quality_filter = True
         self.trade_quality_spread_multiplier = 0.05
         self.enable_signal_persistence = True
-        self.signal_persistence_count_required = 2  # Reduced to 1 for high-confidence signals (see _passes_signal_persistence)
+        self.signal_persistence_count_required = 1  # Reduced to 1 for high-confidence signals (see _passes_signal_persistence)
         self.signal_persistence_seconds = 5.0
 
         self.loop_stats = {
@@ -998,6 +998,15 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
+
+
+
+
+
+
+
+
+
 
 
 

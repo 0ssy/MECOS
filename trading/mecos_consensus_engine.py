@@ -53,35 +53,72 @@ class ConsensusEngine:
         volatility = float(context.get("features", {}).get("realized_volatility", 0.0) or 0.0)
 
         if name == "Buffett":
-            if asset_type == "equity" and edge > 0.0 and trend > -0.01:
+            if edge > 0.0 and trend > -0.01:
                 return {"signal": "BUY", "reasoning": "Value + positive trend alignment."}
-            if asset_type == "equity" and edge < -0.1:
+            if edge < -0.1:
                 return {"signal": "SELL", "reasoning": "Negative valuation edge."}
-            return {"signal": "HOLD", "reasoning": "No equity value advantage."}
+            return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "No clear value advantage."}
 
         if name == "Simons":
-            if momentum > 0.015 and volatility < 0.06:
+            if momentum > 0.01 and volatility < 0.15:
                 return {"signal": "BUY", "reasoning": "Momentum and volatility profile favorable."}
-            if momentum < -0.015 and volatility < 0.06:
+            if momentum < -0.01 and volatility < 0.15:
                 return {"signal": "SELL", "reasoning": "Negative momentum with controlled volatility."}
             return {"signal": "HOLD", "reasoning": "Quant setup is neutral."}
 
         if name == "Dalio":
-            if regime in {"trending", "volatile_trend"} and edge > 0:
+            if edge > 0 and regime not in {"panic"}:
                 return {"signal": "BUY", "reasoning": "Macro regime supports risk-on exposure."}
             if regime == "panic" and edge < 0:
                 return {"signal": "SELL", "reasoning": "Macro regime is risk-off."}
             return {"signal": "HOLD", "reasoning": "Macro allocation remains balanced."}
 
         if name == "Soros":
+            # Soros trades reflexivity; strongest in FX and crypto momentum dislocations.
             if asset_type == "forex":
                 if momentum > 0.01 or base_decision == "BUY":
-                    return {"signal": "BUY", "reasoning": "FX reflexivity and directional pressure are aligned."}
+                    return {"signal": "BUY", "reasoning": "FX reflexivity aligned."}
                 if momentum < -0.01 or base_decision == "SELL":
-                    return {"signal": "SELL", "reasoning": "FX reflexivity points to downside momentum."}
+                    return {"signal": "SELL", "reasoning": "FX reflexivity downside."}
+            elif asset_type == "crypto":
+                if momentum > 0.01 or base_decision == "BUY":
+                    return {"signal": "BUY", "reasoning": "Crypto momentum reflexivity."}
+                if momentum < -0.01 or base_decision == "SELL":
+                    return {"signal": "SELL", "reasoning": "Crypto downside reflexivity."}
+            else:
+                if momentum > 0.015:
+                    return {"signal": "BUY", "reasoning": "Reflexive upside pressure detected."}
+                if momentum < -0.015:
+                    return {"signal": "SELL", "reasoning": "Reflexive downside pressure detected."}
             return {"signal": "HOLD", "reasoning": "No reflexive dislocation detected."}
 
-        return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "Fallback"}
+        if name == "Nakamoto":
+            # Crypto specialist — trades momentum, volatility clustering, and on-chain signals
+            vol_clustering = float(context.get("features", {}).get("volatility_clustering", 0.0) or 0.0)
+            order_flow = float(context.get("features", {}).get("order_flow_imbalance", 0.0) or 0.0)
+            if asset_type == "crypto":
+                if momentum > 0.005 and vol_clustering > 0.5:
+                    return {"signal": "BUY", "reasoning": "Crypto momentum with persistent volatility clustering."}
+                if momentum < -0.005 and vol_clustering > 0.5:
+                    return {"signal": "SELL", "reasoning": "Crypto downside momentum with clustering."}
+                if order_flow > 0.1 and base_decision == "BUY":
+                    return {"signal": "BUY", "reasoning": "Order flow imbalance supports crypto entry."}
+                if order_flow < -0.1 and base_decision == "SELL":
+                    return {"signal": "SELL", "reasoning": "Order flow imbalance supports crypto exit."}
+                return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "Crypto signal follows base."}
+            return {"signal": "HOLD", "reasoning": "Nakamoto only trades crypto."}
+
+        if name == "Wood":
+            # Cathie Wood — disruptive tech and crypto, high conviction growth
+            if asset_type in {"crypto", "equity"}:
+                if momentum > 0.0 and edge > 0.0:
+                    return {"signal": "BUY", "reasoning": "Disruptive asset with positive momentum."}
+                if momentum < -0.02 and edge < -0.05:
+                    return {"signal": "SELL", "reasoning": "Momentum breakdown in disruptive asset."}
+                return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "High conviction hold."}
+            return {"signal": "HOLD", "reasoning": "Wood focuses on disruptive assets only."}
+
+        return {"signal": "HOLD", "reasoning": "No clear persona edge."}
 
     def _reach_consensus(self, perspectives: Dict[str, Dict[str, str]]) -> Dict[str, Any]:
         signals = [str(p.get("signal", "HOLD")).upper() for p in perspectives.values()]
@@ -122,4 +159,15 @@ class ConsensusEngine:
         if final_decision == "HOLD":
             return [name for name, p in perspectives.items() if str(p.get("signal", "HOLD")).upper() != "HOLD"]
         return [name for name, p in perspectives.items() if str(p.get("signal", "HOLD")).upper() != final_decision]
+
+
+
+
+
+
+
+
+
+
+
 

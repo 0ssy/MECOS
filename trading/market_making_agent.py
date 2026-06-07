@@ -26,11 +26,11 @@ class MarketMakingAgent:
         confidence = float(np.clip(mm_readiness * 0.5 + abs(imbalance) * 0.3, 0.0, 0.8))
 
         signal = "HOLD"
-        if mm_readiness > 0.6:
+        if mm_readiness > 0.1:
             # Lean against short-term order-flow pressure while respecting mean-reversion extremes.
-            if imbalance > 0.25 or z_score > 1.5:
+            if imbalance > 0.10 or z_score > 0.8:
                 signal = "SELL"
-            elif imbalance < -0.25 or z_score < -1.5:
+            elif imbalance < -0.10 or z_score < -0.8:
                 signal = "BUY"
             else:
                 signal = "HOLD"
@@ -42,3 +42,7 @@ class MarketMakingAgent:
             "order_flow_imbalance": imbalance,
             "reason": f"mm={mm_readiness:.2f} spread={spread_pressure:.4f} imbalance={imbalance:.2f}",
         }
+
+
+
+

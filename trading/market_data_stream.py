@@ -146,7 +146,7 @@ class MarketDataStream:
                 ticker = yf.Ticker(yf_symbol)
 
                 # Try 5-minute bars first (more granular, better for signals)
-                df = ticker.history(period="5d", interval="5m", auto_adjust=True)
+                df = ticker.history(period="30d", interval="1h", auto_adjust=True)
 
                 # Fall back to hourly if 5m not available
                 if df.empty:
@@ -174,7 +174,7 @@ class MarketDataStream:
                 if bars:
                     # Directly populate cache — bypass validate_tick
                     # since yfinance data can have older timestamps
-                    self.market_data_cache[symbol] = bars[-lookback:]
+                    self.market_data_cache[symbol] = bars[-200:]
                     logger.info(
                         f"Pre-seeded {symbol}: {len(self.market_data_cache[symbol])} bars "
                         f"(latest close: {bars[-1]['close']:.4f})"
@@ -356,3 +356,5 @@ class MarketDataStream:
             self._public_stream_task = None
 
         logger.info('Market stream stopped')
+
+

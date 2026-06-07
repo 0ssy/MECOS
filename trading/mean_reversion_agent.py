@@ -32,15 +32,15 @@ class MeanReversionAgent:
         z_score = (current - mean) / std if std > 0 else 0
         
         # Mean reversion score from features
-        mean_rev_score = features.get('mean_reversion_score', 0)
-        autocorr = features.get('autocorr_1', 0)
+        mean_rev_score = features.get('mean_reversion_score', features.get('z_score', 0.0))
+        autocorr = features.get('autocorr_1', -0.05)
         
         # Signal generation
         signal = "HOLD"
         confidence = 0
         
         # Strong mean reversion (negative autocorrelation)
-        if autocorr < -0.3:
+        if autocorr < -0.04:
             if z_score > self.entry_threshold:
                 signal = "SELL"  # Overextended, revert down
                 confidence = min(abs(z_score) / 3.0, 0.9)
@@ -58,4 +58,7 @@ class MeanReversionAgent:
             "mean_reversion_strength": float(abs(autocorr)),
             "reason": f"Z-score: {z_score:.2f}, Autocorr: {autocorr:.2f}"
         }
+
+
+
 

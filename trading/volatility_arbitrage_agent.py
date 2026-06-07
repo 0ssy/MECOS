@@ -35,11 +35,15 @@ class VolatilityArbitrageAgent:
             # High vol clustering down - sell volatility
             signal = "SELL_VOL"
             confidence = 0.7
-        elif vol_regime == "normal" and realized_vol < 0.15:
+        elif vol_regime == "normal" and realized_vol < 0.25:
             # Low vol - buy volatility (protection)
             signal = "BUY_VOL"
             confidence = 0.6
         
+        # High clustering means momentum is persistent - use it
+        if vol_clustering > 0.7 and realized_vol > 0.02:
+            signal = 'BUY_VOL'
+            confidence = min(vol_clustering * 0.8, 0.75)
         # Volatility arbitrage
         if vol_spread > 0.05:  # Implied > Realized
             signal = "SELL_VOL"  # Sell overpriced vol
@@ -56,3 +60,6 @@ class VolatilityArbitrageAgent:
             "vol_spread": float(vol_spread),
             "reason": f"Vol spread: {vol_spread:.3f}, Regime: {vol_regime}"
         }
+
+
+

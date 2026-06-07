@@ -1,0 +1,3 @@
+import inspect
+from trading.mecos_consensus_engine import ConsensusEngine
+print(inspect.getsource(ConsensusEngine._simulate_persona_analysis))
