@@ -38090,6 +38090,191 @@ graph [
     label "ci/cd pipelines theory theory theory theory theory applications in ci/cd pipelines"
     added "2026-06-08T12:39:55.971920"
   ]
+  node [
+    id 7618
+    label "advanced advanced ci/cd pipelines theory theory"
+    added "2026-06-08T13:11:00.801335"
+  ]
+  node [
+    id 7619
+    label "computational human phantoms"
+    added "2026-06-08T15:53:33.627112"
+  ]
+  node [
+    id 7620
+    label "models of the human body used in compute"
+    added "2026-06-08T15:53:33.637327"
+  ]
+  node [
+    id 7621
+    label "computer science fundamentals and human anatomy organs intersection"
+    added "2026-06-08T15:53:39.222941"
+  ]
+  node [
+    id 7622
+    label "evolutionary psychology"
+    added "2026-06-08T15:53:40.120064"
+  ]
+  node [
+    id 7623
+    label "theoretical approach in psychology that"
+    added "2026-06-08T15:53:40.120642"
+  ]
+  node [
+    id 7624
+    label "psychological traits and mechanisms"
+    added "2026-06-08T15:53:40.120685"
+  ]
+  node [
+    id 7625
+    label "either functional products of natural an"
+    added "2026-06-08T15:53:40.120964"
+  ]
+  node [
+    id 7626
+    label "advanced advanced advanced advanced advanced advanced ci/cd pipelines"
+    added "2026-06-08T16:15:04.340681"
+  ]
+  node [
+    id 7627
+    label "oad and interconnected set of fields that"
+    added "2026-06-08T16:35:40.838244"
+  ]
+  node [
+    id 7628
+    label "crucial for innovation and technological"
+    added "2026-06-08T16:35:40.838355"
+  ]
+  node [
+    id 7629
+    label "these disciplines"
+    added "2026-06-08T16:35:40.838394"
+  ]
+  node [
+    id 7630
+    label "often grouped together because they shar"
+    added "2026-06-08T16:35:40.838409"
+  ]
+  node [
+    id 7631
+    label "typically used in the context of educa"
+    added "2026-06-08T16:35:40.838452"
+  ]
+  node [
+    id 7632
+    label "computer science fundamentals and electronics engineering components intersection"
+    added "2026-06-08T16:35:41.075417"
+  ]
+  node [
+    id 7633
+    label "stem"
+    added "2026-06-08T16:35:41.075479"
+  ]
+  node [
+    id 7634
+    label "advanced ci/cd pipelines theory theory mathematics"
+    added "2026-06-08T16:46:21.720979"
+  ]
+  node [
+    id 7635
+    label "nec"
+    added "2026-06-08T16:56:32.480803"
+  ]
+  node [
+    id 7636
+    label "designs"
+    added "2026-06-08T16:56:32.480831"
+  ]
+  node [
+    id 7637
+    label "introduced shortly before nec sold their"
+    added "2026-06-08T16:56:32.480857"
+  ]
+  node [
+    id 7638
+    label "ci/cd pipelines mathematics applications in electronics engineering components"
+    added "2026-06-08T16:56:32.576929"
+  ]
+  node [
+    id 7639
+    label "v850"
+    added "2026-06-08T16:56:32.576961"
+  ]
+  node [
+    id 7640
+    label "32-bit"
+    added "2026-06-08T16:56:32.577001"
+  ]
+  node [
+    id 7641
+    label "renesas electronics"
+    added "2026-06-08T16:56:32.577068"
+  ]
+  node [
+    id 7642
+    label "renesas"
+    added "2026-06-08T16:56:32.577099"
+  ]
+  node [
+    id 7643
+    label "capability of computational systems to p"
+    added "2026-06-08T18:58:08.163855"
+  ]
+  node [
+    id 7644
+    label "erform tasks that"
+    added "2026-06-08T18:58:08.163927"
+  ]
+  node [
+    id 7645
+    label "typically associated with human intellig"
+    added "2026-06-08T18:58:08.163941"
+  ]
+  node [
+    id 7646
+    label "used in applications throughout industry"
+    added "2026-06-08T18:58:08.163964"
+  ]
+  node [
+    id 7647
+    label "multiple subfields"
+    added "2026-06-08T18:58:08.163997"
+  ]
+  node [
+    id 7648
+    label "the subfield of machine learning"
+    added "2026-06-08T18:58:08.164029"
+  ]
+  node [
+    id 7649
+    label "used for various scientific and commerci"
+    added "2026-06-08T18:58:08.164040"
+  ]
+  node [
+    id 7650
+    label "computer science fundamentals and predictive coding intersection"
+    added "2026-06-08T18:58:08.308362"
+  ]
+  node [
+    id 7651
+    label "fundamental set of rules or defined proc"
+    added "2026-06-08T18:58:08.503285"
+  ]
+  node [
+    id 7652
+    label "edures that"
+    added "2026-06-08T18:58:08.503330"
+  ]
+  node [
+    id 7653
+    label "typically designed and used to be a simp"
+    added "2026-06-08T18:58:08.503340"
+  ]
+  node [
+    id 7654
+    label "advanced ci/cd pipelines theory theory theory theory"
+    added "2026-06-08T19:08:23.635637"
+  ]
   edge [
     source 0
     target 1
@@ -38432,6 +38617,13 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-07T18:14:14.569467"
+  ]
+  edge [
+    source 24
+    target 7647
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T18:58:08.164010"
   ]
   edge [
     source 26
@@ -39034,6 +39226,13 @@ graph [
     predicate "WAS"
     confidence 1.0
     added "2026-06-07T15:28:47.622790"
+  ]
+  edge [
+    source 109
+    target 7631
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T16:35:40.838480"
   ]
   edge [
     source 111
@@ -40636,7 +40835,7 @@ graph [
     target 5459
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T11:49:10.620659"
+    added "2026-06-08T19:08:23.786857"
   ]
   edge [
     source 274
@@ -41448,7 +41647,7 @@ graph [
     target 4873
     predicate "ARE"
     confidence 1.0
-    added "2026-06-06T18:11:07.296196"
+    added "2026-06-08T18:58:08.348627"
   ]
   edge [
     source 395
@@ -41505,6 +41704,13 @@ graph [
     predicate "WAS"
     confidence 1.0
     added "2026-06-08T08:23:37.201647"
+  ]
+  edge [
+    source 395
+    target 7637
+    predicate "WAS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.480866"
   ]
   edge [
     source 398
@@ -46719,7 +46925,7 @@ graph [
     target 7429
     predicate "RECEIVE"
     confidence 1.0
-    added "2026-06-08T10:47:51.447634"
+    added "2026-06-08T16:46:21.765263"
   ]
   edge [
     source 1268
@@ -48105,7 +48311,7 @@ graph [
     target 1504
     predicate "IS"
     confidence 1.0
-    added "2026-06-06T23:16:29.401575"
+    added "2026-06-08T15:53:39.391133"
   ]
   edge [
     source 1503
@@ -50887,6 +51093,20 @@ graph [
     added "2026-06-03T18:07:46.178183"
   ]
   edge [
+    source 1991
+    target 7643
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T18:58:08.163901"
+  ]
+  edge [
+    source 1991
+    target 7646
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-08T18:58:08.163981"
+  ]
+  edge [
     source 1993
     target 1994
     predicate "STAR"
@@ -51353,7 +51573,7 @@ graph [
     target 2096
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T12:39:55.988230"
+    added "2026-06-08T19:08:23.654886"
   ]
   edge [
     source 2099
@@ -57845,6 +58065,13 @@ graph [
     added "2026-06-03T22:13:58.520474"
   ]
   edge [
+    source 3412
+    target 7651
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T18:58:08.503309"
+  ]
+  edge [
     source 3416
     target 3417
     predicate "IS"
@@ -61944,21 +62171,21 @@ graph [
     target 4123
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T12:39:55.908248"
+    added "2026-06-08T19:08:23.432529"
   ]
   edge [
     source 4124
     target 4125
     predicate "ARE"
     confidence 1.0
-    added "2026-06-08T12:39:55.908271"
+    added "2026-06-08T19:08:23.432609"
   ]
   edge [
     source 4126
     target 4127
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T12:39:55.908280"
+    added "2026-06-08T19:08:23.432621"
   ]
   edge [
     source 4128
@@ -61993,7 +62220,7 @@ graph [
     target 4132
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T11:38:43.470192"
+    added "2026-06-08T16:46:21.615023"
   ]
   edge [
     source 4134
@@ -62245,7 +62472,7 @@ graph [
     target 4181
     predicate "ARE"
     confidence 1.0
-    added "2026-06-08T10:37:41.081879"
+    added "2026-06-08T16:15:03.917359"
   ]
   edge [
     source 4182
@@ -83420,7 +83647,7 @@ graph [
     target 7305
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T16:41:01.420402"
+    added "2026-06-08T16:35:41.143425"
   ]
   edge [
     source 7306
@@ -84953,21 +85180,21 @@ graph [
     target 7543
     predicate "IS"
     confidence 1.0
-    added "2026-06-08T10:47:51.447671"
+    added "2026-06-08T16:46:21.765301"
   ]
   edge [
     source 7544
     target 7545
     predicate "ARE"
     confidence 1.0
-    added "2026-06-08T10:47:51.447686"
+    added "2026-06-08T16:46:21.765318"
   ]
   edge [
     source 7546
     target 7547
     predicate "ARE"
     confidence 1.0
-    added "2026-06-08T10:47:51.447698"
+    added "2026-06-08T16:46:21.765332"
   ]
   edge [
     source 7550
@@ -86172,5 +86399,187 @@ graph [
     predicate "MENTIONS"
     confidence 1.0
     added "2026-06-08T12:39:56.153679"
+  ]
+  edge [
+    source 7618
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T13:11:00.801397"
+  ]
+  edge [
+    source 7619
+    target 7620
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T15:53:33.640702"
+  ]
+  edge [
+    source 7621
+    target 3189
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T15:53:39.225921"
+  ]
+  edge [
+    source 7622
+    target 7623
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T15:53:40.120658"
+  ]
+  edge [
+    source 7624
+    target 7625
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T15:53:40.120980"
+  ]
+  edge [
+    source 7626
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:15:04.340751"
+  ]
+  edge [
+    source 7627
+    target 7628
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T16:35:40.838377"
+  ]
+  edge [
+    source 7629
+    target 7630
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T16:35:40.838419"
+  ]
+  edge [
+    source 7632
+    target 7633
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:35:41.075522"
+  ]
+  edge [
+    source 7634
+    target 1404
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:46:21.721031"
+  ]
+  edge [
+    source 7634
+    target 7548
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:46:21.880147"
+  ]
+  edge [
+    source 7635
+    target 7636
+    predicate "SELL"
+    confidence 1.0
+    added "2026-06-08T16:56:32.480843"
+  ]
+  edge [
+    source 7638
+    target 7639
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.576988"
+  ]
+  edge [
+    source 7638
+    target 7640
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577038"
+  ]
+  edge [
+    source 7638
+    target 346
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577051"
+  ]
+  edge [
+    source 7638
+    target 7641
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577077"
+  ]
+  edge [
+    source 7638
+    target 7635
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577088"
+  ]
+  edge [
+    source 7638
+    target 7642
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577108"
+  ]
+  edge [
+    source 7638
+    target 6751
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577120"
+  ]
+  edge [
+    source 7638
+    target 654
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T16:56:32.577135"
+  ]
+  edge [
+    source 7644
+    target 7645
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T18:58:08.163951"
+  ]
+  edge [
+    source 7648
+    target 7649
+    predicate "HAS_BEEN"
+    confidence 1.0
+    added "2026-06-08T18:58:08.164050"
+  ]
+  edge [
+    source 7650
+    target 1991
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T18:58:08.308408"
+  ]
+  edge [
+    source 7650
+    target 4874
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T18:58:08.467492"
+  ]
+  edge [
+    source 7652
+    target 7653
+    predicate "ARE"
+    confidence 1.0
+    added "2026-06-08T18:58:08.503349"
+  ]
+  edge [
+    source 7654
+    target 89
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T19:08:23.635677"
   ]
 ]

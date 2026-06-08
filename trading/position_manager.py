@@ -11,41 +11,41 @@ class PositionManager:
     async def update_position(self, symbol: str, side: str, size: float, price: float):
         if symbol not in self.positions:
             self.positions[symbol] = {
-                'size': 0,
-                'avg_price': 0,
+                'size':         0,
+                'avg_price':    0,
                 'unrealized_pnl': 0,
-                'entry_time': None,
-                'peak_price': 0,
-                'last_price': 0,
-                'sector': 'unknown',
-                'stop_loss': 0,
-                'take_profit': 0,
+                'entry_time':   None,
+                'peak_price':   0,
+                'last_price':   0,
+                'sector':       'unknown',
+                'stop_loss':    0,
+                'take_profit':  0,
             }
-        
+
         position = self.positions[symbol]
-        
+
         if side == 'BUY':
-            total_cost = position['size'] * position['avg_price'] + size * price
-            position['size'] += size
+            total_cost          = position['size'] * position['avg_price'] + size * price
+            position['size']   += size
             position['avg_price'] = total_cost / position['size'] if position['size'] > 0 else 0
             if position['entry_time'] is None:
                 position['entry_time'] = datetime.now().isoformat()
             position['peak_price'] = max(position.get('peak_price', 0), price)
             position['last_price'] = price
-            # Calculate and persist stop levels
+            # Persist stop levels on first entry
             if position['stop_loss'] == 0:
-                position['stop_loss']   = round(price * 0.98,  6)  # 2% stop
-                position['take_profit'] = round(price * 1.05,  6)  # 5% take profit
-            self.save_positions()
-        
+                position['stop_loss']  = round(price * 0.98, 6)   # 2% stop loss
+                position['take_profit'] = round(price * 1.05, 6)  # 5% take profit
+
         elif side == 'SELL':
             position['size'] -= size
             if position['size'] <= 0:
                 del self.positions[symbol]
             else:
                 position['last_price'] = price
-            self.save_positions()
-        logger.info(f'Position updated: {symbol} - {position}')
+
+        self.save_positions()
+        logger.info(f'Position updated: {symbol} - {self.positions.get(symbol, "closed")}')
 
     def load_positions(self, positions: Dict[str, Dict[str, Any]]):
         restored = {}
@@ -114,27 +114,23 @@ class PositionManager:
         return total_exposure
 
     def save_positions(self):
-        """Persist all open positions including stop levels."""
+        """Persist all open positions with stop levels to disk."""
         import json
         from pathlib import Path
         data = {
             "open_positions": {
                 symbol: {
-                    "entry":      pos.get("avg_price", 0),
-                    "size":       pos.get("size", 0),
-                    "stop":       pos.get("stop_loss", 0),
+                    "entry":       pos.get("avg_price", 0),
+                    "size":        pos.get("size", 0),
+                    "stop":        pos.get("stop_loss", 0),
                     "take_profit": pos.get("take_profit", 0),
-                    "opened_at":  pos.get("entry_time", ""),
-                    "metadata": {
-                        "peak_price": pos.get("peak_price", 0),
-                        "sector":     pos.get("sector", "unknown"),
-                    }
+                    "opened_at":   pos.get("entry_time", ""),
+                    "peak_price":  pos.get("peak_price", 0),
+                    "sector":      pos.get("sector", "unknown"),
                 }
                 for symbol, pos in self.positions.items()
                 if pos.get("size", 0) > 0
             },
             "last_updated": __import__("datetime").datetime.utcnow().isoformat()
         }
-        Path("data/state.json").write_text(
-            json.dumps(data, indent=2)
-        )
+        Path("data/state.json").write_text(json.dumps(data, indent=2))
