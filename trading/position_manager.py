@@ -17,7 +17,9 @@ class PositionManager:
                 'entry_time': None,
                 'peak_price': 0,
                 'last_price': 0,
-                'sector': 'unknown'
+                'sector': 'unknown',
+                'stop_loss': 0,
+                'take_profit': 0,
             }
         
         position = self.positions[symbol]
@@ -30,6 +32,11 @@ class PositionManager:
                 position['entry_time'] = datetime.now().isoformat()
             position['peak_price'] = max(position.get('peak_price', 0), price)
             position['last_price'] = price
+            # Calculate and persist stop levels
+            if position['stop_loss'] == 0:
+                position['stop_loss']   = round(price * 0.98,  6)  # 2% stop
+                position['take_profit'] = round(price * 1.05,  6)  # 5% take profit
+            self.save_positions()
         
         elif side == 'SELL':
             position['size'] -= size
@@ -37,7 +44,7 @@ class PositionManager:
                 del self.positions[symbol]
             else:
                 position['last_price'] = price
-        
+            self.save_positions()
         logger.info(f'Position updated: {symbol} - {position}')
 
     def load_positions(self, positions: Dict[str, Dict[str, Any]]):
@@ -56,6 +63,8 @@ class PositionManager:
                 'peak_price': float(pos.get('peak_price', pos.get('avg_price', 0.0)) or 0.0),
                 'last_price': float(pos.get('last_price', pos.get('avg_price', 0.0)) or 0.0),
                 'sector': pos.get('sector', 'unknown'),
+                'stop_loss': float(pos.get('stop_loss', 0.0) or 0.0),
+                'take_profit': float(pos.get('take_profit', 0.0) or 0.0),
             }
         self.positions = restored
         logger.info(f'Position state restored: {len(self.positions)} active positions')
@@ -103,3 +112,29 @@ class PositionManager:
                 total_exposure += abs(exposure)
         
         return total_exposure
+
+    def save_positions(self):
+        """Persist all open positions including stop levels."""
+        import json
+        from pathlib import Path
+        data = {
+            "open_positions": {
+                symbol: {
+                    "entry":      pos.get("avg_price", 0),
+                    "size":       pos.get("size", 0),
+                    "stop":       pos.get("stop_loss", 0),
+                    "take_profit": pos.get("take_profit", 0),
+                    "opened_at":  pos.get("entry_time", ""),
+                    "metadata": {
+                        "peak_price": pos.get("peak_price", 0),
+                        "sector":     pos.get("sector", "unknown"),
+                    }
+                }
+                for symbol, pos in self.positions.items()
+                if pos.get("size", 0) > 0
+            },
+            "last_updated": __import__("datetime").datetime.utcnow().isoformat()
+        }
+        Path("data/state.json").write_text(
+            json.dumps(data, indent=2)
+        )
