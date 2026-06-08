@@ -3,11 +3,14 @@ from __future__ import annotations
 
 class PersonaEngine:
     PERSONAS = {
-        "Buffett": "Focus on intrinsic value, long-term fundamentals, and margin of safety.",
-        "Simons": "Focus on high-frequency patterns, statistical arbitrage, and quantitative signals.",
-        "Dalio": "Focus on macro cycles, debt levels, and diversification across asset classes.",
-        "Soros": "Focus on currency reflexivity, central bank policy, and macro-economic imbalances.",
-    }
+	    "Buffett": "Focus on intrinsic value, long-term fundamentals, and margin of safety.",
+    	"Simons": "Focus on high-frequency patterns, statistical arbitrage, and quantitative signals.",
+   	    "Dalio": "Focus on macro cycles, debt levels, and diversification across asset classes.",
+    	"Soros": "Focus on currency reflexivity, central bank policy, and macro-economic imbalances.",
+    	"Nakamoto": "Focus on crypto momentum, on-chain signals, volatility clustering, and order flow.",
+    	"Wood": "Focus on disruptive technology and crypto, high conviction growth assets.",
+
+        }
 
     def register_persona(self, name: str, prompt: str) -> None:
         token = str(name or "").strip()
@@ -23,7 +26,7 @@ class PersonaEngine:
         if token == "equity":
             return ["Buffett", "Simons", "Dalio"]
         if token == "crypto":
-            return ["Simons", "Dalio", "Buffett"]
+            return ["Nakamoto", "Wood", "Simons", "Dalio"]
         if token in {"forex", "commodity_fx"}:
             return ["Dalio", "Soros", "Simons"]
         if token == "macro":

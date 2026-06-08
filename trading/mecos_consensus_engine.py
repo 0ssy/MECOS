@@ -52,6 +52,30 @@ class ConsensusEngine:
         trend = float(context.get("features", {}).get("trend_strength", 0.0) or 0.0)
         volatility = float(context.get("features", {}).get("realized_volatility", 0.0) or 0.0)
 
+        if name == "Nakamoto":
+            vol_clustering = float(context.get("features", {}).get("volatility_clustering", 0.0) or 0.0)
+            order_flow = float(context.get("features", {}).get("order_flow_imbalance", 0.0) or 0.0)
+            if asset_type == "crypto":
+                if momentum > 0.005 and vol_clustering > 0.5:
+                    return {"signal": "BUY", "reasoning": "Crypto momentum with volatility clustering."}
+                if momentum < -0.005 and vol_clustering > 0.5:
+                    return {"signal": "SELL", "reasoning": "Crypto downside with clustering."}
+                if order_flow > 0.1 and base_decision == "BUY":
+                    return {"signal": "BUY", "reasoning": "Order flow supports crypto entry."}
+                if order_flow < -0.1 and base_decision == "SELL":
+                    return {"signal": "SELL", "reasoning": "Order flow supports crypto exit."}
+                return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "Crypto follows base signal."}
+            return {"signal": "HOLD", "reasoning": "Nakamoto only trades crypto."}
+
+        if name == "Wood":
+            if asset_type in {"crypto", "equity"}:
+                if momentum > 0.0 and edge > 0.0:
+                    return {"signal": "BUY", "reasoning": "Disruptive asset with positive momentum."}
+                if momentum < -0.02 and edge < -0.05:
+                    return {"signal": "SELL", "reasoning": "Momentum breakdown in disruptive asset."}
+                return {"signal": base_decision if base_decision in {"BUY", "SELL"} else "HOLD", "reasoning": "High conviction hold."}
+            return {"signal": "HOLD", "reasoning": "Wood focuses on disruptive assets only."}
+
         if name == "Buffett":
             if edge > 0.0 and trend > -0.01:
                 return {"signal": "BUY", "reasoning": "Value + positive trend alignment."}

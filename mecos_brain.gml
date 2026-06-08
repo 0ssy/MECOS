@@ -37220,6 +37220,196 @@ graph [
     label "credit default swaps in emerging markets"
     added "2026-06-07T19:05:31.484003"
   ]
+  node [
+    id 7444
+    label "bell labs"
+    added "2026-06-08T02:10:28.070135"
+  ]
+  node [
+    id 7445
+    label "the semiconductor industry"
+    added "2026-06-08T02:10:28.070178"
+  ]
+  node [
+    id 7446
+    label "aggregate of companies engaged in the de"
+    added "2026-06-08T02:10:28.070184"
+  ]
+  node [
+    id 7447
+    label "memory consolidation in emerging markets"
+    added "2026-06-08T02:11:26.438284"
+  ]
+  node [
+    id 7448
+    label "shockley"
+    added "2026-06-08T02:11:26.438350"
+  ]
+  node [
+    id 7449
+    label "brattain"
+    added "2026-06-08T02:11:26.438398"
+  ]
+  node [
+    id 7450
+    label "bardeen"
+    added "2026-06-08T02:11:26.438440"
+  ]
+  node [
+    id 7451
+    label "1948"
+    added "2026-06-08T02:11:26.438492"
+  ]
+  node [
+    id 7452
+    label "25,000"
+    added "2026-06-08T02:11:26.438538"
+  ]
+  node [
+    id 7453
+    label "motorola"
+    added "2026-06-08T02:11:26.438578"
+  ]
+  node [
+    id 7454
+    label "shockley semiconductor"
+    added "2026-06-08T02:11:26.438642"
+  ]
+  node [
+    id 7455
+    label "1955"
+    added "2026-06-08T02:11:26.438675"
+  ]
+  node [
+    id 7456
+    label "sylvania"
+    added "2026-06-08T02:11:26.438706"
+  ]
+  node [
+    id 7457
+    label "centralab"
+    added "2026-06-08T02:11:26.438741"
+  ]
+  node [
+    id 7458
+    label "fairchild semiconductor"
+    added "2026-06-08T02:11:26.438791"
+  ]
+  node [
+    id 7459
+    label "texas instruments"
+    added "2026-06-08T02:11:26.438831"
+  ]
+  node [
+    id 7460
+    label "trinidad"
+    added "2026-06-08T02:11:26.497050"
+  ]
+  node [
+    id 7461
+    label "southernmost islands"
+    added "2026-06-08T02:11:26.497096"
+  ]
+  node [
+    id 7462
+    label "the capital city"
+    added "2026-06-08T02:11:26.497134"
+  ]
+  node [
+    id 7463
+    label "port of spain"
+    added "2026-06-08T02:11:26.497146"
+  ]
+  node [
+    id 7464
+    label "ts largest and most populous municipality"
+    added "2026-06-08T02:11:26.497191"
+  ]
+  node [
+    id 7465
+    label "chaguanas"
+    added "2026-06-08T02:11:26.497212"
+  ]
+  node [
+    id 7466
+    label "close to the continent of south america"
+    added "2026-06-08T02:11:26.497239"
+  ]
+  node [
+    id 7467
+    label "tobago"
+    added "2026-06-08T02:11:26.679153"
+  ]
+  node [
+    id 7468
+    label "the republic of trinidad"
+    added "2026-06-08T02:11:26.679206"
+  ]
+  node [
+    id 7469
+    label "caribbean"
+    added "2026-06-08T02:11:26.679242"
+  ]
+  node [
+    id 7470
+    label "south america"
+    added "2026-06-08T02:11:26.679328"
+  ]
+  node [
+    id 7471
+    label "venezuela"
+    added "2026-06-08T02:11:26.679389"
+  ]
+  node [
+    id 7472
+    label "semiconductor industry"
+    added "2026-06-08T02:11:26.725308"
+  ]
+  node [
+    id 7473
+    label "semiconductor market"
+    added "2026-06-08T02:11:26.725355"
+  ]
+  node [
+    id 7474
+    label "revenue share"
+    added "2026-06-08T02:11:26.725384"
+  ]
+  node [
+    id 7475
+    label "japanese"
+    added "2026-06-08T02:11:26.850398"
+  ]
+  node [
+    id 7476
+    label "50%"
+    added "2026-06-08T02:11:26.850426"
+  ]
+  node [
+    id 7477
+    label "developmental robotics in emerging markets"
+    added "2026-06-08T02:20:22.853222"
+  ]
+  node [
+    id 7478
+    label "space probes"
+    added "2026-06-08T02:20:22.867546"
+  ]
+  node [
+    id 7479
+    label "vacuums"
+    added "2026-06-08T02:20:22.867579"
+  ]
+  node [
+    id 7480
+    label "an autonomous robot"
+    added "2026-06-08T02:20:22.867592"
+  ]
+  node [
+    id 7481
+    label "robot that acts without recourse to huma"
+    added "2026-06-08T02:20:22.867600"
+  ]
   edge [
     source 0
     target 1
@@ -40670,6 +40860,20 @@ graph [
     predicate "ARE"
     confidence 1.0
     added "2026-06-04T03:43:24.801748"
+  ]
+  edge [
+    source 400
+    target 7478
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-08T02:20:22.867565"
+  ]
+  edge [
+    source 400
+    target 7479
+    predicate "INCLUDE"
+    confidence 1.0
+    added "2026-06-08T02:20:22.867586"
   ]
   edge [
     source 403
@@ -45989,14 +46193,14 @@ graph [
     target 1302
     predicate "COMBINE"
     confidence 1.0
-    added "2026-06-07T16:40:56.089071"
+    added "2026-06-08T02:20:22.778803"
   ]
   edge [
     source 1301
     target 1303
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T16:40:56.125690"
+    added "2026-06-08T02:20:22.778844"
   ]
   edge [
     source 1301
@@ -46010,7 +46214,7 @@ graph [
     target 1305
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T16:40:56.126015"
+    added "2026-06-08T02:20:22.778860"
   ]
   edge [
     source 1306
@@ -48930,6 +49134,13 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-03T19:22:16.959088"
+  ]
+  edge [
+    source 1834
+    target 7466
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.497250"
   ]
   edge [
     source 1837
@@ -82445,14 +82656,14 @@ graph [
     target 7302
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T16:41:00.686640"
+    added "2026-06-08T02:20:22.620592"
   ]
   edge [
     source 7303
     target 1420
     predicate "ARE"
     confidence 1.0
-    added "2026-06-07T16:41:00.687309"
+    added "2026-06-08T02:20:22.620633"
   ]
   edge [
     source 7304
@@ -83384,5 +83595,264 @@ graph [
     predicate "MENTIONS"
     confidence 1.0
     added "2026-06-07T19:05:31.827919"
+  ]
+  edge [
+    source 7444
+    target 4733
+    predicate "LICENSE"
+    confidence 1.0
+    added "2026-06-08T02:10:28.070157"
+  ]
+  edge [
+    source 7444
+    target 1746
+    predicate "LICENSE"
+    confidence 1.0
+    added "2026-06-08T02:10:28.070170"
+  ]
+  edge [
+    source 7445
+    target 7446
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:10:28.070189"
+  ]
+  edge [
+    source 7447
+    target 7448
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438369"
+  ]
+  edge [
+    source 7447
+    target 7449
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438421"
+  ]
+  edge [
+    source 7447
+    target 7450
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438455"
+  ]
+  edge [
+    source 7447
+    target 7444
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438471"
+  ]
+  edge [
+    source 7447
+    target 7451
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438507"
+  ]
+  edge [
+    source 7447
+    target 7452
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438558"
+  ]
+  edge [
+    source 7447
+    target 7453
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438596"
+  ]
+  edge [
+    source 7447
+    target 3847
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438621"
+  ]
+  edge [
+    source 7447
+    target 7454
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438656"
+  ]
+  edge [
+    source 7447
+    target 7455
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438688"
+  ]
+  edge [
+    source 7447
+    target 7456
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438719"
+  ]
+  edge [
+    source 7447
+    target 7457
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438759"
+  ]
+  edge [
+    source 7447
+    target 7458
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438809"
+  ]
+  edge [
+    source 7447
+    target 7459
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.438856"
+  ]
+  edge [
+    source 7447
+    target 7460
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679103"
+  ]
+  edge [
+    source 7447
+    target 7467
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679230"
+  ]
+  edge [
+    source 7447
+    target 7468
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679218"
+  ]
+  edge [
+    source 7447
+    target 7469
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679253"
+  ]
+  edge [
+    source 7447
+    target 4531
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679267"
+  ]
+  edge [
+    source 7447
+    target 5959
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679285"
+  ]
+  edge [
+    source 7447
+    target 7465
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679309"
+  ]
+  edge [
+    source 7447
+    target 7470
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679341"
+  ]
+  edge [
+    source 7447
+    target 7471
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.679438"
+  ]
+  edge [
+    source 7447
+    target 1093
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.850357"
+  ]
+  edge [
+    source 7447
+    target 7475
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.850413"
+  ]
+  edge [
+    source 7447
+    target 7476
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.850436"
+  ]
+  edge [
+    source 7447
+    target 3349
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.850448"
+  ]
+  edge [
+    source 7460
+    target 7461
+    predicate "COMPRISE"
+    confidence 1.0
+    added "2026-06-08T02:11:26.497108"
+  ]
+  edge [
+    source 7462
+    target 7463
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.497155"
+  ]
+  edge [
+    source 7464
+    target 7465
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:11:26.497224"
+  ]
+  edge [
+    source 7472
+    target 7473
+    predicate "DOMINATE"
+    confidence 1.0
+    added "2026-06-08T02:11:26.725367"
+  ]
+  edge [
+    source 7474
+    target 3063
+    predicate "REACH"
+    confidence 1.0
+    added "2026-06-08T02:11:26.725396"
+  ]
+  edge [
+    source 7477
+    target 155
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:20:22.853255"
+  ]
+  edge [
+    source 7480
+    target 7481
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:20:22.867607"
   ]
 ]
