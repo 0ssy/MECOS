@@ -37410,6 +37410,21 @@ graph [
     label "robot that acts without recourse to huma"
     added "2026-06-08T02:20:22.867600"
   ]
+  node [
+    id 7482
+    label "alternative risk premia in emerging markets"
+    added "2026-06-08T02:30:31.694667"
+  ]
+  node [
+    id 7483
+    label "liquidity risk"
+    added "2026-06-08T02:30:31.712281"
+  ]
+  node [
+    id 7484
+    label "financial risk that for a certain period"
+    added "2026-06-08T02:30:31.712309"
+  ]
   edge [
     source 0
     target 1
@@ -58163,21 +58178,21 @@ graph [
     target 446
     predicate "REFLECT"
     confidence 1.0
-    added "2026-06-07T09:24:54.384453"
+    added "2026-06-08T02:30:31.384516"
   ]
   edge [
     source 3549
     target 3550
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T09:24:54.384501"
+    added "2026-06-08T02:30:31.384552"
   ]
   edge [
     source 3551
     target 3552
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T09:24:54.384515"
+    added "2026-06-08T02:30:31.384564"
   ]
   edge [
     source 3553
@@ -59668,21 +59683,21 @@ graph [
     target 3832
     predicate "ACHIEVE"
     confidence 1.0
-    added "2026-06-07T06:22:14.362586"
+    added "2026-06-08T02:30:31.852460"
   ]
   edge [
     source 3833
     target 3834
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T06:22:14.362621"
+    added "2026-06-08T02:30:31.852498"
   ]
   edge [
     source 3833
     target 3837
     predicate "IS"
     confidence 1.0
-    added "2026-06-07T06:22:14.362642"
+    added "2026-06-08T02:30:31.852526"
   ]
   edge [
     source 3833
@@ -59752,7 +59767,7 @@ graph [
     target 3836
     predicate "ARE"
     confidence 1.0
-    added "2026-06-07T06:22:14.362632"
+    added "2026-06-08T02:30:31.852514"
   ]
   edge [
     source 3840
@@ -83854,5 +83869,33 @@ graph [
     predicate "IS"
     confidence 1.0
     added "2026-06-08T02:20:22.867607"
+  ]
+  edge [
+    source 7482
+    target 3554
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:30:31.694709"
+  ]
+  edge [
+    source 7482
+    target 3838
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:30:32.065060"
+  ]
+  edge [
+    source 7482
+    target 3839
+    predicate "MENTIONS"
+    confidence 1.0
+    added "2026-06-08T02:30:32.065094"
+  ]
+  edge [
+    source 7483
+    target 7484
+    predicate "IS"
+    confidence 1.0
+    added "2026-06-08T02:30:31.712317"
   ]
 ]

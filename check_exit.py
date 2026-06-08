@@ -1,0 +1,3 @@
+import inspect
+from trading.paper_trading_executor import PaperTradingExecutor
+print(inspect.getsource(PaperTradingExecutor.generate_exit_signal))
