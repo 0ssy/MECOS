@@ -372,27 +372,22 @@ class AutonomousTradingLoop:
         await self.market_stream.stream_live_market_data(self.symbols)
 
     async def _poll_stock_prices(self, symbols: list, interval: int = 60):
-        """
-        Poll yfinance for stock prices every 60 seconds.
-        Keeps stock analysis alive when Alpaca WebSocket dies.
-        """
         import yfinance as yf
         stock_symbols = [s for s in symbols if "/" not in s]
         if not stock_symbols:
             return
-        logger.info(f"Stock price polling started for {len(stock_symbols)} symbols")
+        logger.info(f"Stock polling started for {len(stock_symbols)} symbols")
         while self.running:
             for symbol in stock_symbols:
                 try:
-                    ticker = yf.Ticker(symbol)
-                    df = ticker.history(period="1d", interval="1m", auto_adjust=True)
+                    df = yf.Ticker(symbol).history(period="1d", interval="1m", auto_adjust=True)
                     if df.empty:
                         continue
-                    row = df.iloc[-1]
+                    row   = df.iloc[-1]
                     close = float(row.get("Close", 0) or 0)
                     if close <= 0:
                         continue
-                    tick = {
+                    await self.market_stream.emit_market_data(symbol, {
                         "symbol":    symbol,
                         "open":      float(row.get("Open",   close) or close),
                         "close":     close,
@@ -400,8 +395,7 @@ class AutonomousTradingLoop:
                         "low":       float(row.get("Low",    close) or close),
                         "volume":    float(row.get("Volume", 1)     or 1),
                         "timestamp": str(df.index[-1]),
-                    }
-                    await self.market_stream.emit_market_data(symbol, tick)
+                    })
                 except Exception as e:
                     logger.debug(f"Stock poll failed for {symbol}: {e}")
             await asyncio.sleep(interval)
@@ -683,8 +677,8 @@ class AutonomousTradingLoop:
             )
 
         self.database.save_portfolio_snapshot({
-            'total_value': self.paper_executor.paper_account['equity'],
-            'cash': self.paper_executor.paper_account['cash'],
+            'total_value': float(self.paper_executor.paper_account.get('equity') or 0.0),
+            'cash': float(self.paper_executor.paper_account.get('cash') or 0.0),
             'positions': self.paper_executor.position_manager.positions
         })
 

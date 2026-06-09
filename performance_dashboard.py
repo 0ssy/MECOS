@@ -49,8 +49,8 @@ def show_dashboard():
         for sym, pos in positions.items():
             entry  = float(pos.get("entry",        0))
             size   = float(pos.get("size",         0))
-            stop   = float(pos.get("stop",         0))
-            tp     = float(pos.get("take_profit",  0))
+            stop   = float(pos.get('stop', 0) or 0)
+            tp     = float(pos.get('take_profit', 0) or 0)
             value  = entry * size
             opened = str(pos.get("opened_at", ""))[:19]
             pnl_pct_pos = ((stop / entry) - 1) * 100 if entry and stop else 0
@@ -143,3 +143,5 @@ def show_dashboard():
 
 if __name__ == "__main__":
     show_dashboard()
+
+

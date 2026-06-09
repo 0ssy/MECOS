@@ -33,7 +33,7 @@ class PositionManager:
             position['peak_price'] = max(position.get('peak_price', 0), price)
             position['last_price'] = price
             # Persist stop levels on first entry
-            if position['stop_loss'] == 0:
+            if position.get('stop_loss', 0) == 0:
                 position['stop_loss']  = round(price * 0.98, 6)   # 2% stop loss
                 position['take_profit'] = round(price * 1.05, 6)  # 5% take profit
 
