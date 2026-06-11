@@ -366,6 +366,7 @@ class PaperTradingExecutor:
             else:
                 self.positions[symbol] = {'shares': remaining}
             
+            holding_seconds = self.position_manager.get_holding_seconds(symbol)
             await self.position_manager.update_position(symbol, 'SELL', sell_shares, price)
             
             order = {
@@ -383,7 +384,6 @@ class PaperTradingExecutor:
             self.execution_stats['total_pnl'] += pnl
             await self.risk_monitor.update_daily_pnl(pnl)
 
-            holding_seconds = self.position_manager.get_holding_seconds(symbol)
             open_trade = self.database.get_open_trade_for_symbol(symbol)
             if open_trade:
                 self.database.close_trade(open_trade['id'], price, pnl, holding_seconds)
@@ -519,12 +519,12 @@ class PaperTradingExecutor:
             }
 
         tracked_position = self.position_manager.positions.get(symbol, {'avg_price': reference_price})
+        holding_seconds = self.position_manager.get_holding_seconds(symbol)
         await self.position_manager.update_position(symbol, 'SELL', order_qty, reference_price)
         pnl = (reference_price - tracked_position.get('avg_price', reference_price)) * order_qty
         self.execution_stats['total_pnl'] += pnl
         await self.risk_monitor.update_daily_pnl(pnl)
 
-        holding_seconds = self.position_manager.get_holding_seconds(symbol)
         open_trade = self.database.get_open_trade_for_symbol(symbol)
         if open_trade:
             self.database.close_trade(open_trade['id'], reference_price, pnl, holding_seconds)

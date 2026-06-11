@@ -174,6 +174,7 @@ class MultiBrokerAdapter(BrokerAdapter):
             grouped.setdefault(adapter, []).append(symbol)
 
         active_tasks: Dict[BrokerAdapter, asyncio.Task] = {}
+        connection_limit_detected = False
         for adapter, adapter_symbols in grouped.items():
             active_tasks[adapter] = asyncio.create_task(adapter.stream_quotes(adapter_symbols, callback))
 
@@ -194,6 +195,8 @@ class MultiBrokerAdapter(BrokerAdapter):
                         exc = task.exception()
                         if exc is not None:
                             logger.error(f'{type(adapter).__name__} stream failed: {exc}')
+                            if 'connection limit' in str(exc).lower():
+                                connection_limit_detected = True
                             self._degraded_stream_adapters.add(adapter)
                             rerouted = 0
                             for symbol in adapter_symbols:
@@ -225,9 +228,17 @@ class MultiBrokerAdapter(BrokerAdapter):
                     active_tasks[adapter] = asyncio.create_task(adapter.stream_quotes(merged_symbols, callback))
 
                 if not active_tasks:
+                    if connection_limit_detected:
+                        logger.warning(
+                            'Broker stream paused after connection-limit failure; '
+                            'keeping fallback polling paths active without restarting stream.'
+                        )
+                        while True:
+                            await asyncio.sleep(300)
                     raise RuntimeError('All broker streams stopped.')
         except asyncio.CancelledError:
             for task in active_tasks.values():
                 task.cancel()
             await asyncio.gather(*active_tasks.values(), return_exceptions=True)
             raise
+

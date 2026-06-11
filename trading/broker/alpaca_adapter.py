@@ -12,6 +12,7 @@ from .base_adapter import BrokerAdapter
 class AlpacaAdapter(BrokerAdapter):
     def __init__(self):
         self.connector = BrokerConnector()
+        self.max_reconnect_attempts = 1
 
     async def get_live_bars(self, symbol: str, timeframe: str = '1Min', limit: int = 200) -> List[Dict[str, Any]]:
         return await self.connector.get_market_data(symbol, timeframe=timeframe, limit=limit)
@@ -150,7 +151,7 @@ class AlpacaAdapter(BrokerAdapter):
 
         async def run_stream(stream_name: str, stream_factory, stream_symbols: List[str]):
             reconnect_attempt = 0
-            while True:
+            while reconnect_attempt < self.max_reconnect_attempts:
                 data_stream = stream_factory(api_key, secret_key)
                 for symbol in stream_symbols:
                     data_stream.subscribe_quotes(quote_handler, symbol)
@@ -163,10 +164,14 @@ class AlpacaAdapter(BrokerAdapter):
                     if 'auth failed' in str(exc).lower():
                         raise RuntimeError('Alpaca websocket auth failed. Check ALPACA_API_KEY/ALPACA_SECRET_KEY.') from exc
                     reconnect_attempt += 1
-                    backoff = min(2 ** reconnect_attempt, 60)
                     logger.error(
                         f'Alpaca {stream_name} quote stream disconnected (attempt {reconnect_attempt}): {exc}'
                     )
+                    if reconnect_attempt >= self.max_reconnect_attempts:
+                        raise RuntimeError(
+                            f'Alpaca {stream_name} quote stream failed; max reconnect attempts reached.'
+                        ) from exc
+                    backoff = min(2 ** reconnect_attempt, 60)
                     await asyncio.sleep(backoff)
 
         stream_tasks: List[asyncio.Task] = []
@@ -180,3 +185,4 @@ class AlpacaAdapter(BrokerAdapter):
         finally:
             for task in stream_tasks:
                 task.cancel()
+

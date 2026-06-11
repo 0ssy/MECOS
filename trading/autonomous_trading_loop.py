@@ -679,7 +679,7 @@ class AutonomousTradingLoop:
         self.database.save_portfolio_snapshot({
             'total_value': float(self.paper_executor.paper_account.get('equity') or 0.0),
             'cash': float(self.paper_executor.paper_account.get('cash') or 0.0),
-            'positions': self.paper_executor.position_manager.positions
+            'positions': dict(self.paper_executor.position_manager.positions or {})
         })
 
         import time as _time
@@ -1029,6 +1029,7 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
+
 
 
 

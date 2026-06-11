@@ -59,11 +59,11 @@ class PositionManager:
                 'size': size,
                 'avg_price': float(pos.get('avg_price', pos.get('entry', 0.0)) or 0.0),
                 'unrealized_pnl': float(pos.get('unrealized_pnl', 0.0) or 0.0),
-                'entry_time': pos.get('entry_time'),
+                'entry_time': pos.get('entry_time') or pos.get('opened_at'),
                 'peak_price': float(pos.get('peak_price', pos.get('avg_price', 0.0)) or 0.0),
                 'last_price': float(pos.get('last_price', pos.get('avg_price', 0.0)) or 0.0),
                 'sector': pos.get('sector', 'unknown'),
-                'stop_loss': float(pos.get('stop_loss', 0.0) or 0.0),
+                'stop_loss': float(pos.get('stop_loss', pos.get('stop', 0.0)) or 0.0),
                 'take_profit': float(pos.get('take_profit', 0.0) or 0.0),
             }
         self.positions = restored
@@ -79,16 +79,27 @@ class PositionManager:
         )
 
     def get_holding_seconds(self, symbol: str) -> float:
-        position = self.positions.get(symbol)
+        position = self.positions.get(symbol, {})
+        logger.debug(
+            f'holding_seconds check for {symbol}: '
+            f'entry_time={position.get("entry_time")} opened_at={position.get("opened_at")}'
+        )
         if not position:
             return 0.0
-        entry_time = position.get('entry_time')
+        entry_time = position.get('entry_time') or position.get('opened_at')
+
         if not entry_time:
             return 0.0
+
+        entry_time = str(entry_time).strip()
+        if entry_time.endswith('Z'):
+            entry_time = entry_time[:-1] + '+00:00'
+
         try:
             dt = datetime.fromisoformat(entry_time)
-            return max(0.0, (datetime.now() - dt).total_seconds())
-        except ValueError:
+            now = datetime.now(dt.tzinfo) if dt.tzinfo is not None else datetime.now()
+            return max(0.0, (now - dt).total_seconds())
+        except (ValueError, TypeError):
             return 0.0
 
     async def calculate_unrealized_pnl(self, current_prices: Dict[str, float]) -> float:
