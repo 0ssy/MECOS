@@ -103,6 +103,7 @@ class PositionStateStore:
         entry: float,
         size: float,
         stop: Optional[float] = None,
+        take_profit: Optional[float] = None,
         metadata: Optional[Dict[str, Any]] = None,
     ) -> None:
         token = str(symbol or "").strip().upper()
@@ -113,6 +114,7 @@ class PositionStateStore:
             "entry": float(entry),
             "size": float(size),
             "stop": float(stop) if stop is not None else None,
+            "take_profit": float(take_profit) if take_profit is not None else None,
             "opened_at": _utcnow().isoformat(),
             "metadata": metadata or {},
         }
@@ -138,7 +140,8 @@ class PositionStateStore:
             snapshot[token] = {
                 "entry": float(payload.get("avg_price", payload.get("entry", 0.0)) or 0.0),
                 "size": size,
-                "stop": float(payload.get("stop", 0.0) or 0.0) or None,
+                "stop": float(payload.get("stop_loss", payload.get("stop", 0.0)) or 0.0) or None,
+                "take_profit": float(payload.get("take_profit", 0.0) or 0.0) or None,
                 "opened_at": str(payload.get("entry_time", _utcnow().isoformat())),
                 "metadata": {"source": "restored_snapshot"},
             }
@@ -228,11 +231,12 @@ class StabilityLayer:
         price: float,
         size: float,
         stop: Optional[float] = None,
+        take_profit: Optional[float] = None,
         metadata: Optional[Dict[str, Any]] = None,
     ) -> None:
         action = str(side or "").upper()
         if action == "BUY":
-            self.position_store.record_entry(symbol, entry=price, size=size, stop=stop, metadata=metadata)
+            self.position_store.record_entry(symbol, entry=price, size=size, stop=stop, take_profit=take_profit, metadata=metadata)
         elif action == "SELL":
             self.position_store.record_exit(symbol)
 

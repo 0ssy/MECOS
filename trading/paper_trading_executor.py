@@ -300,11 +300,14 @@ class PaperTradingExecutor:
                 'confidence': signal.get('confidence', 0.0),
                 'regime': signal.get('regime', 'unknown'),
             })
+            _pos = self.position_manager.positions.get(symbol, {})
             self.stability_layer.record_order_fill(
                 symbol=symbol,
                 side='BUY',
                 price=price,
                 size=shares,
+                stop=_pos.get('stop_loss'),
+                take_profit=_pos.get('take_profit'),
                 metadata={
                     'regime': signal.get('regime', 'unknown'),
                     'confidence': float(signal.get('confidence', 0.0) or 0.0),
@@ -481,11 +484,14 @@ class PaperTradingExecutor:
                 'confidence': signal.get('confidence', 0.0),
                 'regime': signal.get('regime', 'unknown'),
             })
+            _pos = self.position_manager.positions.get(symbol, {})
             self.stability_layer.record_order_fill(
                 symbol=symbol,
                 side='BUY',
                 price=reference_price,
                 size=order_qty,
+                stop=_pos.get('stop_loss'),
+                take_profit=_pos.get('take_profit'),
                 metadata={
                     'regime': signal.get('regime', 'unknown'),
                     'confidence': float(signal.get('confidence', 0.0) or 0.0),

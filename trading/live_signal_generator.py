@@ -18,7 +18,7 @@ class LiveSignalGenerator:
 
         # Confidence calibrator: 20s half-life, 0.5% baseline decay per tick
         self.calibrator = ConfidenceCalibrator(
-            half_life_seconds=20.0,
+            half_life_seconds=300.0,
             baseline_decay=0.995,
         )
 
