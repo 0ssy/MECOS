@@ -146,6 +146,15 @@ class TradingAgent:
             minimum_support_ratio=min_support,
             require_unanimous=require_unanimous,
         )
+        # Unified collaborative engine — replaces MetaOrchestrator + ConsensusEngine chain
+        from trading.collaborative_decision_engine import CollaborativeDecisionEngine
+        self.collab_engine = CollaborativeDecisionEngine(
+            agents=self.meta_orchestrator.agents,
+            personas={
+                name: self.consensus_engine._persona_analysis
+                for name in self.consensus_engine.personas
+            },
+        )
         logger.info(
             f"Consensus config | require_unanimous={require_unanimous} min_support={min_support:.2f}"
         )
@@ -264,61 +273,32 @@ class TradingAgent:
         external_market_context["options"] = option_snapshot
         external_market_context["quick_backtest"] = backtest_snapshot
 
-        orchestrator_data = {symbol: valid_data}
-        orchestrated = await self.meta_orchestrator.orchestrate_signals(
-            orchestrator_data,
-            regime,
-            features,
-            physics,
-        )
-        # --- QuantSignalFusion: regime-aware Bayesian fusion ---
-        fused = self.quant_fusion.fuse(
-            orchestrated_signals=orchestrated,
+        # ── Unified collaborative decision — replaces four-layer chain ──────────
+        collab = await self.collab_engine.decide(
+            symbol=symbol,
+            data=valid_data,
             features=features,
             regime=regime,
-        )
-        # Kelly-fraction position sizing
-        _edge = float(fused.get("edge", 0.0))
-        _conf = float(fused.get("confidence", 0.0))
-        _vol = max(float(features.get("realized_volatility", 0.02)), 0.01)
-        _kelly = float(np.clip(0.5 * (_edge * _conf) / _vol, 0.01, 0.20)) if _edge > 0 and _conf > 0 else 0.01
-        fused["kelly_fraction"] = _kelly
-        fused["allocation"] = _kelly
-        orchestrated = {**orchestrated, **fused}
-        # NOTE: second signal_fusion.fuse() call removed — it received
-        # already-fused output with no agent_signals key, so always
-        # returned HOLD/0.0 and overwrote the correct first-pass result.
-
-        orchestrator_decision = str(orchestrated.get("final_decision", "HOLD")).upper()
-        final_decision = str(fused.get("decision", orchestrator_decision)).upper()
-        confidence = float(fused.get("confidence", orchestrated.get("confidence", 0.0)))
-        edge = float(fused.get("edge", 0.0))
-        if orchestrator_decision == "HOLD" and abs(edge) < 0.05:
-            final_decision = "HOLD"
-
-        consensus = self.consensus_engine.coordinate_debate(
-            topic=symbol,
-            context={
-                "asset_type": persona_asset_type,
-                "regime": regime,
-                "base_decision": final_decision,
-                "base_confidence": confidence,
-                "features": features,
-                "edge": edge,
+            physics=physics,
+            asset_type=persona_asset_type,
+            news_score=float(news_snapshot.get("sentiment_score", 0.0) or 0.0),
+            macro_snapshot=macro_snapshot,
+            extra_context={
                 "active_personas": active_personas,
                 "external_market_context": external_market_context,
             },
         )
-        consensus_decision = str(consensus.get("final_decision", "HOLD")).upper()
-        if len(consensus.get("dissenting_opinions", [])) > len(consensus.get("perspectives", {}) or {}) // 2:
-            final_decision = "HOLD"
-            confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
-        elif consensus_decision == "HOLD":
-            final_decision = "HOLD"
-            confidence = min(confidence, float(consensus.get("confidence_score", confidence)))
-        else:
-            final_decision = consensus_decision
-            confidence = max(confidence, float(consensus.get("confidence_score", confidence)))
+        final_decision = str(collab.get("decision", "HOLD")).upper()
+        confidence     = float(collab.get("confidence", 0.0))
+        edge           = float(collab.get("edge", 0.0))
+        orchestrated   = collab  # keep legacy key for downstream code
+
+        # Kelly-fraction position sizing
+        _vol   = max(float(features.get("realized_volatility", 0.02)), 0.01)
+        _kelly = float(np.clip(0.5 * (abs(edge) * confidence) / _vol, 0.01, 0.20)) \
+            if edge != 0 and confidence > 0 else 0.01
+        orchestrated["kelly_fraction"] = _kelly
+        orchestrated["allocation"]     = _kelly
 
         risk_gate_reason = ""
         macro_regime = str(macro_snapshot.get("risk_regime", "neutral")).lower()
