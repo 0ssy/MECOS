@@ -121,8 +121,11 @@ class UniverseScanner:
             else:
                 yf_symbol = symbol                      # AAPL     -> AAPL
 
-            ticker = yf.Ticker(yf_symbol)
-            df     = ticker.history(period="30d", interval="1h", auto_adjust=True)
+            def _yf_fetch_universe(sym):
+                import yfinance as yf
+                t = yf.Ticker(sym)
+                return t.history(period="30d", interval="1h", auto_adjust=True, timeout=10)
+            df = await asyncio.to_thread(_yf_fetch_universe, yf_symbol)
 
             if df.empty:
                 logger.debug(f'yfinance returned no data for {symbol} (tried {yf_symbol})')

@@ -380,7 +380,10 @@ class AutonomousTradingLoop:
         while self.running:
             for symbol in stock_symbols:
                 try:
-                    df = yf.Ticker(symbol).history(period="1d", interval="1m", auto_adjust=True)
+                    def _yf_fetch_poll(sym):
+                        import yfinance as yf
+                        return yf.Ticker(sym).history(period="1d", interval="1m", auto_adjust=True, timeout=10)
+                    df = await asyncio.to_thread(_yf_fetch_poll, symbol)
                     if df.empty:
                         continue
                     row   = df.iloc[-1]

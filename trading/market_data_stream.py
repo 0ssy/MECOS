@@ -143,7 +143,10 @@ class MarketDataStream:
                 else:
                     yf_symbol = symbol                      # AAPL -> AAPL
 
-                ticker = yf.Ticker(yf_symbol)
+                def _yf_fetch_preseed(sym):
+                    import yfinance as yf
+                    return yf.Ticker(sym)
+                ticker = await asyncio.to_thread(_yf_fetch_preseed, yf_symbol)
 
                 # Try 5-minute bars first (more granular, better for signals)
                 df = ticker.history(period="30d", interval="1h", auto_adjust=True)
