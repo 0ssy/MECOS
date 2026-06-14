@@ -285,7 +285,9 @@ class TradingAgent:
         fused["kelly_fraction"] = _kelly
         fused["allocation"] = _kelly
         orchestrated = {**orchestrated, **fused}
-        fused = self.signal_fusion.fuse(orchestrated, features, regime)
+        # NOTE: second signal_fusion.fuse() call removed — it received
+        # already-fused output with no agent_signals key, so always
+        # returned HOLD/0.0 and overwrote the correct first-pass result.
 
         orchestrator_decision = str(orchestrated.get("final_decision", "HOLD")).upper()
         final_decision = str(fused.get("decision", orchestrator_decision)).upper()
