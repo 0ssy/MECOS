@@ -327,8 +327,12 @@ class TradingAgent:
         if final_decision == "BUY" and bt_return < -0.03 and confidence < 0.45:
             risk_gate_reason = "backtest_negative_expectancy"
         if risk_gate_reason:
-            logger.info(f"Risk gate forced HOLD for {symbol}: {risk_gate_reason}")
-            final_decision = "HOLD"
+            if confidence < 0.45:
+                logger.info(f"Risk gate HOLD for {symbol}: {risk_gate_reason} (conf={confidence:.3f} < 0.45)")
+                final_decision = "HOLD"
+            else:
+                logger.info(f"Risk gate PENALTY for {symbol}: {risk_gate_reason} (conf={confidence:.3f} >= 0.45 - 20pct haircut)")
+                confidence = confidence * 0.80
 
         rsi_value = float(features.get("rsi_14", features.get("rsi", 50.0)) or 50.0)
         weighted_confidence = self.signal_weighter.score_opportunity(
@@ -583,7 +587,6 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
-
 
 
 
