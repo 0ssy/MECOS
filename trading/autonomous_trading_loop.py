@@ -256,6 +256,19 @@ class AutonomousTradingLoop:
                 done=True,
             )
             await self.rl_trainer.train_from_replay(batch_size=32)
+            try:
+                ta = getattr(self.paper_executor, 'trading_agent', None)
+                ce = getattr(ta, 'collab_engine', None) if ta else None
+                if ce and hasattr(self.rl_trainer, 'q_values'):
+                    qvals = self.rl_trainer.q_values(
+                        context['state'], ['BUY', 'SELL', 'HOLD']
+                    )
+                    q_taken  = float(qvals.get(context['action'], 0.0))
+                    others   = [v for k, v in qvals.items() if k != context['action']]
+                    q_adv    = q_taken - (sum(others) / len(others)) if others else 0.0
+                    ce.update_rl_weight(q_adv)
+            except Exception:
+                pass
             logger.info(
                 f"RL update {symbol}: action={context['action']} raw_pnl={raw_pnl:.2f} "
                 f"adjusted={adjusted_pnl:.2f} causes={causal.get('loss_causes', [])}"

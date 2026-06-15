@@ -95,6 +95,14 @@ BASE_PERSONA_WEIGHTS: Dict[str, float] = {
 # by abstaining-agent weight — only active signal weights count.
 MIN_DIRECTIONAL_SCORE = 0.18
 
+# Weights for analytic participants (MTF, regime, optimizer, backtest)
+BASE_ANALYTIC_WEIGHTS: Dict[str, float] = {
+    "multi_timeframe": 1.10,
+    "rule_regime":     0.90,
+    "optimizer":       0.75,
+    "backtest":        0.65,
+}
+
 
 class CollaborativeDecisionEngine:
     """
@@ -159,31 +167,36 @@ class CollaborativeDecisionEngine:
             **extra_context,
         }
 
-        # Run quant agents and personas concurrently
-        agent_task   = asyncio.create_task(
+        # Run quant agents, personas, and analytics concurrently
+        agent_task    = asyncio.create_task(
             self._run_all_agents(data, features, physics, symbol)
         )
-        persona_task = asyncio.create_task(
+        persona_task  = asyncio.create_task(
             self._run_all_personas(shared_context)
         )
+        analytic_task = asyncio.create_task(
+            self._run_analytics(shared_context)
+        )
 
-        agent_signals, persona_signals = await asyncio.gather(
-            agent_task, persona_task, return_exceptions=False
+        agent_signals, persona_signals, analytic_signals = await asyncio.gather(
+            agent_task, persona_task, analytic_task, return_exceptions=False
         )
 
         # Pool all signals together
         all_signals: Dict[str, Dict[str, Any]] = {
             **{f"agent:{k}": v for k, v in agent_signals.items()},
             **{f"persona:{k}": v for k, v in persona_signals.items()},
+            **{f"analytic:{k}": v for k, v in analytic_signals.items()},
         }
 
         # Fuse into one decision
         result = self._fuse(all_signals, regime, features)
-        result["symbol"]         = symbol
-        result["regime"]         = regime
-        result["agent_signals"]  = agent_signals
-        result["persona_signals"] = persona_signals
-        result["all_signals"]    = all_signals
+        result["symbol"]           = symbol
+        result["regime"]           = regime
+        result["agent_signals"]    = agent_signals
+        result["persona_signals"]  = persona_signals
+        result["analytic_signals"] = analytic_signals
+        result["all_signals"]      = all_signals
 
         logger.info(
             f"[Collaborative] {symbol} → {result['decision']} "
@@ -283,6 +296,91 @@ class CollaborativeDecisionEngine:
     #  Unified fusion                                                       #
     # ------------------------------------------------------------------ #
 
+    async def _run_analytics(
+        self, context: dict
+    ) -> dict:
+        """
+        Run analytic modules as voting participants instead of post-hoc vetoes.
+        MTF, rule regime, optimizer, and backtest each contribute a signal.
+        """
+        out: dict = {}
+        extra = context.get("external_market_context", {}) or {}
+
+        # MultiTimeframe alignment
+        try:
+            mtf = extra.get("multi_timeframe", {}) or {}
+            alignment = float(mtf.get("alignment_score", 0.0) or 0.0)
+            composite = str(mtf.get("composite_trend", "mixed"))
+            if alignment > 0.40:
+                sig, conf = "BUY",  min(0.85, 0.50 + alignment * 0.40)
+            elif alignment < -0.40:
+                sig, conf = "SELL", min(0.85, 0.50 + abs(alignment) * 0.40)
+            else:
+                sig, conf = "HOLD", 0.30
+            out["multi_timeframe"] = {
+                "signal": sig, "confidence": conf,
+                "reasoning": f"MTF alignment={alignment:.2f} composite={composite}",
+            }
+        except Exception as e:
+            out["multi_timeframe"] = {"signal": "HOLD", "confidence": 0.1, "error": str(e)}
+
+        # Rule-based regime
+        try:
+            rrd = extra.get("rule_regime", {}) or {}
+            rr  = str(rrd.get("regime", "unknown")).lower()
+            if rr in {"bull", "trending"}:
+                out["rule_regime"] = {"signal": "BUY",  "confidence": 0.60,
+                                      "reasoning": f"Rule regime: {rr}"}
+            elif rr in {"bear", "panic"}:
+                out["rule_regime"] = {"signal": "SELL", "confidence": 0.65,
+                                      "reasoning": f"Rule regime: {rr}"}
+            else:
+                out["rule_regime"] = {"signal": "HOLD", "confidence": 0.30,
+                                      "reasoning": f"Rule regime: {rr}"}
+        except Exception as e:
+            out["rule_regime"] = {"signal": "HOLD", "confidence": 0.1, "error": str(e)}
+
+        # Portfolio optimizer
+        try:
+            opt = extra.get("optimizer", {}) or {}
+            rec = str(opt.get("recommendation", "HOLD")).upper()
+            opt_conf = float(opt.get("confidence", 0.3) or 0.3)
+            sig = rec if rec in {"BUY", "SELL"} else "HOLD"
+            out["optimizer"] = {"signal": sig, "confidence": min(0.70, opt_conf),
+                                "reasoning": f"Optimizer: {rec}"}
+        except Exception as e:
+            out["optimizer"] = {"signal": "HOLD", "confidence": 0.1, "error": str(e)}
+
+        # Quick backtest expectancy
+        try:
+            bt = extra.get("quick_backtest", {}) or {}
+            bt_ret = float(bt.get("total_return", 0.0) or 0.0)
+            if bt_ret > 0.02:
+                out["backtest"] = {"signal": "BUY",  "confidence": min(0.65, 0.45 + bt_ret * 2),
+                                   "reasoning": f"Backtest return={bt_ret:.2%}"}
+            elif bt_ret < -0.02:
+                out["backtest"] = {"signal": "SELL", "confidence": min(0.65, 0.45 + abs(bt_ret) * 2),
+                                   "reasoning": f"Backtest return={bt_ret:.2%}"}
+            else:
+                out["backtest"] = {"signal": "HOLD", "confidence": 0.30,
+                                   "reasoning": f"Backtest neutral: {bt_ret:.2%}"}
+        except Exception as e:
+            out["backtest"] = {"signal": "HOLD", "confidence": 0.1, "error": str(e)}
+
+        return out
+
+    def update_rl_weight(self, q_advantage: float) -> None:
+        """
+        Dynamically adjust the RL agent's fusion weight based on Q-advantage.
+        Called after each trade outcome is recorded.
+        """
+        import numpy as np
+        current = BASE_AGENT_WEIGHTS.get("reinforcement_learning", 0.50)
+        delta = float(np.clip(q_advantage * 0.05, -0.10, 0.10))
+        BASE_AGENT_WEIGHTS["reinforcement_learning"] = float(
+            np.clip(current + delta, 0.30, 1.20)
+        )
+
     def _fuse(
         self,
         all_signals: Dict[str, Dict[str, Any]],
@@ -316,6 +414,10 @@ class CollaborativeDecisionEngine:
                 pname = key[8:]
                 ptype = "persona"
                 base_w = BASE_PERSONA_WEIGHTS.get(pname, 0.75)
+            elif key.startswith("analytic:"):
+                pname = key[9:]
+                ptype = "analytic"
+                base_w = BASE_ANALYTIC_WEIGHTS.get(pname, 0.80)
             else:
                 pname = key
                 ptype = "unknown"

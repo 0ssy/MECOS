@@ -146,15 +146,6 @@ class TradingAgent:
             minimum_support_ratio=min_support,
             require_unanimous=require_unanimous,
         )
-        # Unified collaborative engine — replaces MetaOrchestrator + ConsensusEngine chain
-        from trading.collaborative_decision_engine import CollaborativeDecisionEngine
-        self.collab_engine = CollaborativeDecisionEngine(
-            agents=self.meta_orchestrator.agents,
-            personas={
-                name: self.consensus_engine._persona_analysis
-                for name in self.consensus_engine.personas
-            },
-        )
         logger.info(
             f"Consensus config | require_unanimous={require_unanimous} min_support={min_support:.2f}"
         )
@@ -192,6 +183,16 @@ class TradingAgent:
         self.meta_orchestrator.register_agent("sentiment", self.sentiment_agent)
         self.meta_orchestrator.register_agent("reinforcement_learning", self.reinforcement_learning_agent)
         self.meta_orchestrator.register_agent("market_making", self.market_making_agent)
+        # Unified collaborative engine — initialized after all agents registered
+        # Unified collaborative engine — replaces MetaOrchestrator + ConsensusEngine chain
+        from trading.collaborative_decision_engine import CollaborativeDecisionEngine
+        self.collab_engine = CollaborativeDecisionEngine(
+            agents=self.meta_orchestrator.agents,
+            personas={
+                name: self.consensus_engine._persona_analysis
+                for name in self.consensus_engine.personas
+            },
+        )
 
         self.paper_portfolio = {"cash": 10000.0, "positions": {}, "total_value": 10000.0}
         logger.info("Advanced TradingAgent initialized with all specialist agents.")
@@ -370,7 +371,7 @@ class TradingAgent:
         position_size = 0.0
         portfolio_metrics = await self.portfolio_engine.calculate_portfolio_metrics(self.paper_portfolio)
         if final_decision != "HOLD":
-            sizing = fused.get("sizing_multipliers", {})
+            sizing = {}  # collab engine handles sizing via Kelly fraction
             volatility = float(features.get("realized_volatility", 0.3) or 0.3)
             optimizer_multiplier = float(optimizer_snapshot.get("allocation_multiplier", 1.0) or 1.0)
             position_size = await self.portfolio_engine.optimize_position_size(
@@ -415,11 +416,11 @@ class TradingAgent:
                 try:
                     _uf_approval = self.uncertainty_flagger.score_plan(
                         plan=f"{symbol} {final_decision}",
-                        signal_strength=float(fused.get("confidence", 0.5)),
+                        signal_strength=float(orchestrated.get("confidence", 0.5)),
                         market_regime=0.7 if regime != "unknown" else 0.4,
                         volatility_regime=float(min(1.0, 1.0 - features.get("realized_volatility", 0.3))),
                         data_freshness=0.9,
-                        historical_accuracy=float(fused.get("agreement", 0.5)),
+                        historical_accuracy=float(orchestrated.get("agreement", 0.5)),
                         edge_case_coverage=0.6,
                     )
                     if not _uf_approval.execution_approved and final_decision != "HOLD":
@@ -448,9 +449,9 @@ class TradingAgent:
             "portfolio": portfolio_metrics,
             "position_size": float(position_size),
             "allocation": float(position_size),
-            "buy_score": float(fused.get("buy_score", orchestrated.get("buy_score", 0.0))),
-            "sell_score": float(fused.get("sell_score", orchestrated.get("sell_score", 0.0))),
-            "hold_score": float(fused.get("hold_score", orchestrated.get("hold_score", 0.0))),
+            "buy_score": float(orchestrated.get("buy_score", 0.0)),
+            "sell_score": float(orchestrated.get("sell_score", 0.0)),
+            "hold_score": float(orchestrated.get("hold_score", 0.0)),
             "edge": float(edge),
             "expected_move": float(expected_move),
             "spread_pressure": float(spread_pressure),
@@ -458,7 +459,7 @@ class TradingAgent:
             "weighted_confidence": float(weighted_confidence),
             "neural_brain": neural_context,
             "persona_context": persona_context,
-            "consensus": consensus,
+            "consensus": orchestrated,
             "sector": sector,
             "primary_persona": primary_persona,
             "active_personas": active_personas,
@@ -582,7 +583,6 @@ class TradingAgent:
     async def analyze_multi_asset(self, market_data: Dict[str, List[Dict]]) -> Dict[str, Any]:
         decisions = await self.analyze_market(market_data)
         return {"asset_signals": decisions}
-
 
 
 
