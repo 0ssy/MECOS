@@ -1,147 +1,246 @@
+#!/usr/bin/env python3
 """
-MECOS Performance Dashboard
-Run anytime: python performance_dashboard.py
+sector_dashboard.py
+Sector-separated performance dashboard for MECOS.
+Shows crypto / equities / ETFs P&L independently so you can see
+exactly where gains and losses are coming from.
+
+Run: python sector_dashboard.py
 """
+
 import sqlite3
-import json
+from datetime import datetime, timezone
 from pathlib import Path
-from datetime import datetime
+import json
+
+DB_PATH = "data/trading.db"
+STATE_PATH = "data/state.json"
+
+# ── Sector classification ─────────────────────────────────────────────────────
+
+CRYPTO  = {"BTC/USD", "ETH/USD", "SOL/USD", "AVAX/USD", "LINK/USD",
+           "DOGE/USD", "ADA/USD", "BNB/USD", "XRP/USD", "DOT/USD"}
+ETFS    = {"SPY", "QQQ", "IWM", "DIA", "GLD", "SLV", "TLT", "XLF",
+           "XLE", "XLK", "XLV", "XLU", "ARKK", "VTI", "VOO"}
+FOREX   = {"EUR/USD", "GBP/USD", "USD/JPY", "USD/CHF", "AUD/USD",
+           "NZD/USD", "USD/CAD", "EUR/GBP", "EUR/JPY"}
+
+def classify(symbol: str) -> str:
+    if symbol in CRYPTO:
+        return "crypto"
+    if symbol in ETFS:
+        return "etf"
+    if symbol in FOREX:
+        return "forex"
+    return "equity"
 
 
-def show_dashboard():
-    print("\n" + "=" * 60)
-    print("MECOS TRADING PERFORMANCE DASHBOARD")
-    print("=" * 60)
+def sector_label(s: str) -> str:
+    return {"crypto": "CRYPTO", "etf": "ETFs", "equity": "EQUITIES",
+            "forex": "FOREX"}.get(s, s.upper())
 
-    db_path = Path("data/trading.db")
-    if not db_path.exists():
-        print("No trading database found")
-        return
 
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
+# ── DB helpers ────────────────────────────────────────────────────────────────
 
-    # ── Portfolio ────────────────────────────────────────────
+def get_closed_trades(conn):
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT symbol, side, entry_price, exit_price, quantity, pnl,
+               entry_time, exit_time, holding_seconds, regime
+        FROM trades
+        WHERE status = 'CLOSED' AND pnl IS NOT NULL
+        ORDER BY entry_time
+    """)
+    rows = cur.fetchall()
+    trades = []
+    for r in rows:
+        trades.append({
+            "symbol":          r[0],
+            "side":            r[1],
+            "entry_price":     float(r[2] or 0),
+            "exit_price":      float(r[3] or 0),
+            "quantity":        float(r[4] or 0),
+            "pnl":             float(r[5] or 0),
+            "entry_time":      r[6],
+            "exit_time":       r[7],
+            "holding_seconds": float(r[8] or 0),
+            "regime":          r[9] or "unknown",
+            "sector":          classify(r[0]),
+        })
+    return trades
+
+
+def get_open_positions():
     try:
-        row = conn.execute(
-            "SELECT * FROM portfolio_snapshots ORDER BY timestamp DESC LIMIT 1"
-        ).fetchone()
-        if row:
-            equity  = float(row["total_value"])
-            cash    = float(row["cash"])
-            initial = 10_000.0
-            pnl     = equity - initial
-            pnl_pct = (pnl / initial) * 100
-            print(f"\nPORTFOLIO:")
-            print(f"  Equity:    ${equity:,.2f}")
-            print(f"  Cash:      ${cash:,.2f}")
-            print(f"  Total PnL: ${pnl:+,.2f} ({pnl_pct:+.2f}%)")
-        else:
-            print("\nPORTFOLIO: No snapshots yet")
-    except Exception as e:
-        print(f"Portfolio error: {e}")
+        state = json.loads(Path(STATE_PATH).read_text())
+        return state.get("open_positions", {})
+    except Exception:
+        return {}
 
-    # ── Open positions ───────────────────────────────────────
-    try:
-        state     = json.loads(Path("data/state.json").read_text())
-        positions = state.get("open_positions", {})
-        print(f"\nOPEN POSITIONS ({len(positions)}):")
-        for sym, pos in positions.items():
-            entry  = float(pos.get("entry",        0))
-            size   = float(pos.get("size",         0))
-            stop   = float(pos.get('stop', 0) or 0)
-            tp     = float(pos.get('take_profit', 0) or 0)
-            value  = entry * size
-            opened = str(pos.get("opened_at", ""))[:19]
-            pnl_pct_pos = ((stop / entry) - 1) * 100 if entry and stop else 0
-            print(f"  {sym:10s}  entry=${entry:>10,.2f}  value=${value:>8,.2f}"
-                  f"  stop=${stop:>10,.2f}  tp=${tp:>10,.2f}  opened={opened}")
-    except Exception as e:
-        print(f"Positions error: {e}")
 
-    # ── Trade history ────────────────────────────────────────
-    try:
-        trades = conn.execute(
-            "SELECT * FROM trades ORDER BY timestamp DESC"
-        ).fetchall()
+def get_latest_snapshot(conn):
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT total_value, cash, timestamp
+        FROM portfolio_snapshots
+        ORDER BY id DESC LIMIT 1
+    """)
+    row = cur.fetchone()
+    if not row:
+        return 10000.0, 10000.0, ""
+    return float(row[0] or 0), float(row[1] or 0), row[2]
 
-        closed = [t for t in trades
-                  if t["exit_price"] and float(t["exit_price"] or 0) > 0]
-        wins   = [t for t in closed if float(t["pnl"] or 0) > 0]
-        losses = [t for t in closed if float(t["pnl"] or 0) <= 0]
 
-        print(f"\nTRADE HISTORY:")
-        print(f"  Total trades:  {len(trades)}")
-        print(f"  Closed trades: {len(closed)}")
+# ── Stats per sector ──────────────────────────────────────────────────────────
 
-        if closed:
-            total_pnl = sum(float(t["pnl"] or 0) for t in closed)
-            win_rate  = len(wins) / len(closed) * 100
-            avg_win   = sum(float(t["pnl"] or 0) for t in wins)   / max(len(wins),   1)
-            avg_loss  = sum(float(t["pnl"] or 0) for t in losses) / max(len(losses), 1)
-            pf        = abs(avg_win / avg_loss) if avg_loss != 0 else 0
-            avg_hold  = sum(float(t["holding_seconds"] or 0) for t in closed) / len(closed)
-            print(f"  Win rate:      {win_rate:.1f}%")
-            print(f"  Total PnL:     ${total_pnl:+,.2f}")
-            print(f"  Avg win:       ${avg_win:+,.2f}")
-            print(f"  Avg loss:      ${avg_loss:+,.2f}")
-            print(f"  Profit factor: {pf:.2f}")
-            print(f"  Avg hold time: {avg_hold/60:.1f} min")
-        else:
-            print("  No closed trades yet — positions still open")
+def sector_stats(trades):
+    sectors = {}
+    for t in trades:
+        s = t["sector"]
+        if s not in sectors:
+            sectors[s] = {"trades": [], "wins": 0, "losses": 0,
+                          "total_pnl": 0.0, "win_pnl": 0.0, "loss_pnl": 0.0,
+                          "avg_hold": 0.0}
+        d = sectors[s]
+        d["trades"].append(t)
+        d["total_pnl"] += t["pnl"]
+        if t["pnl"] > 0:
+            d["wins"]    += 1
+            d["win_pnl"] += t["pnl"]
+        elif t["pnl"] < 0:
+            d["losses"]    += 1
+            d["loss_pnl"]  += t["pnl"]
 
-        if trades:
-            print(f"\nRECENT TRADES (last 10):")
-            for t in list(trades)[:10]:
-                pnl    = float(t["pnl"] or 0)
-                sym    = str(t["symbol"])
-                side   = str(t["side"])
-                status = str(t["status"] or "open")
-                ts     = str(t["timestamp"])[:19]
-                ep     = float(t["entry_price"] or 0)
-                xp     = float(t["exit_price"]  or 0)
-                exit_str = f"→ ${xp:,.2f}" if xp else "  (open)"
-                print(f"  {ts}  {sym:10s}  {side:4s}  "
-                      f"${ep:,.2f} {exit_str}  pnl=${pnl:+,.2f}  [{status}]")
+    for s, d in sectors.items():
+        n = len(d["trades"])
+        d["n"] = n
+        d["win_rate"]      = d["wins"] / n if n > 0 else 0
+        d["avg_hold_min"]  = (sum(t["holding_seconds"] for t in d["trades"]) / n / 60) if n > 0 else 0
+        d["avg_win"]       = d["win_pnl"]  / d["wins"]   if d["wins"]   > 0 else 0
+        d["avg_loss"]      = d["loss_pnl"] / d["losses"] if d["losses"] > 0 else 0
+        d["profit_factor"] = abs(d["win_pnl"] / d["loss_pnl"]) if d["loss_pnl"] != 0 else float("inf") if d["win_pnl"] > 0 else 0
 
-    except Exception as e:
-        print(f"Trades error: {e}")
+    return sectors
 
-    # ── Signals summary ──────────────────────────────────────
-    try:
-        sig_count = conn.execute("SELECT COUNT(*) FROM signals").fetchone()[0]
-        last_sig  = conn.execute(
-            "SELECT symbol, signal, confidence, timestamp FROM signals ORDER BY timestamp DESC LIMIT 1"
-        ).fetchone()
-        print(f"\nSIGNALS: {sig_count} total")
-        if last_sig:
-            print(f"  Last: {last_sig['timestamp'][:19]}  "
-                  f"{last_sig['symbol']}  {last_sig['signal']}  "
-                  f"conf={float(last_sig['confidence']):.3f}")
-    except Exception as e:
-        print(f"Signals error: {e}")
 
-    # ── Performance metrics ───────────────────────────────────
-    try:
-        daily = conn.execute(
-            "SELECT * FROM performance_daily_metrics ORDER BY date DESC LIMIT 7"
-        ).fetchall()
-        if daily:
-            print(f"\nDAILY PERFORMANCE (last 7 days):")
-            for d in daily:
-                ret = float(d["daily_return"] or 0) * 100
-                eq  = float(d["ending_equity"] or 0)
-                print(f"  {d['date']}  equity=${eq:,.2f}  return={ret:+.2f}%")
-    except Exception as e:
-        print(f"Daily metrics error: {e}")
+# ── Render ────────────────────────────────────────────────────────────────────
+
+WIDTH = 62
+
+def bar(value, max_abs=None, width=30):
+    """Simple ASCII bar, green for positive, red for negative."""
+    if max_abs is None or max_abs == 0:
+        max_abs = max(abs(value), 1)
+    filled = int(abs(value) / max_abs * width)
+    char   = "█" if value >= 0 else "▓"
+    return char * filled + "·" * (width - filled)
+
+
+def pnl_color(v):
+    return f"+${v:,.2f}" if v >= 0 else f"-${abs(v):,.2f}"
+
+
+def print_sector(name, d, open_positions):
+    label = sector_label(name)
+    n     = d["n"]
+    pf_str = f"{d['profit_factor']:.2f}" if d["profit_factor"] != float("inf") else "∞"
+
+    # Open positions in this sector
+    open_in_sector = {
+        sym: pos for sym, pos in open_positions.items()
+        if classify(sym) == name
+    }
+    open_pnl = 0.0
+    for sym, pos in open_in_sector.items():
+        ep  = float(pos.get("entry", 0) or 0)
+        lp  = float(pos.get("entry", ep))  # last_price not in state, use entry as proxy
+        qty = float(pos.get("size", 0) or 0)
+        open_pnl += (lp - ep) * qty
+
+    print(f"\n{'═' * WIDTH}")
+    print(f"  {label}  ({n} closed trades, {len(open_in_sector)} open)")
+    print(f"{'─' * WIDTH}")
+
+    # P&L bar
+    max_abs = max(abs(d["total_pnl"]), 1)
+    b = bar(d["total_pnl"], max_abs)
+    pnl_str = pnl_color(d["total_pnl"])
+    print(f"  Closed PnL   {b}  {pnl_str}")
+
+    print(f"  Win rate     {d['win_rate']*100:5.1f}%   "
+          f"({d['wins']}W / {d['losses']}L)")
+    print(f"  Avg win      +${d['avg_win']:,.2f}   "
+          f"Avg loss   -${abs(d['avg_loss']):,.2f}")
+    print(f"  Profit fac   {pf_str}        "
+          f"Avg hold  {d['avg_hold_min']:.0f}min")
+
+    if open_in_sector:
+        print(f"  Open pos     {', '.join(open_in_sector.keys())}")
+
+    print(f"{'─' * WIDTH}")
+
+    # Last 5 trades
+    recent = sorted(d["trades"], key=lambda t: t["entry_time"] or "", reverse=True)[:5]
+    for t in recent:
+        ts  = (t["entry_time"] or "")[:16]
+        sym = t["symbol"].ljust(9)
+        p   = pnl_color(t["pnl"])
+        print(f"    {ts}  {sym}  {p}")
+
+
+def main():
+    conn = sqlite3.connect(DB_PATH)
+    trades  = get_closed_trades(conn)
+    equity, cash, snap_ts = get_latest_snapshot(conn)
+    open_pos = get_open_positions()
+
+    initial  = 10_000.0
+    total_pnl = equity - initial
+    pnl_pct   = total_pnl / initial * 100
+
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    print(f"\n{'═' * WIDTH}")
+    print(f"  MECOS SECTOR PERFORMANCE DASHBOARD")
+    print(f"  Generated: {now}")
+    print(f"{'═' * WIDTH}")
+    print(f"  Equity:    ${equity:>10,.2f}")
+    print(f"  Cash:      ${cash:>10,.2f}")
+    print(f"  Total PnL: {pnl_color(total_pnl)} ({pnl_pct:+.2f}%)")
+    print(f"  Open pos:  {len(open_pos)}")
+    print(f"{'─' * WIDTH}")
+    print(f"  All closed trades: {len(trades)}")
+
+    stats = sector_stats(trades)
+
+    # Print in order: crypto, equity, etf, forex
+    for sector in ("crypto", "equity", "etf", "forex"):
+        if sector in stats:
+            print_sector(sector, stats[sector], open_pos)
+
+    # Summary comparison table
+    print(f"\n{'═' * WIDTH}")
+    print(f"  SECTOR COMPARISON")
+    print(f"{'─' * WIDTH}")
+    print(f"  {'Sector':<12} {'Trades':>6} {'PnL':>10} {'WinRate':>8} {'ProfFac':>8}")
+    print(f"  {'─'*12} {'─'*6} {'─'*10} {'─'*8} {'─'*8}")
+
+    for sector in ("crypto", "equity", "etf", "forex"):
+        if sector not in stats:
+            continue
+        d = stats[sector]
+        pf_str = f"{d['profit_factor']:.2f}" if d["profit_factor"] != float("inf") else "  ∞"
+        pnl_s  = f"${d['total_pnl']:+,.2f}"
+        print(f"  {sector_label(sector):<12} {d['n']:>6} {pnl_s:>10} "
+              f"{d['win_rate']*100:>7.1f}% {pf_str:>8}")
+
+    print(f"{'═' * WIDTH}")
+    print(f"  NOTE: 'Closed PnL' reflects realised trades only.")
+    print(f"  Open position marks are approximated from entry price.")
+    print(f"{'═' * WIDTH}\n")
 
     conn.close()
-    print("\n" + "=" * 60)
-    print(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("=" * 60 + "\n")
 
 
 if __name__ == "__main__":
-    show_dashboard()
-
-
+    main()

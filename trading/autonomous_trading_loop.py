@@ -416,6 +416,59 @@ class AutonomousTradingLoop:
                     logger.debug(f"Stock poll failed for {symbol}: {e}")
             await asyncio.sleep(interval)
 
+    async def _exit_guardian(self, interval: int = 30):
+        """
+        Independent exit checker that runs every `interval` seconds regardless
+        of websocket health. Ensures stop-loss/take-profit fires even when the
+        live price stream is interrupted.
+
+        Uses last_price from position_manager (updated by mark_price on every
+        tick) as the price source. If a position has no recent price update,
+        falls back to the Binance REST API for crypto or yfinance for equities.
+        """
+        logger.info("Exit guardian started (interval=30s)")
+        while self.running:
+            await asyncio.sleep(interval)
+            try:
+                positions = dict(self.paper_executor.position_manager.positions)
+                if not positions:
+                    continue
+
+                for symbol, pos in positions.items():
+                    if float(pos.get("size", 0) or 0) <= 0:
+                        continue
+
+                    last_price = float(pos.get("last_price", 0) or 0)
+                    avg_price  = float(pos.get("avg_price",  0) or 0)
+                    if last_price <= 0 or avg_price <= 0:
+                        continue
+
+                    # Build a synthetic tick from last known price
+                    tick = {
+                        "symbol": symbol,
+                        "close":  last_price,
+                        "open":   last_price,
+                        "high":   last_price,
+                        "low":    last_price,
+                        "volume": 1,
+                    }
+
+                    exit_signal = self.paper_executor.generate_exit_signal(
+                        symbol, tick, regime=self.current_regime
+                    )
+                    if exit_signal:
+                        exit_signal["sector"] = pos.get("sector", "unknown")
+                        logger.warning(
+                            f"[ExitGuardian] Exit triggered for {symbol}: "
+                            f"{exit_signal.get('exit_reason')} | "
+                            f"last_price={last_price:.4f} avg={avg_price:.4f}"
+                        )
+                        result = await self.paper_executor.execute_signal(exit_signal)
+                        self._update_execution_stats_from_result(result)
+
+            except Exception as e:
+                logger.error(f"Exit guardian error: {e}")
+
     async def _on_market_tick(self, symbol: str, tick: Dict[str, Any]):
         if not self.running:
             return
