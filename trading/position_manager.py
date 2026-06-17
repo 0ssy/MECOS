@@ -72,7 +72,9 @@ class PositionManager:
     def mark_price(self, symbol: str, price: float):
         if symbol not in self.positions:
             return
+        import time as _time
         self.positions[symbol]['last_price'] = price
+        self.positions[symbol]['last_price_ts'] = _time.time()
         self.positions[symbol]['peak_price'] = max(
             self.positions[symbol].get('peak_price', price),
             price

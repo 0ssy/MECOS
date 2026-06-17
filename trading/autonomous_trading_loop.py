@@ -1,4 +1,5 @@
 import asyncio
+import time as _time
 from typing import List, Dict, Any, Optional
 from loguru import logger
 from datetime import datetime
@@ -12,6 +13,7 @@ from .confidence_calibrator import ConfidenceCalibrator
 from .config import TradingConfig
 from .event_bus import EventBus, Event, EventType
 from .schemas import Signal, Decision, MarketEvent
+from .asset_profiles import infer_market
 
 try:
     from rl_trainer import RLTrainer
@@ -381,6 +383,8 @@ class AutonomousTradingLoop:
         await self.market_stream.preseed_cache(self.symbols)
         # Start stock polling fallback for when Alpaca stream dies
         asyncio.create_task(self._poll_stock_prices(self.symbols))
+        # Exit guardian: independent stop-loss checker every 30s
+        asyncio.create_task(self._exit_guardian(interval=30))
 
         await self.market_stream.stream_live_market_data(self.symbols)
 
@@ -426,7 +430,7 @@ class AutonomousTradingLoop:
         tick) as the price source. If a position has no recent price update,
         falls back to the Binance REST API for crypto or yfinance for equities.
         """
-        logger.info("Exit guardian started (interval=30s)")
+        logger.info("Exit guardian started (interval={}s)", interval)
         while self.running:
             await asyncio.sleep(interval)
             try:
@@ -438,12 +442,27 @@ class AutonomousTradingLoop:
                     if float(pos.get("size", 0) or 0) <= 0:
                         continue
 
-                    last_price = float(pos.get("last_price", 0) or 0)
-                    avg_price  = float(pos.get("avg_price",  0) or 0)
-                    if last_price <= 0 or avg_price <= 0:
+                    avg_price = float(pos.get("avg_price", 0) or 0)
+                    if avg_price <= 0:
                         continue
 
-                    # Build a synthetic tick from last known price
+                    # Determine if last_price is fresh (updated within 2 intervals)
+                    last_price = float(pos.get("last_price", 0) or 0)
+                    last_price_ts = float(pos.get("last_price_ts", 0) or 0)
+                    price_age = _time.time() - last_price_ts if last_price_ts > 0 else float("inf")
+                    stale = price_age > interval * 2
+
+                    # If price is stale, fetch a fresh one
+                    if stale or last_price <= 0:
+                        fresh = await self._fetch_fresh_price(symbol)
+                        if fresh and fresh > 0:
+                            last_price = fresh
+                            self.paper_executor.position_manager.mark_price(symbol, fresh)
+                            logger.debug(f"[ExitGuardian] Fetched fresh price for {symbol}: {fresh:.4f}")
+                        elif last_price <= 0:
+                            continue  # No usable price at all
+
+                    # Build a synthetic tick from the price
                     tick = {
                         "symbol": symbol,
                         "close":  last_price,
@@ -468,6 +487,34 @@ class AutonomousTradingLoop:
 
             except Exception as e:
                 logger.error(f"Exit guardian error: {e}")
+
+    async def _fetch_fresh_price(self, symbol: str) -> Optional[float]:
+        """Fetch a live price for exit-guardian staleness fallback."""
+        try:
+            market = infer_market(symbol)
+            if market == 'crypto':
+                # Binance public REST — no auth needed
+                import aiohttp
+                pair = symbol.replace("/", "").replace("USD", "USDT")
+                url = f"https://api.binance.com/api/v3/ticker/price?symbol={pair}"
+                async with aiohttp.ClientSession() as sess:
+                    async with sess.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                        if resp.status == 200:
+                            data = await resp.json()
+                            return float(data.get("price", 0))
+            else:
+                # yfinance for equities / ETFs
+                import yfinance as yf
+                def _yf(sym):
+                    t = yf.Ticker(sym)
+                    h = t.history(period="1d", interval="1m", auto_adjust=True, timeout=8)
+                    if h.empty:
+                        return 0.0
+                    return float(h["Close"].iloc[-1])
+                return await asyncio.to_thread(_yf, symbol)
+        except Exception as exc:
+            logger.debug(f"[ExitGuardian] Fresh price fetch failed for {symbol}: {exc}")
+        return None
 
     async def _on_market_tick(self, symbol: str, tick: Dict[str, Any]):
         if not self.running:
@@ -513,6 +560,20 @@ class AutonomousTradingLoop:
             self._update_execution_stats_from_result(result)
             if result.get('status') == 'EXECUTED':
                 await self._post_trade_updates(symbol, tick, result)
+            return
+
+        # ── Equity market hours gate ──────────────────────────────────────
+        # Block new BUY entries for equities outside regular trading hours.
+        # Equities use yfinance polling which returns stale closes pre-market,
+        # causing entries at wrong prices.  Crypto/forex trade 24h — not gated.
+        # ETFs technically have the same hours but are profitable as-is, so
+        # we only hard-block non-ETF equities.
+        asset_market = infer_market(symbol)
+        if asset_market == 'equity' and session_name in ('after_hours', 'crypto_weekend'):
+            logger.debug(
+                f"Equity hours gate BLOCK for {symbol}: session={session_name} — "
+                f"no new entries outside market hours"
+            )
             return
 
         signal = await self.signal_generator.on_market_data(symbol, tick)
