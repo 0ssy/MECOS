@@ -177,7 +177,7 @@ def print_sector(name, d, open_positions):
     if open_in_sector:
         print(f"  Open pos     {', '.join(open_in_sector.keys())}")
 
-    print(f"{'─' * WIDTH}")
+        print(f"{'─' * WIDTH}")
 
     # Last 5 trades
     recent = sorted(d["trades"], key=lambda t: t["entry_time"] or "", reverse=True)[:5]
