@@ -1,4 +1,6 @@
 import chromadb
+import os
+import uuid
 from loguru import logger
 from config import settings
 import time
@@ -10,8 +12,19 @@ from memory_quality import MemoryQualityGate
 
 class VectorMemory:
     def __init__(self):
-        self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
-        self.collection = self.client.get_or_create_collection(name="mecos_long_term")
+        force_ephemeral = os.getenv("MECOS_VECTOR_DB_MODE", "").strip().lower() == "ephemeral"
+        is_pytest = "PYTEST_CURRENT_TEST" in os.environ
+
+        if force_ephemeral or is_pytest:
+            self.client = chromadb.EphemeralClient()
+            # Isolate test collections to avoid lock/reuse issues between fixtures.
+            collection_name = f"mecos_long_term_test_{os.getpid()}_{uuid.uuid4().hex[:8]}"
+            logger.info("Vector Memory using EphemeralClient.")
+        else:
+            self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
+            collection_name = "mecos_long_term"
+
+        self.collection = self.client.get_or_create_collection(name=collection_name)
         self._op_lock = asyncio.Lock()
         logger.info("Vector Memory System Initialized.")
 

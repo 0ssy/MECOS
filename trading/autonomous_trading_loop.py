@@ -2,7 +2,7 @@ import asyncio
 import time as _time
 from typing import List, Dict, Any, Optional
 from loguru import logger
-from datetime import datetime
+from datetime import datetime, time as _dt_time
 from .cooldown_manager import CooldownManager
 from .regime_detection import detect_regime
 from .exposure_manager import ExposureManager
@@ -54,6 +54,36 @@ def _normalize_quant_mode(mode: str) -> str:
     if normalized not in SESSION_THRESHOLD_PROFILES:
         return 'balanced'
     return normalized
+
+
+def _is_equity_market_open() -> bool:
+    """
+    Returns True when US equities are in regular session (9:30-16:00 ET, Mon-Fri).
+    Falls back to permissive mode if timezone support is unavailable.
+    """
+    try:
+        from zoneinfo import ZoneInfo
+        et = ZoneInfo("America/New_York")
+    except ImportError:
+        try:
+            import pytz
+            et = pytz.timezone("America/New_York")
+        except ImportError:
+            return True
+
+    now_et = datetime.now(et)
+    if now_et.weekday() >= 5:
+        return False
+
+    market_open = _dt_time(hour=9, minute=30)
+    market_close = _dt_time(hour=16, minute=0)
+    return market_open <= now_et.time() <= market_close
+
+
+def _symbol_needs_market_hours(symbol: str) -> bool:
+    """Equity/ETF symbols are gated to regular US market hours."""
+    return infer_market(symbol) == 'equity'
+
 
 class AutonomousTradingLoop:
     def __init__(self, 
@@ -528,6 +558,11 @@ class AutonomousTradingLoop:
 
         self.loop_stats['iterations'] += 1
 
+        # Equity/ETF symbols only process ticks during regular NYSE/NASDAQ hours.
+        if _symbol_needs_market_hours(symbol) and not _is_equity_market_open():
+            logger.debug(f"Market-hours gate skip for {symbol}: outside 09:30-16:00 ET")
+            return
+
         # Keep account equity in sync before risk checks and sizing decisions.
         await self.paper_executor.update_equity({symbol: tick.get('close', 0.0)})
 
@@ -560,20 +595,6 @@ class AutonomousTradingLoop:
             self._update_execution_stats_from_result(result)
             if result.get('status') == 'EXECUTED':
                 await self._post_trade_updates(symbol, tick, result)
-            return
-
-        # ── Equity market hours gate ──────────────────────────────────────
-        # Block new BUY entries for equities outside regular trading hours.
-        # Equities use yfinance polling which returns stale closes pre-market,
-        # causing entries at wrong prices.  Crypto/forex trade 24h — not gated.
-        # ETFs technically have the same hours but are profitable as-is, so
-        # we only hard-block non-ETF equities.
-        asset_market = infer_market(symbol)
-        if asset_market == 'equity' and session_name in ('after_hours', 'crypto_weekend'):
-            logger.debug(
-                f"Equity hours gate BLOCK for {symbol}: session={session_name} — "
-                f"no new entries outside market hours"
-            )
             return
 
         signal = await self.signal_generator.on_market_data(symbol, tick)
@@ -1159,7 +1180,6 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
-
 
 
 
