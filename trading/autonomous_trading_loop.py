@@ -81,8 +81,14 @@ def _is_equity_market_open() -> bool:
 
 
 def _symbol_needs_market_hours(symbol: str) -> bool:
-    """Equity/ETF symbols are gated to regular US market hours."""
-    return infer_market(symbol) == 'equity'
+    """
+    Equity and ETF symbols are gated to regular US market hours.
+    Crypto/forex/commodity-fx symbols remain 24/7.
+    """
+    market = infer_market(symbol)
+    if market in {'crypto', 'forex', 'commodity_fx'}:
+        return False
+    return market == 'equity'
 
 
 class AutonomousTradingLoop:
@@ -1180,7 +1186,6 @@ async def start_trading_loop():
 
     logger.info("Starting the autonomous trading loop with multi-broker live adapter...")
     await trading_loop.start(use_starter_universe=True)
-
 
 
 
