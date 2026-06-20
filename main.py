@@ -25,6 +25,8 @@ from independence_manager import IndependenceManager
 from dreaming_engine import DreamingEngine
 from neural_brain_service import NeuralBrainService
 from mecos.domain_expansion import DomainExpansionController
+from agent_reach_bridge import get_bridge
+from agent_reach_tools import register_agent_reach_tools
 
 
 async def startup_checks(memory: MemorySystem) -> None:
@@ -54,6 +56,16 @@ async def main():
     # ── 1. Core memory (everything depends on this) ───────────────────────
     memory = MemorySystem()
     await startup_checks(memory)
+
+    # ── 1.5 Agent-Reach bridge initialized once, wired to memory ──────────
+    bridge = get_bridge(memory)
+    channel_map = await bridge.initialize()
+    active_channel_count = sum(1 for v in channel_map.values() if v.get("status") in ("ok", "warn"))
+    logger.info(
+        "AgentReachBridge initialized — {} channels active out of {}".format(
+            active_channel_count, len(channel_map)
+        )
+    )
 
     # ── 2. Trading agent (must exist before IndependenceManager) ─────────
     trading_agent = TradingAgent(memory)

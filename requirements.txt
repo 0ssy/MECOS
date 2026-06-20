@@ -54,3 +54,10 @@ pytest-asyncio>=0.23
 black>=24.0
 isort>=5.13
 
+# ── Agent-Reach Integration ────────────────────────────────────────────────────
+# Required by agent_reach channel system:
+pyyaml>=6.0
+rich>=13.0
+yt-dlp>=2024.0
+browser-cookie3>=0.19
+

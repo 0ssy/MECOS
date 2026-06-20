@@ -19,24 +19,56 @@ logger = logging.getLogger("mecos.brain")
 class MECOSBrain:
     """
     Optional neural cognition stack for trading:
-    transformer + TFT + memory bank + PPO.
+    transformer + TFT + memory bank + PPO, grounded in MECOS memory system.
     """
 
     ACTIONS = ["strong_buy", "buy", "hold", "sell", "strong_sell"]
 
-    def __init__(self, memory_system: Any = None):
+    def __init__(self, memory_system: Any = None, memory_query_fn=None):
         self.memory_system = memory_system
+        self._memory_query_fn = memory_query_fn
         self.transformer = MarketTransformer()
         self.tft = TemporalFusionTransformer()
         self.memory = NeuralMemoryBank(memory_size=10_000, key_size=256, value_size=64)
         self.ppo = PPOTrainer(state_dim=256, n_actions=len(self.ACTIONS))
+        self._memory_context_cache: str = ""
         self._load_all()
         logger.info("MECOS Brain initialized (memory slots=%d)", 10_000)
+
+    def set_memory_context(self, context_text: str) -> None:
+        self._memory_context_cache = context_text or ""
+
+    def _fetch_memory_snapshot(self, query: str, max_items: int = 5) -> str:
+        if self._memory_query_fn is not None:
+            try:
+                results = self._memory_query_fn(query=query, n_results=max_items)
+                docs = (results.get("documents") or [[]])[0]
+                if docs:
+                    return "\n".join(docs)
+            except Exception as exc:
+                logger.debug(f"Memory query failed during brain inference: {exc}")
+        if self._memory_context_cache:
+            return self._memory_context_cache
+        return "(no relevant memory context)"
 
     def _load_all(self) -> None:
         self.memory.load()
 
-    def process(self, ticker: str, signals: Dict[str, Any], bars: Any) -> Dict[str, Any]:
+    def process(
+        self,
+        ticker: str,
+        signals: Dict[str, Any],
+        bars: Any,
+        memory_context: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        if not memory_context:
+            recap_parts = [
+                f"ticker={ticker}",
+                f"rsi={float(signals.get('rsi', 0.0) or 0.0):.2f}",
+                f"regime={signals.get('regime', 'unknown')}",
+            ]
+            memory_context = self._fetch_memory_snapshot(" ".join(recap_parts), max_items=5)
+        self.set_memory_context(memory_context)
         signal_vals, signal_ids = self._encode_signals(signals)
         t_out = self.transformer(signal_vals, signal_ids)
         state_repr = t_out["signal_repr"]
@@ -53,7 +85,7 @@ class MECOSBrain:
         action_probs = F.softmax(t_out["action_logits"], dim=-1).detach().cpu().numpy()[0].tolist()
 
         self.memory.write(state_repr.detach(), torch.zeros((1, 64), dtype=state_repr.dtype))
-        explanation = self._reason(ticker, signals, action_name, uncertainty)
+        explanation = self._reason(ticker, signals, action_name, uncertainty, memory_context=memory_context)
         return {
             "action": action_name,
             "uncertainty": round(uncertainty, 4),
@@ -68,6 +100,7 @@ class MECOSBrain:
             },
             "variable_importance": tft_out["past_importance"].detach().cpu().numpy().tolist(),
             "memory_similarity": float(mem_weights.max().item()),
+            "memory_context": memory_context[:400],
             "explanation": explanation,
         }
 
@@ -186,9 +219,26 @@ class MECOSBrain:
         return past, static
 
     @staticmethod
-    def _reason(ticker: str, signals: Dict[str, Any], action: str, uncertainty: float) -> str:
+    def _reason(
+        ticker: str,
+        signals: Dict[str, Any],
+        action: str,
+        uncertainty: float,
+        memory_context: str = "",
+    ) -> str:
         rsi = float(signals.get("rsi", 50.0) or 50.0)
         regime = str(signals.get("regime", "unknown"))
+        regime_note = f", regime={regime}" if regime != "unknown" else ""
+        memory_note = ""
+        if memory_context:
+            snippet = memory_context.replace("\n", " ")[:180]
+            memory_note = f" Memory context: {snippet}."
         if uncertainty > 0.7:
-            return f"{ticker}: high uncertainty, treat {action} as low conviction."
-        return f"{ticker}: action={action} based on regime={regime}, rsi={rsi:.1f} and multi-source fusion."
+            return (
+                f"{ticker}: high uncertainty={uncertainty:.2f}; treat {action} as low conviction."
+                f"{regime_note}{memory_note}"
+            )
+        return (
+            f"{ticker}: action={action}{regime_note}, rsi={rsi:.1f}."
+            f"{memory_note}"
+        )

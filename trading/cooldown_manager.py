@@ -1,23 +1,23 @@
 import time
 
-# Asset-class-aware cooldown periods
+# Asset-class-aware cooldown periods (reduced for paper trading/testing)
 COOLDOWN_BY_CLASS = {
-    "crypto":      60,    # Crypto: 1 minute (24/7, fast-moving)
-    "index":       120,   # ETFs: 2 minutes
-    "technology":  180,   # Tech stocks: 3 minutes
-    "equity":      180,   # Default equity: 3 minutes
-    "small_cap":   240,   # Small caps: 4 minutes (less liquid)
-    "default":     180,
+    "crypto":      15,    # Crypto: 15 seconds
+    "index":       30,    # ETFs: 30 seconds
+    "technology":  30,    # Tech stocks: 30 seconds
+    "equity":      30,    # Default equity: 30 seconds
+    "small_cap":   30,    # Small caps: 30 seconds
+    "default":     30,
 }
 
-# Symbol-level overrides
+# Symbol-level overrides (reduced for testing)
 SYMBOL_COOLDOWNS = {
-    "BTC/USD":  60,
-    "ETH/USD":  60,
-    "SOL/USD":  60,
-    "SPY":      90,
-    "QQQ":      90,
-    "IWM":      120,
+    "BTC/USD":  15,
+    "ETH/USD":  15,
+    "SOL/USD":  15,
+    "SPY":      30,
+    "QQQ":      30,
+    "IWM":      30,
 }
 
 

@@ -27,6 +27,7 @@ class WebPerception:
         else:
             self._http_only = False
         self._playwright_failed = False
+        self.agent_reach_bridge = None
 
     async def startup(self):
         """Initialize Playwright browser."""

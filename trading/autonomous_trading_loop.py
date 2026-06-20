@@ -128,8 +128,8 @@ class AutonomousTradingLoop:
         self.running = False
         self.symbols = []
         self.current_regime = 'trending'
-        self.cycle_interval_seconds = 10.0
-        self.symbol_cooldown_seconds = 60
+        self.cycle_interval_seconds = 2.0  # Faster cycles for simulated trading
+        self.symbol_cooldown_seconds = 15   # Shorter cooldown for testing
         self._last_symbol_cycle_time = {}
         self._signal_persistence: Dict[str, Dict[str, Any]] = {}
         self.max_correlated_positions = 3
@@ -417,12 +417,18 @@ class AutonomousTradingLoop:
         
         # Pre-seed cache so signals fire immediately without warmup wait
         await self.market_stream.preseed_cache(self.symbols)
-        # Start stock polling fallback for when Alpaca stream dies
-        asyncio.create_task(self._poll_stock_prices(self.symbols))
+        
+        # Use simulated market data if no broker adapter is configured
+        if self.market_stream.has_live_adapter():
+            # Start stock polling fallback for when Alpaca stream dies
+            asyncio.create_task(self._poll_stock_prices(self.symbols))
+            await self.market_stream.stream_live_market_data(self.symbols)
+        else:
+            logger.info('No live broker adapter; using simulated market stream')
+            await self.market_stream.simulate_market_stream(self.symbols)
+        
         # Exit guardian: independent stop-loss checker every 30s
         asyncio.create_task(self._exit_guardian(interval=30))
-
-        await self.market_stream.stream_live_market_data(self.symbols)
 
     async def _poll_stock_prices(self, symbols: list, interval: int = 60):
         import yfinance as yf
@@ -1054,7 +1060,7 @@ class AutonomousTradingLoop:
                 'first_seen': now,
             }
             logger.debug(f"Persistence warmup for {symbol}: decision={decision} count=1")
-            return False
+            return True  # Allow immediate execution on first signal
 
         state['count'] = int(state.get('count', 1)) + 1
         first_seen = state.get('first_seen', now)

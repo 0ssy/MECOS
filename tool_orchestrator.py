@@ -14,6 +14,7 @@ from tool_registry import ToolRegistry, ToolSpec, ToolPermission
 from code_executor import CodeExecutor
 from file_operations import FileOperations
 from app_controller import AppController
+from agent_reach_bridge import get_bridge
 
 
 class ToolOrchestrator:
@@ -27,10 +28,11 @@ class ToolOrchestrator:
         self.code_executor = CodeExecutor()
         self.file_ops = FileOperations()
         self.app_controller = AppController()
-        self.web_perception = None  # Injected after construction
+        self.web_perception = None
 
         self._register_all_tools()
-        logger.info("ToolOrchestrator ready with full Phase 4 tool suite.")
+        self._register_agent_reach_tools()
+        logger.info("ToolOrchestrator ready with full Phase 4 tool suite + Agent-Reach channels.")
 
     def _register_all_tools(self):
         """Register all available tools into the registry."""
@@ -171,6 +173,10 @@ class ToolOrchestrator:
             permissions=ToolPermission(),
             category="system",
         ))
+
+    def _register_agent_reach_tools(self):
+        from agent_reach_tools import register_agent_reach_tools
+        register_agent_reach_tools(self.registry, None)
 
     # ── Tool implementations ──────────────────────────────────────────────
 

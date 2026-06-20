@@ -27,10 +27,6 @@ class MarketDataStream:
         }
         logger.info('Market Data Stream initialized')
 
-    # ------------------------------------------------------------------ #
-    #  Validation                                                          #
-    # ------------------------------------------------------------------ #
-
     def _parse_ts(self, ts_value):
         if not ts_value:
             return None
@@ -65,10 +61,6 @@ class MarketDataStream:
 
         return True
 
-    # ------------------------------------------------------------------ #
-    #  Subscription                                                        #
-    # ------------------------------------------------------------------ #
-
     def subscribe(self, symbol: str, callback: Callable):
         if symbol not in self.subscribers:
             self.subscribers[symbol] = []
@@ -82,10 +74,6 @@ class MarketDataStream:
 
     def has_live_adapter(self) -> bool:
         return self.broker_adapter is not None
-
-    # ------------------------------------------------------------------ #
-    #  Data emission                                                       #
-    # ------------------------------------------------------------------ #
 
     async def emit_market_data(self, symbol: str, data: Dict[str, Any]):
         if not self._validate_tick(symbol, data):
@@ -111,10 +99,6 @@ class MarketDataStream:
         if symbol not in self.market_data_cache:
             return []
         return self.market_data_cache[symbol][-lookback:]
-
-    # ------------------------------------------------------------------ #
-    #  Cache pre-seeding                                                   #
-    # ------------------------------------------------------------------ #
 
     async def preseed_cache(self, symbols: List[str], lookback: int = 100):
         """
@@ -188,10 +172,6 @@ class MarketDataStream:
 
         seeded = sum(1 for s in symbols if s in self.market_data_cache and self.market_data_cache[s])
         logger.info(f"Cache pre-seeding complete: {seeded}/{len(symbols)} symbols ready")
-
-    # ------------------------------------------------------------------ #
-    #  Live streaming                                                      #
-    # ------------------------------------------------------------------ #
 
     async def stream_live_market_data(self, symbols: List[str]):
         """Stream live market data from broker adapters (Alpaca + Binance)."""
@@ -275,25 +255,37 @@ class MarketDataStream:
         finally:
             self._public_stream_task = None
 
-    # ------------------------------------------------------------------ #
-    #  Simulated stream (fallback / testing only)                          #
-    # ------------------------------------------------------------------ #
-
     async def simulate_market_stream(self, symbols: List[str]):
         """Simulated stream for testing. Not used in live trading."""
         self.running = True
         self.live_mode = False
         logger.info(f'Starting simulated market stream for {symbols}')
 
-        prices = {sym: 100.0 for sym in symbols}
+        # Use realistic base prices for each symbol type
+        base_prices = {}
+        for sym in symbols:
+            if 'BTC' in sym:
+                base_prices[sym] = 64000.0 + np.random.uniform(-1000, 1000)
+            elif 'ETH' in sym:
+                base_prices[sym] = 1700.0 + np.random.uniform(-50, 50)
+            elif 'SOL' in sym:
+                base_prices[sym] = 70.0 + np.random.uniform(-5, 5)
+            elif sym in {'SPY', 'QQQ', 'IWM'}:
+                base_prices[sym] = 700.0 + np.random.uniform(-20, 20)
+            else:
+                base_prices[sym] = 300.0 + np.random.uniform(-30, 30)
+
+        prices = dict(base_prices)
 
         while self.running:
             for symbol in symbols:
-                drift = np.random.normal(0, 0.0002)
+                # Upward drift with occasional pullbacks for realistic exits
+                drift = np.random.normal(0.0005, 0.001)  # Positive bias
                 vol   = np.random.normal(0, 0.001)
-
+                
                 prev_price      = prices[symbol]
-                prices[symbol]  = max(prices[symbol] * (1 + drift + vol), 1.0)
+                new_price       = prices[symbol] * (1 + drift + vol)
+                prices[symbol]  = max(new_price, base_prices[symbol] * 0.5)
                 open_price      = prev_price
 
                 tick = {
@@ -308,10 +300,6 @@ class MarketDataStream:
                 await self.emit_market_data(symbol, tick)
 
             await asyncio.sleep(1)
-
-    # ------------------------------------------------------------------ #
-    #  Internal loops                                                      #
-    # ------------------------------------------------------------------ #
 
     async def _router_loop(self, symbols: List[str]):
         while self.running:
@@ -338,10 +326,6 @@ class MarketDataStream:
                 pass
         queue.put_nowait(tick)
 
-    # ------------------------------------------------------------------ #
-    #  Stop                                                                #
-    # ------------------------------------------------------------------ #
-
     def stop(self):
         self.running  = False
         self.live_mode = False
@@ -359,5 +343,3 @@ class MarketDataStream:
             self._public_stream_task = None
 
         logger.info('Market stream stopped')
-
-

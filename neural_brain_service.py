@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import os
 from typing import Any, Dict, Optional
 
@@ -27,12 +28,25 @@ class NeuralBrainService:
         try:
             from mecos_brain import MECOSBrain
 
-            self.brain = MECOSBrain(memory_system=memory_system)
-            logger.info("NeuralBrainService initialized")
+            self.brain = MECOSBrain(
+                memory_system=memory_system,
+                memory_query_fn=self._query_memory_sync,
+            )
+            logger.info("NeuralBrainService initialized with memory grounding")
         except Exception as exc:
             self.enabled = False
             self.last_error = str(exc)
             logger.warning(f"NeuralBrainService unavailable: {exc}")
+
+    def _query_memory_sync(self, query: str, n_results: int = 5) -> Dict[str, Any]:
+        if self.memory_system is None:
+            return {"documents": [[]]}
+        try:
+            coro = self.memory_system.retrieve_context(query=query, n_results=n_results)
+            return asyncio.run(coro)
+        except Exception as exc:
+            logger.debug(f"Sync memory query failed: {exc}")
+            return {"documents": [[]]}
 
     @property
     def is_available(self) -> bool:

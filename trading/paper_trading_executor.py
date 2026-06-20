@@ -78,9 +78,9 @@ class PaperTradingExecutor:
         self.kill_switch_triggered = False
         self.positions = {}
         self.stop_loss_pct = 0.02
-        self.take_profit_pct = 0.05
+        self.take_profit_pct = 0.03  # Lower for quicker exits
         self.trailing_stop_pct = 0.015
-        self.max_holding_seconds = 4 * 60 * 60
+        self.max_holding_seconds = 60  # Reduced for faster testing
 
         self.execution_stats = {
             'total_orders': 0,
