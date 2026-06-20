@@ -14,6 +14,7 @@ from tool_registry import ToolRegistry, ToolSpec, ToolPermission
 from code_executor import CodeExecutor
 from file_operations import FileOperations
 from app_controller import AppController
+from browser_automation import BrowserAutomation
 from agent_reach_bridge import get_bridge
 
 
@@ -23,15 +24,17 @@ class ToolOrchestrator:
     Manages all available tools and routes execution requests from the action engine.
     """
 
-    def __init__(self):
+    def __init__(self, memory_system=None):
         self.registry = ToolRegistry()
         self.code_executor = CodeExecutor()
         self.file_ops = FileOperations()
         self.app_controller = AppController()
+        self.browser_automation = BrowserAutomation()
         self.web_perception = None
 
         self._register_all_tools()
-        self._register_agent_reach_tools()
+        self._register_browser_tools()
+        self._register_agent_reach_tools(memory_system)
         logger.info("ToolOrchestrator ready with full Phase 4 tool suite + Agent-Reach channels.")
 
     def _register_all_tools(self):
@@ -174,9 +177,43 @@ class ToolOrchestrator:
             category="system",
         ))
 
-    def _register_agent_reach_tools(self):
+    def _register_browser_tools(self):
+        self.registry.register(ToolSpec(
+            name="browser_navigate",
+            description="Navigate the bundled Playwright browser to a URL.",
+            func=self._browser_navigate,
+            parameters={"url": "The URL to open"},
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
+        self.registry.register(ToolSpec(
+            name="browser_get_text",
+            description="Extract visible text from the current browser page.",
+            func=self._browser_get_text,
+            parameters={},
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
+        self.registry.register(ToolSpec(
+            name="browser_screenshot",
+            description="Take a full-page screenshot in the browser.",
+            func=self._browser_screenshot,
+            parameters={"filename": "Optional screenshot filename"},
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
+        self.registry.register(ToolSpec(
+            name="browser_extract_links",
+            description="Extract all hyperlinks from the current page.",
+            func=self._browser_extract_links,
+            parameters={},
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
+
+    def _register_agent_reach_tools(self, memory_system=None):
         from agent_reach_tools import register_agent_reach_tools
-        register_agent_reach_tools(self.registry, None)
+        register_agent_reach_tools(self.registry, memory_system)
 
     # ── Tool implementations ──────────────────────────────────────────────
 
@@ -288,6 +325,34 @@ class ToolOrchestrator:
         )
         return json.dumps(machine_map)
 
+    async def _browser_navigate(self, url: str) -> str:
+        try:
+            ok = await self.browser_automation.navigate(url)
+            return f"Navigated to {url}" if ok else f"Navigation failed for {url}"
+        except Exception as e:
+            return f"Browser navigation error: {e}"
+
+    async def _browser_get_text(self) -> str:
+        try:
+            text = await self.browser_automation.get_text()
+            return text[:5000] if text else "No text extracted."
+        except Exception as e:
+            return f"Browser text extraction error: {e}"
+
+    async def _browser_screenshot(self, filename: Optional[str] = None) -> str:
+        try:
+            path = await self.browser_automation.screenshot(filename)
+            return f"Screenshot saved: {path}" if path else "Screenshot failed."
+        except Exception as e:
+            return f"Browser screenshot error: {e}"
+
+    async def _browser_extract_links(self) -> str:
+        try:
+            links = await self.browser_automation.extract_links()
+            return "\n".join(links) if links else "No links found."
+        except Exception as e:
+            return f"Browser link extraction error: {e}"
+
     # ── Public interface ──────────────────────────────────────────────────
 
     async def run_tool(self, tool_name: str, **kwargs) -> str:
@@ -312,3 +377,90 @@ class ToolOrchestrator:
     def describe_tools(self) -> str:
         """Return a formatted description of all available tools for the reasoner."""
         return self.registry.describe_all()
+
+    # ── Workflow orchestration ─────────────────────────────────────────
+
+    async def run_workflow(self, steps: list[dict]) -> list:
+        results = []
+        for step in steps:
+            tool = step.get("tool") or step.get("name")
+            args = step.get("args") or step.get("parameters") or {}
+            logger.info("[workflow] step: {} -> {}", tool, args)
+
+            spec = self.registry.get(tool)
+            if not spec:
+                results.append({"tool": tool, "status": "error", "error": f"Unknown tool: {tool}"})
+                continue
+            if not spec.enabled:
+                results.append({"tool": tool, "status": "skipped", "error": "disabled"})
+                continue
+
+            validated = self._validate_args(spec, args)
+            if "error" in validated:
+                fallback = step.get("fallback")
+                if fallback:
+                    logger.info("[workflow] falling back for {} -> {}", tool, fallback)
+                    fb = self.registry.get(fallback)
+                    if fb and fb.enabled:
+                        try:
+                            res = await fb.func(**validated.get("fallback_args") or {})
+                            results.append({"tool": fallback, "status": "ok", "result": str(res)[:1000]})
+                            continue
+                        except Exception as exc:
+                            results.append({"tool": fallback, "status": "error", "error": str(exc)})
+                            continue
+                results.append({"tool": tool, "status": "error", "error": validated["error"]})
+                continue
+
+            try:
+                res = await spec.func(**validated)
+                results.append({"tool": tool, "status": "ok", "result": str(res)[:2000]})
+            except Exception as exc:
+                results.append({"tool": tool, "status": "error", "error": str(exc)})
+        return results
+
+    @staticmethod
+    def _validate_args(spec, args: dict) -> dict:
+        if not args or not spec.parameters:
+            return args or {}
+        validated = {}
+        for key, desc in spec.parameters.items():
+            if key not in args:
+                continue
+            val = args[key]
+            if key == "timeout" or key.endswith("_limit") or key == "max_pages":
+                try:
+                    validated[key] = max(1, int(val))
+                except Exception:
+                    validated[key] = 30
+            elif isinstance(val, str):
+                validated[key] = val
+            elif isinstance(val, (list, dict)):
+                validated[key] = val
+            else:
+                validated[key] = str(val)
+        return validated
+
+    async def run_tool_with_fallback(self, tool_name: str, fallbacks: list[str], **kwargs) -> str:
+        last_error = ""
+        for name in [tool_name] + fallbacks:
+            spec = self.registry.get(name)
+            if not spec or not spec.enabled:
+                continue
+            try:
+                return await spec.func(**kwargs)
+            except Exception as exc:
+                last_error = str(exc)
+                logger.debug("Tool '{}' failed: {}", name, exc)
+                continue
+        return f"All tools failed ({tool_name} + {fallbacks}): {last_error}"
+
+    def available_tools_summary(self) -> str:
+        tools = self.registry.list_tools()
+        lines = [f"MECOS ToolOrchestrator — {len(tools)} tools registered"]
+        cats: dict = {}
+        for t in tools:
+            cats.setdefault(t.category, []).append(t.name)
+        for cat, names in sorted(cats.items()):
+            lines.append(f"  [{cat}]: {', '.join(names)}")
+        return "\n".join(lines)

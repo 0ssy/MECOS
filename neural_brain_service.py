@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import threading
 from typing import Any, Dict, Optional
 
 from loguru import logger
@@ -12,6 +13,9 @@ class NeuralBrainService:
     Global neural brain service for MECOS runtime.
     Provides optional, shared access to MECOSBrain across subsystems.
     """
+
+    _bg_loop: Optional[asyncio.AbstractEventLoop] = None
+    _bg_loop_lock = threading.Lock()
 
     def __init__(self, memory_system: Any = None, enabled: Optional[bool] = None):
         env_enabled = os.getenv("MECOS_ENABLE_NEURAL_BRAIN", "false").strip().lower() == "true"
@@ -30,7 +34,7 @@ class NeuralBrainService:
 
             self.brain = MECOSBrain(
                 memory_system=memory_system,
-                memory_query_fn=self._query_memory_sync,
+                memory_query_fn=self._query_memory,
             )
             logger.info("NeuralBrainService initialized with memory grounding")
         except Exception as exc:
@@ -38,14 +42,21 @@ class NeuralBrainService:
             self.last_error = str(exc)
             logger.warning(f"NeuralBrainService unavailable: {exc}")
 
-    def _query_memory_sync(self, query: str, n_results: int = 5) -> Dict[str, Any]:
+    def _query_memory(self, query: str, n_results: int = 5) -> Dict[str, Any]:
         if self.memory_system is None:
             return {"documents": [[]]}
         try:
             coro = self.memory_system.retrieve_context(query=query, n_results=n_results)
-            return asyncio.run(coro)
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                return asyncio.run(coro)
+            with NeuralBrainService._bg_loop_lock:
+                if NeuralBrainService._bg_loop is None or NeuralBrainService._bg_loop.is_closed():
+                    NeuralBrainService._bg_loop = asyncio.new_event_loop()
+            return NeuralBrainService._bg_loop.run_until_complete(coro)
         except Exception as exc:
-            logger.debug(f"Sync memory query failed: {exc}")
+            logger.debug(f"Memory query failed: {exc}")
             return {"documents": [[]]}
 
     @property

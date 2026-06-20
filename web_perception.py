@@ -34,6 +34,9 @@ class WebPerception:
         async with self._playwright_lock:
             await self._startup_playwright_unlocked()
 
+    async def set_agent_reach_bridge(self, bridge):
+        self.agent_reach_bridge = bridge
+
     async def _startup_playwright_unlocked(self):
         if self._http_only or self._playwright_failed:
             logger.info("Web Perception running in HTTP mode (Playwright disabled).")
@@ -53,7 +56,13 @@ class WebPerception:
         logger.info("Web Perception Module Shutdown.")
 
     async def ingest_url(self, url: str):
-        """Navigate to a URL, extract content, and store in memory."""
+        """Navigate to a URL, extract content, and store in memory.
+
+        Preference order:
+        1. Agent-Reach bridge (platform-specific channels when available)
+        2. Playwright browser
+        3. HTTP fallback
+        """
         if self._is_blocked_url(url):
             logger.warning(f"Skipping blocked URL: {url}")
             return {
@@ -63,6 +72,14 @@ class WebPerception:
                 "ok": False,
                 "error": "blocked_url",
             }
+
+        if self.agent_reach_bridge is not None:
+            try:
+                bridge_result = await self.agent_reach_bridge.read_url(url)
+                if bridge_result.get("ok"):
+                    return bridge_result
+            except Exception as e:
+                logger.debug(f"Agent-Reach bridge ingest failed for {url}: {e}")
 
         if not self._http_only and not self._playwright_failed:
             try:

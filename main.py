@@ -1,15 +1,14 @@
 """
 MECOS Main Entry Point
 
-Fixes applied:
-  1. IndependenceManager.set_agents() is now called after all components
-     are constructed — governance gates now check real live metrics.
-  2. TRAINING_ACCELERATION_FACTOR added to settings via .env fallback
-     (meta_learner.py references it but config never defined it).
-  3. memory_system_stub removed (test artifact, should never be in prod).
-  4. Startup sequence is ordered correctly:
-       memory → trading_agent → meta_learner → independence_manager
-       (so set_agents() always has live objects to inject)
+Supports both full-system runs (with trading) and stripped-down cognition
+loops (without trading) depending on environment flags.
+
+Architecture:
+  Memory → Intelligence layer (KG, Curiosity, CrossDomain) → Reasoner
+  → ActionExecutionEngine → ToolOrchestrator → tools
+  → AppPerception + Agent-Reach perception
+  → NeuralBrainService (optional)
 """
 
 import asyncio
@@ -19,139 +18,138 @@ from loguru import logger
 from config import settings
 from memory_system import MemorySystem
 from reasoner import Reasoner
-from trading_agent import TradingAgent
 from meta_learner import MetaLearner
 from independence_manager import IndependenceManager
 from dreaming_engine import DreamingEngine
 from neural_brain_service import NeuralBrainService
 from mecos.domain_expansion import DomainExpansionController
 from agent_reach_bridge import get_bridge
-from agent_reach_tools import register_agent_reach_tools
+from tool_orchestrator import ToolOrchestrator
+from action_engine import ActionExecutionEngine
+from app_perception import AppPerception
+from app_controller import AppController
+
+TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
 
 
 async def startup_checks(memory: MemorySystem) -> None:
-    """Verify core systems are reachable before entering the main loop."""
     logger.info("Running startup checks...")
-
-    # Memory check
     try:
         stats = await memory.get_stats()
         logger.info(f"Memory OK — {stats.get('experience_count', 0)} experiences stored")
     except Exception as e:
         logger.error(f"Memory check failed: {e}")
         raise
-
-    # Broker connectivity (non-fatal — just warn)
-    if not settings.ALPACA_API_KEY:
+    if TRADING_ENABLED and not settings.ALPACA_API_KEY:
         logger.warning("ALPACA_API_KEY not set — stock trading disabled")
-    if not settings.BINANCE_API_KEY:
+    if TRADING_ENABLED and not settings.BINANCE_API_KEY:
         logger.warning("BINANCE_API_KEY not set — crypto trading disabled")
-
     logger.info("Startup checks complete.")
 
 
-async def main():
-    logger.info(f"Starting MECOS {settings.VERSION}")
+def build_intelligence_stack() -> dict:
+    from mecos.knowledge_core import KnowledgeGraph
+    from mecos.domain_graph import DomainGraph
+    from mecos.curiosity_engine import CuriosityEngine
+    from mecos.cross_domain_inference import CrossDomainInferenceEngine
 
-    # ── 1. Core memory (everything depends on this) ───────────────────────
-    memory = MemorySystem()
-    await startup_checks(memory)
-
-    # ── 1.5 Agent-Reach bridge initialized once, wired to memory ──────────
-    bridge = get_bridge(memory)
-    channel_map = await bridge.initialize()
-    active_channel_count = sum(1 for v in channel_map.values() if v.get("status") in ("ok", "warn"))
+    kg = KnowledgeGraph()
+    dg = DomainGraph()
+    curiosity = CuriosityEngine(kg=kg, domain_graph=dg)
+    xdi = CrossDomainInferenceEngine(kg=kg, domain_graph=dg)
     logger.info(
-        "AgentReachBridge initialized — {} channels active out of {}".format(
-            active_channel_count, len(channel_map)
-        )
+        "Intelligence stack ready: kg={} nodes, dg={} domains, {} curiosities",
+        kg.graph.number_of_nodes(),
+        dg.graph.number_of_nodes(),
+        len(curiosity.queue),
     )
+    return {
+        "knowledge_graph": kg,
+        "domain_graph": dg,
+        "curiosity_engine": curiosity,
+        "cross_domain_inference": xdi,
+    }
 
-    # ── 2. Trading agent (must exist before IndependenceManager) ─────────
-    trading_agent = TradingAgent(memory)
-    neural_brain_service = NeuralBrainService(memory_system=memory)
-    domain_expansion_enabled = os.getenv("MECOS_ENABLE_DOMAIN_EXPANSION", "false").strip().lower() == "true"
-    domain_expansion_every = max(1, int(os.getenv("MECOS_DOMAIN_EXPANSION_MAIN_CYCLES", "20")))
-    domain_expansion_controller = None
-    if domain_expansion_enabled:
-        try:
-            domain_expansion_controller = DomainExpansionController()
-            logger.info(
-                "Domain expansion controller wired in main loop | every {} cycles",
-                domain_expansion_every,
-            )
-        except Exception as exc:
-            logger.warning(f"Domain expansion controller unavailable in main loop: {exc}")
-    if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
-        trading_agent.neural_brain = neural_brain_service.brain
-        trading_agent.neural_brain_enabled = True
-        logger.info("Neural brain shared with root TradingAgent")
-    logger.info("TradingAgent ready.")
 
-    # ── 3. Reasoner ───────────────────────────────────────────────────────
-    reasoner = Reasoner(memory)
-    logger.info("Reasoner ready.")
-
-    # ── 4. Meta-learner ───────────────────────────────────────────────────
-    meta_learner = MetaLearner(memory)
-    logger.info("MetaLearner ready.")
-
-    # ── 5. Independence manager — inject live agents NOW ─────────────────
-    #    FIX: original code left trading_agent=None and meta_learner=None,
-    #    so governance gates never ran against real data.
-    independence = IndependenceManager(memory)
-    independence.set_agents(trading_agent, meta_learner)
-    logger.info("IndependenceManager wired with live TradingAgent + MetaLearner.")
-
-    # ── 6. Dreaming engine ────────────────────────────────────────────────
-    dreaming = DreamingEngine(memory)
-    logger.info("DreamingEngine ready.")
-
-    # ── 7. Initial readiness check ────────────────────────────────────────
-    readiness = await independence.check_readiness()
-    logger.info(f"System readiness: {readiness}")
-
-    # ── 8. Main loop ──────────────────────────────────────────────────────
-    logger.info("Entering main loop...")
+async def run_cognition_loop(
+    memory: MemorySystem,
+    reasoner: Reasoner,
+    meta_learner: MetaLearner,
+    independence: IndependenceManager,
+    dreaming: DreamingEngine,
+    neural_brain_service: NeuralBrainService,
+    action_engine: ActionExecutionEngine,
+    app_perception: AppPerception,
+    domain_expansion_controller=None,
+    domain_expansion_every: int = 20,
+) -> None:
+    logger.info("Entering cognition loop (timer + event hybrid)...")
     cycle = 0
+    pending_goals: list = []
 
     while True:
         cycle += 1
-        logger.info(f"=== Main Cycle #{cycle} ===")
 
         try:
-            # Trading cycle
-            trade_result = await trading_agent.run_cycle()
-            logger.info(f"Trading: {trade_result['signals']} signals, "
-                        f"{trade_result['actionable']} actionable")
+            # ── Goal intake (from any source) ───────────────────────────
+            for goal_desc in pending_goals[:]:
+                logger.info("Goal: {}", goal_desc[:80])
+                plan = await reasoner.generate_plan(goal_desc)
+                if plan:
+                    results = await action_engine.execute_plan(plan)
+                    await reasoner.reflect(goal_desc, plan, results)
+                pending_goals.remove(goal_desc)
 
-            if neural_brain_service.is_available:
-                insight = neural_brain_service.runtime_insight(
-                    {
-                        "runtime_health": 85.0,
-                        "success_rate": 0.9,
-                        "runtime_regime": "trending",
-                    }
-                )
-                if insight:
-                    logger.info(
-                        f"Global neural insight: action={insight.get('action')} "
-                        f"uncertainty={insight.get('uncertainty')}"
-                    )
+            # ── Intelligence persistence (every 3 cycles) ────────────────
+            if cycle % 3 == 0:
+                kg = reasoner.intelligence.get("knowledge_graph")
+                dg = reasoner.intelligence.get("domain_graph")
+                if kg and hasattr(kg, "save"):
+                    kg.save()
+                if dg and hasattr(dg, "save"):
+                    dg.save()
 
-            # Meta-learning cycle (every 5 main cycles)
+            # ── Curiosity-driven research (every 7 cycles) ───────────────
+            if cycle % 7 == 0:
+                engine = reasoner.intelligence.get("curiosity_engine")
+                if engine and engine.queue_size() > 0:
+                    item = engine.next_curiosity()
+                    if item:
+                        concept = item.get("concept", "")
+                        logger.info("Curiosity research: {}", concept)
+                        plan = await reasoner.generate_plan(f"Research and learn about: {concept}")
+                        if plan:
+                            results = await action_engine.execute_plan(plan)
+                            kg = reasoner.intelligence.get("knowledge_graph")
+                            if kg:
+                                kg.add_triplet(concept, "EXPLORED_VIA", "curiosity", source="curiosity", confidence=0.7)
+                            await reasoner.reflect(f"Research: {concept}", plan, results)
+
+            # ── Periodic desktop observation (every 4 cycles) ────────────
+            if cycle % 4 == 0 and app_perception:
+                try:
+                    snapshot = await app_perception.observe_current_desktop()
+                    unknown = snapshot.get("unknown_apps", 0)
+                    if unknown:
+                        logger.debug("Desktop snapshot: {} open windows, {} unknown apps", snapshot.get("open_windows", 0), unknown)
+                except Exception as exc:
+                    logger.debug("App observation failed: {}", exc)
+
+            # ── Meta-learning (every 5 cycles) ───────────────────────────
             if cycle % 5 == 0:
                 meta_result = await meta_learner.run_meta_cycle()
                 logger.info(f"Meta score: {meta_result.get('benchmark_score', 'N/A')}")
 
-            # Dreaming cycle (every 10 main cycles, when idle)
+            # ── Dreaming (every 10 cycles) ───────────────────────────────
             if cycle % 10 == 0:
                 await dreaming.dream()
 
-            # Governance check (every 20 cycles)
+            # ── Governance (every 20 cycles) ─────────────────────────────
             if cycle % 20 == 0:
                 readiness = await independence.check_readiness()
                 logger.info(f"Governance readiness: {readiness}")
+
+            # ── Domain expansion ─────────────────────────────────────────
             if domain_expansion_controller and cycle % domain_expansion_every == 0:
                 await asyncio.to_thread(domain_expansion_controller.learn_next)
 
@@ -159,6 +157,118 @@ async def main():
             logger.error(f"Cycle #{cycle} error: {e}")
 
         await asyncio.sleep(settings.IDLE_SLEEP_TIME)
+
+
+async def run_trading_loop(
+    trading_agent,
+    neural_brain_service: NeuralBrainService,
+    domain_expansion_controller=None,
+    domain_expansion_every: int = 20,
+) -> None:
+    logger.info("Trading loop active.")
+    cycle = 0
+    while True:
+        cycle += 1
+        try:
+            trade_result = await trading_agent.run_cycle()
+            logger.info(f"Trading: {trade_result['signals']} signals, {trade_result['actionable']} actionable")
+
+            if neural_brain_service.is_available:
+                insight = neural_brain_service.runtime_insight({
+                    "runtime_health": 85.0, "success_rate": 0.9, "runtime_regime": "trending",
+                })
+                if insight:
+                    logger.info(f"Global neural insight: action={insight.get('action')} uncertainty={insight.get('uncertainty')}")
+
+            if domain_expansion_controller and cycle % domain_expansion_every == 0:
+                await asyncio.to_thread(domain_expansion_controller.learn_next)
+        except Exception as e:
+            logger.error(f"Trading Cycle #{cycle} error: {e}")
+        await asyncio.sleep(settings.IDLE_SLEEP_TIME)
+
+
+async def main():
+    logger.info(f"Starting MECOS {settings.VERSION} (trading={'enabled' if TRADING_ENABLED else 'disabled'})")
+
+    # ── 1. Core memory ──────────────────────────────────────────────────
+    memory = MemorySystem()
+    await startup_checks(memory)
+
+    # ── 2. Perception ───────────────────────────────────────────────────
+    bridge = get_bridge(memory)
+    channel_map = await bridge.initialize()
+    active_channel_count = sum(1 for v in channel_map.values() if v.get("status") in ("ok", "warn"))
+    logger.info("AgentReachBridge: {} channels active out of {}", active_channel_count, len(channel_map))
+
+    app_controller = AppController()
+    app_perception = AppPerception(memory_system=memory, controller=app_controller)
+    await app_perception.scan_and_learn_system(learn_web=False)
+    logger.info("AppPerception: {} apps, {} file types", len(app_perception.store.apps), len(app_perception.store.file_types))
+
+    # ── 3. Intelligence layer ───────────────────────────────────────────
+    intelligence = build_intelligence_stack()
+
+    # ── 4. Tool orchestration + ActionEngine ────────────────────────────
+    tool_orchestrator = ToolOrchestrator(memory_system=memory)
+    action_engine = ActionExecutionEngine(tool_orchestrator, memory)
+    logger.info("ToolOrchestrator + ActionEngine ready: {} tools", len(tool_orchestrator.registry.list_tools()))
+
+    # ── 5. Reasoner (with full intelligence) ────────────────────────────
+    reasoner = Reasoner(memory, tool_orchestrator=tool_orchestrator, intelligence_stack=intelligence)
+    logger.info("Reasoner ready with graph={} nodes, {} curiosities queued",
+                intelligence["knowledge_graph"].graph.number_of_nodes(),
+                intelligence["curiosity_engine"].queue_size())
+
+    # ── 6. Neural brain (optional) ──────────────────────────────────────
+    neural_brain_service = NeuralBrainService(memory_system=memory)
+
+    # ── 7. Meta-learner & independence ──────────────────────────────────
+    meta_learner = MetaLearner(memory)
+    independence = IndependenceManager(memory)
+
+    trading_agent = None
+    if TRADING_ENABLED:
+        try:
+            from trading_agent import TradingAgent
+            trading_agent = TradingAgent(memory)
+            if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
+                trading_agent.neural_brain = neural_brain_service.brain
+                trading_agent.neural_brain_enabled = True
+            independence.set_agents(trading_agent, meta_learner)
+            logger.info("IndependenceManager: live TradingAgent + MetaLearner.")
+        except Exception as exc:
+            logger.warning(f"Trading disabled: {exc}")
+    else:
+        independence.set_agents(None, meta_learner)
+        logger.info("IndependenceManager: no TradingAgent (trading disabled).")
+
+    # ── 8. Domain expansion ─────────────────────────────────────────────
+    domain_expansion_controller = None
+    if os.getenv("MECOS_ENABLE_DOMAIN_EXPANSION", "false").strip().lower() == "true":
+        try:
+            domain_expansion_controller = DomainExpansionController()
+        except Exception as exc:
+            logger.warning(f"Domain expansion unavailable: {exc}")
+
+    # ── 9. Dreaming ─────────────────────────────────────────────────────
+    dreaming = DreamingEngine(memory)
+
+    # ── 10. Readiness check ─────────────────────────────────────────────
+    readiness = await independence.check_readiness()
+    logger.info(f"System readiness: {readiness}")
+
+    # ── 11. Enter main loop ─────────────────────────────────────────────
+    if TRADING_ENABLED and trading_agent is not None:
+        await run_trading_loop(
+            trading_agent, neural_brain_service,
+            domain_expansion_controller, domain_expansion_every=20,
+        )
+    else:
+        await run_cognition_loop(
+            memory, reasoner, meta_learner, independence, dreaming,
+            neural_brain_service, action_engine, app_perception,
+            domain_expansion_controller, domain_expansion_every=20,
+        )
 
 
 if __name__ == "__main__":

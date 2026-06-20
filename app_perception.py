@@ -651,6 +651,23 @@ class AppPerception:
         self.scanner    = SystemScanner()
         self.ui_obs     = UIObserver()
         self.builder    = AppKnowledgeBuilder()
+        self._controller_wired = False
+        if self.controller is not None:
+            self._wire_controller()
+
+    def _wire_controller(self):
+        if self._controller_wired:
+            return
+        discovered = self.scanner.scan_installed_apps()
+        for app_data in discovered:
+            name = app_data.get("name", "").strip()
+            exe = app_data.get("exe_path", "")
+            if name and exe:
+                try:
+                    self.controller.register_app(name, exe)
+                except Exception:
+                    pass
+        self._controller_wired = True
 
     # ------------------------------------------------------------------ #
     #  Main learning cycle                                                 #

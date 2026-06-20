@@ -10,45 +10,39 @@ from loguru import logger
 class YFinanceAdapter:
     """Simple yfinance-based market data adapter for paper trading without API keys."""
 
-    def __init__(self):
-        self._is_crypto_symbols = {'BTC', 'ETH', 'SOL', 'ADA', 'DOGE', 'AVAX', 'LINK', 'XRP', 'BNB', 'DOT', 'LTC'}
-
     @staticmethod
     def _to_yf_symbol(symbol: str) -> str:
-        symbol = str(symbol).upper().strip().replace("/", "").replace("-", "")
-        if symbol.endswith('USDT'):
-            symbol = symbol[:-4]
-        if '/' in symbol:
-            base, quote = symbol.split('/', 1)
-            if base in YFinanceAdapter._is_crypto_symbols:
-                return f"{base}-{quote}"
-            else:
-                return f"{base}{quote}=X"
-        return symbol
+        s = str(symbol).upper().strip()
+        if '/' in s:
+            base, quote = s.split('/', 1)
+            return f"{base}-{quote}"
+        return s
 
     async def stream_quotes(self, symbols: List[str], callback: Callable[[str, Dict[str, Any]], Awaitable[None]]):
         """Generate live ticks using yfinance with realistic intraday updates."""
-        logger.info(f'YFinance stream starting for {len(symbols)} symbols')
+        logger.info(f'YFinance stream starting for {len(symbols)} symbols: {symbols}')
         
-        # Pre-fetch to get last close
+        # Pre-fetch to get last close prices
         prices = {}
         for symbol in symbols:
             try:
                 yf_symbol = self._to_yf_symbol(symbol)
-                def _fetch(s):
-                    return yf.Ticker(s).history(period="1d", interval="1m", auto_adjust=True)
-                df = await asyncio.to_thread(_fetch, yf_symbol)
+                df = yf.Ticker(yf_symbol).history(period="1d", interval="1m", auto_adjust=True, timeout=10)
                 if not df.empty:
                     prices[symbol] = float(df.iloc[-1]["Close"])
-            except Exception:
+                    logger.info(f"Pre-fetched {symbol}: {yf_symbol} -> {prices[symbol]:.2f}")
+            except Exception as e:
                 prices[symbol] = 100.0
+                logger.warning(f"Pre-fetch failed for {symbol}: {e}")
         
+        iteration = 0
         while True:
+            iteration += 1
             for symbol in symbols:
                 price = prices.get(symbol, 100.0)
-                # Generate realistic tick with small random movement
-                change = np.random.normal(0, 0.001)
-                price = max(price * (1 + change), 10.0)
+                # Small random walk movement
+                change = np.random.normal(0, 0.0015)
+                price = max(price * (1 + change), prices.get(symbol, 100.0) * 0.7)
                 prices[symbol] = price
 
                 tick = {
@@ -60,7 +54,12 @@ class YFinanceAdapter:
                     'volume': float(np.random.randint(1000, 10000)),
                     'timestamp': datetime.utcnow().isoformat(),
                 }
-                await callback(symbol, tick)
+                try:
+                    await callback(symbol, tick)
+                except Exception as e:
+                    logger.error(f"Callback error for {symbol}: {e}")
+            
+            logger.debug(f"YFinance stream tick {iteration} for {len(symbols)} symbols")
             await asyncio.sleep(2)
 
     async def get_live_bars(self, symbol: str, timeframe: str = '1Min', limit: int = 200) -> List[Dict[str, Any]]:

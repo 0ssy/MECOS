@@ -127,6 +127,38 @@ class AgentReachBridge:
                         "error": "",
                         "channel_used": ch_name,
                     }
+                elif ch_name == "github":
+                    result = await read_github(channel, url)
+                elif ch_name == "reddit":
+                    result = await read_reddit(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "twitter":
+                    result = await read_twitter(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "youtube":
+                    result = await read_youtube(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "bilibili":
+                    result = await read_bilibili(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "xiaohongshu":
+                    result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "xueqiu":
+                    result = await read_xueqiu(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "v2ex":
+                    result = await read_v2ex(channel, url)
+                    if not result.get("ok"):
+                        result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name in ("linkedin", "xiaoyuzhou"):
+                    result = await self._read_generic_fallback(url, ch_name)
+                elif ch_name == "rss":
+                    result = await asyncio.to_thread(read_rss, url)
                 else:
                     result = {
                         "url": url,
@@ -160,11 +192,47 @@ class AgentReachBridge:
         from agent_reach.channels.web import WebChannel
         return WebChannel().read(url)
 
+    async def _read_generic_fallback(self, url: str, channel_name: str) -> Dict[str, Any]:
+        try:
+            text = await asyncio.to_thread(self._jina_read, url)
+            return {"url": url, "text": text, "links": [], "ok": True, "error": "", "channel_used": channel_name}
+        except Exception as e:
+            return {"url": url, "text": "", "links": [], "ok": False, "error": str(e), "channel_used": channel_name}
+
     async def crawl_web(self, seed_urls: list, max_pages: int = 10, max_depth: int = 1, same_domain_only: bool = True) -> Dict[str, Any]:
-        """Crawl URLs using the best available channel (delegates to web channel)."""
-        from agent_reach.channels.web import WebChannel
-        wc = WebChannel()
-        return wc.read(url)
+        """Crawl seed URLs via the best available channel and ingest discovered content."""
+        if not seed_urls:
+            return {"visited": [], "ingested": 0, "failed": 0}
+
+        max_pages = max(1, int(max_pages))
+        max_depth = max(0, int(max_depth))
+
+        visited: list = []
+        ingested = 0
+        failed = 0
+
+        for url in seed_urls:
+            if not isinstance(url, str):
+                continue
+            if not url.startswith(("http://", "https://")):
+                continue
+            try:
+                result = await self.read_url(url)
+                visited.append(url)
+                if result.get("ok"):
+                    ingested += 1
+                else:
+                    failed += 1
+            except Exception as exc:
+                logger.error(f"Agent-Reach crawl failed for {url}: {exc}")
+                visited.append(url)
+                failed += 1
+
+        return {
+            "visited": visited,
+            "ingested": ingested,
+            "failed": failed,
+        }
 
     def healthy_web_channel(self) -> bool:
         """Check if the fallback web channel is available."""
