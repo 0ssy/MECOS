@@ -219,6 +219,11 @@ async def main():
     # ── 4. Tool orchestration + ActionEngine ────────────────────────────
     tool_orchestrator = ToolOrchestrator(memory_system=memory)
     action_engine = ActionExecutionEngine(tool_orchestrator, memory)
+    
+    # ── MCP tool registration ─────────────────────────────────────
+    if os.getenv("MECOS_ENABLE_MCP", "false").strip().lower() == "true":
+        asyncio.create_task(tool_orchestrator.mcp_client_register_all())
+    
     logger.info("ToolOrchestrator + ActionEngine ready: {} tools", len(tool_orchestrator.registry.list_tools()))
 
     # ── 5. Reasoner (with full intelligence) ────────────────────────────

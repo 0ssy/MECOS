@@ -1,0 +1,38 @@
+{
+  "sqlite": {
+    "description": "Structured data storage for app schemas and logs",
+    "command": ["python", "-m", "mcp_server_sqlite"],
+    "env": {},
+    "enabled": true
+  },
+  "memory": {
+    "description": "Persistent vector storage across sessions",
+    "command": ["python", "-m", "mcp_server_memory"],
+    "env": {},
+    "enabled": true
+  },
+  "sequential-thinking": {
+    "description": "Enhanced reasoning chains for complex problems",
+    "command": ["python", "-m", "mcp_server_sequential_thinking"],
+    "env": {},
+    "enabled": true
+  },
+  "filesystem": {
+    "description": "Enhanced file operations",
+    "command": ["npx", "-y", "mcp-filesystem"],
+    "env": {},
+    "enabled": true
+  },
+  "time": {
+    "description": "Timezone-aware scheduling and time operations",
+    "command": ["npx", "-y", "mcp-time"],
+    "env": {},
+    "enabled": true
+  },
+  "fetch": {
+    "description": "Web content extraction",
+    "command": ["npx", "-y", "mcp-fetch"],
+    "env": {},
+    "enabled": true
+  }
+}

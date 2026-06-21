@@ -16,6 +16,7 @@ from file_operations import FileOperations
 from app_controller import AppController
 from browser_automation import BrowserAutomation
 from agent_reach_bridge import get_bridge
+from mcp_client import MCPClient
 
 
 class ToolOrchestrator:
@@ -31,6 +32,7 @@ class ToolOrchestrator:
         self.app_controller = AppController()
         self.browser_automation = BrowserAutomation()
         self.web_perception = None
+        self.mcp_client = MCPClient(self.registry)
 
         self._register_all_tools()
         self._register_browser_tools()
@@ -509,3 +511,13 @@ class ToolOrchestrator:
         for cat, names in sorted(cats.items()):
             lines.append(f"  [{cat}]: {', '.join(names)}")
         return "\n".join(lines)
+
+    async def mcp_client_register_all(self) -> int:
+        """Register all enabled MCP servers."""
+        total = 0
+        for server_name, config in self.mcp_client._configs.items():
+            if config.get("enabled", False):
+                count = await self.mcp_client.register_server_tools(server_name)
+                total += count
+        logger.info(f"MCP registration complete: {total} tools registered")
+        return total
