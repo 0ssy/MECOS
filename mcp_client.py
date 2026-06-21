@@ -21,49 +21,31 @@ def get_recommended_mcp_servers() -> Dict[str, Dict[str, Any]]:
             "description": "Repository operations, issue management, PR creation",
             "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
             "env": {"GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"},
-            "enabled": True,
+            "enabled": False
         },
         "sqlite": {
             "description": "Structured data storage for app schemas and logs",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-sqlite", "--db-path", "data/mecos.db"],
+            "command": ["python", "-m", "mecos.mcp_sqlite"],
             "env": {},
-            "enabled": True,
-        },
-        "brave-search": {
-            "description": "Web search via Brave API",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
-            "env": {"BRAVE_API_KEY": "${BRAVE_API_KEY}"},
-            "enabled": True,
+            "enabled": True
         },
         "memory": {
             "description": "Persistent vector storage across sessions",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-memory"],
+            "command": ["python", "-m", "mecos.mcp_memory"],
             "env": {},
-            "enabled": True,
+            "enabled": True
         },
         "sequential-thinking": {
             "description": "Enhanced reasoning chains for complex problems",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+            "command": ["python", "-m", "mecos.mcp_sequential"],
             "env": {},
-            "enabled": True,
+            "enabled": True
         },
-        "filesystem": {
-            "description": "Enhanced file operations",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "--root-dir", "."],
+        "chrome-devtools": {
+            "description": "Chrome DevTools for browser automation",
+            "command": ["npx", "-y", "chrome-devtools-mcp"],
             "env": {},
-            "enabled": True,
-        },
-        "time": {
-            "description": "Timezone-aware scheduling and time operations",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-time"],
-            "env": {},
-            "enabled": True,
-        },
-        "fetch": {
-            "description": "Web content extraction",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-fetch"],
-            "env": {},
-            "enabled": True,
+            "enabled": True
         },
     }
 
@@ -104,12 +86,12 @@ class MCPClient:
 
         try:
             cmd = config["command"].copy()
-            # Resolve env variables
-            env = {}
+            env = {**subprocess.os.environ}
             for key, value in config.get("env", {}).items():
                 if value.startswith("${") and value.endswith("}"):
                     env_key = value[2:-1]
-                    env[key] = Path.cwd().parent.parent.parent / env_key  # placeholder
+                    import os
+                    env[key] = os.environ.get(env_key, "")
                 else:
                     env[key] = value
             
@@ -118,7 +100,7 @@ class MCPClient:
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                env={**subprocess.os.environ, **env},
+                env=env,
             )
             self._processes[server_name] = proc
             logger.info(f"Started MCP server: {server_name}")
@@ -129,16 +111,12 @@ class MCPClient:
 
     async def discover_tools(self, server_name: str) -> List[str]:
         """Discover tools available from an MCP server."""
-        # For simulation (actual MCP uses JSON-RPC)
         known_tools = {
             "github": ["github_create_repo", "github_create_issue", "github_list_issues", "github_create_pull_request"],
             "sqlite": ["sqlite_query", "sqlite_execute", "sqlite_tables"],
-            "brave-search": ["brave_search", "brave_image_search"],
             "memory": ["memory_store", "memory_retrieve", "memory_search"],
             "sequential-thinking": ["sequential_think", "think_step"],
-            "filesystem": ["fs_read", "fs_write", "fs_list", "fs_search"],
-            "time": ["time_now", "time_in_timezone", "time_format"],
-            "fetch": ["fetch_url", "fetch_extract_text"],
+            "chrome-devtools": ["devtools_connect", "devtools_navigate", "devtools_screenshot", "devtools_console"],
         }
         return known_tools.get(server_name, [])
 
@@ -146,7 +124,6 @@ class MCPClient:
         """Register all tools from an MCP server."""
         config = self._configs.get(server_name, {})
         
-        # Try to start actual MCP server, fallback to simulation
         try:
             if not await self.start_server(server_name):
                 logger.warning(f"MCP server {server_name} not available, using simulated tools")
@@ -157,14 +134,11 @@ class MCPClient:
         from tool_registry import ToolSpec, ToolPermission
         
         for tool_name in tools:
-            # Determine permissions based on tool category
             perms = ToolPermission()
-            if server_name in ("github",):
+            if server_name in ("github", "chrome-devtools", "fetch"):
                 perms.can_access_network = True
-            elif server_name in ("sqlite",):
+            elif server_name in ("sqlite", "filesystem"):
                 perms.can_write_files = True
-            elif server_name in ("filesystem", "fetch", "time", "brave-search"):
-                perms.can_access_network = True
             elif server_name in ("memory", "sequential-thinking"):
                 perms.can_execute_code = True
             
@@ -192,7 +166,22 @@ class MCPClient:
 
     async def call_tool(self, server_name: str, tool_name: str, args: dict) -> dict:
         """Execute a tool on an MCP server."""
-        # Placeholder - actual implementation uses JSON-RPC over stdin/stdout
+        proc = self._processes.get(server_name)
+        if proc and proc.poll() is None:
+            try:
+                request = {
+                    "id": 1,
+                    "method": "callTool",
+                    "params": {"name": tool_name, "arguments": args}
+                }
+                proc.stdin.write((json.dumps(request) + "\n").encode())
+                proc.stdin.flush()
+                response = proc.stdout.readline().decode()
+                return {"result": json.loads(response)}
+            except Exception as e:
+                logger.error(f"MCP call failed: {e}")
+        
+        # Fallback simulation
         return {"result": {"status": "mcp_simulated", "tool": f"{server_name}/{tool_name}"}}
 
     def stop_all(self):
@@ -203,3 +192,4 @@ class MCPClient:
                 logger.info(f"Stopped MCP server: {name}")
             except Exception:
                 pass
+        self._processes.clear()
