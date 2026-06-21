@@ -1,0 +1,20 @@
+{
+  "cycle": 30,
+  "n": 2,
+  "domains": [
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory and Docker containerization",
+      "reason": "Cross-domain: CI/CD pipelines theory theory theory theory \u00d7 Docker containerization",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

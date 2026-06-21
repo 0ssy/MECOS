@@ -1,0 +1,29 @@
+{
+  "date": "2026-05-30",
+  "performance": {
+    "starting_equity": 10000.0,
+    "ending_equity": 10000.0,
+    "daily_pnl": 0.0,
+    "daily_return": 0.0
+  },
+  "metrics": {
+    "trades_count": 0,
+    "wins": 0,
+    "losses": 0,
+    "win_rate": 0.0,
+    "avg_win": 0.0,
+    "avg_loss": 0.0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "sharpe_ratio": 0.0,
+    "max_drawdown": 0.0
+  },
+  "progress": {
+    "goal_equity": 60000.0,
+    "current_equity": 10000.0,
+    "progress_percent": 0.0
+  },
+  "trades": [],
+  "discoveries": [],
+  "generated_at": "2026-05-30T17:13:12.523583"
+}

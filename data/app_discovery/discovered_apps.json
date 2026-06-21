@@ -1,0 +1,788 @@
+{
+  "timestamp": "2026-05-31T16:08:22.460087",
+  "system": "Windows",
+  "apps": {
+    "AMD": {
+      "name": "AMD",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\AMD",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.441240"
+    },
+    "Android": {
+      "name": "Android",
+      "path": "C:\\Program Files (x86)\\Android",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435278"
+    },
+    "Apache NetBeans": {
+      "name": "Apache NetBeans",
+      "path": "C:\\Program Files\\Apache NetBeans",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.426307"
+    },
+    "Application Verifier": {
+      "name": "Application Verifier",
+      "path": "C:\\Program Files (x86)\\Application Verifier",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435377"
+    },
+    "BCUninstaller": {
+      "name": "BCUninstaller",
+      "path": "C:\\Program Files\\BCUninstaller",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.426506"
+    },
+    "Blender Foundation": {
+      "name": "Blender Foundation",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Blender Foundation",
+      "type": "design",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.442452"
+    },
+    "Cisco Packet Tracer 9.0.0": {
+      "name": "Cisco Packet Tracer 9.0.0",
+      "path": "C:\\Program Files\\Cisco Packet Tracer 9.0.0",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.426972"
+    },
+    "Common Files": {
+      "name": "Common Files",
+      "path": "C:\\Program Files (x86)\\Common Files",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435461"
+    },
+    "Docker": {
+      "name": "Docker",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Docker",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.443831"
+    },
+    "dotnet": {
+      "name": "dotnet",
+      "path": "C:\\Program Files (x86)\\dotnet",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435688"
+    },
+    "EA": {
+      "name": "EA",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\EA",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.444494"
+    },
+    "EA Games": {
+      "name": "EA Games",
+      "path": "C:\\Program Files\\EA Games",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.427927"
+    },
+    "Eclipse Adoptium": {
+      "name": "Eclipse Adoptium",
+      "path": "C:\\Program Files\\Eclipse Adoptium",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428025"
+    },
+    "Electronic Arts": {
+      "name": "Electronic Arts",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Electronic Arts",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.445263"
+    },
+    "Epic Games": {
+      "name": "Epic Games",
+      "path": "C:\\Program Files (x86)\\Epic Games",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435846"
+    },
+    "FinceptTerminal": {
+      "name": "FinceptTerminal",
+      "path": "C:\\Program Files\\FinceptTerminal",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428250"
+    },
+    "Git": {
+      "name": "Git",
+      "path": "C:\\Program Files\\Git",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428321"
+    },
+    "Google": {
+      "name": "Google",
+      "path": "C:\\Program Files (x86)\\Google",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435963"
+    },
+    "HP": {
+      "name": "HP",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\HP",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.452220"
+    },
+    "HPCommRecovery": {
+      "name": "HPCommRecovery",
+      "path": "C:\\Program Files\\HPCommRecovery",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428517"
+    },
+    "HPPrintScanDoctor": {
+      "name": "HPPrintScanDoctor",
+      "path": "C:\\Program Files\\HPPrintScanDoctor",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428592"
+    },
+    "IIS": {
+      "name": "IIS",
+      "path": "C:\\Program Files (x86)\\IIS",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.436394"
+    },
+    "Internet Explorer": {
+      "name": "Internet Explorer",
+      "path": "C:\\Program Files (x86)\\Internet Explorer",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.436891"
+    },
+    "Krita (x64)": {
+      "name": "Krita (x64)",
+      "path": "C:\\Program Files\\Krita (x64)",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428881"
+    },
+    "McAfee": {
+      "name": "McAfee",
+      "path": "C:\\Program Files\\McAfee",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.428948"
+    },
+    "Microsoft": {
+      "name": "Microsoft",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Microsoft",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.454842"
+    },
+    "Microsoft GameInput": {
+      "name": "Microsoft GameInput",
+      "path": "C:\\Program Files\\Microsoft GameInput",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429101"
+    },
+    "Microsoft MPI": {
+      "name": "Microsoft MPI",
+      "path": "C:\\Program Files\\Microsoft MPI",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429163"
+    },
+    "Microsoft Office": {
+      "name": "Microsoft Office",
+      "path": "C:\\Program Files\\Microsoft Office",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429227"
+    },
+    "Microsoft Office 15": {
+      "name": "Microsoft Office 15",
+      "path": "C:\\Program Files\\Microsoft Office 15",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429600"
+    },
+    "Microsoft OneDrive": {
+      "name": "Microsoft OneDrive",
+      "path": "C:\\Program Files\\Microsoft OneDrive",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429705"
+    },
+    "Microsoft SQL Server": {
+      "name": "Microsoft SQL Server",
+      "path": "C:\\Program Files (x86)\\Microsoft SQL Server",
+      "type": "data",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437135"
+    },
+    "Microsoft SQL Server Management Studio 22": {
+      "name": "Microsoft SQL Server Management Studio 22",
+      "path": "C:\\Program Files\\Microsoft SQL Server Management Studio 22",
+      "type": "data",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.429860"
+    },
+    "Microsoft Visual Studio 10.0": {
+      "name": "Microsoft Visual Studio 10.0",
+      "path": "C:\\Program Files\\Microsoft Visual Studio 10.0",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.430018"
+    },
+    "Microsoft.NET": {
+      "name": "Microsoft.NET",
+      "path": "C:\\Program Files (x86)\\Microsoft.NET",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437601"
+    },
+    "ModifiableWindowsApps": {
+      "name": "ModifiableWindowsApps",
+      "path": "C:\\Program Files\\ModifiableWindowsApps",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.430509"
+    },
+    "MSBuild": {
+      "name": "MSBuild",
+      "path": "C:\\Program Files (x86)\\MSBuild",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437750"
+    },
+    "Nefarius Software Solutions": {
+      "name": "Nefarius Software Solutions",
+      "path": "C:\\Program Files\\Nefarius Software Solutions",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.430843"
+    },
+    "nodejs": {
+      "name": "nodejs",
+      "path": "C:\\Program Files\\nodejs",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.430954"
+    },
+    "Npcap": {
+      "name": "Npcap",
+      "path": "C:\\Program Files\\Npcap",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.431096"
+    },
+    "Oracle": {
+      "name": "Oracle",
+      "path": "C:\\Program Files\\Oracle",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.431433"
+    },
+    "PC Remote Receiver": {
+      "name": "PC Remote Receiver",
+      "path": "C:\\Program Files\\PC Remote Receiver",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.431549"
+    },
+    "PostgreSQL": {
+      "name": "PostgreSQL",
+      "path": "C:\\Program Files\\PostgreSQL",
+      "type": "data",
+      "capabilities": [
+        {
+          "name": "PostgreSQL Python API",
+          "description": "Database operations",
+          "api_type": "python",
+          "endpoints": [
+            "query",
+            "insert",
+            "update",
+            "delete"
+          ]
+        }
+      ],
+      "discovered_at": "2026-05-31T16:08:22.431637"
+    },
+    "PowerShell": {
+      "name": "PowerShell",
+      "path": "C:\\Program Files\\PowerShell",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.431724"
+    },
+    "QuickCPU": {
+      "name": "QuickCPU",
+      "path": "C:\\Program Files\\QuickCPU",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.431829"
+    },
+    "Reference Assemblies": {
+      "name": "Reference Assemblies",
+      "path": "C:\\Program Files (x86)\\Reference Assemblies",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438710"
+    },
+    "SmartFusionLabs": {
+      "name": "SmartFusionLabs",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\SmartFusionLabs",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.457555"
+    },
+    "TAP-Windows": {
+      "name": "TAP-Windows",
+      "path": "C:\\Program Files\\TAP-Windows",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.432361"
+    },
+    "Tesseract-OCR": {
+      "name": "Tesseract-OCR",
+      "path": "C:\\Program Files\\Tesseract-OCR",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.432439"
+    },
+    "tixati": {
+      "name": "tixati",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\tixati",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.458307"
+    },
+    "Uninstall Information": {
+      "name": "Uninstall Information",
+      "path": "C:\\Program Files\\Uninstall Information",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.433267"
+    },
+    "USBPcap": {
+      "name": "USBPcap",
+      "path": "C:\\Program Files\\USBPcap",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.433379"
+    },
+    "Viddly": {
+      "name": "Viddly",
+      "path": "C:\\Program Files\\Viddly",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.433475"
+    },
+    "Windows Defender": {
+      "name": "Windows Defender",
+      "path": "C:\\Program Files (x86)\\Windows Defender",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438864"
+    },
+    "Windows Mail": {
+      "name": "Windows Mail",
+      "path": "C:\\Program Files (x86)\\Windows Mail",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.439235"
+    },
+    "Windows Media Player": {
+      "name": "Windows Media Player",
+      "path": "C:\\Program Files (x86)\\Windows Media Player",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.439323"
+    },
+    "Windows NT": {
+      "name": "Windows NT",
+      "path": "C:\\Program Files (x86)\\Windows NT",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.439621"
+    },
+    "Windows Photo Viewer": {
+      "name": "Windows Photo Viewer",
+      "path": "C:\\Program Files (x86)\\Windows Photo Viewer",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.439708"
+    },
+    "Windows Sidebar": {
+      "name": "Windows Sidebar",
+      "path": "C:\\Program Files (x86)\\Windows Sidebar",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.440004"
+    },
+    "WindowsApps": {
+      "name": "WindowsApps",
+      "path": "C:\\Program Files\\WindowsApps",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.434570"
+    },
+    "WindowsPowerShell": {
+      "name": "WindowsPowerShell",
+      "path": "C:\\Program Files (x86)\\WindowsPowerShell",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.440303"
+    },
+    "WinRAR": {
+      "name": "WinRAR",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\WinRAR",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.459769"
+    },
+    "Wireshark": {
+      "name": "Wireshark",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Wireshark",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.460055"
+    },
+    "WSL": {
+      "name": "WSL",
+      "path": "C:\\Program Files\\WSL",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.434854"
+    },
+    "Dev-Cpp": {
+      "name": "Dev-Cpp",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Dev-Cpp",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.443219"
+    },
+    "EasyAntiCheat_EOS": {
+      "name": "EasyAntiCheat_EOS",
+      "path": "C:\\Program Files (x86)\\EasyAntiCheat_EOS",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.435780"
+    },
+    "InstallShield Installation Information": {
+      "name": "InstallShield Installation Information",
+      "path": "C:\\Program Files (x86)\\InstallShield Installation Information",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.436760"
+    },
+    "Microsoft SDKs": {
+      "name": "Microsoft SDKs",
+      "path": "C:\\Program Files (x86)\\Microsoft SDKs",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437064"
+    },
+    "Microsoft Visual Studio": {
+      "name": "Microsoft Visual Studio",
+      "path": "C:\\Program Files (x86)\\Microsoft Visual Studio",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437198"
+    },
+    "NuGet": {
+      "name": "NuGet",
+      "path": "C:\\Program Files (x86)\\NuGet",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.437864"
+    },
+    "Online Services": {
+      "name": "Online Services",
+      "path": "C:\\Program Files (x86)\\Online Services",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438232"
+    },
+    "Realtek": {
+      "name": "Realtek",
+      "path": "C:\\Program Files (x86)\\Realtek",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438579"
+    },
+    "Steam": {
+      "name": "Steam",
+      "path": "C:\\Program Files (x86)\\Steam",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438783"
+    },
+    "Windows Kits": {
+      "name": "Windows Kits",
+      "path": "C:\\Program Files (x86)\\Windows Kits",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.438930"
+    },
+    "Workflow Manager Tools": {
+      "name": "Workflow Manager Tools",
+      "path": "C:\\Program Files (x86)\\Workflow Manager Tools",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.440404"
+    },
+    "Adobe": {
+      "name": "Adobe",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Adobe",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.440914"
+    },
+    "Antigravity": {
+      "name": "Antigravity",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Antigravity",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.441535"
+    },
+    "balenaEtcher": {
+      "name": "balenaEtcher",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\balenaEtcher",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.441828"
+    },
+    "bin": {
+      "name": "bin",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\bin",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.442148"
+    },
+    "Code": {
+      "name": "Code",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Code",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.442527"
+    },
+    "create-next-app-nodejs": {
+      "name": "create-next-app-nodejs",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\create-next-app-nodejs",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.442821"
+    },
+    "Cursor": {
+      "name": "Cursor",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Cursor",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.442918"
+    },
+    "df_launcher": {
+      "name": "df_launcher",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\df_launcher",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.443527"
+    },
+    "Docker Desktop": {
+      "name": "Docker Desktop",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Docker Desktop",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.444193"
+    },
+    "EasyAntiCheat": {
+      "name": "EasyAntiCheat",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\EasyAntiCheat",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.444827"
+    },
+    "FLT": {
+      "name": "FLT",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\FLT",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.447021"
+    },
+    "gcloud": {
+      "name": "gcloud",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\gcloud",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.447190"
+    },
+    "GitHub Desktop": {
+      "name": "GitHub Desktop",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\GitHub Desktop",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.451504"
+    },
+    "Goldberg SocialClub Emu Saves": {
+      "name": "Goldberg SocialClub Emu Saves",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Goldberg SocialClub Emu Saves",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.451904"
+    },
+    "hpqLog": {
+      "name": "hpqLog",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\hpqLog",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.452589"
+    },
+    "Insomniac Games": {
+      "name": "Insomniac Games",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Insomniac Games",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.452879"
+    },
+    "java": {
+      "name": "java",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\java",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.453223"
+    },
+    "JetBrains": {
+      "name": "JetBrains",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\JetBrains",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.453637"
+    },
+    "krita": {
+      "name": "krita",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\krita",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.453966"
+    },
+    "Medal": {
+      "name": "Medal",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Medal",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.454315"
+    },
+    "MetaQuotes": {
+      "name": "MetaQuotes",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\MetaQuotes",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.454693"
+    },
+    "MongoDB Compass": {
+      "name": "MongoDB Compass",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\MongoDB Compass",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.455245"
+    },
+    "NetBeans": {
+      "name": "NetBeans",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\NetBeans",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.455609"
+    },
+    "nextjs-nodejs": {
+      "name": "nextjs-nodejs",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\nextjs-nodejs",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.455972"
+    },
+    "npm": {
+      "name": "npm",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\npm",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.456064"
+    },
+    "NVE": {
+      "name": "NVE",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\NVE",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.456380"
+    },
+    "ollama app.exe": {
+      "name": "ollama app.exe",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\ollama app.exe",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.456678"
+    },
+    "PacketTracer": {
+      "name": "PacketTracer",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\PacketTracer",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.456996"
+    },
+    "silke": {
+      "name": "silke",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\silke",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.457271"
+    },
+    "sourcery": {
+      "name": "sourcery",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\sourcery",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.457675"
+    },
+    "TDM": {
+      "name": "TDM",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\TDM",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.457999"
+    },
+    "Urban Cyber Security": {
+      "name": "Urban Cyber Security",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Urban Cyber Security",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.458597"
+    },
+    "viddly": {
+      "name": "viddly",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\viddly",
+      "type": "other",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.458869"
+    },
+    "Visual Studio Setup": {
+      "name": "Visual Studio Setup",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\Visual Studio Setup",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.459155"
+    },
+    "vscode-react-native": {
+      "name": "vscode-react-native",
+      "path": "C:\\Users\\josep\\AppData\\Roaming\\vscode-react-native",
+      "type": "dev",
+      "capabilities": [],
+      "discovered_at": "2026-05-31T16:08:22.459474"
+    }
+  }
+}

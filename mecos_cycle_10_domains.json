@@ -1,0 +1,27 @@
+{
+  "cycle": 10,
+  "n": 3,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and Human anatomy organs intersection",
+      "reason": "Bridge between Computer Science fundamentals and Human anatomy organs",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced advanced CI/CD pipelines theory mathematics",
+      "reason": "Deeper exploration of hub domain: advanced advanced CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced advanced advanced advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: advanced advanced advanced advanced advanced CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

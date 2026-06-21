@@ -1,0 +1,332 @@
+{
+  "nodes": {
+    "mecos_core": {
+      "id": "mecos_core",
+      "type": "runtime",
+      "properties": {
+        "mode": "local-first"
+      }
+    },
+    "sandbox": {
+      "id": "sandbox",
+      "type": "component",
+      "properties": {
+        "purpose": "safe execution"
+      }
+    }
+  },
+  "edges": [
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    },
+    {
+      "source": "mecos_core",
+      "target": "sandbox",
+      "relation": "uses",
+      "weight": 1.0
+    }
+  ]
+}

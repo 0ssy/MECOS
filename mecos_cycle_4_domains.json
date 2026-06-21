@@ -1,0 +1,370 @@
+{
+  "cycle": 4,
+  "n": 52,
+  "domains": [
+    {
+      "name": "Stock markets equities and society",
+      "reason": "Connecting isolated domain: Stock markets equities",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Supply chain logistics and society",
+      "reason": "Connecting isolated domain: Supply chain logistics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Marine engineering ships and society",
+      "reason": "Connecting isolated domain: Marine engineering ships",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Public policy governance and society",
+      "reason": "Connecting isolated domain: Public policy governance",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Sociology society culture and society",
+      "reason": "Connecting isolated domain: Sociology society culture",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Commodities trading gold oil and society",
+      "reason": "Connecting isolated domain: Commodities trading gold oil",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Public speaking presentation and society",
+      "reason": "Connecting isolated domain: Public speaking presentation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Investment analysis valuation and society",
+      "reason": "Connecting isolated domain: Investment analysis valuation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Stock markets equities in emerging markets",
+      "reason": "Connecting isolated domain: Stock markets equities",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Supply chain logistics in emerging markets",
+      "reason": "Connecting isolated domain: Supply chain logistics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Automotive engineering vehicles and society",
+      "reason": "Connecting isolated domain: Automotive engineering vehicles",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Accounting financial statements and society",
+      "reason": "Connecting isolated domain: Accounting financial statements",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Anthropology human civilization and society",
+      "reason": "Connecting isolated domain: Anthropology human civilization",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Public policy governance in emerging markets",
+      "reason": "Connecting isolated domain: Public policy governance",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Photography composition lighting and society",
+      "reason": "Connecting isolated domain: Photography composition lighting",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Construction engineering projects and society",
+      "reason": "Connecting isolated domain: Construction engineering projects",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Startup ecosystem venture capital and society",
+      "reason": "Connecting isolated domain: Startup ecosystem venture capital",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Cognitive science thinking memory and society",
+      "reason": "Connecting isolated domain: Cognitive science thinking memory",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Sociology society culture in emerging markets",
+      "reason": "Connecting isolated domain: Sociology society culture",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Entrepreneurship startups founding and society",
+      "reason": "Connecting isolated domain: Entrepreneurship startups founding",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Political science government power and society",
+      "reason": "Connecting isolated domain: Political science government power",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Environmental engineering pollution and society",
+      "reason": "Connecting isolated domain: Environmental engineering pollution",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Graphic design visual communication and society",
+      "reason": "Connecting isolated domain: Graphic design visual communication",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Investment analysis valuation in emerging markets",
+      "reason": "Connecting isolated domain: Investment analysis valuation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Automotive engineering vehicles in emerging markets",
+      "reason": "Connecting isolated domain: Automotive engineering vehicles",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Accounting financial statements in emerging markets",
+      "reason": "Connecting isolated domain: Accounting financial statements",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Anthropology human civilization in emerging markets",
+      "reason": "Connecting isolated domain: Anthropology human civilization",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Reliability engineering failure analysis and society",
+      "reason": "Connecting isolated domain: Reliability engineering failure analysis",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Photography composition lighting in emerging markets",
+      "reason": "Connecting isolated domain: Photography composition lighting",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Entrepreneurship startups founding in emerging markets",
+      "reason": "Connecting isolated domain: Entrepreneurship startups founding",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals and Operating systems Linux Windows intersection",
+      "reason": "Bridge between Computer Science fundamentals and Operating systems Linux Windows",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "statistical arbitrage",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "alternative risk premia",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "lattice-based cryptography",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "elliptic curve cryptography",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Data structures trees graphs",
+      "reason": "Deeper exploration of hub domain: Data structures trees graphs",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer architecture CPU memory theory",
+      "reason": "Deeper exploration of hub domain: Computer architecture CPU memory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Linear algebra matrices vectors mathematics",
+      "reason": "Deeper exploration of hub domain: Linear algebra matrices vectors",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Reverse engineering software theory",
+      "reason": "Deeper exploration of hub domain: advanced Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced CI/CD pipelines mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Frontend development HTML CSS JavaScript mathematics",
+      "reason": "Deeper exploration of hub domain: Frontend development HTML CSS JavaScript",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software design patterns and DevOps practices",
+      "reason": "Cross-domain: Software design patterns \u00d7 DevOps practices",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "Computer networking and 3D modeling rendering",
+      "reason": "Cross-domain: Computer networking \u00d7 3D modeling rendering",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "Electromagnetism electricity magnetism and CI/CD pipelines theory",
+      "reason": "Cross-domain: Electromagnetism electricity magnetism \u00d7 CI/CD pipelines theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "Electronics engineering components and Object-oriented programming",
+      "reason": "Cross-domain: Electronics engineering components \u00d7 Object-oriented programming",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "quantum sensing",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "autonomous weapons systems",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "room temperature superconductors",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    }
+  ]
+}

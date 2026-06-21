@@ -1,0 +1,90 @@
+{
+  "cycle": 7,
+  "n": 12,
+  "domains": [
+    {
+      "name": "mechanism design in emerging markets and society",
+      "reason": "Connecting isolated domain: mechanism design in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "programmable matter in emerging markets in emerging markets",
+      "reason": "Connecting isolated domain: programmable matter in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "threshold signatures in emerging markets in emerging markets",
+      "reason": "Connecting isolated domain: threshold signatures in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals and Software engineering principles intersection",
+      "reason": "Bridge between Computer Science fundamentals and Software engineering principles",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines theory mathematics theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced CI/CD pipelines mathematics",
+      "reason": "Deeper exploration of hub domain: advanced advanced CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced advanced advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: advanced advanced advanced advanced CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Earth science geology and CI/CD pipelines theory",
+      "reason": "Cross-domain: Earth science geology \u00d7 CI/CD pipelines theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "CI/CD pipelines applications in advanced advanced CI/CD pipelines",
+      "reason": "Cross-domain: CI/CD pipelines \u00d7 advanced advanced CI/CD pipelines",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "advanced advanced advanced advanced CI/CD pipelines and Operating systems Linux Windows",
+      "reason": "Cross-domain: advanced advanced advanced advanced CI/CD pipelines \u00d7 Operating systems Linux Windows",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

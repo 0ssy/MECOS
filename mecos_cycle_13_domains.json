@@ -1,0 +1,34 @@
+{
+  "cycle": 13,
+  "n": 4,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and Chemistry elements compounds and society intersection",
+      "reason": "Bridge between Computer Science fundamentals and Chemistry elements compounds and society",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines theory theory mathematics theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced CI/CD pipelines theory theory theory",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced CI/CD pipelines mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: advanced advanced advanced CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

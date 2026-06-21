@@ -1,0 +1,20 @@
+{
+  "cycle": 47,
+  "n": 2,
+  "domains": [
+    {
+      "name": "Computer networking applications in CI/CD pipelines theory theory theory theory theory theory theory",
+      "reason": "Cross-domain: Computer networking \u00d7 CI/CD pipelines theory theory theory theory theory theory theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory and CI/CD pipelines and CI/CD pipelines theory theory theory theory theory",
+      "reason": "Cross-domain: CI/CD pipelines theory theory theory and CI/CD pipelines \u00d7 CI/CD pipelines theory theory theory theory theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

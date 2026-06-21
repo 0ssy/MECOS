@@ -1,0 +1,9 @@
+{
+  "Fincept Terminal": {
+    "name": "Fincept Terminal",
+    "is_learned": true,
+    "driver_path": "drivers\\fincept_terminal_driver.py",
+    "api_type": "CLI",
+    "confidence_score": 0.85
+  }
+}

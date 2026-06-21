@@ -177,6 +177,24 @@ class ToolOrchestrator:
             category="system",
         ))
 
+        # ── Office Automation ──────────────────────────────────────────
+        self.registry.register(ToolSpec(
+            name="office_write",
+            description="Write text to Microsoft Word document.",
+            func=self._office_write,
+            parameters={"text": "Text content to write", "topic": "Optional topic for essay generation"},
+            permissions=ToolPermission(can_launch_apps=True),
+            category="office",
+        ))
+        self.registry.register(ToolSpec(
+            name="office_generate_essay",
+            description="Generate and write an essay to Word.",
+            func=self._office_generate_essay,
+            parameters={"topic": "Essay topic", "pages": "Target page count"},
+            permissions=ToolPermission(can_launch_apps=True),
+            category="office",
+        ))
+
     def _register_browser_tools(self):
         self.registry.register(ToolSpec(
             name="browser_navigate",
@@ -324,6 +342,33 @@ class ToolOrchestrator:
             executable_limit=int(executable_limit),
         )
         return json.dumps(machine_map)
+
+    async def _office_write(self, text: str, topic: str = "") -> str:
+        """Write text to Word document."""
+        if not text:
+            return "No text provided"
+        try:
+            from office_automation import OfficeAutomation
+            office = OfficeAutomation()
+            result = await office.open_word()
+            if result["status"] != "ok":
+                return f"Could not open Word: {result.get('message', 'unknown error')}"
+            write_result = await office.write_to_word(text)
+            return f"Written to Word: {write_result.get('chars_written', 0)} chars"
+        except Exception as e:
+            return f"Office write error: {e}"
+
+    async def _office_generate_essay(self, topic: str, pages: int = 20) -> str:
+        """Generate and write essay to Word."""
+        try:
+            from office_automation import OfficeAutomation
+            office = OfficeAutomation()
+            result = await office.generate_and_write_essay(topic, int(pages))
+            if result["status"] == "ok":
+                return f"Essay generated: {result.get('paragraphs_written', 0)} paragraphs on '{topic}'"
+            return f"Essay generation failed: {result.get('message', 'unknown error')}"
+        except Exception as e:
+            return f"Essay generation error: {e}"
 
     async def _browser_navigate(self, url: str) -> str:
         try:

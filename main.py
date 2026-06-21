@@ -9,6 +9,7 @@ Architecture:
   → ActionExecutionEngine → ToolOrchestrator → tools
   → AppPerception + Agent-Reach perception
   → NeuralBrainService (optional)
+  → HealthMonitor + SecurityAgent + GuardianAgent for safety
 """
 
 import asyncio
@@ -16,6 +17,7 @@ import os
 from loguru import logger
 
 from config import settings
+from validate_config import validate_on_startup
 from memory_system import MemorySystem
 from reasoner import Reasoner
 from meta_learner import MetaLearner
@@ -28,6 +30,9 @@ from tool_orchestrator import ToolOrchestrator
 from action_engine import ActionExecutionEngine
 from app_perception import AppPerception
 from app_controller import AppController
+from health_monitor import HealthMonitor
+from security_agent import SecurityAgent
+from guardian_agent import GuardianAgent
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
 
@@ -189,6 +194,9 @@ async def run_trading_loop(
 
 async def main():
     logger.info(f"Starting MECOS {settings.VERSION} (trading={'enabled' if TRADING_ENABLED else 'disabled'})")
+    
+    # Run config validation
+    validate_on_startup()
 
     # ── 1. Core memory ──────────────────────────────────────────────────
     memory = MemorySystem()
@@ -253,7 +261,15 @@ async def main():
     # ── 9. Dreaming ─────────────────────────────────────────────────────
     dreaming = DreamingEngine(memory)
 
-    # ── 10. Readiness check ─────────────────────────────────────────────
+    # ── 10. Safety agents ─────────────────────────────────────────────
+    health_monitor = HealthMonitor(memory)
+    security_agent = SecurityAgent(memory, tool_orchestrator.registry)
+    guardian = GuardianAgent(memory, health_monitor)
+
+    # Start health monitoring
+    asyncio.create_task(health_monitor.periodic_check(interval=120))
+
+    # ── 11. Readiness check ─────────────────────────────────────────────
     readiness = await independence.check_readiness()
     logger.info(f"System readiness: {readiness}")
 

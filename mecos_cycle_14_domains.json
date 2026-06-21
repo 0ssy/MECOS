@@ -1,0 +1,27 @@
+{
+  "cycle": 14,
+  "n": 3,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and predictive coding intersection",
+      "reason": "Bridge between Computer Science fundamentals and predictive coding",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

@@ -7,6 +7,8 @@ Full implementation with:
   - Risk management (position sizing, daily loss limit, max positions)
   - Paper-trading kill-switch (TRADING_ENABLED must be True to place real orders)
   - Performance metrics tracked for IndependenceManager governance gates
+  - Market hours awareness for equity trading
+  - Trailing stop-loss and take-profit support
 """
 import asyncio
 import time
@@ -276,11 +278,70 @@ def generate_signal(symbol: str, exchange: str, prices: pd.Series) -> TradeSigna
 
 # ── Risk manager ──────────────────────────────────────────────────────────────
 
+class PositionManager:
+    """Manages open positions with trailing stops and take-profit levels."""
+
+    def __init__(self):
+        self.positions: Dict[str, Dict[str, Any]] = {}
+        self.trailing_stop_pct = 0.05  # 5% trailing stop
+        self.take_profit_pct = 0.10    # 10% take profit
+
+    def add_position(self, symbol: str, entry_price: float, notional: float):
+        """Add a new position with tracking."""
+        self.positions[symbol] = {
+            "entry_price": entry_price,
+            "notional": notional,
+            "highest_price": entry_price,
+            "stop_loss": entry_price * (1 - self.trailing_stop_pct),
+            "take_profit": entry_price * (1 + self.take_profit_pct),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+    def update_high_water_mark(self, symbol: str, current_price: float) -> Optional[str]:
+        """Update trailing stop based on price movement. Returns 'exit' if stop hit."""
+        if symbol not in self.positions:
+            return None
+
+        pos = self.positions[symbol]
+        pos["highest_price"] = max(pos["highest_price"], current_price)
+        pos["stop_loss"] = max(pos["stop_loss"], pos["highest_price"] * (1 - self.trailing_stop_pct))
+
+        if current_price <= pos["stop_loss"]:
+            return "stop_loss"
+        if current_price >= pos["take_profit"]:
+            return "take_profit"
+        return None
+
+    def close_position(self, symbol: str) -> Optional[Dict]:
+        """Close a position and return final details."""
+        return self.positions.pop(symbol, None)
+
+
 class RiskManager:
     def __init__(self):
         self.daily_pnl: float = 0.0
         self.open_positions: Dict[str, float] = {}  # symbol -> notional USD
         self._day_start = datetime.now(timezone.utc).date()
+        self.position_manager = PositionManager()
+
+    @staticmethod
+    def is_equity_market_open() -> bool:
+        """Check if US equity markets are currently open (Eastern time)."""
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("US/Eastern"))
+        weekday = now.weekday()
+        hour = now.hour
+
+        # Weekend
+        if weekday >= 5:
+            return False
+        # Before 9:30 AM or after 4:00 PM
+        if hour < 9 or hour >= 16:
+            return False
+        # 9:30-4:00 window
+        if hour == 9 and now.minute < 30:
+            return False
+        return True
 
     def _reset_if_new_day(self):
         today = datetime.now(timezone.utc).date()
@@ -617,5 +678,47 @@ class TradingAgent:
             "news_updates": self._metrics["news_updates"],
             "daily_pnl": self.risk.daily_pnl,
             "open_positions": dict(self.risk.open_positions),
+            "position_count": len(self.risk.position_manager.positions),
+            "market_hours": self.risk.is_equity_market_open(),
         }
+
+    def ingest_trading_performance(self, metrics: Dict) -> None:
+        """Ingest metrics from meta-learner or other sources."""
+        self._metrics["analyses"] = metrics.get("analyses", self._metrics["analyses"])
+        self._metrics["actionable_signals"] = metrics.get("actionable_signals", self._metrics["actionable_signals"])
+        self._metrics["orders_placed"] = metrics.get("orders_placed", self._metrics["orders_placed"])
+
+
+class SentimentAnalyzer:
+    """Analyzes sentiment from headlines and social indicators."""
+
+    NEGATIVE_WORDS = {"crash", "plunge", "collapse", "downgrade", "sell", "bear", "loss", "fail"}
+    POSITIVE_WORDS = {"surge", "jump", "upgrade", "buy", "bull", "gain", "success", "beat", "exceed"}
+
+    @classmethod
+    def analyze(cls, text: str) -> float:
+        """Return sentiment score -1 (bearish) to +1 (bullish)."""
+        text_lower = text.lower()
+        neg_count = sum(1 for w in cls.NEGATIVE_WORDS if w in text_lower)
+        pos_count = sum(1 for w in cls.POSITIVE_WORDS if w in text_lower)
+
+        if neg_count == 0 and pos_count == 0:
+            return 0.0
+        return (pos_count - neg_count) / (pos_count + neg_count)
+
+    @classmethod
+    def adjust_signal(cls, signal: TradeSignal, sentiment: float) -> TradeSignal:
+        """Adjust signal confidence based on sentiment."""
+        adjusted_conf = max(0.0, min(1.0, signal.confidence + sentiment * 0.1))
+        return TradeSignal(
+            symbol=signal.symbol,
+            exchange=signal.exchange,
+            side=signal.side,
+            confidence=adjusted_conf,
+            reason=f"{signal.reason} | sentiment_adj={sentiment:+.2f}",
+            price=signal.price,
+            rsi=signal.rsi,
+            macd=signal.macd,
+            bb_position=signal.bb_position,
+        )
 

@@ -1,0 +1,1049 @@
+{
+  "cycle": 2,
+  "n": 149,
+  "domains": [
+    {
+      "name": "Relational databases advanced",
+      "reason": "Coverage only 4% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Functional programming advanced",
+      "reason": "Coverage only 8% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Software design patterns advanced",
+      "reason": "Coverage only 16% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Object-oriented programming advanced",
+      "reason": "Coverage only 16% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Algorithms sorting searching advanced",
+      "reason": "Coverage only 26% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Data structures trees graphs advanced",
+      "reason": "Coverage only 12% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Computer Science fundamentals advanced",
+      "reason": "Coverage only 8% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Operating systems Linux Windows advanced",
+      "reason": "Coverage only 18% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Software engineering principles advanced",
+      "reason": "Coverage only 12% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Computer architecture CPU memory advanced",
+      "reason": "Coverage only 12% \u2014 needs reinforcement",
+      "category": "reinforcement",
+      "priority": 1,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Set theory logic and society",
+      "reason": "Connecting isolated domain: Set theory logic",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Robotics automation and society",
+      "reason": "Connecting isolated domain: Robotics automation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Optics light lenses and society",
+      "reason": "Connecting isolated domain: Optics light lenses",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Discrete mathematics and society",
+      "reason": "Connecting isolated domain: Discrete mathematics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Geometry shapes space and society",
+      "reason": "Connecting isolated domain: Geometry shapes space",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Graph theory networks and society",
+      "reason": "Connecting isolated domain: Graph theory networks",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Financial mathematics and society",
+      "reason": "Connecting isolated domain: Financial mathematics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Acoustics sound waves and society",
+      "reason": "Connecting isolated domain: Acoustics sound waves",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Astrophysics galaxies and society",
+      "reason": "Connecting isolated domain: Astrophysics galaxies",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Astronomy stars planets and society",
+      "reason": "Connecting isolated domain: Astronomy stars planets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Statistics data analysis and society",
+      "reason": "Connecting isolated domain: Statistics data analysis",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Set theory logic in emerging markets",
+      "reason": "Connecting isolated domain: Set theory logic",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Microservices architecture and society",
+      "reason": "Connecting isolated domain: Microservices architecture",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Robotics automation in emerging markets",
+      "reason": "Connecting isolated domain: Robotics automation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Optics light lenses in emerging markets",
+      "reason": "Connecting isolated domain: Optics light lenses",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Algorithms sorting searching and society",
+      "reason": "Connecting isolated domain: Algorithms sorting searching",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Embedded systems programming and society",
+      "reason": "Connecting isolated domain: Embedded systems programming",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Discrete mathematics in emerging markets",
+      "reason": "Connecting isolated domain: Discrete mathematics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Chemistry elements compounds and society",
+      "reason": "Connecting isolated domain: Chemistry elements compounds",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Cybersecurity network defense and society",
+      "reason": "Connecting isolated domain: Cybersecurity network defense",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Geometry shapes space in emerging markets",
+      "reason": "Connecting isolated domain: Geometry shapes space",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Numerical methods computation and society",
+      "reason": "Connecting isolated domain: Numerical methods computation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Acoustics sound waves in emerging markets",
+      "reason": "Connecting isolated domain: Acoustics sound waves",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Astrophysics galaxies in emerging markets",
+      "reason": "Connecting isolated domain: Astrophysics galaxies",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Astronomy stars planets in emerging markets",
+      "reason": "Connecting isolated domain: Astronomy stars planets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Distributed systems architecture and society",
+      "reason": "Connecting isolated domain: Distributed systems architecture",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Statistics data analysis in emerging markets",
+      "reason": "Connecting isolated domain: Statistics data analysis",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer vision image recognition and society",
+      "reason": "Connecting isolated domain: Computer vision image recognition",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Algorithms sorting searching in emerging markets",
+      "reason": "Connecting isolated domain: Algorithms sorting searching",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Chemistry elements compounds in emerging markets",
+      "reason": "Connecting isolated domain: Chemistry elements compounds",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Cybersecurity network defense in emerging markets",
+      "reason": "Connecting isolated domain: Cybersecurity network defense",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Numerical methods computation in emerging markets",
+      "reason": "Connecting isolated domain: Numerical methods computation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Distributed systems architecture in emerging markets",
+      "reason": "Connecting isolated domain: Distributed systems architecture",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software engineering principles and Web development intersection",
+      "reason": "Bridge between Software engineering principles and Web development",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Computer Science fundamentals and Computer networking intersection",
+      "reason": "Bridge between Computer Science fundamentals and Computer networking",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "risk parity",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "neurogenesis",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "meta-learning",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "auction theory",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "mechanism design",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "factor investing",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "gradient boosting",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "few-shot learning",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "predictive coding",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "federated learning",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "volatility surface",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "synaptic plasticity",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "neural oscillations",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "behavioral economics",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "default mode network",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "bayesian optimization",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "information asymmetry",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "zero knowledge proofs",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Web development theory",
+      "reason": "Deeper exploration of hub domain: Web development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "principal agent problem",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "DevOps practices theory",
+      "reason": "Deeper exploration of hub domain: DevOps practices",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Web development",
+      "reason": "Deeper exploration of hub domain: Web development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "post-quantum cryptography",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced DevOps practices",
+      "reason": "Deeper exploration of hub domain: DevOps practices",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer networking theory",
+      "reason": "Deeper exploration of hub domain: Computer networking",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Relational databases theory",
+      "reason": "Deeper exploration of hub domain: Relational databases",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Web development mathematics",
+      "reason": "Deeper exploration of hub domain: Web development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Computer networking",
+      "reason": "Deeper exploration of hub domain: Computer networking",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Earth science geology theory",
+      "reason": "Deeper exploration of hub domain: Earth science geology",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "3D modeling rendering theory",
+      "reason": "Deeper exploration of hub domain: 3D modeling rendering",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "DevOps practices mathematics",
+      "reason": "Deeper exploration of hub domain: DevOps practices",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "secure multiparty computation",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Mobile app development theory",
+      "reason": "Deeper exploration of hub domain: Mobile app development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Relational databases",
+      "reason": "Deeper exploration of hub domain: Relational databases",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Earth science geology",
+      "reason": "Deeper exploration of hub domain: Earth science geology",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Docker containerization theory",
+      "reason": "Deeper exploration of hub domain: Docker containerization",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced 3D modeling rendering",
+      "reason": "Deeper exploration of hub domain: 3D modeling rendering",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer networking mathematics",
+      "reason": "Deeper exploration of hub domain: Computer networking",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software design patterns theory",
+      "reason": "Deeper exploration of hub domain: Software design patterns",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Mobile app development",
+      "reason": "Deeper exploration of hub domain: Mobile app development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Kubernetes orchestration theory",
+      "reason": "Deeper exploration of hub domain: Kubernetes orchestration",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Docker containerization",
+      "reason": "Deeper exploration of hub domain: Docker containerization",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Relational databases mathematics",
+      "reason": "Deeper exploration of hub domain: Relational databases",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Earth science geology mathematics",
+      "reason": "Deeper exploration of hub domain: Earth science geology",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "3D modeling rendering mathematics",
+      "reason": "Deeper exploration of hub domain: 3D modeling rendering",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Kubernetes orchestration",
+      "reason": "Deeper exploration of hub domain: Kubernetes orchestration",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Object-oriented programming theory",
+      "reason": "Deeper exploration of hub domain: Object-oriented programming",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Mobile app development mathematics",
+      "reason": "Deeper exploration of hub domain: Mobile app development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Algebra equations variables theory",
+      "reason": "Deeper exploration of hub domain: Algebra equations variables",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Docker containerization mathematics",
+      "reason": "Deeper exploration of hub domain: Docker containerization",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Arithmetic number operations theory",
+      "reason": "Deeper exploration of hub domain: Arithmetic number operations",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Energy systems power grids",
+      "reason": "Deeper exploration of hub domain: Energy systems power grids",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Reverse engineering software theory",
+      "reason": "Deeper exploration of hub domain: Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Object-oriented programming",
+      "reason": "Deeper exploration of hub domain: Object-oriented programming",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software design patterns mathematics",
+      "reason": "Deeper exploration of hub domain: Software design patterns",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals theory",
+      "reason": "Deeper exploration of hub domain: Computer Science fundamentals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Kubernetes orchestration mathematics",
+      "reason": "Deeper exploration of hub domain: Kubernetes orchestration",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Algebra equations variables",
+      "reason": "Deeper exploration of hub domain: Algebra equations variables",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Arithmetic number operations",
+      "reason": "Deeper exploration of hub domain: Arithmetic number operations",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Calculus derivatives integrals theory",
+      "reason": "Deeper exploration of hub domain: Calculus derivatives integrals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Reverse engineering software",
+      "reason": "Deeper exploration of hub domain: Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software engineering principles theory",
+      "reason": "Deeper exploration of hub domain: Software engineering principles",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Digital forensics investigation theory",
+      "reason": "Deeper exploration of hub domain: Digital forensics investigation",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Meteorology weather forecasting theory",
+      "reason": "Deeper exploration of hub domain: Meteorology weather forecasting",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Object-oriented programming mathematics",
+      "reason": "Deeper exploration of hub domain: Object-oriented programming",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Calculus derivatives integrals",
+      "reason": "Deeper exploration of hub domain: Calculus derivatives integrals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Internet protocols TCP IP HTTP",
+      "reason": "Deeper exploration of hub domain: Internet protocols TCP IP HTTP",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Algebra equations variables mathematics",
+      "reason": "Deeper exploration of hub domain: Algebra equations variables",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Digital forensics investigation",
+      "reason": "Deeper exploration of hub domain: Digital forensics investigation",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Linear algebra matrices vectors",
+      "reason": "Deeper exploration of hub domain: Linear algebra matrices vectors",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Arithmetic number operations mathematics",
+      "reason": "Deeper exploration of hub domain: Arithmetic number operations",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Meteorology weather forecasting",
+      "reason": "Deeper exploration of hub domain: Meteorology weather forecasting",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Reverse engineering software mathematics",
+      "reason": "Deeper exploration of hub domain: Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Electronics engineering components theory",
+      "reason": "Deeper exploration of hub domain: Electronics engineering components",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals mathematics",
+      "reason": "Deeper exploration of hub domain: Computer Science fundamentals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Backend development servers APIs",
+      "reason": "Deeper exploration of hub domain: Backend development servers APIs",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Calculus derivatives integrals mathematics",
+      "reason": "Deeper exploration of hub domain: Calculus derivatives integrals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Software engineering principles mathematics",
+      "reason": "Deeper exploration of hub domain: Software engineering principles",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Electronics engineering components",
+      "reason": "Deeper exploration of hub domain: Electronics engineering components",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Digital forensics investigation mathematics",
+      "reason": "Deeper exploration of hub domain: Digital forensics investigation",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Digital marketing SEO social media",
+      "reason": "Deeper exploration of hub domain: Digital marketing SEO social media",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Meteorology weather forecasting mathematics",
+      "reason": "Deeper exploration of hub domain: Meteorology weather forecasting",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Electromagnetism electricity magnetism theory",
+      "reason": "Deeper exploration of hub domain: Electromagnetism electricity magnetism",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Electronics engineering components mathematics",
+      "reason": "Deeper exploration of hub domain: Electronics engineering components",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Electromagnetism electricity magnetism",
+      "reason": "Deeper exploration of hub domain: Electromagnetism electricity magnetism",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Frontend development HTML CSS JavaScript",
+      "reason": "Deeper exploration of hub domain: Frontend development HTML CSS JavaScript",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Electromagnetism electricity magnetism mathematics",
+      "reason": "Deeper exploration of hub domain: Electromagnetism electricity magnetism",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "econophysics",
+      "reason": "Applying physics models to financial markets",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "neuroeconomics",
+      "reason": "How the brain makes financial decisions",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "climate finance",
+      "reason": "Carbon markets, ESG investing, physical climate risk",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "legal technology",
+      "reason": "Automating legal reasoning and document analysis",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "quantum computing",
+      "reason": "Next generation computation affecting cryptography and AI",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "affective computing",
+      "reason": "Systems that understand human emotion",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "computational creativity",
+      "reason": "Understanding and building creative machines",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "computational social science",
+      "reason": "Understanding mass human behavior through data",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "DevOps practices and Reverse engineering software",
+      "reason": "Cross-domain: DevOps practices \u00d7 Reverse engineering software",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "Relational databases and Electromagnetism electricity magnetism",
+      "reason": "Cross-domain: Relational databases \u00d7 Electromagnetism electricity magnetism",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "mRNA therapeutics",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "AI agent frameworks",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CRISPR gene therapy",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "multimodal AI systems",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    }
+  ]
+}

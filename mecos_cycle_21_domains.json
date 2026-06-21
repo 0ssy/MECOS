@@ -1,0 +1,34 @@
+{
+  "cycle": 21,
+  "n": 4,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and advanced Linear algebra matrices vectors intersection",
+      "reason": "Bridge between Computer Science fundamentals and advanced Linear algebra matrices vectors",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines mathematics theory mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced CI/CD pipelines theory theory",
+      "reason": "Deeper exploration of hub domain: advanced advanced CI/CD pipelines theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer networking and CI/CD pipelines theory theory theory theory",
+      "reason": "Cross-domain: Computer networking \u00d7 CI/CD pipelines theory theory theory theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

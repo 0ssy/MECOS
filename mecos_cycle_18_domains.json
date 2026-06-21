@@ -1,0 +1,55 @@
+{
+  "cycle": 18,
+  "n": 7,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and advanced Docker containerization intersection",
+      "reason": "Bridge between Computer Science fundamentals and advanced Docker containerization",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced CI/CD pipelines mathematics mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines mathematics mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory applications in CI/CD pipelines theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory applications in CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer networking applications in Docker containerization",
+      "reason": "Cross-domain: Computer networking \u00d7 Docker containerization",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory and CI/CD pipelines and CI/CD pipelines theory theory theory theory",
+      "reason": "Cross-domain: CI/CD pipelines theory theory theory theory theory and CI/CD pipelines \u00d7 CI/CD pipelines theory theory theory theory",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

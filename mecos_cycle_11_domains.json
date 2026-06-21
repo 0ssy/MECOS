@@ -1,0 +1,27 @@
+{
+  "cycle": 11,
+  "n": 3,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and Electronics engineering components intersection",
+      "reason": "Bridge between Computer Science fundamentals and Electronics engineering components",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics applications in Electronics engineering components",
+      "reason": "Cross-domain: CI/CD pipelines mathematics \u00d7 Electronics engineering components",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

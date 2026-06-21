@@ -1,0 +1,909 @@
+{
+  "cycle": 3,
+  "n": 129,
+  "domains": [
+    {
+      "name": "Human anatomy organs and society",
+      "reason": "Connecting isolated domain: Human anatomy organs",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biochemistry metabolism and society",
+      "reason": "Connecting isolated domain: Biochemistry metabolism",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Zoology animal behavior and society",
+      "reason": "Connecting isolated domain: Zoology animal behavior",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Bioinformatics genomics and society",
+      "reason": "Connecting isolated domain: Bioinformatics genomics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biology living organisms and society",
+      "reason": "Connecting isolated domain: Biology living organisms",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Animal science livestock and society",
+      "reason": "Connecting isolated domain: Animal science livestock",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Agriculture farming crops and society",
+      "reason": "Connecting isolated domain: Agriculture farming crops",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Materials science polymers and society",
+      "reason": "Connecting isolated domain: Materials science polymers",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Crop science plant breeding and society",
+      "reason": "Connecting isolated domain: Crop science plant breeding",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Pharmacology drugs medicine and society",
+      "reason": "Connecting isolated domain: Pharmacology drugs medicine",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Human anatomy organs in emerging markets",
+      "reason": "Connecting isolated domain: Human anatomy organs",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Human physiology body systems and society",
+      "reason": "Connecting isolated domain: Human physiology body systems",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Mechatronics robotics control and society",
+      "reason": "Connecting isolated domain: Mechatronics robotics control",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biochemistry metabolism in emerging markets",
+      "reason": "Connecting isolated domain: Biochemistry metabolism",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Zoology animal behavior in emerging markets",
+      "reason": "Connecting isolated domain: Zoology animal behavior",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Bioinformatics genomics in emerging markets",
+      "reason": "Connecting isolated domain: Bioinformatics genomics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Mechanical engineering machines and society",
+      "reason": "Connecting isolated domain: Mechanical engineering machines",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Analytical chemistry measurement and society",
+      "reason": "Connecting isolated domain: Analytical chemistry measurement",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biology living organisms in emerging markets",
+      "reason": "Connecting isolated domain: Biology living organisms",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Civil engineering infrastructure and society",
+      "reason": "Connecting isolated domain: Civil engineering infrastructure",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biotechnology genetic engineering and society",
+      "reason": "Connecting isolated domain: Biotechnology genetic engineering",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Agriculture farming crops in emerging markets",
+      "reason": "Connecting isolated domain: Agriculture farming crops",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Food science nutrition processing and society",
+      "reason": "Connecting isolated domain: Food science nutrition processing",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Public health medicine prevention and society",
+      "reason": "Connecting isolated domain: Public health medicine prevention",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Materials science polymers in emerging markets",
+      "reason": "Connecting isolated domain: Materials science polymers",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biomedical engineering prosthetics and society",
+      "reason": "Connecting isolated domain: Biomedical engineering prosthetics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Pharmacology drugs medicine in emerging markets",
+      "reason": "Connecting isolated domain: Pharmacology drugs medicine",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Mechatronics robotics control in emerging markets",
+      "reason": "Connecting isolated domain: Mechatronics robotics control",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Analytical chemistry measurement in emerging markets",
+      "reason": "Connecting isolated domain: Analytical chemistry measurement",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Structural engineering buildings bridges and society",
+      "reason": "Connecting isolated domain: Structural engineering buildings bridges",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biotechnology genetic engineering in emerging markets",
+      "reason": "Connecting isolated domain: Biotechnology genetic engineering",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals and Data structures trees graphs intersection",
+      "reason": "Bridge between Computer Science fundamentals and Data structures trees graphs",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Algorithms sorting searching and Evolution natural selection Darwin intersection",
+      "reason": "Bridge between Algorithms sorting searching and Evolution natural selection Darwin",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "public goods",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "connectomics",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "optogenetics",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "externalities",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "monetary theory",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "causal inference",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "model compression",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "commitment schemes",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "structured products",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "threshold signatures",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "credit default swaps",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "memory consolidation",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "decision neuroscience",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "self-supervised learning",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "computational psychiatry",
+      "reason": "Deep subtopic of neuroscience",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "algorithmic market making",
+      "reason": "Deep subtopic of finance",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "uncertainty quantification",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "neural architecture search",
+      "reason": "Deep subtopic of machine learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "fiscal policy transmission",
+      "reason": "Deep subtopic of economics",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "verifiable random functions",
+      "reason": "Deep subtopic of cryptography",
+      "category": "depth",
+      "priority": 3,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Software design patterns",
+      "reason": "Deeper exploration of hub domain: Software design patterns",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Education pedagogy learning theory",
+      "reason": "Deeper exploration of hub domain: Education pedagogy learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Education pedagogy learning",
+      "reason": "Deeper exploration of hub domain: Education pedagogy learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Linear algebra matrices vectors theory",
+      "reason": "Deeper exploration of hub domain: Linear algebra matrices vectors",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Computer Science fundamentals",
+      "reason": "Deeper exploration of hub domain: Computer Science fundamentals",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Education pedagogy learning mathematics",
+      "reason": "Deeper exploration of hub domain: Education pedagogy learning",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Backend development servers APIs theory",
+      "reason": "Deeper exploration of hub domain: Backend development servers APIs",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Software engineering principles",
+      "reason": "Deeper exploration of hub domain: Software engineering principles",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Operating systems Linux Windows",
+      "reason": "Deeper exploration of hub domain: Operating systems Linux Windows",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced Mobile app development",
+      "reason": "Deeper exploration of hub domain: advanced Mobile app development",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Computer architecture CPU memory",
+      "reason": "Deeper exploration of hub domain: Computer architecture CPU memory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced Reverse engineering software",
+      "reason": "Deeper exploration of hub domain: advanced Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Frontend development HTML CSS JavaScript theory",
+      "reason": "Deeper exploration of hub domain: Frontend development HTML CSS JavaScript",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced Electromagnetism electricity magnetism",
+      "reason": "Deeper exploration of hub domain: advanced Electromagnetism electricity magnetism",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Web development and Object-oriented programming",
+      "reason": "Cross-domain: Web development \u00d7 Object-oriented programming",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "Computer networking applications in Computer Science fundamentals",
+      "reason": "Cross-domain: Computer networking \u00d7 Computer Science fundamentals",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "virome",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "stigmergy",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "soft power",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "nanosensors",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "xenobiology",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "geroscience",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "DNA computing",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "metamaterials",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "endosymbiosis",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "artificial life",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "hegemony theory",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "AI consciousness",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "longevity science",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "cognitive warfare",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "diaspora networks",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "historical cycles",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "photonic computing",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "molecular machines",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "embodied cognition",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "swarm intelligence",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "degrowth economics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "doughnut economics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "protocell research",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "precision medicine",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "narrative strategy",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "cultural diplomacy",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "programmable matter",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "microbiome research",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "propaganda analysis",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "information warfare",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "quantum cryptography",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "open ended evolution",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "intrinsic motivation",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "complexity economics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "systems pharmacology",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "civilizational theory",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "developmental robotics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "experimental economics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "modern monetary theory",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "quantum error correction",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "quantum machine learning",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "evolutionary game theory",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "post keynesian economics",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "horizontal gene transfer",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "curiosity driven learning",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "natural capital accounting",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "mechanistic interpretability",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "ecosystem services valuation",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "topological quantum computing",
+      "reason": "Cycle 3 frontier domain",
+      "category": "frontier",
+      "priority": 5,
+      "source": "seed_list"
+    },
+    {
+      "name": "fusion energy",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "DNA data storage",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "catastrophe bonds",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "prediction markets",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "brain computer interfaces",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "carbon capture technology",
+      "reason": "Emerging field \u2014 cutting edge knowledge",
+      "category": "emerging",
+      "priority": 5,
+      "source": "gap_analysis"
+    }
+  ]
+}

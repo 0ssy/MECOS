@@ -1,0 +1,27 @@
+{
+  "cycle": 20,
+  "n": 3,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and advanced Algebra equations variables intersection",
+      "reason": "Bridge between Computer Science fundamentals and advanced Algebra equations variables",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines mathematics theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory theory and CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory and CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

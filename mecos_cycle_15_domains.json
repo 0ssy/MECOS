@@ -1,0 +1,20 @@
+{
+  "cycle": 15,
+  "n": 2,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and zero knowledge proofs intersection",
+      "reason": "Bridge between Computer Science fundamentals and zero knowledge proofs",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

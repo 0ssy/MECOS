@@ -1,0 +1,293 @@
+{
+  "cycle": 5,
+  "n": 41,
+  "domains": [
+    {
+      "name": "risk parity and society",
+      "reason": "Connecting isolated domain: risk parity",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neurogenesis and society",
+      "reason": "Connecting isolated domain: neurogenesis",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "optogenetics and society",
+      "reason": "Connecting isolated domain: optogenetics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "auction theory and society",
+      "reason": "Connecting isolated domain: auction theory",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neuroeconomics and society",
+      "reason": "Connecting isolated domain: neuroeconomics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "mechanism design and society",
+      "reason": "Connecting isolated domain: mechanism design",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "factor investing and society",
+      "reason": "Connecting isolated domain: factor investing",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "legal technology and society",
+      "reason": "Connecting isolated domain: legal technology",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "volatility surface and society",
+      "reason": "Connecting isolated domain: volatility surface",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "risk parity in emerging markets",
+      "reason": "Connecting isolated domain: risk parity",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neural oscillations and society",
+      "reason": "Connecting isolated domain: neural oscillations",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "structured products and society",
+      "reason": "Connecting isolated domain: structured products",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neurogenesis in emerging markets",
+      "reason": "Connecting isolated domain: neurogenesis",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "optogenetics in emerging markets",
+      "reason": "Connecting isolated domain: optogenetics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "threshold signatures and society",
+      "reason": "Connecting isolated domain: threshold signatures",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neuroeconomics in emerging markets",
+      "reason": "Connecting isolated domain: neuroeconomics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Music theory composition and society",
+      "reason": "Connecting isolated domain: Music theory composition",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "mechanism design in emerging markets",
+      "reason": "Connecting isolated domain: mechanism design",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "factor investing in emerging markets",
+      "reason": "Connecting isolated domain: factor investing",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "legal technology in emerging markets",
+      "reason": "Connecting isolated domain: legal technology",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "volatility surface in emerging markets",
+      "reason": "Connecting isolated domain: volatility surface",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "neural oscillations in emerging markets",
+      "reason": "Connecting isolated domain: neural oscillations",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "structured products in emerging markets",
+      "reason": "Connecting isolated domain: structured products",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "threshold signatures in emerging markets",
+      "reason": "Connecting isolated domain: threshold signatures",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Music theory composition in emerging markets",
+      "reason": "Connecting isolated domain: Music theory composition",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Personal finance budgeting investing and society",
+      "reason": "Connecting isolated domain: Personal finance budgeting investing",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Geometry shapes space in emerging markets and society",
+      "reason": "Connecting isolated domain: Geometry shapes space in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Statistics data analysis in emerging markets in emerging markets",
+      "reason": "Connecting isolated domain: Statistics data analysis in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Biology living organisms in emerging markets in emerging markets",
+      "reason": "Connecting isolated domain: Biology living organisms in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Pharmacology drugs medicine in emerging markets in emerging markets",
+      "reason": "Connecting isolated domain: Pharmacology drugs medicine in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals and Frontend development HTML CSS JavaScript intersection",
+      "reason": "Bridge between Computer Science fundamentals and Frontend development HTML CSS JavaScript",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Algorithms sorting searching and Evolution natural selection Darwin intersection and society",
+      "reason": "Connecting isolated domain: Algorithms sorting searching and Evolution natural selection Darwin intersection",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Operating systems Linux Windows theory",
+      "reason": "Deeper exploration of hub domain: Operating systems Linux Windows",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced CI/CD pipelines theory",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: advanced advanced CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer architecture CPU memory mathematics",
+      "reason": "Deeper exploration of hub domain: Computer architecture CPU memory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced Reverse engineering software mathematics",
+      "reason": "Deeper exploration of hub domain: advanced Reverse engineering software",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

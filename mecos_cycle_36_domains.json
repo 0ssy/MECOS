@@ -1,0 +1,27 @@
+{
+  "cycle": 36,
+  "n": 3,
+  "domains": [
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory and Computer networking",
+      "reason": "Cross-domain: CI/CD pipelines theory theory \u00d7 Computer networking",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory applications in Docker containerization",
+      "reason": "Cross-domain: CI/CD pipelines theory theory theory \u00d7 Docker containerization",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

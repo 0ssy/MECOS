@@ -1,0 +1,20 @@
+{
+  "cycle": 40,
+  "n": 2,
+  "domains": [
+    {
+      "name": "CI/CD pipelines theory theory mathematics theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory mathematics theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory and CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory and CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

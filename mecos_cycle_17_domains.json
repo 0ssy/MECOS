@@ -1,0 +1,41 @@
+{
+  "cycle": 17,
+  "n": 5,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and CI/CD pipelines mathematics intersection",
+      "reason": "Bridge between Computer Science fundamentals and CI/CD pipelines mathematics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory and CI/CD pipelines theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory and CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines applications in advanced CI/CD pipelines mathematics",
+      "reason": "Cross-domain: CI/CD pipelines \u00d7 advanced CI/CD pipelines mathematics",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

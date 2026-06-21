@@ -1,0 +1,307 @@
+{
+  "cycle": 6,
+  "n": 43,
+  "domains": [
+    {
+      "name": "geroscience and society",
+      "reason": "Connecting isolated domain: geroscience",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "longevity science and society",
+      "reason": "Connecting isolated domain: longevity science",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "catastrophe bonds and society",
+      "reason": "Connecting isolated domain: catastrophe bonds",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "embodied cognition and society",
+      "reason": "Connecting isolated domain: embodied cognition",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "swarm intelligence and society",
+      "reason": "Connecting isolated domain: swarm intelligence",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "narrative strategy and society",
+      "reason": "Connecting isolated domain: narrative strategy",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "prediction markets and society",
+      "reason": "Connecting isolated domain: prediction markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "geroscience in emerging markets",
+      "reason": "Connecting isolated domain: geroscience",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "programmable matter and society",
+      "reason": "Connecting isolated domain: programmable matter",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "credit default swaps and society",
+      "reason": "Connecting isolated domain: credit default swaps",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "memory consolidation and society",
+      "reason": "Connecting isolated domain: memory consolidation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "civilizational theory and society",
+      "reason": "Connecting isolated domain: civilizational theory",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "developmental robotics and society",
+      "reason": "Connecting isolated domain: developmental robotics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "alternative risk premia and society",
+      "reason": "Connecting isolated domain: alternative risk premia",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "computational psychiatry and society",
+      "reason": "Connecting isolated domain: computational psychiatry",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "horizontal gene transfer and society",
+      "reason": "Connecting isolated domain: horizontal gene transfer",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "longevity science in emerging markets",
+      "reason": "Connecting isolated domain: longevity science",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "catastrophe bonds in emerging markets",
+      "reason": "Connecting isolated domain: catastrophe bonds",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "carbon capture technology and society",
+      "reason": "Connecting isolated domain: carbon capture technology",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "uncertainty quantification and society",
+      "reason": "Connecting isolated domain: uncertainty quantification",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "fiscal policy transmission and society",
+      "reason": "Connecting isolated domain: fiscal policy transmission",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "embodied cognition in emerging markets",
+      "reason": "Connecting isolated domain: embodied cognition",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "swarm intelligence in emerging markets",
+      "reason": "Connecting isolated domain: swarm intelligence",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "narrative strategy in emerging markets",
+      "reason": "Connecting isolated domain: narrative strategy",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "prediction markets in emerging markets",
+      "reason": "Connecting isolated domain: prediction markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "programmable matter in emerging markets",
+      "reason": "Connecting isolated domain: programmable matter",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "credit default swaps in emerging markets",
+      "reason": "Connecting isolated domain: credit default swaps",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "memory consolidation in emerging markets",
+      "reason": "Connecting isolated domain: memory consolidation",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "developmental robotics in emerging markets",
+      "reason": "Connecting isolated domain: developmental robotics",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "alternative risk premia in emerging markets",
+      "reason": "Connecting isolated domain: alternative risk premia",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "computational psychiatry in emerging markets",
+      "reason": "Connecting isolated domain: computational psychiatry",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "horizontal gene transfer in emerging markets",
+      "reason": "Connecting isolated domain: horizontal gene transfer",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "carbon capture technology in emerging markets",
+      "reason": "Connecting isolated domain: carbon capture technology",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "uncertainty quantification in emerging markets",
+      "reason": "Connecting isolated domain: uncertainty quantification",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "fiscal policy transmission in emerging markets",
+      "reason": "Connecting isolated domain: fiscal policy transmission",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Set theory logic in emerging markets and society",
+      "reason": "Connecting isolated domain: Set theory logic in emerging markets",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Computer Science fundamentals and DevOps practices intersection",
+      "reason": "Bridge between Computer Science fundamentals and DevOps practices",
+      "category": "bridge",
+      "priority": 2,
+      "source": "gap_analysis"
+    },
+    {
+      "name": "Electromagnetism electricity magnetism and CI/CD pipelines theory and society",
+      "reason": "Connecting isolated domain: Electromagnetism electricity magnetism and CI/CD pipelines theory",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory mathematics",
+      "reason": "Deeper exploration of hub domain: advanced CI/CD pipelines theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "Operating systems Linux Windows mathematics",
+      "reason": "Deeper exploration of hub domain: Operating systems Linux Windows",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory theory theory theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced advanced advanced advanced CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: advanced advanced advanced CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines mathematics mathematics mathematics mathematics",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines mathematics mathematics mathematics",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    }
+  ]
+}

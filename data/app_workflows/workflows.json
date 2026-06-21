@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-05-31T16:08:22.463214",
+  "workflows": {
+    "MECOS:Daily trading reporting": {
+      "app_name": "MECOS",
+      "task_description": "Daily trading reporting",
+      "steps": [
+        "Scan app ecosystem",
+        "Generate reports",
+        "Dispatch milestone and summary alerts"
+      ],
+      "success_rate": 1.0,
+      "execution_count": 1,
+      "last_executed": "2026-05-31T16:08:22.463188"
+    }
+  }
+}

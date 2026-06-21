@@ -1,0 +1,175 @@
+{
+  "coding": {
+    "score": 0.0,
+    "frozen_at": 1780173859.9317672,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "research": {
+    "score": 0.0,
+    "frozen_at": 1780173859.931822,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "debugging": {
+    "score": 0.0,
+    "frozen_at": 1780173859.9318254,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "memory": {
+    "score": 0.0,
+    "frozen_at": 1780173859.9318273,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "evolution": {
+    "score": 0.0,
+    "frozen_at": 1780173859.9318287,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "planning": {
+    "score": 0.0,
+    "frozen_at": 1780173859.9318302,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "trading": {
+    "score": 0.0,
+    "frozen_at": 1780173859.931832,
+    "frozen_at_human": "2026-05-30 23:44:19"
+  },
+  "anchor_1780216222": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780216222.709999,
+    "created_at_human": "2026-05-31 11:30:22"
+  },
+  "anchor_1780220881": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780220881.945225,
+    "created_at_human": "2026-05-31 12:48:01"
+  },
+  "anchor_1780223233": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780223233.9175096,
+    "created_at_human": "2026-05-31 13:27:13"
+  },
+  "anchor_1780223462": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780223462.442132,
+    "created_at_human": "2026-05-31 13:31:02"
+  },
+  "anchor_1780223550": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780223550.9448354,
+    "created_at_human": "2026-05-31 13:32:30"
+  },
+  "anchor_1780223834": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780223834.9144707,
+    "created_at_human": "2026-05-31 13:37:14"
+  },
+  "anchor_1780224151": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780224151.6555903,
+    "created_at_human": "2026-05-31 13:42:31"
+  },
+  "anchor_1780224375": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780224375.4992611,
+    "created_at_human": "2026-05-31 13:46:15"
+  },
+  "anchor_1780224643": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780224643.7255836,
+    "created_at_human": "2026-05-31 13:50:43"
+  },
+  "anchor_1780224790": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780224790.1001177,
+    "created_at_human": "2026-05-31 13:53:10"
+  },
+  "anchor_1780224992": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780224992.5190077,
+    "created_at_human": "2026-05-31 13:56:32"
+  },
+  "anchor_1780225053": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780225053.1820443,
+    "created_at_human": "2026-05-31 13:57:33"
+  },
+  "anchor_1780225255": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780225255.8838124,
+    "created_at_human": "2026-05-31 14:00:55"
+  },
+  "anchor_1780225557": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780225557.0740502,
+    "created_at_human": "2026-05-31 14:05:57"
+  },
+  "anchor_1780225640": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780225640.3943596,
+    "created_at_human": "2026-05-31 14:07:20"
+  },
+  "anchor_1780226296": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780226296.3974867,
+    "created_at_human": "2026-05-31 14:18:16"
+  },
+  "anchor_1780227003": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780227003.3521466,
+    "created_at_human": "2026-05-31 14:30:03"
+  },
+  "anchor_1780229164": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780229164.5060608,
+    "created_at_human": "2026-05-31 15:06:04"
+  },
+  "anchor_1780229416": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780229416.165796,
+    "created_at_human": "2026-05-31 15:10:16"
+  },
+  "anchor_1780229745": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780229745.273193,
+    "created_at_human": "2026-05-31 15:15:45"
+  },
+  "anchor_1780230427": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780230427.611777,
+    "created_at_human": "2026-05-31 15:27:07"
+  },
+  "anchor_1780230675": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780230675.4333236,
+    "created_at_human": "2026-05-31 15:31:15"
+  },
+  "anchor_1780232892": {
+    "description": "Stability before expansion",
+    "source": "operator_policy",
+    "created_at": 1780232892.9803255,
+    "created_at_human": "2026-05-31 16:08:12"
+  }
+}

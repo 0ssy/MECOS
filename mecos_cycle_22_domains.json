@@ -1,0 +1,41 @@
+{
+  "cycle": 22,
+  "n": 5,
+  "domains": [
+    {
+      "name": "Computer Science fundamentals and Discrete mathematics and society intersection and society",
+      "reason": "Connecting isolated domain: Computer Science fundamentals and Discrete mathematics and society intersection",
+      "category": "bridge",
+      "priority": 2,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory mathematics theory theory",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory mathematics theory",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "advanced CI/CD pipelines theory theory theory theory theory applications in CI/CD pipelines",
+      "reason": "Deeper exploration of hub domain: CI/CD pipelines theory theory theory theory theory applications in CI/CD pipelines",
+      "category": "depth",
+      "priority": 3,
+      "source": "expansion_rule"
+    },
+    {
+      "name": "CI/CD pipelines theory and Electronics engineering components",
+      "reason": "Cross-domain: CI/CD pipelines theory \u00d7 Electronics engineering components",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    },
+    {
+      "name": "CI/CD pipelines mathematics and advanced advanced CI/CD pipelines mathematics",
+      "reason": "Cross-domain: CI/CD pipelines mathematics \u00d7 advanced advanced CI/CD pipelines mathematics",
+      "category": "interdisciplinary",
+      "priority": 4,
+      "source": "cross_pollination"
+    }
+  ]
+}

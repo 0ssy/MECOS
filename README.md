@@ -13,7 +13,7 @@ MECOS is organized into seven phases, each building on the last:
 | Phase | Module(s) | Responsibility |
 |-------|-----------|----------------|
 | 1 | `memory_system.py` | Vector-based episodic and semantic memory (ChromaDB + sentence-transformers) |
-| 2 | `perception.py`, `web_perception.py`, `screen_perception.py` | File system, web, and screen perception |
+| 2 | `perception/`, `web_perception.py`, `screen_perception.py`, `app_perception.py` | File system, web, screen, and application perception |
 | 3 | `reasoner.py` | LLM-powered planning, reflection, and self-critique |
 | 4 | `tool_registry.py`, `code_executor.py`, `file_operations.py`, `app_controller.py`, `browser_automation.py`, `tool_orchestrator.py`, `action_engine.py` | Full tool orchestration and sandboxed execution |
 | 5 | `trading_agent.py`, `coding_agent.py`, `research_agent.py`, `agent_coordinator.py` | Specialized domain agents and multi-agent coordination |
@@ -33,53 +33,54 @@ pip install -r requirements.txt
 ### 2. Configure Environment
 
 ```bash
-export OPENAI_API_KEY=your_key_here
+# Copy .env.example and fill in your keys
+cp .env.example .env
+
+# Required for full functionality:
+# ALPACA_API_KEY, ALPACA_SECRET_KEY (trading)
+# BINANCE_API_KEY, BINANCE_SECRET_KEY (crypto)
+# OPENAI_API_KEY (reasoning - optional if using Ollama)
 ```
 
 ### 3. Run the Engine
 
 ```bash
+# Interactive mode
 python main.py
+
+# Away mode (autonomous dreaming)
+python main.py away
 ```
 
 ### 4. Run Tests
 
 ```bash
 python -m pytest tests/test_mecos.py -v
-# 42 passed
 ```
 
-### 5. Knowledge Layer (Free Local Stack)
+---
 
-```bash
-python -m mecos.learning_pipeline learn "Bitcoin"
-python -m mecos.learning_pipeline query "bitcoin"
-python -m mecos.learning_pipeline semantic "How does the Fed affect crypto?"
-```
+## Configuration
 
-Install the NLP model once:
+All settings are configurable via environment variables or `.env` file:
 
-```bash
-python -m spacy download en_core_web_sm
-```
-
-### 6. Trading Toolkit Utilities
-
-Use the trading utility CLI to run screeners, pipelines, events, and terminal dashboards:
-
-```bash
-# Fundamental screener
-python run_trading_tools.py screen --tickers AAPL MSFT NVDA --strategy value
-
-# JSON-defined pipeline execution
-python run_trading_tools.py pipeline --config pipeline.json --bars bars.json
-
-# Earnings + macro calendar snapshot
-python run_trading_tools.py calendar --tickers AAPL MSFT
-
-# Render terminal dashboard from decisions JSON
-python run_trading_tools.py dashboard --decisions decisions.json
-```
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `SERVER_IP` | `127.0.0.1` | Ollama server address |
+| `LOCAL_LLM_URL` | `http://127.0.0.1:11434/v1` | Local LLM endpoint |
+| `DEFAULT_MODEL` | `llama3` | LLM model name |
+| `ALPACA_API_KEY` | — | Alpaca trading API key |
+| `ALPACA_SECRET_KEY` | — | Alpaca secret key |
+| `ALPACA_MODE` | `paper` | `paper` or `live` |
+| `BINANCE_API_KEY` | — | Binance API key |
+| `BINANCE_SECRET_KEY` | — | Binance secret key |
+| `BINANCE_TESTNET` | `true` | Use Binance testnet |
+| `TRADING_ENABLED` | `false` | Enable live trading (hard kill-switch) |
+| `MAX_POSITION_SIZE_USD` | `100` | Max position size |
+| `MAX_DAILY_LOSS_USD` | `50` | Daily loss limit |
+| `MAX_OPEN_POSITIONS` | `5` | Max concurrent positions |
+| `GOV_MIN_EXPERIENCES` | `500` | Governance experience threshold |
+| `GOV_MIN_META_EPISODES` | `10` | Meta-learning episodes required |
 
 ---
 
@@ -100,6 +101,7 @@ results = await memory.retrieve_context("RSI trading signal", n_results=5)
 - **`PerceptionLayer`** — monitors the file system, parses JSON/CSV/text, stores observations in memory.
 - **`WebPerception`** — uses Playwright to browse URLs, extract page content, and store web observations.
 - **`ScreenPerception`** — captures screenshots and uses OCR for visual environment awareness.
+- **`AppPerception`** — discovers and learns all installed applications dynamically.
 
 ### Phase 3 — Reasoner
 
@@ -127,7 +129,7 @@ result = await orchestrator.run_tool("execute_python", code="print(2 ** 10)")
 
 ### Phase 5 — Specialized Domain Agents
 
-- **`TradingAgent`** — RSI, MACD, Bollinger Bands, signal generation, backtesting, risk management.
+- **`TradingAgent`** — RSI, MACD, Bollinger Bands, signal generation, risk management, multi-market support (Stocks, Crypto, Forex).
 - **`CodingAgent`** — code generation, AST-based syntax analysis, bug detection, test generation.
 - **`ResearchAgent`** — multi-source information gathering, summarization, knowledge graph construction.
 - **`AgentCoordinator`** — routes goals to the most appropriate agent, supports parallel execution.
@@ -142,7 +144,7 @@ result = await coordinator.collaborative_solve("Analyze AAPL stock and write a t
 - **`SelfSupervisedTrainer`** — generates training tasks from memory (fill-in-the-blank, summarization, QA) and evaluates the engine's own responses.
 - **`CurriculumManager`** — tracks skill levels (novice → expert) per domain, schedules appropriately-difficult tasks, advances difficulty as mastery is detected.
 - **`MemoryConsolidation`** — distills episodic memories into semantic knowledge, scores importance, extracts patterns, prunes low-value memories.
-- **`BenchmarkingEngine`** — standardized 8-task benchmark suite across reasoning, coding, planning, analysis, trading, and meta-learning. Detects regressions automatically.
+- **`BenchmarkingEngine`** — standardized benchmark suite across reasoning, coding, planning, analysis, trading, and meta-learning. Detects regressions automatically.
 
 ### Phase 7 — Evolution & Meta-Learning
 
@@ -161,7 +163,7 @@ results = await meta_learner.run_meta_cycle()
 
 ## Full Cognitive Cycle
 
-When `engine.process_goal(goal)` is called:
+When a goal is processed through MECOS:
 
 ```
 1. Observe     → PerceptionLayer scans the environment
@@ -180,58 +182,51 @@ When `engine.process_goal(goal)` is called:
 
 ```
 MECOS/
-├── main.py                    # Full engine entry point (all 7 phases)
+├── main.py                    # Engine entry point
 ├── config.py                  # Centralized settings
+├── event_bus.py               # Inter-layer communication
 │
 ├── memory_system.py           # Phase 1: Vector memory
 ├── perception.py              # Phase 2: File system perception
-├── web_perception.py          # Phase 2: Web perception (Playwright)
+├── web_perception.py          # Phase 2: Web perception
 ├── screen_perception.py       # Phase 2: Screen/OCR perception
+├── app_perception.py          # Phase 2: Application discovery
 ├── reasoner.py                # Phase 3: LLM planning & reflection
 │
-├── tool_registry.py           # Phase 4: Tool registration & permissions
-├── code_executor.py           # Phase 4: Sandboxed code execution
+├── tool_registry.py           # Phase 4: Tool registration
+├── code_executor.py           # Phase 4: Sandboxed execution
 ├── file_operations.py         # Phase 4: Safe file operations
-├── app_controller.py          # Phase 4: System command controller
-├── browser_automation.py      # Phase 4: Browser automation
+├── app_controller.py          # Phase 4: System commands
+├── browser_automation.py      # Phase 4: Browser control
 ├── tool_orchestrator.py       # Phase 4: Unified tool interface
-├── action_engine.py           # Phase 4: Plan execution engine
+├── action_engine.py           # Phase 4: Plan execution
 │
 ├── trading_agent.py           # Phase 5: Trading & market analysis
-├── coding_agent.py            # Phase 5: Code generation & analysis
-├── research_agent.py          # Phase 5: Research & knowledge graph
+├── coding_agent.py            # Phase 5: Code generation
+├── research_agent.py          # Phase 5: Research & knowledge
 ├── agent_coordinator.py       # Phase 5: Multi-agent coordination
 │
-├── rl_trainer.py              # Phase 6: Reinforcement learning (Q-learning)
-├── self_supervised_trainer.py # Phase 6: Self-supervised training
-├── curriculum_manager.py      # Phase 6: Adaptive curriculum (novice→expert)
-├── memory_consolidation.py    # Phase 6: Memory distillation & pruning
-├── benchmarking.py            # Phase 6: Performance benchmarking
+├── rl_trainer.py              # Phase 6: RL training
+├── self_supervised_trainer.py # Phase 6: SSL training
+├── curriculum_manager.py      # Phase 6: Skill progression
+├── memory_consolidation.py    # Phase 6: Memory distillation
+├── benchmarking.py            # Phase 6: Performance testing
 │
-├── genetic_optimizer.py       # Phase 7: Genetic hyperparameter search
-├── strategy_evolution.py      # Phase 7: Behavioral strategy evolution
+├── genetic_optimizer.py       # Phase 7: Hyperparameter search
+├── strategy_evolution.py      # Phase 7: Strategy evolution
 ├── meta_learner.py            # Phase 7: Meta-learning coordinator
-├── checkpoint_manager.py      # Phase 7: State checkpointing & rollback
-├── world_model.py             # Phase 7: Environment world model
+├── checkpoint_manager.py      # Phase 7: State snapshots
+├── world_model.py             # Phase 7: Environment modeling
+│
+├── mecos/                     # Extended modules
+│   ├── knowledge_core.py      # Knowledge graph
+│   ├── curiosity_engine.py    # Knowledge gaps tracking
+│   ├── cross_domain_inference.py # Analogical reasoning
+│   └── learning_pipeline.py   # CLI interface
 │
 └── tests/
-    └── test_mecos.py          # Full test suite (42 tests, all passing)
+    └── test_mecos.py          # Test suite
 ```
-
----
-
-## Configuration
-
-Key settings (configurable via environment variables):
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `OPENAI_API_KEY` | — | OpenAI API key (required) |
-| `DEFAULT_MODEL` | `gpt-4.1-mini` | LLM model for reasoning |
-| `BASE_DIR` | `~/MECOS` | Project root directory |
-| `MEMORY_DIR` | `~/MECOS/memory_db` | Persistent memory storage |
-| `DATA_DIR` | `~/MECOS/data` | Data directory for perception |
-| `LOGS_DIR` | `~/MECOS/logs` | Log file directory |
 
 ---
 

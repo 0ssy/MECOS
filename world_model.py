@@ -27,6 +27,7 @@ class StateTransition:
         self.next_state = next_state
         self.reward = reward
         self.timestamp = datetime.now().isoformat()
+        self.confidence: float = 1.0  # Confidence in this transition
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -36,6 +37,7 @@ class StateTransition:
             "next_state": self.next_state,
             "reward": self.reward,
             "timestamp": self.timestamp,
+            "confidence": self.confidence,
         }
 
 
@@ -78,13 +80,14 @@ class WorldModel:
         path.write_text(json.dumps(data, default=str))
 
     def _index_transition(self, t: StateTransition):
-        """Index a transition for fast lookup."""
+        """Index a transition with confidence-weighted outcome."""
         state_key = t.state[:100]  # Truncate for key
         if state_key not in self.state_action_outcomes:
             self.state_action_outcomes[state_key] = {}
         if t.action not in self.state_action_outcomes[state_key]:
-            self.state_action_outcomes[state_key][t.action] = []
-        self.state_action_outcomes[state_key][t.action].append(t.outcome)
+            self.state_action_outcomes[state_key][t.action] = {"outcomes": [], "confidences": []}
+        self.state_action_outcomes[state_key][t.action]["outcomes"].append(t.outcome)
+        self.state_action_outcomes[state_key][t.action]["confidences"].append(t.confidence)
 
     def record_transition(self, state: str, action: str, outcome: str, next_state: str, reward: float = 0.0):
         """Record a new state transition into the world model."""
@@ -98,21 +101,29 @@ class WorldModel:
     def lookup_outcomes(self, state: str, action: str) -> List[str]:
         """Look up historical outcomes for a (state, action) pair."""
         state_key = state[:100]
-        return self.state_action_outcomes.get(state_key, {}).get(action, [])
+        data = self.state_action_outcomes.get(state_key, {}).get(action, {})
+        return data.get("outcomes", [])
+
+    def lookup_outcomes_with_confidence(self, state: str, action: str) -> Tuple[List[str], List[float]]:
+        """Look up outcomes with their confidence scores."""
+        state_key = state[:100]
+        data = self.state_action_outcomes.get(state_key, {}).get(action, {})
+        return data.get("outcomes", []), data.get("confidences", [])
 
     async def predict_outcome(self, state: str, action: str, context: str = "") -> str:
         """
         Predict the likely outcome of taking an action in a given state.
-        Uses historical data if available, otherwise uses LLM.
+        Uses historical data with confidence weighting if available, otherwise uses LLM.
         """
-        # Check historical data first
-        historical = self.lookup_outcomes(state, action)
-        if historical:
-            # Return the most common historical outcome
-            from collections import Counter
-            most_common = Counter(historical).most_common(1)[0][0]
-            logger.debug(f"World model prediction (historical): {most_common[:80]}")
-            return most_common
+        # Check historical data first (confidence-weighted)
+        historical, confidences = self.lookup_outcomes_with_confidence(state, action)
+        if historical and confidences:
+            # Calculate weighted outcomes by confidence
+            weighted = sorted(zip(historical, confidences), key=lambda x: x[1], reverse=True)
+            top_outcome = weighted[0][0]
+            avg_conf = sum(confidences) / len(confidences)
+            logger.debug(f"World model prediction (historical): {top_outcome[:80]} conf={avg_conf:.2f}")
+            return top_outcome
 
         # Fall back to LLM prediction
         prompt = f"""Predict the most likely outcome of this action.
@@ -134,21 +145,39 @@ Predict the outcome in 1-2 sentences. Be specific and realistic."""
         except Exception as e:
             return f"Prediction unavailable: {e}"
 
+    async def predict_with_confidence(self, state: str, action: str, context: str = "") -> Tuple[str, float]:
+        """Predict outcome and return both prediction and confidence score."""
+        prediction = await self.predict_outcome(state, action, context)
+        
+        # Derive confidence from historical data or set default
+        historical, confidences = self.lookup_outcomes_with_confidence(state, action)
+        if historical:
+            confidence = sum(confidences) / len(confidences) if confidences else 0.5
+            # Higher confidence if consistent outcomes
+            unique_outcomes = len(set(historical))
+            confidence *= (1.0 - unique_outcomes * 0.1) if unique_outcomes > 1 else 1.0
+        else:
+            confidence = 0.3  # LLM predictions are less confident
+        
+        return prediction, min(1.0, max(0.0, confidence))
+
     async def simulate_plan(self, initial_state: str, plan: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Mentally simulate executing a plan and predict outcomes for each step.
-        Returns a list of predicted step results.
+        Returns a list of predicted step results with confidence scores.
         """
         logger.info(f"Simulating plan: {len(plan)} steps")
         current_state = initial_state
         simulation_results = []
+        cumulative_confidence = 1.0
 
         for i, step in enumerate(plan, start=1):
             tool = step.get("tool", "unknown")
             args = step.get("args", {})
             action_desc = f"{tool}({', '.join(f'{k}={v}' for k, v in args.items())})"
 
-            predicted_outcome = await self.predict_outcome(current_state, action_desc)
+            predicted_outcome, pred_confidence = await self.predict_with_confidence(current_state, action_desc)
+            cumulative_confidence *= pred_confidence
             predicted_success = not any(
                 kw in predicted_outcome.lower()
                 for kw in ["fail", "error", "unable", "cannot", "impossible"]
@@ -159,6 +188,7 @@ Predict the outcome in 1-2 sentences. Be specific and realistic."""
                 "action": action_desc,
                 "predicted_outcome": predicted_outcome,
                 "predicted_success": predicted_success,
+                "confidence": round(pred_confidence, 3),
             }
             simulation_results.append(result)
 
@@ -167,7 +197,8 @@ Predict the outcome in 1-2 sentences. Be specific and realistic."""
 
         await self.memory.add_experience(
             f"PLAN SIMULATION: {len(plan)} steps, "
-            f"predicted_success={sum(1 for r in simulation_results if r['predicted_success'])}/{len(plan)}",
+            f"predicted_success={sum(1 for r in simulation_results if r['predicted_success'])}/{len(plan)}, "
+            f"avg_confidence={cumulative_confidence:.2f}",
             source="world_model",
         )
         return simulation_results
