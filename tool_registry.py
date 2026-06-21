@@ -224,3 +224,41 @@ class ToolRegistry:
             "degraded": sum(1 for h in self._health_status.values() if h.get("status") == "warn"),
             "failed": sum(1 for h in self._health_status.values() if h.get("status") == "error"),
         }
+
+    def load_skill(self, skill_path: str) -> List[str]:
+        """Load a skill from .kilo/skill-*.md file. Returns list of registered tool names."""
+        import yaml
+        path = Path(skill_path)
+        if not path.exists():
+            return []
+
+        content = path.read_text(encoding="utf-8")
+        if not content.startswith("---"):
+            return []
+
+        parts = content.split("---", 2)
+        if len(parts) < 3:
+            return []
+
+        try:
+            frontmatter = yaml.safe_load(parts[1])
+        except Exception:
+            return []
+
+        if not frontmatter or "name" not in frontmatter:
+            return []
+
+        skill_name = frontmatter.get("name", "unknown")
+        description = frontmatter.get("description", "")
+        metadata = frontmatter.get("metadata", {})
+
+        # Register the skill
+        self.register(ToolSpec(
+            name=f"skill:{skill_name}",
+            description=description,
+            func=lambda *a, **kw: {"status": "skill_invoked", "name": skill_name},
+            parameters={"query": "string", "args": "dict"},
+            category=metadata.get("category", "general"),
+            source_module=skill_path,
+        ))
+        return [f"skill:{skill_name}"]

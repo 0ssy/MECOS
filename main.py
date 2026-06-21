@@ -219,7 +219,15 @@ async def main():
     # ── 4. Tool orchestration + ActionEngine ────────────────────────────
     tool_orchestrator = ToolOrchestrator(memory_system=memory)
     action_engine = ActionExecutionEngine(tool_orchestrator, memory)
-    
+
+    # ── Load Kilo skills ───────────────────────────────────────────────
+    skills_dir = settings.KILO_SKILLS_DIR
+    if skills_dir.exists():
+        for skill_file in sorted(skills_dir.glob("skill-*.md")):
+            skill_names = tool_orchestrator.registry.load_skill(str(skill_file))
+            for name in skill_names:
+                logger.info(f"Loaded skill: {name} from {skill_file.name}")
+
     # ── MCP tool registration ─────────────────────────────────────
     if os.getenv("MECOS_ENABLE_MCP", "false").strip().lower() == "true":
         asyncio.create_task(tool_orchestrator.mcp_client_register_all())

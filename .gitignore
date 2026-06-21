@@ -1,42 +1,4 @@
-# Environment
-.env
-.env.*
-!.env.example
-
-# Logs
-*.log
-logs/
-
-# Python artifacts
-*.pyc
-__pycache__/
-dist/
-build/
-*.egg-info/
-*.egg
-.venv
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Databases (but preserve schema files)
-memory_db/*/
-*.db
-*.sqlite
-*.sqlite3
-!memory_db/schema.sql
-
-# Event logs (keep structure but ignore data)
-memory_db/events/*.jsonl
-
-# Compiled Python cache
-*.pyd
-*.pyo
-trade_attribution.jsonl
+# Kilo configuration (ignore everything in .kilo except specific files)
+.kilo/*
+!.kilo/kilo.json
+!.kilo/skill-*.md

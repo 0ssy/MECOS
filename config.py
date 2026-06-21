@@ -105,6 +105,23 @@ class Settings(BaseSettings):
         __import__('os').getenv("TRAINING_ACCELERATION_FACTOR", "1")
     )
 
+    # ── Skill Configuration ──────────────────────────────────────────────────
+    KILO_SKILLS_DIR: Path = BASE_DIR / ".kilo"
+    ENABLED_SKILLS: list = [
+        "marketing-skills", "gstack", "social-media-skills", "superpowers",
+        "kilocode", "financial-services", "legal-workflow", "front-end-design",
+        "humanizer", "ai-second-brain", "notebook-llm", "seo-tools",
+        "hyperframes", "doc-skills", "caveman", "obsidian", "last30days",
+    ]
+
+    # ── MCP Servers ───────────────────────────────────────────────────────────
+    MCP_SERVERS: dict = {
+        "notion": {"command": "npx", "args": ["-y", "@notionhq/notion-mcp-server"]},
+        "slack": {"command": "npx", "args": ["-y", "slack-mcp-server"]},
+        "granola": {"command": "uvx", "args": ["granola-mcp-server"]},
+        "zapier": {"command": "npx", "args": ["-y", "zapier-mcp-server"]},
+    }
+
     class Config:
         env_file = ".env"
         extra = "allow"
