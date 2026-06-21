@@ -39,3 +39,4 @@ memory_db/events/*.jsonl
 # Compiled Python cache
 *.pyd
 *.pyo
+trade_attribution.jsonl
