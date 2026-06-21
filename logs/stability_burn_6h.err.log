@@ -1,0 +1,1237 @@
+2026-05-27 20:21:48.570 | INFO     | checkpoint_manager:__init__:30 - CheckpointManager initialized: 10 checkpoints
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|##########| 103/103 [00:00<00:00, 3876.12it/s]
+2026-05-27 20:21:56.371 | INFO     | memory_system:__init__:17 - Vector Memory System Initialized.
+2026-05-27 20:21:56.373 | INFO     | app_controller:__init__:10 - AppController initialized. Using KB: exploration/discoveries/knowledge.json
+2026-05-27 20:21:57.266 | INFO     | web_perception:startup:22 - Web Perception Module Initialized.
+2026-05-27 20:21:57.268 | INFO     | tool_registry:__init__:44 - ToolRegistry initialized.
+2026-05-27 20:21:57.271 | INFO     | code_executor:__init__:68 - CodeExecutor initialized. Sandbox: C:\Users\josep\Downloads\MECOS\data\sandbox
+2026-05-27 20:21:57.272 | INFO     | file_operations:__init__:41 - FileOperations initialized. Base: C:\Users\josep\Downloads\MECOS\data
+2026-05-27 20:21:57.273 | INFO     | app_controller:__init__:10 - AppController initialized. Using KB: exploration/discoveries/knowledge.json
+2026-05-27 20:21:57.274 | INFO     | tool_registry:register:49 - Tool registered: [system] terminal_command v1.0.0
+2026-05-27 20:21:57.274 | INFO     | tool_registry:register:49 - Tool registered: [files] file_write v1.0.0
+2026-05-27 20:21:57.275 | INFO     | tool_registry:register:49 - Tool registered: [files] file_read v1.0.0
+2026-05-27 20:21:57.275 | INFO     | tool_registry:register:49 - Tool registered: [files] file_append v1.0.0
+2026-05-27 20:21:57.276 | INFO     | tool_registry:register:49 - Tool registered: [files] file_list v1.0.0
+2026-05-27 20:21:57.276 | INFO     | tool_registry:register:49 - Tool registered: [files] file_search v1.0.0
+2026-05-27 20:21:57.277 | INFO     | tool_registry:register:49 - Tool registered: [files] file_delete v1.0.0
+2026-05-27 20:21:57.277 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_python v1.0.0
+2026-05-27 20:21:57.293 | INFO     | tool_registry:register:49 - Tool registered: [code] execute_bash v1.0.0
+2026-05-27 20:21:57.294 | INFO     | tool_registry:register:49 - Tool registered: [code] run_tests v1.0.0
+2026-05-27 20:21:57.294 | INFO     | tool_registry:register:49 - Tool registered: [web] web_fetch v1.0.0
+2026-05-27 20:21:57.295 | INFO     | tool_registry:register:49 - Tool registered: [web] web_ingest v1.0.0
+2026-05-27 20:21:57.295 | INFO     | tool_registry:register:49 - Tool registered: [web] web_crawl v1.0.0
+2026-05-27 20:21:57.296 | INFO     | tool_registry:register:49 - Tool registered: [system] system_info v1.0.0
+2026-05-27 20:21:57.296 | INFO     | tool_registry:register:49 - Tool registered: [system] app_map v1.0.0
+2026-05-27 20:21:57.296 | INFO     | tool_orchestrator:__init__:33 - ToolOrchestrator ready with full Phase 4 tool suite.
+2026-05-27 20:21:57.297 | INFO     | action_engine:__init__:35 - ActionExecutionEngine initialized.
+2026-05-27 20:21:57.876 | INFO     | mecos_llm:__init__:24 - MECOS LLM connected to remote brain at http://192.168.1.88:11434/v1
+2026-05-27 20:21:57.878 | INFO     | reasoner:__init__:40 - Reasoner initialized with custom MECOS LLM.
+2026-05-27 20:21:58.450 | INFO     | coding_agent:__init__:104 - CodingAgent initialized.
+2026-05-27 20:21:59.024 | INFO     | research_agent:__init__:70 - ResearchAgent initialized.
+2026-05-27 20:21:59.588 | INFO     | agent_coordinator:__init__:60 - AgentCoordinator initialized.
+2026-05-27 20:21:59.592 | INFO     | orchestrator:__init__:28 - AutonomousOrchestrator initialized
+2026-05-27 20:21:59.593 | INFO     | trading.regime_detection_agent:__init__:10 - Regime Detection Agent initialized
+2026-05-27 20:21:59.593 | INFO     | trading.meta_orchestrator:__init__:12 - Meta Orchestrator initialized
+2026-05-27 20:21:59.594 | INFO     | trading.risk_engine:__init__:14 - Risk Engine initialized
+2026-05-27 20:21:59.594 | INFO     | trading.feature_engine:__init__:15 - Feature Engine initialized
+2026-05-27 20:21:59.596 | INFO     | trading.market_physics_engine:__init__:16 - Market Physics Engine initialized
+2026-05-27 20:21:59.596 | INFO     | trading.portfolio_engine:__init__:18 - Portfolio Engine initialized
+2026-05-27 20:21:59.597 | INFO     | trading.trend_agent:__init__:13 - Trend Agent initialized
+2026-05-27 20:21:59.597 | INFO     | trading.mean_reversion_agent:__init__:17 - Mean Reversion Agent initialized
+2026-05-27 20:21:59.598 | INFO     | trading.volatility_arbitrage_agent:__init__:14 - Volatility Arbitrage Agent initialized
+2026-05-27 20:21:59.598 | INFO     | trading.options_pricing_agent:__init__:10 - Options Pricing Agent initialized
+2026-05-27 20:21:59.598 | INFO     | trading.liquidity_hunter_agent:__init__:14 - Liquidity Hunter Agent initialized
+2026-05-27 20:21:59.599 | INFO     | trading.statistical_arbitrage_engine:__init__:10 - Statistical Arbitrage Engine initialized
+2026-05-27 20:21:59.599 | INFO     | trading.sentiment_agent:__init__:14 - Sentiment Agent initialized
+2026-05-27 20:21:59.600 | INFO     | trading.reinforcement_learning_optimizer:__init__:15 - RL Optimizer initialized
+2026-05-27 20:21:59.600 | INFO     | trading.market_making_agent:__init__:13 - Market Making Agent initialized
+2026-05-27 20:21:59.600 | INFO     | trading.trading_agent:__init__:127 - Advanced TradingAgent initialized with all specialist agents.
+2026-05-27 20:21:59.601 | INFO     | agent_coordinator:register_agent:65 - Agent registered: trading (trading)
+2026-05-27 20:21:59.601 | INFO     | agent_coordinator:register_agent:65 - Agent registered: coding (coding)
+2026-05-27 20:21:59.602 | INFO     | agent_coordinator:register_agent:65 - Agent registered: research (research)
+2026-05-27 20:21:59.605 | INFO     | trading.trade_database:__init__:11 - Trade Database initialized: data/trading.db
+2026-05-27 20:21:59.605 | INFO     | trading.regime_detection_agent:__init__:10 - Regime Detection Agent initialized
+2026-05-27 20:21:59.606 | INFO     | trading.meta_orchestrator:__init__:12 - Meta Orchestrator initialized
+2026-05-27 20:21:59.606 | INFO     | trading.risk_engine:__init__:14 - Risk Engine initialized
+2026-05-27 20:21:59.606 | INFO     | trading.feature_engine:__init__:15 - Feature Engine initialized
+2026-05-27 20:21:59.607 | INFO     | trading.market_physics_engine:__init__:16 - Market Physics Engine initialized
+2026-05-27 20:21:59.607 | INFO     | trading.portfolio_engine:__init__:18 - Portfolio Engine initialized
+2026-05-27 20:21:59.608 | INFO     | trading.trend_agent:__init__:13 - Trend Agent initialized
+2026-05-27 20:21:59.608 | INFO     | trading.mean_reversion_agent:__init__:17 - Mean Reversion Agent initialized
+2026-05-27 20:21:59.608 | INFO     | trading.volatility_arbitrage_agent:__init__:14 - Volatility Arbitrage Agent initialized
+2026-05-27 20:21:59.609 | INFO     | trading.options_pricing_agent:__init__:10 - Options Pricing Agent initialized
+2026-05-27 20:21:59.609 | INFO     | trading.liquidity_hunter_agent:__init__:14 - Liquidity Hunter Agent initialized
+2026-05-27 20:21:59.609 | INFO     | trading.statistical_arbitrage_engine:__init__:10 - Statistical Arbitrage Engine initialized
+2026-05-27 20:21:59.610 | INFO     | trading.sentiment_agent:__init__:14 - Sentiment Agent initialized
+2026-05-27 20:21:59.610 | INFO     | trading.reinforcement_learning_optimizer:__init__:15 - RL Optimizer initialized
+2026-05-27 20:21:59.611 | INFO     | trading.market_making_agent:__init__:13 - Market Making Agent initialized
+2026-05-27 20:21:59.611 | INFO     | trading.trading_agent:__init__:127 - Advanced TradingAgent initialized with all specialist agents.
+2026-05-27 20:21:59.611 | INFO     | trading.market_data_stream:__init__:25 - Market Data Stream initialized
+2026-05-27 20:21:59.612 | INFO     | trading.universe_manager:__init__:126 - Universe Manager initialized
+2026-05-27 20:21:59.614 | INFO     | trading.universe_manager:__init__:127 - Total universe size: 85
+2026-05-27 20:21:59.615 | INFO     | trading.universe_scanner:__init__:14 - Universe Scanner initialized
+2026-05-27 20:21:59.615 | INFO     | trading.position_manager:__init__:9 - Position Manager initialized
+2026-05-27 20:21:59.615 | INFO     | trading.order_manager:__init__:19 - Order Manager initialized
+2026-05-27 20:21:59.617 | INFO     | trading.performance_monitor:__init__:11 - Performance Monitor initialized
+2026-05-27 20:22:00.937 | INFO     | trading.broker_connector:__init__:56 - BrokerConnector initialized | paper_mode=True
+2026-05-27 20:22:00.940 | INFO     | trading.broker.multi_broker_adapter:__init__:23 - MultiBrokerAdapter ready | ibkr=True alpaca=True binance=True
+2026-05-27 20:22:00.941 | INFO     | trading.position_manager:load_positions:61 - Position state restored: 0 active positions
+2026-05-27 20:22:00.941 | INFO     | trading.paper_trading_executor:_restore_portfolio_state:83 - Portfolio state restored from snapshot: cash=9237.39, equity=9237.39, positions=0
+2026-05-27 20:22:00.942 | INFO     | trading.paper_trading_executor:__init__:54 - Paper Trading Executor initialized | Capital: 9237.39 | Execution enabled: True | Mode: PAPER
+2026-05-27 20:22:00.942 | INFO     | trading.live_signal_generator:__init__:23 - Live Signal Generator initialized (VALIDATION MODE)
+2026-05-27 20:22:00.942 | INFO     | trading.trading_system:__init__:56 - TradingSystem initialized with broker adapter: MultiBrokerAdapter | execution_mode=PAPER
+2026-05-27 20:22:00.944 | INFO     | runtime.state_checkpoint:save_runtime_state:25 - Runtime state saved: C:\Users\josep\Downloads\MECOS\data\runtime_state.json
+2026-05-27 20:22:00.965 | INFO     | checkpoint_manager:create_checkpoint:99 - Checkpoint created: ckpt_20260527_202200 (4 files)
+2026-05-27 20:22:00.967 | INFO     | __main__:startup:199 - Unified MECOS startup complete: {'memory': True, 'perception': True, 'web_perception': True, 'reasoning': True, 'core_coding': True, 'core_research': True, 'agent_coordinator': True, 'runtime_memory': True, 'runtime_knowledge_graph': True, 'runtime_research': True, 'runtime_coding': True, 'runtime_debugger': True, 'runtime_orchestrator': True, 'runtime_evolution': True, 'runtime_router': True, 'quant_trading_agent': True, 'trading_system': True}
+2026-05-27 20:22:00.969 | INFO     | continuous_loop:start:27 - Continuous Research Loop activated
+2026-05-27 20:22:00.970 | INFO     | analyzer:crawl_web:27 - Researching topic: autonomous runtime
+2026-05-27 20:22:00.972 | INFO     | analyzer:analyze_repo:37 - Analyzing repository: C:\Users\josep\Downloads\MECOS
+2026-05-27 20:22:02.874 | INFO     | engineer:build_module:65 - Building module: diagnostic_tool
+2026-05-27 20:22:03.038 | INFO     | model_router:route_request:20 - Routing long_term_planning to main brain (http://192.168.1.88:11434)
+2026-05-27 20:22:03.041 | INFO     | orchestrator:run_goal:36 - Goal 'Evolve MECOS into sovereign autonomous runtime' -> 5 tasks
+2026-05-27 20:22:03.042 | INFO     | orchestrator:_dispatch_task:56 - Dispatching [learning:research] Autonomous Research Sweep
+2026-05-27 20:22:03.251 | INFO     | orchestrator:_dispatch_task:56 - Dispatching [foundation:memory] Memory Synchronization
+2026-05-27 20:22:03.468 | INFO     | orchestrator:_dispatch_task:56 - Dispatching [learning:coding] Coding and Sandbox Iteration
+2026-05-27 20:22:03.672 | INFO     | orchestrator:_dispatch_task:56 - Dispatching [foundation:orchestration] Local Orchestrator Boot
+2026-05-27 20:22:03.875 | INFO     | orchestrator:_dispatch_task:56 - Dispatching [evolution:evolution] Evolution Scoring
+2026-05-27 20:22:04.077 | INFO     | orchestrator:run_goal:44 - Goal execution completed
+2026-05-27 20:22:04.078 | WARNING  | continuous_loop:stop:41 - Continuous Research Loop stopping...
+2026-05-27 20:22:04.763 | INFO     | __main__:run_runtime_demo:290 - Runtime demo complete. memory_hits=5
+2026-05-27 20:22:04.767 | INFO     | trading.event_bus:__init__:33 - Event Bus initialized
+2026-05-27 20:22:04.768 | WARNING  | rl_trainer:load:51 - QTable file not found: C:\Users\josep\Downloads\MECOS\memory_db\rl\trading\q_table.json
+2026-05-27 20:22:04.769 | INFO     | rl_trainer:__init__:144 - RLTrainer initialized for domain: trading (\u03b5=0.120)
+2026-05-27 20:22:04.770 | WARNING  | rl_trainer:load:51 - QTable file not found: data\qtable.json
+2026-05-27 20:22:04.770 | INFO     | trading.autonomous_trading_loop:_init_rl_trainer:136 - Trading RL policy enabled (Q-learning + replay)
+2026-05-27 20:22:04.771 | INFO     | trading.autonomous_trading_loop:__init__:119 - Enhanced Autonomous Trading Loop initialized
+2026-05-27 20:22:04.771 | INFO     | trading.autonomous_trading_loop:__init__:120 - Quant mode: balanced | session_thresholds={'market_hours': 0.6, 'after_hours': 0.62, 'crypto_weekend': 0.6}
+2026-05-27 20:22:04.771 | INFO     | trading.universe_manager:load_starter_universe:152 - Loaded starter universe: 12 assets
+2026-05-27 20:22:04.772 | INFO     | trading.universe_manager:load_starter_universe:153 - Stocks: 6 | ETFs: 3 | Crypto: 3
+2026-05-27 20:22:04.772 | INFO     | trading.autonomous_trading_loop:start:339 - Using STARTER universe (12 assets)
+2026-05-27 20:22:04.773 | WARNING  | trading.autonomous_trading_loop:start:344 - ========================================
+2026-05-27 20:22:04.773 | WARNING  | trading.autonomous_trading_loop:start:345 - AUTONOMOUS TRADING LOOP STARTING
+2026-05-27 20:22:04.773 | WARNING  | trading.autonomous_trading_loop:start:346 - Universe size: 12
+2026-05-27 20:22:04.774 | WARNING  | trading.autonomous_trading_loop:start:347 - Execution enabled: True
+2026-05-27 20:22:04.774 | WARNING  | trading.autonomous_trading_loop:start:348 - ========================================
+2026-05-27 20:22:04.774 | INFO     | trading.autonomous_trading_loop:start:351 - Sector allocation: {'mega_cap_tech': 6, 'semiconductors': 0, 'banks': 0, 'energy': 0, 'defensive': 0, 'industrials': 0, 'healthcare': 0, 'etfs': 3, 'crypto': 3, 'forex': 0, 'commodities': 0}
+2026-05-27 20:22:04.775 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to AAPL
+2026-05-27 20:22:04.775 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to MSFT
+2026-05-27 20:22:04.775 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to NVDA
+2026-05-27 20:22:04.776 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to TSLA
+2026-05-27 20:22:04.776 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to AMZN
+2026-05-27 20:22:04.777 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to META
+2026-05-27 20:22:04.777 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to SPY
+2026-05-27 20:22:04.777 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to QQQ
+2026-05-27 20:22:04.778 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to IWM
+2026-05-27 20:22:04.778 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to BTC/USD
+2026-05-27 20:22:04.778 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to ETH/USD
+2026-05-27 20:22:04.779 | INFO     | trading.market_data_stream:subscribe:62 - Subscribed to SOL/USD
+2026-05-27 20:22:04.779 | INFO     | trading.universe_manager:load_default_universe:179 - Loaded full universe: 83 assets
+2026-05-27 20:22:04.780 | INFO     | trading.market_data_stream:stream_live_market_data:173 - Starting live market stream for 12 symbols
+2026-05-27 20:22:04.780 | INFO     | trading.universe_scanner:scan_universe:19 - Scanning 83 symbols...
+2026-05-27 20:22:04.781 | INFO     | trading.universe_scanner:scan_universe:60 - Scan complete: 0/83 assets analyzed
+2026-05-27 20:22:04.781 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:22:04.782 | INFO     | trading.broker.ibkr_adapter:_connect_async:32 - Connecting to IBKR at 127.0.0.1:7497 clientId=2
+2026-05-27 20:22:04.783 | INFO     | trading.broker.binance_adapter:stream_quotes:169 - Starting Binance quote stream for: ['BTC/USD', 'ETH/USD', 'SOL/USD']
+2026-05-27 20:22:05.217 | INFO     | trading.broker.ibkr_adapter:_connect_async:37 - IBKR connected
+Error 10089, reqId 30: Requested market data requires additional subscription for API. See link in 'Market Data Connections' dialog for more details.MSFT NASDAQ.NMS/TOP/ALL, contract: Stock(conId=272093, symbol='MSFT', exchange='SMART', primaryExchange='NASDAQ', currency='USD', localSymbol='MSFT', tradingClass='NMS')
+2026-05-27 20:22:08.538 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (1 bars)
+2026-05-27 20:22:08.924 | INFO     | trading.broker.ibkr_adapter:stream_quotes:182 - Starting IBKR quote stream for: ['AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMZN', 'META', 'SPY', 'QQQ', 'IWM']
+2026-05-27 20:22:09.197 | DEBUG    | trading.live_signal_generator:on_market_data:29 - AAPL: Insufficient data (1 bars)
+2026-05-27 20:22:09.198 | DEBUG    | trading.live_signal_generator:on_market_data:29 - NVDA: Insufficient data (1 bars)
+2026-05-27 20:22:09.198 | DEBUG    | trading.live_signal_generator:on_market_data:29 - TSLA: Insufficient data (1 bars)
+2026-05-27 20:22:09.199 | DEBUG    | trading.live_signal_generator:on_market_data:29 - AMZN: Insufficient data (1 bars)
+2026-05-27 20:22:09.694 | DEBUG    | trading.live_signal_generator:on_market_data:29 - META: Insufficient data (1 bars)
+2026-05-27 20:22:09.898 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (1 bars)
+2026-05-27 20:22:09.941 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SPY: Insufficient data (1 bars)
+2026-05-27 20:22:10.443 | DEBUG    | trading.live_signal_generator:on_market_data:29 - QQQ: Insufficient data (1 bars)
+2026-05-27 20:22:10.979 | DEBUG    | trading.live_signal_generator:on_market_data:29 - BTC/USD: Insufficient data (1 bars)
+2026-05-27 20:22:10.980 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75084.95000000001, 'high': 75086.82, 'low': 75083.08, 'close': 75084.95000000001, 'volume': 1.0, 'timestamp': '2026-05-27T17:22:10.979900', 'bid': 75083.08, 'ask': 75086.82, 'source': 'binance_bookticker'}
+2026-05-27 20:22:10.980 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75085.15, 'high': 75086.82, 'low': 75083.48, 'close': 75085.15, 'volume': 5.068510000000001, 'timestamp': '2026-05-27T17:22:10.979900', 'bid': 75083.48, 'ask': 75086.82, 'source': 'binance_bookticker'}
+2026-05-27 20:22:10.981 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75083.48999999999, 'high': 75083.5, 'low': 75083.48, 'close': 75083.48999999999, 'volume': 5.07089, 'timestamp': '2026-05-27T17:22:10.979900', 'bid': 75083.48, 'ask': 75083.5, 'source': 'binance_bookticker'}
+2026-05-27 20:22:10.981 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75083.485, 'high': 75083.49, 'low': 75083.48, 'close': 75083.485, 'volume': 17.248060000000002, 'timestamp': '2026-05-27T17:22:10.979900', 'bid': 75083.48, 'ask': 75083.49, 'source': 'binance_bookticker'}
+2026-05-27 20:22:11.012 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.955, 'high': 2061.97, 'low': 2061.94, 'close': 2061.955, 'volume': 22.2034, 'timestamp': '2026-05-27T17:22:11.012903', 'bid': 2061.94, 'ask': 2061.97, 'source': 'binance_bookticker'}
+2026-05-27 20:22:11.013 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.9449999999997, 'high': 2061.95, 'low': 2061.94, 'close': 2061.9449999999997, 'volume': 195.6785, 'timestamp': '2026-05-27T17:22:11.012903', 'bid': 2061.94, 'ask': 2061.95, 'source': 'binance_bookticker'}
+2026-05-27 20:22:11.190 | DEBUG    | trading.live_signal_generator:on_market_data:29 - IWM: Insufficient data (1 bars)
+2026-05-27 20:22:19.194 | DEBUG    | trading.live_signal_generator:on_market_data:29 - AAPL: Insufficient data (41 bars)
+2026-05-27 20:22:19.195 | DEBUG    | trading.live_signal_generator:on_market_data:29 - NVDA: Insufficient data (41 bars)
+2026-05-27 20:22:19.195 | DEBUG    | trading.live_signal_generator:on_market_data:29 - TSLA: Insufficient data (41 bars)
+2026-05-27 20:22:19.196 | DEBUG    | trading.live_signal_generator:on_market_data:29 - AMZN: Insufficient data (41 bars)
+2026-05-27 20:22:19.698 | DEBUG    | trading.live_signal_generator:on_market_data:29 - META: Insufficient data (41 bars)
+2026-05-27 20:22:19.948 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SPY: Insufficient data (41 bars)
+2026-05-27 20:22:20.439 | DEBUG    | trading.live_signal_generator:on_market_data:29 - QQQ: Insufficient data (41 bars)
+2026-05-27 20:22:21.198 | DEBUG    | trading.live_signal_generator:on_market_data:29 - IWM: Insufficient data (41 bars)
+2026-05-27 20:22:21.572 | DEBUG    | trading.live_signal_generator:on_market_data:29 - BTC/USD: Insufficient data (19 bars)
+2026-05-27 20:22:26.897 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (6 bars)
+2026-05-27 20:22:27.652 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75064.005, 'high': 75064.01, 'low': 75064.0, 'close': 75064.005, 'volume': 32.939620000000005, 'timestamp': '2026-05-27T17:22:27.652499', 'bid': 75064.0, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:22:27.679 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.8599999999997, 'high': 2060.87, 'low': 2060.85, 'close': 2060.8599999999997, 'volume': 43.5572, 'timestamp': '2026-05-27T17:22:27.679501', 'bid': 2060.85, 'ask': 2060.87, 'source': 'binance_bookticker'}
+2026-05-27 20:22:27.680 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.855, 'high': 2060.86, 'low': 2060.85, 'close': 2060.855, 'volume': 202.1192, 'timestamp': '2026-05-27T17:22:27.679501', 'bid': 2060.85, 'ask': 2060.86, 'source': 'binance_bookticker'}
+2026-05-27 20:22:29.180 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (6 bars)
+2026-05-27 20:22:29.181 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.675, 'high': 83.71, 'low': 83.64, 'close': 83.675, 'volume': 9613.832, 'timestamp': '2026-05-27T17:22:29.180930', 'bid': 83.64, 'ask': 83.71, 'source': 'binance_bookticker'}
+2026-05-27 20:22:29.182 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.64500000000001, 'high': 83.65, 'low': 83.64, 'close': 83.64500000000001, 'volume': 11491.456, 'timestamp': '2026-05-27T17:22:29.180930', 'bid': 83.64, 'ask': 83.65, 'source': 'binance_bookticker'}
+2026-05-27 20:22:29.452 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:22:29.508 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:22:29.509 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.98)
+2026-05-27 20:22:29.510 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AAPL BUY @ 0.98
+2026-05-27 20:22:29.510 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.98
+2026-05-27 20:22:29.511 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:22:29.511 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:22:29.524 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:22:29.525 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.98)
+2026-05-27 20:22:29.526 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: NVDA BUY @ 0.98
+2026-05-27 20:22:29.526 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.98
+2026-05-27 20:22:29.527 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0002 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:22:29.527 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:22:29.539 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:29.540 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.98)
+2026-05-27 20:22:29.541 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: TSLA BUY @ 0.98
+2026-05-27 20:22:29.541 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.98
+2026-05-27 20:22:29.542 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0002 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:22:29.542 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:22:29.556 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:29.557 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.93)
+2026-05-27 20:22:29.558 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AMZN BUY @ 0.93
+2026-05-27 20:22:29.558 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.93
+2026-05-27 20:22:29.559 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.93 thr=0.62
+2026-05-27 20:22:29.700 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:22:29.711 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:29.712 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.64)
+2026-05-27 20:22:29.945 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:22:29.955 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.24
+2026-05-27 20:22:29.956 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.92)
+2026-05-27 20:22:29.957 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.92
+2026-05-27 20:22:29.957 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.92
+2026-05-27 20:22:29.957 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.92 thr=0.62
+2026-05-27 20:22:30.444 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:22:30.454 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:22:30.455 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.88)
+2026-05-27 20:22:30.455 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.88
+2026-05-27 20:22:30.456 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:22:31.194 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:22:31.213 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:31.214 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.60)
+2026-05-27 20:22:31.884 | DEBUG    | trading.live_signal_generator:on_market_data:29 - BTC/USD: Insufficient data (27 bars)
+2026-05-27 20:22:34.767 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:22:39.450 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:22:39.480 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.25
+2026-05-27 20:22:39.481 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.12)
+2026-05-27 20:22:39.698 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:22:39.709 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:22:39.710 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.87)
+2026-05-27 20:22:39.710 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.87
+2026-05-27 20:22:39.710 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:22:39.711 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:22:39.723 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.31
+2026-05-27 20:22:39.724 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.82)
+2026-05-27 20:22:39.725 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.82
+2026-05-27 20:22:39.725 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.81 thr=0.62
+2026-05-27 20:22:39.726 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:22:39.738 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:22:39.739 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.33)
+2026-05-27 20:22:39.739 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:22:39.750 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:39.752 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.97)
+2026-05-27 20:22:39.753 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: META BUY @ 0.97
+2026-05-27 20:22:39.754 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.97
+2026-05-27 20:22:39.755 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0004 spread=0.0002 vol=0.0000 conf=0.97 thr=0.62
+2026-05-27 20:22:39.948 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:22:39.963 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:22:39.964 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.88)
+2026-05-27 20:22:39.965 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.88
+2026-05-27 20:22:39.966 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:22:40.446 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:22:40.457 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:22:40.458 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.90)
+2026-05-27 20:22:40.459 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.90
+2026-05-27 20:22:40.459 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:22:40.910 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (13 bars)
+2026-05-27 20:22:41.195 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:22:41.206 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:22:41.206 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.91)
+2026-05-27 20:22:41.206 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.91
+2026-05-27 20:22:41.208 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.91
+2026-05-27 20:22:41.208 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:22:43.580 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (17 bars)
+2026-05-27 20:22:44.030 | DEBUG    | trading.live_signal_generator:on_market_data:29 - BTC/USD: Insufficient data (34 bars)
+2026-05-27 20:22:44.032 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.995, 'high': 75064.01, 'low': 75063.98, 'close': 75063.995, 'volume': 32.92657, 'timestamp': '2026-05-27T17:22:44.030227', 'bid': 75063.98, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:22:44.033 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.61, 'high': 75064.01, 'low': 75063.21, 'close': 75063.61, 'volume': 44.39002, 'timestamp': '2026-05-27T17:22:44.030227', 'bid': 75063.21, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:22:45.082 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.215, 'high': 75063.22, 'low': 75063.21, 'close': 75063.215, 'volume': 20.369480000000003, 'timestamp': '2026-05-27T17:22:45.082734', 'bid': 75063.21, 'ask': 75063.22, 'source': 'binance_bookticker'}
+2026-05-27 20:22:45.082 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.215, 'high': 75063.22, 'low': 75063.21, 'close': 75063.215, 'volume': 20.37081, 'timestamp': '2026-05-27T17:22:45.082734', 'bid': 75063.21, 'ask': 75063.22, 'source': 'binance_bookticker'}
+2026-05-27 20:22:45.560 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.63499999999999, 'high': 83.64, 'low': 83.63, 'close': 83.63499999999999, 'volume': 16892.746, 'timestamp': '2026-05-27T17:22:45.560417', 'bid': 83.63, 'ask': 83.64, 'source': 'binance_bookticker'}
+2026-05-27 20:22:45.562 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.61500000000001, 'high': 83.62, 'low': 83.61, 'close': 83.61500000000001, 'volume': 3876.008, 'timestamp': '2026-05-27T17:22:45.560968', 'bid': 83.61, 'ask': 83.62, 'source': 'binance_bookticker'}
+2026-05-27 20:22:46.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=50.0s
+2026-05-27 20:22:46.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=50.0s
+2026-05-27 20:22:46.384 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=50.0s
+2026-05-27 20:22:46.385 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=50.0s
+2026-05-27 20:22:46.385 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=49.1s
+2026-05-27 20:22:46.385 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=49.1s
+2026-05-27 20:22:46.386 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=48.5s
+2026-05-27 20:22:46.386 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=48.5s
+2026-05-27 20:22:46.386 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=46.8s
+2026-05-27 20:22:46.387 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=46.8s
+2026-05-27 20:22:46.387 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=46.8s
+2026-05-27 20:22:46.387 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=46.8s
+2026-05-27 20:22:49.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:22:49.459 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:22:49.460 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.87)
+2026-05-27 20:22:49.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.87
+2026-05-27 20:22:49.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:22:49.698 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:22:49.709 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:22:49.710 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.90)
+2026-05-27 20:22:49.710 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.90
+2026-05-27 20:22:49.711 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:22:49.711 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:22:49.720 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:22:49.721 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.88)
+2026-05-27 20:22:49.721 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.88
+2026-05-27 20:22:49.722 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0000 spread=0.0003 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:22:49.722 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:22:49.731 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.18
+2026-05-27 20:22:49.733 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.57)
+2026-05-27 20:22:49.736 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:22:49.747 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:22:49.748 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.98)
+2026-05-27 20:22:49.749 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: META BUY @ 0.98
+2026-05-27 20:22:49.749 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.98
+2026-05-27 20:22:49.750 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0001 spread=0.0003 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:22:49.944 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:22:49.954 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:22:49.954 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.10)
+2026-05-27 20:22:50.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:22:50.459 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:22:50.460 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.89)
+2026-05-27 20:22:50.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.89
+2026-05-27 20:22:50.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:22:51.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:22:51.228 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.11
+2026-05-27 20:22:51.233 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.69)
+2026-05-27 20:22:54.724 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (20 bars)
+2026-05-27 20:22:56.235 | DEBUG    | trading.live_signal_generator:on_market_data:29 - BTC/USD: Insufficient data (46 bars)
+2026-05-27 20:22:56.380 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=60.0s
+2026-05-27 20:22:56.381 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=60.0s
+2026-05-27 20:22:56.381 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=60.0s
+2026-05-27 20:22:56.381 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=60.0s
+2026-05-27 20:22:56.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=59.1s
+2026-05-27 20:22:56.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=59.1s
+2026-05-27 20:22:56.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=58.5s
+2026-05-27 20:22:56.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=58.5s
+2026-05-27 20:22:56.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=56.8s
+2026-05-27 20:22:56.384 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=56.8s
+2026-05-27 20:22:56.384 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=56.8s
+2026-05-27 20:22:56.384 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=56.8s
+2026-05-27 20:22:59.441 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:22:59.458 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:59.459 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.60)
+2026-05-27 20:22:59.691 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:22:59.699 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:22:59.700 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.90)
+2026-05-27 20:22:59.700 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.90
+2026-05-27 20:22:59.700 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:22:59.938 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:22:59.945 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:22:59.946 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.98)
+2026-05-27 20:22:59.947 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: TSLA BUY @ 0.98
+2026-05-27 20:22:59.947 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.98
+2026-05-27 20:22:59.947 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:22:59.948 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:22:59.956 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:22:59.957 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.43)
+2026-05-27 20:22:59.957 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:22:59.966 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:22:59.967 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.32)
+2026-05-27 20:22:59.968 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:22:59.976 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:22:59.976 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.10)
+2026-05-27 20:23:00.450 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:00.462 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:23:00.463 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.10)
+2026-05-27 20:23:01.197 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:01.208 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:01.209 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.60)
+2026-05-27 20:23:01.993 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (24 bars)
+2026-05-27 20:23:01.994 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.60499999999999, 'high': 83.61, 'low': 83.6, 'close': 83.60499999999999, 'volume': 2372.9120000000003, 'timestamp': '2026-05-27T17:23:01.993159', 'bid': 83.6, 'ask': 83.61, 'source': 'binance_bookticker'}
+2026-05-27 20:23:01.995 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.595, 'high': 83.6, 'low': 83.59, 'close': 83.595, 'volume': 8890.143, 'timestamp': '2026-05-27T17:23:01.993159', 'bid': 83.59, 'ask': 83.6, 'source': 'binance_bookticker'}
+2026-05-27 20:23:04.766 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:23:06.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=70.0s
+2026-05-27 20:23:06.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=70.0s
+2026-05-27 20:23:06.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=70.0s
+2026-05-27 20:23:06.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=70.0s
+2026-05-27 20:23:06.385 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=69.1s
+2026-05-27 20:23:06.385 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=69.1s
+2026-05-27 20:23:06.385 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=68.5s
+2026-05-27 20:23:06.386 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=68.5s
+2026-05-27 20:23:06.386 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=66.8s
+2026-05-27 20:23:06.386 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=66.8s
+2026-05-27 20:23:06.387 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=66.8s
+2026-05-27 20:23:06.387 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=66.8s
+2026-05-27 20:23:06.815 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:23:06.824 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:06.825 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.60)
+2026-05-27 20:23:09.445 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:09.455 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:09.456 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.60)
+2026-05-27 20:23:09.694 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:09.705 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:09.706 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.90)
+2026-05-27 20:23:09.706 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.90
+2026-05-27 20:23:09.706 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0002 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:23:09.951 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:09.970 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:23:09.972 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.32)
+2026-05-27 20:23:09.972 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:23:09.992 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:09.995 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.89)
+2026-05-27 20:23:09.995 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.89
+2026-05-27 20:23:09.995 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:09.996 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:23:10.016 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:23:10.018 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.87)
+2026-05-27 20:23:10.018 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.87
+2026-05-27 20:23:10.019 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0004 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:23:10.019 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:23:10.036 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:23:10.040 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.88)
+2026-05-27 20:23:10.041 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.88
+2026-05-27 20:23:10.042 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0002 spread=0.0000 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:23:10.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:10.459 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:23:10.460 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.88)
+2026-05-27 20:23:10.461 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.88
+2026-05-27 20:23:10.461 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:23:11.200 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:11.227 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:11.228 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.60)
+2026-05-27 20:23:16.380 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=80.0s
+2026-05-27 20:23:16.381 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=80.0s
+2026-05-27 20:23:16.381 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=80.0s
+2026-05-27 20:23:16.381 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=80.0s
+2026-05-27 20:23:16.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=79.1s
+2026-05-27 20:23:16.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=79.1s
+2026-05-27 20:23:16.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=78.5s
+2026-05-27 20:23:16.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=78.5s
+2026-05-27 20:23:16.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=76.8s
+2026-05-27 20:23:16.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=76.8s
+2026-05-27 20:23:16.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=76.8s
+2026-05-27 20:23:16.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=76.8s
+2026-05-27 20:23:16.746 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75075.87, 'high': 75086.82, 'low': 75064.92, 'close': 75075.87, 'volume': 1.0, 'timestamp': '2026-05-27T17:23:16.746745', 'bid': 75064.92, 'ask': 75086.82, 'source': 'binance_bookticker'}
+2026-05-27 20:23:16.747 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75076.21, 'high': 75086.82, 'low': 75065.6, 'close': 75076.21, 'volume': 1.0, 'timestamp': '2026-05-27T17:23:16.746745', 'bid': 75065.6, 'ask': 75086.82, 'source': 'binance_bookticker'}
+2026-05-27 20:23:16.748 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75076.215, 'high': 75086.82, 'low': 75065.61, 'close': 75076.215, 'volume': 22.69872, 'timestamp': '2026-05-27T17:23:16.746745', 'bid': 75065.61, 'ask': 75086.82, 'source': 'binance_bookticker'}
+2026-05-27 20:23:16.748 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75065.67, 'high': 75065.73, 'low': 75065.61, 'close': 75065.67, 'volume': 22.69798, 'timestamp': '2026-05-27T17:23:16.746745', 'bid': 75065.61, 'ask': 75065.73, 'source': 'binance_bookticker'}
+2026-05-27 20:23:16.749 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75065.61499999999, 'high': 75065.62, 'low': 75065.61, 'close': 75065.61499999999, 'volume': 22.74982, 'timestamp': '2026-05-27T17:23:16.746745', 'bid': 75065.61, 'ask': 75065.62, 'source': 'binance_bookticker'}
+2026-05-27 20:23:16.768 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (22 bars)
+2026-05-27 20:23:16.770 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.025, 'high': 2061.03, 'low': 2061.02, 'close': 2061.025, 'volume': 314.462, 'timestamp': '2026-05-27T17:23:16.768755', 'bid': 2061.02, 'ask': 2061.03, 'source': 'binance_bookticker'}
+2026-05-27 20:23:18.357 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (32 bars)
+2026-05-27 20:23:19.447 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:19.451 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:23:19.451 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.32)
+2026-05-27 20:23:19.696 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:19.708 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:23:19.709 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.98)
+2026-05-27 20:23:19.710 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: NVDA BUY @ 0.98
+2026-05-27 20:23:19.710 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.98
+2026-05-27 20:23:19.711 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:23:19.945 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:19.960 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.31
+2026-05-27 20:23:19.961 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.82)
+2026-05-27 20:23:19.963 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.82
+2026-05-27 20:23:19.963 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0002 spread=0.0001 vol=0.0000 conf=0.82 thr=0.62
+2026-05-27 20:23:20.199 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:23:20.214 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.19
+2026-05-27 20:23:20.216 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.51)
+2026-05-27 20:23:20.216 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:23:20.234 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.12
+2026-05-27 20:23:20.236 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.66)
+2026-05-27 20:23:20.237 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:23:20.253 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:23:20.254 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.41)
+2026-05-27 20:23:20.465 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:20.476 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:20.477 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.89)
+2026-05-27 20:23:20.478 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.89
+2026-05-27 20:23:20.478 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:21.195 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:21.213 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.14
+2026-05-27 20:23:21.214 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.68)
+2026-05-27 20:23:21.570 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:23:21.581 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:23:21.581 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:23:21.582 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.85)
+2026-05-27 20:23:26.379 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=90.0s
+2026-05-27 20:23:26.380 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=90.0s
+2026-05-27 20:23:26.380 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=90.0s
+2026-05-27 20:23:26.380 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=90.0s
+2026-05-27 20:23:26.381 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=89.1s
+2026-05-27 20:23:26.381 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=89.1s
+2026-05-27 20:23:26.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=88.5s
+2026-05-27 20:23:26.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=88.5s
+2026-05-27 20:23:26.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=86.8s
+2026-05-27 20:23:26.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=86.8s
+2026-05-27 20:23:26.382 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=86.8s
+2026-05-27 20:23:26.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=86.8s
+2026-05-27 20:23:28.732 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75065.61499999999, 'high': 75065.62, 'low': 75065.61, 'close': 75065.61499999999, 'volume': 22.74317, 'timestamp': '2026-05-27T17:23:28.732481', 'bid': 75065.61, 'ask': 75065.62, 'source': 'binance_bookticker'}
+2026-05-27 20:23:29.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:29.459 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:23:29.460 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.88)
+2026-05-27 20:23:29.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.88
+2026-05-27 20:23:29.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:29.695 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:29.706 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:23:29.707 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.87)
+2026-05-27 20:23:29.708 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.87
+2026-05-27 20:23:29.708 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:23:29.947 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:29.961 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:23:29.962 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.87)
+2026-05-27 20:23:29.963 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.87
+2026-05-27 20:23:29.964 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0003 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:23:30.197 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:23:30.210 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:30.211 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.98)
+2026-05-27 20:23:30.211 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AMZN BUY @ 0.98
+2026-05-27 20:23:30.211 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.98
+2026-05-27 20:23:30.212 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:23:30.212 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:23:30.225 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.14
+2026-05-27 20:23:30.226 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.53)
+2026-05-27 20:23:30.447 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:23:30.454 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:30.455 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.89)
+2026-05-27 20:23:30.455 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.89
+2026-05-27 20:23:30.456 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:30.456 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:30.463 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:30.464 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.89)
+2026-05-27 20:23:30.464 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.89
+2026-05-27 20:23:30.465 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:31.196 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:31.209 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.12
+2026-05-27 20:23:31.210 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.89)
+2026-05-27 20:23:31.211 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.89
+2026-05-27 20:23:31.217 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:23:32.445 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (23 bars)
+2026-05-27 20:23:33.135 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:23:33.144 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:33.145 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:23:33.145 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.98)
+2026-05-27 20:23:33.145 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75064.95499999999, 'high': 75065.62, 'low': 75064.29, 'close': 75064.95499999999, 'volume': 1.0, 'timestamp': '2026-05-27T17:23:33.135095', 'bid': 75064.29, 'ask': 75065.62, 'source': 'binance_bookticker'}
+2026-05-27 20:23:33.146 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75064.005, 'high': 75064.01, 'low': 75064.0, 'close': 75064.005, 'volume': 14.62588, 'timestamp': '2026-05-27T17:23:33.135095', 'bid': 75064.0, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:33.154 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.145, 'high': 2061.15, 'low': 2061.14, 'close': 2061.145, 'volume': 49.85680000000001, 'timestamp': '2026-05-27T17:23:33.154096', 'bid': 2061.14, 'ask': 2061.15, 'source': 'binance_bookticker'}
+2026-05-27 20:23:33.155 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.1549999999997, 'high': 2061.16, 'low': 2061.15, 'close': 2061.1549999999997, 'volume': 99.57690000000001, 'timestamp': '2026-05-27T17:23:33.154096', 'bid': 2061.15, 'ask': 2061.16, 'source': 'binance_bookticker'}
+2026-05-27 20:23:33.155 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.165, 'high': 2061.17, 'low': 2061.16, 'close': 2061.165, 'volume': 11.4303, 'timestamp': '2026-05-27T17:23:33.154096', 'bid': 2061.16, 'ask': 2061.17, 'source': 'binance_bookticker'}
+2026-05-27 20:23:33.156 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.175, 'high': 2061.18, 'low': 2061.17, 'close': 2061.175, 'volume': 320.0167, 'timestamp': '2026-05-27T17:23:33.156102', 'bid': 2061.17, 'ask': 2061.18, 'source': 'binance_bookticker'}
+2026-05-27 20:23:34.774 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:23:35.151 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (33 bars)
+2026-05-27 20:23:36.381 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=100.0s
+2026-05-27 20:23:36.382 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=100.0s
+2026-05-27 20:23:36.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=100.0s
+2026-05-27 20:23:36.383 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=100.0s
+2026-05-27 20:23:36.383 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=99.1s
+2026-05-27 20:23:36.384 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=99.1s
+2026-05-27 20:23:36.384 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=98.5s
+2026-05-27 20:23:36.385 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=98.5s
+2026-05-27 20:23:36.385 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=96.8s
+2026-05-27 20:23:36.387 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=96.8s
+2026-05-27 20:23:36.391 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=96.8s
+2026-05-27 20:23:36.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=96.8s
+2026-05-27 20:23:39.446 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:39.457 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.29
+2026-05-27 20:23:39.458 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.83)
+2026-05-27 20:23:39.459 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.83
+2026-05-27 20:23:39.459 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0002 spread=0.0001 vol=0.0000 conf=0.83 thr=0.62
+2026-05-27 20:23:39.697 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:39.706 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:23:39.707 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.33)
+2026-05-27 20:23:39.945 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:39.964 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:23:39.969 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.98)
+2026-05-27 20:23:39.971 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: TSLA BUY @ 0.98
+2026-05-27 20:23:39.972 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.98
+2026-05-27 20:23:39.972 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:23:40.188 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:23:40.198 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:23:40.199 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.32)
+2026-05-27 20:23:40.447 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:23:40.458 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:40.459 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.88)
+2026-05-27 20:23:40.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.88
+2026-05-27 20:23:40.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0001 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:40.461 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:23:40.470 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:40.471 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.60)
+2026-05-27 20:23:40.472 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:40.481 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.25
+2026-05-27 20:23:40.481 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.15)
+2026-05-27 20:23:41.193 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:41.204 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:23:41.205 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.90)
+2026-05-27 20:23:41.205 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.90
+2026-05-27 20:23:41.206 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.90
+2026-05-27 20:23:41.207 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.90 thr=0.62
+2026-05-27 20:23:43.438 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:23:43.456 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.06
+2026-05-27 20:23:43.457 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.82)
+2026-05-27 20:23:46.405 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=110.0s
+2026-05-27 20:23:46.406 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=110.0s
+2026-05-27 20:23:46.406 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=110.0s
+2026-05-27 20:23:46.407 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=110.0s
+2026-05-27 20:23:46.407 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=109.1s
+2026-05-27 20:23:46.407 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=109.1s
+2026-05-27 20:23:46.408 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=108.5s
+2026-05-27 20:23:46.408 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=108.5s
+2026-05-27 20:23:46.409 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=106.8s
+2026-05-27 20:23:46.409 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=106.8s
+2026-05-27 20:23:46.409 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=106.8s
+2026-05-27 20:23:46.410 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=106.8s
+2026-05-27 20:23:49.401 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.965, 'high': 75064.01, 'low': 75063.92, 'close': 75063.965, 'volume': 3.1261400000000004, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75063.92, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.402 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.62, 'high': 75064.01, 'low': 75063.23, 'close': 75063.62, 'volume': 1.84524, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75063.23, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.403 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.61, 'high': 75064.01, 'low': 75063.21, 'close': 75063.61, 'volume': 13.30231, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75063.21, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.404 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75063.345, 'high': 75064.01, 'low': 75062.68, 'close': 75063.345, 'volume': 1.84584, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75062.68, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.404 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75058.22, 'high': 75064.01, 'low': 75052.43, 'close': 75058.22, 'volume': 1.8455000000000001, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75052.43, 'ask': 75064.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.404 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75044.005, 'high': 75044.01, 'low': 75044.0, 'close': 75044.005, 'volume': 30.32385, 'timestamp': '2026-05-27T17:23:49.401245', 'bid': 75044.0, 'ask': 75044.01, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.416 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (26 bars)
+2026-05-27 20:23:49.417 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.1549999999997, 'high': 2061.18, 'low': 2061.13, 'close': 2061.1549999999997, 'volume': 104.6711, 'timestamp': '2026-05-27T17:23:49.417852', 'bid': 2061.13, 'ask': 2061.18, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.419 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.1, 'high': 2061.18, 'low': 2061.02, 'close': 2061.1, 'volume': 330.8275, 'timestamp': '2026-05-27T17:23:49.417852', 'bid': 2061.02, 'ask': 2061.18, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.420 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.795, 'high': 2060.81, 'low': 2060.78, 'close': 2060.795, 'volume': 115.0956, 'timestamp': '2026-05-27T17:23:49.417852', 'bid': 2060.78, 'ask': 2060.81, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.420 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.785, 'high': 2060.79, 'low': 2060.78, 'close': 2060.785, 'volume': 216.6328, 'timestamp': '2026-05-27T17:23:49.417852', 'bid': 2060.78, 'ask': 2060.79, 'source': 'binance_bookticker'}
+2026-05-27 20:23:49.464 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:49.479 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:23:49.480 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.39)
+2026-05-27 20:23:49.698 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:49.711 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.26
+2026-05-27 20:23:49.712 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.89)
+2026-05-27 20:23:49.712 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.89
+2026-05-27 20:23:49.713 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:49.946 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:49.957 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:23:49.958 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.60)
+2026-05-27 20:23:50.193 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:23:50.204 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:50.204 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.89)
+2026-05-27 20:23:50.205 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.89
+2026-05-27 20:23:50.205 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0001 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:50.442 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:23:50.449 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.12
+2026-05-27 20:23:50.450 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.89)
+2026-05-27 20:23:50.450 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.89
+2026-05-27 20:23:50.451 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0004 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:50.690 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:23:50.700 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:23:50.701 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.60)
+2026-05-27 20:23:50.701 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:23:50.709 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.12
+2026-05-27 20:23:50.710 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.88)
+2026-05-27 20:23:50.711 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.88
+2026-05-27 20:23:50.711 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:23:50.906 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (35 bars)
+2026-05-27 20:23:50.907 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.60499999999999, 'high': 83.61, 'low': 83.6, 'close': 83.60499999999999, 'volume': 2942.228, 'timestamp': '2026-05-27T17:23:50.906415', 'bid': 83.6, 'ask': 83.61, 'source': 'binance_bookticker'}
+2026-05-27 20:23:50.907 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.6, 'high': 83.61, 'low': 83.59, 'close': 83.6, 'volume': 4801.496, 'timestamp': '2026-05-27T17:23:50.906415', 'bid': 83.59, 'ask': 83.61, 'source': 'binance_bookticker'}
+2026-05-27 20:23:50.908 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.595, 'high': 83.6, 'low': 83.59, 'close': 83.595, 'volume': 8631.004, 'timestamp': '2026-05-27T17:23:50.906415', 'bid': 83.59, 'ask': 83.6, 'source': 'binance_bookticker'}
+2026-05-27 20:23:51.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:23:51.209 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.18
+2026-05-27 20:23:51.210 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.91)
+2026-05-27 20:23:51.210 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.91
+2026-05-27 20:23:51.211 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.91
+2026-05-27 20:23:51.211 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.90 thr=0.62
+2026-05-27 20:23:53.907 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:23:53.917 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.24
+2026-05-27 20:23:53.918 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.15)
+2026-05-27 20:23:56.409 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=120.0s
+2026-05-27 20:23:56.411 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=120.0s
+2026-05-27 20:23:56.412 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=120.0s
+2026-05-27 20:23:56.412 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=120.0s
+2026-05-27 20:23:56.413 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=119.1s
+2026-05-27 20:23:56.413 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=119.1s
+2026-05-27 20:23:56.414 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=118.5s
+2026-05-27 20:23:56.414 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=118.5s
+2026-05-27 20:23:56.414 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=116.8s
+2026-05-27 20:23:56.415 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=116.8s
+2026-05-27 20:23:56.415 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=116.8s
+2026-05-27 20:23:56.415 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=116.8s
+2026-05-27 20:23:59.692 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:23:59.702 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:59.703 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.89)
+2026-05-27 20:23:59.703 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.89
+2026-05-27 20:23:59.704 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0002 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:23:59.704 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:23:59.711 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:23:59.712 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.97)
+2026-05-27 20:23:59.712 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: NVDA BUY @ 0.97
+2026-05-27 20:23:59.712 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.97
+2026-05-27 20:23:59.713 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.96 thr=0.62
+2026-05-27 20:23:59.954 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:23:59.973 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:23:59.974 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.32)
+2026-05-27 20:24:00.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:00.212 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:00.212 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.89)
+2026-05-27 20:24:00.213 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.89
+2026-05-27 20:24:00.213 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:24:00.451 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:00.463 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.13
+2026-05-27 20:24:00.464 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.57)
+2026-05-27 20:24:00.696 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:00.706 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:24:00.707 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.91)
+2026-05-27 20:24:00.707 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.91
+2026-05-27 20:24:00.707 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.91
+2026-05-27 20:24:00.708 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:24:00.708 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:00.715 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.24
+2026-05-27 20:24:00.716 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.43)
+2026-05-27 20:24:01.197 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:01.206 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:24:01.207 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.88)
+2026-05-27 20:24:01.207 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.88
+2026-05-27 20:24:01.208 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:24:04.113 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:24:04.127 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.10
+2026-05-27 20:24:04.128 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:24:04.129 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.92)
+2026-05-27 20:24:04.778 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:24:05.863 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75043.345, 'high': 75044.01, 'low': 75042.68, 'close': 75043.345, 'volume': 29.33603, 'timestamp': '2026-05-27T17:24:05.863657', 'bid': 75042.68, 'ask': 75044.01, 'source': 'binance_bookticker'}
+2026-05-27 20:24:05.867 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75027.83499999999, 'high': 75027.84, 'low': 75027.83, 'close': 75027.83499999999, 'volume': 18.13274, 'timestamp': '2026-05-27T17:24:05.863657', 'bid': 75027.83, 'ask': 75027.84, 'source': 'binance_bookticker'}
+2026-05-27 20:24:05.870 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (30 bars)
+2026-05-27 20:24:05.871 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.605, 'high': 2060.61, 'low': 2060.6, 'close': 2060.605, 'volume': 396.25120000000004, 'timestamp': '2026-05-27T17:24:05.870039', 'bid': 2060.6, 'ask': 2060.61, 'source': 'binance_bookticker'}
+2026-05-27 20:24:06.391 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=130.0s
+2026-05-27 20:24:06.392 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=130.0s
+2026-05-27 20:24:06.393 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=130.0s
+2026-05-27 20:24:06.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=130.0s
+2026-05-27 20:24:06.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=129.1s
+2026-05-27 20:24:06.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=129.1s
+2026-05-27 20:24:06.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=128.5s
+2026-05-27 20:24:06.396 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=128.5s
+2026-05-27 20:24:06.396 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=126.8s
+2026-05-27 20:24:06.397 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=126.8s
+2026-05-27 20:24:06.397 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=126.8s
+2026-05-27 20:24:06.398 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=126.8s
+2026-05-27 20:24:07.329 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (36 bars)
+2026-05-27 20:24:09.697 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:09.709 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:24:09.711 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.87)
+2026-05-27 20:24:09.711 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.87
+2026-05-27 20:24:09.712 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:24:09.712 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:09.725 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:24:09.726 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.98)
+2026-05-27 20:24:09.727 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: NVDA BUY @ 0.98
+2026-05-27 20:24:09.728 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.98
+2026-05-27 20:24:09.728 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:24:09.946 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:24:09.956 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.27
+2026-05-27 20:24:09.957 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.12)
+2026-05-27 20:24:10.199 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:10.209 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:10.209 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.93)
+2026-05-27 20:24:10.210 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AMZN BUY @ 0.93
+2026-05-27 20:24:10.210 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.93
+2026-05-27 20:24:10.211 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.93 thr=0.62
+2026-05-27 20:24:10.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:10.456 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.11
+2026-05-27 20:24:10.456 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.67)
+2026-05-27 20:24:10.696 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:10.706 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:10.707 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.93)
+2026-05-27 20:24:10.707 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.93
+2026-05-27 20:24:10.707 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.93
+2026-05-27 20:24:10.708 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.93 thr=0.62
+2026-05-27 20:24:10.708 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:10.717 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:10.718 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.86)
+2026-05-27 20:24:10.718 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.86
+2026-05-27 20:24:10.719 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:24:11.195 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:11.206 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:24:11.207 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.91)
+2026-05-27 20:24:11.207 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.91
+2026-05-27 20:24:11.208 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.91
+2026-05-27 20:24:11.208 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:24:14.622 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:24:14.638 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:14.639 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.19)
+2026-05-27 20:24:16.391 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=140.0s
+2026-05-27 20:24:16.392 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=140.0s
+2026-05-27 20:24:16.392 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=140.0s
+2026-05-27 20:24:16.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=140.0s
+2026-05-27 20:24:16.393 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=139.1s
+2026-05-27 20:24:16.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=139.1s
+2026-05-27 20:24:16.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=138.5s
+2026-05-27 20:24:16.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=138.5s
+2026-05-27 20:24:16.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=136.8s
+2026-05-27 20:24:16.395 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=136.8s
+2026-05-27 20:24:16.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=136.8s
+2026-05-27 20:24:16.396 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=136.8s
+2026-05-27 20:24:17.133 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (36 bars)
+2026-05-27 20:24:19.701 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:19.713 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.25
+2026-05-27 20:24:19.715 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.14)
+2026-05-27 20:24:19.715 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:19.730 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:24:19.731 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.10)
+2026-05-27 20:24:19.946 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:24:19.961 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:24:19.962 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.47)
+2026-05-27 20:24:20.194 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:20.203 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.25
+2026-05-27 20:24:20.204 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.15)
+2026-05-27 20:24:20.446 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:20.456 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:20.459 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.85)
+2026-05-27 20:24:20.459 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.85
+2026-05-27 20:24:20.459 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0003 vol=0.0000 conf=0.85 thr=0.62
+2026-05-27 20:24:20.694 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:20.703 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.14
+2026-05-27 20:24:20.704 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.55)
+2026-05-27 20:24:20.704 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:20.713 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.14
+2026-05-27 20:24:20.714 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.69)
+2026-05-27 20:24:21.195 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:21.207 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.10
+2026-05-27 20:24:21.208 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.92)
+2026-05-27 20:24:21.208 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.92
+2026-05-27 20:24:21.209 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.92
+2026-05-27 20:24:21.209 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:24:22.144 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75028.61499999999, 'high': 75028.62, 'low': 75028.61, 'close': 75028.61499999999, 'volume': 5.26769, 'timestamp': '2026-05-27T17:24:22.144678', 'bid': 75028.61, 'ask': 75028.62, 'source': 'binance_bookticker'}
+2026-05-27 20:24:22.145 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75028.61499999999, 'high': 75028.62, 'low': 75028.61, 'close': 75028.61499999999, 'volume': 27.232390000000002, 'timestamp': '2026-05-27T17:24:22.144678', 'bid': 75028.61, 'ask': 75028.62, 'source': 'binance_bookticker'}
+2026-05-27 20:24:22.165 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.59, 'high': 2060.61, 'low': 2060.57, 'close': 2060.59, 'volume': 7.7718, 'timestamp': '2026-05-27T17:24:22.165675', 'bid': 2060.57, 'ask': 2060.61, 'source': 'binance_bookticker'}
+2026-05-27 20:24:22.167 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.5550000000003, 'high': 2060.61, 'low': 2060.5, 'close': 2060.5550000000003, 'volume': 137.07399999999998, 'timestamp': '2026-05-27T17:24:22.165675', 'bid': 2060.5, 'ask': 2060.61, 'source': 'binance_bookticker'}
+2026-05-27 20:24:22.167 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.505, 'high': 2060.51, 'low': 2060.5, 'close': 2060.505, 'volume': 624.2358, 'timestamp': '2026-05-27T17:24:22.165675', 'bid': 2060.5, 'ask': 2060.51, 'source': 'binance_bookticker'}
+2026-05-27 20:24:23.303 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (38 bars)
+2026-05-27 20:24:26.403 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=150.0s
+2026-05-27 20:24:26.404 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=150.0s
+2026-05-27 20:24:26.405 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=150.0s
+2026-05-27 20:24:26.406 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=150.0s
+2026-05-27 20:24:26.406 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=149.1s
+2026-05-27 20:24:26.406 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=149.1s
+2026-05-27 20:24:26.406 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=148.5s
+2026-05-27 20:24:26.407 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=148.5s
+2026-05-27 20:24:26.407 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=146.8s
+2026-05-27 20:24:26.407 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=146.8s
+2026-05-27 20:24:26.407 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=146.8s
+2026-05-27 20:24:26.408 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=146.8s
+2026-05-27 20:24:29.700 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:29.710 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:24:29.711 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.58)
+2026-05-27 20:24:29.711 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:29.721 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.17
+2026-05-27 20:24:29.721 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.24)
+2026-05-27 20:24:29.931 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (39 bars)
+2026-05-27 20:24:29.964 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:24:29.973 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.18
+2026-05-27 20:24:29.973 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.58)
+2026-05-27 20:24:30.200 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:24:30.210 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.32
+2026-05-27 20:24:30.211 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.10)
+2026-05-27 20:24:30.211 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:30.220 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:24:30.221 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.43)
+2026-05-27 20:24:30.450 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:30.459 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:30.460 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.89)
+2026-05-27 20:24:30.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.89
+2026-05-27 20:24:30.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:24:30.700 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:30.709 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:30.710 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.60)
+2026-05-27 20:24:30.710 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:30.719 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:30.720 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.60)
+2026-05-27 20:24:31.199 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:31.208 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.13
+2026-05-27 20:24:31.209 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.56)
+2026-05-27 20:24:34.776 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:24:36.393 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=160.0s
+2026-05-27 20:24:36.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=160.0s
+2026-05-27 20:24:36.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=160.0s
+2026-05-27 20:24:36.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=160.0s
+2026-05-27 20:24:36.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=159.1s
+2026-05-27 20:24:36.395 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=159.1s
+2026-05-27 20:24:36.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=158.5s
+2026-05-27 20:24:36.396 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=158.5s
+2026-05-27 20:24:36.396 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=156.8s
+2026-05-27 20:24:36.396 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=156.8s
+2026-05-27 20:24:36.396 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=156.8s
+2026-05-27 20:24:36.397 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=156.8s
+2026-05-27 20:24:36.632 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (41 bars)
+2026-05-27 20:24:38.555 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75034.91500000001, 'high': 75034.92, 'low': 75034.91, 'close': 75034.91500000001, 'volume': 18.65231, 'timestamp': '2026-05-27T17:24:38.555259', 'bid': 75034.91, 'ask': 75034.92, 'source': 'binance_bookticker'}
+2026-05-27 20:24:38.578 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.4700000000003, 'high': 2060.48, 'low': 2060.46, 'close': 2060.4700000000003, 'volume': 80.1079, 'timestamp': '2026-05-27T17:24:38.578002', 'bid': 2060.46, 'ask': 2060.48, 'source': 'binance_bookticker'}
+2026-05-27 20:24:38.578 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.465, 'high': 2060.47, 'low': 2060.46, 'close': 2060.465, 'volume': 201.2724, 'timestamp': '2026-05-27T17:24:38.578002', 'bid': 2060.46, 'ask': 2060.47, 'source': 'binance_bookticker'}
+2026-05-27 20:24:39.698 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:39.699 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:24:39.699 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.47)
+2026-05-27 20:24:39.946 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:39.955 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:24:39.956 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.88)
+2026-05-27 20:24:39.957 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.88
+2026-05-27 20:24:39.957 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:24:40.065 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.625, 'high': 83.63, 'low': 83.62, 'close': 83.625, 'volume': 4952.464, 'timestamp': '2026-05-27T17:24:40.065653', 'bid': 83.62, 'ask': 83.63, 'source': 'binance_bookticker'}
+2026-05-27 20:24:40.197 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:24:40.199 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.32
+2026-05-27 20:24:40.199 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.11)
+2026-05-27 20:24:40.447 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:40.460 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.11
+2026-05-27 20:24:40.461 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.67)
+2026-05-27 20:24:40.461 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:40.474 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:40.475 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.59)
+2026-05-27 20:24:40.699 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:40.707 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.24
+2026-05-27 20:24:40.708 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.43)
+2026-05-27 20:24:40.708 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:40.714 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:40.717 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.60)
+2026-05-27 20:24:41.192 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:41.202 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:41.203 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.60)
+2026-05-27 20:24:46.399 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=170.0s
+2026-05-27 20:24:46.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=170.0s
+2026-05-27 20:24:46.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=170.0s
+2026-05-27 20:24:46.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=170.0s
+2026-05-27 20:24:46.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=169.1s
+2026-05-27 20:24:46.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=169.1s
+2026-05-27 20:24:46.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=168.5s
+2026-05-27 20:24:46.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=168.5s
+2026-05-27 20:24:46.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=166.8s
+2026-05-27 20:24:46.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=166.8s
+2026-05-27 20:24:46.402 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=166.8s
+2026-05-27 20:24:46.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=166.8s
+2026-05-27 20:24:46.759 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:24:46.769 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.21
+2026-05-27 20:24:46.769 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:24:46.770 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.98)
+2026-05-27 20:24:46.770 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75037.625, 'high': 75037.63, 'low': 75037.62, 'close': 75037.625, 'volume': 37.4831, 'timestamp': '2026-05-27T17:24:46.759766', 'bid': 75037.62, 'ask': 75037.63, 'source': 'binance_bookticker'}
+2026-05-27 20:24:46.770 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (43 bars)
+2026-05-27 20:24:46.771 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.545, 'high': 2060.55, 'low': 2060.54, 'close': 2060.545, 'volume': 367.1163, 'timestamp': '2026-05-27T17:24:46.759766', 'bid': 2060.54, 'ask': 2060.55, 'source': 'binance_bookticker'}
+2026-05-27 20:24:49.700 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:49.707 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:49.708 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.89)
+2026-05-27 20:24:49.709 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.89
+2026-05-27 20:24:49.709 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0002 spread=0.0000 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:24:49.950 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:49.959 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:24:49.959 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.88)
+2026-05-27 20:24:49.960 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.88
+2026-05-27 20:24:49.960 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0008 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:24:50.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:24:50.210 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:24:50.211 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.84)
+2026-05-27 20:24:50.211 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.84
+2026-05-27 20:24:50.211 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0002 spread=0.0002 vol=0.0000 conf=0.84 thr=0.62
+2026-05-27 20:24:50.331 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (43 bars)
+2026-05-27 20:24:50.439 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:24:50.448 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:24:50.449 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.49)
+2026-05-27 20:24:50.693 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:24:50.701 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.11
+2026-05-27 20:24:50.702 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.69)
+2026-05-27 20:24:50.702 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:24:50.710 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:24:50.710 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: HOLD (Confidence: 0.47)
+2026-05-27 20:24:50.711 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:24:50.720 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.14
+2026-05-27 20:24:50.721 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.55)
+2026-05-27 20:24:51.199 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:24:51.210 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.14
+2026-05-27 20:24:51.210 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.68)
+2026-05-27 20:24:56.398 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=180.0s
+2026-05-27 20:24:56.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=180.0s
+2026-05-27 20:24:56.399 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=180.0s
+2026-05-27 20:24:56.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=180.0s
+2026-05-27 20:24:56.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=179.1s
+2026-05-27 20:24:56.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=179.1s
+2026-05-27 20:24:56.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=178.5s
+2026-05-27 20:24:56.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=178.5s
+2026-05-27 20:24:56.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=176.8s
+2026-05-27 20:24:56.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=176.8s
+2026-05-27 20:24:56.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=176.8s
+2026-05-27 20:24:56.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=176.8s
+2026-05-27 20:24:57.174 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (46 bars)
+2026-05-27 20:24:59.703 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:24:59.712 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:24:59.713 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.12)
+2026-05-27 20:24:59.952 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:24:59.960 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:24:59.961 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.60)
+2026-05-27 20:25:00.203 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:25:00.211 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.24
+2026-05-27 20:25:00.212 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.89)
+2026-05-27 20:25:00.213 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.89
+2026-05-27 20:25:00.213 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0002 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:25:00.440 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:25:00.449 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:25:00.450 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.89)
+2026-05-27 20:25:00.451 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.89
+2026-05-27 20:25:00.451 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:25:00.689 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:25:00.699 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.14
+2026-05-27 20:25:00.700 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.69)
+2026-05-27 20:25:00.701 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:25:00.711 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.12
+2026-05-27 20:25:00.712 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.89)
+2026-05-27 20:25:00.712 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.89
+2026-05-27 20:25:00.713 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:25:00.713 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:25:00.723 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:00.724 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: HOLD (Confidence: 0.60)
+2026-05-27 20:25:01.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:25:01.209 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.18
+2026-05-27 20:25:01.210 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: HOLD (Confidence: 0.46)
+2026-05-27 20:25:03.502 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:25:03.509 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:03.510 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:25:03.511 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.98)
+2026-05-27 20:25:03.511 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75039.955, 'high': 75039.96, 'low': 75039.95, 'close': 75039.955, 'volume': 39.57227, 'timestamp': '2026-05-27T17:25:03.502676', 'bid': 75039.95, 'ask': 75039.96, 'source': 'binance_bookticker'}
+2026-05-27 20:25:03.521 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.49, 'high': 2060.5, 'low': 2060.48, 'close': 2060.49, 'volume': 114.8172, 'timestamp': '2026-05-27T17:25:03.521288', 'bid': 2060.48, 'ask': 2060.5, 'source': 'binance_bookticker'}
+2026-05-27 20:25:03.523 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.4849999999997, 'high': 2060.49, 'low': 2060.48, 'close': 2060.4849999999997, 'volume': 448.70799999999997, 'timestamp': '2026-05-27T17:25:03.521288', 'bid': 2060.48, 'ask': 2060.49, 'source': 'binance_bookticker'}
+2026-05-27 20:25:04.767 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:25:06.392 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=190.0s
+2026-05-27 20:25:06.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=190.0s
+2026-05-27 20:25:06.393 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=190.0s
+2026-05-27 20:25:06.393 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=190.0s
+2026-05-27 20:25:06.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=189.1s
+2026-05-27 20:25:06.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=189.1s
+2026-05-27 20:25:06.394 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=188.5s
+2026-05-27 20:25:06.394 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=188.5s
+2026-05-27 20:25:06.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=186.8s
+2026-05-27 20:25:06.395 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=186.8s
+2026-05-27 20:25:06.395 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=186.8s
+2026-05-27 20:25:06.395 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=186.8s
+2026-05-27 20:25:07.951 | DEBUG    | trading.live_signal_generator:on_market_data:29 - ETH/USD: Insufficient data (49 bars)
+2026-05-27 20:25:08.595 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (45 bars)
+2026-05-27 20:25:09.942 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:25:09.952 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:09.953 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.97)
+2026-05-27 20:25:09.953 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AAPL BUY @ 0.97
+2026-05-27 20:25:09.953 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.97
+2026-05-27 20:25:09.953 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0002 spread=0.0000 vol=0.0000 conf=0.97 thr=0.62
+2026-05-27 20:25:09.954 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:25:09.961 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: SELL with Confidence: 0.28
+2026-05-27 20:25:09.962 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.11)
+2026-05-27 20:25:10.190 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:25:10.199 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.14
+2026-05-27 20:25:10.200 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.87)
+2026-05-27 20:25:10.201 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.87
+2026-05-27 20:25:10.201 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0003 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:25:10.438 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:25:10.448 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:25:10.449 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.87)
+2026-05-27 20:25:10.450 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.87
+2026-05-27 20:25:10.450 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.86 thr=0.62
+2026-05-27 20:25:10.698 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:25:10.712 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:25:10.726 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.92)
+2026-05-27 20:25:10.727 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: META BUY @ 0.92
+2026-05-27 20:25:10.728 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.92
+2026-05-27 20:25:10.729 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:25:10.730 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:25:10.746 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:25:10.750 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.96)
+2026-05-27 20:25:10.752 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.96
+2026-05-27 20:25:10.752 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.96
+2026-05-27 20:25:10.753 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.95 thr=0.62
+2026-05-27 20:25:10.754 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:25:10.769 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:25:10.771 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.91)
+2026-05-27 20:25:10.771 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: QQQ BUY @ 0.91
+2026-05-27 20:25:10.772 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.91
+2026-05-27 20:25:10.772 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0001 spread=0.0000 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:25:11.190 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:25:11.202 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.14
+2026-05-27 20:25:11.203 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.88)
+2026-05-27 20:25:11.203 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.88
+2026-05-27 20:25:11.204 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.88 thr=0.62
+2026-05-27 20:25:16.398 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=200.0s
+2026-05-27 20:25:16.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=200.0s
+2026-05-27 20:25:16.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=200.0s
+2026-05-27 20:25:16.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=200.0s
+2026-05-27 20:25:16.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=199.1s
+2026-05-27 20:25:16.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=199.1s
+2026-05-27 20:25:16.402 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=198.5s
+2026-05-27 20:25:16.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=198.5s
+2026-05-27 20:25:16.402 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=196.8s
+2026-05-27 20:25:16.403 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=196.8s
+2026-05-27 20:25:16.403 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=196.8s
+2026-05-27 20:25:16.403 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=196.8s
+2026-05-27 20:25:19.785 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:25:19.793 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:19.795 | WARNING  | trading.trading_agent:_analyze_symbol:203 - TRADE REJECTED for BTC/USD: Position size exceeded
+2026-05-27 20:25:19.795 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.93)
+2026-05-27 20:25:19.808 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing ETH/USD...
+2026-05-27 20:25:19.815 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:25:19.815 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for ETH/USD: BUY (Confidence: 0.98)
+2026-05-27 20:25:19.816 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: ETH/USD BUY @ 0.98
+2026-05-27 20:25:19.816 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: ETH/USD | BUY | Conf: 0.98
+2026-05-27 20:25:19.816 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for ETH/USD: expected_move=0.0002 spread=0.0000 vol=0.0000 conf=0.97 thr=0.62
+2026-05-27 20:25:19.817 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.455, 'high': 2060.49, 'low': 2060.42, 'close': 2060.455, 'volume': 358.4414, 'timestamp': '2026-05-27T17:25:19.807263', 'bid': 2060.42, 'ask': 2060.49, 'source': 'binance_bookticker'}
+2026-05-27 20:25:19.817 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.13, 'high': 2060.49, 'low': 2059.77, 'close': 2060.13, 'volume': 505.89660000000003, 'timestamp': '2026-05-27T17:25:19.807263', 'bid': 2059.77, 'ask': 2060.49, 'source': 'binance_bookticker'}
+2026-05-27 20:25:19.818 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2059.775, 'high': 2059.78, 'low': 2059.77, 'close': 2059.775, 'volume': 165.9826, 'timestamp': '2026-05-27T17:25:19.808264', 'bid': 2059.77, 'ask': 2059.78, 'source': 'binance_bookticker'}
+2026-05-27 20:25:19.907 | DEBUG    | trading.live_signal_generator:on_market_data:29 - SOL/USD: Insufficient data (48 bars)
+2026-05-27 20:25:19.941 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:25:19.948 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:25:19.949 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: HOLD (Confidence: 0.11)
+2026-05-27 20:25:20.193 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:25:20.202 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:25:20.202 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.97)
+2026-05-27 20:25:20.203 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: NVDA BUY @ 0.97
+2026-05-27 20:25:20.203 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.97
+2026-05-27 20:25:20.203 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0005 spread=0.0002 vol=0.0000 conf=0.97 thr=0.62
+2026-05-27 20:25:20.204 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:25:20.212 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.33
+2026-05-27 20:25:20.213 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: HOLD (Confidence: 0.09)
+2026-05-27 20:25:20.445 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:25:20.454 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:20.455 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.33)
+2026-05-27 20:25:20.694 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:25:20.703 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:25:20.704 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.90)
+2026-05-27 20:25:20.704 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: META BUY @ 0.90
+2026-05-27 20:25:20.705 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.90
+2026-05-27 20:25:20.705 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.90 thr=0.62
+2026-05-27 20:25:20.946 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:25:20.960 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.25
+2026-05-27 20:25:20.963 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.78)
+2026-05-27 20:25:20.964 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.78
+2026-05-27 20:25:20.964 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0001 spread=0.0000 vol=0.0000 conf=0.78 thr=0.62
+2026-05-27 20:25:20.965 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:25:20.977 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:20.979 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.93)
+2026-05-27 20:25:20.979 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: QQQ BUY @ 0.93
+2026-05-27 20:25:20.980 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.93
+2026-05-27 20:25:20.981 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0001 spread=0.0000 vol=0.0000 conf=0.93 thr=0.62
+2026-05-27 20:25:21.195 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:25:21.204 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.19
+2026-05-27 20:25:21.205 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.90)
+2026-05-27 20:25:21.205 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.90
+2026-05-27 20:25:21.205 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.90
+2026-05-27 20:25:21.206 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.90 thr=0.62
+2026-05-27 20:25:21.403 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.61, 'high': 83.63, 'low': 83.59, 'close': 83.61, 'volume': 5346.341, 'timestamp': '2026-05-27T17:25:21.402422', 'bid': 83.59, 'ask': 83.63, 'source': 'binance_bookticker'}
+2026-05-27 20:25:21.403 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.595, 'high': 83.63, 'low': 83.56, 'close': 83.595, 'volume': 1857.21, 'timestamp': '2026-05-27T17:25:21.403425', 'bid': 83.56, 'ask': 83.63, 'source': 'binance_bookticker'}
+2026-05-27 20:25:21.404 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.555, 'high': 83.56, 'low': 83.55, 'close': 83.555, 'volume': 15621.275000000001, 'timestamp': '2026-05-27T17:25:21.403425', 'bid': 83.55, 'ask': 83.56, 'source': 'binance_bookticker'}
+2026-05-27 20:25:26.399 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=210.0s
+2026-05-27 20:25:26.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=210.0s
+2026-05-27 20:25:26.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=210.0s
+2026-05-27 20:25:26.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=210.0s
+2026-05-27 20:25:26.402 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=209.1s
+2026-05-27 20:25:26.402 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=209.1s
+2026-05-27 20:25:26.402 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=208.5s
+2026-05-27 20:25:26.403 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=208.5s
+2026-05-27 20:25:26.403 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=206.8s
+2026-05-27 20:25:26.403 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=206.8s
+2026-05-27 20:25:26.404 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=206.8s
+2026-05-27 20:25:26.404 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=206.8s
+2026-05-27 20:25:29.949 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:25:29.951 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.24
+2026-05-27 20:25:29.951 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.98)
+2026-05-27 20:25:29.951 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AAPL BUY @ 0.98
+2026-05-27 20:25:29.951 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.98
+2026-05-27 20:25:29.951 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0001 spread=0.0000 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:25:30.197 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:25:30.209 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.30
+2026-05-27 20:25:30.209 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: HOLD (Confidence: 0.11)
+2026-05-27 20:25:30.210 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:25:30.223 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.13
+2026-05-27 20:25:30.224 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.88)
+2026-05-27 20:25:30.225 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.88
+2026-05-27 20:25:30.227 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0003 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:25:30.448 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:25:30.458 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:25:30.459 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: BUY (Confidence: 0.98)
+2026-05-27 20:25:30.460 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AMZN BUY @ 0.98
+2026-05-27 20:25:30.460 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AMZN | BUY | Conf: 0.98
+2026-05-27 20:25:30.460 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AMZN: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:25:30.906 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing ETH/USD...
+2026-05-27 20:25:30.914 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.20
+2026-05-27 20:25:30.915 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for ETH/USD: HOLD (Confidence: 0.37)
+2026-05-27 20:25:30.953 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:25:30.962 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:30.963 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: HOLD (Confidence: 0.60)
+2026-05-27 20:25:30.963 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:25:30.972 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:25:30.973 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.98)
+2026-05-27 20:25:30.974 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.98
+2026-05-27 20:25:30.974 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.98
+2026-05-27 20:25:30.974 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.97 thr=0.62
+2026-05-27 20:25:30.975 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:25:30.983 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:30.984 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.93)
+2026-05-27 20:25:30.985 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: QQQ BUY @ 0.93
+2026-05-27 20:25:30.985 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.93
+2026-05-27 20:25:30.985 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.93 thr=0.62
+2026-05-27 20:25:31.202 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:25:31.211 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:25:31.212 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.81)
+2026-05-27 20:25:31.213 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.81
+2026-05-27 20:25:31.213 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.80 thr=0.62
+2026-05-27 20:25:33.164 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing BTC/USD...
+2026-05-27 20:25:33.180 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.17
+2026-05-27 20:25:33.181 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for BTC/USD: HOLD (Confidence: 0.60)
+2026-05-27 20:25:34.775 | DEBUG    | trading.market_data_stream:_heartbeat_loop:143 - Market data heartbeat: live router active
+2026-05-27 20:25:36.269 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75036.45999999999, 'high': 75036.47, 'low': 75036.45, 'close': 75036.45999999999, 'volume': 30.21686, 'timestamp': '2026-05-27T17:25:36.269383', 'bid': 75036.45, 'ask': 75036.47, 'source': 'binance_bookticker'}
+2026-05-27 20:25:36.270 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for BTC/USD: {'symbol': 'BTC/USD', 'open': 75036.455, 'high': 75036.46, 'low': 75036.45, 'close': 75036.455, 'volume': 30.221629999999998, 'timestamp': '2026-05-27T17:25:36.269383', 'bid': 75036.45, 'ask': 75036.46, 'source': 'binance_bookticker'}
+2026-05-27 20:25:36.270 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2061.3199999999997, 'high': 2062.6, 'low': 2060.04, 'close': 2061.3199999999997, 'volume': 458.79760000000005, 'timestamp': '2026-05-27T17:25:36.269383', 'bid': 2060.04, 'ask': 2062.6, 'source': 'binance_bookticker'}
+2026-05-27 20:25:36.271 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for ETH/USD: {'symbol': 'ETH/USD', 'open': 2060.045, 'high': 2060.05, 'low': 2060.04, 'close': 2060.045, 'volume': 523.0895, 'timestamp': '2026-05-27T17:25:36.269383', 'bid': 2060.04, 'ask': 2060.05, 'source': 'binance_bookticker'}
+2026-05-27 20:25:36.398 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=memory stale_for=220.0s
+2026-05-27 20:25:36.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=memory stale_for=220.0s
+2026-05-27 20:25:36.399 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=perception stale_for=220.0s
+2026-05-27 20:25:36.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=perception stale_for=220.0s
+2026-05-27 20:25:36.399 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=web_perception stale_for=219.1s
+2026-05-27 20:25:36.399 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=web_perception stale_for=219.1s
+2026-05-27 20:25:36.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=reasoning stale_for=218.5s
+2026-05-27 20:25:36.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=reasoning stale_for=218.5s
+2026-05-27 20:25:36.400 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=agents stale_for=216.8s
+2026-05-27 20:25:36.400 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=agents stale_for=216.8s
+2026-05-27 20:25:36.401 | WARNING  | runtime.watchdog:_run:44 - Watchdog detected stale component=runtime_stack stale_for=216.8s
+2026-05-27 20:25:36.401 | WARNING  | __main__:_on_stale_component:73 - Recovery signal: component=runtime_stack stale_for=216.8s
+2026-05-27 20:25:37.375 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SOL/USD...
+2026-05-27 20:25:37.394 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.26
+2026-05-27 20:25:37.395 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SOL/USD: BUY (Confidence: 0.89)
+2026-05-27 20:25:37.396 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SOL/USD | BUY | Conf: 0.89
+2026-05-27 20:25:37.396 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SOL/USD: expected_move=0.0005 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:25:37.831 | DEBUG    | trading.market_data_stream:emit_market_data:72 - Data integrity reject for SOL/USD: {'symbol': 'SOL/USD', 'open': 83.58500000000001, 'high': 83.59, 'low': 83.58, 'close': 83.58500000000001, 'volume': 8427.184, 'timestamp': '2026-05-27T17:25:37.831533', 'bid': 83.58, 'ask': 83.59, 'source': 'binance_bookticker'}
+2026-05-27 20:25:39.948 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AAPL...
+2026-05-27 20:25:39.951 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.15
+2026-05-27 20:25:39.951 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AAPL: BUY (Confidence: 0.98)
+2026-05-27 20:25:39.951 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: AAPL BUY @ 0.98
+2026-05-27 20:25:39.951 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: AAPL | BUY | Conf: 0.98
+2026-05-27 20:25:39.951 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for AAPL: expected_move=0.0000 spread=0.0001 vol=0.0000 conf=0.98 thr=0.62
+2026-05-27 20:25:40.198 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing NVDA...
+2026-05-27 20:25:40.208 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:25:40.209 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for NVDA: BUY (Confidence: 0.90)
+2026-05-27 20:25:40.210 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: NVDA | BUY | Conf: 0.90
+2026-05-27 20:25:40.210 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for NVDA: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.89 thr=0.62
+2026-05-27 20:25:40.211 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing TSLA...
+2026-05-27 20:25:40.220 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.14
+2026-05-27 20:25:40.221 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for TSLA: BUY (Confidence: 0.87)
+2026-05-27 20:25:40.221 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: TSLA | BUY | Conf: 0.87
+2026-05-27 20:25:40.221 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for TSLA: expected_move=0.0001 spread=0.0002 vol=0.0000 conf=0.87 thr=0.62
+2026-05-27 20:25:40.447 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing AMZN...
+2026-05-27 20:25:40.457 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.16
+2026-05-27 20:25:40.459 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for AMZN: HOLD (Confidence: 0.33)
+2026-05-27 20:25:41.196 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing META...
+2026-05-27 20:25:41.201 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.10
+2026-05-27 20:25:41.201 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for META: BUY (Confidence: 0.92)
+2026-05-27 20:25:41.201 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: META BUY @ 0.92
+2026-05-27 20:25:41.201 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: META | BUY | Conf: 0.92
+2026-05-27 20:25:41.201 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for META: expected_move=0.0000 spread=0.0002 vol=0.0000 conf=0.92 thr=0.62
+2026-05-27 20:25:41.201 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing SPY...
+2026-05-27 20:25:41.216 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.11
+2026-05-27 20:25:41.217 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for SPY: BUY (Confidence: 0.91)
+2026-05-27 20:25:41.218 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: SPY BUY @ 0.91
+2026-05-27 20:25:41.218 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: SPY | BUY | Conf: 0.91
+2026-05-27 20:25:41.218 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for SPY: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.91 thr=0.62
+2026-05-27 20:25:41.219 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing QQQ...
+2026-05-27 20:25:41.227 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.23
+2026-05-27 20:25:41.228 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for QQQ: BUY (Confidence: 0.81)
+2026-05-27 20:25:41.229 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: QQQ | BUY | Conf: 0.81
+2026-05-27 20:25:41.229 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for QQQ: expected_move=0.0001 spread=0.0001 vol=0.0000 conf=0.81 thr=0.62
+2026-05-27 20:25:41.229 | INFO     | trading.trading_agent:_analyze_symbol:153 - Analyzing IWM...
+2026-05-27 20:25:41.239 | INFO     | trading.meta_orchestrator:orchestrate_signals:142 - MetaOrchestrator Decision: BUY with Confidence: 0.22
+2026-05-27 20:25:41.240 | INFO     | trading.trading_agent:_analyze_symbol:214 - Decision for IWM: BUY (Confidence: 0.97)
+2026-05-27 20:25:41.240 | WARNING  | trading.live_signal_generator:_validate_signal:94 - HIGH CONFIDENCE SIGNAL: IWM BUY @ 0.97
+2026-05-27 20:25:41.240 | INFO     | trading.live_signal_generator:on_market_data:70 - SIGNAL: IWM | BUY | Conf: 0.97
+2026-05-27 20:25:41.241 | INFO     | trading.autonomous_trading_loop:_passes_trade_quality:734 - Quality gate HOLD for IWM: expected_move=0.0000 spread=0.0000 vol=0.0000 conf=0.97 thr=0.62
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFEDAC2348D  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFEDC4BE957  Unknown               Unknown  Unknown
+ntdll.dll          00007FFEDD1E427C  Unknown               Unknown  Unknown

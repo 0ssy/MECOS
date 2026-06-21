@@ -23,6 +23,7 @@ class AgentRole(Enum):
     PLANNING = "planning"
     REFLECTION = "reflection"
     SAFETY = "safety"
+    COMPLIANCE = "compliance"
 
 
 class AgentMessage:

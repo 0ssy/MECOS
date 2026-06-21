@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-05-28T22:26:39.135335",
+  "error_type": "AttributeError",
+  "error": "'DriftGuard' object has no attribute 'evaluate'",
+  "runtime_state": {
+    "connection_state": {
+      "memory": true,
+      "perception": true,
+      "web_perception": true,
+      "reasoning": true,
+      "core_coding": true,
+      "core_research": true,
+      "agent_coordinator": true,
+      "agents": true,
+      "runtime_memory": true,
+      "runtime_knowledge_graph": true,
+      "runtime_research": true,
+      "runtime_coding": true,
+      "runtime_debugger": true,
+      "runtime_orchestrator": true,
+      "runtime_evolution": true,
+      "runtime_router": true,
+      "runtime_stack": true,
+      "quant_trading_agent": true,
+      "trading_system": true
+    },
+    "trading_execution_mode": "paper"
+  }
+}

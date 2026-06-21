@@ -231,6 +231,11 @@ async def main():
     # ── MCP tool registration ─────────────────────────────────────
     if os.getenv("MECOS_ENABLE_MCP", "false").strip().lower() == "true":
         asyncio.create_task(tool_orchestrator.mcp_client_register_all())
+
+    # Register skill-based MCP servers (notion, slack, granola, zapier)
+    mcp_skill_count = tool_orchestrator.register_mcp_from_config()
+    if mcp_skill_count:
+        logger.info(f"Registered {mcp_skill_count} MCP skill tools")
     
     logger.info("ToolOrchestrator + ActionEngine ready: {} tools", len(tool_orchestrator.registry.list_tools()))
 
@@ -248,10 +253,11 @@ async def main():
     independence = IndependenceManager(memory)
 
     trading_agent = None
+    compliance_agent = None
     if TRADING_ENABLED:
         try:
             from trading_agent import TradingAgent
-            trading_agent = TradingAgent(memory)
+            trading_agent = TradingAgent(memory, tool_orchestrator)
             if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
                 trading_agent.neural_brain = neural_brain_service.brain
                 trading_agent.neural_brain_enabled = True
@@ -262,6 +268,14 @@ async def main():
     else:
         independence.set_agents(None, meta_learner)
         logger.info("IndependenceManager: no TradingAgent (trading disabled).")
+
+    # Register ComplianceAgent
+    try:
+        from compliance_agent import ComplianceAgent
+        compliance_agent = ComplianceAgent(memory, tool_orchestrator)
+        logger.info("ComplianceAgent ready for legal workflow.")
+    except Exception as exc:
+        logger.warning(f"ComplianceAgent unavailable: {exc}")
 
     # ── 8. Domain expansion ─────────────────────────────────────────────
     domain_expansion_controller = None

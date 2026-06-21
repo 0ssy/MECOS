@@ -2,3 +2,4 @@
 .kilo/*
 !.kilo/kilo.json
 !.kilo/skill-*.md
+trade_attribution.jsonl

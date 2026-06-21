@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-05-31T13:32:43.342163",
+  "error_type": "RuntimeError",
+  "error": "Execution guard exhausted retries for runtime_research_analyze_repo: cannot reuse already awaited coroutine",
+  "runtime_state": {
+    "connection_state": {
+      "memory": true,
+      "perception": true,
+      "web_perception": true,
+      "reasoning": true,
+      "core_coding": true,
+      "core_research": true,
+      "agent_coordinator": true,
+      "agents": true,
+      "polyglot_coding_agent": true,
+      "global_app_intelligence": true,
+      "runtime_memory": true,
+      "runtime_knowledge_graph": true,
+      "runtime_research": true,
+      "runtime_coding": true,
+      "runtime_debugger": true,
+      "runtime_orchestrator": true,
+      "runtime_evolution": true,
+      "runtime_router": true,
+      "runtime_stack": true,
+      "quant_trading_agent": true,
+      "trading_system": true
+    },
+    "trading_execution_mode": "paper"
+  }
+}

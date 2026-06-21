@@ -1,0 +1,2603 @@
+[
+  {
+    "timestamp": "2026-05-30T21:56:02.909831",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T21:58:02.973751",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T21:58:02.976008",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T21:58:08.039012",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:00:08.103903",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:00:08.106337",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:00:31.652380",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:02:31.708568",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:02:31.710963",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:02:35.679165",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:04:35.747201",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:04:35.749338",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:04:39.350315",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:06:39.546128",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:06:39.579089",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:06:39.581201",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:06:43.580824",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:08:43.634441",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:08:43.636673",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:08:48.098639",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:10:48.156652",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:10:48.158911",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:10:54.187363",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:12:54.274440",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:12:54.276270",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:13:00.468789",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:15:00.546392",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:15:00.549482",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:15:05.007770",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:17:05.073628",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:17:05.075506",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:17:10.113417",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:17:48.341038",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:19:10.204566",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:19:10.207605",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:19:15.567648",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:21:15.645395",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:21:15.648567",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:21:20.619978",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:23:20.705591",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:23:20.708506",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:23:26.246254",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:25:26.333445",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:25:26.337487",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:25:32.381739",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:27:32.464589",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:27:32.467170",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:27:37.047039",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:28:57.534386",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:29:37.124919",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:29:37.128088",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:29:41.404546",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:31:41.477050",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:31:41.479344",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:31:46.437531",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:33:46.515568",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:33:46.518742",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:33:52.293616",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:35:52.399974",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:35:52.403192",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:35:57.092298",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:37:57.153772",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:37:57.156946",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:38:01.934074",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:40:01.990092",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:40:01.991970",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:40:08.237192",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:42:09.692982",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:42:09.695388",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:42:14.192138",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:44:14.263279",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:44:14.265938",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:44:19.624452",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:46:19.688791",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:46:19.691342",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:46:25.311365",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:48:25.379864",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:48:25.381596",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:48:30.722109",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:50:30.777213",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:50:30.779340",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:50:35.041758",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:51:18.240088",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:52:35.104073",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:52:35.106039",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:52:39.806497",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:54:39.863903",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:54:39.866722",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:54:44.690431",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:56:44.765555",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:56:44.767656",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:56:51.044014",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:58:51.115773",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:58:51.117810",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T22:58:56.623281",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:00:56.692269",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:00:56.695293",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:01:01.418336",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:02:27.078841",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:03:01.475406",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:03:01.477454",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:03:05.676278",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:05:05.758374",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:05:05.761264",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:05:10.231113",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:07:10.317848",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:07:10.320906",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:07:14.757139",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:09:14.814568",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:09:14.816204",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:09:18.708725",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:11:18.765070",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:11:18.767110",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:11:23.414015",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:13:23.485012",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:13:23.487143",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:13:28.606800",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:13:36.591032",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:15:28.658479",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:15:28.661217",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:15:32.894546",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:17:32.971513",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:17:32.973007",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:17:37.006273",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:19:37.071631",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:19:37.074273",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:19:42.960368",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:21:43.046781",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:21:43.049126",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:21:47.051230",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:23:47.141117",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:23:47.142974",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:23:51.347572",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:24:45.285252",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:25:51.436125",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:25:51.437923",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:25:55.551046",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:27:55.624059",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:27:55.626087",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:27:59.933669",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:30:00.005037",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:30:00.008049",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:30:03.979913",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:32:04.055191",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:32:04.057080",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:32:08.282033",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:34:08.353883",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:34:08.355780",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:34:13.309275",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:35:53.983733",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:36:13.381065",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:36:13.382664",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:36:17.644318",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:38:17.698039",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:38:17.700143",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:38:22.437141",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:40:22.505329",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:40:22.509286",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:40:27.284965",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:42:27.349065",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:42:27.350550",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-30T23:42:30.720661",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:49.565481",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:49.616074",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:49.617487",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:50.099891",
+    "metrics": {
+      "research_useful_discoveries_per_hour": 522.4453642251204,
+      "coding_compile_success_rate": 1.0,
+      "debug_repair_success_rate": 1.0,
+      "memory_retrieval_relevance": 0.6368215815888842,
+      "evolution_benchmark_delta": 0.0,
+      "planning_task_completion_efficiency": 1.0,
+      "research_quality_index": 1.0,
+      "trading_sharpe_ratio": 0.0,
+      "trading_max_drawdown": 0.0
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:50.108472",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:50.110891",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:30:54.948725",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:32:54.990463",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:32:54.991508",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:32:58.055459",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:34:58.101291",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:34:58.102454",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:35:01.960545",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:37:02.004241",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:37:02.005525",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:37:05.634135",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:39:05.683691",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:39:05.685208",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:39:08.865553",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:41:08.898045",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:41:08.899141",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:41:12.687451",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:41:46.575961",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:43:12.758933",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:43:12.759864",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:43:16.619653",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:45:16.659751",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:45:16.660778",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:45:20.229339",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:47:20.268167",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:47:20.269251",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:47:23.656521",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:49:23.703409",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:49:23.704665",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:49:27.593555",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:51:27.639392",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:51:27.640332",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-31T11:51:31.429379",
+    "metrics": {
+      "domain": "trading",
+      "trading": {
+        "sharpe_ratio": 0.0,
+        "max_drawdown": 0.0,
+        "total_trades": 0,
+        "win_rate": 0.0,
+        "profit_factor": 0.0
+      }
+    }
+  }
+]

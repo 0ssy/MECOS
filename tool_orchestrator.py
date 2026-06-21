@@ -521,3 +521,43 @@ class ToolOrchestrator:
                 total += count
         logger.info(f"MCP registration complete: {total} tools registered")
         return total
+
+    def mcp_client_register_skill_tools(self) -> int:
+        """Register MCP tools from skill-configured servers (notion, slack, granola, zapier)."""
+        from tool_registry import ToolSpec, ToolPermission
+        import os
+
+        mcp_servers = settings.MCP_SERVERS
+        count = 0
+
+        for server_name, server_config in mcp_servers.items():
+            # Register as skill-based wrapper for external MCP servers
+            tool_name = f"mcp:{server_name}:invoke"
+            desc = f"Invoke {server_name} MCP operations via skill integration"
+            spec = ToolSpec(
+                name=tool_name,
+                description=desc,
+                func=self._make_mcp_skill_call(server_name, server_config),
+                parameters={"operation": "MCP operation", "params": "Operation params"},
+                permissions=ToolPermission(can_access_network=True),
+                category="mcp",
+                is_mcp_tool=True,
+                mcp_server=server_name,
+            )
+            self.registry.register(spec)
+            count += 1
+            logger.info(f"Registered MCP skill tool: {tool_name}")
+
+        return count
+
+    def _make_mcp_skill_call(self, server_name: str, config: dict):
+        """Create a callable wrapper for MCP skill invocation."""
+        async def call(**kwargs):
+            # In production, this would connect to actual MCP server
+            # For now, returns simulation that skills can extend
+            return {"status": "mcp_ready", "server": server_name, "operation": kwargs.get("operation")}
+        return call
+
+    def register_mcp_from_config(self):
+        """Register MCP servers from config (calls mcp_client_register_skill_tools)."""
+        return self.mcp_client_register_skill_tools()

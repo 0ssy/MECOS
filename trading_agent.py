@@ -9,6 +9,7 @@ Full implementation with:
   - Performance metrics tracked for IndependenceManager governance gates
   - Market hours awareness for equity trading
   - Trailing stop-loss and take-profit support
+  - Marketing/social sentiment integration
 """
 import asyncio
 import time
@@ -21,6 +22,14 @@ from loguru import logger
 
 from config import settings
 from memory_system import MemorySystem
+
+# Import ToolOrchestrator for type hints (lazy import to avoid circular dependency)
+try:
+    from tool_orchestrator import ToolOrchestrator
+    _TOOL_ORCH_AVAILABLE = True
+except ImportError:
+    ToolOrchestrator = None  # type: ignore
+    _TOOL_ORCH_AVAILABLE = False
 
 # ── Optional broker imports (graceful degradation) ───────────────────────────
 try:
@@ -484,22 +493,93 @@ class BinanceAdapter:
             return {"status": "error", "reason": str(e)}
 
 
+# ── Sentiment Analyzer ──────────────────────────────────────────────────────────
+
+class SentimentAnalyzer:
+    """Analyzes sentiment from headlines and social indicators."""
+
+    NEGATIVE_WORDS = {"crash", "plunge", "collapse", "downgrade", "sell", "bear", "loss", "fail"}
+    POSITIVE_WORDS = {"surge", "jump", "upgrade", "buy", "bull", "gain", "success", "beat", "exceed"}
+
+    @classmethod
+    def analyze(cls, text: str) -> float:
+        """Return sentiment score -1 (bearish) to +1 (bullish)."""
+        text_lower = text.lower()
+        neg_count = sum(1 for w in cls.NEGATIVE_WORDS if w in text_lower)
+        pos_count = sum(1 for w in cls.POSITIVE_WORDS if w in text_lower)
+
+        if neg_count == 0 and pos_count == 0:
+            return 0.0
+        return (pos_count - neg_count) / (pos_count + neg_count)
+
+    @classmethod
+    def adjust_signal(cls, signal: TradeSignal, sentiment: float) -> TradeSignal:
+        """Adjust signal confidence based on sentiment."""
+        adjusted_conf = max(0.0, min(1.0, signal.confidence + sentiment * 0.1))
+        return TradeSignal(
+            symbol=signal.symbol,
+            exchange=signal.exchange,
+            side=signal.side,
+            confidence=adjusted_conf,
+            reason=f"{signal.reason} | sentiment_adj={sentiment:+.2f}",
+            price=signal.price,
+            rsi=signal.rsi,
+            macd=signal.macd,
+            bb_position=signal.bb_position,
+        )
+
+
+# ── Marketing Sentiment Analyzer ────────────────────────────────────────────────
+
+class MarketingSentimentAnalyzer:
+    """Analyzes social media sentiment for trading signals."""
+
+    @staticmethod
+    def analyze_social_signals(posts: List[str]) -> Dict[str, float]:
+        """Analyze social media posts and return sentiment scores by keyword."""
+        results = {"bullish": 0.0, "bearish": 0.0, "trending": False, "volume": len(posts)}
+        bullish = {"bull", "buy", "moon", "pump", "surge", "ath", "gainers"}
+        bearish = {"bear", "sell", "dump", "crash", "down", "losers"}
+
+        for post in posts:
+            post_lower = post.lower()
+            if any(w in post_lower for w in bullish):
+                results["bullish"] += 1
+            if any(w in post_lower for w in bearish):
+                results["bearish"] += 1
+
+        if results["volume"] > 0:
+            results["bullish"] /= results["volume"]
+            results["bearish"] /= results["volume"]
+        results["trending"] = results["bullish"] > 0.3 or results["bearish"] > 0.3
+        return results
+
+    @staticmethod
+    def merge_with_trading_signal(signal: TradeSignal, social_sentiment: Dict[str, float]) -> TradeSignal:
+        """Adjust trading signal based on social media sentiment."""
+        adj = social_sentiment.get("bullish", 0) - social_sentiment.get("bearish", 0)
+        return SentimentAnalyzer.adjust_signal(signal, adj * 0.15)
+
+
 # ── TradingAgent ──────────────────────────────────────────────────────────────
 
 class TradingAgent:
     """
     Coordinates signal generation and order execution across Alpaca and Binance.
     Feeds performance metrics back to MemorySystem and IndependenceManager.
+    Extended with marketing/social sentiment integration.
     """
 
     # Watchlists
     STOCK_UNIVERSE = ["AAPL", "MSFT", "NVDA", "TSLA", "AMZN", "GOOGL", "META"]
     CRYPTO_UNIVERSE = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "SOLUSDT"]
 
-    def __init__(self, memory: MemorySystem):
+    def __init__(self, memory: MemorySystem, orchestrator: ToolOrchestrator = None):
         self.memory = memory
+        self.orchestrator = orchestrator
         self.risk = RiskManager()
         self.news = OpenBBNewsAdapter()
+        self.social_analyzer = MarketingSentimentAnalyzer()
         self._metrics: Dict = {
             "analyses": 0,
             "signals_generated": 0,
@@ -507,6 +587,7 @@ class TradingAgent:
             "orders_placed": 0,
             "orders_blocked": 0,
             "news_updates": 0,
+            "social_signals": 0,
         }
 
         # Broker clients (lazy, graceful)
@@ -552,6 +633,8 @@ class TradingAgent:
                     news_blurb = "; ".join(headlines[:2])
                     signal.reason = f"{signal.reason} | NEWS: {news_blurb}"
                     self._metrics["news_updates"] += len(headlines[:2])
+                # Apply social sentiment adjustment via marketing mixin
+                signal = await self.analyze_social_sentiment_for_signal(signal)
                 signals.append(signal)
                 self._metrics["analyses"] += 1
                 logger.debug(f"Stock signal: {signal}")
@@ -663,6 +746,38 @@ class TradingAgent:
             logger.warning(f"Could not fetch equity for {exchange}: {e}")
         return 1000.0  # Safe fallback (keeps position sizes small)
 
+    # ── Marketing/Social Integration ─────────────────────────────────────
+
+    async def analyze_social_sentiment_for_signal(self, signal: TradeSignal) -> TradeSignal:
+        """Analyze social media sentiment and adjust trading signal."""
+        try:
+            # Use skill:marketing-skills through orchestrator
+            if hasattr(self, 'orchestrator') and self.orchestrator:
+                result = await self.orchestrator.run_tool(
+                    "skill:social-media-skills",
+                    query=f"social sentiment for {signal.symbol}",
+                    args={"symbol": signal.symbol}
+                )
+                social_data = result if isinstance(result, dict) else {"bullish": 0, "bearish": 0}
+                return self.social_analyzer.merge_with_trading_signal(signal, social_data)
+        except Exception as e:
+            logger.debug(f"Social sentiment analysis unavailable: {e}")
+        return signal
+
+    async def assess_marketing_impact(self, symbol: str) -> Dict[str, Any]:
+        """Assess potential marketing/campaign impact on asset."""
+        try:
+            if hasattr(self, 'orchestrator') and self.orchestrator:
+                result = await self.orchestrator.run_tool(
+                    "skill:marketing-skills",
+                    query=f"campaign analysis for {symbol}",
+                    args={"symbol": symbol, "type": "campaign performance"}
+                )
+                return result if isinstance(result, dict) else {"status": "simulated", "symbol": symbol}
+        except Exception as e:
+            logger.debug(f"Marketing assessment failed: {e}")
+        return {"status": "simulated", "symbol": symbol}
+
     # ── Metrics (used by IndependenceManager governance gates) ────────────
 
     def get_performance_metrics(self) -> Dict:
@@ -687,38 +802,3 @@ class TradingAgent:
         self._metrics["analyses"] = metrics.get("analyses", self._metrics["analyses"])
         self._metrics["actionable_signals"] = metrics.get("actionable_signals", self._metrics["actionable_signals"])
         self._metrics["orders_placed"] = metrics.get("orders_placed", self._metrics["orders_placed"])
-
-
-class SentimentAnalyzer:
-    """Analyzes sentiment from headlines and social indicators."""
-
-    NEGATIVE_WORDS = {"crash", "plunge", "collapse", "downgrade", "sell", "bear", "loss", "fail"}
-    POSITIVE_WORDS = {"surge", "jump", "upgrade", "buy", "bull", "gain", "success", "beat", "exceed"}
-
-    @classmethod
-    def analyze(cls, text: str) -> float:
-        """Return sentiment score -1 (bearish) to +1 (bullish)."""
-        text_lower = text.lower()
-        neg_count = sum(1 for w in cls.NEGATIVE_WORDS if w in text_lower)
-        pos_count = sum(1 for w in cls.POSITIVE_WORDS if w in text_lower)
-
-        if neg_count == 0 and pos_count == 0:
-            return 0.0
-        return (pos_count - neg_count) / (pos_count + neg_count)
-
-    @classmethod
-    def adjust_signal(cls, signal: TradeSignal, sentiment: float) -> TradeSignal:
-        """Adjust signal confidence based on sentiment."""
-        adjusted_conf = max(0.0, min(1.0, signal.confidence + sentiment * 0.1))
-        return TradeSignal(
-            symbol=signal.symbol,
-            exchange=signal.exchange,
-            side=signal.side,
-            confidence=adjusted_conf,
-            reason=f"{signal.reason} | sentiment_adj={sentiment:+.2f}",
-            price=signal.price,
-            rsi=signal.rsi,
-            macd=signal.macd,
-            bb_position=signal.bb_position,
-        )
-

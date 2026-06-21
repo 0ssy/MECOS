@@ -6,17 +6,19 @@ Now uses:
   - CrossDomainInferenceEngine for analogies and cross-domain insight
   - CuriosityEngine to surface gaps in knowledge
   - Richer tool descriptions from ToolOrchestrator
+  - Skill-aware planning via skill: prefixed tools
 """
 
 import json
 import re
+from typing import Any, Dict, List, Optional
 from loguru import logger
 from config import settings
 from memory_system import MemorySystem
 from mecos_llm import get_mecos_llm
 
 
-def _extract_json(text: str) -> dict | list | None:
+def _extract_json(text: str) -> Any:
     if not text:
         return None
     fence_match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", text)
@@ -35,7 +37,7 @@ def _extract_json(text: str) -> dict | list | None:
         return None
 
 
-def _extract_plan_list(parsed: dict | list | None) -> list:
+def _extract_plan_list(parsed: Any) -> list:
     if parsed is None:
         return []
     if isinstance(parsed, list):
@@ -56,7 +58,23 @@ class Reasoner:
         self.llm = get_mecos_llm()
         self.tool_orchestrator = tool_orchestrator
         self.intelligence = intelligence_stack or {}
+        self.skill_triggers = self._load_skill_triggers()
         logger.info("Reasoner initialized with intelligence layer: {}", list(self.intelligence.keys()))
+
+    def _load_skill_triggers(self) -> Dict[str, List[str]]:
+        """Load skill trigger keywords from registered skill tools."""
+        triggers = {}
+        if self.tool_orchestrator:
+            for tool in self.tool_orchestrator.registry.list_tools():
+                if tool.name.startswith("skill:"):
+                    skill_name = tool.name.replace("skill:", "")
+                    triggers[skill_name] = self._extract_triggers(tool.description)
+        return triggers
+
+    def _extract_triggers(self, description: str) -> List[str]:
+        """Extract trigger keywords from skill description."""
+        matches = re.findall(r"(?:^|\s)(?:marketing|social|legal|humanize|frontend|design|seo|humanizer)[\w-]*", description.lower())
+        return [m.strip() for m in matches if m.strip()]
 
     def _graph_context(self, query: str, max_items: int = 5) -> str:
         kg = self.intelligence.get("knowledge_graph")
@@ -194,8 +212,51 @@ Extract a concise lesson (3-5 sentences). Also extract key facts as
             parts.append(self._graph_context(query))
             parts.append(self._curiosity_context(query))
             parts.append(self._cross_domain_context(query))
+        matched_skills = self._match_skills(query)
+        if matched_skills:
+            parts.append(f"\nMatched skills: {', '.join(matched_skills)}")
+            skill_tools = self._skill_tools_context(matched_skills)
+            if skill_tools:
+                parts.append(f"\nAvailable skill tools:\n{skill_tools}")
         parts = [p for p in parts if p]
         return "\n\n".join(parts) if parts else "(no prior context)"
+
+    def _match_skills(self, query: str) -> List[str]:
+        """Match goal query against skill triggers."""
+        query_lower = query.lower()
+        matched = []
+        for skill_name in self.skill_triggers:
+            if skill_name.replace("-", " ") in query_lower or skill_name.replace("-", "") in query_lower:
+                matched.append(skill_name)
+        return matched
+
+    def _skill_tools_context(self, skills: List[str]) -> str:
+        """Build tool context string for matched skills."""
+        if not self.tool_orchestrator:
+            return ""
+        skill_tools = []
+        for t in self.tool_orchestrator.registry.list_tools():
+            for skill in skills:
+                if f"skill:{skill}" in t.name:
+                    skill_tools.append(f"  - {t.name}: {t.description}")
+        return "\n".join(skill_tools) if skill_tools else ""
+
+    async def invoke_skill(self, skill_name: str, query: str, args: Optional[Dict] = None) -> str:
+        """Invoke a registered skill tool and return result."""
+        tool_name = f"skill:{skill_name}"
+        spec = self.tool_orchestrator.registry.get(tool_name) if self.tool_orchestrator else None
+        if spec is None:
+            return f"Skill '{skill_name}' not available"
+        try:
+            result = await spec.func(query=query, args=args or {})
+            await self.memory.add_experience(
+                f"SKILL INVOKED: {skill_name} for '{query[:60]}'",
+                source="reasoner",
+            )
+            return str(result)
+        except Exception as e:
+            logger.error(f"Skill invocation failed: {e}")
+            return f"Skill error: {e}"
 
     def _build_plan_prompt(self, goal: str, context: str) -> str:
         tools_desc = self._tool_descriptions()
@@ -210,13 +271,15 @@ Context:
 {tools_desc}
 
 Decompose this goal into a structured plan. Return ONLY a JSON object with a
-\"plan\" key containing a list of actions. Each action must have \"tool\" and
-\"args\" keys. Use the richest tools available (web_perception, agent_reach,
+"plan" key containing a list of actions. Each action must have "tool" and
+"args" keys. Use the richest tools available (web_perception, agent_reach,
 browser_navigate, terminal_command, execute_python, file_write, etc).
+When a skill is matched, prefer using skill:skill-name with query and args.
 
 {{
-  \"plan\": [
-    {{"tool": "agent_reach_read_url", "args": {{"url": "https://..."}}}},
+  "plan": [
+    {{"tool": "skill:legal-workflow", "args": {{"query": "review contract"}}}},
+    {{"tool": "skill:humanizer", "args": {{"query": "polish", "args": {{"text": "..."}}}}}},
     {{"tool": "file_write", "args": {{"path": "report.md", "content": "# Summary"}}}}
   ]
 }}

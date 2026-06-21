@@ -17,9 +17,34 @@ from config import settings
 
 class MECOSLLM:
     def __init__(self):
-        self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
+        self.router = settings.LLM_ROUTER
+        self.client = None
         self.model = settings.DEFAULT_MODEL
-        logger.info(f"MECOS LLM connected to {settings.LOCAL_LLM_URL} (model={self.model})")
+        self._init_client()
+        logger.info(f"MECOS LLM router={self.router} (model={self.model})")
+
+    def _init_client(self):
+        """Initialize LLM client based on router configuration."""
+        providers = settings.LLM_PROVIDERS
+        provider_config = providers.get(self.router, providers.get("local", {}))
+
+        if self.router == "local":
+            self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
+        elif self.router in ("ollama-phi3"):
+            base_url = provider_config.get("base_url", settings.LOCAL_LLM_URL)
+            self.client = OpenAI(base_url=base_url, api_key="local-no-key")
+            self.model = provider_config.get("model", "phi3:mini")
+        elif self.router in ("groq-free", "huggingface-free"):
+            base_url = provider_config.get("base_url", "")
+            api_key = provider_config.get("api_key", "")
+            if api_key:
+                self.client = OpenAI(base_url=base_url, api_key=api_key)
+                self.model = provider_config.get("model", self.model)
+            else:
+                logger.warning(f"{self.router} API key not set, falling back to local")
+        else:
+            logger.warning(f"Unknown router '{self.router}', falling back to local")
+            self.client = OpenAI(base_url=settings.LOCAL_LLM_URL, api_key="local-no-key")
 
     # ── Internal sync helpers (run in thread pool) ────────────────────────
 
