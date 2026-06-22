@@ -26,8 +26,8 @@ def handle_request(request):
     elif method == "listTools":
         return {
             "tools": [
-                {"name": "sequential_think", "description": "Multi-step reasoning chain", "inputSchema": {"type": "object", "properties": {"thought": {"type": "string"}, "next_steps": {"type": "array"}}},
-                {"name": "think_step", "description": "Single reasoning step", "inputSchema": {"type": "object", "properties": {"step": {"type": "string"}}},
+                {"name": "sequential_think", "description": "Multi-step reasoning chain", "inputSchema": {"type": "object", "properties": {"thought": {"type": "string"}, "next_steps": {"type": "array"}}}},
+                {"name": "think_step", "description": "Single reasoning step", "inputSchema": {"type": "object", "properties": {"step": {"type": "string"}}}},
             ]
         }
     

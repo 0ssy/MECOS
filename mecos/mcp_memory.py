@@ -43,9 +43,9 @@ def handle_request(request):
     elif method == "listTools":
         return {
             "tools": [
-                {"name": "memory_store", "description": "Store a key-value pair", "inputSchema": {"type": "object", "properties": {"key": {"type": "string"}, "value": {"type": "string"}}},
-                {"name": "memory_retrieve", "description": "Retrieve a value by key", "inputSchema": {"type": "object", "properties": {"key": {"type": "string"}}},
-                {"name": "memory_search", "description": "Search memory by query", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}}},
+                {"name": "memory_store", "description": "Store a key-value pair", "inputSchema": {"type": "object", "properties": {"key": {"type": "string"}, "value": {"type": "string"}}}},
+                {"name": "memory_retrieve", "description": "Retrieve a value by key", "inputSchema": {"type": "object", "properties": {"key": {"type": "string"}}}},
+                {"name": "memory_search", "description": "Search memory by query", "inputSchema": {"type": "object", "properties": {"query": {"type": "string"}}}},
             ]
         }
     

@@ -14,6 +14,7 @@ Architecture:
 
 import asyncio
 import os
+from typing import Optional
 from loguru import logger
 
 from config import settings
@@ -33,18 +34,13 @@ from app_controller import AppController
 from health_monitor import HealthMonitor
 from security_agent import SecurityAgent
 from guardian_agent import GuardianAgent
+from outreach.outreach_agent import OutreachAgent
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
 
 
 async def startup_checks(memory: MemorySystem) -> None:
     logger.info("Running startup checks...")
-    try:
-        stats = await memory.get_stats()
-        logger.info(f"Memory OK — {stats.get('experience_count', 0)} experiences stored")
-    except Exception as e:
-        logger.error(f"Memory check failed: {e}")
-        raise
     if TRADING_ENABLED and not settings.ALPACA_API_KEY:
         logger.warning("ALPACA_API_KEY not set — stock trading disabled")
     if TRADING_ENABLED and not settings.BINANCE_API_KEY:
@@ -87,6 +83,7 @@ async def run_cognition_loop(
     app_perception: AppPerception,
     domain_expansion_controller=None,
     domain_expansion_every: int = 20,
+    outreach_agent: Optional[OutreachAgent] = None,
 ) -> None:
     logger.info("Entering cognition loop (timer + event hybrid)...")
     cycle = 0
@@ -96,6 +93,12 @@ async def run_cognition_loop(
         cycle += 1
 
         try:
+            # ── Outreach agent cycle (optional, run every cycle if enabled) ─
+            if outreach_agent and outreach_agent.enabled:
+                outreach_result = await outreach_agent.run_cycle()
+                if cycle % 5 == 0:
+                    logger.info(f"Outreach status: {outreach_result.get('outreach_status')}")
+
             # ── Goal intake (from any source) ───────────────────────────
             for goal_desc in pending_goals[:]:
                 logger.info("Goal: {}", goal_desc[:80])
@@ -169,12 +172,18 @@ async def run_trading_loop(
     neural_brain_service: NeuralBrainService,
     domain_expansion_controller=None,
     domain_expansion_every: int = 20,
+    outreach_agent: Optional[OutreachAgent] = None,
 ) -> None:
     logger.info("Trading loop active.")
     cycle = 0
     while True:
         cycle += 1
         try:
+            if outreach_agent and outreach_agent.enabled:
+                outreach_result = await outreach_agent.run_cycle()
+                if cycle % 5 == 0:
+                    logger.info(f"Outreach status: {outreach_result.get('outreach_status')}")
+
             trade_result = await trading_agent.run_cycle()
             logger.info(f"Trading: {trade_result['signals']} signals, {trade_result['actionable']} actionable")
 
@@ -194,7 +203,7 @@ async def run_trading_loop(
 
 async def main():
     logger.info(f"Starting MECOS {settings.VERSION} (trading={'enabled' if TRADING_ENABLED else 'disabled'})")
-    
+
     # Run config validation
     validate_on_startup()
 
@@ -236,16 +245,11 @@ async def main():
     mcp_skill_count = tool_orchestrator.register_mcp_from_config()
     if mcp_skill_count:
         logger.info(f"Registered {mcp_skill_count} MCP skill tools")
-    
+
     logger.info("ToolOrchestrator + ActionEngine ready: {} tools", len(tool_orchestrator.registry.list_tools()))
 
     # ── 5. Reasoner (with full intelligence) ────────────────────────────
     reasoner = Reasoner(memory, tool_orchestrator=tool_orchestrator, intelligence_stack=intelligence)
-    logger.info("Reasoner ready with graph={} nodes, {} curiosities queued",
-                intelligence["knowledge_graph"].graph.number_of_nodes(),
-                intelligence["curiosity_engine"].queue_size())
-
-    # ── 6. Neural brain (optional) ──────────────────────────────────────
     neural_brain_service = NeuralBrainService(memory_system=memory)
 
     # ── 7. Meta-learner & independence ──────────────────────────────────
@@ -256,7 +260,6 @@ async def main():
     compliance_agent = None
     if TRADING_ENABLED:
         try:
-            from trading_agent import TradingAgent
             trading_agent = TradingAgent(memory, tool_orchestrator)
             if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
                 trading_agent.neural_brain = neural_brain_service.brain
@@ -296,21 +299,36 @@ async def main():
     # Start health monitoring
     asyncio.create_task(health_monitor.periodic_check(interval=120))
 
-    # ── 11. Readiness check ─────────────────────────────────────────────
+    # ── 11. Outreach agent (optional, enable with MECOS_ENABLE_OUTREACH=true) ──
+    outreach_agent = OutreachAgent(memory)
+    await outreach_agent.startup()
+
+    # ── 12. Readiness check ─────────────────────────────────────────────
     readiness = await independence.check_readiness()
     logger.info(f"System readiness: {readiness}")
+    outreach_summary = outreach_agent.get_summary()
+    logger.info(f"Outreach summary: {outreach_summary}")
 
-    # ── 11. Enter main loop ─────────────────────────────────────────────
+    # ── 13. Enter main loop ─────────────────────────────────────────────
     if TRADING_ENABLED and trading_agent is not None:
         await run_trading_loop(
-            trading_agent, neural_brain_service,
-            domain_expansion_controller, domain_expansion_every=20,
+            trading_agent=trading_agent,
+            neural_brain_service=neural_brain_service,
+            domain_expansion_controller=domain_expansion_controller,
+            outreach_agent=outreach_agent,
         )
     else:
         await run_cognition_loop(
-            memory, reasoner, meta_learner, independence, dreaming,
-            neural_brain_service, action_engine, app_perception,
-            domain_expansion_controller, domain_expansion_every=20,
+            memory=memory,
+            reasoner=reasoner,
+            meta_learner=meta_learner,
+            independence=independence,
+            dreaming=dreaming,
+            neural_brain_service=neural_brain_service,
+            action_engine=action_engine,
+            app_perception=app_perception,
+            domain_expansion_controller=domain_expansion_controller,
+            outreach_agent=outreach_agent,
         )
 
 

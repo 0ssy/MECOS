@@ -89,6 +89,7 @@ class Settings(BaseSettings):
     CPU_LIMIT_PERCENT: int = 80
     IDLE_SLEEP_TIME: int = 60
     USE_GPU: bool = False
+    WEB_NAVIGATION_TIMEOUT_MS: int = int(os.getenv("WEB_NAVIGATION_TIMEOUT_MS", "15000"))
 
     # ── Sovereignty / Independence gates ─────────────────────────────────
     GOV_MIN_EXPERIENCES: int = int(os.getenv("GOV_MIN_EXPERIENCES", "500"))
@@ -104,6 +105,12 @@ class Settings(BaseSettings):
     TRAINING_ACCELERATION_FACTOR: int = int(
         __import__('os').getenv("TRAINING_ACCELERATION_FACTOR", "1")
     )
+
+    # ── Outreach / Email ──────────────────────────────────────────────────
+    MECOS_EMAIL: str = os.getenv("MECOS_EMAIL", "")
+    MECOS_EMAIL_APP_PASSWORD: str = os.getenv("MECOS_EMAIL_APP_PASSWORD", "")
+    MECOS_ENABLE_OUTREACH: bool = os.getenv("MECOS_ENABLE_OUTREACH", "false").lower() == "true"
+    DASHBOARD_PORT: int = int(os.getenv("DASHBOARD_PORT", "8080"))
 
     # ── Skill Configuration ──────────────────────────────────────────────────
     KILO_SKILLS_DIR: Path = BASE_DIR / ".kilo"
