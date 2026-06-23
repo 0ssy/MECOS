@@ -206,21 +206,14 @@ class DeliveryAgent:
 
     def draft_for_lead(self, brief: Dict[str, Any], channels: Optional[List[str]] = None) -> List[Dict[str, Any]]:
         if channels is None:
-            channels = ["email", "twitter_dm", "linkedin_message", "reddit_post"]
+            channels = ["email"]
 
         drafts = []
         contacts = brief.get("contacts", {})
         has_email = bool(contacts.get("emails"))
-        has_social = bool(contacts.get("social")) or brief.get("source", "").startswith("reddit") or brief.get("source", "") == "hackernews"
 
         if "email" in channels and has_email:
             drafts.append(self.draft_email(brief))
-        if "twitter_dm" in channels and has_social:
-            drafts.append(self.draft_dm_twitter(brief))
-        if "linkedin_message" in channels and has_social:
-            drafts.append(self.draft_linkedin_message(brief))
-        if "reddit_post" in channels:
-            drafts.append(self.draft_reddit_post(brief))
 
         return drafts
 

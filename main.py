@@ -36,6 +36,7 @@ from security_agent import SecurityAgent
 from guardian_agent import GuardianAgent
 from trading_agent import TradingAgent
 from outreach.outreach_agent import OutreachAgent
+from ceo_agent import CeoAgent
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
 
@@ -85,6 +86,7 @@ async def run_cognition_loop(
     domain_expansion_controller=None,
     domain_expansion_every: int = 20,
     outreach_agent: Optional[OutreachAgent] = None,
+    ceo_agent: Optional[CeoAgent] = None,
 ) -> None:
     logger.info("Entering cognition loop (timer + event hybrid)...")
     cycle = 0
@@ -99,6 +101,12 @@ async def run_cognition_loop(
                 outreach_result = await outreach_agent.run_cycle()
                 if cycle % 5 == 0:
                     logger.info(f"Outreach status: {outreach_result.get('outreach_status')}")
+
+            # ── CEO supervision (every 3 cycles) ─────────────────────────
+            if ceo_agent and cycle % 3 == 0:
+                ceo_result = await ceo_agent.run_cycle()
+                if ceo_result.get("health", {}).get("status") != "healthy":
+                    logger.warning("CEO health alert: {}", ceo_result["health"]["issues"])
 
             # ── Goal intake (from any source) ───────────────────────────
             for goal_desc in pending_goals[:]:
@@ -174,6 +182,7 @@ async def run_trading_loop(
     domain_expansion_controller=None,
     domain_expansion_every: int = 20,
     outreach_agent: Optional[OutreachAgent] = None,
+    ceo_agent: Optional[CeoAgent] = None,
 ) -> None:
     logger.info("Trading loop active.")
     cycle = 0
@@ -184,6 +193,12 @@ async def run_trading_loop(
                 outreach_result = await outreach_agent.run_cycle()
                 if cycle % 5 == 0:
                     logger.info(f"Outreach status: {outreach_result.get('outreach_status')}")
+
+            # ── CEO supervision (every 3 cycles) ─────────────────────────
+            if ceo_agent and cycle % 3 == 0:
+                ceo_result = await ceo_agent.run_cycle()
+                if ceo_result.get("health", {}).get("status") != "healthy":
+                    logger.warning("CEO health alert: {}", ceo_result["health"]["issues"])
 
             trade_result = await trading_agent.run_cycle()
             logger.info(f"Trading: {trade_result['signals']} signals, {trade_result['actionable']} actionable")
@@ -303,6 +318,12 @@ async def main():
     # ── 11. Outreach agent (optional, enable with MECOS_ENABLE_OUTREACH=true) ──
     outreach_agent = OutreachAgent(memory)
     await outreach_agent.startup()
+    
+    # ── 11b. CEO agent (permanent coordinator) ──
+    ceo_agent = CeoAgent(memory, tool_orchestrator=tool_orchestrator, revenue_ledger=outreach_agent.revenue_ledger)
+    ceo_agent.attach_outreach(outreach_agent)
+    if outreach_agent.enabled:
+        await ceo_agent.resume_outreach()
 
     # ── 12. Readiness check ─────────────────────────────────────────────
     readiness = await independence.check_readiness()
@@ -317,6 +338,7 @@ async def main():
             neural_brain_service=neural_brain_service,
             domain_expansion_controller=domain_expansion_controller,
             outreach_agent=outreach_agent,
+            ceo_agent=ceo_agent,
         )
     else:
         await run_cognition_loop(
@@ -330,6 +352,7 @@ async def main():
             app_perception=app_perception,
             domain_expansion_controller=domain_expansion_controller,
             outreach_agent=outreach_agent,
+            ceo_agent=ceo_agent,
         )
 
 

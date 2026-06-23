@@ -17,6 +17,9 @@ from outreach.scanner import OutreachScanner
 from outreach.synthesizer import LeadSynthesizer
 from outreach.delivery_agent import DeliveryAgent
 from outreach.funnel_builder import FunnelBuilder
+from outreach.email_enricher import EmailEnricher
+from outreach.worldmonitor_adapter import WorldMonitorAdapter
+from outreach.ceo_instincts import CeoInstincts
 from outreach.revenue_ledger import RevenueLedger
 from outreach.payments.payment_ledger import PaymentLedger
 from outreach.payments.paypal_client import PayPalClient
@@ -33,6 +36,9 @@ class OutreachAgent:
         self.revenue_ledger = RevenueLedger()
         self.payment_ledger = PaymentLedger()
         self.paypal_client = PayPalClient()
+        self.email_enricher = EmailEnricher()
+        self.intel_adapter = WorldMonitorAdapter()
+        self.instincts = CeoInstincts()
         self.cycle = 0
 
     async def startup(self):
@@ -60,6 +66,10 @@ class OutreachAgent:
             if self.cycle % 3 == 1:
                 scan_result = await self._run_scan_cycle()
                 result["scan"] = scan_result
+
+            if self.cycle % 4 == 3:
+                enrich_result = await self._run_enrich_cycle()
+                result["enrich"] = enrich_result
 
             if self.cycle % 5 == 2:
                 synth_result = await self._run_synth_cycle()
@@ -130,16 +140,55 @@ class OutreachAgent:
 
         total = len(leads) + len(social_leads)
         logger.info(f"Outreach scan: {total} leads found ({len(leads)} URLs + {len(social_leads)} social)")
-        return {"urls_scanned": len(seed_urls), "new_leads": total}
+
+        all_new = leads + social_leads
+
+        if all_new:
+            enriched_new = await self.email_enricher.enrich_batch(all_new)
+            for lead in enriched_new:
+                if lead.get("contacts", {}).get("emails"):
+                    existing = next((l for l in self.scanner.leads if l.get("url") == lead.get("url")), None)
+                    if existing:
+                        existing["contacts"] = lead["contacts"]
+                    else:
+                        self.scanner.leads.append(lead)
+
+        scored = self.intel_adapter.enrich_batch(all_new)
+        for lead in scored:
+            if lead.get("intel_multiplier", 1.0) != 1.0:
+                self.scanner.leads = [l if l.get("url") != lead.get("url") else lead for l in self.scanner.leads]
+                self.scanner._save_leads()
+
+        return {"urls_scanned": len(seed_urls), "new_leads": total, "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
+
+    async def _run_enrich_cycle(self) -> dict:
+        unenriched = [l for l in self.scanner.leads if not l.get("contacts", {}).get("emails")]
+        if not unenriched:
+            return {"enriched": 0, "reason": "all_leads_have_emails"}
+
+        batch = unenriched[:10]
+        enriched = await self.email_enricher.enrich_batch(batch)
+        
+        updated = 0
+        for lead in enriched:
+            if lead.get("contacts", {}).get("emails"):
+                updated += 1
+                self.scanner._save_leads()
+
+        logger.info(f"Outreach enrichment: {updated}/{len(batch)} leads got emails")
+        return {"enriched": updated, "attempted": len(batch)}
 
     async def _run_synth_cycle(self) -> dict:
         new_leads = self.scanner.get_new_leads(min_score=1, limit=10)
         if not new_leads:
             return {"synthesized": 0}
 
+        new_leads = [self.instincts.score_lead(l) for l in new_leads]
+        new_leads.sort(key=lambda l: l.get("total_score", 0), reverse=True)
+
         briefs = await self.synthesizer.synthesize_batch(new_leads)
         count = len(briefs)
-        logger.info(f"Outreach synthesis: {count} leads briefed")
+        logger.info(f"Outreach synthesis: {count} leads briefed (instincts ranked)")
         return {"synthesized": count}
 
     async def _run_draft_cycle(self) -> dict:
@@ -155,6 +204,9 @@ class OutreachAgent:
                 drafts = self.delivery_agent.draft_for_lead(brief)
                 paths = self.delivery_agent.save_drafts(drafts)
                 total_drafts += len(paths)
+
+                brief["status"] = "drafted"
+                self.synthesizer._save()
 
                 for draft in drafts:
                     if draft.get("type") == "email" and draft.get("status") == "pending_send":
