@@ -12,17 +12,16 @@ from memory_quality import MemoryQualityGate
 
 class VectorMemory:
     def __init__(self):
-        force_persistent = os.getenv("MECOS_VECTOR_DB_MODE", "").strip().lower() == "persistent"
         is_pytest = "PYTEST_CURRENT_TEST" in os.environ
 
-        if force_persistent and not is_pytest:
-            self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
-            collection_name = f"mecos_long_term"
-            logger.info("Vector Memory using PersistentClient.")
-        else:
+        if is_pytest:
             self.client = chromadb.EphemeralClient()
             collection_name = f"mecos_long_term_{os.getpid()}_{uuid.uuid4().hex[:8]}"
-            logger.info("Vector Memory using EphemeralClient.")
+            logger.info("Vector Memory using EphemeralClient (pytest).")
+        else:
+            self.client = chromadb.PersistentClient(path=settings.VECTOR_DB_PATH)
+            collection_name = "mecos_long_term"
+            logger.info("Vector Memory using PersistentClient.")
 
         self.collection = self.client.get_or_create_collection(name=collection_name)
         self._op_lock = asyncio.Lock()

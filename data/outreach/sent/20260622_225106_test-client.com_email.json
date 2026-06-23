@@ -1,0 +1,30 @@
+{
+  "type": "email",
+  "to": "jiganihizu@gmail.com",
+  "subject": "Quick automation idea for test-client.com",
+  "body": "Hi,\n\nI came across test-client.com and noticed you might be dealing with manual data entry.\n\nI build custom automation bots (web scraping, data pipelines, workflow orchestration) that typically cut manual work by 60-80%.\n\nHere's what I can do for you:\n- One-time automation build\n- Delivery in 2-3 days\n- Price: $500-$1,000\n\nNo long-term contracts. If it saves you time, we continue. If not, you walk away.\n\nWant me to send over a 2-minute Loom demo of a similar bot I built?\n\nBest,\nMECOS Automation",
+  "lead_brief": {
+    "domain": "test-client.com",
+    "pain_points": [
+      "manual data entry"
+    ],
+    "recommended_package": {
+      "name": "quick_win",
+      "price_range": "$500-$1,000",
+      "description": "One-time automation build",
+      "delivery": "2-3 days"
+    },
+    "contacts": {
+      "emails": [
+        "jiganihizu@gmail.com"
+      ],
+      "phones": [],
+      "social": []
+    }
+  },
+  "created_at": "2026-06-22T22:51:03.283318",
+  "status": "sent",
+  "channel": "personal_email",
+  "sent_at": "2026-06-22T22:51:06.982744",
+  "sent_via": "smtp"
+}

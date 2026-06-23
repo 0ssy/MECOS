@@ -1,0 +1,44 @@
+{
+  "entries": [
+    {
+      "deal_id": "deal_20260622_001",
+      "amount": 1500.0,
+      "source": "client_payment",
+      "description": "First automation agency contract - workflow retainer",
+      "allocated_at": "2026-06-22T23:02:02.649360",
+      "allocation": {
+        "ops_hardware": 600.0,
+        "trading_reserve": 450.0,
+        "growth_profit": 450.0
+      },
+      "cumulative_balances": {
+        "ops_hardware": 600.0,
+        "trading_reserve": 450.0,
+        "growth_profit": 450.0
+      }
+    },
+    {
+      "deal_id": "inv_20260623_053435_test_lea",
+      "amount": 1500.0,
+      "source": "paypal",
+      "description": "PayPal payment for MECOS automation: workflow_retainer",
+      "allocated_at": "2026-06-23T05:34:35.736665",
+      "allocation": {
+        "ops_hardware": 600.0,
+        "trading_reserve": 450.0,
+        "growth_profit": 450.0
+      },
+      "cumulative_balances": {
+        "ops_hardware": 1200.0,
+        "trading_reserve": 900.0,
+        "growth_profit": 900.0
+      }
+    }
+  ],
+  "bucket_balances": {
+    "ops_hardware": 1200.0,
+    "trading_reserve": 900.0,
+    "growth_profit": 900.0
+  },
+  "last_updated": "2026-06-23T05:34:35.736694"
+}

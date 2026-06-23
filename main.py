@@ -34,6 +34,7 @@ from app_controller import AppController
 from health_monitor import HealthMonitor
 from security_agent import SecurityAgent
 from guardian_agent import GuardianAgent
+from trading_agent import TradingAgent
 from outreach.outreach_agent import OutreachAgent
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"

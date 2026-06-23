@@ -51,7 +51,9 @@ class DeliveryAgent:
             f"No long-term contracts. If it saves you time, we continue. If not, you walk away.\n\n"
             f"Want me to send over a 2-minute Loom demo of a similar bot I built?\n\n"
             f"Best,\n"
-            f"MECOS Automation"
+            f"MECOS Automation\n\n"
+            f"---\n"
+            f"Unsubscribe: reply STOP to stop receiving emails."
         )
 
         draft = {

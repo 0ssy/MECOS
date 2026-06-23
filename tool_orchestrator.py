@@ -513,14 +513,69 @@ class ToolOrchestrator:
         return "\n".join(lines)
 
     async def mcp_client_register_all(self) -> int:
-        """Register all enabled MCP servers."""
+        """Register all enabled MCP servers with explicit logging and health reporting."""
+        logger.info("MCP registration cycle starting")
+        logger.debug(
+            "MCP configs available: {} | enabled: {}",
+            list(self.mcp_client._configs.keys()),
+            [k for k, v in self.mcp_client._configs.items() if v.get("enabled")],
+        )
         total = 0
+        failed = []
         for server_name, config in self.mcp_client._configs.items():
-            if config.get("enabled", False):
+            enabled = config.get("enabled", False)
+            logger.info(
+                "MCP server {} enabled={}", server_name, enabled,
+            )
+            if not enabled:
+                continue
+            try:
                 count = await self.mcp_client.register_server_tools(server_name)
                 total += count
-        logger.info(f"MCP registration complete: {total} tools registered")
+                logger.info(
+                    "MCP server {} registered {} tools successfully", server_name, count,
+                )
+            except Exception as exc:
+                failed.append(server_name)
+                logger.error(
+                    "MCP server {} registration failed: {}", server_name, exc,
+                )
+        logger.info(
+            "MCP registration complete: {} tools registered across {} servers | failures={}",
+            total,
+            len(self.mcp_client._configs),
+            failed,
+        )
+        self.mcp_client_register_skill_tools()
         return total
+
+    def mcp_health_check(self) -> dict:
+        """Return health status of all MCP servers."""
+        statuses = {}
+        for server_name, config in self.mcp_client._configs.items():
+            proc = self.mcp_client._processes.get(server_name)
+            running = proc.poll() is None if proc else False
+            statuses[server_name] = {
+                "enabled": config.get("enabled", False),
+                "running": running,
+                "tools_registered": len(
+                    [t for t in self.registry.list_tools() if t.name.startswith(f"mcp_{server_name}_")]
+                ),
+            }
+        logger.debug("MCP health check: {}", statuses)
+        return statuses
+
+    def get_mcp_health_report(self) -> str:
+        """Human-readable MCP health summary for logging/debugging."""
+        health = self.mcp_health_check()
+        lines = ["MCP Health Report:"]
+        for name, info in health.items():
+            state = "RUNNING" if info["running"] else "STOPPED"
+            enabled = "enabled" if info["enabled"] else "disabled"
+            lines.append(
+                f"  {name}: {enabled} | {state} | {info['tools_registered']} tools"
+            )
+        return "\n".join(lines)
 
     def mcp_client_register_skill_tools(self) -> int:
         """Register MCP tools from skill-configured servers (notion, slack, granola, zapier)."""

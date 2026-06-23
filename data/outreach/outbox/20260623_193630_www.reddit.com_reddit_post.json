@@ -1,0 +1,42 @@
+{
+  "type": "reddit_post",
+  "subreddit": "automation",
+  "title": "[Show MECOS] Built an automation bot that removed growing team / scaling challenges for a local business",
+  "body": "Background: I run an automation agency (MECOS) and recently finished a project for www.reddit.com.\n\nThe problem: Growing Team / Scaling Challenges\nThe solution: Custom Python bot using browser automation + data pipelines.\nResult: Ongoing automation maintenance + new workflows.\n\nI'm documenting the build process and sharing the open-source components.\n\nIf you run into similar ops headaches, feel free to reach out. Happy to do a free 15-min audit.\n\nGitHub: [link]\nDemo video: [link]",
+  "lead_brief": {
+    "url": "https://www.reddit.com/r/Entrepreneur/comments/15lp6c2/the_best_actually_free_to_use_ai_tools_for/",
+    "domain": "www.reddit.com",
+    "synthesized_at": "2026-06-23T19:34:24.387984",
+    "pain_points": [
+      "growing team / scaling challenges"
+    ],
+    "persona": "scaling_business",
+    "suggested_pitch": "Automated solution for www.reddit.com targeting Growing Team / Scaling Challenges. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "workflow_retainer",
+      "price_range": "$1,000-$2,000/mo",
+      "description": "Ongoing automation maintenance + new workflows",
+      "delivery": "ongoing"
+    },
+    "contacts": {
+      "emails": [],
+      "phones": [],
+      "social": []
+    },
+    "original_signals": {
+      "inefficiency_markers": 0,
+      "pain_points": 0,
+      "organic_intent": 0,
+      "revenue_fit": 2
+    },
+    "matched_terms": [
+      "small business",
+      "startup"
+    ],
+    "status": "ready_for_outreach"
+  },
+  "created_at": "2026-06-23T19:36:30.058616",
+  "status": "pending_review",
+  "channel": "agent_reach_reddit",
+  "_filename": "20260623_193630_www.reddit.com_reddit_post.json"
+}

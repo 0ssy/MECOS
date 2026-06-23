@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 from typing import List, Optional
 
 from loguru import logger
@@ -17,6 +18,8 @@ from outreach.synthesizer import LeadSynthesizer
 from outreach.delivery_agent import DeliveryAgent
 from outreach.funnel_builder import FunnelBuilder
 from outreach.revenue_ledger import RevenueLedger
+from outreach.payments.payment_ledger import PaymentLedger
+from outreach.payments.paypal_client import PayPalClient
 
 
 class OutreachAgent:
@@ -28,6 +31,8 @@ class OutreachAgent:
         self.delivery_agent = DeliveryAgent()
         self.funnel_builder = FunnelBuilder()
         self.revenue_ledger = RevenueLedger()
+        self.payment_ledger = PaymentLedger()
+        self.paypal_client = PayPalClient()
         self.cycle = 0
 
     async def startup(self):
@@ -89,11 +94,9 @@ class OutreachAgent:
 
     async def _run_scan_cycle(self) -> dict:
         seed_urls = [
-            "https://www.reddit.com/r/automation/new/",
             "https://www.reddit.com/r/smallbusiness/new/",
             "https://www.reddit.com/r/Entrepreneur/new/",
-            "https://hn.algolia.com/api/v1/search?query=automation&tags=story&hitsPerPage=15",
-            "https://www.indiehackers.com/search?q=automation&type=posts",
+            "https://www.reddit.com/r/webdev/new/",
         ]
         leads = []
         for url in seed_urls:
@@ -107,10 +110,23 @@ class OutreachAgent:
         social_leads = []
         for source in ["reddit", "hackernews", "indiehackers"]:
             try:
-                items = await self.scanner.scan_social_source(source, query="automation", limit=10)
+                items = await self.scanner.scan_social_source(source, query="automation needed hiring", limit=10)
                 social_leads.extend(items)
             except Exception as e:
                 logger.debug(f"Social scan skip {source}: {e}")
+
+        searxng_queries = [
+            "small business automation needed site:reddit.com",
+            "workflow bottleneck startup",
+            "manual data entry help",
+            "automation tool needed",
+        ]
+        for query in searxng_queries:
+            try:
+                found = await self.scanner.search_leads(query, limit=5)
+                social_leads.extend(found)
+            except Exception as e:
+                logger.debug(f"SearXNG search skip {query}: {e}")
 
         total = len(leads) + len(social_leads)
         logger.info(f"Outreach scan: {total} leads found ({len(leads)} URLs + {len(social_leads)} social)")
@@ -133,6 +149,7 @@ class OutreachAgent:
 
         total_drafts = 0
         total_sent = 0
+        total_invoiced = 0
         for brief in ready:
             try:
                 drafts = self.delivery_agent.draft_for_lead(brief)
@@ -141,14 +158,61 @@ class OutreachAgent:
 
                 for draft in drafts:
                     if draft.get("type") == "email" and draft.get("status") == "pending_send":
+                        contact_email = (
+                            draft.get("lead_brief", {}).get("contacts", {}).get("emails", [""])[0]
+                            or "client@example.com"
+                        )
+                        if contact_email in ("unknown@example.com", "client@example.com"):
+                            logger.warning(
+                                "Skipping send for {}: no valid contact email",
+                                draft.get("to", "unknown"),
+                            )
+                            draft["status"] = "skipped_no_email"
+                            self.delivery_agent._save_draft(draft)
+                            continue
+                        if self.paypal_client.client_id:
+                            lead_id = draft.get("lead_brief", {}).get("url", "unknown")[:32]
+                            package = draft.get("lead_brief", {}).get("recommended_package", {})
+                            price_str = package.get("price_range", "$500-$1,500")
+                            amount = self._extract_amount(price_str)
+                            invoice = self.payment_ledger.create_invoice(
+                                lead_id=lead_id,
+                                amount=amount,
+                                description=f"MECOS automation: {package.get('name', 'custom')}",
+                                client_email=contact_email,
+                            )
+                            paypal_result = self.paypal_client.create_order(
+                                invoice_id=invoice["invoice_id"],
+                                amount=amount,
+                                description=f"MECOS automation: {package.get('name', 'custom')}",
+                                client_email=contact_email,
+                            )
+                            if paypal_result.get("checkout_url"):
+                                self.payment_ledger.link_paypal_order(
+                                    invoice["invoice_id"],
+                                    paypal_result["order_id"],
+                                    paypal_result["checkout_url"],
+                                )
+                                draft["payment_link"] = paypal_result["checkout_url"]
+                                draft["invoice_id"] = invoice["invoice_id"]
+                                total_invoiced += 1
+                                logger.info(f"Invoice {invoice['invoice_id']} created: ${amount:.2f} → {paypal_result['checkout_url'][:60]}")
+
                         if self.delivery_agent.send_draft(draft):
                             total_sent += 1
             except Exception as e:
                 logger.error(f"Draft generation failed for {brief.get('domain')}: {e}")
 
         pending = len(self.delivery_agent.list_pending())
-        logger.info(f"Outreach drafts: {total_drafts} created, {total_sent} sent, {pending} pending review")
-        return {"drafts_created": total_drafts, "drafts_sent": total_sent, "pending_review": pending}
+        logger.info(f"Outreach drafts: {total_drafts} created, {total_sent} sent, {pending} pending review, {total_invoiced} invoiced")
+        return {"drafts_created": total_drafts, "drafts_sent": total_sent, "pending_review": pending, "invoices_created": total_invoiced}
+
+    def _extract_amount(self, price_str: str) -> float:
+        import re
+        numbers = re.findall(r"[\d,]+", price_str.replace(",", ""))
+        if numbers:
+            return float(numbers[0])
+        return 500.0
 
     async def _run_content_cycle(self) -> dict:
         published = self.funnel_builder.get_case_studies(limit=20)

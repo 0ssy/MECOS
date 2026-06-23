@@ -75,6 +75,49 @@ class DashboardHandler(BaseHTTPRequestHandler):
                     except Exception:
                         pass
             self._send_json(outbox[-50:])
+        elif self.path == "/api/payments":
+            self._send_json(self._read_json(OUTREACH_DIR / "payments" / "payment_ledger.json", {}).get("payments", []))
+        elif self.path.startswith("/api/invoices/"):
+            invoice_id = self.path.split("/")[-1]
+            ledger_data = self._read_json(OUTREACH_DIR / "payments" / "payment_ledger.json", {})
+            payment = next((p for p in ledger_data.get("payments", []) if p.get("invoice_id") == invoice_id), None)
+            if payment:
+                self._send_json(payment)
+            else:
+                self._send_json({"error": "not_found"}, 404)
+        elif self.path == "/api/payments/summary":
+            self._send_json(self._read_json(OUTREACH_DIR / "payments" / "payment_ledger.json", {}).get("payments", []))
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def do_POST(self):
+        content_length = int(self.headers.get("Content-Length", 0))
+        body_bytes = self.rfile.read(content_length)
+
+        if self.path == "/webhooks/paypal":
+            try:
+                from outreach.payments.webhooks import PayPalWebhookHandler
+                handler = PayPalWebhookHandler()
+                event_body = json.loads(body_bytes.decode())
+
+                verified = handler.verify_signature(dict(self.headers), body_bytes)
+                if not verified:
+                    self.send_response(403)
+                    self.end_headers()
+                    self.wfile.write(b'{"error": "invalid_signature"}')
+                    return
+
+                result = handler.process_event(event_body)
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps(result).encode())
+            except Exception as e:
+                logger.error(f"PayPal webhook processing error: {e}")
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(b'{"error": "processing_failed"}')
         else:
             self.send_response(404)
             self.end_headers()

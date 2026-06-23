@@ -90,6 +90,7 @@ class Settings(BaseSettings):
     IDLE_SLEEP_TIME: int = 60
     USE_GPU: bool = False
     WEB_NAVIGATION_TIMEOUT_MS: int = int(os.getenv("WEB_NAVIGATION_TIMEOUT_MS", "15000"))
+    WEB_BLOCKED_URL_PATTERNS: list = ["login", "signup", "sign-in", "sign-out", "register", "account", "settings", "help", "about", "privacy", "terms"]
 
     # ── Sovereignty / Independence gates ─────────────────────────────────
     GOV_MIN_EXPERIENCES: int = int(os.getenv("GOV_MIN_EXPERIENCES", "500"))
@@ -111,6 +112,17 @@ class Settings(BaseSettings):
     MECOS_EMAIL_APP_PASSWORD: str = os.getenv("MECOS_EMAIL_APP_PASSWORD", "")
     MECOS_ENABLE_OUTREACH: bool = os.getenv("MECOS_ENABLE_OUTREACH", "false").lower() == "true"
     DASHBOARD_PORT: int = int(os.getenv("DASHBOARD_PORT", "8080"))
+
+    # ── SearXNG Search ─────────────────────────────────────────────────────
+    SEARXNG_URL: str = os.getenv("SEARXNG_URL", "http://localhost:8888")
+
+    # ── PayPal Payments ────────────────────────────────────────────────────
+    PAYPAL_CLIENT_ID: str = os.getenv("PAYPAL_CLIENT_ID", "")
+    PAYPAL_CLIENT_SECRET: str = os.getenv("PAYPAL_CLIENT_SECRET", "")
+    PAYPAL_WEBHOOK_ID: str = os.getenv("PAYPAL_WEBHOOK_ID", "")
+    PAYPAL_MODE: str = os.getenv("PAYPAL_MODE", "sandbox")
+    PAYPAL_RETURN_URL: str = os.getenv("PAYPAL_RETURN_URL", "http://localhost:8080/payment/success")
+    PAYPAL_CANCEL_URL: str = os.getenv("PAYPAL_CANCEL_URL", "http://localhost:8080/payment/cancel")
 
     # ── Skill Configuration ──────────────────────────────────────────────────
     KILO_SKILLS_DIR: Path = BASE_DIR / ".kilo"

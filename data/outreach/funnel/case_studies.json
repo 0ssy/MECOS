@@ -1,0 +1,22 @@
+[
+  {
+    "id": "cs_20260622_224500",
+    "created_at": "2026-06-22T22:45:00",
+    "client": "Local Retail Store",
+    "package": "workflow_retainer",
+    "price": "$1,500/mo",
+    "problem": "Manual inventory tracking and order processing consuming 15+ hours per week",
+    "solution": "Custom Python bot using browser automation + data pipelines for inventory sync and order routing.",
+    "before_hours_per_week": 15,
+    "after_hours_per_week": 2,
+    "time_saved_pct": 87,
+    "tech_stack": [
+      "Python",
+      "Playwright",
+      "ChromaDB",
+      "FastAPI"
+    ],
+    "testimonial": "MECOS automated our entire inventory workflow. We went from 15 hours of manual work to 2 hours of oversight.",
+    "status": "published"
+  }
+]

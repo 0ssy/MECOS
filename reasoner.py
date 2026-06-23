@@ -73,8 +73,15 @@ class Reasoner:
 
     def _extract_triggers(self, description: str) -> List[str]:
         """Extract trigger keywords from skill description."""
-        matches = re.findall(r"(?:^|\s)(?:marketing|social|legal|humanize|frontend|design|seo|humanizer)[\w-]*", description.lower())
-        return [m.strip() for m in matches if m.strip()]
+        outreach_patterns = [
+            r"outreach", r"email", r"cold.?mail", r"lead", r"sales",
+            r"pitch", r"prospect", r"draft", r"send", r"notion",
+            r"slack", r"social.?media", r"marketing", r"humanize",
+            r"frontend|front.?end", r"seo|search.?optim", r"content",
+        ]
+        base = re.findall(r"(?:^|\s)(?:marketing|social|legal|humanize|frontend|design|seo|humanizer)[\w-]*", description.lower())
+        outreach = re.findall(r"(?:^|\s)(" + "|".join(outreach_patterns) + r")[\w-]*", description.lower())
+        return [m.strip() for m in (base + outreach) if m.strip()]
 
     def _graph_context(self, query: str, max_items: int = 5) -> str:
         kg = self.intelligence.get("knowledge_graph")
@@ -222,12 +229,20 @@ Extract a concise lesson (3-5 sentences). Also extract key facts as
         return "\n\n".join(parts) if parts else "(no prior context)"
 
     def _match_skills(self, query: str) -> List[str]:
-        """Match goal query against skill triggers."""
+        """Match goal query against skill triggers and outreach keywords."""
         query_lower = query.lower()
         matched = []
+        outreach_keywords = [
+            "outreach", "email", "sales", "lead", "prospect", "cold outreach",
+            "send message", "follow up", "notion", "slack", "zapier",
+        ]
         for skill_name in self.skill_triggers:
             if skill_name.replace("-", " ") in query_lower or skill_name.replace("-", "") in query_lower:
                 matched.append(skill_name)
+        for kw in outreach_keywords:
+            if kw in query_lower and "outreach" not in matched:
+                matched.append("outreach")
+                break
         return matched
 
     def _skill_tools_context(self, skills: List[str]) -> str:
