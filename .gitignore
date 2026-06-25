@@ -25,4 +25,6 @@ engine.log
 # Random temp files
 null
 trade_attribution.jsonl
-!.txt/libs/
+!.txt
+
+libs/

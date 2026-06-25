@@ -1,0 +1,14 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-x --tb=short --timeout=30"
+timeout = 30
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I"]
+exclude = ["libs/"]
+
+[tool.mypy]
+strict = false
+ignore_missing_imports = true
