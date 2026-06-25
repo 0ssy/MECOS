@@ -1,1 +1,1 @@
-[{"url": "https://example.com/post/1", "domain": "example.com", "discovered_at": "2026-06-25T14:51:20.501220", "content_hash": "hash1", "signals": {"inefficiency_markers": 0, "pain_points": 1, "organic_intent": 0, "revenue_fit": 0}, "total_score": 3, "matched_terms": ["manual data entry"], "contacts": {"emails": [], "phones": [], "social": []}, "status": "new", "pitch_suggestion": "", "source": "research_cycle/web", "text_excerpt": "We need automation for manual data entry."}]
+[]
