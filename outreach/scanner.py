@@ -6,23 +6,21 @@ A) Inefficiency markers, B) Pain point indicators, C) Revenue fit, D) Organic in
 from __future__ import annotations
 
 import asyncio
-import json
-import os
-import re
-import requests
-from datetime import datetime
-from pathlib import Path
-from typing import Any, Dict, List, Optional
-from urllib.parse import urljoin, urlparse
 import hashlib
+import json
+import re
 import time as time_module
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
+import requests
 from loguru import logger
+
+from browser_automation import BrowserAutomation
 from config import settings
 from memory_system import MemorySystem
-from browser_automation import BrowserAutomation
 from web_perception import WebPerception
-
 
 PAIN_KEYWORDS = [
     "manual data entry", "too much time", "wasting time", "bottleneck",
@@ -81,7 +79,7 @@ class OutreachScanner:
             return False
         if domain in ("localhost", "127.0.0.1"):
             return False
-        if ".example.com" in domain or domain == "example.com":
+        if domain == "example.com" or ".example.com" in domain:
             return False
         if parsed.path.startswith("/search") or parsed.query.startswith("q=") or "/search" in parsed.query:
             return False

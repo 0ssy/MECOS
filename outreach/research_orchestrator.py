@@ -22,6 +22,11 @@ from .scanner import (
     REVENUE_FIT_SIGNALS,
 )
 
+BLOCKED_DOMAINS = {
+    "example.com", "localhost", "127.0.0.1",
+    "hn.algolia.com", "news.ycombinator.com",
+}
+
 
 class ResearchOrchestrator:
     """Orchestrates multi-platform research for leads.
@@ -227,6 +232,11 @@ class ResearchOrchestrator:
 
                         scored = _score_text(text, url)
                         if scored["total_score"] >= 2:
+                            domain_lower = domain.lower()
+                            if domain_lower.startswith("www."):
+                                domain_lower = domain_lower[4:]
+                            if domain_lower in BLOCKED_DOMAINS:
+                                continue
                             text_hash = hashlib.md5(text.encode()).hexdigest()
                             candidate = {
                                 "url": url,

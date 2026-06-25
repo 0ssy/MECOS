@@ -18,6 +18,95 @@ def research_orchestrator():
     return ResearchOrchestrator()
 
 
+@pytest.fixture
+def delivery_agent():
+    from outreach.delivery_agent import DeliveryAgent
+    return DeliveryAgent()
+
+
+def test_research_lead_returns_shape_when_all_backends_fail(
+    research_orchestrator,
+):
+    """Test Task 5: ResearchOrchestrator.research_lead() returns expected shape when all backends down."""
+    high_score_lead = {
+        "total_score": 6,
+        "domain": "test.com",
+        "matched_terms": ["automation needed"],
+        "pain_points": ["manual work"],
+    }
+
+    with (
+        patch(
+            "outreach.research_orchestrator.research_twitter",
+            new_callable=AsyncMock,
+            return_value={"ok": False, "text": "", "error": "backend_unavailable"},
+        ),
+        patch(
+            "outreach.research_orchestrator.research_youtube",
+            new_callable=AsyncMock,
+            return_value={"ok": False, "text": "", "error": "backend_unavailable"},
+        ),
+        patch(
+            "outreach.research_orchestrator.research_reddit",
+            new_callable=AsyncMock,
+            return_value={"ok": False, "text": "", "error": "backend_unavailable"},
+        ),
+        patch(
+            "outreach.research_orchestrator.research_web",
+            new_callable=AsyncMock,
+            return_value={"ok": False, "text": "", "error": "backend_unavailable"},
+        ),
+    ):
+        signals = asyncio.run(research_orchestrator.research_lead(high_score_lead))
+
+    assert "twitter" in signals
+    assert "youtube" in signals
+    assert "reddit" in signals
+    assert "web" in signals
+    for platform in ["twitter", "youtube", "reddit", "web"]:
+        assert "ok" in signals[platform]
+        assert signals[platform]["ok"] is False
+
+
+def test_draft_email_includes_personalization_when_research_summary_present(
+    delivery_agent,
+):
+    """Test Task 5: draft_email() includes personalization when research_summary is present."""
+    brief_with_research = {
+        "domain": "testcompany.com",
+        "pain_points": ["manual data entry"],
+        "contacts": {"emails": ["test@testcompany.com"]},
+        "recommended_package": {
+            "description": "Custom bot build",
+            "delivery": "1 week",
+            "price_range": "$500",
+        },
+        "research_summary": "Recent Twitter discussion mentions automation challenges.",
+    }
+
+    draft = delivery_agent.draft_email(brief_with_research)
+    assert "Recent Twitter discussion" in draft["body"]
+
+
+def test_draft_email_omits_personalization_when_research_summary_absent(
+    delivery_agent,
+):
+    """Test Task 5: draft_email() omits personalization when research_summary is absent."""
+    brief_without_research = {
+        "domain": "testcompany.com",
+        "pain_points": ["manual data entry"],
+        "contacts": {"emails": ["test@testcompany.com"]},
+        "recommended_package": {
+            "description": "Custom bot build",
+            "delivery": "1 week",
+            "price_range": "$500",
+        },
+    }
+
+    draft = delivery_agent.draft_email(brief_without_research)
+    assert "Recent Twitter discussion" not in draft["body"]
+
+
 def test_discover_lead_signals_returns_empty_when_all_backends_fail(
     research_orchestrator,
 ):
