@@ -16,7 +16,7 @@ from typing import List, Optional
 from loguru import logger
 from config import settings
 from memory_system import MemorySystem
-from outreach.scanner import OutreachScanner
+from outreach.scanner import OutreachScanner, PAIN_KEYWORDS
 from outreach.synthesizer import LeadSynthesizer
 from outreach.delivery_agent import DeliveryAgent
 from outreach.funnel_builder import FunnelBuilder
@@ -29,6 +29,7 @@ from outreach.payments.paypal_client import PayPalClient
 from outreach.reply_monitor import ReplyMonitor
 from outreach.demo_deliverer import DemoDeliverer
 from outreach.followup_engine import FollowupEngine
+from outreach.research_orchestrator import ResearchOrchestrator
 
 
 class OutreachAgent:
@@ -72,6 +73,10 @@ class OutreachAgent:
         result = {"outreach_status": "ok", "cycle": self.cycle}
 
         try:
+            if self.cycle % 20 == 0:
+                research_result = await self._run_research_cycle()
+                result["research"] = research_result
+
             if self.cycle % 3 == 1:
                 scan_result = await self._run_scan_cycle()
                 result["scan"] = scan_result
@@ -117,6 +122,54 @@ class OutreachAgent:
             result["error"] = str(e)
 
         return result
+
+    async def _run_research_cycle(self) -> dict:
+        orchestrator = ResearchOrchestrator()
+        keywords = PAIN_KEYWORDS[:6]
+        candidates = orchestrator.discover_lead_signals(keywords)
+
+        new_count = 0
+        for candidate in candidates:
+            url = candidate.get("url", "")
+            if not url:
+                continue
+            if url in self.scanner.scanned_urls:
+                continue
+            existing = next(
+                (lead_item for lead_item in self.scanner.leads if lead_item.get("url") == url), None
+            )
+            if existing:
+                continue
+
+            lead = {
+                "url": url,
+                "domain": candidate.get("domain", ""),
+                "discovered_at": datetime.now().isoformat(),
+                "content_hash": candidate.get("content_hash", ""),
+                "signals": candidate.get("signals", {}),
+                "total_score": candidate.get("total_score", 0),
+                "matched_terms": candidate.get("matched_terms", []),
+                "contacts": {"emails": [], "phones": [], "social": []},
+                "status": "new",
+                "pitch_suggestion": "",
+                "source": f"research_cycle/{candidate.get('source_platform', 'unknown')}",
+            }
+            if candidate.get("text_excerpt"):
+                lead["text_excerpt"] = candidate["text_excerpt"]
+
+            self.scanner.leads.append(lead)
+            self.scanner.scanned_urls.add(url)
+            if candidate.get("content_hash"):
+                self.scanner.scanned_content_hashes.add(candidate["content_hash"])
+            new_count += 1
+
+        if new_count > 0:
+            self.scanner._save_leads()
+
+        logger.info(
+            f"Research cycle: discovered {len(candidates)} candidates, {new_count} new leads"
+        )
+        return {"discovered": len(candidates), "new_leads": new_count}
 
     async def _run_scan_cycle(self) -> dict:
         seed_urls = [
@@ -212,11 +265,27 @@ class OutreachAgent:
         if not ready:
             return {"drafts_created": 0}
 
+        research_orchestrator = ResearchOrchestrator()
+        self._research_orchestrator = research_orchestrator
+
         total_drafts = 0
         total_sent = 0
         total_invoiced = 0
         for brief in ready:
             try:
+                lead_url = brief.get("url", "")
+                lead = next((l for l in self.scanner.leads if l.get("url") == lead_url), None)
+                if lead and research_orchestrator.should_research(lead):
+                    signals = await research_orchestrator.research_lead(lead)
+                    brief["research_summary"] = research_orchestrator.build_summary(signals)
+                    # Update the brief in the synthesizer's list to persist research_summary
+                    for i, b in enumerate(self.synthesizer.briefs):
+                        if b.get("url") == lead_url:
+                            self.synthesizer.briefs[i]["research_summary"] = brief["research_summary"]
+                            break
+                    self.scanner._save_leads()
+                    self.synthesizer._save()
+
                 drafts = self.delivery_agent.draft_for_lead(brief)
                 paths = self.delivery_agent.save_drafts(drafts)
                 total_drafts += len(paths)
@@ -236,6 +305,24 @@ class OutreachAgent:
                                 draft.get("to", "unknown"),
                             )
                             draft["status"] = "skipped_no_email"
+                            self.delivery_agent._save_draft(draft)
+                            continue
+                        recipient_domain = contact_email.split("@")[-1].lower()
+                        if recipient_domain in OutreachScanner.AGGREGATOR_DOMAINS or ".example.com" in recipient_domain:
+                            logger.warning(
+                                "Skipping send to {}: aggregator/placeholder domain",
+                                contact_email,
+                            )
+                            draft["status"] = "skipped_bad_domain"
+                            self.delivery_agent._save_draft(draft)
+                            continue
+                        body = draft.get("body", "")
+                        if len(body) < 200 or "automation bots" not in body:
+                            logger.warning(
+                                "Skipping send for {}: email too generic or missing personalization",
+                                contact_email,
+                            )
+                            draft["status"] = "skipped_low_quality"
                             self.delivery_agent._save_draft(draft)
                             continue
                         if self.paypal_client.client_id:

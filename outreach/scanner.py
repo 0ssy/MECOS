@@ -54,6 +54,11 @@ REVENUE_FIT_SIGNALS = [
 
 
 class OutreachScanner:
+    AGGREGATOR_DOMAINS = {
+        "hn.algolia.com",
+        "news.ycombinator.com",
+    }
+
     def __init__(self, memory: MemorySystem, browser: Optional[BrowserAutomation] = None,
                  web_perception: Optional[WebPerception] = None):
         self.memory = memory
@@ -61,11 +66,26 @@ class OutreachScanner:
         self.web_perception = web_perception or WebPerception(memory)
         self.leads: List[Dict[str, Any]] = []
         self.scanned_urls: set = set()
-        self.scanned_content_hashes: set = set()  # For deduplication
-        self.scan_cycles_by_url: Dict[str, float] = {}  # Last scan timestamp per URL
+        self.scanned_content_hashes: set = set()
+        self.scan_cycles_by_url: Dict[str, float] = {}
         self.save_path = settings.DATA_DIR / "outreach" / "leads.json"
         self.save_path.parent.mkdir(parents=True, exist_ok=True)
         self._load_leads()
+
+    def _is_business_url(self, url: str) -> bool:
+        domain = urlparse(url).netloc.lower()
+        if domain.startswith("www."):
+            domain = domain[4:]
+        parsed = urlparse(url)
+        if domain in self.AGGREGATOR_DOMAINS:
+            return False
+        if domain in ("localhost", "127.0.0.1"):
+            return False
+        if ".example.com" in domain or domain == "example.com":
+            return False
+        if parsed.path.startswith("/search") or parsed.query.startswith("q=") or "/search" in parsed.query:
+            return False
+        return True
 
     def _load_leads(self):
         if self.save_path.exists():
@@ -171,6 +191,8 @@ class OutreachScanner:
         return {"emails": emails, "phones": phones, "social": social}
 
     async def scan_url(self, url: str) -> Optional[Dict[str, Any]]:
+        if not self._is_business_url(url):
+            return None
         # Check 24h deduplication window
         now = time_module.time()
         last_scan = self.scan_cycles_by_url.get(url, 0)
@@ -244,6 +266,8 @@ class OutreachScanner:
                 now = time_module.time()
                 if now - self.scan_cycles_by_url.get(url, 0) < 86400:
                     continue
+                if not self._is_business_url(url):
+                    continue
                 self.scan_cycles_by_url[url] = now
                 await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
                 text = await self.browser.get_text()
@@ -277,6 +301,8 @@ class OutreachScanner:
             now = time_module.time()
             if now - self.scan_cycles_by_url.get(url, 0) < 86400:
                 return leads
+            if not self._is_business_url(url):
+                return leads
             self.scan_cycles_by_url[url] = now
             await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
             text = await self.browser.get_text()
@@ -308,6 +334,8 @@ class OutreachScanner:
             url = f"https://www.indiehackers.com/search?q={search_q}&type=posts"
             now = time_module.time()
             if now - self.scan_cycles_by_url.get(url, 0) < 86400:
+                return leads
+            if not self._is_business_url(url):
                 return leads
             self.scan_cycles_by_url[url] = now
             await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
@@ -359,6 +387,9 @@ class OutreachScanner:
                 content = result.get("content", "")
                 
                 if not url:
+                    continue
+                
+                if not self._is_business_url(url):
                     continue
                 
                 # Check deduplication

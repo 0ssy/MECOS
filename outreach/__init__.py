@@ -11,4 +11,5 @@ from .revenue_ledger import RevenueLedger
 from .reply_monitor import ReplyMonitor
 from .demo_deliverer import DemoDeliverer
 from .followup_engine import FollowupEngine
+from .research_orchestrator import ResearchOrchestrator
 from .outreach_agent import OutreachAgent

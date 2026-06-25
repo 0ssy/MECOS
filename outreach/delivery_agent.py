@@ -35,6 +35,7 @@ class DeliveryAgent:
         package = brief.get("recommended_package", {})
         contacts = brief.get("contacts", {})
         emails = contacts.get("emails", [])
+        research_summary = brief.get("research_summary", "")
 
         recipient = emails[0] if emails else "unknown@example.com"
 
@@ -42,6 +43,10 @@ class DeliveryAgent:
         body = (
             f"Hi,\n\n"
             f"I came across {domain} and noticed you might be dealing with {pain}.\n\n"
+        )
+        if research_summary:
+            body += f"{research_summary}\n\n"
+        body += (
             f"I build custom automation bots (web scraping, data pipelines, workflow orchestration) "
             f"that typically cut manual work by 60-80%.\n\n"
             f"Here's what I can do for you:\n"
