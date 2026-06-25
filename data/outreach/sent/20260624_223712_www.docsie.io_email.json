@@ -1,0 +1,48 @@
+{
+  "type": "email",
+  "to": "support@docsie.io",
+  "subject": "Automation for www.docsie.io \u2014 manual labor / operational overhead",
+  "body": "I saw you're dealing with manual labor / operational overhead.\n\nThe problem: Manual Labor / Operational Overhead eats into your team's bandwidth.\n\nThe outcome: We guarantee 60%+ time reduction on your targeted process within 30 days, or you pay nothing.\n\nWe build browser automation bots that replace manual work with scheduled scripts.\n\nReply 'DEMO' and I'll send a 2-minute Loom showing what we built for a similar client.\n\nP.S. Know someone who'd benefit? Refer them during signup and you both get $50 credit + 10% off + 30 days extension.\n",
+  "lead_brief": {
+    "url": "https://www.docsie.io/blog/glossary/workflow-bottleneck/",
+    "domain": "www.docsie.io",
+    "synthesized_at": "2026-06-24T22:37:00.178351",
+    "pain_points": [
+      "manual labor / operational overhead"
+    ],
+    "persona": "overwhelmed_operator",
+    "suggested_pitch": "Automated solution for www.docsie.io targeting Manual Labor / Operational Overhead. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "single_bot_package",
+      "price_range": "$500-$1,500 one-time",
+      "description": "Focused automation for one high-impact process",
+      "delivery": "2-3 days"
+    },
+    "contacts": {
+      "emails": [
+        "support@docsie.io",
+        "sales@docsie.io"
+      ],
+      "phones": [],
+      "social": [],
+      "email_source": "website_scrape",
+      "email_confidence": "high"
+    },
+    "original_signals": {
+      "inefficiency_markers": 0,
+      "pain_points": 2,
+      "organic_intent": 0,
+      "revenue_fit": 0
+    },
+    "matched_terms": [
+      "bottleneck",
+      "workflow bottleneck"
+    ],
+    "status": "ready_for_outreach"
+  },
+  "referral_code": "F417A54B",
+  "created_at": "2026-06-24T22:37:07.114796",
+  "status": "pending_send",
+  "channel": "personal_email",
+  "_filename": "20260624_223707_www.docsie.io_email.json"
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "high_pain_boost",
+    "conditions": [
+      {
+        "field": "total_score",
+        "op": "gte",
+        "value": 3
+      },
+      {
+        "field": "status",
+        "op": "eq",
+        "value": "new"
+      }
+    ],
+    "score_bonus": 1.5,
+    "enabled": true,
+    "created_at": "2026-06-23T21:45:03.456660",
+    "stats": {
+      "hits": 0,
+      "positive": 0
+    }
+  },
+  {
+    "name": "recent_funding_signal",
+    "conditions": [
+      {
+        "field": "matched_terms",
+        "op": "contains",
+        "value": [
+          "funding",
+          "series",
+          "raised"
+        ]
+      }
+    ],
+    "score_bonus": 2.0,
+    "enabled": true,
+    "created_at": "2026-06-23T21:45:03.456660",
+    "stats": {
+      "hits": 0,
+      "positive": 0
+    }
+  },
+  {
+    "name": "organic_intent_boost",
+    "conditions": [
+      {
+        "field": "signals",
+        "op": "contains",
+        "value": {
+          "organic_intent": 1
+        }
+      }
+    ],
+    "score_bonus": 1.2,
+    "enabled": true,
+    "created_at": "2026-06-23T21:45:03.456660",
+    "stats": {
+      "hits": 0,
+      "positive": 0
+    }
+  },
+  {
+    "name": "cold_lead_penalty",
+    "conditions": [
+      {
+        "field": "signals",
+        "op": "contains",
+        "value": {
+          "organic_intent": 0
+        }
+      },
+      {
+        "field": "signals",
+        "op": "contains",
+        "value": {
+          "pain_points": 0
+        }
+      }
+    ],
+    "score_bonus": -2.0,
+    "enabled": true,
+    "created_at": "2026-06-23T21:45:03.456660",
+    "stats": {
+      "hits": 0,
+      "positive": 0
+    }
+  }
+]

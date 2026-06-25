@@ -91,18 +91,19 @@ class DeliveryAgent:
             return False
 
     def send_draft(self, draft: Dict[str, Any]) -> bool:
-        if draft.get("type") != "email":
-            logger.warning(f"Auto-send only supports email drafts (type={draft.get('type')})")
+        if draft.get("type") not in ("email", "vsl_followup"):
+            logger.warning(f"Auto-send only supports email/vsl_followup drafts (type={draft.get('type')})")
             return False
         if draft.get("status") != "pending_send":
             logger.warning(f"Draft status is not pending_send: {draft.get('status')}")
             return False
 
-        success = self._send_smtp(draft["to"], draft["subject"], draft["body"])
+        success, message_id = self._send_smtp(draft["to"], draft["subject"], draft["body"])
         if success:
             draft["status"] = "sent"
             draft["sent_at"] = datetime.now().isoformat()
             draft["sent_via"] = "smtp"
+            draft["message_id"] = message_id
             self._move_to_sent(draft)
         else:
             draft["status"] = "send_failed"

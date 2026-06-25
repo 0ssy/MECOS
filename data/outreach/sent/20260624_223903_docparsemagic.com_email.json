@@ -1,0 +1,47 @@
+{
+  "type": "email",
+  "to": "support@docparsemagic.com",
+  "subject": "Automation for docparsemagic.com \u2014 manual labor / operational overhead",
+  "body": "I saw you're dealing with manual labor / operational overhead.\n\nThe problem: Manual Labor / Operational Overhead eats into your team's bandwidth.\n\nThe outcome: We guarantee 60%+ time reduction on your targeted process within 30 days, or you pay nothing.\n\nWe build browser automation bots that replace manual work with scheduled scripts.\n\nReply 'DEMO' and I'll send a 2-minute Loom showing what we built for a similar client.\n\nP.S. Know someone who'd benefit? Refer them during signup and you both get $50 credit + 10% off + 30 days extension.\n",
+  "lead_brief": {
+    "url": "https://docparsemagic.com/blog/manual-data-entry",
+    "domain": "docparsemagic.com",
+    "synthesized_at": "2026-06-23T19:39:41.258340",
+    "pain_points": [
+      "manual labor / operational overhead"
+    ],
+    "persona": "overwhelmed_operator",
+    "suggested_pitch": "Automated solution for docparsemagic.com targeting Manual Labor / Operational Overhead. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "single_bot_package",
+      "price_range": "$500-$1,500 one-time",
+      "description": "Focused automation for one high-impact process",
+      "delivery": "2-3 days"
+    },
+    "contacts": {
+      "emails": [
+        "support@docparsemagic.com"
+      ],
+      "phones": [],
+      "social": [],
+      "email_source": "website_scrape",
+      "email_confidence": "high"
+    },
+    "original_signals": {
+      "inefficiency_markers": 0,
+      "pain_points": 2,
+      "organic_intent": 0,
+      "revenue_fit": 0
+    },
+    "matched_terms": [
+      "manual data entry",
+      "wasting time"
+    ],
+    "status": "ready_for_outreach"
+  },
+  "referral_code": "D387DF35",
+  "created_at": "2026-06-24T22:38:57.539230",
+  "status": "pending_send",
+  "channel": "personal_email",
+  "_filename": "20260624_223857_docparsemagic.com_email.json"
+}

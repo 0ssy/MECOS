@@ -6,8 +6,11 @@ into a single pipeline that runs in the cognition loop.
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import re
+from datetime import datetime
+from pathlib import Path
 from typing import List, Optional
 
 from loguru import logger
@@ -23,6 +26,9 @@ from outreach.ceo_instincts import CeoInstincts
 from outreach.revenue_ledger import RevenueLedger
 from outreach.payments.payment_ledger import PaymentLedger
 from outreach.payments.paypal_client import PayPalClient
+from outreach.reply_monitor import ReplyMonitor
+from outreach.demo_deliverer import DemoDeliverer
+from outreach.followup_engine import FollowupEngine
 
 
 class OutreachAgent:
@@ -40,6 +46,9 @@ class OutreachAgent:
         self.intel_adapter = WorldMonitorAdapter()
         self.instincts = CeoInstincts()
         self.cycle = 0
+        self.reply_monitor = ReplyMonitor()
+        self.demo_deliverer = DemoDeliverer()
+        self.followup_engine = FollowupEngine()
 
     async def startup(self):
         if not self.enabled:
@@ -78,6 +87,13 @@ class OutreachAgent:
             if self.cycle % 7 == 4:
                 draft_result = await self._run_draft_cycle()
                 result["drafts"] = draft_result
+
+            reply_result = self._run_reply_check_cycle()
+            result["replies"] = reply_result
+
+            if self.cycle % 15 == 0:
+                followup_result = self._run_followup_cycle()
+                result["followups"] = followup_result
 
             if self.cycle % 11 == 6:
                 content_result = await self._run_content_cycle()
@@ -258,6 +274,55 @@ class OutreachAgent:
         pending = len(self.delivery_agent.list_pending())
         logger.info(f"Outreach drafts: {total_drafts} created, {total_sent} sent, {pending} pending review, {total_invoiced} invoiced")
         return {"drafts_created": total_drafts, "drafts_sent": total_sent, "pending_review": pending, "invoices_created": total_invoiced}
+
+    def _run_reply_check_cycle(self) -> dict:
+        new_replies = self.reply_monitor.fetch_new_replies()
+        demo_triggered = 0
+        for reply in new_replies:
+            if reply.get("demo_keyword_detected"):
+                sent_file = reply.get("matched_sent_file")
+                sent_email = None
+                if sent_file:
+                    try:
+                        from pathlib import Path
+                        p = Path(sent_file)
+                        if not p.exists():
+                            p = self.delivery_agent.sent_dir / p.name
+                        if p.exists():
+                            sent_email = json.loads(p.read_text())
+                    except Exception as exc:
+                        logger.debug(f"Failed to load sent email for reply: {exc}")
+                if self.demo_deliverer.send_demo_reply(reply, sent_email):
+                    demo_triggered += 1
+                self.reply_monitor.mark_processed(reply.get("receiver_uid", ""), demo_triggered=(demo_triggered > 0))
+        logger.info(f"Reply check: {len(new_replies)} replies, {demo_triggered} demo deliveries")
+        return {"replies_found": len(new_replies), "demos_sent": demo_triggered}
+
+    def _run_followup_cycle(self) -> dict:
+        if not hasattr(self.followup_engine, "create_followup_drafts"):
+            return {"followups_drafted": 0, "reason": "unavailable"}
+        drafts = self.followup_engine.create_followup_drafts(limit=10)
+        sent = 0
+        from outreach.delivery_agent import DeliveryAgent
+        delivery = DeliveryAgent()
+        for item in drafts:
+            try:
+                path = Path(item["saved"])
+                if path.exists():
+                    data = json.loads(path.read_text())
+                    if data.get("status") == "pending_send":
+                        if delivery.send_draft(data):
+                            sent += 1
+            except Exception as exc:
+                logger.debug(f"Failed to send follow-up draft: {exc}")
+        logger.info(f"Follow-up cycle: {len(drafts)} drafted, {sent} sent")
+        return {"followups_drafted": len(drafts), "followups_sent": sent}
+
+    def check_replies(self) -> dict:
+        return self._run_reply_check_cycle()
+
+    def send_followups(self) -> dict:
+        return self._run_followup_cycle()
 
     def _extract_amount(self, price_str: str) -> float:
         import re

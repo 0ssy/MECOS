@@ -2,5 +2,27 @@
 .kilo/*
 !.kilo/kilo.json
 !.kilo/skill-*.md
+!.kilo/plans/
+!.kilo/command/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.bak
+
+# Secrets and envs
+.env
+.env.local
+.env.*.local
+
+# Logs and temp
+*.log
+mecos_*.log
+engine.log
+
+# Random temp files
+null
 trade_attribution.jsonl
-!.txt
+!.txt/libs/
