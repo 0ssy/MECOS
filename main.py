@@ -14,8 +14,13 @@ Architecture:
 
 import asyncio
 import os
+from pathlib import Path
 from typing import Optional
 from loguru import logger
+
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from uvicorn import Server, Config
 
 from config import settings
 from validate_config import validate_on_startup
@@ -36,6 +41,7 @@ from security_agent import SecurityAgent
 from guardian_agent import GuardianAgent
 from trading_agent import TradingAgent
 from outreach.outreach_agent import OutreachAgent
+from outreach.dashboard import DashboardService
 from ceo_agent import CeoAgent
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
@@ -324,6 +330,41 @@ async def main():
     ceo_agent.attach_outreach(outreach_agent)
     if outreach_agent.enabled:
         await ceo_agent.resume_outreach()
+    
+    # ── 11c. Outreach scheduler (decoupled daily batch) ──
+    scheduler = None
+    if outreach_agent.enabled:
+        from outreach.scheduler import OutreachScheduler
+        scheduler = OutreachScheduler(
+            outreach_agent=outreach_agent,
+            ceo_agent=ceo_agent,
+            delivery_agent=outreach_agent.delivery_agent,
+        )
+        scheduler.start()
+
+    # ── 11d. Dashboard server ──────────────────────────────────────────
+    dashboard_server = None
+    if outreach_agent.enabled:
+        dashboard_app = FastAPI()
+
+        @dashboard_app.get("/")
+        async def dashboard_root():
+            html = (Path(__file__).parent / "outreach" / "dashboard.html").read_text(encoding="utf-8")
+            return HTMLResponse(content=html)
+
+        @dashboard_app.get("/api/status")
+        async def dashboard_api():
+            return DashboardService.get_status()
+
+        dashboard_config = Config(
+            app=dashboard_app,
+            host="127.0.0.1",
+            port=8080,
+            log_level="warning",
+        )
+        dashboard_server = Server(dashboard_config)
+        asyncio.create_task(dashboard_server.serve())
+        logger.info("Dashboard available at http://127.0.0.1:8080")
 
     # ── 12. Readiness check ─────────────────────────────────────────────
     readiness = await independence.check_readiness()

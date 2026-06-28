@@ -6,18 +6,19 @@ tracks revenue, and coordinates worker agents for stable operation.
 
 from __future__ import annotations
 
-import asyncio
+import json
 import os
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from loguru import logger
-from config import settings
+
 from memory_system import MemorySystem
+from outreach.ceo_instincts import CeoInstincts
 from outreach.outreach_agent import OutreachAgent
 from outreach.revenue_ledger import RevenueLedger
-from outreach.ceo_instincts import CeoInstincts
+from outreach.scanner import OutreachScanner
 from tool_orchestrator import ToolOrchestrator
 
 
@@ -357,7 +358,151 @@ class CeoAgent:
             content="OUTREACH RESUMED by CEO",
             source="ceo_agent",
         )
-    
+
+    async def approve_drafts(self) -> Dict[str, Any]:
+        """Apply tiered CEO approval rules to pending drafts."""
+        if not self.outreach or not self.outreach.enabled:
+            return {"auto_send": [], "flag_review": [], "reject": []}
+
+        if self.outreach_paused or self.send_paused:
+            return {"auto_send": [], "flag_review": [], "reject": []}
+
+        pending = self.outreach.delivery_agent.list_pending()
+        if not pending:
+            return {"auto_send": [], "flag_review": [], "reject": []}
+
+        auto_send: List[Dict[str, Any]] = []
+        flag_review: List[Dict[str, Any]] = []
+        reject: List[Dict[str, Any]] = []
+
+        min_local_score = int(os.getenv("CEO_MIN_LOCAL_SCORE", "3"))
+        max_enterprise_penalty = int(os.getenv("CEO_MAX_ENTERPRISE_PENALTY", "2"))
+        min_body_length = int(os.getenv("CEO_MIN_BODY_LENGTH", "200"))
+
+        for draft in pending:
+            decision = self._evaluate_draft(
+                draft,
+                min_local_score=min_local_score,
+                max_enterprise_penalty=max_enterprise_penalty,
+                min_body_length=min_body_length,
+            )
+            if decision == "auto_send":
+                auto_send.append(draft)
+            elif decision == "flag_review":
+                flag_review.append(draft)
+            else:
+                reject.append(draft)
+
+        for draft in auto_send:
+            draft["status"] = "pending_send"
+            draft["approved_at"] = datetime.now().isoformat()
+            draft["approved_by"] = "ceo_auto"
+            self.outreach.delivery_agent.update_draft(draft)
+
+        for draft in reject:
+            draft["status"] = "skipped_bad_lead"
+            draft["rejected_at"] = datetime.now().isoformat()
+            draft["rejected_by"] = "ceo_auto"
+            self.outreach.delivery_agent.update_draft(draft)
+
+            archive_dir = Path("data/outreach/archive_stale")
+            archive_dir.mkdir(parents=True, exist_ok=True)
+            filename = draft.get("_filename", f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_rejected.json")
+            archive_path = archive_dir / filename
+            try:
+                with open(archive_path, "w", encoding="utf-8") as f:
+                    json.dump(draft, f, default=str, indent=2)
+                src = self.outreach.delivery_agent.outbox_dir / filename
+                if src.exists():
+                    src.unlink()
+            except Exception as exc:
+                logger.debug("Failed to archive rejected draft: {}", exc)
+
+        self._log_approvals(auto_send, flag_review, reject)
+
+        return {
+            "auto_send": auto_send,
+            "flag_review": flag_review,
+            "reject": reject,
+        }
+
+    def _evaluate_draft(
+        self,
+        draft: Dict[str, Any],
+        min_local_score: int = 3,
+        max_enterprise_penalty: int = 2,
+        min_body_length: int = 200,
+    ) -> str:
+        """Evaluate a draft against CEO tiered rules. Returns: auto_send, flag_review, or reject."""
+        brief = draft.get("lead_brief", {})
+        contacts = brief.get("contacts", {})
+        emails = contacts.get("emails", [])
+        email = emails[0] if emails else ""
+        recipient_domain = email.split("@")[-1].lower() if "@" in email else ""
+
+        confidence = contacts.get("email_confidence", "unknown")
+        source = contacts.get("email_source", "unknown")
+        local_score = brief.get("local_business_score", 0)
+        enterprise_penalty = brief.get("enterprise_penalty", 0)
+        body = draft.get("body", "")
+
+        if confidence in ("placeholder", "example") or confidence == "unknown":
+            return "reject"
+
+        if recipient_domain in OutreachScanner.AGGREGATOR_DOMAINS:
+            return "reject"
+
+        if ".example.com" in recipient_domain:
+            return "reject"
+
+        if enterprise_penalty > max_enterprise_penalty:
+            return "reject"
+
+        if local_score < min_local_score:
+            return "reject"
+
+        if len(body) < min_body_length:
+            return "reject"
+
+        if confidence == "low":
+            return "flag_review"
+
+        if source == "pattern_guess":
+            return "flag_review"
+
+        if min_local_score <= local_score <= 4:
+            return "flag_review"
+
+        if enterprise_penalty == 2:
+            return "flag_review"
+
+        return "auto_send"
+
+    def _log_approvals(
+        self,
+        auto_send: List[Dict[str, Any]],
+        flag_review: List[Dict[str, Any]],
+        reject: List[Dict[str, Any]],
+    ) -> None:
+        """Log approval decisions to ceo_approvals.jsonl."""
+        report = {
+            "timestamp": datetime.now().isoformat(),
+            "auto_send_count": len(auto_send),
+            "flag_review_count": len(flag_review),
+            "reject_count": len(reject),
+            "auto_send": [
+                {"to": d.get("to"), "subject": d.get("subject"), "domain": d.get("lead_brief", {}).get("domain", "")}
+                for d in auto_send
+            ],
+        }
+        approvals_path = Path("data/outreach/ceo_approvals.jsonl")
+        approvals_path.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            with open(approvals_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(report, default=str) + "\n")
+        except Exception as exc:
+            logger.error("CEO: Failed to log approvals: {}", exc)
+
     async def emergency_stop(self):
         """Emergency stop — pause all outreach and sends."""
         self.outreach_paused = True

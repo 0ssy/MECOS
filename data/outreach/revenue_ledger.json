@@ -2,26 +2,29 @@
   "entries": [
     {
       "deal_id": "deal_20260622_001",
-      "amount": 1500.0,
+      "amount": 0.0,
       "source": "client_payment",
-      "description": "First automation agency contract - workflow retainer",
+      "description": "First automation agency contract - workflow retainer (REVERSED - fake revenue)",
       "allocated_at": "2026-06-22T23:02:02.649360",
       "allocation": {
-        "ops_hardware": 600.0,
-        "trading_reserve": 450.0,
-        "growth_profit": 450.0
+        "ops_hardware": 0.0,
+        "trading_reserve": 0.0,
+        "growth_profit": 0.0
       },
       "cumulative_balances": {
-        "ops_hardware": 600.0,
-        "trading_reserve": 450.0,
-        "growth_profit": 450.0
-      }
+        "ops_hardware": 0.0,
+        "trading_reserve": 0.0,
+        "growth_profit": 0.0
+      },
+      "reversed": true,
+      "reversed_at": "2026-06-28T16:16:59.000000",
+      "reverse_reason": "Fake revenue - never actually received payment"
     }
   ],
   "bucket_balances": {
-    "ops_hardware": 600.0,
-    "trading_reserve": 450.0,
-    "growth_profit": 450.0
+    "ops_hardware": 0.0,
+    "trading_reserve": 0.0,
+    "growth_profit": 0.0
   },
-  "last_updated": "2026-06-23T05:34:35.736694"
+  "last_updated": "2026-06-28T16:16:59.000000"
 }

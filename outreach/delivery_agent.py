@@ -143,6 +143,14 @@ class DeliveryAgent:
         path = self.outbox_dir / filename
         path.write_text(json.dumps(draft, default=str, indent=2))
 
+    def update_draft(self, draft: Dict[str, Any]) -> None:
+        """Update an existing draft file in place."""
+        filename = draft.get("_filename")
+        if filename:
+            path = self.outbox_dir / filename
+            if path.exists():
+                path.write_text(json.dumps(draft, default=str, indent=2))
+
     def _move_to_sent(self, draft: Dict[str, Any]):
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         domain = draft.get("lead_brief", {}).get("domain", "unknown")

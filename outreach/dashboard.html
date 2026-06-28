@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MECOS Outreach Dashboard</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 20px;
+    background: #f4f1ea;
+    color: #3e2723;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .banner {
+    border: 4px double #3e2723;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 32px;
+    background: #faf8f3;
+    box-shadow: 6px 6px 0 #2e7d32;
+  }
+  .banner h1 {
+    font-size: 3.2rem;
+    margin: 0 0 8px 0;
+    letter-spacing: 6px;
+    color: #1b5e20;
+    text-transform: uppercase;
+  }
+  .banner .sub {
+    font-size: 1.1rem;
+    color: #5d4037;
+    letter-spacing: 2px;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .tile {
+    border: 3px solid #5d4037;
+    padding: 16px;
+    background: #faf8f3;
+    text-align: center;
+    transition: transform 0.1s;
+  }
+  .tile:hover { transform: translateY(-2px); }
+  .tile .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #795548;
+    margin-bottom: 8px;
+  }
+  .tile .value {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #1b5e20;
+  }
+  .tile.warn .value { color: #e65100; }
+  .tile.bad .value { color: #b71c1c; }
+  .section {
+    border: 3px solid #3e2723;
+    padding: 16px;
+    margin-bottom: 24px;
+    background: #faf8f3;
+  }
+  .section h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #1b5e20;
+    border-bottom: 2px solid #8d6e63;
+    padding-bottom: 8px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #d7ccc8;
+  }
+  th {
+    color: #5d4037;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .status-dot.on { background: #2e7d32; }
+  .status-dot.off { background: #c62828; }
+  .loading { color: #795548; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="banner">
+    <h1>MECOS OUTREACH</h1>
+    <div class="sub">/// LIVE PIPELINE MONITOR ///</div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="label">Sent Today</div><div class="value" id="v-sent">--</div></div>
+    <div class="tile"><div class="label">Drafts Today</div><div class="value" id="v-drafts">--</div></div>
+    <div class="tile"><div class="label">Skipped ICP</div><div class="value" id="v-skipped">--</div></div>
+    <div class="tile"><div class="label">Replies</div><div class="value" id="v-replies">--</div></div>
+    <div class="tile"><div class="label">Revenue</div><div class="value" id="v-revenue">--</div></div>
+    <div class="tile"><div class="label">Scheduler</div><div class="value" id="v-scheduler">--</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Recent Emails (Outbox)</h2>
+    <table>
+      <thead><tr><th>To</th><th>Subject</th><th>Created</th><th>Status</th></tr></thead>
+      <tbody id="t-recent-emails"><tr><td colspan="4" class="loading">Loading...</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Recent Replies</h2>
+    <table>
+      <thead><tr><th>From</th><th>Subject</th><th>Received</th></tr></thead>
+      <tbody id="t-recent-replies"><tr><td colspan="3" class="loading">Loading...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+async function poll() {
+  try {
+    const res = await fetch('/api/status');
+    const d = await res.json();
+    document.getElementById('v-sent').textContent = d.today_sent;
+    document.getElementById('v-drafts').textContent = d.today_drafts;
+    document.getElementById('v-skipped').textContent = d.total_skipped_leads;
+    document.getElementById('v-replies').textContent = d.total_replies;
+    document.getElementById('v-revenue').textContent = '$' + d.total_revenue.toLocaleString();
+    const sched = document.getElementById('v-scheduler');
+    sched.innerHTML = d.scheduler_running
+      ? '<span class="status-dot on"></span>RUNNING'
+      : '<span class="status-dot off"></span>STOPPED';
+
+    const emailTbody = document.getElementById('t-recent-emails');
+    if (d.recent_emails.length === 0) {
+      emailTbody.innerHTML = '<tr><td colspan="4">No emails sent yet.</td></tr>';
+    } else {
+      emailTbody.innerHTML = d.recent_emails.map(e => `
+        <tr>
+          <td>${esc(e.to)}</td>
+          <td>${esc(e.subject)}</td>
+          <td>${esc(e.created_at || '')}</td>
+          <td>${esc(e.status || '')}</td>
+        </tr>
+      `).join('');
+    }
+
+    const replyTbody = document.getElementById('t-recent-replies');
+    if (d.recent_replies.length === 0) {
+      replyTbody.innerHTML = '<tr><td colspan="3">No replies yet.</td></tr>';
+    } else {
+      replyTbody.innerHTML = d.recent_replies.map(r => `
+        <tr>
+          <td>${esc(r.from || r.to || '')}</td>
+          <td>${esc(r.subject || '')}</td>
+          <td>${esc(r.received_at || r.created_at || '')}</td>
+        </tr>
+      `).join('');
+    }
+  } catch (e) {
+    console.error('Dashboard poll failed:', e);
+  }
+}
+
+function esc(str) {
+  return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+setInterval(poll, 2000);
+poll();
+</script>
+</body>
+</html>

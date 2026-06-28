@@ -3,14 +3,16 @@ MECOS Outreach - Reply Monitor
 Polls IMAP inbox, detects DEMO keyword replies, and stores reply events.
 """
 
+import asyncio
 import json
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 from loguru import logger
-from mecos.email_ingester import EmailIngester, EmailDocument
+
+from mecos.email_ingester import EmailDocument, EmailIngester
 
 
 class ReplyMonitor:
@@ -121,3 +123,62 @@ class ReplyMonitor:
 
     def get_unprocessed_demo_replies(self) -> list[dict]:
         return [r for r in self._replies if r.get("demo_keyword_detected") and not r.get("processed")]
+
+    async def process_demo_replies(self) -> int:
+        """Process unprocessed demo replies with report generation and delivery."""
+        demos_sent = 0
+        for reply in self._replies:
+            if not reply.get("demo_keyword_detected") or reply.get("processed"):
+                continue
+
+            sent_file = reply.get("matched_sent_file")
+            sent_email = None
+            if sent_file:
+                try:
+                    p = Path(sent_file)
+                    if not p.exists():
+                        p = Path("data/outreach/sent") / p.name
+                    if p.exists():
+                        sent_email = json.loads(p.read_text())
+                except Exception as exc:
+                    logger.debug(f"Failed to load sent email for demo reply: {exc}")
+
+            lead_url = None
+            if sent_email:
+                lead_url = sent_email.get("lead_brief", {}).get("url")
+
+            report_path = None
+            if lead_url:
+                try:
+                    from outreach.demo_report import DemoReportGenerator
+                    report = await asyncio.to_thread(DemoReportGenerator().generate, lead_url)
+                    if report.get("ok"):
+                        report_path = report.get("report_path")
+                        self._log_demo_delivery(reply, report_path)
+                except Exception as exc:
+                    logger.error(f"Demo report generation failed: {exc}")
+
+            if self.demo_deliverer.send_demo_reply(reply, sent_email, report_path):
+                demos_sent += 1
+            self.mark_processed(reply.get("receiver_uid", ""), demo_triggered=(demos_sent > 0))
+
+        return demos_sent
+
+    def _log_demo_delivery(self, reply: dict, report_path: Optional[str]) -> None:
+        delivered_path = Path("data/outreach/demos/delivered.jsonl")
+        delivered_path.parent.mkdir(parents=True, exist_ok=True)
+        delivery_record = {
+            "timestamp": datetime.now().isoformat(),
+            "receiver": reply.get("from"),
+            "subject": reply.get("subject"),
+            "report_path": report_path,
+        }
+        try:
+            with open(delivered_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(delivery_record, default=str) + "\n")
+        except Exception as exc:
+            logger.error(f"Failed to log demo delivery: {exc}")
+
+    def attach_demo_deliverer(self, demo_deliverer) -> None:
+        """Attach demo deliverer instance for report delivery."""
+        self.demo_deliverer = demo_deliverer

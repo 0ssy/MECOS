@@ -125,9 +125,7 @@ class OutreachScanner:
             domain = domain[4:]
         parsed = urlparse(url)
         if domain in OutreachScanner.AGGREGATOR_DOMAINS:
-            allow_paths = ["/comments/", "/questions/", "/post/", "/thread/", "/topic/", ".json", "/api/"]
-            if not any(p in parsed.path for p in allow_paths):
-                return False
+            return False
         for keyword in ENTERPRISE_DOMAIN_KEYWORDS:
             if keyword in domain:
                 return False

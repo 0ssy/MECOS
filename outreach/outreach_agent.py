@@ -5,11 +5,13 @@ into a single pipeline that runs in the cognition loop.
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import re
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 from loguru import logger
 
@@ -50,6 +52,7 @@ class OutreachAgent:
         self.demo_deliverer = DemoDeliverer()
         self.followup_engine = FollowupEngine()
         self.twenty_bridge = TwentyBridge()
+        self.reply_monitor.attach_demo_deliverer(self.demo_deliverer)
 
     async def startup(self):
         if not self.enabled:
@@ -97,7 +100,7 @@ class OutreachAgent:
                 approval_result = self._run_approval_cycle()
                 result["approvals"] = approval_result
 
-            reply_result = self._run_reply_check_cycle()
+            reply_result = await self._run_reply_check_cycle()
             result["replies"] = reply_result
 
             if self.cycle % 15 == 0:
@@ -162,6 +165,10 @@ class OutreachAgent:
             }
             if candidate.get("text_excerpt"):
                 lead["text_excerpt"] = candidate["text_excerpt"]
+
+            if not OutreachScanner._is_business_url(url):
+                logger.debug(f"Research cycle blocked bad URL: {url}")
+                continue
 
             self.scanner.leads.append(lead)
             self.scanner.scanned_urls.add(url)
@@ -276,12 +283,17 @@ class OutreachAgent:
 
         batch = unenriched[:10]
         enriched = await self.email_enricher.enrich_batch(batch)
-        
+
         updated = 0
         for lead in enriched:
             if lead.get("contacts", {}).get("emails"):
                 updated += 1
-                self.scanner._save_leads()
+                for i, existing in enumerate(self.scanner.leads):
+                    if existing.get("url") == lead.get("url"):
+                        self.scanner.leads[i] = lead
+                        break
+        if updated > 0:
+            self.scanner._save_leads()
 
         logger.info(f"Outreach enrichment: {updated}/{len(batch)} leads got emails")
         return {"enriched": updated, "attempted": len(batch)}
@@ -315,6 +327,10 @@ class OutreachAgent:
                 for item in skipped:
                     f.write(json.dumps(item, default=str) + "\n")
             logger.info(f"Outreach synth: skipped {len(skipped)} leads (ICP gate)")
+
+            skipped_urls = {item["url"] for item in skipped}
+            self.scanner.leads = [l for l in self.scanner.leads if l.get("url") not in skipped_urls]
+            self.scanner._save_leads()
 
         new_leads = [self.instincts.score_lead(l) for l in filtered]
         new_leads.sort(key=lambda l: l.get("total_score", 0), reverse=True)
@@ -362,6 +378,10 @@ class OutreachAgent:
                 for item in skipped:
                     f.write(json.dumps(item, default=str) + "\n")
             logger.info(f"Outreach draft: skipped {len(skipped)} briefs (ICP gate)")
+
+            skipped_urls = {item["url"] for item in skipped}
+            self.scanner.leads = [l for l in self.scanner.leads if l.get("url") not in skipped_urls]
+            self.scanner._save_leads()
 
         research_orchestrator = ResearchOrchestrator()
         self._research_orchestrator = research_orchestrator
@@ -451,9 +471,10 @@ class OutreachAgent:
         logger.info(f"Outreach drafts: {total_drafts} created, 0 sent (manual review), {pending} pending review, {total_invoiced} invoiced")
         return {"drafts_created": total_drafts, "drafts_sent": 0, "pending_review": pending, "invoices_created": total_invoiced, "skipped_icp": len(skipped)}
 
-    def _run_reply_check_cycle(self) -> dict:
+    async def _run_reply_check_cycle(self) -> dict:
         new_replies = self.reply_monitor.fetch_new_replies()
         demo_triggered = 0
+
         for reply in new_replies:
             if reply.get("demo_keyword_detected"):
                 sent_file = reply.get("matched_sent_file")
@@ -468,11 +489,43 @@ class OutreachAgent:
                             sent_email = json.loads(p.read_text())
                     except Exception as exc:
                         logger.debug(f"Failed to load sent email for reply: {exc}")
-                if self.demo_deliverer.send_demo_reply(reply, sent_email):
+
+                lead_url = None
+                if sent_email:
+                    lead_url = sent_email.get("lead_brief", {}).get("url")
+
+                report_path = None
+                if lead_url:
+                    try:
+                        from outreach.demo_report import DemoReportGenerator
+                        report = await asyncio.to_thread(DemoReportGenerator().generate, lead_url)
+                        if report.get("ok"):
+                            report_path = report.get("report_path")
+                            self._log_demo_delivery(reply, report_path)
+                    except Exception as exc:
+                        logger.error(f"Demo report generation failed: {exc}")
+
+                if self.demo_deliverer.send_demo_reply(reply, sent_email, report_path):
                     demo_triggered += 1
                 self.reply_monitor.mark_processed(reply.get("receiver_uid", ""), demo_triggered=(demo_triggered > 0))
+
         logger.info(f"Reply check: {len(new_replies)} replies, {demo_triggered} demo deliveries")
         return {"replies_found": len(new_replies), "demos_sent": demo_triggered}
+
+    def _log_demo_delivery(self, reply: dict, report_path: Optional[str]) -> None:
+        delivered_path = Path("data/outreach/demos/delivered.jsonl")
+        delivered_path.parent.mkdir(parents=True, exist_ok=True)
+        record = {
+            "timestamp": datetime.now().isoformat(),
+            "receiver": reply.get("from"),
+            "subject": reply.get("subject"),
+            "report_path": report_path,
+        }
+        try:
+            with open(delivered_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, default=str) + "\n")
+        except Exception as exc:
+            logger.error(f"Failed to log demo delivery: {exc}")
 
     def _run_followup_cycle(self) -> dict:
         if not hasattr(self.followup_engine, "create_followup_drafts"):

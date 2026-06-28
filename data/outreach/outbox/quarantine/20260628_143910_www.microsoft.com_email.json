@@ -1,0 +1,52 @@
+{
+  "type": "email",
+  "to": "florian.schuster@microsoft.com",
+  "subject": "Quick automation idea for www.microsoft.com",
+  "body": "Hi,\n\nI noticed www.microsoft.com mentions repetitive, enterprise on their site.\n\nYouTube content shows interest in automation solutions. Title: www.microsoft.com repetitive enterprise small business workflow\n\nURL Source: https://www.youtube.com/results?search_query=www.microsoft.com%20%20repetitive%20enterprise%20small%20business%20wor... Reddit discussions highlight similar pain points. Title: \n\nURL Source: https://www.reddit.com/search/?q=www.microsoft.com%20%20repetitive%20enterprise%20small%20business\n\nWarning: Target URL returned error 403: Forbidden\n\nMarkdown Content:\nYou've bee...\n\nI can build a workflow automation retainer \u2014 ongoing optimization to solve this.\n\nFor a similar project, I delivered:\n- Ongoing automation maintenance + new workflows\n- Delivery: ongoing (fixed scope, no long-term contract)\n- Price: $1,000-$2,000/mo\n\nIf this sounds useful, I can send a quick demo of a comparable build.\n\nBest,\nMECOS Automation\n\n---\nReply STOP to unsubscribe.",
+  "lead_brief": {
+    "url": "https://www.microsoft.com/en-us/power-platform/products/power-automate/?msockid=1a6d6001926f6cdc3d26778793026d73",
+    "domain": "www.microsoft.com",
+    "synthesized_at": "2026-06-28T14:38:56.955245",
+    "pain_points": [
+      "manual labor / operational overhead",
+      "growing team / scaling challenges"
+    ],
+    "persona": "scaling_business",
+    "suggested_pitch": "Automated solution for www.microsoft.com targeting Manual Labor / Operational Overhead. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "workflow_retainer",
+      "price_range": "$1,000-$2,000/mo",
+      "description": "Ongoing automation maintenance + new workflows",
+      "delivery": "ongoing"
+    },
+    "recommended_first_tool": "workflow automation retainer \u2014 ongoing optimization",
+    "contacts": {
+      "emails": [
+        "florian.schuster@microsoft.com"
+      ],
+      "phones": [
+        "(800) 642 7676"
+      ],
+      "social": [],
+      "email_source": "api",
+      "email_confidence": "high"
+    },
+    "original_signals": {
+      "inefficiency_markers": 0,
+      "pain_points": 1,
+      "organic_intent": 0,
+      "revenue_fit": 2
+    },
+    "matched_terms": [
+      "repetitive",
+      "enterprise",
+      "small business"
+    ],
+    "status": "ready_for_outreach",
+    "research_summary": "YouTube content shows interest in automation solutions. Title: www.microsoft.com repetitive enterprise small business workflow\n\nURL Source: https://www.youtube.com/results?search_query=www.microsoft.com%20%20repetitive%20enterprise%20small%20business%20wor... Reddit discussions highlight similar pain points. Title: \n\nURL Source: https://www.reddit.com/search/?q=www.microsoft.com%20%20repetitive%20enterprise%20small%20business\n\nWarning: Target URL returned error 403: Forbidden\n\nMarkdown Content:\nYou've bee..."
+  },
+  "created_at": "2026-06-28T14:39:10.984584",
+  "status": "pending_review",
+  "channel": "personal_email",
+  "_filename": "20260628_143910_www.microsoft.com_email.json"
+}

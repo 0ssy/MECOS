@@ -3,10 +3,8 @@ MECOS Outreach - Demo Deliverer
 Creates demo pages and sends reply emails with demo links.
 """
 
-import json
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, Optional
 
 from loguru import logger
 
@@ -28,7 +26,7 @@ class DemoDeliverer:
             logger.debug(f"FunnelBuilder unavailable: {exc}")
             return None
 
-    def send_demo_reply(self, reply_event: dict, sent_email: dict | None = None) -> bool:
+    def send_demo_reply(self, reply_event: dict, sent_email: dict | None = None, report_path: str | None = None) -> bool:
         to_addr = (reply_event.get("from") or "").split("<")[-1].split(">")[0].strip()
         if not to_addr:
             to_addr = sent_email.get("to") if sent_email else ""
@@ -43,9 +41,12 @@ class DemoDeliverer:
         demo_path = self._create_demo_page(case_study, referral_code, to_addr)
 
         reply_subject = f"Re: {reply_event.get('subject', 'Your automation inquiry')}"
+        
+        report_link = "\n\n**Automation Opportunity Report attached below**\n\n" if report_path else ""
+        
         reply_body = (
             f"Thanks for reaching out!\n\n"
-            f"Here's the demo you asked for: {demo_path}\n\n"
+            f"Here's the demo you asked for: {demo_path}{report_link}"
             f"This shows what we're capable of for a similar project.\n"
             f"If it looks like a fit, reply and we'll discuss next steps.\n\n"
             f"Know someone who'd benefit? Refer them and you both get:\n"

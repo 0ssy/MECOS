@@ -205,8 +205,8 @@ def test_run_research_cycle_integration():
 
     mock_candidates = [
         {
-            "url": "https://example.com/post/1",
-            "domain": "example.com",
+            "url": "https://localplumbing.com/contact",
+            "domain": "localplumbing.com",
             "text_excerpt": "We need automation for manual data entry.",
             "source_platform": "web",
             "total_score": 3,
@@ -233,4 +233,174 @@ def test_run_research_cycle_integration():
     assert result["discovered"] == 1
     assert result["new_leads"] == 1
     assert len(agent.scanner.leads) == 1
-    assert agent.scanner.leads[0]["url"] == "https://example.com/post/1"
+    assert agent.scanner.leads[0]["url"] == "https://localplumbing.com/contact"
+
+
+def test_ceo_approve_drafts_auto_sends_high_confidence_local():
+    """Test: approve_drafts() approves high-confidence local business drafts."""
+    os.environ["MECOS_ENABLE_OUTREACH"] = "true"
+
+    from ceo_agent import CeoAgent
+    from memory_system import MemorySystem
+    from outreach.outreach_agent import OutreachAgent
+
+    memory = MemorySystem()
+    outreach = OutreachAgent(memory=memory)
+    ceo = CeoAgent(memory=memory, revenue_ledger=outreach.revenue_ledger)
+    ceo.attach_outreach(outreach)
+
+    for f in outreach.delivery_agent.outbox_dir.glob("*.json"):
+        f.unlink()
+
+    high_confidence_draft = {
+        "type": "email",
+        "to": "owner@localplumbing.com",
+        "subject": "Quick automation idea for localplumbing.com",
+        "body": ("Hi there, I noticed your local plumbing business might benefit from automated scheduling "
+                 "and customer notifications. This is a test email to verify CEO approval rules work "
+                 "correctly for high-confidence local business prospects seeking automation solutions."),
+        "status": "pending_review",
+        "lead_brief": {
+            "url": "https://localplumbing.com",
+            "domain": "localplumbing.com",
+            "contacts": {
+                "emails": ["owner@localplumbing.com"],
+                "email_source": "website_scrape",
+                "email_confidence": "high",
+            },
+            "local_business_score": 5,
+            "enterprise_penalty": 0,
+        },
+    }
+
+    outreach.delivery_agent.save_draft(high_confidence_draft)
+    result = asyncio.run(ceo.approve_drafts())
+
+    assert len(result["auto_send"]) == 1
+    assert result["auto_send"][0]["status"] == "pending_send"
+
+
+def test_ceo_approve_drafts_flags_low_confidence():
+    """Test: approve_drafts() flags low-confidence drafts for review."""
+    os.environ["MECOS_ENABLE_OUTREACH"] = "true"
+
+    from ceo_agent import CeoAgent
+    from memory_system import MemorySystem
+    from outreach.outreach_agent import OutreachAgent
+
+    memory = MemorySystem()
+    outreach = OutreachAgent(memory=memory)
+    ceo = CeoAgent(memory=memory, revenue_ledger=outreach.revenue_ledger)
+    ceo.attach_outreach(outreach)
+
+    for f in outreach.delivery_agent.outbox_dir.glob("*.json"):
+        f.unlink()
+
+    low_confidence_draft = {
+        "type": "email",
+        "to": "owner@localplumbing.com",
+        "subject": "Quick automation idea",
+        "body": ("Hi there, this is a test email with low confidence email source that needs manual "
+                 "review before sending. The body is intentionally long enough to pass the minimum "
+                 "length requirement but the source is pattern_guess so it should be flagged."),
+        "status": "pending_review",
+        "lead_brief": {
+            "url": "https://localplumbing.com",
+            "domain": "localplumbing.com",
+            "contacts": {
+                "emails": ["owner@localplumbing.com"],
+                "email_source": "pattern_guess",
+                "email_confidence": "low",
+            },
+            "local_business_score": 5,
+            "enterprise_penalty": 0,
+        },
+    }
+
+    outreach.delivery_agent.save_draft(low_confidence_draft)
+    result = asyncio.run(ceo.approve_drafts())
+
+    assert len(result["flag_review"]) == 1
+
+
+def test_ceo_approve_drafts_rejects_aggregator_domain():
+    """Test: approve_drafts() rejects drafts to aggregator domains."""
+    os.environ["MECOS_ENABLE_OUTREACH"] = "true"
+
+    from ceo_agent import CeoAgent
+    from memory_system import MemorySystem
+    from outreach.outreach_agent import OutreachAgent
+
+    memory = MemorySystem()
+    outreach = OutreachAgent(memory=memory)
+    ceo = CeoAgent(memory=memory, revenue_ledger=outreach.revenue_ledger)
+    ceo.attach_outreach(outreach)
+
+    for f in outreach.delivery_agent.outbox_dir.glob("*.json"):
+        f.unlink()
+
+    aggregator_draft = {
+        "type": "email",
+        "to": "user@reddit.com",
+        "subject": "Test subject",
+        "body": ("This is a test email body with sufficient length for validation purposes "
+                 "and meets the minimum 200 character requirement for CEO approval rules "
+                 "testing aggregator domain rejection in the outreach system."),
+        "status": "pending_review",
+        "lead_brief": {
+            "url": "https://reddit.com/r/somepost",
+            "domain": "reddit.com",
+            "contacts": {
+                "emails": ["user@reddit.com"],
+                "email_source": "website_scrape",
+                "email_confidence": "high",
+            },
+            "local_business_score": 5,
+            "enterprise_penalty": 0,
+        },
+    }
+
+    outreach.delivery_agent.save_draft(aggregator_draft)
+    result = asyncio.run(ceo.approve_drafts())
+
+    assert len(result["reject"]) == 1
+    assert result["reject"][0]["status"] == "skipped_bad_lead"
+
+
+def test_scheduler_respects_circuit_breaker():
+    """Test: scheduler skips batch when CEO circuit breaker is active."""
+    os.environ["MECOS_ENABLE_OUTREACH"] = "true"
+
+    from ceo_agent import CeoAgent
+    from memory_system import MemorySystem
+    from outreach.outreach_agent import OutreachAgent
+    from outreach.scheduler import OutreachScheduler
+
+    memory = MemorySystem()
+    outreach = OutreachAgent(memory=memory)
+    ceo = CeoAgent(memory=memory, revenue_ledger=outreach.revenue_ledger)
+    ceo.attach_outreach(outreach)
+    ceo.outreach_paused = True
+
+    scheduler = OutreachScheduler(outreach_agent=outreach, ceo_agent=ceo)
+    result = asyncio.run(scheduler._run_batch())
+
+    assert result["status"] == "skipped"
+    assert "circuit_breaker" in result.get("reason", "")
+
+
+def test_scheduler_rates_records_sends():
+    """Test: scheduler tracks hourly send rate limits."""
+    os.environ["MECOS_ENABLE_OUTREACH"] = "true"
+
+    from outreach.scheduler import OutreachScheduler
+
+    scheduler = OutreachScheduler.__new__(OutreachScheduler)
+    scheduler._sent_timestamps = []
+    scheduler.hourly_limit = 3
+
+    assert scheduler._can_send() is True
+    scheduler._record_send()
+    scheduler._record_send()
+    scheduler._record_send()
+    assert scheduler._can_send() is False

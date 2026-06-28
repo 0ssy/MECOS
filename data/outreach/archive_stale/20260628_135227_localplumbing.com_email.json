@@ -1,0 +1,23 @@
+{
+  "type": "email",
+  "to": "owner@localplumbing.com",
+  "subject": "Quick automation idea for localplumbing.com",
+  "body": "Hi there, I noticed your local plumbing business might benefit from automated scheduling and customer notifications. This is a test email to verify CEO approval.",
+  "status": "skipped_bad_lead",
+  "lead_brief": {
+    "url": "https://localplumbing.com",
+    "domain": "localplumbing.com",
+    "contacts": {
+      "emails": [
+        "owner@localplumbing.com"
+      ],
+      "email_source": "website_scrape",
+      "email_confidence": "high"
+    },
+    "local_business_score": 5,
+    "enterprise_penalty": 0
+  },
+  "_filename": "20260628_135227_localplumbing.com_email.json",
+  "rejected_at": "2026-06-28T13:52:27.678738",
+  "rejected_by": "ceo_auto"
+}
