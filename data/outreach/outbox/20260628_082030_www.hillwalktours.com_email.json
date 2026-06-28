@@ -1,0 +1,52 @@
+{
+  "type": "email",
+  "to": "info@hillwalktours.com",
+  "subject": "Quick automation idea for www.hillwalktours.com",
+  "body": "Hi,\n\nI noticed www.hillwalktours.com mentions walk in, small business on their site.\n\nYouTube content shows interest in automation solutions. Title: \n\nURL Source: https://www.youtube.com/results?search_query=www.hillwalktours.com%20%20walk%20in%20small%20business%20founder%20workflow\n\nWarning: Target URL returned error 403: Forbidden\nWarnin... Reddit discussions highlight similar pain points. Title: \n\nURL Source: https://www.reddit.com/search/?q=www.hillwalktours.com%20%20walk%20in%20small%20business%20founder\n\nWarning: Target URL returned error 403: Forbidden\n\nMarkdown Content:\nYou've bee...\n\nI can build a workflow automation retainer \u2014 ongoing optimization to solve this.\n\nFor a similar project, I delivered:\n- Ongoing automation maintenance + new workflows\n- Delivery: ongoing (fixed scope, no long-term contract)\n- Price: $1,000-$2,000/mo\n\nIf this sounds useful, I can send a quick demo of a comparable build.\n\nBest,\nMECOS Automation\n\n---\nReply STOP to unsubscribe.",
+  "lead_brief": {
+    "url": "https://www.hillwalktours.com/walking-hiking-blog/ultimate-guide-to-hiking-the-wicklow-mountains/",
+    "domain": "www.hillwalktours.com",
+    "synthesized_at": "2026-06-28T08:15:15.503496",
+    "pain_points": [
+      "missing automation / outdated processes",
+      "growing team / scaling challenges"
+    ],
+    "persona": "scaling_business",
+    "suggested_pitch": "Automated solution for www.hillwalktours.com targeting Missing Automation / Outdated Processes. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "workflow_retainer",
+      "price_range": "$1,000-$2,000/mo",
+      "description": "Ongoing automation maintenance + new workflows",
+      "delivery": "ongoing"
+    },
+    "recommended_first_tool": "workflow automation retainer \u2014 ongoing optimization",
+    "contacts": {
+      "emails": [
+        "info@hillwalktours.com"
+      ],
+      "phones": [],
+      "social": [
+        "twitter.com",
+        "x.com",
+        "linkedin.com"
+      ]
+    },
+    "original_signals": {
+      "inefficiency_markers": 1,
+      "pain_points": 0,
+      "organic_intent": 0,
+      "revenue_fit": 2
+    },
+    "matched_terms": [
+      "walk in",
+      "small business",
+      "founder"
+    ],
+    "status": "ready_for_outreach",
+    "research_summary": "YouTube content shows interest in automation solutions. Title: \n\nURL Source: https://www.youtube.com/results?search_query=www.hillwalktours.com%20%20walk%20in%20small%20business%20founder%20workflow\n\nWarning: Target URL returned error 403: Forbidden\nWarnin... Reddit discussions highlight similar pain points. Title: \n\nURL Source: https://www.reddit.com/search/?q=www.hillwalktours.com%20%20walk%20in%20small%20business%20founder\n\nWarning: Target URL returned error 403: Forbidden\n\nMarkdown Content:\nYou've bee..."
+  },
+  "created_at": "2026-06-28T08:20:30.456761",
+  "status": "pending_review",
+  "channel": "personal_email",
+  "_filename": "20260628_082030_www.hillwalktours.com_email.json"
+}

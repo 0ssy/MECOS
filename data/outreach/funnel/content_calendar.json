@@ -1,632 +1,702 @@
 [
   {
-    "platform": "twitter",
-    "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
-    "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-22T23:07:44.872487",
-    "status": "draft"
-  },
-  {
-    "platform": "linkedin",
-    "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
-    "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-22T23:07:44.885359",
-    "status": "draft"
-  },
-  {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-22T23:07:44.887244",
+    "created_at": "2026-06-27T23:17:31.556947",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:20:19.817227",
+    "created_at": "2026-06-27T23:36:35.848681",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:20:19.823376",
+    "created_at": "2026-06-27T23:36:36.000381",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:20:19.829195",
+    "created_at": "2026-06-27T23:36:36.002822",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:34:35.560712",
+    "created_at": "2026-06-27T23:54:21.882050",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:34:35.564103",
+    "created_at": "2026-06-27T23:54:21.884688",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:34:35.567961",
+    "created_at": "2026-06-27T23:54:21.886311",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:48:39.892354",
+    "created_at": "2026-06-28T00:13:22.054970",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:48:39.895269",
+    "created_at": "2026-06-28T00:13:22.058127",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T05:48:39.898569",
+    "created_at": "2026-06-28T00:13:22.060230",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T09:50:29.388642",
+    "created_at": "2026-06-28T00:54:46.942560",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T09:50:29.390922",
+    "created_at": "2026-06-28T00:54:46.946758",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T09:50:29.392192",
+    "created_at": "2026-06-28T00:54:46.949826",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:01:34.360160",
+    "created_at": "2026-06-28T01:12:18.415621",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:01:34.362251",
+    "created_at": "2026-06-28T01:12:18.417379",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:01:34.366116",
+    "created_at": "2026-06-28T01:12:18.418617",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:12:40.502906",
+    "created_at": "2026-06-28T01:31:17.977774",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:12:40.504703",
+    "created_at": "2026-06-28T01:31:17.980322",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:12:40.506326",
+    "created_at": "2026-06-28T01:31:17.983232",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:25:44.284999",
+    "created_at": "2026-06-28T01:48:00.938809",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:25:44.289326",
+    "created_at": "2026-06-28T01:48:00.940554",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:25:44.291656",
+    "created_at": "2026-06-28T01:48:00.941747",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:40:15.565315",
+    "created_at": "2026-06-28T02:08:21.815066",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:40:15.579133",
+    "created_at": "2026-06-28T02:08:21.816935",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:40:15.581945",
+    "created_at": "2026-06-28T02:08:21.818134",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:54:43.163174",
+    "created_at": "2026-06-28T02:24:05.195111",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:54:43.166770",
+    "created_at": "2026-06-28T02:24:05.196771",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T10:54:43.169014",
+    "created_at": "2026-06-28T02:24:05.198006",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:10:24.123757",
+    "created_at": "2026-06-28T02:41:24.573300",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:10:24.126830",
+    "created_at": "2026-06-28T02:41:24.575294",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:10:24.128804",
+    "created_at": "2026-06-28T02:41:24.576534",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:24:36.720165",
+    "created_at": "2026-06-28T02:59:23.480868",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:24:36.723450",
+    "created_at": "2026-06-28T02:59:23.482723",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:24:36.725886",
+    "created_at": "2026-06-28T02:59:23.484007",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:38:56.766286",
+    "created_at": "2026-06-28T03:19:27.891776",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:38:56.770268",
+    "created_at": "2026-06-28T03:19:27.893369",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:38:56.772437",
+    "created_at": "2026-06-28T03:19:27.894633",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:53:15.413002",
+    "created_at": "2026-06-28T03:36:06.479390",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:53:15.415979",
+    "created_at": "2026-06-28T03:36:06.480873",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T11:53:15.418356",
+    "created_at": "2026-06-28T03:36:06.482068",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T19:38:36.019480",
+    "created_at": "2026-06-28T03:52:57.255647",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T19:38:36.024221",
+    "created_at": "2026-06-28T03:52:57.258456",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-23T19:38:36.027739",
+    "created_at": "2026-06-28T03:52:57.259741",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:24:32.032018",
+    "created_at": "2026-06-28T04:11:41.643618",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:24:32.038371",
+    "created_at": "2026-06-28T04:11:41.645377",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:24:32.041075",
+    "created_at": "2026-06-28T04:11:41.646607",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:52:48.427724",
+    "created_at": "2026-06-28T04:29:01.744659",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:52:48.433070",
+    "created_at": "2026-06-28T04:29:01.746540",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T15:52:48.435636",
+    "created_at": "2026-06-28T04:29:01.747790",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:05:17.736064",
+    "created_at": "2026-06-28T04:44:05.322448",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:05:17.739284",
+    "created_at": "2026-06-28T04:44:05.324473",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:05:17.742641",
+    "created_at": "2026-06-28T04:44:05.325853",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:32:07.873710",
+    "created_at": "2026-06-28T05:02:05.687196",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:32:07.877866",
+    "created_at": "2026-06-28T05:02:05.690296",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:32:07.880083",
+    "created_at": "2026-06-28T05:02:05.693638",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:47:09.325610",
+    "created_at": "2026-06-28T05:19:31.292675",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:47:09.330104",
+    "created_at": "2026-06-28T05:19:31.294704",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T16:47:09.332809",
+    "created_at": "2026-06-28T05:19:31.295949",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:01:26.113732",
+    "created_at": "2026-06-28T05:38:04.344339",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:01:26.118070",
+    "created_at": "2026-06-28T05:38:04.346035",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:01:26.120892",
+    "created_at": "2026-06-28T05:38:04.347449",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:15:14.360174",
+    "created_at": "2026-06-28T06:05:59.373766",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:15:14.364197",
+    "created_at": "2026-06-28T06:05:59.384116",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:15:14.366786",
+    "created_at": "2026-06-28T06:05:59.387612",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:44:27.339424",
+    "created_at": "2026-06-28T06:22:59.601447",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:44:27.359834",
+    "created_at": "2026-06-28T06:22:59.603261",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T17:44:27.381316",
+    "created_at": "2026-06-28T06:22:59.604439",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:16:42.080527",
+    "created_at": "2026-06-28T06:58:35.348124",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:16:42.084977",
+    "created_at": "2026-06-28T06:58:35.349814",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:16:42.087353",
+    "created_at": "2026-06-28T06:58:35.351072",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:25:10.887319",
+    "created_at": "2026-06-28T07:13:14.296625",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:25:10.892658",
+    "created_at": "2026-06-28T07:13:14.300935",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:25:10.895442",
+    "created_at": "2026-06-28T07:13:14.304985",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:38:30.726534",
+    "created_at": "2026-06-28T07:30:22.915587",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:38:30.732469",
+    "created_at": "2026-06-28T07:30:22.917445",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:38:30.735811",
+    "created_at": "2026-06-28T07:30:22.918696",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:51:59.777904",
+    "created_at": "2026-06-28T07:48:02.574797",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:51:59.783554",
+    "created_at": "2026-06-28T07:48:02.580489",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T18:51:59.787001",
+    "created_at": "2026-06-28T07:48:02.583460",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:06:50.818628",
+    "created_at": "2026-06-28T08:06:02.542070",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:06:50.823291",
+    "created_at": "2026-06-28T08:06:02.543516",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:06:50.826304",
+    "created_at": "2026-06-28T08:06:02.544783",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:20:32.267559",
+    "created_at": "2026-06-28T08:22:14.745387",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:20:32.272095",
+    "created_at": "2026-06-28T08:22:14.747658",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:20:32.274534",
+    "created_at": "2026-06-28T08:22:14.748957",
     "status": "draft"
   },
   {
     "platform": "twitter",
     "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:37:53.488441",
+    "created_at": "2026-06-28T08:40:00.725729",
     "status": "draft"
   },
   {
     "platform": "linkedin",
     "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:37:53.491588",
+    "created_at": "2026-06-28T08:40:00.727568",
     "status": "draft"
   },
   {
     "platform": "reddit",
     "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
     "case_study_id": "cs_20260622_224500",
-    "created_at": "2026-06-25T19:37:53.493753",
+    "created_at": "2026-06-28T08:40:00.728824",
+    "status": "draft"
+  },
+  {
+    "platform": "twitter",
+    "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T08:59:17.500708",
+    "status": "draft"
+  },
+  {
+    "platform": "linkedin",
+    "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T08:59:17.502407",
+    "status": "draft"
+  },
+  {
+    "platform": "reddit",
+    "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T08:59:17.503673",
+    "status": "draft"
+  },
+  {
+    "platform": "twitter",
+    "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:18:35.804042",
+    "status": "draft"
+  },
+  {
+    "platform": "linkedin",
+    "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:18:35.805972",
+    "status": "draft"
+  },
+  {
+    "platform": "reddit",
+    "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:18:35.807293",
+    "status": "draft"
+  },
+  {
+    "platform": "twitter",
+    "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:35:40.821658",
+    "status": "draft"
+  },
+  {
+    "platform": "linkedin",
+    "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:35:40.825764",
+    "status": "draft"
+  },
+  {
+    "platform": "reddit",
+    "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:35:40.827658",
+    "status": "draft"
+  },
+  {
+    "platform": "twitter",
+    "text": "Built a bot for Local Retail Store that cut their Manual inventory tracking and order processing consuming 15+ hours per week by 87%.\n\nStack: Python, Playwright, ChromaDB, FastAPI\nResult: 2 hrs/wk instead of 15.\n\nI'm documenting the full build. Follow for the open-source breakdown. #automation #python",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:56:23.384056",
+    "status": "draft"
+  },
+  {
+    "platform": "linkedin",
+    "text": "I recently finished an automation project for Local Retail Store that I'm really proud of.\n\nThe problem: Manual Inventory Tracking And Order Processing Consuming 15+ Hours Per Week was consuming 15 hours per week.\nThe solution: A custom Python bot using browser automation and data pipelines.\nThe result: Down to 2 hour per week. (87% reduction)\n\nWhat's interesting is that the biggest challenge wasn't the code \u2014 it was understanding their workflow well enough to simplify it.\n\nTech used: Python, Playwright, ChromaDB, FastAPI\n\nIf your team is drowning in manual work, happy to do a free 15-min process audit. DM me.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:56:23.435116",
+    "status": "draft"
+  },
+  {
+    "platform": "reddit",
+    "text": "[Show MECOS] Built a 87% time-saving automation bot for Local Retail Store\n\nWhat it does: Replaces Manual inventory tracking and order processing consuming 15+ hours per week with a scheduled, monitored script.\nTech: Python, Playwright, ChromaDB, FastAPI\nDelivery: workflow_retainer\n\nI'm sharing the architecture and open-source components. Full breakdown in comments.\n\nIf you have similar ops headaches, happy to review your process for free.",
+    "case_study_id": "cs_20260622_224500",
+    "created_at": "2026-06-28T09:56:23.437599",
     "status": "draft"
   }
 ]

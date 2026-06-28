@@ -16,6 +16,8 @@ __pycache__/
 .env
 .env.local
 .env.*.local
+.env*
+!.env.example
 
 # Logs and temp
 *.log
@@ -27,3 +29,6 @@ null
 trade_attribution.jsonl
 !.txt
 libs/
+
+# SQLite transient files
+*.sqlite3-journal

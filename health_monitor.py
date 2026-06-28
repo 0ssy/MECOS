@@ -127,7 +127,7 @@ class HealthMonitor:
         status = "ok" if error_count == 0 else "warn"
         return HealthCheck("brokers", status, f"{error_count} errors", time.time() - start, details)
 
-    def _check_disk_space(self) -> HealthCheck:
+    async def _check_disk_space(self) -> HealthCheck:
         """Check available disk space."""
         import shutil
         start = time.time()

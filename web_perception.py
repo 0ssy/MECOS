@@ -153,10 +153,16 @@ class WebPerception:
             for anchor in soup.find_all("a", href=True)
         ]
         links = [link for link in links if self._is_allowed_link(link)]
-        await self.memory.add_experience(
-            content=f"WEB CONTENT ({url}):\n{clean_text[:5000]}",
-            source="web_perception",
-        )
+        try:
+            await asyncio.wait_for(
+                self.memory.add_experience(
+                    content=f"WEB CONTENT ({url}):\n{clean_text[:5000]}",
+                    source="web_perception",
+                ),
+                timeout=5,
+            )
+        except Exception:
+            pass
         logger.success(f"Successfully ingested web content from {url}")
         return {
             "url": url,

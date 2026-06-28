@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 
 import requests
+from bs4 import BeautifulSoup
 from loguru import logger
 
 from browser_automation import BrowserAutomation
@@ -55,7 +56,31 @@ class OutreachScanner:
     AGGREGATOR_DOMAINS = {
         "hn.algolia.com",
         "news.ycombinator.com",
+        "reddit.com",
+        "indiehackers.com",
+        "upwork.com",
+        "linkedin.com",
+        "gravityflow.io",
+        "docparsemagic.com",
+        "timedoctor.com",
+        "techweez.com",
+        "docsie.io",
+        "freelancer.com",
+        "pinterest.com",
+        "bing.com",
+        "google.com",
+        "youtube.com",
+        "twitter.com",
+        "x.com",
+        "facebook.com",
+        "instagram.com",
+        "tiktok.com",
+        "craigslist.org",
+        "ebay.com",
+        "amazon.com",
+        "github.com",
     }
+    BLOCKED_TLDS = {".reddit.com", ".hackernews.com", ".indiehackers.com", ".upwork.com", ".linkedin.com"}
 
     def __init__(self, memory: MemorySystem, browser: Optional[BrowserAutomation] = None,
                  web_perception: Optional[WebPerception] = None):
@@ -76,13 +101,18 @@ class OutreachScanner:
             domain = domain[4:]
         parsed = urlparse(url)
         if domain in self.AGGREGATOR_DOMAINS:
-            return False
+            allow_paths = ["/comments/", "/questions/", "/post/", "/thread/", "/topic/", ".json", "/api/"]
+            if not any(p in parsed.path for p in allow_paths):
+                return False
         if domain in ("localhost", "127.0.0.1"):
             return False
         if domain == "example.com" or ".example.com" in domain:
             return False
         if parsed.path.startswith("/search") or parsed.query.startswith("q=") or "/search" in parsed.query:
             return False
+        for blocked in self.BLOCKED_TLDS:
+            if domain.endswith(blocked):
+                return False
         return True
 
     def _load_leads(self):
@@ -188,6 +218,35 @@ class OutreachScanner:
 
         return {"emails": emails, "phones": phones, "social": social}
 
+    def _extract_business_urls(self, text: str) -> List[str]:
+        """Extract business URLs from text, excluding aggregator domains."""
+        url_re = re.compile(r'https?://[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/[^\s\'"<>]+')
+        urls = url_re.findall(text)
+        # Filter out aggregator domains
+        return [u for u in urls if self._is_business_url(u)][:5]
+
+    @staticmethod
+    def _fetch_page_text(url: str, timeout: int = 15) -> Dict[str, Any]:
+        try:
+            response = requests.get(
+                url,
+                timeout=timeout,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+            )
+            if response.status_code != 200:
+                return {"ok": False, "text": "", "html": "", "error": f"HTTP {response.status_code}"}
+            html = response.text
+            soup = BeautifulSoup(html, "html.parser")
+            for script in soup(["script", "style"]):
+                script.decompose()
+            text = soup.get_text(separator="\n")
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            clean_text = "\n".join(chunk for chunk in chunks if chunk)
+            return {"ok": True, "text": clean_text, "html": html}
+        except Exception as e:
+            return {"ok": False, "text": "", "html": "", "error": str(e)}
+
     async def scan_url(self, url: str) -> Optional[Dict[str, Any]]:
         if not self._is_business_url(url):
             return None
@@ -198,7 +257,7 @@ class OutreachScanner:
             return None
         self.scan_cycles_by_url[url] = now
 
-        result = await self.web_perception.ingest_url(url)
+        result = await asyncio.to_thread(self._fetch_page_text, url)
         if not result.get("ok") or not result.get("text"):
             return None
 
@@ -214,7 +273,7 @@ class OutreachScanner:
         score = self._score_signal(text, url)
         contacts = self._extract_contact_hints(text, html)
 
-        if score["total_score"] == 0:
+        if score["total_score"] < 3:
             return None
 
         domain = urlparse(url).netloc
@@ -230,6 +289,7 @@ class OutreachScanner:
             "contacts": contacts,
             "status": "new",
             "pitch_suggestion": "",
+            "source": "web_scan",
         }
         self.leads.append(lead)
         self._save_leads()
@@ -270,21 +330,29 @@ class OutreachScanner:
                 await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
                 text = await self.browser.get_text()
                 score = self._score_signal(text, url)
-                if score["total_score"] >= 2:
-                    lead = {
-                        "url": url,
-                        "domain": "reddit.com",
-                        "discovered_at": datetime.now().isoformat(),
-                        "signals": score["signals"],
-                        "total_score": score["total_score"],
-                        "matched_terms": score["matched_terms"],
-                        "contacts": {"emails": [], "phones": [], "social": ["reddit"]},
-                        "status": "new",
-                        "pitch_suggestion": "",
-                        "source": f"reddit/{sub}",
-                    }
-                    leads.append(lead)
-                    self.leads.append(lead)
+                if score["total_score"] >= 3:
+                    # Extract business URLs from post content instead of using reddit.com as domain
+                    extracted_urls = self._extract_business_urls(text)
+                    if not extracted_urls:
+                        continue  # Skip if no business URLs found in post
+                    for extracted_url in extracted_urls[:2]:  # Limit 2 per post
+                        if not self._is_business_url(extracted_url):
+                            continue
+                        domain = urlparse(extracted_url).netloc.lower()
+                        lead = {
+                            "url": extracted_url,
+                            "domain": domain,
+                            "discovered_at": datetime.now().isoformat(),
+                            "signals": score["signals"],
+                            "total_score": score["total_score"],
+                            "matched_terms": score["matched_terms"],
+                            "contacts": {"emails": [], "phones": [], "social": ["reddit"]},
+                            "status": "new",
+                            "pitch_suggestion": "",
+                            "source": f"reddit/{sub}",
+                        }
+                        leads.append(lead)
+                        self.leads.append(lead)
             except Exception as e:
                 logger.debug(f"Reddit scan failed for {sub}: {e}")
                 continue
@@ -305,21 +373,27 @@ class OutreachScanner:
             await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
             text = await self.browser.get_text()
             score = self._score_signal(text, url)
-            if score["total_score"] >= 2:
-                lead = {
-                    "url": url,
-                    "domain": "news.ycombinator.com",
-                    "discovered_at": datetime.now().isoformat(),
-                    "signals": score["signals"],
-                    "total_score": score["total_score"],
-                    "matched_terms": score["matched_terms"],
-                    "contacts": {"emails": [], "phones": [], "social": ["hackernews"]},
-                    "status": "new",
-                    "pitch_suggestion": "",
-                    "source": "hackernews",
-                }
-                leads.append(lead)
-                self.leads.append(lead)
+            if score["total_score"] >= 3:
+                # Extract business URLs from API response (hits contain story URLs)
+                extracted_urls = self._extract_business_urls(text)
+                for extracted_url in extracted_urls[:2]:
+                    if not self._is_business_url(extracted_url):
+                        continue
+                    domain = urlparse(extracted_url).netloc.lower()
+                    lead = {
+                        "url": extracted_url,
+                        "domain": domain,
+                        "discovered_at": datetime.now().isoformat(),
+                        "signals": score["signals"],
+                        "total_score": score["total_score"],
+                        "matched_terms": score["matched_terms"],
+                        "contacts": {"emails": [], "phones": [], "social": ["hackernews"]},
+                        "status": "new",
+                        "pitch_suggestion": "",
+                        "source": "hackernews",
+                    }
+                    leads.append(lead)
+                    self.leads.append(lead)
         except Exception as e:
             logger.debug(f"HackerNews scan failed: {e}")
         self._save_leads()
@@ -339,83 +413,95 @@ class OutreachScanner:
             await self.browser.navigate(url, wait_until="domcontentloaded", timeout=15000)
             text = await self.browser.get_text()
             score = self._score_signal(text, url)
-            if score["total_score"] >= 2:
-                lead = {
-                    "url": url,
-                    "domain": "indiehackers.com",
-                    "discovered_at": datetime.now().isoformat(),
-                    "signals": score["signals"],
-                    "total_score": score["total_score"],
-                    "matched_terms": score["matched_terms"],
-                    "contacts": {"emails": [], "phones": [], "social": ["indiehackers"]},
-                    "status": "new",
-                    "pitch_suggestion": "",
-                    "source": "indiehackers",
-                }
-                leads.append(lead)
-                self.leads.append(lead)
+            if score["total_score"] >= 3:
+                # Extract business URLs from search results
+                extracted_urls = self._extract_business_urls(text)
+                for extracted_url in extracted_urls[:2]:
+                    if not self._is_business_url(extracted_url):
+                        continue
+                    domain = urlparse(extracted_url).netloc.lower()
+                    lead = {
+                        "url": extracted_url,
+                        "domain": domain,
+                        "discovered_at": datetime.now().isoformat(),
+                        "signals": score["signals"],
+                        "total_score": score["total_score"],
+                        "matched_terms": score["matched_terms"],
+                        "contacts": {"emails": [], "phones": [], "social": ["indiehackers"]},
+                        "status": "new",
+                        "pitch_suggestion": "",
+                        "source": "indiehackers",
+                    }
+                    leads.append(lead)
+                    self.leads.append(lead)
         except Exception as e:
             logger.debug(f"IndieHackers scan failed: {e}")
         self._save_leads()
         return leads
 
-    async def search_leads(self, query: str, engines: str = "google,duckduckgo", limit: int = 20) -> List[Dict[str, Any]]:
-        """Search for leads using SearXNG and create leads from results."""
+    async def scan_business_directories(self, limit: int = 15) -> List[Dict[str, Any]]:
+        """Scan business directories for leads with automation pain signals."""
+        queries = [
+            "looking for automation tools small business",
+            "manual data entry help business",
+            "workflow bottleneck process improvement",
+            "automation needed for business",
+            "spreadsheet hell looking for solution",
+            "too much time on manual work",
+            "business process automation help",
+            "custom automation bot for business",
+        ]
+        all_leads = []
+        for query in queries[:4]:
+            try:
+                found = await self.search_leads(query, limit=limit)
+                all_leads.extend(found)
+            except Exception as e:
+                logger.debug(f"Business directory scan skip '{query}': {e}")
+        return all_leads
+
+    async def search_leads(self, query: str, limit: int = 20) -> List[Dict[str, Any]]:
+        """Search for leads using SearXNG. Requires SearXNG running at localhost:8888."""
         now = time_module.time()
         
         search_url = settings.SEARXNG_URL.rstrip("/") + "/search"
         params = {
             "q": query,
             "format": "json",
-            "engines": engines,
             "language": "en-US",
+            "engines": "bing",
         }
         
         leads = []
         try:
             response = requests.get(search_url, params=params, timeout=30)
             if response.status_code != 200:
-                logger.warning(f"SearXNG search failed: {response.status_code}")
+                logger.error(f"SearXNG search failed: {response.status_code} - is Docker running?")
                 return leads
             
             results = response.json()
+            candidate_urls = []
             for result in results.get("results", [])[:limit]:
                 url = result.get("url", "")
-                title = result.get("title", "")
-                content = result.get("content", "")
-                
                 if not url:
                     continue
-                
                 if not self._is_business_url(url):
                     continue
-                
-                # Check deduplication
                 last_scan = self.scan_cycles_by_url.get(url, 0)
                 if now - last_scan < 86400:
                     continue
-                
-                combined_text = title + " " + content
-                score = self._score_signal(combined_text, url)
-                
-                if score["total_score"] >= 2:
-                    content_hash = hashlib.md5(combined_text.encode()).hexdigest()
-                    lead = {
-                        "url": url,
-                        "domain": urlparse(url).netloc,
-                        "discovered_at": datetime.now().isoformat(),
-                        "scan_cycle_id": int(now),
-                        "content_hash": content_hash,
-                        "signals": score["signals"],
-                        "total_score": score["total_score"],
-                        "matched_terms": score["matched_terms"],
-                        "contacts": self._extract_contact_hints(combined_text, ""),
-                        "status": "new",
-                        "source": "searxng_search",
-                    }
-                    self.leads.append(lead)
-                    self.scan_cycles_by_url[url] = now
-                    leads.append(lead)
+                candidate_urls.append(url)
+            
+            for url in candidate_urls:
+                try:
+                    lead = await self.scan_url(url)
+                    if lead:
+                        leads.append(lead)
+                        if len(leads) >= limit:
+                            break
+                except Exception as e:
+                    logger.debug(f"scan_url skip for {url}: {e}")
+                    continue
             
             if leads:
                 self._save_leads()

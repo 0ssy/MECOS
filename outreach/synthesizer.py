@@ -55,6 +55,7 @@ class LeadSynthesizer:
             "persona": persona,
             "suggested_pitch": suggested_pitch,
             "recommended_package": package,
+            "recommended_first_tool": self._recommend_first_tool(pain_points),
             "contacts": contacts,
             "original_signals": signals,
             "matched_terms": matched,
@@ -134,6 +135,15 @@ class LeadSynthesizer:
             f"Automated solution for {domain} targeting {primary_pain}. "
             f"Build: 2-3 days. Price: fixed scope. No long-term contract required."
         )
+
+    def _recommend_first_tool(self, pain_points: List[str]) -> str:
+        if "actively seeking" in str(pain_points):
+            return "full automation audit — we map your workflow first"
+        if "growing team" in str(pain_points):
+            return "workflow automation retainer — ongoing optimization"
+        if "operational overhead" in str(pain_points):
+            return "targeted bot for your highest-friction process"
+        return "proof-of-concept automation for one repetitive task"
 
     def get_ready_for_outreach(self, limit: int = 20) -> List[Dict[str, Any]]:
         return [b for b in self.briefs if b.get("status") == "ready_for_outreach"][-limit:]

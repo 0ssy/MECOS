@@ -1,14 +1,51 @@
 {
   "skills": [
-    "marketing-skills", "gstack", "social-media-skills", "superpowers",
-    "kilocode", "financial-services", "legal-workflow", "front-end-design",
-    "humanizer", "ai-second-brain", "notebook-llm", "seo-tools",
-    "hyperframes", "doc-skills", "caveman", "obsidian", "last30days"
+    "marketing-skills",
+    "gstack",
+    "social-media-skills",
+    "superpowers",
+    "kilocode",
+    "financial-services",
+    "legal-workflow",
+    "front-end-design",
+    "humanizer",
+    "ai-second-brain",
+    "notebook-llm",
+    "seo-tools",
+    "hyperframes",
+    "doc-skills",
+    "caveman",
+    "obsidian",
+    "last30days"
   ],
   "mcp": {
-    "notion": {"command": "npx", "args": ["-y", "@notionhq/notion-mcp-server"]},
-    "slack": {"command": "npx", "args": ["-y", "slack-mcp-server"]},
-    "granola": {"command": "uvx", "args": ["granola-mcp-server"]},
-    "zapier": {"command": "npx", "args": ["-y", "zapier-mcp-server"]}
-  }
+    "notion": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ]
+    },
+    "slack": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "slack-mcp-server"
+      ]
+    },
+    "granola": {
+      "command": "uvx",
+      "args": [
+        "granola-mcp-server"
+      ]
+    },
+    "zapier": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "zapier-mcp-server"
+      ]
+    }
+  },
+  "snapshot": false
 }

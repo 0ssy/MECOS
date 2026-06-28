@@ -187,6 +187,36 @@ class CeoAgent:
             logger.error("Tool health check failed: {}", exc)
             return {"status": "error", "issues": [str(exc)]}
     
+    def _check_spam_risk(self) -> Dict[str, Any]:
+        """Check outreach engagement metrics and pause if spam risk is high."""
+        if not self.outreach or not self.outreach.enabled:
+            return {"paused": False}
+        
+        try:
+            from outreach.delivery_agent import DeliveryAgent
+            from outreach.reply_monitor import ReplyMonitor
+            delivery = DeliveryAgent()
+            reply_monitor = ReplyMonitor()
+            
+            sent_files = list(delivery.sent_dir.glob("*.json"))
+            total_sent = len(sent_files)
+            send_failed = sum(1 for f in sent_files if json.loads(f.read_text()).get("status") == "send_failed")
+            replies = reply_monitor._replies if hasattr(reply_monitor, '_replies') else []
+            total_replies = len(replies)
+            
+            bounce_rate = send_failed / total_sent if total_sent > 0 else 0
+            reply_rate = total_replies / total_sent if total_sent > 0 else 0
+            
+            if total_sent >= 10 and (bounce_rate > 0.05 or reply_rate < 0.01):
+                reason = f"bounce_rate={bounce_rate:.1%}, reply_rate={reply_rate:.1%}"
+                logger.warning("CEO: Spam risk detected — {}", reason)
+                return {"paused": True, "reason": reason, "bounce_rate": bounce_rate, "reply_rate": reply_rate}
+            
+            return {"paused": False, "bounce_rate": bounce_rate, "reply_rate": reply_rate}
+        except Exception as exc:
+            logger.debug("Spam risk check failed: {}", exc)
+            return {"paused": False}
+
     async def _supervise_outreach(self) -> Dict[str, Any]:
         """Supervise outreach agent cycles and enforce limits."""
         if not self.outreach or not self.outreach.enabled:
@@ -225,6 +255,13 @@ class CeoAgent:
                     self.outreach_paused = True
                     status["actions"].append("circuit_breaker_triggered")
                     logger.warning("CEO: Outreach paused after {} consecutive failures", self.consecutive_failures)
+                
+                # Spam-risk scoring
+                spam_risk = self._check_spam_risk()
+                if spam_risk.get("paused"):
+                    self.outreach_paused = True
+                    status["actions"].append("spam_risk_paused")
+                    logger.warning("CEO: Outreach paused due to spam risk: {}", spam_risk.get("reason"))
                 
             except Exception as exc:
                 logger.error("CEO: Outreach cycle failed: {}", exc)

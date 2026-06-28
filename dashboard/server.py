@@ -10,14 +10,15 @@ import json
 import os
 import sys
 from datetime import datetime
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import Any, Dict
-from http.server import HTTPServer, BaseHTTPRequestHandler
 from socketserver import ThreadingMixIn
+from typing import Any, Dict
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from loguru import logger
+
 from config import settings
 
 BASE_DIR = settings.BASE_DIR
@@ -87,6 +88,10 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": "not_found"}, 404)
         elif self.path == "/api/payments/summary":
             self._send_json(self._read_json(OUTREACH_DIR / "payments" / "payment_ledger.json", {}).get("payments", []))
+        elif self.path == "/api/twenty/leads":
+            self._send_json(self._get_twenty_leads())
+        elif self.path == "/api/twenty/briefs":
+            self._send_json(self._get_twenty_briefs())
         else:
             self.send_response(404)
             self.end_headers()
@@ -115,6 +120,28 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 self.wfile.write(json.dumps(result).encode())
             except Exception as e:
                 logger.error(f"PayPal webhook processing error: {e}")
+                self.send_response(500)
+                self.end_headers()
+                self.wfile.write(b'{"error": "processing_failed"}')
+        elif self.path == "/api/emails/send-approved":
+            try:
+                body = json.loads(body_bytes.decode())
+                draft_id = body.get("draft_id") or body.get("twenty_draft_id", "")
+                if not draft_id:
+                    self._send_json({"error": "missing_draft_id"}, 400)
+                    return
+
+                from outreach.twenty.twenty_bridge import TwentyBridge
+                bridge = TwentyBridge()
+                if not bridge.enabled:
+                    self._send_json({"error": "twenty_crm_disabled"}, 400)
+                    return
+
+                result = bridge.mark_draft_sent(draft_id)
+                result["action"] = "marked_sent"
+                self._send_json(result)
+            except Exception as e:
+                logger.error(f"Send-approved endpoint error: {e}")
                 self.send_response(500)
                 self.end_headers()
                 self.wfile.write(b'{"error": "processing_failed"}')
@@ -147,6 +174,8 @@ class DashboardHandler(BaseHTTPRequestHandler):
         bucket_balances = revenue.get("bucket_balances", {})
         entries = revenue.get("entries", [])
 
+        twenty_status = self._get_twenty_status()
+
         status = {
             "timestamp": datetime.now().isoformat(),
             "system": {
@@ -154,6 +183,7 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 "trading_enabled": os.getenv("TRADING_ENABLED", "false").lower() == "true",
                 "outreach_enabled": settings.MECOS_ENABLE_OUTREACH,
                 "email_enabled": bool(settings.MECOS_EMAIL),
+                "twenty_crm_enabled": settings.TWENTY_CRM_ENABLED,
             },
             "leads": {
                 "total": len(leads),
@@ -173,8 +203,46 @@ class DashboardHandler(BaseHTTPRequestHandler):
                 "transactions": len(entries),
             },
             "recent_transactions": entries[-10:],
+            "twenty": twenty_status,
         }
         return status
+
+    def _get_twenty_status(self) -> Dict[str, Any]:
+        if not getattr(settings, "TWENTY_CRM_ENABLED", False):
+            return {"enabled": False}
+        try:
+            from outreach.twenty.twenty_bridge import TwentyBridge
+            bridge = TwentyBridge()
+            leads = bridge.get_leads_by_status("new", limit=5)
+            return {
+                "enabled": True,
+                "api_url": settings.TWENTY_CRM_API_URL,
+                "recent_leads": len(leads),
+            }
+        except Exception as e:
+            return {"enabled": True, "error": str(e)}
+
+    def _get_twenty_leads(self) -> Dict[str, Any]:
+        if not getattr(settings, "TWENTY_CRM_ENABLED", False):
+            return {"error": "twenty_crm_disabled"}
+        try:
+            from outreach.twenty.twenty_bridge import TwentyBridge
+            bridge = TwentyBridge()
+            leads = bridge.get_leads_by_status("new", limit=50)
+            return {"leads": leads}
+        except Exception as e:
+            return {"error": str(e)}
+
+    def _get_twenty_briefs(self) -> Dict[str, Any]:
+        if not getattr(settings, "TWENTY_CRM_ENABLED", False):
+            return {"error": "twenty_crm_disabled"}
+        try:
+            from outreach.twenty.twenty_bridge import TwentyBridge
+            bridge = TwentyBridge()
+            all_leads = bridge.get_leads_by_status("ready_for_outreach", limit=50)
+            return {"briefs": all_leads}
+        except Exception as e:
+            return {"error": str(e)}
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -405,6 +473,10 @@ async function update() {
       <div class="card">
         <div class="card-header">Email</div>
         <div style="margin-top:6px;"><span class="tag ${d.system.email_enabled ? 'active' : 'warn'}">${d.system.email_enabled ? 'CONNECTED' : 'MISSING'}</span></div>
+      </div>
+      <div class="card">
+        <div class="card-header">Twenty CRM</div>
+        <div style="margin-top:6px;"><span class="tag ${d.system.twenty_crm_enabled ? 'active' : 'warn'}">${d.system.twenty_crm_enabled ? 'CONNECTED' : 'OFF'}</span></div>
       </div>
       <div class="card">
         <div class="card-header">Last Update</div>

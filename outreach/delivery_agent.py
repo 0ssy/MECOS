@@ -32,33 +32,36 @@ class DeliveryAgent:
     def draft_email(self, brief: Dict[str, Any]) -> Dict[str, Any]:
         domain = brief.get("domain", "your company")
         pain = brief.get("pain_points", ["efficiency"])[0].replace("_", " ")
+        matched_terms = brief.get("matched_terms", [])[:3]
         package = brief.get("recommended_package", {})
         contacts = brief.get("contacts", {})
         emails = contacts.get("emails", [])
         research_summary = brief.get("research_summary", "")
+        recommended_tool = brief.get("recommended_first_tool", "custom automation bot")
 
         recipient = emails[0] if emails else "unknown@example.com"
 
+        personalization = ""
+        if matched_terms:
+            personalization = f"I noticed {domain} mentions {', '.join(matched_terms[:2])} on their site.\n\n"
+        if research_summary:
+            personalization += f"{research_summary}\n\n"
+
         subject = f"Quick automation idea for {domain}"
+
         body = (
             f"Hi,\n\n"
-            f"I came across {domain} and noticed you might be dealing with {pain}.\n\n"
-        )
-        if research_summary:
-            body += f"{research_summary}\n\n"
-        body += (
-            f"I build custom automation bots (web scraping, data pipelines, workflow orchestration) "
-            f"that typically cut manual work by 60-80%.\n\n"
-            f"Here's what I can do for you:\n"
+            f"{personalization}"
+            f"I can build a {recommended_tool} to solve this.\n\n"
+            f"For a similar project, I delivered:\n"
             f"- {package.get('description', 'Custom automation build')}\n"
-            f"- Delivery in {package.get('delivery', '1 week')}\n"
+            f"- Delivery: {package.get('delivery', '3-5 days')} (fixed scope, no long-term contract)\n"
             f"- Price: {package.get('price_range', '$500-$1,500')}\n\n"
-            f"No long-term contracts. If it saves you time, we continue. If not, you walk away.\n\n"
-            f"Want me to send over a 2-minute Loom demo of a similar bot I built?\n\n"
+            f"If this sounds useful, I can send a quick demo of a comparable build.\n\n"
             f"Best,\n"
             f"MECOS Automation\n\n"
             f"---\n"
-            f"Unsubscribe: reply STOP to stop receiving emails."
+            f"Reply STOP to unsubscribe."
         )
 
         draft = {
@@ -99,11 +102,25 @@ class DeliveryAgent:
         if draft.get("type") not in ("email", "vsl_followup"):
             logger.warning(f"Auto-send only supports email/vsl_followup drafts (type={draft.get('type')})")
             return False
-        if draft.get("status") != "pending_send":
-            logger.warning(f"Draft status is not pending_send: {draft.get('status')}")
+        if draft.get("status") not in ("pending_send", "approved_send"):
+            logger.warning(f"Draft status is not sendable: {draft.get('status')}")
             return False
 
-        success, message_id = self._send_smtp(draft["to"], draft["subject"], draft["body"])
+        to_addr = draft.get("to", "")
+        if not to_addr or "@" not in to_addr:
+            logger.warning(f"Invalid recipient: {to_addr}")
+            draft["status"] = "skipped_invalid_email"
+            self._save_draft(draft)
+            return False
+
+        from outreach.email_verifier import verify_email_deliverable
+        if not verify_email_deliverable(to_addr):
+            logger.warning(f"Email not deliverable: {to_addr}")
+            draft["status"] = "skipped_invalid_email"
+            self._save_draft(draft)
+            return False
+
+        success, message_id = self._send_smtp(to_addr, draft["subject"], draft["body"])
         if success:
             draft["status"] = "sent"
             draft["sent_at"] = datetime.now().isoformat()

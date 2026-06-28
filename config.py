@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     # ── LLM (Ollama / local) ──────────────────────────────────────────────
     SERVER_IP: str = os.getenv("SERVER_IP", "127.0.0.1")
     LOCAL_LLM_URL: str = os.getenv("LOCAL_LLM_URL", f"http://127.0.0.1:11434/v1")
-    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "llama3")
+    DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "llama3.2:3b")
 
     # ── Embeddings ────────────────────────────────────────────────────────
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
@@ -124,6 +124,11 @@ class Settings(BaseSettings):
     PAYPAL_RETURN_URL: str = os.getenv("PAYPAL_RETURN_URL", "http://localhost:8080/payment/success")
     PAYPAL_CANCEL_URL: str = os.getenv("PAYPAL_CANCEL_URL", "http://localhost:8080/payment/cancel")
 
+    # ── Twenty CRM ──────────────────────────────────────────────────────────────
+    TWENTY_CRM_ENABLED: bool = os.getenv("TWENTY_CRM_ENABLED", "false").lower() == "true"
+    TWENTY_CRM_API_URL: str = os.getenv("TWENTY_CRM_API_URL", "http://localhost:3000/api")
+    TWENTY_CRM_API_KEY: str = os.getenv("TWENTY_CRM_API_KEY", "")
+
     # ── Skill Configuration ──────────────────────────────────────────────────
     KILO_SKILLS_DIR: Path = BASE_DIR / ".kilo"
     ENABLED_SKILLS: list = [
@@ -146,7 +151,7 @@ class Settings(BaseSettings):
     LLM_PROVIDERS: dict = {
         "local": {
             "base_url": os.getenv("LOCAL_LLM_URL", "http://127.0.0.1:11434/v1"),
-            "model": os.getenv("DEFAULT_MODEL", "llama3"),
+            "model": os.getenv("DEFAULT_MODEL", "llama3.2:3b"),
             "api_key": "local-no-key",
             "cost": "$0 (local Ollama)",
         },

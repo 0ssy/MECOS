@@ -5,31 +5,30 @@ into a single pipeline that runs in the cognition loop.
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import os
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional
 
 from loguru import logger
-from config import settings
+
 from memory_system import MemorySystem
-from outreach.scanner import OutreachScanner, PAIN_KEYWORDS
-from outreach.synthesizer import LeadSynthesizer
-from outreach.delivery_agent import DeliveryAgent
-from outreach.funnel_builder import FunnelBuilder
-from outreach.email_enricher import EmailEnricher
-from outreach.worldmonitor_adapter import WorldMonitorAdapter
 from outreach.ceo_instincts import CeoInstincts
-from outreach.revenue_ledger import RevenueLedger
+from outreach.delivery_agent import DeliveryAgent
+from outreach.demo_deliverer import DemoDeliverer
+from outreach.email_enricher import EmailEnricher
+from outreach.followup_engine import FollowupEngine
+from outreach.funnel_builder import FunnelBuilder
 from outreach.payments.payment_ledger import PaymentLedger
 from outreach.payments.paypal_client import PayPalClient
 from outreach.reply_monitor import ReplyMonitor
-from outreach.demo_deliverer import DemoDeliverer
-from outreach.followup_engine import FollowupEngine
 from outreach.research_orchestrator import ResearchOrchestrator
+from outreach.revenue_ledger import RevenueLedger
+from outreach.scanner import PAIN_KEYWORDS, OutreachScanner
+from outreach.synthesizer import LeadSynthesizer
+from outreach.twenty.twenty_bridge import TwentyBridge
+from outreach.worldmonitor_adapter import WorldMonitorAdapter
 
 
 class OutreachAgent:
@@ -50,6 +49,7 @@ class OutreachAgent:
         self.reply_monitor = ReplyMonitor()
         self.demo_deliverer = DemoDeliverer()
         self.followup_engine = FollowupEngine()
+        self.twenty_bridge = TwentyBridge()
 
     async def startup(self):
         if not self.enabled:
@@ -92,6 +92,10 @@ class OutreachAgent:
             if self.cycle % 7 == 4:
                 draft_result = await self._run_draft_cycle()
                 result["drafts"] = draft_result
+
+            if self.cycle % 7 == 5:
+                approval_result = self._run_approval_cycle()
+                result["approvals"] = approval_result
 
             reply_result = self._run_reply_check_cycle()
             result["replies"] = reply_result
@@ -165,6 +169,8 @@ class OutreachAgent:
 
         if new_count > 0:
             self.scanner._save_leads()
+            for lead_item in self.scanner.leads[-new_count:]:
+                self.twenty_bridge.sync_lead(lead_item)
 
         logger.info(
             f"Research cycle: discovered {len(candidates)} candidates, {new_count} new leads"
@@ -172,45 +178,42 @@ class OutreachAgent:
         return {"discovered": len(candidates), "new_leads": new_count}
 
     async def _run_scan_cycle(self) -> dict:
-        seed_urls = [
-            "https://www.reddit.com/r/smallbusiness/new/",
-            "https://www.reddit.com/r/Entrepreneur/new/",
-            "https://www.reddit.com/r/webdev/new/",
-        ]
-        leads = []
-        for url in seed_urls:
-            try:
-                lead = await self.scanner.scan_url(url)
-                if lead:
-                    leads.append(lead)
-            except Exception as e:
-                logger.debug(f"Scan skip {url}: {e}")
+        dir_leads = []
+        try:
+            dir_leads = await self.scanner.scan_business_directories(limit=15)
+        except Exception as e:
+            logger.debug(f"Business directory scan skip: {e}")
 
-        social_leads = []
-        for source in ["reddit", "hackernews", "indiehackers"]:
-            try:
-                items = await self.scanner.scan_social_source(source, query="automation needed hiring", limit=10)
-                social_leads.extend(items)
-            except Exception as e:
-                logger.debug(f"Social scan skip {source}: {e}")
-
+        search_leads = []
         searxng_queries = [
-            "small business automation needed site:reddit.com",
-            "workflow bottleneck startup",
-            "manual data entry help",
-            "automation tool needed",
+            "looking for automation tools small business",
+            "manual data entry help business",
+            "workflow bottleneck process improvement",
+            "automation needed for business",
+            "spreadsheet hell looking for solution",
+            "too much time on manual work",
         ]
         for query in searxng_queries:
             try:
                 found = await self.scanner.search_leads(query, limit=5)
+                search_leads.extend(found)
+            except Exception as e:
+                logger.debug(f"SearXNG search skip '{query}': {e}")
+
+        total = len(dir_leads) + len(search_leads)
+        
+        social_leads = []
+        for source in ["reddit", "hackernews", "indiehackers"]:
+            try:
+                found = await self.scanner.scan_social_source(source, limit=10)
                 social_leads.extend(found)
             except Exception as e:
-                logger.debug(f"SearXNG search skip {query}: {e}")
+                logger.debug(f"Social scan skip '{source}': {e}")
+        
+        total += len(social_leads)
+        logger.info(f"Outreach scan: {total} leads found ({len(dir_leads)} directories + {len(search_leads)} search + {len(social_leads)} social)")
 
-        total = len(leads) + len(social_leads)
-        logger.info(f"Outreach scan: {total} leads found ({len(leads)} URLs + {len(social_leads)} social)")
-
-        all_new = leads + social_leads
+        all_new = dir_leads + search_leads + social_leads
 
         if all_new:
             enriched_new = await self.email_enricher.enrich_batch(all_new)
@@ -228,7 +231,7 @@ class OutreachAgent:
                 self.scanner.leads = [l if l.get("url") != lead.get("url") else lead for l in self.scanner.leads]
                 self.scanner._save_leads()
 
-        return {"urls_scanned": len(seed_urls), "new_leads": total, "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
+        return {"urls_scanned": len(searxng_queries), "new_leads": total, "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
 
     async def _run_enrich_cycle(self) -> dict:
         unenriched = [l for l in self.scanner.leads if not l.get("contacts", {}).get("emails")]
@@ -257,6 +260,8 @@ class OutreachAgent:
 
         briefs = await self.synthesizer.synthesize_batch(new_leads)
         count = len(briefs)
+        for brief_item in briefs:
+            self.twenty_bridge.sync_brief(brief_item)
         logger.info(f"Outreach synthesis: {count} leads briefed (instincts ranked)")
         return {"synthesized": count}
 
@@ -287,41 +292,34 @@ class OutreachAgent:
                     self.synthesizer._save()
 
                 drafts = self.delivery_agent.draft_for_lead(brief)
+                for draft in drafts:
+                    draft["status"] = "pending_review"
                 paths = self.delivery_agent.save_drafts(drafts)
                 total_drafts += len(paths)
+
+                for draft_item in drafts:
+                    self.twenty_bridge.sync_draft(draft_item)
 
                 brief["status"] = "drafted"
                 self.synthesizer._save()
 
                 for draft in drafts:
-                    if draft.get("type") == "email" and draft.get("status") == "pending_send":
+                    if draft.get("type") == "email":
                         contact_email = (
                             draft.get("lead_brief", {}).get("contacts", {}).get("emails", [""])[0]
-                            or "client@example.com"
+                            or "unknown@example.com"
                         )
                         if contact_email in ("unknown@example.com", "client@example.com"):
-                            logger.warning(
-                                "Skipping send for {}: no valid contact email",
-                                draft.get("to", "unknown"),
-                            )
                             draft["status"] = "skipped_no_email"
                             self.delivery_agent._save_draft(draft)
                             continue
                         recipient_domain = contact_email.split("@")[-1].lower()
                         if recipient_domain in OutreachScanner.AGGREGATOR_DOMAINS or ".example.com" in recipient_domain:
-                            logger.warning(
-                                "Skipping send to {}: aggregator/placeholder domain",
-                                contact_email,
-                            )
                             draft["status"] = "skipped_bad_domain"
                             self.delivery_agent._save_draft(draft)
                             continue
                         body = draft.get("body", "")
-                        if len(body) < 200 or "automation bots" not in body:
-                            logger.warning(
-                                "Skipping send for {}: email too generic or missing personalization",
-                                contact_email,
-                            )
+                        if len(body) < 200:
                             draft["status"] = "skipped_low_quality"
                             self.delivery_agent._save_draft(draft)
                             continue
@@ -351,16 +349,14 @@ class OutreachAgent:
                                 draft["payment_link"] = paypal_result["checkout_url"]
                                 draft["invoice_id"] = invoice["invoice_id"]
                                 total_invoiced += 1
+                                self.twenty_bridge.sync_payment(invoice)
                                 logger.info(f"Invoice {invoice['invoice_id']} created: ${amount:.2f} → {paypal_result['checkout_url'][:60]}")
-
-                        if self.delivery_agent.send_draft(draft):
-                            total_sent += 1
             except Exception as e:
                 logger.error(f"Draft generation failed for {brief.get('domain')}: {e}")
 
         pending = len(self.delivery_agent.list_pending())
-        logger.info(f"Outreach drafts: {total_drafts} created, {total_sent} sent, {pending} pending review, {total_invoiced} invoiced")
-        return {"drafts_created": total_drafts, "drafts_sent": total_sent, "pending_review": pending, "invoices_created": total_invoiced}
+        logger.info(f"Outreach drafts: {total_drafts} created, 0 sent (manual review), {pending} pending review, {total_invoiced} invoiced")
+        return {"drafts_created": total_drafts, "drafts_sent": 0, "pending_review": pending, "invoices_created": total_invoiced}
 
     def _run_reply_check_cycle(self) -> dict:
         new_replies = self.reply_monitor.fetch_new_replies()
@@ -412,7 +408,6 @@ class OutreachAgent:
         return self._run_followup_cycle()
 
     def _extract_amount(self, price_str: str) -> float:
-        import re
         numbers = re.findall(r"[\d,]+", price_str.replace(",", ""))
         if numbers:
             return float(numbers[0])
@@ -434,6 +429,51 @@ class OutreachAgent:
 
         logger.info(f"Outreach content: {len(draft_contents)} social posts drafted")
         return {"content_generated": len(draft_contents), "platforms": ["twitter", "linkedin", "reddit"]}
+
+    def _run_approval_cycle(self) -> dict:
+        if not self.twenty_bridge.enabled:
+            return {"approved_sent": 0, "reason": "crm_disabled"}
+
+        approved = self.twenty_bridge.get_approved_drafts(limit=20)
+        if not approved:
+            return {"approved_sent": 0, "reason": "no_approved_drafts"}
+
+        sent = 0
+        skipped = 0
+        for draft_node in approved:
+            twenty_id = draft_node.get("id")
+            subject = draft_node.get("subject", "")
+            body = draft_node.get("body", "")
+            brief = draft_node.get("leadBrief") or {}
+            lead = brief.get("lead") or {}
+            contact_email = ""
+            contacts = brief.get("contacts") or {}
+            if isinstance(contacts, dict):
+                contact_email = (contacts.get("emails") or [""])[0]
+
+            if not contact_email or "example.com" in contact_email:
+                skipped += 1
+                continue
+
+            full_draft = {
+                "type": "email",
+                "subject": subject,
+                "body": body,
+                "lead_brief": {
+                    "url": brief.get("url", ""),
+                    "domain": lead.get("domain", brief.get("domain", "")),
+                    "contacts": contacts,
+                },
+                "status": "approved",
+            }
+            if self.delivery_agent.send_draft(full_draft):
+                sent += 1
+                self.twenty_bridge.mark_draft_sent(twenty_id)
+                logger.info(f"Sent approved draft via Twenty CRM: {subject}")
+            else:
+                skipped += 1
+
+        return {"approved_sent": sent, "skipped": skipped, "checked": len(approved)}
 
     def record_payment(self, deal_id: str, amount: float, source: str = "client_payment",
                        description: str = "") -> dict:

@@ -129,8 +129,13 @@ class CeoInstincts:
                 if lead_val > value:
                     return False
             elif op == "contains":
-                text = str(lead_val).lower()
-                if not any(v.lower() in text for v in (value if isinstance(value, list) else [value])):
+                if isinstance(lead_val, dict) and isinstance(value, dict):
+                    text = str(lead_val).lower()
+                    search_items = [str(v).lower() for v in value.values()]
+                else:
+                    text = str(lead_val).lower()
+                    search_items = [str(v).lower() for v in (value if isinstance(value, list) else [value])]
+                if not any(item in text for item in search_items):
                     return False
             elif op == "eq":
                 if lead_val != value:
