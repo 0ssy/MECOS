@@ -45,10 +45,33 @@ ORGANIC_INTENT_PHRASES = [
     "automation needed", "workflow help", "bot for",
 ]
 REVENUE_FIT_SIGNALS = [
-    "hiring", "now hiring", "we're growing", "series a", "series b",
-    "funded", "expansion", "opening new", "enterprise", "fortune",
-    "inc 5000", "fastest growing", "small business", "local business",
-    "founder", "startup", "freelancer", "contract", "$500",
+    "hiring", "now hiring", "we're growing", "expansion", "opening new",
+    "small business", "local business",
+    "founder", "startup", "freelancer", "contract",
+]
+LOCAL_BUSINESS_SIGNALS = [
+    "family owned", "family-owned", "since 19", "since 20",
+    "serving", "proudly serving", "locally owned", "locally-owned",
+    "neighborhood", "community", "trusted", "established",
+    "appointment", "walk-ins welcome", "call for pricing",
+    "our team", "our staff", "master", "licensed",
+    "certified", "insured", "years of experience",
+    "address", "phone", "directions", "hours",
+    "monday", "tuesday", "wednesday", "thursday", "friday",
+    "saturday", "sunday", "closed",
+]
+ENTERPRISE_BLOCKS = [
+    "fortune 500", "fortune 1000", "inc 5000", "enterprise",
+    "/enterprise", "/solutions", "/platform", "/products",
+    "enterprise-grade", "enterprise class", "global scale",
+    "public company", "nasdaq", "nyse", "stock symbol",
+]
+ENTERPRISE_DOMAIN_KEYWORDS = [
+    "microsoft", "google", "apple", "ibm", "oracle", "sap",
+    "salesforce", "adobe", "servicenow", "workday", "snowflake",
+    "datadog", "crowdstrike", "zscaler", "twilio", "twitch",
+    "marketscreener", "businessinsider", "bloomberg",
+    "wikipedia", "docsie", "gravityflow", "timedoctor",
 ]
 
 
@@ -95,14 +118,18 @@ class OutreachScanner:
         self.save_path.parent.mkdir(parents=True, exist_ok=True)
         self._load_leads()
 
-    def _is_business_url(self, url: str) -> bool:
+    @staticmethod
+    def _is_business_url(url: str) -> bool:
         domain = urlparse(url).netloc.lower()
         if domain.startswith("www."):
             domain = domain[4:]
         parsed = urlparse(url)
-        if domain in self.AGGREGATOR_DOMAINS:
+        if domain in OutreachScanner.AGGREGATOR_DOMAINS:
             allow_paths = ["/comments/", "/questions/", "/post/", "/thread/", "/topic/", ".json", "/api/"]
             if not any(p in parsed.path for p in allow_paths):
+                return False
+        for keyword in ENTERPRISE_DOMAIN_KEYWORDS:
+            if keyword in domain:
                 return False
         if domain in ("localhost", "127.0.0.1"):
             return False
@@ -110,7 +137,7 @@ class OutreachScanner:
             return False
         if parsed.path.startswith("/search") or parsed.query.startswith("q=") or "/search" in parsed.query:
             return False
-        for blocked in self.BLOCKED_TLDS:
+        for blocked in OutreachScanner.BLOCKED_TLDS:
             if domain.endswith(blocked):
                 return False
         return True
@@ -200,6 +227,47 @@ class OutreachScanner:
             "matched_terms": matched[:10],
         }
 
+    def _calculate_local_business_score(self, text: str, url: str) -> int:
+        text_lower = text.lower()
+        parsed = urlparse(url)
+        path = parsed.path.lower()
+        score = 0
+
+        for signal in LOCAL_BUSINESS_SIGNALS:
+            if signal in text_lower:
+                score += 1
+
+        if any(ext in path for ext in ["/contact", "/about", "/team", "/about-us"]):
+            score += 1
+        if "address" in text_lower or "directions" in text_lower:
+            score += 1
+        if re.search(r"\(?\d{3}\)?[\s.\-]\d{3}[\s.\-]\d{4}", text):
+            score += 1
+
+        return min(score, 10)
+
+    def _calculate_enterprise_penalty(self, text: str, url: str) -> int:
+        text_lower = text.lower()
+        parsed = urlparse(url)
+        path = parsed.path.lower()
+        penalty = 0
+
+        for block in ENTERPRISE_BLOCKS:
+            if block.startswith("/"):
+                if block in path:
+                    penalty += 2
+            elif block in text_lower:
+                penalty += 1
+
+        domain = parsed.netloc.lower()
+        if domain.startswith("www."):
+            domain = domain[4:]
+        for keyword in ENTERPRISE_DOMAIN_KEYWORDS:
+            if keyword in domain:
+                penalty += 3
+
+        return min(penalty, 10)
+
     def _extract_contact_hints(self, text: str, html: str) -> Dict[str, List[str]]:
         email_re = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}")
         emails = list(set(email_re.findall(text + " " + html)))
@@ -277,6 +345,8 @@ class OutreachScanner:
             return None
 
         domain = urlparse(url).netloc
+        local_score = self._calculate_local_business_score(text, url)
+        enterprise_penalty = self._calculate_enterprise_penalty(text, url)
         lead = {
             "url": url,
             "domain": domain,
@@ -290,6 +360,8 @@ class OutreachScanner:
             "status": "new",
             "pitch_suggestion": "",
             "source": "web_scan",
+            "local_business_score": local_score,
+            "enterprise_penalty": enterprise_penalty,
         }
         self.leads.append(lead)
         self._save_leads()
@@ -339,6 +411,8 @@ class OutreachScanner:
                         if not self._is_business_url(extracted_url):
                             continue
                         domain = urlparse(extracted_url).netloc.lower()
+                        local_score = self._calculate_local_business_score(text, extracted_url)
+                        enterprise_penalty = self._calculate_enterprise_penalty(text, extracted_url)
                         lead = {
                             "url": extracted_url,
                             "domain": domain,
@@ -350,6 +424,8 @@ class OutreachScanner:
                             "status": "new",
                             "pitch_suggestion": "",
                             "source": f"reddit/{sub}",
+                            "local_business_score": local_score,
+                            "enterprise_penalty": enterprise_penalty,
                         }
                         leads.append(lead)
                         self.leads.append(lead)
@@ -380,6 +456,8 @@ class OutreachScanner:
                     if not self._is_business_url(extracted_url):
                         continue
                     domain = urlparse(extracted_url).netloc.lower()
+                    local_score = self._calculate_local_business_score(text, extracted_url)
+                    enterprise_penalty = self._calculate_enterprise_penalty(text, extracted_url)
                     lead = {
                         "url": extracted_url,
                         "domain": domain,
@@ -391,6 +469,8 @@ class OutreachScanner:
                         "status": "new",
                         "pitch_suggestion": "",
                         "source": "hackernews",
+                        "local_business_score": local_score,
+                        "enterprise_penalty": enterprise_penalty,
                     }
                     leads.append(lead)
                     self.leads.append(lead)
@@ -420,6 +500,8 @@ class OutreachScanner:
                     if not self._is_business_url(extracted_url):
                         continue
                     domain = urlparse(extracted_url).netloc.lower()
+                    local_score = self._calculate_local_business_score(text, extracted_url)
+                    enterprise_penalty = self._calculate_enterprise_penalty(text, extracted_url)
                     lead = {
                         "url": extracted_url,
                         "domain": domain,
@@ -431,6 +513,8 @@ class OutreachScanner:
                         "status": "new",
                         "pitch_suggestion": "",
                         "source": "indiehackers",
+                        "local_business_score": local_score,
+                        "enterprise_penalty": enterprise_penalty,
                     }
                     leads.append(lead)
                     self.leads.append(lead)
@@ -442,14 +526,14 @@ class OutreachScanner:
     async def scan_business_directories(self, limit: int = 15) -> List[Dict[str, Any]]:
         """Scan business directories for leads with automation pain signals."""
         queries = [
-            "looking for automation tools small business",
-            "manual data entry help business",
-            "workflow bottleneck process improvement",
-            "automation needed for business",
-            "spreadsheet hell looking for solution",
-            "too much time on manual work",
-            "business process automation help",
-            "custom automation bot for business",
+            "HVAC scheduling spreadsheet hell small business",
+            "auto repair shop manual invoicing small business",
+            "dental office patient intake paper forms small business",
+            "plumbing dispatch spreadsheet small business",
+            "local business appointment booking pain",
+            "family owned business manual processes",
+            "small business workflow bottleneck",
+            "local service business automation needed",
         ]
         all_leads = []
         for query in queries[:4]:

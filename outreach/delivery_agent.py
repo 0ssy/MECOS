@@ -7,15 +7,15 @@ Drafts saved to outbox/ for human review of non-email channels.
 from __future__ import annotations
 
 import json
-import os
 import smtplib
 import ssl
-from email.mime.text import MIMEText
 from datetime import datetime
+from email.mime.text import MIMEText
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from loguru import logger
+
 from config import settings
 
 
@@ -43,21 +43,25 @@ class DeliveryAgent:
 
         personalization = ""
         if matched_terms:
-            personalization = f"I noticed {domain} mentions {', '.join(matched_terms[:2])} on their site.\n\n"
+            personalization = f"I came across {domain} and noticed you mention {', '.join(matched_terms[:2])} on your site.\n\n"
         if research_summary:
             personalization += f"{research_summary}\n\n"
 
-        subject = f"Quick automation idea for {domain}"
+        primary_pain = pain.replace("/", " / ").title()
+
+        subject = f"Quick thought for {domain} — {primary_pain}"
 
         body = (
-            f"Hi,\n\n"
+            f"Hi there,\n\n"
             f"{personalization}"
-            f"I can build a {recommended_tool} to solve this.\n\n"
-            f"For a similar project, I delivered:\n"
-            f"- {package.get('description', 'Custom automation build')}\n"
-            f"- Delivery: {package.get('delivery', '3-5 days')} (fixed scope, no long-term contract)\n"
-            f"- Price: {package.get('price_range', '$500-$1,500')}\n\n"
-            f"If this sounds useful, I can send a quick demo of a comparable build.\n\n"
+            f"I build focused automations for local service businesses, and {primary_pain.lower()} "
+            f"tends to be one of the biggest time sinks I see.\n\n"
+            f"For a business like yours, I'd recommend starting with a single high-impact build:\n"
+            f"- {recommended_tool.title()}\n"
+            f"- Turnaround: {package.get('delivery', '3-5 days')} (fixed scope, no long-term contract)\n"
+            f"- Investment: {package.get('price_range', '$500-$1,500')}\n\n"
+            f"No monthly retainers, no lock-in. Just a working tool that replaces the repetitive part of your workflow.\n\n"
+            f"If this sounds useful, I can send a quick demo of a comparable build so you can see exactly what's possible.\n\n"
             f"Best,\n"
             f"MECOS Automation\n\n"
             f"---\n"

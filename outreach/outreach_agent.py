@@ -157,6 +157,8 @@ class OutreachAgent:
                 "status": "new",
                 "pitch_suggestion": "",
                 "source": f"research_cycle/{candidate.get('source_platform', 'unknown')}",
+                "local_business_score": 0,
+                "enterprise_penalty": 0,
             }
             if candidate.get("text_excerpt"):
                 lead["text_excerpt"] = candidate["text_excerpt"]
@@ -186,12 +188,14 @@ class OutreachAgent:
 
         search_leads = []
         searxng_queries = [
-            "looking for automation tools small business",
-            "manual data entry help business",
-            "workflow bottleneck process improvement",
-            "automation needed for business",
-            "spreadsheet hell looking for solution",
-            "too much time on manual work",
+            "HVAC scheduling spreadsheet hell small business",
+            "auto repair shop manual invoicing small business",
+            "dental office patient intake paper forms small business",
+            "plumbing dispatch spreadsheet small business",
+            "local business appointment booking pain",
+            "family owned business manual processes",
+            "small business workflow bottleneck",
+            "local service business automation needed",
         ]
         for query in searxng_queries:
             try:
@@ -216,7 +220,37 @@ class OutreachAgent:
         all_new = dir_leads + search_leads + social_leads
 
         if all_new:
-            enriched_new = await self.email_enricher.enrich_batch(all_new)
+            filtered = []
+            skipped = []
+            for lead in all_new:
+                local_score = lead.get("local_business_score", 0)
+                enterprise_penalty = lead.get("enterprise_penalty", 0)
+                if local_score < 3 or enterprise_penalty > 2:
+                    skip_reason = ""
+                    if enterprise_penalty > 2:
+                        skip_reason = f"enterprise_penalty={enterprise_penalty}"
+                    else:
+                        skip_reason = f"local_business_score={local_score}"
+                    skipped.append({
+                        "url": lead.get("url", ""),
+                        "domain": lead.get("domain", ""),
+                        "reason": skip_reason,
+                        "local_business_score": local_score,
+                        "enterprise_penalty": enterprise_penalty,
+                        "skipped_at": datetime.now().isoformat(),
+                    })
+                    continue
+                filtered.append(lead)
+
+            if skipped:
+                skip_path = Path("data/outreach/skipped_leads.jsonl")
+                skip_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(skip_path, "a", encoding="utf-8") as f:
+                    for item in skipped:
+                        f.write(json.dumps(item, default=str) + "\n")
+                logger.info(f"Outreach scan: skipped {len(skipped)} leads (ICP gate)")
+
+            enriched_new = await self.email_enricher.enrich_batch(filtered)
             for lead in enriched_new:
                 if lead.get("contacts", {}).get("emails"):
                     existing = next((l for l in self.scanner.leads if l.get("url") == lead.get("url")), None)
@@ -225,13 +259,15 @@ class OutreachAgent:
                     else:
                         self.scanner.leads.append(lead)
 
-        scored = self.intel_adapter.enrich_batch(all_new)
-        for lead in scored:
-            if lead.get("intel_multiplier", 1.0) != 1.0:
-                self.scanner.leads = [l if l.get("url") != lead.get("url") else lead for l in self.scanner.leads]
-                self.scanner._save_leads()
+            scored = self.intel_adapter.enrich_batch(filtered)
+            for lead in scored:
+                if lead.get("intel_multiplier", 1.0) != 1.0:
+                    self.scanner.leads = [l if l.get("url") != lead.get("url") else lead for l in self.scanner.leads]
+                    self.scanner._save_leads()
 
-        return {"urls_scanned": len(searxng_queries), "new_leads": total, "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
+            return {"urls_scanned": len(searxng_queries), "new_leads": len(filtered), "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
+
+        return {"urls_scanned": len(searxng_queries), "new_leads": 0, "intel_scored": 0}
 
     async def _run_enrich_cycle(self) -> dict:
         unenriched = [l for l in self.scanner.leads if not l.get("contacts", {}).get("emails")]
@@ -255,7 +291,32 @@ class OutreachAgent:
         if not new_leads:
             return {"synthesized": 0}
 
-        new_leads = [self.instincts.score_lead(l) for l in new_leads]
+        filtered = []
+        skipped = []
+        for lead in new_leads:
+            local_score = lead.get("local_business_score", 0)
+            enterprise_penalty = lead.get("enterprise_penalty", 0)
+            if local_score < 3 or enterprise_penalty > 2:
+                skipped.append({
+                    "url": lead.get("url", ""),
+                    "domain": lead.get("domain", ""),
+                    "reason": f"local_business_score={local_score}" if local_score < 3 else f"enterprise_penalty={enterprise_penalty}",
+                    "local_business_score": local_score,
+                    "enterprise_penalty": enterprise_penalty,
+                    "skipped_at": datetime.now().isoformat(),
+                })
+                continue
+            filtered.append(lead)
+
+        if skipped:
+            skip_path = Path("data/outreach/skipped_leads.jsonl")
+            skip_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(skip_path, "a", encoding="utf-8") as f:
+                for item in skipped:
+                    f.write(json.dumps(item, default=str) + "\n")
+            logger.info(f"Outreach synth: skipped {len(skipped)} leads (ICP gate)")
+
+        new_leads = [self.instincts.score_lead(l) for l in filtered]
         new_leads.sort(key=lambda l: l.get("total_score", 0), reverse=True)
 
         briefs = await self.synthesizer.synthesize_batch(new_leads)
@@ -270,13 +331,45 @@ class OutreachAgent:
         if not ready:
             return {"drafts_created": 0}
 
+        filtered = []
+        skipped = []
+        for brief in ready:
+            lead_url = brief.get("url", "")
+            lead = next((l for l in self.scanner.leads if l.get("url") == lead_url), None)
+            local_score = (lead or {}).get("local_business_score", 0)
+            enterprise_penalty = (lead or {}).get("enterprise_penalty", 0)
+            if local_score < 3 or enterprise_penalty > 2:
+                skip_reason = ""
+                if enterprise_penalty > 2:
+                    skip_reason = f"enterprise_penalty={enterprise_penalty}"
+                else:
+                    skip_reason = f"local_business_score={local_score}"
+                skipped.append({
+                    "url": lead_url,
+                    "domain": brief.get("domain", ""),
+                    "reason": skip_reason,
+                    "local_business_score": local_score,
+                    "enterprise_penalty": enterprise_penalty,
+                    "skipped_at": datetime.now().isoformat(),
+                })
+                continue
+            filtered.append(brief)
+
+        if skipped:
+            skip_path = Path("data/outreach/skipped_leads.jsonl")
+            skip_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(skip_path, "a", encoding="utf-8") as f:
+                for item in skipped:
+                    f.write(json.dumps(item, default=str) + "\n")
+            logger.info(f"Outreach draft: skipped {len(skipped)} briefs (ICP gate)")
+
         research_orchestrator = ResearchOrchestrator()
         self._research_orchestrator = research_orchestrator
 
         total_drafts = 0
         total_sent = 0
         total_invoiced = 0
-        for brief in ready:
+        for brief in filtered:
             try:
                 lead_url = brief.get("url", "")
                 lead = next((l for l in self.scanner.leads if l.get("url") == lead_url), None)
@@ -356,7 +449,7 @@ class OutreachAgent:
 
         pending = len(self.delivery_agent.list_pending())
         logger.info(f"Outreach drafts: {total_drafts} created, 0 sent (manual review), {pending} pending review, {total_invoiced} invoiced")
-        return {"drafts_created": total_drafts, "drafts_sent": 0, "pending_review": pending, "invoices_created": total_invoiced}
+        return {"drafts_created": total_drafts, "drafts_sent": 0, "pending_review": pending, "invoices_created": total_invoiced, "skipped_icp": len(skipped)}
 
     def _run_reply_check_cycle(self) -> dict:
         new_replies = self.reply_monitor.fetch_new_replies()

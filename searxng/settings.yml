@@ -1,6 +1,3 @@
-# SearXNG settings - place in ./searxng/ directory before running docker-compose
-# This file enables JSON output format for the API
-
 use_default_settings: true
 general:
   debug: false
@@ -12,16 +9,40 @@ search:
     - json
 
 server:
-  secret_key: "change-me-to-a-random-string"
+  secret_key: "mecos-searxng-secret-2026"
   base_url: http://localhost:8888/
 
-# Optional: restrict to specific engines to reduce load
 engines:
-  - name: google
-    engine: google
-    shortcut: g
-    categories: general
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
+    categories: general
+    disabled: true
+  - name: google
+    engine: google
+    shortcut: go
+    categories: general
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: general
+  - name: yahoo
+    engine: yahoo
+    shortcut: yh
+    categories: general
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: general
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wiki
+    categories: general
+  - name: stackoverflow
+    engine: stackoverflow
+    shortcut: so
+    categories: general
+  - name: qwant
+    engine: qwant
+    shortcut: qw
     categories: general

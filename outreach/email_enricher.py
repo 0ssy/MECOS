@@ -8,10 +8,8 @@ Multi-strategy email discovery for leads:
 
 from __future__ import annotations
 
-import json
 import os
 import re
-import time
 from typing import Any, Dict, List, Optional
 from urllib.parse import urljoin, urlparse
 
@@ -42,9 +40,11 @@ class EmailEnricher:
         if not domain:
             return lead
 
-        # Skip if email already exists
+        # Skip if email already exists and is valid
         if contacts.get("emails"):
-            return lead
+            existing = [e for e in contacts["emails"] if not self._is_placeholder_email(e)]
+            if existing:
+                return lead
 
         emails = []
         source = None
@@ -67,6 +67,8 @@ class EmailEnricher:
             guessed = self._guess_emails(domain, lead)
             emails.extend(guessed)
             source = "pattern_guess"
+
+        emails = [e for e in emails if not self._is_placeholder_email(e)]
 
         if emails:
             lead = dict(lead)
@@ -119,7 +121,8 @@ class EmailEnricher:
         exclude_patterns = re.compile(
             r'(example\.com|test\.com|domain\.com|placeholder|sentry|wixpress|wysiwyg|'
             r'webpack|babel|github|google|jquery|bootstrap|fontawesome|'
-            r'@\d+\.\d+\.\d+\.\d+|\.(png|jpg|gif|svg|css|js|woff|ttf))',
+            r'@\d+\.\d+\.\d+\.\d+|\.(png|jpg|gif|svg|css|js|woff|ttf)|'
+            r'name@company\.com|email@domain\.com|your@email\.com|user@example\.com)',
             re.IGNORECASE
         )
 
@@ -204,7 +207,7 @@ class EmailEnricher:
         try:
             # BetterContact uses URL for finding
             url = lead.get("url", f"https://{domain}")
-            api_url = f"https://api.bettercontact.rocks/v1/find-email"
+            api_url = "https://api.bettercontact.rocks/v1/find-email"
             payload = {
                 "url": url,
                 "api_key": self.api_keys["bettercontact"],
@@ -254,6 +257,23 @@ class EmailEnricher:
         if source == "pattern_guess":
             return "low"
         return "unknown"
+
+    def _is_placeholder_email(self, email: str) -> bool:
+        email_lower = email.lower()
+        if not email_lower or "@" not in email_lower:
+            return True
+        local, domain = email_lower.rsplit("@", 1)
+        if domain in ("example.com", "test.com", "domain.com", "placeholder.com"):
+            return True
+        if local in ("name", "email", "your", "user", "info", "admin", "webmaster", "test", "example"):
+            if domain in ("company.com", "domain.com", "example.com", "test.com"):
+                return True
+        if email_lower in (
+            "name@company.com", "email@domain.com", "your@email.com",
+            "user@example.com", "info@example.com", "admin@example.com",
+        ):
+            return True
+        return False
 
     def get_summary(self) -> Dict[str, Any]:
         """Get enricher status."""
