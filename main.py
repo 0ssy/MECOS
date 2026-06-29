@@ -1,16 +1,4 @@
-"""
-MECOS Main Entry Point
-
-Supports both full-system runs (with trading) and stripped-down cognition
-loops (without trading) depending on environment flags.
-
-Architecture:
-  Memory → Intelligence layer (KG, Curiosity, CrossDomain) → Reasoner
-  → ActionExecutionEngine → ToolOrchestrator → tools
-  → AppPerception + Agent-Reach perception
-  → NeuralBrainService (optional)
-  → HealthMonitor + SecurityAgent + GuardianAgent for safety
-"""
+from __future__ import annotations
 
 import asyncio
 import os
@@ -44,7 +32,14 @@ from outreach.outreach_agent import OutreachAgent
 from outreach.dashboard import DashboardService
 from ceo_agent import CeoAgent
 
+# Assistant overlay imports
+from meeting_assistant import MeetingAssistant
+from assistant_engine import AssistantEngine
+from kilo_bridge import KiloBridge
+from ui_overlay.routes import get_router, set_meeting_active, add_transcript_segment, set_suggestion
+
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
+ASSISTANT_ENABLED = os.getenv("MECOS_ENABLE_ASSISTANT", "false").strip().lower() == "true"
 
 
 async def startup_checks(memory: MemorySystem) -> None:
@@ -78,6 +73,60 @@ def build_intelligence_stack() -> dict:
         "curiosity_engine": curiosity,
         "cross_domain_inference": xdi,
     }
+
+
+async def _run_meeting_assistant(
+    meeting_assistant: MeetingAssistant,
+    assistant_engine: AssistantEngine,
+    app_perception: AppPerception,
+):
+    debounce_counter = 0
+    last_meeting_active = False
+    capture_task = None
+
+    while True:
+        try:
+            meeting_state = await app_perception.observe_meeting_apps()
+            current_meeting = meeting_state.get("meeting_active", False)
+
+            if current_meeting != last_meeting_active:
+                debounce_counter += 1
+                if debounce_counter >= 3:
+                    if current_meeting and not meeting_assistant.running:
+                        logger.info("Meeting detected - starting audio capture")
+                        capture_task = asyncio.create_task(
+                            _process_transcript_stream(meeting_assistant, assistant_engine)
+                        )
+                    elif not current_meeting and meeting_assistant.running:
+                        await meeting_assistant.stop_capture()
+                        if capture_task:
+                            capture_task.cancel()
+                            capture_task = None
+                        logger.info("Meeting ended - stopping audio capture")
+                    set_meeting_active(current_meeting)
+                    last_meeting_active = current_meeting
+                    debounce_counter = 0
+            else:
+                debounce_counter = 0
+
+        except Exception as e:
+            logger.warning(f"Meeting assistant loop error: {e}")
+
+        await asyncio.sleep(3)
+
+
+async def _process_transcript_stream(meeting_assistant: MeetingAssistant, assistant_engine: AssistantEngine):
+    try:
+        async for segment in meeting_assistant.start_capture():
+            add_transcript_segment(segment)
+            if assistant_engine:
+                result = await assistant_engine.process_segment(segment)
+                if result:
+                    set_suggestion(result.get("answer", ""))
+    except asyncio.CancelledError:
+        pass
+    except Exception as e:
+        logger.error(f"Transcript stream error: {e}")
 
 
 async def run_cognition_loop(
@@ -342,10 +391,11 @@ async def main():
         )
         scheduler.start()
 
-    # ── 11d. Dashboard server ──────────────────────────────────────────
+    # ── 11d. Dashboard server + Overlay API ─────────────────────────────
     dashboard_server = None
     if outreach_agent.enabled:
         dashboard_app = FastAPI()
+        dashboard_app.include_router(get_router())
 
         @dashboard_app.get("/")
         async def dashboard_root():
@@ -356,6 +406,21 @@ async def main():
         async def dashboard_api():
             return DashboardService.get_status()
 
+        @dashboard_app.get("/api/pending-drafts")
+        async def pending_drafts_api():
+            from outreach.dashboard import DraftApprovalAPI
+            return DraftApprovalAPI.list_pending_drafts()
+
+        @dashboard_app.post("/api/drafts/{filename}/approve")
+        async def approve_draft_api(filename: str):
+            from outreach.dashboard import DraftApprovalAPI
+            return DraftApprovalAPI.approve_draft(filename)
+
+        @dashboard_app.post("/api/drafts/{filename}/reject")
+        async def reject_draft_api(filename: str):
+            from outreach.dashboard import DraftApprovalAPI
+            return DraftApprovalAPI.reject_draft(filename)
+
         dashboard_config = Config(
             app=dashboard_app,
             host="127.0.0.1",
@@ -365,6 +430,19 @@ async def main():
         dashboard_server = Server(dashboard_config)
         asyncio.create_task(dashboard_server.serve())
         logger.info("Dashboard available at http://127.0.0.1:8080")
+
+    # ── Assistant overlay (if enabled) ───────────────────────────────────
+    meeting_assistant = None
+    assistant_engine = None
+    if ASSISTANT_ENABLED:
+        meeting_assistant = MeetingAssistant(memory_system=memory)
+        initialized = await meeting_assistant.initialize()
+        if initialized:
+            assistant_engine = AssistantEngine(memory, reasoner, action_engine)
+            asyncio.create_task(_run_meeting_assistant(meeting_assistant, assistant_engine, app_perception))
+            logger.info("Assistant overlay enabled with meeting detection")
+        else:
+            logger.warning("MeetingAssistant initialization failed - overlay disabled")
 
     # ── 12. Readiness check ─────────────────────────────────────────────
     readiness = await independence.check_readiness()

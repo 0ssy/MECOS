@@ -186,7 +186,6 @@ class DashboardService:
 
     @staticmethod
     def _check_scheduler_running() -> bool:
-        # Check if there are python processes running main.py
         import subprocess
         try:
             result = subprocess.run(
@@ -197,3 +196,52 @@ class DashboardService:
             return count > 0
         except Exception:
             return False
+
+
+class DraftApprovalAPI:
+    """API for approving/rejecting drafts in the outbox."""
+
+    @staticmethod
+    def list_pending_drafts() -> list:
+        outbox_path = DASHBOARD_DATA_DIR / "outbox"
+        if not outbox_path.exists():
+            return []
+        drafts = []
+        for f in sorted(outbox_path.glob("*.json")):
+            if f.is_file() and f.suffix == ".json":
+                try:
+                    data = json.loads(f.read_text())
+                    if data.get("status") in ("pending_review", "pending_send"):
+                        drafts.append({
+                            "filename": f.name,
+                            "to": data.get("to", ""),
+                            "subject": data.get("subject", ""),
+                            "body": data.get("body", ""),
+                            "created_at": data.get("created_at", ""),
+                            "status": data.get("status", ""),
+                        })
+                except Exception:
+                    continue
+        return drafts
+
+    @staticmethod
+    def approve_draft(filename: str) -> dict:
+        outbox_path = DASHBOARD_DATA_DIR / "outbox" / filename
+        if not outbox_path.exists():
+            return {"error": "not_found"}
+        data = json.loads(outbox_path.read_text())
+        data["status"] = "approved_send"
+        data["approved_at"] = datetime.now().isoformat()
+        data["approved_by"] = "manual"
+        outbox_path.write_text(json.dumps(data, indent=2, default=str))
+        return {"status": "approved", "filename": filename}
+
+    @staticmethod
+    def reject_draft(filename: str) -> dict:
+        outbox_path = DASHBOARD_DATA_DIR / "outbox" / filename
+        if not outbox_path.exists():
+            return {"error": "not_found"}
+        data = json.loads(outbox_path.read_text())
+        data["status"] = "rejected"
+        outbox_path.write_text(json.dumps(data, indent=2, default=str))
+        return {"status": "rejected", "filename": filename}

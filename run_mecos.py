@@ -3,6 +3,7 @@ MECOS Startup Script
 Starts SearXNG Docker container, waits for it to be healthy, then launches MECOS.
 Usage: python run_mecos.py
 """
+import os
 import subprocess
 import sys
 import time
@@ -46,8 +47,12 @@ def wait_for_searxng(timeout=60):
 
 def run_mecos():
     print("[MECOS] Starting MECOS engine...")
+    env = dict(os.environ)
+    env["MECOS_ENABLE_ASSISTANT"] = "true"
+    env["MECOS_ENABLE_OUTREACH"] = "false"
     result = subprocess.run(
         [sys.executable, "main.py"],
+        env=env,
     )
     return result.returncode
 

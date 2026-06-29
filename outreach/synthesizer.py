@@ -42,6 +42,10 @@ class LeadSynthesizer:
         domain = lead.get("domain", "")
         contacts = lead.get("contacts", {})
 
+        existing = next((b for b in self.briefs if b.get("url") == url), None)
+        if existing and existing.get("status") in ("ready_for_outreach", "drafted"):
+            return existing
+
         pain_points = self._categorize_pain(signals, matched)
         suggested_pitch = self._craft_pitch(pain_points, domain, contacts)
         persona = self._derive_persona(pain_points, domain)

@@ -394,9 +394,12 @@ class CeoAgent:
                 reject.append(draft)
 
         for draft in auto_send:
-            draft["status"] = "pending_send"
-            draft["approved_at"] = datetime.now().isoformat()
-            draft["approved_by"] = "ceo_auto"
+            draft["status"] = "pending_review"
+            draft["ceo_reviewed_at"] = datetime.now().isoformat()
+            draft["ceo_reviewed_by"] = "ceo_auto_pass"
+            self.outreach.delivery_agent.update_draft(draft)
+
+        for draft in flag_review:
             self.outreach.delivery_agent.update_draft(draft)
 
         for draft in reject:

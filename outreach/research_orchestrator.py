@@ -25,6 +25,13 @@ from .scanner import (
 BLOCKED_DOMAINS = {
     "example.com", "localhost", "127.0.0.1",
     "hn.algolia.com", "news.ycombinator.com",
+    "babbel.com", "auto.ru", "myauto.ge", "drom.ru", "avito.ru",
+}  # non-target regions
+
+BLOCKED_REGION_KEYWORDS = {
+    "india", "indian", "china", "chinese", "russia", "russian",
+    "brazil", "brazilian", "argentina", "mexico", "mexican",
+    "africa", "african", "nigeria", "kenya",
 }
 
 
@@ -55,8 +62,12 @@ class ResearchOrchestrator:
         matched = lead.get("matched_terms", [])
         pain_points = lead.get("pain_points", [])
 
-        pain_str = " ".join(pain_points[:2]) if pain_points else ""
-        keyword_str = " ".join(matched[:3]) if matched else ""
+        # Filter out region keywords from queries
+        filtered_matched = [m for m in matched if not any(rkw in m.lower() for rkw in BLOCKED_REGION_KEYWORDS)]
+        filtered_pain = [p for p in pain_points if not any(rkw in p.lower() for rkw in BLOCKED_REGION_KEYWORDS)]
+
+        pain_str = " ".join(filtered_pain[:2]) if filtered_pain else ""
+        keyword_str = " ".join(filtered_matched[:3]) if filtered_matched else ""
 
         base_query = f"{domain} {pain_str} {keyword_str}".strip()
 
@@ -130,19 +141,25 @@ class ResearchOrchestrator:
             text = signals["twitter"]["text"][:200]
             if len(signals["twitter"]["text"]) > 200:
                 text += "..."
-            parts.append(f"Recent discussion on Twitter mentions related challenges. {text}")
+            blocked = any(kw in text.lower() for kw in BLOCKED_REGION_KEYWORDS)
+            if not blocked:
+                parts.append(f"Recent discussion on Twitter mentions related challenges. {text}")
 
         if signals.get("youtube", {}).get("ok") and signals["youtube"].get("text"):
             text = signals["youtube"]["text"][:200]
             if len(signals["youtube"]["text"]) > 200:
                 text += "..."
-            parts.append(f"YouTube content shows interest in automation solutions. {text}")
+            blocked = any(kw in text.lower() for kw in BLOCKED_REGION_KEYWORDS)
+            if not blocked:
+                parts.append(f"YouTube content shows interest in automation solutions. {text}")
 
         if signals.get("reddit", {}).get("ok") and signals["reddit"].get("text"):
             text = signals["reddit"]["text"][:200]
             if len(signals["reddit"]["text"]) > 200:
                 text += "..."
-            parts.append(f"Reddit discussions highlight similar pain points. {text}")
+            blocked = any(kw in text.lower() for kw in BLOCKED_REGION_KEYWORDS)
+            if not blocked:
+                parts.append(f"Reddit discussions highlight similar pain points. {text}")
 
         return " ".join(parts[:2])
 
@@ -159,6 +176,10 @@ class ResearchOrchestrator:
                 "revenue_fit": 0,
             }
             matched = []
+
+            for region_kw in BLOCKED_REGION_KEYWORDS:
+                if region_kw in text_lower:
+                    return {"total_score": 0, "signals": signals, "matched_terms": [], "blocked_reason": f"region_{region_kw}"}
 
             for kw in INEFFICIENCY_MARKERS:
                 if kw in text_lower:

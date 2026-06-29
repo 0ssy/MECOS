@@ -404,3 +404,95 @@ def test_scheduler_rates_records_sends():
     scheduler._record_send()
     scheduler._record_send()
     assert scheduler._can_send() is False
+
+
+def test_scrapling_adapter_fetch_returns_ok_on_success():
+    """Test: scrapling_adapter.fetch returns ok=True on successful scrape."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    mock_response = MagicMock()
+    mock_response.get_text.return_value = "Contact us at test@example.com"
+    mock_response.get_page_html.return_value = "<html><body>Contact us at test@example.com</body></html>"
+    mock_response.status_code = 200
+
+    mock_fetcher = MagicMock()
+    mock_fetcher.fetch.return_value = mock_response
+
+    mock_scrapling = MagicMock()
+    mock_scrapling.Fetcher = MagicMock(return_value=mock_fetcher)
+
+    with patch.dict(sys.modules, {"scrapling": mock_scrapling}):
+        if "outreach.scrapling_adapter" in sys.modules:
+            del sys.modules["outreach.scrapling_adapter"]
+
+        from outreach.scrapling_adapter import ScraplingAdapter
+        adapter = ScraplingAdapter()
+        adapter._fetcher = None
+        result = adapter.fetch("https://example.com")
+
+        assert result["ok"] is True
+        assert "test@example.com" in result["text"]
+
+
+def test_scrapling_adapter_fallback_to_requests_on_scrapling_failure():
+    """Test: scrapling_adapter falls back to requests when scrapling fails."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+    mock_response.text = "<html><body>Fallback content</body></html>"
+
+    mock_fetcher = MagicMock()
+    mock_fetcher.fetch.side_effect = Exception("Scrapling failed")
+
+    mock_scrapling = MagicMock()
+    mock_scrapling.Fetcher = MagicMock(return_value=mock_fetcher)
+
+    with patch.dict(sys.modules, {"scrapling": mock_scrapling}):
+        if "outreach.scrapling_adapter" in sys.modules:
+            del sys.modules["outreach.scrapling_adapter"]
+
+        with patch("outreach.scrapling_adapter.requests.get", return_value=mock_response):
+            from outreach.scrapling_adapter import ScraplingAdapter
+            adapter = ScraplingAdapter()
+            adapter._fetcher = None
+            result = adapter.fetch("https://example.com")
+
+            assert result["ok"] is True
+
+
+def test_scrapling_adapter_returns_false_on_all_failures():
+    """Test: scrapling_adapter returns ok=False when both methods fail."""
+    import sys
+    from unittest.mock import MagicMock, patch
+
+    mock_fetcher = MagicMock()
+    mock_fetcher.fetch.side_effect = Exception("Scrapling failed")
+
+    mock_scrapling = MagicMock()
+    mock_scrapling.Fetcher = MagicMock(return_value=mock_fetcher)
+
+    with patch.dict(sys.modules, {"scrapling": mock_scrapling}):
+        if "outreach.scrapling_adapter" in sys.modules:
+            del sys.modules["outreach.scrapling_adapter"]
+
+        with patch("outreach.scrapling_adapter.requests.get", side_effect=Exception("Network error")):
+            from outreach.scrapling_adapter import ScraplingAdapter
+            adapter = ScraplingAdapter()
+            adapter._fetcher = None
+            result = adapter.fetch("https://example.com")
+
+            assert result["ok"] is False
+            assert "error" in result
+
+
+def test_scrapling_adapter_singleton_returns_same_instance():
+    """Test: scrapling_adapter singleton pattern returns same instance."""
+    from outreach.scrapling_adapter import ScraplingAdapter
+
+    adapter1 = ScraplingAdapter()
+    adapter2 = ScraplingAdapter()
+
+    assert adapter1 is adapter2

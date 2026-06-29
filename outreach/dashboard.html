@@ -132,11 +132,19 @@
     </table>
   </div>
 
-  <div class="section">
+<div class="section">
     <h2>Recent Replies</h2>
     <table>
       <thead><tr><th>From</th><th>Subject</th><th>Received</th></tr></thead>
       <tbody id="t-recent-replies"><tr><td colspan="3" class="loading">Loading...</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Pending Drafts (Approve/Reject)</h2>
+    <table>
+      <thead><tr><th>To</th><th>Subject</th><th>Body Preview</th><th>Created</th><th>Actions</th></tr></thead>
+      <tbody id="t-pending-drafts"><tr><td colspan="5" class="loading">Loading...</td></tr></tbody>
     </table>
   </div>
 </div>
@@ -182,13 +190,43 @@ async function poll() {
         </tr>
       `).join('');
     }
+
+    const draftRes = await fetch('/api/pending-drafts');
+    const drafts = await draftRes.json();
+    const draftTbody = document.getElementById('t-pending-drafts');
+    if (drafts.length === 0) {
+      draftTbody.innerHTML = '<tr><td colspan="5">No pending drafts.</td></tr>';
+    } else {
+      draftTbody.innerHTML = drafts.map(d => `
+        <tr>
+          <td>${esc(d.to)}</td>
+          <td>${esc(d.subject)}</td>
+          <td style="max-width:300px; font-size:0.8rem;">${esc((d.body || '').substring(0, 200))}${(d.body || '').length > 200 ? '...' : ''}</td>
+          <td>${esc(d.created_at || '')}</td>
+          <td>
+            <button onclick="approveDraft('${d.filename}')">Approve</button>
+            <button onclick="rejectDraft('${d.filename}')">Reject</button>
+          </td>
+        </tr>
+      `).join('');
+    }
   } catch (e) {
     console.error('Dashboard poll failed:', e);
   }
 }
 
+async function approveDraft(filename) {
+  await fetch(`/api/drafts/${filename}/approve`, { method: 'POST' });
+  poll();
+}
+
+async function rejectDraft(filename) {
+  await fetch(`/api/drafts/${filename}/reject`, { method: 'POST' });
+  poll();
+}
+
 function esc(str) {
-  return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  return (str || '').replace(/[&<>"']/g, m => ({"&":'&amp;',"<":'&lt;',">":'&gt;',"\"":'&quot;',"'":'&#39;'}[m]));
 }
 
 setInterval(poll, 2000);

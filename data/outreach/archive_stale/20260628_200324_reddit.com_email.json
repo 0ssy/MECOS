@@ -1,0 +1,23 @@
+{
+  "type": "email",
+  "to": "user@reddit.com",
+  "subject": "Test subject",
+  "body": "This is a test email body with sufficient length for validation purposes and meets the minimum 200 character requirement for CEO approval rules testing aggregator domain rejection in the outreach system.",
+  "status": "skipped_bad_lead",
+  "lead_brief": {
+    "url": "https://reddit.com/r/somepost",
+    "domain": "reddit.com",
+    "contacts": {
+      "emails": [
+        "user@reddit.com"
+      ],
+      "email_source": "website_scrape",
+      "email_confidence": "high"
+    },
+    "local_business_score": 5,
+    "enterprise_penalty": 0
+  },
+  "_filename": "20260628_200324_reddit.com_email.json",
+  "rejected_at": "2026-06-28T20:03:24.733549",
+  "rejected_by": "ceo_auto"
+}

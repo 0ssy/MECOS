@@ -138,6 +138,14 @@ class ToolOrchestrator:
             category="web",
         ))
         self.registry.register(ToolSpec(
+            name="scrapling_fetch",
+            description="Stealth scrape a URL using Scrapling (falls back to Playwright).",
+            func=self.scrapling_fetch,
+            parameters={"url": "The URL to fetch", "timeout": "Fetch timeout in seconds"},
+            permissions=ToolPermission(can_access_network=True),
+            category="web",
+        ))
+        self.registry.register(ToolSpec(
             name="web_ingest",
             description="Ingest a URL into MECOS memory via the web perception system.",
             func=self._web_ingest,
@@ -333,6 +341,31 @@ class ToolOrchestrator:
             same_domain_only=True,
         )
         return json.dumps(result)
+
+    async def scrapling_fetch(
+        self,
+        url: str,
+        timeout: int = 15,
+    ) -> dict:
+        from outreach.scrapling_adapter import ScraplingAdapter
+        adapter = ScraplingAdapter()
+        result = adapter.fetch(url, timeout=int(timeout))
+        if result.get("ok") and result.get("text"):
+            return {
+                "url": url,
+                "text": result.get("text", ""),
+                "links": [],
+                "ok": True,
+            }
+        if self.web_perception:
+            return await self.web_perception.ingest_url(url)
+        return {
+            "url": url,
+            "text": "",
+            "links": [],
+            "ok": False,
+            "error": result.get("error", "scrapling_failed"),
+        }
 
     async def _system_info(self) -> str:
         info = self.app_controller.get_system_info()

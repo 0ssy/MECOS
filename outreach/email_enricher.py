@@ -16,6 +16,11 @@ from urllib.parse import urljoin, urlparse
 import requests
 from loguru import logger
 
+try:
+    from outreach.scrapling_adapter import get_scrapling_adapter
+except ImportError:
+    get_scrapling_adapter = None
+
 
 class EmailEnricher:
     """Discovers and enriches lead email addresses via multiple strategies."""
@@ -128,10 +133,23 @@ class EmailEnricher:
 
         for page in pages_to_check:
             try:
-                resp = requests.get(page, headers=self.headers, timeout=self.timeout, allow_redirects=True)
-                if resp.status_code != 200:
-                    continue
-                text = resp.text
+                if get_scrapling_adapter:
+                    result = get_scrapling_adapter().fetch(
+                        page, timeout=self.timeout, headers=self.headers
+                    )
+                    if not result.get("ok"):
+                        continue
+                    text = result.get("text", "")
+                else:
+                    resp = requests.get(
+                        page,
+                        headers=self.headers,
+                        timeout=self.timeout,
+                        allow_redirects=True,
+                    )
+                    if resp.status_code != 200:
+                        continue
+                    text = resp.text
                 found = email_pattern.findall(text)
                 for email in found:
                     email = email.lower().strip()

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MECOS Assistant Overlay</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: rgba(18, 18, 20, 0.92);
+    color: #e8e8e8;
+    font-family: 'Segoe UI', 'SF Pro Display', system-ui, sans-serif;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+  }
+  .split {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .panel {
+    padding: 16px;
+    overflow-y: auto;
+    border-right: 1px solid #333;
+  }
+  .panel:last-child { border-right: none; }
+  .left { flex: 1; min-width: 30%; }
+  .right { flex: 1; min-width: 30%; }
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #333;
+    margin-bottom: 12px;
+  }
+  .tab {
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #777;
+  }
+  .tab.active { color: #4ade80; border-bottom: 2px solid #4ade80; }
+  .panel-content { display: none; }
+  .panel-content.active { display: block; }
+  .transcript-line {
+    margin-bottom: 12px;
+    padding: 8px;
+    border-left: 2px solid #333;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  .suggestion {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  pre {
+    background: #1a1a1a;
+    padding: 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+  }
+  code { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+  .header {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .auto-scroll { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<div class="split">
+  <div class="panel left">
+    <div class="header">Live Transcript</div>
+    <div class="panel-content active" id="transcript-panel">
+      <div id="transcript-lines"></div>
+    </div>
+  </div>
+  <div class="panel right">
+    <div class="tabs">
+      <div class="tab active" data-tab="suggestions">Suggestions</div>
+      <div class="tab" data-tab="code">Code</div>
+    </div>
+    <div class="panel-content active" id="suggestions-panel">
+      <div class="suggestion" id="suggestion-content">Waiting for question...</div>
+    </div>
+    <div class="panel-content" id="code-panel">
+      <pre><code id="code-content">// Code output will appear here</code></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel-content');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const tabName = tab.dataset.tab;
+    panels.forEach(p => {
+      p.classList.toggle('active', p.id === `${tabName}-panel`);
+    });
+  });
+});
+
+const evtSource = new EventSource('/api/overlay/transcript');
+evtSource.onmessage = (e) => {
+  const data = JSON.parse(e.data);
+  const transcriptDiv = document.getElementById('transcript-lines');
+  const line = document.createElement('div');
+  line.className = 'transcript-line';
+  line.textContent = data.transcript;
+  transcriptDiv.appendChild(line);
+  transcriptDiv.parentElement.scrollTop = transcriptDiv.parentElement.scrollHeight;
+};
+
+async function pollStatus() {
+  try {
+    const res = await fetch('/api/overlay/status');
+    const d = await res.json();
+    if (d.suggestion) {
+      document.getElementById('suggestion-content').textContent = d.suggestion;
+    }
+  } catch (e) {
+    console.error('Status poll failed:', e);
+  }
+}
+
+setInterval(pollStatus, 2000);
+pollStatus();
+
+async function hideOverlay() {
+  await fetch('/api/overlay/hide', { method: 'POST' });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.altKey && e.key === 'o') {
+    hideOverlay();
+  }
+});
+</script>
+</body>
+</html>

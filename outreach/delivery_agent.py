@@ -75,7 +75,7 @@ class DeliveryAgent:
             "body": body,
             "lead_brief": brief,
             "created_at": datetime.now().isoformat(),
-            "status": "pending_send",
+            "status": "pending_review",
             "channel": "personal_email",
         }
         return draft
@@ -106,8 +106,8 @@ class DeliveryAgent:
         if draft.get("type") not in ("email", "vsl_followup"):
             logger.warning(f"Auto-send only supports email/vsl_followup drafts (type={draft.get('type')})")
             return False
-        if draft.get("status") not in ("pending_send", "approved_send"):
-            logger.warning(f"Draft status is not sendable: {draft.get('status')}")
+        if draft.get("status") != "approved_send":
+            logger.warning(f"Draft status is not approved for sending: {draft.get('status')}")
             return False
 
         to_addr = draft.get("to", "")
@@ -136,12 +136,34 @@ class DeliveryAgent:
             self._save_draft(draft)
         return success
 
-    def _save_draft(self, draft: Dict[str, Any]):
+    def _save_draft(self, draft: Dict[str, Any]) -> bool:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         domain = draft.get("lead_brief", {}).get("domain", "unknown")
         filename = f"{ts}_{domain}_{draft.get('type', 'draft')}.json"
         path = self.outbox_dir / filename
+
+        if self._is_duplicate_draft(draft):
+            logger.debug(f"Skipping duplicate draft for {domain}")
+            return False
+
+        draft["_filename"] = filename
         path.write_text(json.dumps(draft, default=str, indent=2))
+        return True
+
+    def _is_duplicate_draft(self, draft: Dict[str, Any], hours: int = 24) -> bool:
+        domain = draft.get("lead_brief", {}).get("domain", "")
+        if not domain:
+            return False
+        cutoff = datetime.now().timestamp() - (hours * 3600)
+        for f in self.outbox_dir.glob(f"*{domain}*_email.json"):
+            try:
+                existing = json.loads(f.read_text())
+                created = datetime.fromisoformat(existing.get("created_at", "")).timestamp()
+                if created > cutoff:
+                    return True
+            except Exception:
+                continue
+        return False
 
     def update_draft(self, draft: Dict[str, Any]) -> None:
         """Update an existing draft file in place."""
@@ -252,11 +274,16 @@ class DeliveryAgent:
 
         return drafts
 
-    def save_draft(self, draft: Dict[str, Any]) -> Path:
+    def save_draft(self, draft: Dict[str, Any]) -> Optional[Path]:
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         domain = draft.get("lead_brief", {}).get("domain", "unknown")
         filename = f"{ts}_{domain}_{draft.get('type', 'draft')}.json"
         path = self.outbox_dir / filename
+
+        if self._is_duplicate_draft(draft):
+            logger.debug(f"Skipping duplicate draft for {domain}")
+            return None
+
         draft["_filename"] = filename
         path.write_text(json.dumps(draft, default=str, indent=2))
         logger.info(f"Draft saved to outbox: {path.name}")
@@ -266,7 +293,9 @@ class DeliveryAgent:
         paths = []
         for draft in drafts:
             try:
-                paths.append(self.save_draft(draft))
+                p = self.save_draft(draft)
+                if p:
+                    paths.append(p)
             except Exception as e:
                 logger.error(f"Failed to save draft: {e}")
         return paths
@@ -281,6 +310,19 @@ class DeliveryAgent:
             except Exception:
                 continue
         return pending
+
+    def list_approved_for_send(self) -> List[Dict[str, Any]]:
+        """List drafts with status approved_send for manual approval sending."""
+        approved = []
+        for f in sorted(self.outbox_dir.glob("*.json")):
+            try:
+                data = json.loads(f.read_text())
+                if data.get("status") == "approved_send":
+                    data["_filename"] = f.name
+                    approved.append(data)
+            except Exception:
+                continue
+        return approved
 
     def mark_sent(self, filename: str):
         src = self.outbox_dir / filename

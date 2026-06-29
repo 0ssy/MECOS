@@ -986,6 +986,43 @@ class AppPerception:
         setattr(schema, "last_used", datetime.utcnow().isoformat())
         self.store.set_app(schema)
 
+    MEETING_APPS = {
+        "zoom": {"process_names": ["zoom.exe", "zoom"], "window_patterns": [r"zoom", r"meeting", r"- zoom"]},
+        "teams": {"process_names": ["ms-teams.exe", "teams.exe", "msedge.exe"], "window_patterns": [r"teams?", r"microsoft teams", r"call with"]},
+        "google_meet": {"process_names": ["chrome.exe"], "window_patterns": [r"meet", r"google meet", r"meet - google"]},
+    }
+
+    def detect_meeting_app(self, window_title: str, process_name: str = "") -> Optional[str]:
+        title_lower = window_title.lower()
+        proc_lower = process_name.lower()
+        for meeting_name, config in self.MEETING_APPS.items():
+            if proc_lower in [p.lower() for p in config["process_names"]]:
+                return meeting_name
+            for pattern in config["window_patterns"]:
+                if re.search(pattern, title_lower):
+                    return meeting_name
+        return None
+
+    def get_running_meeting_apps(self) -> list[str]:
+        meeting_apps = set()
+        for proc in psutil.process_iter(["name", "exe"]):
+            try:
+                proc_name = (proc.info.get("name") or "").lower()
+                detected = self.detect_meeting_app("", proc_name)
+                if detected:
+                    meeting_apps.add(detected)
+            except Exception:
+                continue
+        return list(meeting_apps)
+
+    async def observe_meeting_apps(self) -> dict:
+        running = self.get_running_meeting_apps()
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "meeting_apps_running": running,
+            "meeting_active": len(running) > 0,
+        }
+
     # ------------------------------------------------------------------ #
     #  Backward compatibility with original interface                     #
     # ------------------------------------------------------------------ #

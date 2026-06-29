@@ -18,6 +18,11 @@ import requests
 from bs4 import BeautifulSoup
 from loguru import logger
 
+try:
+    from outreach.scrapling_adapter import get_scrapling_adapter
+except ImportError:
+    get_scrapling_adapter = None
+
 from browser_automation import BrowserAutomation
 from config import settings
 from memory_system import MemorySystem
@@ -104,6 +109,11 @@ class OutreachScanner:
         "github.com",
     }
     BLOCKED_TLDS = {".reddit.com", ".hackernews.com", ".indiehackers.com", ".upwork.com", ".linkedin.com"}
+    BLOCKED_GEO_DOMAINS = {
+        "babbel.com", "auto.ru", "myauto.ge", "drom.ru", "avito.ru",
+        "russian", "russia", "india", "indian", "china", "chinese",
+        "brazil", "brazilian", "argentina", "mexico", "mexican",
+    }  # non-target regions (Europe, NA, Japan, Oceania focus)
 
     def __init__(self, memory: MemorySystem, browser: Optional[BrowserAutomation] = None,
                  web_perception: Optional[WebPerception] = None):
@@ -126,6 +136,9 @@ class OutreachScanner:
         parsed = urlparse(url)
         if domain in OutreachScanner.AGGREGATOR_DOMAINS:
             return False
+        for blocked in OutreachScanner.BLOCKED_GEO_DOMAINS:
+            if blocked in domain:
+                return False
         for keyword in ENTERPRISE_DOMAIN_KEYWORDS:
             if keyword in domain:
                 return False
@@ -291,16 +304,25 @@ class OutreachScanner:
         # Filter out aggregator domains
         return [u for u in urls if self._is_business_url(u)][:5]
 
-    @staticmethod
-    def _fetch_page_text(url: str, timeout: int = 15) -> Dict[str, Any]:
+    def _fetch_page_text(self, url: str, timeout: int = 15) -> Dict[str, Any]:
+        if get_scrapling_adapter:
+            try:
+                result = get_scrapling_adapter().fetch(url, timeout=timeout)
+                if result.get("ok"):
+                    txt = result.get("text", "")
+                    return {"ok": True, "text": txt, "html": result.get("html", "")}
+            except Exception as e:
+                logger.debug(f"Scrapling fetch failed for {url}: {e}")
+
         try:
             response = requests.get(
                 url,
                 timeout=timeout,
-                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
             )
             if response.status_code != 200:
-                return {"ok": False, "text": "", "html": "", "error": f"HTTP {response.status_code}"}
+                err = f"HTTP {response.status_code}"
+                return {"ok": False, "text": "", "html": "", "error": err}
             html = response.text
             soup = BeautifulSoup(html, "html.parser")
             for script in soup(["script", "style"]):

@@ -8,6 +8,8 @@ pandas>=2.0.0
 numpy>=1.24.0
 pywin32>=305; sys_platform == 'win32'
 pywinauto>=0.6.0; sys_platform == 'win32'
+pywebview>=5.0; sys_platform == 'win32'
+pyaudio>=0.2.0; sys_platform == 'win32'
 playwright>=1.40.0
 openai>=1.0.0
 alpaca-py>=0.8.0
@@ -21,4 +23,5 @@ aiofiles>=23.0.0
 httpx>=0.25.0
 duckduckgo-search>=6.0.0
 requests>=2.31.0
+scrapling>=0.1.0
 yfinance>=0.2.40

@@ -90,6 +90,12 @@ class OutreachScheduler:
             logger.warning("Scheduler: CEO circuit breaker active, skipping batch")
             return {"status": "skipped", "reason": "circuit_breaker_active"}
 
+        # Time gate: no sends before 8 AM
+        now = datetime.now()
+        if now.hour < 8:
+            logger.info("Scheduler: waiting for 8 AM (current time: {:02d}:{:02d})", now.hour, now.minute)
+            return {"status": "waiting", "reason": "before_8am"}
+
         logger.info("Scheduler: starting daily batch for {}", today)
 
         metrics: Dict[str, Any] = {
@@ -122,18 +128,18 @@ class OutreachScheduler:
                 flag_review = approval.get("flag_review", [])
                 reject = approval.get("reject", [])
 
-                for draft in auto_send:
+                metrics["flagged_review"] += len(flag_review)
+                metrics["rejected"] += len(reject)
+
+                # Send all manually approved drafts (status=approved_send)
+                approved_drafts = self.delivery_agent.list_approved_for_send()
+                for draft in approved_drafts:
                     if self._can_send():
                         if self.delivery_agent.send_draft(draft):
                             metrics["auto_sent"] += 1
                             self._record_send()
-                        else:
-                            self.ceo_agent.consecutive_failures += 1
                     else:
                         break
-
-                metrics["flagged_review"] += len(flag_review)
-                metrics["rejected"] += len(reject)
 
                 total_processed = (
                     metrics["auto_sent"] + metrics["flagged_review"] + metrics["rejected"]
