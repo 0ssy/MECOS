@@ -6,12 +6,13 @@ Singleton pattern to share one Fetcher instance across modules.
 
 from __future__ import annotations
 
+import asyncio
+import logging
 import time as time_module
 import warnings
-import logging
 from typing import Any, Dict, Optional
 
-import requests
+import httpx
 from loguru import logger
 
 scrapling_logger = logging.getLogger("scrapling")
@@ -21,7 +22,7 @@ scrapling_logger.setLevel(logging.ERROR)
 class ScraplingAdapter:
     """
     Lazy-initialized singleton wrapper for Scrapling Fetcher.
-    Provides both sync and async interfaces with requests fallback.
+    Provides both sync and async interfaces with httpx fallback.
     """
 
     _instance: Optional["ScraplingAdapter"] = None
@@ -42,7 +43,7 @@ class ScraplingAdapter:
     def _get_cached(self, url: str) -> Optional[Dict[str, Any]]:
         if url in self._cache:
             ts, result = self._cache[url]
-            if time_module.time() - ts < 300:
+            if time_module.time() - ts < 600:
                 return result
             del self._cache[url]
         return None
@@ -76,9 +77,9 @@ class ScraplingAdapter:
         headers: Optional[Dict[str, str]] = None,
     ) -> Dict[str, Any]:
         """
-        Fetch a URL using Scrapling with requests fallback.
+        Fetch a URL using Scrapling with httpx fallback.
         Returns dict with ok, text, html, status_code, error keys.
-        Uses 5-minute cache to prevent repeated fetches.
+        Uses 10-minute cache to prevent repeated fetches.
         """
         timeout = timeout or self.timeout
 
@@ -89,7 +90,7 @@ class ScraplingAdapter:
         result = self._fetch_with_scrapling(url, timeout, headers)
 
         if not result.get("ok") or result.get("status_code", 200) != 200:
-            result = self._fetch_with_requests(url, timeout, headers)
+            result = self._fetch_with_httpx(url, timeout, headers)
 
         self._set_cache(url, result)
         return result
@@ -100,9 +101,20 @@ class ScraplingAdapter:
         timeout: Optional[int] = None,
         headers: Optional[Dict[str, str]] = None,
     ) -> Dict[str, Any]:
-        """Async wrapper for sync fetch (for use with asyncio.to_thread)."""
-        import asyncio
-        return await asyncio.to_thread(self.fetch, url, timeout, headers)
+        """Async fetch using httpx with scrapling fallback."""
+        timeout = timeout or self.timeout
+
+        cached = self._get_cached(url)
+        if cached:
+            return cached
+
+        result = await self._fetch_with_scrapling_async(url, timeout, headers)
+
+        if not result.get("ok") or result.get("status_code", 200) != 200:
+            result = await self._fetch_with_httpx_async(url, timeout, headers)
+
+        self._set_cache(url, result)
+        return result
 
     def _fetch_with_scrapling(
         self,
@@ -137,21 +149,69 @@ class ScraplingAdapter:
             logger.debug(f"Scrapling fetch failed for {url}: {e}")
             return {"ok": False, "text": "", "html": "", "error": str(e)}
 
-    def _fetch_with_requests(
+    async def _fetch_with_scrapling_async(
         self,
         url: str,
         timeout: int,
         headers: Optional[Dict[str, str]],
     ) -> Dict[str, Any]:
-        """Fallback fetch using requests with standard headers."""
+        """Async wrapper for scrapling fetch."""
+        try:
+            Fetcher = self._ensure_fetcher()
+            if Fetcher is None:
+                return {"ok": False, "text": "", "html": "", "error": "scrapling_unavailable"}
+
+            with warnings.catch_warnings():
+                warnings.filterwarnings("ignore", message=".*Proxy.*")
+                warnings.simplefilter("ignore")
+                response = await asyncio.to_thread(Fetcher.get, url)
+
+            if response is None:
+                return {"ok": False, "text": "", "html": "", "error": "no_response"}
+
+            html = response.html_content if hasattr(response, "html_content") else str(response)
+            text = response.get_all_text() if hasattr(response, "get_all_text") else str(response)
+
+            return {
+                "ok": True,
+                "text": text,
+                "html": html,
+                "status_code": 200,
+            }
+        except Exception as e:
+            logger.debug(f"Scrapling fetch failed for {url}: {e}")
+            return {"ok": False, "text": "", "html": "", "error": str(e)}
+
+    def _fetch_with_httpx(
+        self,
+        url: str,
+        timeout: int,
+        headers: Optional[Dict[str, str]],
+    ) -> Dict[str, Any]:
+        """Fallback fetch using httpx with standard headers."""
+        try:
+            return asyncio.run(self._fetch_with_httpx_async(url, timeout, headers))
+        except Exception as e:
+            logger.debug(f"Httpx fallback failed for {url}: {e}")
+            return {"ok": False, "text": "", "html": "", "error": str(e)}
+
+    async def _fetch_with_httpx_async(
+        self,
+        url: str,
+        timeout: int,
+        headers: Optional[Dict[str, str]],
+    ) -> Dict[str, Any]:
+        """Async fetch using httpx."""
         try:
             req_headers = headers or {
                 "User-Agent": self.user_agent,
             }
-            resp = requests.get(url, headers=req_headers, timeout=timeout, allow_redirects=True)
+            async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
+                resp = await client.get(url, headers=req_headers)
 
             html = resp.text
             from bs4 import BeautifulSoup
+
             soup = BeautifulSoup(html, "html.parser")
             for script in soup(["script", "style"]):
                 script.decompose()
@@ -168,7 +228,7 @@ class ScraplingAdapter:
                 "error": f"HTTP {resp.status_code}" if resp.status_code != 200 else "",
             }
         except Exception as e:
-            logger.debug(f"Requests fallback failed for {url}: {e}")
+            logger.debug(f"Httpx fetch failed for {url}: {e}")
             return {"ok": False, "text": "", "html": "", "error": str(e)}
 
 

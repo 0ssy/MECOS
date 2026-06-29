@@ -46,6 +46,7 @@ class CeoAgent:
         self.last_health_check: Optional[datetime] = None
         self.last_outreach_cycle: Optional[datetime] = datetime.now()
         self.last_revenue_check: Optional[datetime] = None
+        self.last_report_date: Optional[str] = None
         self.alert_thresholds = {
             "max_leads_per_hour": int(os.getenv("CEO_MAX_LEADS_HOUR", "50")),
             "max_sends_per_hour": int(os.getenv("CEO_MAX_SENDS_HOUR", "20")),
@@ -77,6 +78,10 @@ class CeoAgent:
             "revenue": await self._check_revenue(),
             "actions": [],
         }
+        
+        weekly = await self._run_weekly_report()
+        if weekly:
+            result["weekly_report"] = weekly
         
         # Persist CEO state
         await self._store_cycle_state(result)
@@ -270,6 +275,70 @@ class CeoAgent:
                 status["actions"].append("cycle_failed")
         
         return status
+    
+    async def _run_weekly_report(self) -> Optional[Dict[str, Any]]:
+        now = datetime.now()
+        today = now.date().isoformat()
+        week_label = now.strftime("%Y-W%V")
+        if self.last_report_date == week_label:
+            return None
+        
+        if now.weekday() != 0 and self.last_report_date:
+            return None
+        
+        try:
+            from outreach.analytics.weekly_report import WeeklyReport
+            report = WeeklyReport()
+            path = report.generate()
+            push = await self._push_report_to_github(path)
+            self.last_report_date = week_label
+            return {"path": str(path), "pushed": push}
+        except Exception as exc:
+            logger.error(f"Weekly report failed: {exc}")
+            return None
+    
+    async def _push_report_to_github(self, path: Path) -> bool:
+        from config import settings
+        repo = settings.GITHUB_PAGES_REPO
+        token = settings.GITHUB_TOKEN
+        if not repo or not token:
+            logger.debug("GitHub Pages push skipped: GITHUB_PAGES_REPO or GITHUB_TOKEN not set")
+            return False
+        try:
+            import subprocess, base64
+            if not path.exists():
+                return False
+            content = base64.b64encode(path.read_bytes()).decode()
+            name = path.name
+            url = f"https://api.github.com/repos/{repo}/contents/reports/{name}"
+            payload = {
+                "message": f"Add weekly report {name}",
+                "content": content,
+                "branch": "gh-pages",
+            }
+            result = subprocess.run(
+                ["python", "-c", f"""
+import json, urllib.request
+req = urllib.request.Request('{url}', data=json.dumps({payload}).encode(), headers={{"Authorization":"token {token}","Content-Type":"application/json","Accept":"application/vnd.github.v3+json"}})
+try:
+    with urllib.request.urlopen(req) as r:
+        print(r.status)
+except urllib.error.HTTPError as e:
+    if e.code == 422:
+        print('exists')
+    else:
+        raise
+"""],
+                capture_output=True, text=True, timeout=30
+            )
+            if result.returncode == 0 and result.stdout.strip() in ("200", "201", "exists"):
+                logger.info(f"Report pushed to GitHub Pages: {name}")
+                return True
+            logger.warning(f"GitHub push failed: {result.stderr}")
+            return False
+        except Exception as exc:
+            logger.error(f"GitHub Pages push failed: {exc}")
+            return False
     
     async def _check_revenue(self) -> Dict[str, Any]:
         """Check revenue ledger and flag anomalies."""

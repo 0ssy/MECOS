@@ -28,6 +28,11 @@ from outreach.reply_monitor import ReplyMonitor
 from outreach.research_orchestrator import ResearchOrchestrator
 from outreach.revenue_ledger import RevenueLedger
 from outreach.scanner import PAIN_KEYWORDS, OutreachScanner
+from outreach.lead_sources.base import LeadSource
+from outreach.lead_sources import INDUSTRY_SOURCES
+from outreach.analytics.funnel import FunnelAnalytics
+from outreach.email_sequence import EmailSequence
+from outreach.followup_scheduler import FollowupScheduler
 from outreach.synthesizer import LeadSynthesizer
 from outreach.twenty.twenty_bridge import TwentyBridge
 from outreach.worldmonitor_adapter import WorldMonitorAdapter
@@ -38,6 +43,7 @@ class OutreachAgent:
         self.memory = memory
         self.enabled = os.getenv("MECOS_ENABLE_OUTREACH", "false").strip().lower() == "true"
         self.scanner = OutreachScanner(memory=memory)
+        self.lead_sources = INDUSTRY_SOURCES
         self.synthesizer = LeadSynthesizer(memory=memory)
         self.delivery_agent = DeliveryAgent()
         self.funnel_builder = FunnelBuilder()
@@ -103,7 +109,7 @@ class OutreachAgent:
             reply_result = await self._run_reply_check_cycle()
             result["replies"] = reply_result
 
-            if self.cycle % 15 == 0:
+            if self.cycle % 10 == 0:
                 followup_result = self._run_followup_cycle()
                 result["followups"] = followup_result
 
@@ -133,7 +139,7 @@ class OutreachAgent:
     async def _run_research_cycle(self) -> dict:
         orchestrator = ResearchOrchestrator()
         keywords = PAIN_KEYWORDS[:6]
-        candidates = orchestrator.discover_lead_signals(keywords)
+        candidates = await orchestrator.discover_lead_signals(keywords)
 
         new_count = 0
         for candidate in candidates:
@@ -193,7 +199,6 @@ class OutreachAgent:
         except Exception as e:
             logger.debug(f"Business directory scan skip: {e}")
 
-        search_leads = []
         searxng_queries = [
             "HVAC scheduling spreadsheet hell small business",
             "auto repair shop manual invoicing small business",
@@ -204,27 +209,32 @@ class OutreachAgent:
             "small business workflow bottleneck",
             "local service business automation needed",
         ]
-        for query in searxng_queries:
-            try:
-                found = await self.scanner.search_leads(query, limit=5)
-                search_leads.extend(found)
-            except Exception as e:
-                logger.debug(f"SearXNG search skip '{query}': {e}")
+        search_tasks = [self.scanner.search_leads(q, limit=5) for q in searxng_queries]
+        search_results = await asyncio.gather(*search_tasks, return_exceptions=True)
+        search_leads = []
+        for r in search_results:
+            if isinstance(r, list):
+                search_leads.extend(r)
+            elif isinstance(r, Exception):
+                logger.debug(f"SearXNG search error: {r}")
 
         total = len(dir_leads) + len(search_leads)
         
-        social_leads = []
-        for source in ["reddit", "hackernews", "indiehackers"]:
-            try:
-                found = await self.scanner.scan_social_source(source, limit=10)
-                social_leads.extend(found)
-            except Exception as e:
-                logger.debug(f"Social scan skip '{source}': {e}")
+        source_leads = []
+        try:
+            for name, source_cls in self.lead_sources.items():
+                try:
+                    src = source_cls()
+                    urls = await src.get_leads()
+                    source_leads.extend(urls)
+                except Exception as exc:
+                    logger.debug(f"Lead source {name} failed: {exc}")
+        except Exception as exc:
+            logger.debug(f"Lead sources scan skip: {exc}")
         
-        total += len(social_leads)
-        logger.info(f"Outreach scan: {total} leads found ({len(dir_leads)} directories + {len(search_leads)} search + {len(social_leads)} social)")
-
-        all_new = dir_leads + search_leads + social_leads
+        all_new = dir_leads + search_leads + source_leads
+        total = len(all_new)
+        logger.info(f"Outreach scan: {total} leads found ({len(dir_leads)} directories + {len(search_leads)} search + {len(source_leads)} industry sources)")
 
         if all_new:
             filtered = []
@@ -396,7 +406,6 @@ class OutreachAgent:
                 if lead and research_orchestrator.should_research(lead):
                     signals = await research_orchestrator.research_lead(lead)
                     brief["research_summary"] = research_orchestrator.build_summary(signals)
-                    # Update the brief in the synthesizer's list to persist research_summary
                     for i, b in enumerate(self.synthesizer.briefs):
                         if b.get("url") == lead_url:
                             self.synthesizer.briefs[i]["research_summary"] = brief["research_summary"]
@@ -474,26 +483,27 @@ class OutreachAgent:
     async def _run_reply_check_cycle(self) -> dict:
         new_replies = self.reply_monitor.fetch_new_replies()
         demo_triggered = 0
+        booking_triggered = 0
 
         for reply in new_replies:
+            sent_file = reply.get("matched_sent_file")
+            sent_email = None
+            if sent_file:
+                try:
+                    from pathlib import Path
+                    p = Path(sent_file)
+                    if not p.exists():
+                        p = self.delivery_agent.sent_dir / p.name
+                    if p.exists():
+                        sent_email = json.loads(p.read_text())
+                except Exception as exc:
+                    logger.debug(f"Failed to load sent email for reply: {exc}")
+
+            lead_url = None
+            if sent_email:
+                lead_url = sent_email.get("lead_brief", {}).get("url")
+
             if reply.get("demo_keyword_detected"):
-                sent_file = reply.get("matched_sent_file")
-                sent_email = None
-                if sent_file:
-                    try:
-                        from pathlib import Path
-                        p = Path(sent_file)
-                        if not p.exists():
-                            p = self.delivery_agent.sent_dir / p.name
-                        if p.exists():
-                            sent_email = json.loads(p.read_text())
-                    except Exception as exc:
-                        logger.debug(f"Failed to load sent email for reply: {exc}")
-
-                lead_url = None
-                if sent_email:
-                    lead_url = sent_email.get("lead_brief", {}).get("url")
-
                 report_path = None
                 if lead_url:
                     try:
@@ -508,9 +518,26 @@ class OutreachAgent:
                 if self.demo_deliverer.send_demo_reply(reply, sent_email, report_path):
                     demo_triggered += 1
                 self.reply_monitor.mark_processed(reply.get("receiver_uid", ""), demo_triggered=(demo_triggered > 0))
+            elif reply.get("high_intent"):
+                try:
+                    from outreach.calendar.booking import CalendarBooking
+                    booking = CalendarBooking()
+                    to_addr = (reply.get("from") or "").split("<")[-1].split(">")[0].strip()
+                    if not to_addr and sent_email:
+                        to_addr = sent_email.get("to", "")
+                    link = reply.get("booking_link") or booking.generate_booking_link()
+                    body = booking.build_booking_email(company=to_addr)
+                    success, _ = self.delivery_agent._send_smtp(to_addr, "Let's schedule your MECOS call", body)
+                    if success:
+                        booking_triggered += 1
+                        reply["booking_sent"] = True
+                        self.reply_monitor.mark_processed(reply.get("receiver_uid", ""), demo_triggered=False)
+                        logger.info(f"Booking link sent to {to_addr}")
+                except Exception as exc:
+                    logger.error(f"Booking email failed: {exc}")
 
-        logger.info(f"Reply check: {len(new_replies)} replies, {demo_triggered} demo deliveries")
-        return {"replies_found": len(new_replies), "demos_sent": demo_triggered}
+        logger.info(f"Reply check: {len(new_replies)} replies, {demo_triggered} demo deliveries, {booking_triggered} booking links")
+        return {"replies_found": len(new_replies), "demos_sent": demo_triggered, "bookings_sent": booking_triggered}
 
     def _log_demo_delivery(self, reply: dict, report_path: Optional[str]) -> None:
         delivered_path = Path("data/outreach/demos/delivered.jsonl")

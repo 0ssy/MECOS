@@ -35,6 +35,29 @@ class WorldMonitorAdapter:
         "https://feeds.reuters.com/reuters/businessNews",
     ]
 
+    INDUSTRY_FEED_URLS = {
+        "saas": [
+            "https://www.reddit.com/r/saas/new/.rss",
+            "https://www.reddit.com/r/startups/new/.rss",
+        ],
+        "ecommerce": [
+            "https://www.reddit.com/r/ecommerce/new/.rss",
+            "https://www.reddit.com/r/smallbusiness/new/.rss",
+        ],
+        "agencies": [
+            "https://www.reddit.com/r/marketing/new/.rss",
+            "https://www.reddit.com/r/Entrepreneur/new/.rss",
+        ],
+        "creators": [
+            "https://www.reddit.com/r/YouTubers/new/.rss",
+            "https://www.reddit.com/r/contentcreators/new/.rss",
+        ],
+        "solopreneurs": [
+            "https://www.reddit.com/r/solopreneur/new/.rss",
+            "https://www.reddit.com/r/smallbusiness/new/.rss",
+        ],
+    }
+
     SIGNAL_KEYWORDS = {
         "hiring": ["hiring", "now hiring", "we're growing", "looking for", "join our team"],
         "funding": ["series a", "series b", "series c", "raised", "funding", "investors"],

@@ -26,7 +26,7 @@ BLOCKED_DOMAINS = {
     "example.com", "localhost", "127.0.0.1",
     "hn.algolia.com", "news.ycombinator.com",
     "babbel.com", "auto.ru", "myauto.ge", "drom.ru", "avito.ru",
-}  # non-target regions
+}
 
 BLOCKED_REGION_KEYWORDS = {
     "india", "indian", "china", "chinese", "russia", "russian",
@@ -37,7 +37,7 @@ BLOCKED_REGION_KEYWORDS = {
 
 class ResearchOrchestrator:
     """Orchestrates multi-platform research for leads.
-    
+
     Applies high-score gate and runs platforms in parallel.
     Stores results in lead["research_signals"] and brief["research_summary"].
     """
@@ -62,7 +62,6 @@ class ResearchOrchestrator:
         matched = lead.get("matched_terms", [])
         pain_points = lead.get("pain_points", [])
 
-        # Filter out region keywords from queries
         filtered_matched = [m for m in matched if not any(rkw in m.lower() for rkw in BLOCKED_REGION_KEYWORDS)]
         filtered_pain = [p for p in pain_points if not any(rkw in p.lower() for rkw in BLOCKED_REGION_KEYWORDS)]
 
@@ -163,114 +162,127 @@ class ResearchOrchestrator:
 
         return " ".join(parts[:2])
 
-    def discover_lead_signals(self, keywords: List[str]) -> List[Dict[str, Any]]:
-        """Run research across platforms for keywords and return lead candidates."""
+    def _score_text(self, text: str, url: str) -> Dict[str, Any]:
+        """Score text content for lead signals."""
+        text_lower = text.lower()
+        signals = {
+            "inefficiency_markers": 0,
+            "pain_points": 0,
+            "organic_intent": 0,
+            "revenue_fit": 0,
+        }
+        matched = []
+
+        for region_kw in BLOCKED_REGION_KEYWORDS:
+            if region_kw in text_lower:
+                return {"total_score": 0, "signals": signals, "matched_terms": [], "blocked_reason": f"region_{region_kw}"}
+
+        for kw in INEFFICIENCY_MARKERS:
+            if kw in text_lower:
+                signals["inefficiency_markers"] += 1
+                matched.append(kw)
+
+        for kw in PAIN_KEYWORDS:
+            if kw in text_lower:
+                signals["pain_points"] += 1
+                matched.append(kw)
+
+        for phrase in ORGANIC_INTENT_PHRASES:
+            if phrase in text_lower:
+                signals["organic_intent"] += 1
+                matched.append(phrase)
+
+        for kw in REVENUE_FIT_SIGNALS:
+            if kw in text_lower:
+                signals["revenue_fit"] += 1
+                matched.append(kw)
+
+        total = sum(signals.values())
+        return {
+            "signals": signals,
+            "total_score": total,
+            "matched_terms": matched[:10],
+        }
+
+    async def discover_for_keyword(self, keyword: str) -> List[Dict[str, Any]]:
+        """Discover lead signals for a single keyword across platforms."""
         candidates: List[Dict[str, Any]] = []
 
-        def _score_text(text: str, url: str) -> Dict[str, Any]:
-            text_lower = text.lower()
-            signals = {
-                "inefficiency_markers": 0,
-                "pain_points": 0,
-                "organic_intent": 0,
-                "revenue_fit": 0,
-            }
-            matched = []
+        queries = {
+            "twitter": keyword,
+            "reddit": keyword,
+            "youtube": f"{keyword} workflow",
+            "web": f"{keyword} solution",
+        }
 
-            for region_kw in BLOCKED_REGION_KEYWORDS:
-                if region_kw in text_lower:
-                    return {"total_score": 0, "signals": signals, "matched_terms": [], "blocked_reason": f"region_{region_kw}"}
+        async def safe_research(platform: str, query: str):
+            try:
+                if platform == "twitter":
+                    return await research_twitter(
+                        query, max_results=3, timeout=self.PLATFORM_TIMEOUT
+                    )
+                elif platform == "youtube":
+                    return await research_youtube(
+                        query, max_results=3, timeout=self.PLATFORM_TIMEOUT
+                    )
+                elif platform == "reddit":
+                    return await research_reddit(
+                        query, max_results=3, timeout=self.PLATFORM_TIMEOUT
+                    )
+                elif platform == "web":
+                    return await research_web(
+                        query, max_results=3, timeout=self.PLATFORM_TIMEOUT
+                    )
+            except Exception as e:
+                logger.debug("Discovery failed for {}: {}", platform, e)
+                return {"ok": False, "error": str(e)}
 
-            for kw in INEFFICIENCY_MARKERS:
-                if kw in text_lower:
-                    signals["inefficiency_markers"] += 1
-                    matched.append(kw)
+        results = await asyncio.gather(
+            *[safe_research(p, q) for p, q in queries.items()],
+            return_exceptions=True,
+        )
 
-            for kw in PAIN_KEYWORDS:
-                if kw in text_lower:
-                    signals["pain_points"] += 1
-                    matched.append(kw)
+        for i, platform in enumerate(queries.keys()):
+            result = results[i]
+            if isinstance(result, dict) and result.get("ok") and result.get("text"):
+                text = result["text"][:2000]
+                url = result.get("link", "")
+                domain = urlparse(url).netloc if url else ""
 
-            for phrase in ORGANIC_INTENT_PHRASES:
-                if phrase in text_lower:
-                    signals["organic_intent"] += 1
-                    matched.append(phrase)
+                scored = self._score_text(text, url)
+                if scored["total_score"] >= 2:
+                    domain_lower = domain.lower()
+                    if domain_lower.startswith("www."):
+                        domain_lower = domain_lower[4:]
+                    if domain_lower in BLOCKED_DOMAINS:
+                        continue
+                    text_hash = hashlib.md5(text.encode()).hexdigest()
+                    candidate = {
+                        "url": url,
+                        "domain": domain,
+                        "text_excerpt": text[:500],
+                        "source_platform": platform,
+                        "total_score": scored["total_score"],
+                        "matched_terms": scored["matched_terms"],
+                        "signals": scored["signals"],
+                        "content_hash": text_hash,
+                    }
+                    candidates.append(candidate)
 
-            for kw in REVENUE_FIT_SIGNALS:
-                if kw in text_lower:
-                    signals["revenue_fit"] += 1
-                    matched.append(kw)
+        return candidates
 
-            total = sum(signals.values())
-            return {
-                "signals": signals,
-                "total_score": total,
-                "matched_terms": matched[:10],
-            }
+    async def discover_lead_signals(self, keywords: List[str]) -> List[Dict[str, Any]]:
+        """Run research across platforms for keywords and return lead candidates.
+        Keywords are processed in parallel for ~5-6x speedup.
+        """
+        discover_tasks = [self.discover_for_keyword(kw) for kw in keywords]
+        results = await asyncio.gather(*discover_tasks, return_exceptions=True)
 
-        async def _discover() -> List[Dict[str, Any]]:
-            for keyword in keywords:
-                queries = {
-                    "twitter": keyword,
-                    "reddit": keyword,
-                    "youtube": f"{keyword} workflow",
-                    "web": f"{keyword} solution",
-                }
+        candidates = []
+        for result in results:
+            if isinstance(result, list):
+                candidates.extend(result)
+            elif isinstance(result, Exception):
+                logger.debug(f"Keyword discovery failed: {result}")
 
-                async def safe_research(platform: str, query: str):
-                    try:
-                        if platform == "twitter":
-                            return await research_twitter(
-                                query, max_results=3, timeout=self.PLATFORM_TIMEOUT
-                            )
-                        elif platform == "youtube":
-                            return await research_youtube(
-                                query, max_results=3, timeout=self.PLATFORM_TIMEOUT
-                            )
-                        elif platform == "reddit":
-                            return await research_reddit(
-                                query, max_results=3, timeout=self.PLATFORM_TIMEOUT
-                            )
-                        elif platform == "web":
-                            return await research_web(
-                                query, max_results=3, timeout=self.PLATFORM_TIMEOUT
-                            )
-                    except Exception as e:
-                        logger.debug("Discovery failed for {}: {}", platform, e)
-                        return {"ok": False, "error": str(e)}
-
-                results = await asyncio.gather(
-                    *[safe_research(p, q) for p, q in queries.items()],
-                    return_exceptions=True,
-                )
-
-                for i, platform in enumerate(queries.keys()):
-                    result = results[i]
-                    if isinstance(result, dict) and result.get("ok") and result.get("text"):
-                        text = result["text"][:2000]
-                        url = result.get("link", "")
-                        domain = urlparse(url).netloc if url else ""
-
-                        scored = _score_text(text, url)
-                        if scored["total_score"] >= 2:
-                            domain_lower = domain.lower()
-                            if domain_lower.startswith("www."):
-                                domain_lower = domain_lower[4:]
-                            if domain_lower in BLOCKED_DOMAINS:
-                                continue
-                            text_hash = hashlib.md5(text.encode()).hexdigest()
-                            candidate = {
-                                "url": url,
-                                "domain": domain,
-                                "text_excerpt": text[:500],
-                                "source_platform": platform,
-                                "total_score": scored["total_score"],
-                                "matched_terms": scored["matched_terms"],
-                                "signals": scored["signals"],
-                                "content_hash": text_hash,
-                            }
-                            candidates.append(candidate)
-
-            return candidates
-
-        return asyncio.run(_discover())
+        return candidates

@@ -111,7 +111,12 @@ class Settings(BaseSettings):
     MECOS_EMAIL: str = os.getenv("MECOS_EMAIL", "")
     MECOS_EMAIL_APP_PASSWORD: str = os.getenv("MECOS_EMAIL_APP_PASSWORD", "")
     MECOS_ENABLE_OUTREACH: bool = os.getenv("MECOS_ENABLE_OUTREACH", "false").lower() == "true"
+    MECOS_BOOKING_LINK: str = os.getenv("MECOS_BOOKING_LINK", "")
     DASHBOARD_PORT: int = int(os.getenv("DASHBOARD_PORT", "8080"))
+
+    # ── GitHub Pages Reporting ─────────────────────────────────────────
+    GITHUB_PAGES_REPO: str = os.getenv("GITHUB_PAGES_REPO", "")
+    GITHUB_TOKEN: str = os.getenv("GITHUB_TOKEN", "")
 
     # ── SearXNG Search ─────────────────────────────────────────────────────
     SEARXNG_URL: str = os.getenv("SEARXNG_URL", "http://localhost:8888")

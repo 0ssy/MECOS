@@ -1,6 +1,6 @@
 """
 MECOS Outreach - Reply Monitor
-Polls IMAP inbox, detects DEMO keyword replies, and stores reply events.
+Polls IMAP inbox, detects DEMO keyword replies, buying signals, and stores reply events.
 """
 
 import asyncio
@@ -8,15 +8,22 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from loguru import logger
 
 from mecos.email_ingester import EmailDocument, EmailIngester
+from outreach.calendar.booking import CalendarBooking
 
 
 class ReplyMonitor:
-    def __init__(self, replies_path: Path | None = None):
+    BUYING_SIGNAL_KEYWORDS = [
+        "pricing", "demo", "call", "meeting", "schedule",
+        "price", "cost", "available", "quote", "proposal",
+        "contract", "budget", "package", "trial", "pricing page",
+    ]
+
+    def __init__(self, replies_path: Optional[Path] = None):
         if replies_path is None:
             from config import settings
             replies_path = settings.DATA_DIR / "outreach" / "replies.json"
@@ -41,7 +48,7 @@ class ReplyMonitor:
         except Exception as exc:
             logger.error(f"Failed to save replies: {exc}")
 
-    def _matches_sent_email(self, doc: EmailDocument, sent_emails: list[dict]) -> dict | None:
+    def _matches_sent_email(self, doc: EmailDocument, sent_emails: list[dict]) -> Optional[dict]:
         subject = doc.subject or ""
         sender = doc.sender or ""
         sender_email = sender.split("<")[-1].split(">")[0].strip().lower() if "<" in sender else sender.lower()
@@ -62,6 +69,11 @@ class ReplyMonitor:
 
     def _detect_demo_keyword(self, body: str) -> bool:
         return bool(re.search(r"\bDEMO\b", body, re.IGNORECASE))
+
+    def _detect_buying_signals(self, body: str) -> List[str]:
+        """Detect buying intent keywords in reply body."""
+        body_lower = body.lower()
+        return [kw for kw in self.BUYING_SIGNAL_KEYWORDS if kw in body_lower]
 
     def fetch_new_replies(self) -> list[dict]:
         docs = self.ingester.fetch_unread(max_emails=50)
@@ -85,6 +97,7 @@ class ReplyMonitor:
                 continue
 
             demo_keyword = self._detect_demo_keyword(doc.body)
+            buying_signals = self._detect_buying_signals(doc.body)
             reply_event = {
                 "receiver_uid": doc.uid,
                 "from": doc.sender,
@@ -93,13 +106,23 @@ class ReplyMonitor:
                 "date": doc.date,
                 "matched_sent_file": None,
                 "demo_keyword_detected": demo_keyword,
+                "buying_signals": buying_signals,
+                "high_intent": bool(buying_signals),
                 "processed": False,
                 "fetched_at": datetime.now().isoformat(),
             }
 
+            if buying_signals:
+                try:
+                    booking = CalendarBooking()
+                    reply_event["booking_link"] = booking.generate_booking_link(
+                        subject=f"MECOS Discovery Call — {doc.sender.split('<')[-1].split('>')[0].strip() if '<' in doc.sender else doc.sender}"
+                    )
+                except Exception as exc:
+                    logger.debug(f"Booking link generation failed: {exc}")
+
             if matched:
-                from pathlib import Path as _P
-                reply_event["matched_sent_file"] = str(_P(matched.get("_filename", "")))
+                reply_event["matched_sent_file"] = str(Path(matched.get("_filename", "")))
 
             self._replies.append(reply_event)
             new_replies.append(reply_event)
@@ -123,6 +146,10 @@ class ReplyMonitor:
 
     def get_unprocessed_demo_replies(self) -> list[dict]:
         return [r for r in self._replies if r.get("demo_keyword_detected") and not r.get("processed")]
+
+    def get_high_intent_replies(self) -> list[dict]:
+        """Get replies with buying signals."""
+        return [r for r in self._replies if r.get("high_intent") and not r.get("processed")]
 
     async def process_demo_replies(self) -> int:
         """Process unprocessed demo replies with report generation and delivery."""

@@ -8,18 +8,24 @@ Multi-strategy email discovery for leads:
 
 from __future__ import annotations
 
+import asyncio
 import os
 import re
 from typing import Any, Dict, List, Optional
 from urllib.parse import urljoin, urlparse
 
-import requests
+import httpx
 from loguru import logger
 
 try:
     from outreach.scrapling_adapter import get_scrapling_adapter
 except ImportError:
     get_scrapling_adapter = None
+
+try:
+    from outreach.decision_maker_finder import DecisionMakerFinder
+except ImportError:
+    DecisionMakerFinder = None
 
 
 class EmailEnricher:
@@ -35,6 +41,7 @@ class EmailEnricher:
             "User-Agent": "MECOS Lead Enrichment Bot/1.0"
         }
         self.timeout = 10
+        self._enrich_semaphore = asyncio.Semaphore(2)
 
     async def enrich_lead(self, lead: Dict[str, Any]) -> Dict[str, Any]:
         """Enrich a single lead with discovered email addresses."""
@@ -55,14 +62,14 @@ class EmailEnricher:
         source = None
 
         # Strategy 1: Website scraping
-        scraped = self._scrape_website(url, domain)
+        scraped = await self._scrape_website(url, domain)
         if scraped:
             emails.extend(scraped)
             source = "website_scrape"
 
         # Strategy 2: API enrichment (if keys available)
         if not emails:
-            api_email = self._api_enrich(domain, lead)
+            api_email = await self._api_enrich(domain, lead)
             if api_email:
                 emails.append(api_email)
                 source = "api"
@@ -83,20 +90,40 @@ class EmailEnricher:
             lead["contacts"]["email_confidence"] = self._confidence_score(source, emails)
             logger.info(f"Enriched {domain}: {emails[0]} ({source})")
 
+        if DecisionMakerFinder:
+            try:
+                finder = DecisionMakerFinder()
+                dm_info = await finder.find_for_lead(lead)
+                if dm_info.get("contacts"):
+                    lead = dict(lead)
+                    lead["contacts"] = dict(lead.get("contacts", {}))
+                    lead["contacts"].update(dm_info["contacts"])
+            except Exception as exc:
+                logger.debug(f"Decision maker discovery failed for {domain}: {exc}")
+
         return lead
 
     async def enrich_batch(self, leads: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """Enrich a batch of leads."""
+        """Enrich a batch of leads concurrently."""
+        async def enrich_with_semaphore(lead: Dict[str, Any]) -> Dict[str, Any]:
+            async with self._enrich_semaphore:
+                try:
+                    return await self.enrich_lead(lead)
+                except Exception as e:
+                    logger.debug(f"Enrichment failed for {lead.get('domain')}: {e}")
+                    return lead
+
+        tasks = [enrich_with_semaphore(lead) for lead in leads]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
         enriched = []
-        for lead in leads:
-            try:
-                enriched.append(await self.enrich_lead(lead))
-            except Exception as e:
-                logger.debug(f"Enrichment failed for {lead.get('domain')}: {e}")
-                enriched.append(lead)
+        for r in results:
+            if isinstance(r, dict):
+                enriched.append(r)
+            elif isinstance(r, Exception):
+                enriched.append({})
         return enriched
 
-    def _scrape_website(self, url: str, domain: str) -> List[str]:
+    async def _scrape_website(self, url: str, domain: str) -> List[str]:
         """Scrape website pages for email addresses."""
         emails = set()
         pages_to_check = []
@@ -134,19 +161,15 @@ class EmailEnricher:
         for page in pages_to_check:
             try:
                 if get_scrapling_adapter:
-                    result = get_scrapling_adapter().fetch(
+                    result = await get_scrapling_adapter().fetch_async(
                         page, timeout=self.timeout, headers=self.headers
                     )
                     if not result.get("ok"):
                         continue
                     text = result.get("text", "")
                 else:
-                    resp = requests.get(
-                        page,
-                        headers=self.headers,
-                        timeout=self.timeout,
-                        allow_redirects=True,
-                    )
+                    async with httpx.AsyncClient(timeout=self.timeout, follow_redirects=True) as client:
+                        resp = await client.get(page, headers=self.headers)
                     if resp.status_code != 200:
                         continue
                     text = resp.text
@@ -162,33 +185,30 @@ class EmailEnricher:
 
         return list(emails)
 
-    def _api_enrich(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
+    async def _api_enrich(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
         """Try API-based email enrichment."""
-        # Hunter.io
         if self.api_keys.get("hunter"):
-            email = self._hunter_find(domain)
+            email = await self._hunter_find(domain)
             if email:
                 return email
 
-        # Apollo
         if self.api_keys.get("apollo"):
-            email = self._apollo_find(domain, lead)
+            email = await self._apollo_find(domain, lead)
             if email:
                 return email
 
-        # BetterContact
         if self.api_keys.get("bettercontact"):
-            email = self._bettercontact_find(domain, lead)
+            email = await self._bettercontact_find(domain, lead)
             if email:
                 return email
 
         return None
 
-    def _hunter_find(self, domain: str) -> Optional[str]:
-        """Use Hunter.io to find emails."""
+    async def _hunter_find(self, domain: str) -> Optional[str]:
         try:
             url = f"https://api.hunter.io/v2/domain-search?domain={domain}&api_key={self.api_keys['hunter']}&limit=1"
-            resp = requests.get(url, timeout=self.timeout)
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                resp = await client.get(url)
             data = resp.json()
             emails = data.get("data", {}).get("emails", [])
             if emails:
@@ -197,8 +217,7 @@ class EmailEnricher:
             logger.debug(f"Hunter.io lookup failed: {e}")
         return None
 
-    def _apollo_find(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
-        """Use Apollo API to find emails."""
+    async def _apollo_find(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
         try:
             url = "https://api.apollo.io/v1/people/match"
             headers = {
@@ -210,7 +229,8 @@ class EmailEnricher:
                 "domain": domain,
                 "person_locations": [],
             }
-            resp = requests.post(url, json=payload, headers=headers, timeout=self.timeout)
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                resp = await client.post(url, json=payload, headers=headers)
             data = resp.json()
             person = data.get("person", {})
             email = person.get("email")
@@ -220,17 +240,16 @@ class EmailEnricher:
             logger.debug(f"Apollo lookup failed: {e}")
         return None
 
-    def _bettercontact_find(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
-        """Use BetterContact finder."""
+    async def _bettercontact_find(self, domain: str, lead: Dict[str, Any]) -> Optional[str]:
         try:
-            # BetterContact uses URL for finding
             url = lead.get("url", f"https://{domain}")
             api_url = "https://api.bettercontact.rocks/v1/find-email"
             payload = {
                 "url": url,
                 "api_key": self.api_keys["bettercontact"],
             }
-            resp = requests.post(api_url, json=payload, timeout=self.timeout)
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                resp = await client.post(api_url, json=payload)
             data = resp.json()
             email = data.get("email")
             if email:

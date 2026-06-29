@@ -421,6 +421,16 @@ async def main():
             from outreach.dashboard import DraftApprovalAPI
             return DraftApprovalAPI.reject_draft(filename)
 
+        @dashboard_app.get("/api/report/weekly")
+        async def weekly_report_api():
+            try:
+                from outreach.analytics.weekly_report import WeeklyReport
+                report = WeeklyReport()
+                path = report.generate()
+                return {"status": "generated", "path": str(path)}
+            except Exception as exc:
+                return {"status": "error", "detail": str(exc)}
+
         dashboard_config = Config(
             app=dashboard_app,
             host="127.0.0.1",

@@ -58,6 +58,24 @@ class DashboardService:
             logger.error("Dashboard status error: {}", exc)
 
         status["scheduler_running"] = DashboardService._check_scheduler_running()
+
+        # Add funnel metrics
+        try:
+            from outreach.analytics.funnel import FunnelAnalytics
+            funnel = FunnelAnalytics()
+            funnel_metrics = funnel.get_funnel_metrics()
+            status["funnel"] = {
+                "leads": funnel_metrics.get("counts", {}).get("leads_discovered", 0),
+                "emails_sent": funnel_metrics.get("counts", {}).get("emails_sent", 0),
+                "replies": funnel_metrics.get("counts", {}).get("replies_received", 0),
+                "meetings": funnel_metrics.get("counts", {}).get("meetings_booked", 0),
+                "deals_won": funnel_metrics.get("counts", {}).get("deals_won", 0),
+            }
+            status["conversion_rates"] = funnel_metrics.get("rates", {})
+        except Exception as exc:
+            status["funnel"] = {}
+            status["conversion_rates"] = {}
+
         return status
 
     @staticmethod
@@ -179,6 +197,7 @@ class DashboardService:
                 recent = data[-limit:]
                 for r in recent:
                     r["received_at"] = r.get("received_at", "")
+                    r["high_intent"] = r.get("high_intent", False)
                 return list(reversed(recent))
         except Exception:
             pass

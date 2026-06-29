@@ -16,7 +16,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\AMD\\CIM\\BIN64",
-      "last_observed": "2026-06-29T07:11:13.974642",
+      "last_observed": "2026-06-29T14:11:54.555905",
       "observation_count": 1
     },
     "amd ryzen master": {
@@ -33,7 +33,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\AMD\\RyzenMaster\\",
-      "last_observed": "2026-06-29T07:11:13.974718",
+      "last_observed": "2026-06-29T14:11:54.556011",
       "observation_count": 1
     },
     "apache netbeans version 29": {
@@ -52,7 +52,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Apache NetBeans\\",
-      "last_observed": "2026-06-29T07:11:13.974765",
+      "last_observed": "2026-06-29T14:11:54.556065",
       "observation_count": 1
     },
     "cisco packet tracer 9.0.0 64bit": {
@@ -69,7 +69,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Cisco Packet Tracer 9.0.0\\",
-      "last_observed": "2026-06-29T07:11:13.974799",
+      "last_observed": "2026-06-29T14:11:54.556110",
       "observation_count": 1
     },
     "denuvo anti-cheat": {
@@ -86,7 +86,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Denuvo Anti-Cheat",
-      "last_observed": "2026-06-29T07:11:13.974833",
+      "last_observed": "2026-06-29T14:11:54.556143",
       "observation_count": 1
     },
     "docker desktop": {
@@ -105,7 +105,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Docker\\Docker",
-      "last_observed": "2026-06-29T07:11:13.974878",
+      "last_observed": "2026-06-29T14:11:54.556179",
       "observation_count": 1
     },
     "git": {
@@ -125,7 +125,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Git",
-      "last_observed": "2026-06-29T07:11:13.974901",
+      "last_observed": "2026-06-29T14:11:54.556209",
       "observation_count": 1
     },
     "hp documentation": {
@@ -144,7 +144,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.974923",
+      "last_observed": "2026-06-29T14:11:54.556238",
       "observation_count": 1
     },
     "gdr 1160 for sql server 2022 (kb5068407) (64-bit)": {
@@ -163,7 +163,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.974945",
+      "last_observed": "2026-06-29T14:11:54.556266",
       "observation_count": 1
     },
     "gdr 1165 for sql server 2022 (kb5073031) (64-bit)": {
@@ -182,7 +182,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.974966",
+      "last_observed": "2026-06-29T14:11:54.556292",
       "observation_count": 1
     },
     "gdr 1170 for sql server 2022 (kb5077465) (64-bit)": {
@@ -201,7 +201,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.974986",
+      "last_observed": "2026-06-29T14:11:54.556322",
       "observation_count": 1
     },
     "gdr 1175 for sql server 2022 (kb5084815) (64-bit)": {
@@ -220,7 +220,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975006",
+      "last_observed": "2026-06-29T14:11:54.556352",
       "observation_count": 1
     },
     "gdr 1180 for sql server 2022 (kb5091158) (64-bit)": {
@@ -239,7 +239,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975025",
+      "last_observed": "2026-06-29T14:11:54.556377",
       "observation_count": 1
     },
     "krita (x64) 5.2.15 (git 89dea6d)": {
@@ -258,7 +258,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Krita (x64)",
-      "last_observed": "2026-06-29T07:11:13.975051",
+      "last_observed": "2026-06-29T14:11:54.556409",
       "observation_count": 1
     },
     "metatrader 5": {
@@ -275,7 +275,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\MetaTrader 5",
-      "last_observed": "2026-06-29T07:11:13.975071",
+      "last_observed": "2026-06-29T14:11:54.556434",
       "observation_count": 1
     },
     "microsoft sql server 2022 (64-bit)": {
@@ -295,7 +295,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975099",
+      "last_observed": "2026-06-29T14:11:54.556467",
       "observation_count": 1
     },
     "microsoft visual studio 2010 tools for office runtime (x64)": {
@@ -314,7 +314,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975121",
+      "last_observed": "2026-06-29T14:11:54.556498",
       "observation_count": 1
     },
     "microsoft 365 apps for enterprise - ar-sa": {
@@ -322,7 +322,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -334,7 +334,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975148",
+      "last_observed": "2026-06-29T14:11:54.556532",
       "observation_count": 1
     },
     "microsoft 365 apps for enterprise - en-gb": {
@@ -342,7 +342,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -354,7 +354,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975171",
+      "last_observed": "2026-06-29T14:11:54.556564",
       "observation_count": 1
     },
     "microsoft 365 apps for enterprise - fr-fr": {
@@ -362,7 +362,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -374,7 +374,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975194",
+      "last_observed": "2026-06-29T14:11:54.556596",
       "observation_count": 1
     },
     "microsoft onedrive": {
@@ -393,7 +393,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft OneDrive",
-      "last_observed": "2026-06-29T07:11:13.975227",
+      "last_observed": "2026-06-29T14:11:54.556628",
       "observation_count": 1
     },
     "microsoft onenote - ar-sa": {
@@ -401,7 +401,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -413,7 +413,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975252",
+      "last_observed": "2026-06-29T14:11:54.556660",
       "observation_count": 1
     },
     "microsoft onenote - en-gb": {
@@ -421,7 +421,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -433,7 +433,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975275",
+      "last_observed": "2026-06-29T14:11:54.556691",
       "observation_count": 1
     },
     "microsoft onenote - fr-fr": {
@@ -441,7 +441,7 @@
       "exe_path": "C:\\Program Files\\Common Files\\Microsoft Shared\\ClickToRun\\OfficeClickToRun.exe",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20090",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -453,7 +453,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft Office",
-      "last_observed": "2026-06-29T07:11:13.975295",
+      "last_observed": "2026-06-29T14:11:54.556720",
       "observation_count": 1
     },
     "pc remote receiver 7.7.2": {
@@ -472,7 +472,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975319",
+      "last_observed": "2026-06-29T14:11:54.556751",
       "observation_count": 1
     },
     "postgresql 18": {
@@ -492,7 +492,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\PostgreSQL\\18",
-      "last_observed": "2026-06-29T07:11:13.975341",
+      "last_observed": "2026-06-29T14:11:54.556779",
       "observation_count": 1
     },
     "call of duty®": {
@@ -509,7 +509,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975394",
+      "last_observed": "2026-06-29T14:11:54.556841",
       "observation_count": 1
     },
     "tekken 8 - demo": {
@@ -528,7 +528,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\TEKKEN 8 Demo",
-      "last_observed": "2026-06-29T07:11:13.975419",
+      "last_observed": "2026-06-29T14:11:54.556875",
       "observation_count": 1
     },
     "tap-windows 9.24.2": {
@@ -545,7 +545,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975439",
+      "last_observed": "2026-06-29T14:11:54.556900",
       "observation_count": 1
     },
     "tesseract-ocr - open source ocr engine": {
@@ -564,7 +564,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975462",
+      "last_observed": "2026-06-29T14:11:54.559848",
       "observation_count": 1
     },
     "usbpcap 1.5.4.0": {
@@ -581,7 +581,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975481",
+      "last_observed": "2026-06-29T14:11:54.559921",
       "observation_count": 1
     },
     "winrar 7.13 (64-bit)": {
@@ -600,7 +600,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\WinRAR",
-      "last_observed": "2026-06-29T07:11:13.975504",
+      "last_observed": "2026-06-29T14:11:54.559959",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 x64 additional runtime - 12.0.40664": {
@@ -617,7 +617,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975525",
+      "last_observed": "2026-06-29T14:11:54.559993",
       "observation_count": 1
     },
     "microsoft.net.workload.mono.toolchain.net9.manifest-10.0.100 (x64)": {
@@ -634,7 +634,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975546",
+      "last_observed": "2026-06-29T14:11:54.560029",
       "observation_count": 1
     },
     "microsoft.net.workload.emscripten.net9.manifest-10.0.100 (x64)": {
@@ -651,7 +651,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975568",
+      "last_observed": "2026-06-29T14:11:54.560068",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.aot.win-x64.cross.android-arm (x64)": {
@@ -668,7 +668,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975591",
+      "last_observed": "2026-06-29T14:11:54.560111",
       "observation_count": 1
     },
     "microsoft.maui.graphics (x64)": {
@@ -685,7 +685,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975610",
+      "last_observed": "2026-06-29T14:11:54.560144",
       "observation_count": 1
     },
     ".net maui templates (x64)": {
@@ -702,7 +702,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975651",
+      "last_observed": "2026-06-29T14:11:54.560205",
       "observation_count": 1
     },
     "sql server 2022 sql diagnostics": {
@@ -721,7 +721,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975670",
+      "last_observed": "2026-06-29T14:11:54.560234",
       "observation_count": 1
     },
     "microsoft.ios.windows.sdk.net9.0_26.2 (x64)": {
@@ -738,7 +738,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975690",
+      "last_observed": "2026-06-29T14:11:54.560265",
       "observation_count": 1
     },
     "microsoft odbc driver 17 for sql server": {
@@ -757,7 +757,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975710",
+      "last_observed": "2026-06-29T14:11:54.560295",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x64 debug runtime - 14.50.35719": {
@@ -776,7 +776,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975730",
+      "last_observed": "2026-06-29T14:11:54.560327",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.android-arm64 (x64)": {
@@ -793,7 +793,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975753",
+      "last_observed": "2026-06-29T14:11:54.560357",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.iossimulator-x64 (x64)": {
@@ -810,7 +810,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975774",
+      "last_observed": "2026-06-29T14:11:54.560386",
       "observation_count": 1
     },
     "microsoft.ios.sdk.net10.0_26.0 (x64)": {
@@ -827,7 +827,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975795",
+      "last_observed": "2026-06-29T14:11:54.560416",
       "observation_count": 1
     },
     "sql server 2022 shared management objects": {
@@ -846,7 +846,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975816",
+      "last_observed": "2026-06-29T14:11:54.560446",
       "observation_count": 1
     },
     "microsoft gameinput": {
@@ -863,7 +863,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975835",
+      "last_observed": "2026-06-29T14:11:54.560475",
       "observation_count": 1
     },
     "microsoft.maui.controls.build.tasks (x64)": {
@@ -882,7 +882,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975855",
+      "last_observed": "2026-06-29T14:11:54.560511",
       "observation_count": 1
     },
     "sql server 2022 database engine shared": {
@@ -901,7 +901,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975875",
+      "last_observed": "2026-06-29T14:11:54.560546",
       "observation_count": 1
     },
     "microsoft.android.runtime.nativeaot.36.android-x64 (x64)": {
@@ -918,7 +918,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975897",
+      "last_observed": "2026-06-29T14:11:54.560577",
       "observation_count": 1
     },
     "microsoft.ios.runtime.iossimulator-arm64.net10.0_26.2 (x64)": {
@@ -935,7 +935,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975918",
+      "last_observed": "2026-06-29T14:11:54.560610",
       "observation_count": 1
     },
     "microsoft.net.runtime.monotargets.sdk (x64)": {
@@ -952,7 +952,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975948",
+      "last_observed": "2026-06-29T14:11:54.560647",
       "observation_count": 1
     },
     "microsoft.maccatalyst.templates (x64)": {
@@ -969,7 +969,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975968",
+      "last_observed": "2026-06-29T14:11:54.560678",
       "observation_count": 1
     },
     "python 3.11.9 pip bootstrap (64-bit)": {
@@ -986,7 +986,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975988",
+      "last_observed": "2026-06-29T14:11:54.560727",
       "observation_count": 1
     },
     "microsoft visual c++ 2010  x64 redistributable - 10.0.40219": {
@@ -1003,7 +1003,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976008",
+      "last_observed": "2026-06-29T14:11:54.560760",
       "observation_count": 1
     },
     "vs_minshellinteropx64msi": {
@@ -1022,7 +1022,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976028",
+      "last_observed": "2026-06-29T14:11:54.560790",
       "observation_count": 1
     },
     "windows app certification kit native components": {
@@ -1039,7 +1039,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976049",
+      "last_observed": "2026-06-29T14:11:54.560826",
       "observation_count": 1
     },
     "microsoft.maccatalyst.runtime.maccatalyst-x64.net10.0_26.2 (x64)": {
@@ -1056,7 +1056,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976070",
+      "last_observed": "2026-06-29T14:11:54.560864",
       "observation_count": 1
     },
     "python 3.13.7 add to path (64-bit)": {
@@ -1073,7 +1073,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976091",
+      "last_observed": "2026-06-29T14:11:54.560900",
       "observation_count": 1
     },
     "microsoft.net.workload.mono.toolchain.net6.manifest-10.0.100 (x64)": {
@@ -1090,7 +1090,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976142",
+      "last_observed": "2026-06-29T14:11:54.560990",
       "observation_count": 1
     },
     "microsoft.android.runtime.coreclr.36.android-arm64 (x64)": {
@@ -1107,7 +1107,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976177",
+      "last_observed": "2026-06-29T14:11:54.561033",
       "observation_count": 1
     },
     "blender": {
@@ -1126,7 +1126,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Blender Foundation\\Blender 5.1\\",
-      "last_observed": "2026-06-29T07:11:13.976200",
+      "last_observed": "2026-06-29T14:11:54.561083",
       "observation_count": 1
     },
     "ryzenmastersdk": {
@@ -1143,7 +1143,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976218",
+      "last_observed": "2026-06-29T14:11:54.561126",
       "observation_count": 1
     },
     "python 3.11.9 utility scripts (64-bit)": {
@@ -1160,7 +1160,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976239",
+      "last_observed": "2026-06-29T14:11:54.561166",
       "observation_count": 1
     },
     "microsoft.maccatalyst.sdk.net9.0_18.0 (x64)": {
@@ -1177,7 +1177,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976259",
+      "last_observed": "2026-06-29T14:11:54.561190",
       "observation_count": 1
     },
     "microsoft.net.workload.emscripten.net7.manifest-10.0.100 (x64)": {
@@ -1194,7 +1194,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976280",
+      "last_observed": "2026-06-29T14:11:54.561214",
       "observation_count": 1
     },
     "microsoft.maui.controls.xaml (x64)": {
@@ -1211,7 +1211,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976300",
+      "last_observed": "2026-06-29T14:11:54.561235",
       "observation_count": 1
     },
     "microsoft windows desktop targeting pack - 10.0.6 (x64)": {
@@ -1228,7 +1228,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976323",
+      "last_observed": "2026-06-29T14:11:54.561256",
       "observation_count": 1
     },
     "amd settings": {
@@ -1245,7 +1245,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976341",
+      "last_observed": "2026-06-29T14:11:54.561275",
       "observation_count": 1
     },
     "microsoft.net.workload.emscripten.current.manifest-10.0.100 (x64)": {
@@ -1262,7 +1262,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976363",
+      "last_observed": "2026-06-29T14:11:54.561312",
       "observation_count": 1
     },
     "sql server 2022 full text search": {
@@ -1281,7 +1281,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976383",
+      "last_observed": "2026-06-29T14:11:54.561351",
       "observation_count": 1
     },
     "workflow manager tools 1.0 for visual studio": {
@@ -1300,7 +1300,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Workflow Manager Tools\\1.0\\",
-      "last_observed": "2026-06-29T07:11:13.976410",
+      "last_observed": "2026-06-29T14:11:54.561396",
       "observation_count": 1
     },
     "microsoft windows desktop runtime - 10.0.6 (x64)": {
@@ -1317,7 +1317,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976432",
+      "last_observed": "2026-06-29T14:11:54.561418",
       "observation_count": 1
     },
     "sql server integration services singleton": {
@@ -1336,7 +1336,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976454",
+      "last_observed": "2026-06-29T14:11:54.561452",
       "observation_count": 1
     },
     "sql server 2022 shared management objects extensions": {
@@ -1355,7 +1355,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976478",
+      "last_observed": "2026-06-29T14:11:54.561488",
       "observation_count": 1
     },
     "vs_communityx64msi": {
@@ -1372,7 +1372,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976497",
+      "last_observed": "2026-06-29T14:11:54.561515",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 x64 additional runtime - 11.0.61030": {
@@ -1389,7 +1389,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976519",
+      "last_observed": "2026-06-29T14:11:54.561545",
       "observation_count": 1
     },
     "microsoft asp.net core targeting pack - 10.0.6 (x64)": {
@@ -1406,7 +1406,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976548",
+      "last_observed": "2026-06-29T14:11:54.561574",
       "observation_count": 1
     },
     "microsoft.maccatalyst.sdk.net10.0_26.0 (x64)": {
@@ -1423,7 +1423,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976569",
+      "last_observed": "2026-06-29T14:11:54.561602",
       "observation_count": 1
     },
     "microsoft .net apphost pack - 10.0.6 (x64_x86)": {
@@ -1440,7 +1440,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976588",
+      "last_observed": "2026-06-29T14:11:54.561631",
       "observation_count": 1
     },
     "microsoft.maccatalyst.sdk.net9.0_26.2 (x64)": {
@@ -1457,7 +1457,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976613",
+      "last_observed": "2026-06-29T14:11:54.561658",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.android-x64 (x64)": {
@@ -1474,7 +1474,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976644",
+      "last_observed": "2026-06-29T14:11:54.561688",
       "observation_count": 1
     },
     "python 3.11.9 documentation (64-bit)": {
@@ -1493,7 +1493,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976673",
+      "last_observed": "2026-06-29T14:11:54.561715",
       "observation_count": 1
     },
     "node.js": {
@@ -1510,7 +1510,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976701",
+      "last_observed": "2026-06-29T14:11:54.561742",
       "observation_count": 1
     },
     "microsoft.net.sdk.macos.manifest-10.0.100 (x64)": {
@@ -1527,7 +1527,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976735",
+      "last_observed": "2026-06-29T14:11:54.561770",
       "observation_count": 1
     },
     "branding64": {
@@ -1544,7 +1544,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976754",
+      "last_observed": "2026-06-29T14:11:54.561795",
       "observation_count": 1
     },
     ".net for android templates (x64)": {
@@ -1561,7 +1561,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976774",
+      "last_observed": "2026-06-29T14:11:54.561822",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.maccatalyst-arm64 (x64)": {
@@ -1578,7 +1578,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976795",
+      "last_observed": "2026-06-29T14:11:54.561852",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.ios-arm64 (x64)": {
@@ -1595,7 +1595,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976818",
+      "last_observed": "2026-06-29T14:11:54.561880",
       "observation_count": 1
     },
     "microsoft.android.runtime.mono.36.android-x86 (x64)": {
@@ -1612,7 +1612,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976840",
+      "last_observed": "2026-06-29T14:11:54.561909",
       "observation_count": 1
     },
     "microsoft.android.runtime.nativeaot.36.android-arm64 (x64)": {
@@ -1629,7 +1629,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976861",
+      "last_observed": "2026-06-29T14:11:54.561938",
       "observation_count": 1
     },
     "microsoft.ios.sdk.net10.0_26.2 (x64)": {
@@ -1646,7 +1646,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976881",
+      "last_observed": "2026-06-29T14:11:54.561966",
       "observation_count": 1
     },
     "microsoft.android.runtime.mono.36.android-arm64 (x64)": {
@@ -1663,7 +1663,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976903",
+      "last_observed": "2026-06-29T14:11:54.561995",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.android-x86 (x64)": {
@@ -1680,7 +1680,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976923",
+      "last_observed": "2026-06-29T14:11:54.562024",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 x64 minimum runtime - 12.0.40664": {
@@ -1697,7 +1697,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976944",
+      "last_observed": "2026-06-29T14:11:54.562055",
       "observation_count": 1
     },
     "microsoft.ios.runtime.ios.net10.0_26.2 (x64)": {
@@ -1714,7 +1714,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976964",
+      "last_observed": "2026-06-29T14:11:54.562084",
       "observation_count": 1
     },
     "microsoft .net targeting pack - 10.0.6 (x64)": {
@@ -1731,7 +1731,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976986",
+      "last_observed": "2026-06-29T14:11:54.562115",
       "observation_count": 1
     },
     "python 3.11.9 tcl/tk support (64-bit)": {
@@ -1748,7 +1748,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977004",
+      "last_observed": "2026-06-29T14:11:54.562142",
       "observation_count": 1
     },
     "sql server 2022 dmf": {
@@ -1767,7 +1767,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977044",
+      "last_observed": "2026-06-29T14:11:54.562209",
       "observation_count": 1
     },
     "diagnosticshub_collectionservice": {
@@ -1784,7 +1784,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977065",
+      "last_observed": "2026-06-29T14:11:54.562243",
       "observation_count": 1
     },
     "microsoft.android.sdk.windows (x64)": {
@@ -1801,7 +1801,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977083",
+      "last_observed": "2026-06-29T14:11:54.562275",
       "observation_count": 1
     },
     "application verifier x64 external package (onecoreuap)": {
@@ -1818,7 +1818,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977104",
+      "last_observed": "2026-06-29T14:11:54.562307",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x64 minimum runtime - 14.50.35719": {
@@ -1835,7 +1835,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977124",
+      "last_observed": "2026-06-29T14:11:54.562345",
       "observation_count": 1
     },
     "microsoft sql server 2022 rsfx driver": {
@@ -1854,7 +1854,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977144",
+      "last_observed": "2026-06-29T14:11:54.562372",
       "observation_count": 1
     },
     "microsoft.net.sdk.ios.manifest-10.0.100 (x64)": {
@@ -1871,7 +1871,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977166",
+      "last_observed": "2026-06-29T14:11:54.562403",
       "observation_count": 1
     },
     "sql server 2022 advanced analytics": {
@@ -1890,7 +1890,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977185",
+      "last_observed": "2026-06-29T14:11:54.562431",
       "observation_count": 1
     },
     "powershell 7-x64": {
@@ -1909,7 +1909,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977204",
+      "last_observed": "2026-06-29T14:11:54.562457",
       "observation_count": 1
     },
     "microsoft.net.sdk.maccatalyst.manifest-10.0.100 (x64)": {
@@ -1926,7 +1926,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977225",
+      "last_observed": "2026-06-29T14:11:54.562487",
       "observation_count": 1
     },
     "microsoft.net.workload.mono.toolchain.net8.manifest-10.0.100 (x64)": {
@@ -1943,7 +1943,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977247",
+      "last_observed": "2026-06-29T14:11:54.562518",
       "observation_count": 1
     },
     "sql server 2022 database engine services": {
@@ -1962,7 +1962,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977267",
+      "last_observed": "2026-06-29T14:11:54.562546",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.iossimulator-arm64 (x64)": {
@@ -1979,7 +1979,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977288",
+      "last_observed": "2026-06-29T14:11:54.562575",
       "observation_count": 1
     },
     "workflow manager client 1.0": {
@@ -1998,7 +1998,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Reference Assemblies\\Microsoft\\Workflow Manager\\1.0\\",
-      "last_observed": "2026-06-29T07:11:13.977308",
+      "last_observed": "2026-06-29T14:11:54.562603",
       "observation_count": 1
     },
     "sql server 2022 common files": {
@@ -2018,7 +2018,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977333",
+      "last_observed": "2026-06-29T14:11:54.562631",
       "observation_count": 1
     },
     "microsoft.maui.graphics.win2d.winui.desktop (x64)": {
@@ -2035,7 +2035,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977374",
+      "last_observed": "2026-06-29T14:11:54.562659",
       "observation_count": 1
     },
     "microsoft .net host fx resolver - 8.0.27 (x64)": {
@@ -2069,7 +2069,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977401",
+      "last_observed": "2026-06-29T14:11:54.562687",
       "observation_count": 1
     },
     "microsoft visual studio installer": {
@@ -2088,7 +2088,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\Installer\"",
-      "last_observed": "2026-06-29T07:11:13.977478",
+      "last_observed": "2026-06-29T14:11:54.562774",
       "observation_count": 1
     },
     "microsoft .net host fx resolver - 10.0.6 (x64)": {
@@ -2105,7 +2105,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977505",
+      "last_observed": "2026-06-29T14:11:54.562803",
       "observation_count": 1
     },
     "microsoft .net toolset 10.0.202 (x64)": {
@@ -2122,7 +2122,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977536",
+      "last_observed": "2026-06-29T14:11:54.562830",
       "observation_count": 1
     },
     "microsoft.maccatalyst.runtime.maccatalyst.net10.0_26.2 (x64)": {
@@ -2139,7 +2139,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977560",
+      "last_observed": "2026-06-29T14:11:54.562859",
       "observation_count": 1
     },
     "microsoft odbc driver 18 for sql server": {
@@ -2158,7 +2158,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977581",
+      "last_observed": "2026-06-29T14:11:54.562886",
       "observation_count": 1
     },
     "microsoft ole db driver for sql server": {
@@ -2177,7 +2177,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977600",
+      "last_observed": "2026-06-29T14:11:54.562913",
       "observation_count": 1
     },
     "sql server 2022 connection info": {
@@ -2196,7 +2196,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977620",
+      "last_observed": "2026-06-29T14:11:54.562939",
       "observation_count": 1
     },
     "microsoft.maui.core (x64)": {
@@ -2213,7 +2213,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977650",
+      "last_observed": "2026-06-29T14:11:54.562966",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.maccatalyst-x64 (x64)": {
@@ -2230,7 +2230,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977686",
+      "last_observed": "2026-06-29T14:11:54.562995",
       "observation_count": 1
     },
     "microsoft.maccatalyst.sdk.net10.0_26.2 (x64)": {
@@ -2247,7 +2247,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977716",
+      "last_observed": "2026-06-29T14:11:54.563023",
       "observation_count": 1
     },
     "sql server 2022 batch parser": {
@@ -2266,7 +2266,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977748",
+      "last_observed": "2026-06-29T14:11:54.563048",
       "observation_count": 1
     },
     "microsoft.ios.sdk.net9.0_26.2 (x64)": {
@@ -2283,7 +2283,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977784",
+      "last_observed": "2026-06-29T14:11:54.563075",
       "observation_count": 1
     },
     "microsoft mpi (10.1.12498.18)": {
@@ -2300,7 +2300,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft MPI\\",
-      "last_observed": "2026-06-29T07:11:13.977818",
+      "last_observed": "2026-06-29T14:11:54.563100",
       "observation_count": 1
     },
     "microsoft.ios.windows.sdk.net10.0_26.2 (x64)": {
@@ -2317,7 +2317,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977858",
+      "last_observed": "2026-06-29T14:11:54.563128",
       "observation_count": 1
     },
     "microsoft.maui.controls.core (x64)": {
@@ -2334,7 +2334,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977957",
+      "last_observed": "2026-06-29T14:11:54.563189",
       "observation_count": 1
     },
     "microsoft .net 10.0 templates 10.0.202 x64": {
@@ -2351,7 +2351,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977996",
+      "last_observed": "2026-06-29T14:11:54.563217",
       "observation_count": 1
     },
     "microsoft.maccatalyst.runtime.maccatalyst-arm64.net10.0_26.2 (x64)": {
@@ -2368,7 +2368,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978025",
+      "last_observed": "2026-06-29T14:11:54.563246",
       "observation_count": 1
     },
     "office 16 click-to-run extensibility component": {
@@ -2376,7 +2376,7 @@
       "exe_path": "",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20076",
+      "version": "16.0.20131.20044",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -2387,7 +2387,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978046",
+      "last_observed": "2026-06-29T14:11:54.563276",
       "observation_count": 1
     },
     "office 16 click-to-run localization component": {
@@ -2395,7 +2395,7 @@
       "exe_path": "",
       "display_name": "",
       "description": "",
-      "version": "16.0.20026.20182",
+      "version": "16.0.20131.20068",
       "publisher": "Microsoft Corporation",
       "file_types": [],
       "ui_elements": [],
@@ -2406,7 +2406,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978081",
+      "last_observed": "2026-06-29T14:11:54.563305",
       "observation_count": 1
     },
     "microsoft.ios.windows.sdk.net9.0_18.0 (x64)": {
@@ -2423,7 +2423,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978102",
+      "last_observed": "2026-06-29T14:11:54.563333",
       "observation_count": 1
     },
     "microsoft .net apphost pack - 10.0.6 (x64_arm64)": {
@@ -2440,7 +2440,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978123",
+      "last_observed": "2026-06-29T14:11:54.563360",
       "observation_count": 1
     },
     "viddly": {
@@ -2459,7 +2459,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Viddly",
-      "last_observed": "2026-06-29T07:11:13.978159",
+      "last_observed": "2026-06-29T14:11:54.563389",
       "observation_count": 1
     },
     "vs_minshellx64msi": {
@@ -2478,7 +2478,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978192",
+      "last_observed": "2026-06-29T14:11:54.563413",
       "observation_count": 1
     },
     "sql server 2022 xevent": {
@@ -2497,7 +2497,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978221",
+      "last_observed": "2026-06-29T14:11:54.563439",
       "observation_count": 1
     },
     "vigem bus driver": {
@@ -2516,7 +2516,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Nefarius Software Solutions\\ViGEm Bus Driver\\",
-      "last_observed": "2026-06-29T07:11:13.978257",
+      "last_observed": "2026-06-29T14:11:54.563469",
       "observation_count": 1
     },
     "python 3.13.7 development libraries (64-bit)": {
@@ -2535,7 +2535,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978295",
+      "last_observed": "2026-06-29T14:11:54.563497",
       "observation_count": 1
     },
     "microsoft.android.runtime.36.android (x64)": {
@@ -2552,7 +2552,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978331",
+      "last_observed": "2026-06-29T14:11:54.563526",
       "observation_count": 1
     },
     "microsoft.net.sdk.tvos.manifest-10.0.100 (x64)": {
@@ -2569,7 +2569,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978363",
+      "last_observed": "2026-06-29T14:11:54.563554",
       "observation_count": 1
     },
     "python 3.11.9 standard library (64-bit)": {
@@ -2586,7 +2586,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978400",
+      "last_observed": "2026-06-29T14:11:54.563580",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.aot.win-x64.cross.android-x86 (x64)": {
@@ -2603,7 +2603,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978438",
+      "last_observed": "2026-06-29T14:11:54.563610",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.mono.android-arm (x64)": {
@@ -2620,7 +2620,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978504",
+      "last_observed": "2026-06-29T14:11:54.563669",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.aot.win-x64.cross.android-x64 (x64)": {
@@ -2637,7 +2637,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978543",
+      "last_observed": "2026-06-29T14:11:54.563699",
       "observation_count": 1
     },
     "remote gamepad": {
@@ -2654,7 +2654,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978571",
+      "last_observed": "2026-06-29T14:11:54.563727",
       "observation_count": 1
     },
     "python 3.13.7 standard library (64-bit)": {
@@ -2671,7 +2671,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978591",
+      "last_observed": "2026-06-29T14:11:54.563754",
       "observation_count": 1
     },
     "microsoft.ios.sdk.net9.0_18.0 (x64)": {
@@ -2688,7 +2688,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978625",
+      "last_observed": "2026-06-29T14:11:54.563782",
       "observation_count": 1
     },
     "microsoft .net apphost pack - 10.0.6 (x64)": {
@@ -2705,7 +2705,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978667",
+      "last_observed": "2026-06-29T14:11:54.563810",
       "observation_count": 1
     },
     "python 3.13.7 tcl/tk support (64-bit)": {
@@ -2722,7 +2722,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978698",
+      "last_observed": "2026-06-29T14:11:54.563837",
       "observation_count": 1
     },
     "microsoft.android.ref.36 (x64)": {
@@ -2739,7 +2739,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978728",
+      "last_observed": "2026-06-29T14:11:54.563866",
       "observation_count": 1
     },
     "microsoft .net standard targeting pack - 2.1.0 (x64)": {
@@ -2756,7 +2756,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978760",
+      "last_observed": "2026-06-29T14:11:54.563895",
       "observation_count": 1
     },
     "microsoft teams meeting add-in for microsoft office": {
@@ -2776,7 +2776,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978797",
+      "last_observed": "2026-06-29T14:11:54.563923",
       "observation_count": 1
     },
     "amd wvr64": {
@@ -2793,7 +2793,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978829",
+      "last_observed": "2026-06-29T14:11:54.563947",
       "observation_count": 1
     },
     "python 3.11.9 test suite (64-bit)": {
@@ -2810,7 +2810,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978861",
+      "last_observed": "2026-06-29T14:11:54.563972",
       "observation_count": 1
     },
     "microsoft.ios.windows.sdk.net10.0_26.0 (x64)": {
@@ -2827,7 +2827,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978883",
+      "last_observed": "2026-06-29T14:11:54.564000",
       "observation_count": 1
     },
     ".net maui sdk (x64)": {
@@ -2844,7 +2844,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978902",
+      "last_observed": "2026-06-29T14:11:54.564025",
       "observation_count": 1
     },
     "microsoft vss writer for sql server 2022": {
@@ -2863,7 +2863,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978923",
+      "last_observed": "2026-06-29T14:11:54.564051",
       "observation_count": 1
     },
     "microsoft.android.runtime.mono.36.android-arm (x64)": {
@@ -2880,7 +2880,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978946",
+      "last_observed": "2026-06-29T14:11:54.564080",
       "observation_count": 1
     },
     "oracle virtualbox 7.2.2": {
@@ -2897,7 +2897,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978965",
+      "last_observed": "2026-06-29T14:11:54.564107",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x64 additional runtime - 14.50.35719": {
@@ -2914,7 +2914,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978990",
+      "last_observed": "2026-06-29T14:11:54.564138",
       "observation_count": 1
     },
     "microsoft.android.runtime.mono.36.android-x64 (x64)": {
@@ -2931,7 +2931,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979010",
+      "last_observed": "2026-06-29T14:11:54.564166",
       "observation_count": 1
     },
     "microsoft ole db driver 19 for sql server": {
@@ -2950,7 +2950,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979030",
+      "last_observed": "2026-06-29T14:11:54.564193",
       "observation_count": 1
     },
     "python 3.11.9 core interpreter (64-bit)": {
@@ -2967,7 +2967,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979051",
+      "last_observed": "2026-06-29T14:11:54.564221",
       "observation_count": 1
     },
     "eclipse temurin jdk with hotspot 25.0.3+9 (x64)": {
@@ -2984,7 +2984,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.3.9-hotspot\\",
-      "last_observed": "2026-06-29T07:11:13.979071",
+      "last_observed": "2026-06-29T14:11:54.564248",
       "observation_count": 1
     },
     "microsoft sql server 2022 setup (english)": {
@@ -3003,7 +3003,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979092",
+      "last_observed": "2026-06-29T14:11:54.564275",
       "observation_count": 1
     },
     "epic games launcher": {
@@ -3020,7 +3020,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Epic Games\\",
-      "last_observed": "2026-06-29T07:11:13.979112",
+      "last_observed": "2026-06-29T14:11:54.564300",
       "observation_count": 1
     },
     "microsoft.maui.controls (x64)": {
@@ -3037,7 +3037,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979132",
+      "last_observed": "2026-06-29T14:11:54.564327",
       "observation_count": 1
     },
     "windows subsystem for linux": {
@@ -3054,7 +3054,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979151",
+      "last_observed": "2026-06-29T14:11:54.564352",
       "observation_count": 1
     },
     "quick cpu": {
@@ -3071,7 +3071,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979169",
+      "last_observed": "2026-06-29T14:11:54.564377",
       "observation_count": 1
     },
     "microsoft.aspnetcore.components.webview.maui (x64)": {
@@ -3090,7 +3090,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979190",
+      "last_observed": "2026-06-29T14:11:54.564405",
       "observation_count": 1
     },
     "python 3.13.7 core interpreter (64-bit)": {
@@ -3107,7 +3107,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979210",
+      "last_observed": "2026-06-29T14:11:54.564430",
       "observation_count": 1
     },
     "python 3.11.9 executables (64-bit)": {
@@ -3124,7 +3124,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979230",
+      "last_observed": "2026-06-29T14:11:54.564457",
       "observation_count": 1
     },
     "microsoft.net.sdk.android.manifest-10.0.100 (x64)": {
@@ -3141,7 +3141,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979251",
+      "last_observed": "2026-06-29T14:11:54.564485",
       "observation_count": 1
     },
     "ea app": {
@@ -3158,7 +3158,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979276",
+      "last_observed": "2026-06-29T14:11:54.564518",
       "observation_count": 1
     },
     "microsoft.net.sdk.maui.manifest-10.0.100 (x64)": {
@@ -3175,7 +3175,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979297",
+      "last_observed": "2026-06-29T14:11:54.564546",
       "observation_count": 1
     },
     "microsoft .net sdk 10.0.202 (x64) from visual studio": {
@@ -3192,7 +3192,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979319",
+      "last_observed": "2026-06-29T14:11:54.564575",
       "observation_count": 1
     },
     "microsoft asp.net core runtime - 10.0.6 (x64)": {
@@ -3209,7 +3209,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979341",
+      "last_observed": "2026-06-29T14:11:54.564603",
       "observation_count": 1
     },
     "microsoft.ios.ref.net10.0_26.2 (x64)": {
@@ -3226,7 +3226,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979361",
+      "last_observed": "2026-06-29T14:11:54.564630",
       "observation_count": 1
     },
     "microsoft.android.runtime.coreclr.36.android-x64 (x64)": {
@@ -3243,7 +3243,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979383",
+      "last_observed": "2026-06-29T14:11:54.564659",
       "observation_count": 1
     },
     "microsoft.netcore.app.runtime.aot.win-x64.cross.android-arm64 (x64)": {
@@ -3260,7 +3260,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979406",
+      "last_observed": "2026-06-29T14:11:54.564688",
       "observation_count": 1
     },
     "universal crt tools x64": {
@@ -3277,7 +3277,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979424",
+      "last_observed": "2026-06-29T14:11:54.564715",
       "observation_count": 1
     },
     "microsoft.maccatalyst.ref.net10.0_26.2 (x64)": {
@@ -3294,7 +3294,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979445",
+      "last_observed": "2026-06-29T14:11:54.564761",
       "observation_count": 1
     },
     "python 3.13.7 pip bootstrap (64-bit)": {
@@ -3311,7 +3311,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979468",
+      "last_observed": "2026-06-29T14:11:54.564789",
       "observation_count": 1
     },
     "python 3.11.9 add to path (64-bit)": {
@@ -3328,7 +3328,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979487",
+      "last_observed": "2026-06-29T14:11:54.564815",
       "observation_count": 1
     },
     "python 3.11.9 development libraries (64-bit)": {
@@ -3347,7 +3347,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979508",
+      "last_observed": "2026-06-29T14:11:54.564843",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 x64 minimum runtime - 11.0.61030": {
@@ -3364,7 +3364,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979548",
+      "last_observed": "2026-06-29T14:11:54.564899",
       "observation_count": 1
     },
     "python 3.13.7 documentation (64-bit)": {
@@ -3383,7 +3383,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979569",
+      "last_observed": "2026-06-29T14:11:54.564925",
       "observation_count": 1
     },
     "microsoft windows desktop runtime - 8.0.27 (x64)": {
@@ -3417,7 +3417,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979611",
+      "last_observed": "2026-06-29T14:11:54.564984",
       "observation_count": 1
     },
     "application verifier x64 external package (desktopeditions)": {
@@ -3434,7 +3434,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979635",
+      "last_observed": "2026-06-29T14:11:54.565014",
       "observation_count": 1
     },
     "microsoft.ios.runtime.ios-arm64.net10.0_26.2 (x64)": {
@@ -3451,7 +3451,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979667",
+      "last_observed": "2026-06-29T14:11:54.565042",
       "observation_count": 1
     },
     "microsoft.net.workload.mono.toolchain.net7.manifest-10.0.100 (x64)": {
@@ -3468,7 +3468,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979701",
+      "last_observed": "2026-06-29T14:11:54.565072",
       "observation_count": 1
     },
     "microsoft web deploy 4.0": {
@@ -3487,7 +3487,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979721",
+      "last_observed": "2026-06-29T14:11:54.565099",
       "observation_count": 1
     },
     "sql server 2022 sql polybase": {
@@ -3506,7 +3506,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979740",
+      "last_observed": "2026-06-29T14:11:54.565124",
       "observation_count": 1
     },
     "microsoft.net.runtime.monoaotcompiler.task (x64)": {
@@ -3525,7 +3525,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979761",
+      "last_observed": "2026-06-29T14:11:54.565151",
       "observation_count": 1
     },
     "microsoft .net host - 10.0.6 (x64)": {
@@ -3542,7 +3542,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979781",
+      "last_observed": "2026-06-29T14:11:54.565178",
       "observation_count": 1
     },
     "python 3.13.7 executables (64-bit)": {
@@ -3559,7 +3559,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979821",
+      "last_observed": "2026-06-29T14:11:54.565234",
       "observation_count": 1
     },
     "microsoft.ios.runtime.iossimulator-x64.net10.0_26.2 (x64)": {
@@ -3576,7 +3576,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979854",
+      "last_observed": "2026-06-29T14:11:54.565262",
       "observation_count": 1
     },
     "microsoft.net.workload.emscripten.net8.manifest-10.0.100 (x64)": {
@@ -3593,7 +3593,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979882",
+      "last_observed": "2026-06-29T14:11:54.565292",
       "observation_count": 1
     },
     "microsoft.net.workload.mono.toolchain.current.manifest-10.0.100 (x64)": {
@@ -3610,7 +3610,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979915",
+      "last_observed": "2026-06-29T14:11:54.565323",
       "observation_count": 1
     },
     "microsoft .net runtime - 10.0.6 (x64)": {
@@ -3627,7 +3627,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979949",
+      "last_observed": "2026-06-29T14:11:54.565433",
       "observation_count": 1
     },
     "microsoft.net.workload.emscripten.net6.manifest-10.0.100 (x64)": {
@@ -3644,7 +3644,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979975",
+      "last_observed": "2026-06-29T14:11:54.565462",
       "observation_count": 1
     },
     "microsoft.maui.essentials (x64)": {
@@ -3661,7 +3661,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980008",
+      "last_observed": "2026-06-29T14:11:54.565490",
       "observation_count": 1
     },
     "microsoft.maui.resizetizer (x64)": {
@@ -3678,7 +3678,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980045",
+      "last_observed": "2026-06-29T14:11:54.565517",
       "observation_count": 1
     },
     "microsoft .net runtime - 8.0.27 (x64)": {
@@ -3712,7 +3712,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\BCUninstaller\\",
-      "last_observed": "2026-06-29T07:11:13.980080",
+      "last_observed": "2026-06-29T14:11:54.565542",
       "observation_count": 1
     },
     "microsoft.ios.templates (x64)": {
@@ -3729,7 +3729,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980108",
+      "last_observed": "2026-06-29T14:11:54.565568",
       "observation_count": 1
     },
     "windows sdk directx x64 remote": {
@@ -3746,7 +3746,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980146",
+      "last_observed": "2026-06-29T14:11:54.565620",
       "observation_count": 1
     },
     "microsoft .net host - 8.0.27 (x64)": {
@@ -3784,7 +3784,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Microsoft SQL Server Management Studio 22\\Release",
-      "last_observed": "2026-06-29T07:11:13.980172",
+      "last_observed": "2026-06-29T14:11:54.565655",
       "observation_count": 1
     },
     "amd chipset software": {
@@ -3803,7 +3803,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980197",
+      "last_observed": "2026-06-29T14:11:54.565690",
       "observation_count": 1
     },
     "dev-c++": {
@@ -3820,7 +3820,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980215",
+      "last_observed": "2026-06-29T14:11:54.565714",
       "observation_count": 1
     },
     "visual studio build tools 2026": {
@@ -3837,7 +3837,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Microsoft Visual Studio\\18\\BuildTools",
-      "last_observed": "2026-06-29T07:11:13.980233",
+      "last_observed": "2026-06-29T14:11:54.565740",
       "observation_count": 1
     },
     "google chrome": {
@@ -3857,7 +3857,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Google\\Chrome\\Application",
-      "last_observed": "2026-06-29T07:11:13.980274",
+      "last_observed": "2026-06-29T14:11:54.565796",
       "observation_count": 1
     },
     "grand theft auto v legacy": {
@@ -3874,7 +3874,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Grand Theft Auto V Legacy\\",
-      "last_observed": "2026-06-29T07:11:13.980299",
+      "last_observed": "2026-06-29T14:11:54.565823",
       "observation_count": 1
     },
     "copilot": {
@@ -3893,7 +3893,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Microsoft\\Copilot\\Application",
-      "last_observed": "2026-06-29T07:11:13.980353",
+      "last_observed": "2026-06-29T14:11:54.565893",
       "observation_count": 1
     },
     "microsoft edge": {
@@ -3913,7 +3913,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application",
-      "last_observed": "2026-06-29T07:11:13.980377",
+      "last_observed": "2026-06-29T14:11:54.565926",
       "observation_count": 1
     },
     "microsoft edge webview2 runtime": {
@@ -3933,7 +3933,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application",
-      "last_observed": "2026-06-29T07:11:13.980496",
+      "last_observed": "2026-06-29T14:11:54.565963",
       "observation_count": 1
     },
     "npcap": {
@@ -3952,7 +3952,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Npcap",
-      "last_observed": "2026-06-29T07:11:13.980519",
+      "last_observed": "2026-06-29T14:11:54.565996",
       "observation_count": 1
     },
     "steam": {
@@ -3971,7 +3971,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Steam",
-      "last_observed": "2026-06-29T07:11:13.980556",
+      "last_observed": "2026-06-29T14:11:54.566025",
       "observation_count": 1
     },
     "tixati": {
@@ -3990,7 +3990,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\tixati",
-      "last_observed": "2026-06-29T07:11:13.980589",
+      "last_observed": "2026-06-29T14:11:54.566056",
       "observation_count": 1
     },
     "wireshark 4.4.11 x64": {
@@ -4009,7 +4009,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Wireshark",
-      "last_observed": "2026-06-29T07:11:13.980613",
+      "last_observed": "2026-06-29T14:11:54.566087",
       "observation_count": 1
     },
     "vs_minshellinteropsharedmsi": {
@@ -4028,7 +4028,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980634",
+      "last_observed": "2026-06-29T14:11:54.566117",
       "observation_count": 1
     },
     "sptools_microsoft.visualstudio.vsto.msi": {
@@ -4045,7 +4045,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980660",
+      "last_observed": "2026-06-29T14:11:54.566145",
       "observation_count": 1
     },
     "vs_communitymsires": {
@@ -4062,7 +4062,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980698",
+      "last_observed": "2026-06-29T14:11:54.566172",
       "observation_count": 1
     },
     "microsoft portable library multi-targeting pack": {
@@ -4079,7 +4079,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980732",
+      "last_observed": "2026-06-29T14:11:54.566202",
       "observation_count": 1
     },
     "universal crt extension sdk": {
@@ -4096,7 +4096,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980761",
+      "last_observed": "2026-06-29T14:11:54.566229",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 redistributable (x64) - 12.0.40664": {
@@ -4115,7 +4115,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980806",
+      "last_observed": "2026-06-29T14:11:54.566271",
       "observation_count": 1
     },
     "universal crt redistributable": {
@@ -4132,7 +4132,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980828",
+      "last_observed": "2026-06-29T14:11:54.566301",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 redistributable (x64) - 12.0.30501": {
@@ -4149,7 +4149,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980855",
+      "last_observed": "2026-06-29T14:11:54.567824",
       "observation_count": 1
     },
     "msi development tools": {
@@ -4168,7 +4168,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980875",
+      "last_observed": "2026-06-29T14:11:54.567925",
       "observation_count": 1
     },
     "winrt intellisense uap - other languages": {
@@ -4185,7 +4185,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980897",
+      "last_observed": "2026-06-29T14:11:54.567963",
       "observation_count": 1
     },
     "windows sdk desktop headers arm64": {
@@ -4202,7 +4202,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980918",
+      "last_observed": "2026-06-29T14:11:54.567997",
       "observation_count": 1
     },
     "microsoft visual c++ v14 redistributable (x86) - 14.50.35719": {
@@ -4219,7 +4219,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980945",
+      "last_observed": "2026-06-29T14:11:54.568040",
       "observation_count": 1
     },
     "microsoft asp.net core runtime - 10.0.6 (x86)": {
@@ -4236,7 +4236,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980967",
+      "last_observed": "2026-06-29T14:11:54.568111",
       "observation_count": 1
     },
     "windows sdk directx x86 remote": {
@@ -4253,7 +4253,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980987",
+      "last_observed": "2026-06-29T14:11:54.568144",
       "observation_count": 1
     },
     "microsoft .net coreruntime sdk": {
@@ -4270,7 +4270,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981008",
+      "last_observed": "2026-06-29T14:11:54.568180",
       "observation_count": 1
     },
     "windows sdk desktop libs x64": {
@@ -4287,7 +4287,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981029",
+      "last_observed": "2026-06-29T14:11:54.568209",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 x86 minimum runtime - 12.0.21005": {
@@ -4304,7 +4304,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981050",
+      "last_observed": "2026-06-29T14:11:54.568241",
       "observation_count": 1
     },
     "windows sdk addon": {
@@ -4321,7 +4321,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981069",
+      "last_observed": "2026-06-29T14:11:54.568272",
       "observation_count": 1
     },
     "sptools_microsoft.visualstudio.vsto.msi.x64": {
@@ -4338,7 +4338,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981090",
+      "last_observed": "2026-06-29T14:11:54.568309",
       "observation_count": 1
     },
     "microsoft .net framework 4.7.2 targeting pack": {
@@ -4355,7 +4355,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981112",
+      "last_observed": "2026-06-29T14:11:54.568342",
       "observation_count": 1
     },
     "vs_minshellmsires": {
@@ -4374,7 +4374,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981131",
+      "last_observed": "2026-06-29T14:11:54.568370",
       "observation_count": 1
     },
     "vs_coreeditorfonts": {
@@ -4393,7 +4393,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981152",
+      "last_observed": "2026-06-29T14:11:54.568400",
       "observation_count": 1
     },
     "microsoft .net framework cumulative intellisense pack for visual studio (enu)": {
@@ -4410,7 +4410,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981176",
+      "last_observed": "2026-06-29T14:11:54.568446",
       "observation_count": 1
     },
     "windows team extension sdk": {
@@ -4427,7 +4427,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981196",
+      "last_observed": "2026-06-29T14:11:54.568478",
       "observation_count": 1
     },
     "microsoft .net host fx resolver - 10.0.6 (x86)": {
@@ -4444,7 +4444,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981218",
+      "last_observed": "2026-06-29T14:11:54.568512",
       "observation_count": 1
     },
     "microsoft exchange web services managed api 2.1": {
@@ -4463,7 +4463,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981240",
+      "last_observed": "2026-06-29T14:11:54.568540",
       "observation_count": 1
     },
     "windows sdk modern non-versioned developer tools": {
@@ -4482,7 +4482,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981262",
+      "last_observed": "2026-06-29T14:11:54.568566",
       "observation_count": 1
     },
     "windows sdk desktop libs arm64": {
@@ -4499,7 +4499,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981284",
+      "last_observed": "2026-06-29T14:11:54.568591",
       "observation_count": 1
     },
     "windows sdk for windows store apps libs": {
@@ -4516,7 +4516,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981305",
+      "last_observed": "2026-06-29T14:11:54.568617",
       "observation_count": 1
     },
     "winrt intellisense iot - other languages": {
@@ -4533,7 +4533,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981325",
+      "last_observed": "2026-06-29T14:11:54.568643",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 redistributable (x86) - 11.0.61030": {
@@ -4550,7 +4550,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981352",
+      "last_observed": "2026-06-29T14:11:54.568677",
       "observation_count": 1
     },
     "webadvisor by mcafee": {
@@ -4570,7 +4570,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\McAfee\\WebAdvisor",
-      "last_observed": "2026-06-29T07:11:13.981377",
+      "last_observed": "2026-06-29T14:11:54.568706",
       "observation_count": 1
     },
     "winrt intellisense mobile - en-us": {
@@ -4587,7 +4587,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981397",
+      "last_observed": "2026-06-29T14:11:54.568732",
       "observation_count": 1
     },
     "kits configuration installer": {
@@ -4604,7 +4604,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981420",
+      "last_observed": "2026-06-29T14:11:54.568757",
       "observation_count": 1
     },
     "microsoft .net coreruntime for corecon": {
@@ -4621,7 +4621,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981453",
+      "last_observed": "2026-06-29T14:11:54.568783",
       "observation_count": 1
     },
     "amd_chipset_drivers": {
@@ -4638,7 +4638,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Chipset_Software\\",
-      "last_observed": "2026-06-29T07:11:13.981481",
+      "last_observed": "2026-06-29T14:11:54.568822",
       "observation_count": 1
     },
     "windows sdk for windows store apps tools": {
@@ -4655,7 +4655,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981512",
+      "last_observed": "2026-06-29T14:11:54.568852",
       "observation_count": 1
     },
     "windows sdk for windows store managed apps libs": {
@@ -4672,7 +4672,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981542",
+      "last_observed": "2026-06-29T14:11:54.568874",
       "observation_count": 1
     },
     "windows sdk eula": {
@@ -4689,7 +4689,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981571",
+      "last_observed": "2026-06-29T14:11:54.568893",
       "observation_count": 1
     },
     "vs_minshellsharedmsi": {
@@ -4708,7 +4708,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981604",
+      "last_observed": "2026-06-29T14:11:54.568911",
       "observation_count": 1
     },
     "winrt intellisense desktop - en-us": {
@@ -4725,7 +4725,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981626",
+      "last_observed": "2026-06-29T14:11:54.568932",
       "observation_count": 1
     },
     "windows sdk arm64 desktop tools": {
@@ -4742,7 +4742,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981646",
+      "last_observed": "2026-06-29T14:11:54.568953",
       "observation_count": 1
     },
     "microsoft windows desktop targeting pack - 10.0.6 (x86)": {
@@ -4759,7 +4759,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981668",
+      "last_observed": "2026-06-29T14:11:54.568974",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x86 minimum runtime - 14.50.35719": {
@@ -4776,7 +4776,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981690",
+      "last_observed": "2026-06-29T14:11:54.568993",
       "observation_count": 1
     },
     "microsoft windows desktop runtime - 10.0.6 (x86)": {
@@ -4793,7 +4793,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981714",
+      "last_observed": "2026-06-29T14:11:54.569013",
       "observation_count": 1
     },
     "winrt intellisense uap - en-us": {
@@ -4810,7 +4810,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981735",
+      "last_observed": "2026-06-29T14:11:54.569033",
       "observation_count": 1
     },
     "sptools_microsoft.visualstudio.officedevelopertools.msi": {
@@ -4830,7 +4830,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981757",
+      "last_observed": "2026-06-29T14:11:54.569056",
       "observation_count": 1
     },
     "visual c++ library crt desktop appx package": {
@@ -4847,7 +4847,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981778",
+      "last_observed": "2026-06-29T14:11:54.569077",
       "observation_count": 1
     },
     "microsoft .net runtime - 10.0.6 (x86)": {
@@ -4864,7 +4864,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981800",
+      "last_observed": "2026-06-29T14:11:54.569096",
       "observation_count": 1
     },
     "hp connection optimizer": {
@@ -4883,7 +4883,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\HP Inc\\HP Connection Optimizer",
-      "last_observed": "2026-06-29T07:11:13.981824",
+      "last_observed": "2026-06-29T14:11:54.569121",
       "observation_count": 1
     },
     "visual c++ library crt appx resource package": {
@@ -4900,7 +4900,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981846",
+      "last_observed": "2026-06-29T14:11:54.569144",
       "observation_count": 1
     },
     "vs_filehandler_x86": {
@@ -4917,7 +4917,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981867",
+      "last_observed": "2026-06-29T14:11:54.569164",
       "observation_count": 1
     },
     "hp software framework": {
@@ -4936,7 +4936,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\HP\\HP Software Framework\\",
-      "last_observed": "2026-06-29T07:11:13.981913",
+      "last_observed": "2026-06-29T14:11:54.569204",
       "observation_count": 1
     },
     "microsoft netstandard sdk": {
@@ -4953,7 +4953,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981957",
+      "last_observed": "2026-06-29T14:11:54.569240",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x86 additional runtime - 14.50.35719": {
@@ -4970,7 +4970,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.981993",
+      "last_observed": "2026-06-29T14:11:54.569273",
       "observation_count": 1
     },
     "vs_clickoncebootstrappermsi": {
@@ -4987,7 +4987,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982014",
+      "last_observed": "2026-06-29T14:11:54.569307",
       "observation_count": 1
     },
     "windows sdk desktop tools arm64": {
@@ -5004,7 +5004,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982033",
+      "last_observed": "2026-06-29T14:11:54.569338",
       "observation_count": 1
     },
     "vs_ssmsprotocolselectormsi": {
@@ -5021,7 +5021,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982055",
+      "last_observed": "2026-06-29T14:11:54.569367",
       "observation_count": 1
     },
     "universal crt headers libraries and sources": {
@@ -5038,7 +5038,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982076",
+      "last_observed": "2026-06-29T14:11:54.569401",
       "observation_count": 1
     },
     "universal general midi dls extension sdk": {
@@ -5055,7 +5055,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982097",
+      "last_observed": "2026-06-29T14:11:54.569433",
       "observation_count": 1
     },
     "microsoft asp.net core targeting pack - 10.0.6 (x86)": {
@@ -5072,7 +5072,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982122",
+      "last_observed": "2026-06-29T14:11:54.569465",
       "observation_count": 1
     },
     "microsoft portable library multi-targeting pack language pack - enu": {
@@ -5089,7 +5089,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982145",
+      "last_observed": "2026-06-29T14:11:54.569488",
       "observation_count": 1
     },
     "windows_toolscorepkg": {
@@ -5106,7 +5106,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982165",
+      "last_observed": "2026-06-29T14:11:54.569510",
       "observation_count": 1
     },
     "windows sdk onecoreuap headers x64": {
@@ -5123,7 +5123,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982185",
+      "last_observed": "2026-06-29T14:11:54.569529",
       "observation_count": 1
     },
     "microsoft visual studio setup wmi provider": {
@@ -5142,7 +5142,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982207",
+      "last_observed": "2026-06-29T14:11:54.569549",
       "observation_count": 1
     },
     "vs_communitysharedmsi": {
@@ -5159,7 +5159,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982228",
+      "last_observed": "2026-06-29T14:11:54.569576",
       "observation_count": 1
     },
     "windows sdk onecoreuap headers arm64": {
@@ -5176,7 +5176,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982247",
+      "last_observed": "2026-06-29T14:11:54.569595",
       "observation_count": 1
     },
     "microsoft .net framework 4.6.1 targeting pack": {
@@ -5193,7 +5193,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982269",
+      "last_observed": "2026-06-29T14:11:54.569615",
       "observation_count": 1
     },
     "winrt intellisense ppi - en-us": {
@@ -5210,7 +5210,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982318",
+      "last_observed": "2026-06-29T14:11:54.569668",
       "observation_count": 1
     },
     "microsoft visual c++ v14 redistributable (x64) - 14.50.35719": {
@@ -5227,7 +5227,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982346",
+      "last_observed": "2026-06-29T14:11:54.569696",
       "observation_count": 1
     },
     "vs_filehandler_amd64": {
@@ -5244,7 +5244,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982366",
+      "last_observed": "2026-06-29T14:11:54.569715",
       "observation_count": 1
     },
     "microsoft .net framework 4.8 sdk": {
@@ -5261,7 +5261,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982390",
+      "last_observed": "2026-06-29T14:11:54.569734",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 redistributable (x86) - 11.0.60610": {
@@ -5278,7 +5278,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982416",
+      "last_observed": "2026-06-29T14:11:54.569760",
       "observation_count": 1
     },
     "windows sdk redistributables": {
@@ -5295,7 +5295,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982460",
+      "last_observed": "2026-06-29T14:11:54.569779",
       "observation_count": 1
     },
     "vs_filetracker_singleton": {
@@ -5312,7 +5312,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982481",
+      "last_observed": "2026-06-29T14:11:54.569799",
       "observation_count": 1
     },
     "amd psp driver": {
@@ -5329,7 +5329,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\PSP Driver\\",
-      "last_observed": "2026-06-29T07:11:13.982499",
+      "last_observed": "2026-06-29T14:11:54.569818",
       "observation_count": 1
     },
     "windows team extension sdk contracts": {
@@ -5346,7 +5346,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982519",
+      "last_observed": "2026-06-29T14:11:54.569838",
       "observation_count": 1
     },
     "winrt intellisense ppi - other languages": {
@@ -5363,7 +5363,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982541",
+      "last_observed": "2026-06-29T14:11:54.569860",
       "observation_count": 1
     },
     "windows sdk desktop libs x86": {
@@ -5380,7 +5380,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982584",
+      "last_observed": "2026-06-29T14:11:54.569936",
       "observation_count": 1
     },
     "windows mobile extension sdk contracts": {
@@ -5397,7 +5397,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982605",
+      "last_observed": "2026-06-29T14:11:54.569961",
       "observation_count": 1
     },
     "windows iot extension sdk": {
@@ -5414,7 +5414,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982625",
+      "last_observed": "2026-06-29T14:11:54.569981",
       "observation_count": 1
     },
     "microsoft visual c++ 2022 x86 debug runtime - 14.50.35719": {
@@ -5433,7 +5433,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982647",
+      "last_observed": "2026-06-29T14:11:54.570003",
       "observation_count": 1
     },
     "amd ryzen balanced driver": {
@@ -5450,7 +5450,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\RyzenPPKG Driver\\",
-      "last_observed": "2026-06-29T07:11:13.982676",
+      "last_observed": "2026-06-29T14:11:54.570025",
       "observation_count": 1
     },
     "microsoft .net framework 4.6.2 targeting pack": {
@@ -5467,7 +5467,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982712",
+      "last_observed": "2026-06-29T14:11:54.570046",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 redistributable (x64) - 11.0.60610": {
@@ -5484,7 +5484,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982759",
+      "last_observed": "2026-06-29T14:11:54.570073",
       "observation_count": 1
     },
     "windows sdk": {
@@ -5501,7 +5501,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982795",
+      "last_observed": "2026-06-29T14:11:54.570092",
       "observation_count": 1
     },
     "vs_sqlclickoncebootstrappermsi": {
@@ -5520,7 +5520,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982830",
+      "last_observed": "2026-06-29T14:11:54.572564",
       "observation_count": 1
     },
     "microsoft .net framework 4.8 targeting pack (enu)": {
@@ -5537,7 +5537,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982870",
+      "last_observed": "2026-06-29T14:11:54.572603",
       "observation_count": 1
     },
     "windows iot extension sdk contracts": {
@@ -5554,7 +5554,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982908",
+      "last_observed": "2026-06-29T14:11:54.572630",
       "observation_count": 1
     },
     "sdk arm64 redistributables": {
@@ -5571,7 +5571,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982938",
+      "last_observed": "2026-06-29T14:11:54.572655",
       "observation_count": 1
     },
     "amd sbxxx smbus driver": {
@@ -5588,7 +5588,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\SMBUS Driver\\",
-      "last_observed": "2026-06-29T07:11:13.982969",
+      "last_observed": "2026-06-29T14:11:54.572682",
       "observation_count": 1
     },
     "windows sdk for windows store apps metadata": {
@@ -5605,7 +5605,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982997",
+      "last_observed": "2026-06-29T14:11:54.572741",
       "observation_count": 1
     },
     "microsoft .net host - 10.0.6 (x86)": {
@@ -5622,7 +5622,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983026",
+      "last_observed": "2026-06-29T14:11:54.572779",
       "observation_count": 1
     },
     "vs_clickoncebootstrappermsires": {
@@ -5639,7 +5639,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983054",
+      "last_observed": "2026-06-29T14:11:54.572826",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 x86 additional runtime - 11.0.61030": {
@@ -5656,7 +5656,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983087",
+      "last_observed": "2026-06-29T14:11:54.572894",
       "observation_count": 1
     },
     "amd i2c driver": {
@@ -5673,7 +5673,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\I2C Driver\\",
-      "last_observed": "2026-06-29T07:11:13.983116",
+      "last_observed": "2026-06-29T14:11:54.572958",
       "observation_count": 1
     },
     "vcpp_crt.redist.clickonce": {
@@ -5690,7 +5690,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983152",
+      "last_observed": "2026-06-29T14:11:54.573005",
       "observation_count": 1
     },
     "microsoft .net framework 4.7.2 targeting pack (enu)": {
@@ -5707,7 +5707,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983190",
+      "last_observed": "2026-06-29T14:11:54.573042",
       "observation_count": 1
     },
     "windows sdk for windows store apps headers": {
@@ -5724,7 +5724,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983223",
+      "last_observed": "2026-06-29T14:11:54.573115",
       "observation_count": 1
     },
     "vs_githubprotocolhandlermsi": {
@@ -5741,7 +5741,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983255",
+      "last_observed": "2026-06-29T14:11:54.573153",
       "observation_count": 1
     },
     "windows app certification kit x64": {
@@ -5758,7 +5758,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983291",
+      "last_observed": "2026-06-29T14:11:54.573191",
       "observation_count": 1
     },
     "windows app certification kit x64 (onecoreuap)": {
@@ -5775,7 +5775,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983329",
+      "last_observed": "2026-06-29T14:11:54.573228",
       "observation_count": 1
     },
     "microsoft .net framework 4.8 targeting pack": {
@@ -5792,7 +5792,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983351",
+      "last_observed": "2026-06-29T14:11:54.573303",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 x86 minimum runtime - 11.0.61030": {
@@ -5809,7 +5809,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983372",
+      "last_observed": "2026-06-29T14:11:54.573376",
       "observation_count": 1
     },
     "clickonce bootstrapper package for microsoft .net framework": {
@@ -5826,7 +5826,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983394",
+      "last_observed": "2026-06-29T14:11:54.573405",
       "observation_count": 1
     },
     "windows software development kit - windows 10.0.26100.7705": {
@@ -5845,7 +5845,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983434",
+      "last_observed": "2026-06-29T14:11:54.573441",
       "observation_count": 1
     },
     "amd micropep driver": {
@@ -5862,7 +5862,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\UPEP Driver\\",
-      "last_observed": "2026-06-29T07:11:13.983473",
+      "last_observed": "2026-06-29T14:11:54.573734",
       "observation_count": 1
     },
     "visual c++ library crt appx package": {
@@ -5879,7 +5879,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983513",
+      "last_observed": "2026-06-29T14:11:54.573794",
       "observation_count": 1
     },
     "microsoft universalwindowsplatform sdk": {
@@ -5896,7 +5896,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983543",
+      "last_observed": "2026-06-29T14:11:54.573828",
       "observation_count": 1
     },
     "microsoft .net framework 4.6.2 targeting pack (enu)": {
@@ -5913,7 +5913,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983565",
+      "last_observed": "2026-06-29T14:11:54.573859",
       "observation_count": 1
     },
     "sptools_microsoft.visualstudio.vsto.msi.resources": {
@@ -5930,7 +5930,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983587",
+      "last_observed": "2026-06-29T14:11:54.573899",
       "observation_count": 1
     },
     "microsoft visual c++ 2012 redistributable (x64) - 11.0.61030": {
@@ -5947,7 +5947,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983614",
+      "last_observed": "2026-06-29T14:11:54.573968",
       "observation_count": 1
     },
     "powershell 7.5.5.0-x64": {
@@ -5966,7 +5966,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983657",
+      "last_observed": "2026-06-29T14:11:54.574010",
       "observation_count": 1
     },
     "windows sdk for windows store apps headers onecoreuap": {
@@ -5983,7 +5983,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983682",
+      "last_observed": "2026-06-29T14:11:54.574049",
       "observation_count": 1
     },
     "ea sports fc 26": {
@@ -6000,7 +6000,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\EA Games\\EA SPORTS FC 26\\",
-      "last_observed": "2026-06-29T07:11:13.983701",
+      "last_observed": "2026-06-29T14:11:54.574086",
       "observation_count": 1
     },
     "windows sdk desktop headers x64": {
@@ -6017,7 +6017,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983722",
+      "last_observed": "2026-06-29T14:11:54.574126",
       "observation_count": 1
     },
     "windows sdk for windows store apps": {
@@ -6034,7 +6034,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983743",
+      "last_observed": "2026-06-29T14:11:54.574165",
       "observation_count": 1
     },
     "winappdeploy": {
@@ -6051,7 +6051,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983762",
+      "last_observed": "2026-06-29T14:11:54.574204",
       "observation_count": 1
     },
     "windows sdk desktop headers x86": {
@@ -6068,7 +6068,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983782",
+      "last_observed": "2026-06-29T14:11:54.574238",
       "observation_count": 1
     },
     "vs_clickoncesigntoolmsi": {
@@ -6085,7 +6085,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983801",
+      "last_observed": "2026-06-29T14:11:54.574269",
       "observation_count": 1
     },
     "windows sdk desktop tools x86": {
@@ -6102,7 +6102,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983820",
+      "last_observed": "2026-06-29T14:11:54.574298",
       "observation_count": 1
     },
     "microsoft .net targeting pack - 10.0.6 (x86)": {
@@ -6119,7 +6119,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983842",
+      "last_observed": "2026-06-29T14:11:54.574338",
       "observation_count": 1
     },
     "vs_vswebprotocolselectormsi": {
@@ -6138,7 +6138,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983861",
+      "last_observed": "2026-06-29T14:11:54.574377",
       "observation_count": 1
     },
     "windows app certification kit supportedapilist x86": {
@@ -6155,7 +6155,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983884",
+      "last_observed": "2026-06-29T14:11:54.574420",
       "observation_count": 1
     },
     "epic online services": {
@@ -6172,7 +6172,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983904",
+      "last_observed": "2026-06-29T14:11:54.574457",
       "observation_count": 1
     },
     "windows sdk for windows store apps contracts": {
@@ -6189,7 +6189,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983925",
+      "last_observed": "2026-06-29T14:11:54.574495",
       "observation_count": 1
     },
     "windows mobile extension sdk": {
@@ -6206,7 +6206,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983945",
+      "last_observed": "2026-06-29T14:11:54.574522",
       "observation_count": 1
     },
     "sdk arm64 additions": {
@@ -6223,7 +6223,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.983964",
+      "last_observed": "2026-06-29T14:11:54.575041",
       "observation_count": 1
     },
     "amd gpio2 driver": {
@@ -6240,7 +6240,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\AMD\\Chipset_Software\\Binaries\\GPIO2 Driver\\",
-      "last_observed": "2026-06-29T07:11:13.983984",
+      "last_observed": "2026-06-29T14:11:54.575088",
       "observation_count": 1
     },
     "winrt intellisense desktop - other languages": {
@@ -6257,7 +6257,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984005",
+      "last_observed": "2026-06-29T14:11:54.575209",
       "observation_count": 1
     },
     "windows sdk desktop tools x64": {
@@ -6274,7 +6274,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984026",
+      "last_observed": "2026-06-29T14:11:54.575255",
       "observation_count": 1
     },
     "winrt intellisense iot - en-us": {
@@ -6291,7 +6291,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984045",
+      "last_observed": "2026-06-29T14:11:54.575288",
       "observation_count": 1
     },
     "microsoft .net native sdk": {
@@ -6308,7 +6308,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984064",
+      "last_observed": "2026-06-29T14:11:54.575322",
       "observation_count": 1
     },
     "windows sdk onecoreuap headers x86": {
@@ -6325,7 +6325,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984084",
+      "last_observed": "2026-06-29T14:11:54.575360",
       "observation_count": 1
     },
     "microsoft visual c++ 2010  x86 redistributable - 10.0.40219": {
@@ -6342,7 +6342,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984106",
+      "last_observed": "2026-06-29T14:11:54.575390",
       "observation_count": 1
     },
     "windows sdk modern versioned developer tools": {
@@ -6361,7 +6361,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984127",
+      "last_observed": "2026-06-29T14:11:54.575418",
       "observation_count": 1
     },
     "python launcher": {
@@ -6378,7 +6378,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984146",
+      "last_observed": "2026-06-29T14:11:54.575442",
       "observation_count": 1
     },
     "windows desktop extension sdk contracts": {
@@ -6395,7 +6395,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984167",
+      "last_observed": "2026-06-29T14:11:54.575469",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 redistributable (x86) - 12.0.30501": {
@@ -6414,7 +6414,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984193",
+      "last_observed": "2026-06-29T14:11:54.575508",
       "observation_count": 1
     },
     "windows sdk for windows store apps directx x86 remote": {
@@ -6431,7 +6431,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984214",
+      "last_observed": "2026-06-29T14:11:54.577032",
       "observation_count": 1
     },
     "microsoft visual c++ 2013 x86 additional runtime - 12.0.21005": {
@@ -6448,7 +6448,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984237",
+      "last_observed": "2026-06-29T14:11:54.577068",
       "observation_count": 1
     },
     "microsoft visual studio setup configuration": {
@@ -6465,7 +6465,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984260",
+      "last_observed": "2026-06-29T14:11:54.577098",
       "observation_count": 1
     },
     "windows sdk signing tools": {
@@ -6482,7 +6482,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984279",
+      "last_observed": "2026-06-29T14:11:54.577125",
       "observation_count": 1
     },
     "windows sdk facade windows winmd versioned": {
@@ -6499,7 +6499,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984300",
+      "last_observed": "2026-06-29T14:11:54.577155",
       "observation_count": 1
     },
     "browser for sql server 2022": {
@@ -6519,7 +6519,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984320",
+      "last_observed": "2026-06-29T14:11:54.577182",
       "observation_count": 1
     },
     "universal crt tools x86": {
@@ -6536,7 +6536,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984341",
+      "last_observed": "2026-06-29T14:11:54.577208",
       "observation_count": 1
     },
     "windows desktop extension sdk": {
@@ -6553,7 +6553,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984360",
+      "last_observed": "2026-06-29T14:11:54.577233",
       "observation_count": 1
     },
     "trader workstation": {
@@ -6570,7 +6570,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Jts",
-      "last_observed": "2026-06-29T07:11:13.984381",
+      "last_observed": "2026-06-29T14:11:54.577285",
       "observation_count": 1
     },
     "claude code": {
@@ -6589,7 +6589,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe",
-      "last_observed": "2026-06-29T07:11:13.984406",
+      "last_observed": "2026-06-29T14:11:54.577322",
       "observation_count": 1
     },
     "balenaetcher": {
@@ -6606,7 +6606,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\balena_etcher",
-      "last_observed": "2026-06-29T07:11:13.984430",
+      "last_observed": "2026-06-29T14:11:54.577355",
       "observation_count": 1
     },
     "github desktop": {
@@ -6623,7 +6623,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\GitHubDesktop",
-      "last_observed": "2026-06-29T07:11:13.984530",
+      "last_observed": "2026-06-29T14:11:54.577444",
       "observation_count": 1
     },
     "julia 1.12.6": {
@@ -6640,7 +6640,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\Julia-1.12.6\\",
-      "last_observed": "2026-06-29T07:11:13.984574",
+      "last_observed": "2026-06-29T14:11:54.577501",
       "observation_count": 1
     },
     "medal": {
@@ -6657,7 +6657,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Medal",
-      "last_observed": "2026-06-29T07:11:13.984596",
+      "last_observed": "2026-06-29T14:11:54.577529",
       "observation_count": 1
     },
     "mongodb compass": {
@@ -6676,7 +6676,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\MongoDBCompass",
-      "last_observed": "2026-06-29T07:11:13.984620",
+      "last_observed": "2026-06-29T14:11:54.577559",
       "observation_count": 1
     },
     "python 3.11.9": {
@@ -6693,7 +6693,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Python\\pythoncore-3.11-64",
-      "last_observed": "2026-06-29T07:11:13.984646",
+      "last_observed": "2026-06-29T14:11:54.577589",
       "observation_count": 1
     },
     "python 3.14.4": {
@@ -6710,7 +6710,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Python\\pythoncore-3.14-64",
-      "last_observed": "2026-06-29T07:11:13.984666",
+      "last_observed": "2026-06-29T14:11:54.577618",
       "observation_count": 1
     },
     "roblox player for josep": {
@@ -6729,7 +6729,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Roblox\\Versions\\version-bd08027bb04e4045",
-      "last_observed": "2026-06-29T07:11:13.984692",
+      "last_observed": "2026-06-29T14:11:54.577652",
       "observation_count": 1
     },
     "python 3.11.9 (64-bit)": {
@@ -6746,7 +6746,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984718",
+      "last_observed": "2026-06-29T14:11:54.577687",
       "observation_count": 1
     },
     "ollama version 0.30.4": {
@@ -6780,7 +6780,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\CD Projekt Red\\REDlauncher\\",
-      "last_observed": "2026-06-29T07:11:13.984765",
+      "last_observed": "2026-06-29T14:11:54.577751",
       "observation_count": 1
     },
     "microsoft visual studio code (user)": {
@@ -6799,7 +6799,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\Microsoft VS Code\\",
-      "last_observed": "2026-06-29T07:11:13.984791",
+      "last_observed": "2026-06-29T14:11:54.577788",
       "observation_count": 1
     },
     "python 3.13.7 (64-bit)": {
@@ -6818,7 +6818,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984818",
+      "last_observed": "2026-06-29T14:11:54.577821",
       "observation_count": 1
     },
     "antigravity (user)": {
@@ -6835,7 +6835,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\Antigravity\\",
-      "last_observed": "2026-06-29T07:11:13.984840",
+      "last_observed": "2026-06-29T14:11:54.577853",
       "observation_count": 1
     },
     "cursor (user)": {
@@ -6852,7 +6852,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\cursor\\",
-      "last_observed": "2026-06-29T07:11:13.984863",
+      "last_observed": "2026-06-29T14:11:54.577883",
       "observation_count": 1
     },
     "com.fincept.terminal": {
@@ -6871,7 +6871,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\FinceptTerminal",
-      "last_observed": "2026-06-29T07:11:13.984883",
+      "last_observed": "2026-06-29T14:11:54.577910",
       "observation_count": 1
     },
     "apache netbeans": {
@@ -6890,7 +6890,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Apache NetBeans",
-      "last_observed": "2026-06-29T07:11:13.984908",
+      "last_observed": "2026-06-29T14:11:54.577941",
       "observation_count": 1
     },
     "bcuninstaller": {
@@ -6928,7 +6928,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\dotnet",
-      "last_observed": "2026-06-29T07:11:13.984930",
+      "last_observed": "2026-06-29T14:11:54.577974",
       "observation_count": 1
     },
     "hpcommrecovery": {
@@ -6947,7 +6947,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\HPCommRecovery",
-      "last_observed": "2026-06-29T07:11:13.984957",
+      "last_observed": "2026-06-29T14:11:54.578014",
       "observation_count": 1
     },
     "hpprintscandoctor": {
@@ -6966,7 +6966,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\HPPrintScanDoctor",
-      "last_observed": "2026-06-29T07:11:13.984984",
+      "last_observed": "2026-06-29T14:11:54.578053",
       "observation_count": 1
     },
     "internet explorer": {
@@ -6985,7 +6985,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Internet Explorer",
-      "last_observed": "2026-06-29T07:11:13.985005",
+      "last_observed": "2026-06-29T14:11:54.578087",
       "observation_count": 1
     },
     "krita (x64)": {
@@ -7004,7 +7004,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Krita (x64)",
-      "last_observed": "2026-06-29T07:11:13.985030",
+      "last_observed": "2026-06-29T14:11:54.578121",
       "observation_count": 1
     },
     "nodejs": {
@@ -7023,7 +7023,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\nodejs",
-      "last_observed": "2026-06-29T07:11:13.985076",
+      "last_observed": "2026-06-29T14:11:54.578563",
       "observation_count": 1
     },
     "pc remote receiver": {
@@ -7042,7 +7042,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\PC Remote Receiver",
-      "last_observed": "2026-06-29T07:11:13.985100",
+      "last_observed": "2026-06-29T14:11:54.578602",
       "observation_count": 1
     },
     "quickcpu": {
@@ -7061,7 +7061,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\QuickCPU",
-      "last_observed": "2026-06-29T07:11:13.985121",
+      "last_observed": "2026-06-29T14:11:54.578630",
       "observation_count": 1
     },
     "tap-windows": {
@@ -7080,7 +7080,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\TAP-Windows",
-      "last_observed": "2026-06-29T07:11:13.985164",
+      "last_observed": "2026-06-29T14:11:54.578688",
       "observation_count": 1
     },
     "tesseract-ocr": {
@@ -7099,7 +7099,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Tesseract-OCR",
-      "last_observed": "2026-06-29T07:11:13.985186",
+      "last_observed": "2026-06-29T14:11:54.578717",
       "observation_count": 1
     },
     "usbpcap": {
@@ -7119,7 +7119,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\USBPcap",
-      "last_observed": "2026-06-29T07:11:13.985206",
+      "last_observed": "2026-06-29T14:11:54.578743",
       "observation_count": 1
     },
     "windows defender": {
@@ -7138,7 +7138,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Windows Defender",
-      "last_observed": "2026-06-29T07:11:13.985229",
+      "last_observed": "2026-06-29T14:11:54.578771",
       "observation_count": 1
     },
     "windows mail": {
@@ -7158,7 +7158,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Windows Mail",
-      "last_observed": "2026-06-29T07:11:13.985250",
+      "last_observed": "2026-06-29T14:11:54.578799",
       "observation_count": 1
     },
     "windows media player": {
@@ -7178,7 +7178,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Windows Media Player",
-      "last_observed": "2026-06-29T07:11:13.985272",
+      "last_observed": "2026-06-29T14:11:54.578827",
       "observation_count": 1
     },
     "windows photo viewer": {
@@ -7197,7 +7197,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Windows Photo Viewer",
-      "last_observed": "2026-06-29T07:11:13.985297",
+      "last_observed": "2026-06-29T14:11:54.578856",
       "observation_count": 1
     },
     "winrar": {
@@ -7216,7 +7216,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\WinRAR",
-      "last_observed": "2026-06-29T07:11:13.985316",
+      "last_observed": "2026-06-29T14:11:54.578882",
       "observation_count": 1
     },
     "wireshark": {
@@ -7235,7 +7235,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Wireshark",
-      "last_observed": "2026-06-29T07:11:13.985340",
+      "last_observed": "2026-06-29T14:11:54.578911",
       "observation_count": 1
     },
     "wsl": {
@@ -7254,7 +7254,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\WSL",
-      "last_observed": "2026-06-29T07:11:13.985362",
+      "last_observed": "2026-06-29T14:11:54.578938",
       "observation_count": 1
     },
     "dev-cpp": {
@@ -7273,7 +7273,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Dev-Cpp",
-      "last_observed": "2026-06-29T07:11:13.985384",
+      "last_observed": "2026-06-29T14:11:54.578965",
       "observation_count": 1
     },
     "easyanticheat_eos": {
@@ -7309,7 +7309,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985428",
+      "last_observed": "2026-06-29T14:11:54.578992",
       "observation_count": 1
     },
     "chrome.exe": {
@@ -7346,7 +7346,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985474",
+      "last_observed": "2026-06-29T14:11:54.579051",
       "observation_count": 1
     },
     "code.exe": {
@@ -7365,7 +7365,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985453",
+      "last_observed": "2026-06-29T14:11:54.579024",
       "observation_count": 1
     },
     "csrss.exe": {
@@ -7382,7 +7382,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985493",
+      "last_observed": "2026-06-29T14:11:54.579078",
       "observation_count": 1
     },
     "wininit.exe": {
@@ -7399,7 +7399,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985514",
+      "last_observed": "2026-06-29T14:11:54.579105",
       "observation_count": 1
     },
     "conhost.exe": {
@@ -7416,7 +7416,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985967",
+      "last_observed": "2026-06-29T14:11:54.579747",
       "observation_count": 1
     },
     "services.exe": {
@@ -7433,7 +7433,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985560",
+      "last_observed": "2026-06-29T14:11:54.579159",
       "observation_count": 1
     },
     "lsaiso.exe": {
@@ -7450,7 +7450,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985581",
+      "last_observed": "2026-06-29T14:11:54.579187",
       "observation_count": 1
     },
     "lsass.exe": {
@@ -7467,7 +7467,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985601",
+      "last_observed": "2026-06-29T14:11:54.579238",
       "observation_count": 1
     },
     "fdlauncher.exe": {
@@ -7487,7 +7487,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987430",
+      "last_observed": "2026-06-29T14:11:54.583956",
       "observation_count": 1
     },
     "fontdrvhost.exe": {
@@ -7504,7 +7504,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985645",
+      "last_observed": "2026-06-29T14:11:54.579298",
       "observation_count": 1
     },
     "wudfhost.exe": {
@@ -7521,7 +7521,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988429",
+      "last_observed": "2026-06-29T14:11:54.584660",
       "observation_count": 1
     },
     "mpdwsvc.exe": {
@@ -7541,7 +7541,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985671",
+      "last_observed": "2026-06-29T14:11:54.579331",
       "observation_count": 1
     },
     "runtimebroker.exe": {
@@ -7560,7 +7560,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987809",
+      "last_observed": "2026-06-29T14:11:54.584247",
       "observation_count": 1
     },
     "msedge.exe": {
@@ -7580,7 +7580,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986771",
+      "last_observed": "2026-06-29T14:11:54.583820",
       "observation_count": 1
     },
     "msedgewebview2.exe": {
@@ -7600,7 +7600,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987240",
+      "last_observed": "2026-06-29T14:11:54.583844",
       "observation_count": 1
     },
     "useroobebroker.exe": {
@@ -7619,7 +7619,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988006",
+      "last_observed": "2026-06-29T14:11:54.584387",
       "observation_count": 1
     },
     "sqlceip.exe": {
@@ -7639,7 +7639,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986640",
+      "last_observed": "2026-06-29T14:11:54.582412",
       "observation_count": 1
     },
     "memcompression": {
@@ -7656,7 +7656,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985824",
+      "last_observed": "2026-06-29T14:11:54.579551",
       "observation_count": 1
     },
     "fdhost.exe": {
@@ -7676,7 +7676,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987397",
+      "last_observed": "2026-06-29T14:11:54.583932",
       "observation_count": 1
     },
     "networkcap.exe": {
@@ -7695,7 +7695,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985876",
+      "last_observed": "2026-06-29T14:11:54.579622",
       "observation_count": 1
     },
     "diagscap.exe": {
@@ -7714,7 +7714,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985850",
+      "last_observed": "2026-06-29T14:11:54.579587",
       "observation_count": 1
     },
     "apphelpercap.exe": {
@@ -7733,7 +7733,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985901",
+      "last_observed": "2026-06-29T14:11:54.579660",
       "observation_count": 1
     },
     "sysinfocap.exe": {
@@ -7752,7 +7752,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985926",
+      "last_observed": "2026-06-29T14:11:54.579692",
       "observation_count": 1
     },
     "gameinputredistservice.exe": {
@@ -7771,7 +7771,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985784",
+      "last_observed": "2026-06-29T14:11:54.579491",
       "observation_count": 1
     },
     "dashost.exe": {
@@ -7788,7 +7788,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985804",
+      "last_observed": "2026-06-29T14:11:54.579523",
       "observation_count": 1
     },
     "pet.exe": {
@@ -7807,7 +7807,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985695",
+      "last_observed": "2026-06-29T14:11:54.579367",
       "observation_count": 1
     },
     "securityhealthservice.exe": {
@@ -7826,7 +7826,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987118",
+      "last_observed": "2026-06-29T14:11:54.583733",
       "observation_count": 1
     },
     "ms-teams.exe": {
@@ -7846,7 +7846,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986895",
+      "last_observed": "2026-06-29T14:11:54.583517",
       "observation_count": 1
     },
     "launchpad.exe": {
@@ -7866,7 +7866,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986010",
+      "last_observed": "2026-06-29T14:11:54.579839",
       "observation_count": 1
     },
     "winlogon.exe": {
@@ -7883,7 +7883,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985537",
+      "last_observed": "2026-06-29T14:11:54.579131",
       "observation_count": 1
     },
     "spoolsv.exe": {
@@ -7900,7 +7900,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985986",
+      "last_observed": "2026-06-29T14:11:54.579776",
       "observation_count": 1
     },
     "ngciso.exe": {
@@ -7917,7 +7917,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985947",
+      "last_observed": "2026-06-29T14:11:54.579719",
       "observation_count": 1
     },
     "aggregatorhost.exe": {
@@ -7934,7 +7934,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987088",
+      "last_observed": "2026-06-29T14:11:54.583710",
       "observation_count": 1
     },
     "elanfpservice.exe": {
@@ -7951,7 +7951,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986177",
+      "last_observed": "2026-06-29T14:11:54.581466",
       "observation_count": 1
     },
     "etdservice.exe": {
@@ -7968,7 +7968,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986032",
+      "last_observed": "2026-06-29T14:11:54.579869",
       "observation_count": 1
     },
     "officeclicktorun.exe": {
@@ -7988,7 +7988,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986565",
+      "last_observed": "2026-06-29T14:11:54.585807",
       "observation_count": 1
     },
     "mpdefendercoreservice.exe": {
@@ -8005,7 +8005,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986455",
+      "last_observed": "2026-06-29T14:11:54.581507",
       "observation_count": 1
     },
     "rtkauduservice64.exe": {
@@ -8024,7 +8024,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986085",
+      "last_observed": "2026-06-29T14:11:54.579953",
       "observation_count": 1
     },
     "pg_ctl.exe": {
@@ -8044,7 +8044,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986155",
+      "last_observed": "2026-06-29T14:11:54.581409",
       "observation_count": 1
     },
     "rtkbtmanserv.exe": {
@@ -8061,7 +8061,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986112",
+      "last_observed": "2026-06-29T14:11:54.579998",
       "observation_count": 1
     },
     "sqlwriter.exe": {
@@ -8081,7 +8081,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986133",
+      "last_observed": "2026-06-29T14:11:54.580037",
       "observation_count": 1
     },
     "wslservice.exe": {
@@ -8100,7 +8100,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986671",
+      "last_observed": "2026-06-29T14:11:54.583199",
       "observation_count": 1
     },
     "msmpeng.exe": {
@@ -8117,7 +8117,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986603",
+      "last_observed": "2026-06-29T14:11:54.582381",
       "observation_count": 1
     },
     "gameinputsvc.exe": {
@@ -8134,7 +8134,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989376",
+      "last_observed": "2026-06-29T14:11:54.585403",
       "observation_count": 1
     },
     "dwm.exe": {
@@ -8151,7 +8151,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987206",
+      "last_observed": "2026-06-29T14:11:54.583798",
       "observation_count": 1
     },
     "sqlservr.exe": {
@@ -8171,7 +8171,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987461",
+      "last_observed": "2026-06-29T14:11:54.583979",
       "observation_count": 1
     },
     "cmd.exe": {
@@ -8190,7 +8190,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989158",
+      "last_observed": "2026-06-29T14:11:54.585232",
       "observation_count": 1
     },
     "postgres.exe": {
@@ -8210,7 +8210,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986863",
+      "last_observed": "2026-06-29T14:11:54.583465",
       "observation_count": 1
     },
     "unsecapp.exe": {
@@ -8227,7 +8227,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986954",
+      "last_observed": "2026-06-29T14:11:54.583580",
       "observation_count": 1
     },
     "wmiprvse.exe": {
@@ -8244,7 +8244,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985623",
+      "last_observed": "2026-06-29T14:11:54.579268",
       "observation_count": 1
     },
     "openconsole.exe": {
@@ -8264,7 +8264,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987565",
+      "last_observed": "2026-06-29T14:11:54.584080",
       "observation_count": 1
     },
     "vmcompute.exe": {
@@ -8281,7 +8281,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987146",
+      "last_observed": "2026-06-29T14:11:54.583754",
       "observation_count": 1
     },
     "python.exe": {
@@ -8298,7 +8298,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987874",
+      "last_observed": "2026-06-29T14:11:54.579808",
       "observation_count": 1
     },
     "cowork-svc.exe": {
@@ -8317,7 +8317,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986987",
+      "last_observed": "2026-06-29T14:11:54.583618",
       "observation_count": 1
     },
     "gamingservices.exe": {
@@ -8336,7 +8336,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988996",
+      "last_observed": "2026-06-29T14:11:54.585115",
       "observation_count": 1
     },
     "gamingservicesnet.exe": {
@@ -8355,7 +8355,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988829",
+      "last_observed": "2026-06-29T14:11:54.584996",
       "observation_count": 1
     },
     "nissrv.exe": {
@@ -8372,7 +8372,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987274",
+      "last_observed": "2026-06-29T14:11:54.585426",
       "observation_count": 1
     },
     "searchindexer.exe": {
@@ -8389,7 +8389,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986801",
+      "last_observed": "2026-06-29T14:11:54.584705",
       "observation_count": 1
     },
     "sihost.exe": {
@@ -8406,7 +8406,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985718",
+      "last_observed": "2026-06-29T14:11:54.579396",
       "observation_count": 1
     },
     "bridgecommunication.exe": {
@@ -8444,7 +8444,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988222",
+      "last_observed": "2026-06-29T14:11:54.584526",
       "observation_count": 1
     },
     "mscopilot.exe": {
@@ -8483,7 +8483,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988092",
+      "last_observed": "2026-06-29T14:11:54.584432",
       "observation_count": 1
     },
     "taskhostw.exe": {
@@ -8502,7 +8502,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986925",
+      "last_observed": "2026-06-29T14:11:54.583556",
       "observation_count": 1
     },
     "pwsh.exe": {
@@ -8522,7 +8522,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988491",
+      "last_observed": "2026-06-29T14:11:54.584292",
       "observation_count": 1
     },
     "updatertask.exe": {
@@ -8558,7 +8558,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985739",
+      "last_observed": "2026-06-29T14:11:54.579427",
       "observation_count": 1
     },
     "widgetservice.exe": {
@@ -8577,7 +8577,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989627",
+      "last_observed": "2026-06-29T14:11:54.585641",
       "observation_count": 1
     },
     "explorer.exe": {
@@ -8596,7 +8596,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989346",
+      "last_observed": "2026-06-29T14:11:54.585383",
       "observation_count": 1
     },
     "crossdeviceresume.exe": {
@@ -8613,7 +8613,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987601",
+      "last_observed": "2026-06-29T14:11:54.584104",
       "observation_count": 1
     },
     "textinputhost.exe": {
@@ -8630,7 +8630,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989319",
+      "last_observed": "2026-06-29T14:11:54.585363",
       "observation_count": 1
     },
     "crossdeviceservice.exe": {
@@ -8649,7 +8649,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987744",
+      "last_observed": "2026-06-29T14:11:54.584202",
       "observation_count": 1
     },
     "widgets.exe": {
@@ -8669,7 +8669,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989032",
+      "last_observed": "2026-06-29T14:11:54.585141",
       "observation_count": 1
     },
     "searchhost.exe": {
@@ -8686,7 +8686,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988795",
+      "last_observed": "2026-06-29T14:11:54.584972",
       "observation_count": 1
     },
     "startmenuexperiencehost.exe": {
@@ -8703,7 +8703,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987639",
+      "last_observed": "2026-06-29T14:11:54.584133",
       "observation_count": 1
     },
     "appactions.exe": {
@@ -8720,7 +8720,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986834",
+      "last_observed": "2026-06-29T14:11:54.583412",
       "observation_count": 1
     },
     "sourcery.exe": {
@@ -8739,7 +8739,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989194",
+      "last_observed": "2026-06-29T14:11:54.585256",
       "observation_count": 1
     },
     "audiodgsvc.exe": {
@@ -8758,7 +8758,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988653",
+      "last_observed": "2026-06-29T14:11:54.584845",
       "observation_count": 1
     },
     "amdrssrcext.exe": {
@@ -8777,7 +8777,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989404",
+      "last_observed": "2026-06-29T14:11:54.585446",
       "observation_count": 1
     },
     "spotifylauncher.exe": {
@@ -8797,7 +8797,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987975",
+      "last_observed": "2026-06-29T14:11:54.584365",
       "observation_count": 1
     },
     "ctfmon.exe": {
@@ -8814,7 +8814,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988193",
+      "last_observed": "2026-06-29T14:11:54.584506",
       "observation_count": 1
     },
     "xboxpctray.exe": {
@@ -8833,7 +8833,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988927",
+      "last_observed": "2026-06-29T14:11:54.585066",
       "observation_count": 1
     },
     "amdrsserv.exe": {
@@ -8852,7 +8852,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989719",
+      "last_observed": "2026-06-29T14:11:54.585688",
       "observation_count": 1
     },
     "securityhealthsystray.exe": {
@@ -8871,7 +8871,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987706",
+      "last_observed": "2026-06-29T14:11:54.584177",
       "observation_count": 1
     },
     "onedrive.exe": {
@@ -8890,7 +8890,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989095",
+      "last_observed": "2026-06-29T14:11:54.585187",
       "observation_count": 1
     },
     "cncmd.exe": {
@@ -8910,7 +8910,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989747",
+      "last_observed": "2026-06-29T14:11:54.585709",
       "observation_count": 1
     },
     "eabackgroundservice.exe": {
@@ -8929,7 +8929,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988724",
+      "last_observed": "2026-06-29T14:11:54.584918",
       "observation_count": 1
     },
     "m365copilot.exe": {
@@ -8949,7 +8949,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989257",
+      "last_observed": "2026-06-29T14:11:54.585320",
       "observation_count": 1
     },
     "searchprotocolhost.exe": {
@@ -8983,7 +8983,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987842",
+      "last_observed": "2026-06-29T14:11:54.584269",
       "observation_count": 1
     },
     "filecoauth.exe": {
@@ -9002,7 +9002,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989588",
+      "last_observed": "2026-06-29T14:11:54.585589",
       "observation_count": 1
     },
     "radeonsoftware.exe": {
@@ -9021,7 +9021,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989529",
+      "last_observed": "2026-06-29T14:11:54.585540",
       "observation_count": 1
     },
     "shellhost.exe": {
@@ -9040,7 +9040,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989874",
+      "last_observed": "2026-06-29T14:11:54.585728",
       "observation_count": 1
     },
     "cpumetricsserver.exe": {
@@ -9059,7 +9059,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988358",
+      "last_observed": "2026-06-29T14:11:54.584615",
       "observation_count": 1
     },
     "hp.contextaware.exe": {
@@ -9078,7 +9078,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988322",
+      "last_observed": "2026-06-29T14:11:54.584593",
       "observation_count": 1
     },
     "dllhost.exe": {
@@ -9095,7 +9095,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988251",
+      "last_observed": "2026-06-29T14:11:54.584546",
       "observation_count": 1
     },
     "hpsystemeventutilitybackground.exe": {
@@ -9114,7 +9114,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988560",
+      "last_observed": "2026-06-29T14:11:54.584751",
       "observation_count": 1
     },
     "ollama.exe": {
@@ -9131,7 +9131,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988860",
+      "last_observed": "2026-06-29T14:11:54.585019",
       "observation_count": 1
     },
     "hpsystemeventutilityhost.exe": {
@@ -9150,7 +9150,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990009",
+      "last_observed": "2026-06-29T14:11:54.585779",
       "observation_count": 1
     },
     "hp.hpx.exe": {
@@ -9169,7 +9169,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988285",
+      "last_observed": "2026-06-29T14:11:54.584568",
       "observation_count": 1
     },
     "hpmedianetwork.exe": {
@@ -9189,7 +9189,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988621",
+      "last_observed": "2026-06-29T14:11:54.584822",
       "observation_count": 1
     },
     "xboxgamebarspotify.exe": {
@@ -9228,7 +9228,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988961",
+      "last_observed": "2026-06-29T14:11:54.585091",
       "observation_count": 1
     },
     "edgegameassist.exe": {
@@ -9267,7 +9267,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989688",
+      "last_observed": "2026-06-29T14:11:54.585666",
       "observation_count": 1
     },
     "browserhost.exe": {
@@ -9306,7 +9306,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989129",
+      "last_observed": "2026-06-29T14:11:54.585211",
       "observation_count": 1
     },
     "applicationframehost.exe": {
@@ -9323,7 +9323,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989064",
+      "last_observed": "2026-06-29T14:11:54.585164",
       "observation_count": 1
     },
     "onedrive.sync.service.exe": {
@@ -9342,7 +9342,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988395",
+      "last_observed": "2026-06-29T14:11:54.584639",
       "observation_count": 1
     },
     "systemsettings.exe": {
@@ -9378,7 +9378,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987909",
+      "last_observed": "2026-06-29T14:11:54.584317",
       "observation_count": 1
     },
     "silke.exe": {
@@ -9414,7 +9414,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989436",
+      "last_observed": "2026-06-29T14:11:54.585471",
       "observation_count": 1
     },
     "access": {
@@ -9434,7 +9434,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990047",
+      "last_observed": "2026-06-29T14:11:54.585850",
       "observation_count": 1
     },
     "outlook (classic)": {
@@ -9454,7 +9454,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990083",
+      "last_observed": "2026-06-29T14:11:54.585895",
       "observation_count": 1
     },
     "powerpoint": {
@@ -9474,7 +9474,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990116",
+      "last_observed": "2026-06-29T14:11:54.585923",
       "observation_count": 1
     },
     "sticky notes (new)": {
@@ -9495,7 +9495,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990150",
+      "last_observed": "2026-06-29T14:11:54.585958",
       "observation_count": 1
     },
     "telemetry log for office": {
@@ -9515,7 +9515,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990186",
+      "last_observed": "2026-06-29T14:11:54.586006",
       "observation_count": 1
     },
     "ryzen master help guide": {
@@ -9534,7 +9534,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.990223",
+      "last_observed": "2026-06-29T14:11:54.586049",
       "observation_count": 1
     },
     "taskbar": {
@@ -10391,7 +10391,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988164",
+      "last_observed": "2026-06-29T14:11:54.584486",
       "observation_count": 1
     },
     "searchfilterhost.exe": {
@@ -15885,7 +15885,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975370",
+      "last_observed": "2026-06-29T14:11:54.556814",
       "observation_count": 1
     },
     "microsoft windows desktop runtime - 8.0.28 (x64)": {
@@ -15902,7 +15902,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.976120",
+      "last_observed": "2026-06-29T14:11:54.560947",
       "observation_count": 1
     },
     "redis on windows": {
@@ -15919,7 +15919,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977432",
+      "last_observed": "2026-06-29T14:11:54.562738",
       "observation_count": 1
     },
     "logi options+": {
@@ -15938,7 +15938,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977917",
+      "last_observed": "2026-06-29T14:11:54.563158",
       "observation_count": 1
     },
     "microsoft .net runtime - 8.0.28 (x64)": {
@@ -15955,7 +15955,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.978467",
+      "last_observed": "2026-06-29T14:11:54.563638",
       "observation_count": 1
     },
     "microsoft .net host - 8.0.28 (x64)": {
@@ -15972,7 +15972,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979528",
+      "last_observed": "2026-06-29T14:11:54.564870",
       "observation_count": 1
     },
     "samsung usb driver for mobile phones": {
@@ -15991,7 +15991,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979593",
+      "last_observed": "2026-06-29T14:11:54.564959",
       "observation_count": 1
     },
     "microsoft .net host fx resolver - 8.0.28 (x64)": {
@@ -16008,7 +16008,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.979802",
+      "last_observed": "2026-06-29T14:11:54.565207",
       "observation_count": 1
     },
     "logi plugin service": {
@@ -16025,7 +16025,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.980127",
+      "last_observed": "2026-06-29T14:11:54.565594",
       "observation_count": 1
     },
     "forza horizon 6": {
@@ -16042,7 +16042,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Forza Horizon 6\\",
-      "last_observed": "2026-06-29T07:11:13.980252",
+      "last_observed": "2026-06-29T14:11:54.565765",
       "observation_count": 1
     },
     "smart switch": {
@@ -16061,7 +16061,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Samsung\\Smart Switch PC\\",
-      "last_observed": "2026-06-29T07:11:13.980329",
+      "last_observed": "2026-06-29T14:11:54.565857",
       "observation_count": 1
     },
     "need for speed unbound": {
@@ -16080,7 +16080,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Excalibur",
-      "last_observed": "2026-06-29T07:11:13.982297",
+      "last_observed": "2026-06-29T14:11:54.569645",
       "observation_count": 1
     },
     "microsoft visual c++ 2008 redistributable - x86 9.0.30729.6161": {
@@ -16097,7 +16097,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.982563",
+      "last_observed": "2026-06-29T14:11:54.569891",
       "observation_count": 1
     },
     "ollama version 0.30.10": {
@@ -16114,7 +16114,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Programs\\Ollama\\",
-      "last_observed": "2026-06-29T07:11:13.984740",
+      "last_observed": "2026-06-29T14:11:54.577717",
       "observation_count": 1
     },
     "logioptionsplus": {
@@ -16133,7 +16133,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\LogiOptionsPlus",
-      "last_observed": "2026-06-29T07:11:13.985052",
+      "last_observed": "2026-06-29T14:11:54.578515",
       "observation_count": 1
     },
     "redis": {
@@ -16152,7 +16152,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Program Files\\Redis",
-      "last_observed": "2026-06-29T07:11:13.985141",
+      "last_observed": "2026-06-29T14:11:54.578659",
       "observation_count": 1
     },
     "claude.exe": {
@@ -16190,7 +16190,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987026",
+      "last_observed": "2026-06-29T14:11:54.583660",
       "observation_count": 1
     },
     "ealocalhostsvc.exe": {
@@ -16228,7 +16228,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986053",
+      "last_observed": "2026-06-29T14:11:54.579909",
       "observation_count": 1
     },
     "logioptionsplus_updater.exe": {
@@ -16247,7 +16247,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986739",
+      "last_observed": "2026-06-29T14:11:54.583281",
       "observation_count": 1
     },
     "eacefsubprocess.exe": {
@@ -16285,7 +16285,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986524",
+      "last_observed": "2026-06-29T14:11:54.582336",
       "observation_count": 1
     },
     "ss_conn_service2.exe": {
@@ -16304,7 +16304,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.986704",
+      "last_observed": "2026-06-29T14:11:54.583238",
       "observation_count": 1
     },
     "kilo.exe": {
@@ -16323,7 +16323,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987338",
+      "last_observed": "2026-06-29T14:11:54.583887",
       "observation_count": 1
     },
     "mscopilot_proxy.exe": {
@@ -16342,7 +16342,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988461",
+      "last_observed": "2026-06-29T14:11:54.584684",
       "observation_count": 1
     },
     "logi_crashpad_handler.exe": {
@@ -16361,7 +16361,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987777",
+      "last_observed": "2026-06-29T14:11:54.584225",
       "observation_count": 1
     },
     "logioptionsplus_appbroker.exe": {
@@ -16381,7 +16381,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987178",
+      "last_observed": "2026-06-29T14:11:54.583777",
       "observation_count": 1
     },
     "eadesktop.exe": {
@@ -16436,7 +16436,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.985759",
+      "last_observed": "2026-06-29T14:11:54.579455",
       "observation_count": 1
     },
     "whatsapp.root.exe": {
@@ -16474,7 +16474,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988684",
+      "last_observed": "2026-06-29T14:11:54.584885",
       "observation_count": 1
     },
     "backgroundtaskhost.exe": {
@@ -16493,7 +16493,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987057",
+      "last_observed": "2026-06-29T14:11:54.583686",
       "observation_count": 1
     },
     "uvicorn.exe": {
@@ -16588,7 +16588,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.977025",
+      "last_observed": "2026-06-29T14:11:54.562176",
       "observation_count": 1
     },
     "granola 7.345.5": {
@@ -16622,7 +16622,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987942",
+      "last_observed": "2026-06-29T14:11:54.584341",
       "observation_count": 1
     },
     "olkexthost.exe": {
@@ -16696,7 +16696,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988892",
+      "last_observed": "2026-06-29T14:11:54.585041",
       "observation_count": 1
     },
     "m365copilot_autostarter.exe": {
@@ -16750,7 +16750,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.975631",
+      "last_observed": "2026-06-29T14:11:54.560175",
       "observation_count": 1
     },
     "dotnet.exe": {
@@ -17009,7 +17009,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988128",
+      "last_observed": "2026-06-29T14:11:54.584459",
       "observation_count": 1
     },
     "microsoft.visualstudio.code.server.exe": {
@@ -17396,7 +17396,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987528",
+      "last_observed": "2026-06-29T14:11:54.584053",
       "observation_count": 1
     },
     "wsl.exe": {
@@ -17415,7 +17415,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987367",
+      "last_observed": "2026-06-29T14:11:54.583909",
       "observation_count": 1
     },
     "docker desktop.exe": {
@@ -17434,7 +17434,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987671",
+      "last_observed": "2026-06-29T14:11:54.584155",
       "observation_count": 1
     },
     "com.docker.build.exe": {
@@ -17453,7 +17453,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988058",
+      "last_observed": "2026-06-29T14:11:54.584409",
       "observation_count": 1
     },
     "vmwp.exe": {
@@ -17470,7 +17470,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987304",
+      "last_observed": "2026-06-29T14:11:54.583863",
       "observation_count": 1
     },
     "docker-agent.exe": {
@@ -17489,7 +17489,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989466",
+      "last_observed": "2026-06-29T14:11:54.585493",
       "observation_count": 1
     },
     "hpqwmiex.exe": {
@@ -17525,7 +17525,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989284",
+      "last_observed": "2026-06-29T14:11:54.585340",
       "observation_count": 1
     },
     "msrdc.exe": {
@@ -17544,7 +17544,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988590",
+      "last_observed": "2026-06-29T14:11:54.584792",
       "observation_count": 1
     },
     "com.docker.backend.exe": {
@@ -17563,7 +17563,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989498",
+      "last_observed": "2026-06-29T14:11:54.585517",
       "observation_count": 1
     },
     "docker-sandbox.exe": {
@@ -17583,7 +17583,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989559",
+      "last_observed": "2026-06-29T14:11:54.585563",
       "observation_count": 1
     },
     "wslrelay.exe": {
@@ -17602,7 +17602,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.989221",
+      "last_observed": "2026-06-29T14:11:54.585276",
       "observation_count": 1
     },
     "codesetup-stable-7e7950df89d055b5a378379db9ee14290772148a.exe": {
@@ -17622,7 +17622,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.987499",
+      "last_observed": "2026-06-29T14:11:54.584030",
       "observation_count": 1
     },
     "codesetup-stable-7e7950df89d055b5a378379db9ee14290772148a.tmp": {
@@ -17642,7 +17642,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.988761",
+      "last_observed": "2026-06-29T14:11:54.584948",
       "observation_count": 1
     },
     "ripgrep msvc": {
@@ -17659,7 +17659,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BurntSushi.ripgrep.MSVC_Microsoft.Winget.Source_8wekyb3d8bbwe",
-      "last_observed": "2026-06-29T07:11:13.984479",
+      "last_observed": "2026-06-29T14:11:54.577381",
       "observation_count": 1
     },
     "granola 7.372.1": {
@@ -17693,7 +17693,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "C:\\Users\\josep\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe",
-      "last_observed": "2026-06-29T07:11:13.984549",
+      "last_observed": "2026-06-29T14:11:54.577471",
       "observation_count": 1
     },
     "spotify.exe": {
@@ -17862,7 +17862,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-29T07:11:13.984506",
+      "last_observed": "2026-06-29T14:11:54.577414",
       "observation_count": 1
     },
     "llama-server.exe": {
@@ -17879,7 +17879,7 @@
       "web_knowledge": "",
       "icon_path": "",
       "install_dir": "",
-      "last_observed": "2026-06-28T18:43:36.343599",
+      "last_observed": "2026-06-29T14:11:54.584003",
       "observation_count": 1
     },
     "wuaucltcore.exe": {
@@ -17986,6 +17986,44 @@
       "icon_path": "",
       "install_dir": "",
       "last_observed": "2026-06-28T18:43:36.344482",
+      "observation_count": 1
+    },
+    "photos.exe": {
+      "name": "Photos.exe",
+      "exe_path": "C:\\Program Files\\WindowsApps\\Microsoft.Windows.Photos_2026.11050.1001.0_x64__8wekyb3d8bbwe\\Photos.exe",
+      "display_name": "",
+      "description": "",
+      "version": "",
+      "publisher": "",
+      "file_types": [],
+      "ui_elements": [],
+      "menu_items": [],
+      "capabilities": [
+        "file_manager"
+      ],
+      "web_knowledge": "",
+      "icon_path": "",
+      "install_dir": "",
+      "last_observed": "2026-06-29T14:11:54.585614",
+      "observation_count": 1
+    },
+    "appvshnotify.exe": {
+      "name": "AppVShNotify.exe",
+      "exe_path": "C:\\Program Files\\Common Files\\microsoft shared\\ClickToRun\\AppVShNotify.exe",
+      "display_name": "",
+      "description": "",
+      "version": "",
+      "publisher": "",
+      "file_types": [],
+      "ui_elements": [],
+      "menu_items": [],
+      "capabilities": [
+        "file_manager"
+      ],
+      "web_knowledge": "",
+      "icon_path": "",
+      "install_dir": "",
+      "last_observed": "2026-06-29T14:11:54.585751",
       "observation_count": 1
     }
   },
@@ -29343,5 +29381,5 @@
       "web_knowledge": ""
     }
   },
-  "last_saved": "2026-06-29T07:11:14.408317"
+  "last_saved": "2026-06-29T14:11:55.019897"
 }

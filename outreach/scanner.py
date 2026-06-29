@@ -14,7 +14,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 
-import requests
+import httpx
 from bs4 import BeautifulSoup
 from loguru import logger
 
@@ -127,6 +127,8 @@ class OutreachScanner:
         self.save_path = settings.DATA_DIR / "outreach" / "leads.json"
         self.save_path.parent.mkdir(parents=True, exist_ok=True)
         self._load_leads()
+        self._fetch_semaphore = asyncio.Semaphore(3)
+        self._dedup_lock = asyncio.Lock()
 
     @staticmethod
     def _is_business_url(url: str) -> bool:
@@ -304,10 +306,10 @@ class OutreachScanner:
         # Filter out aggregator domains
         return [u for u in urls if self._is_business_url(u)][:5]
 
-    def _fetch_page_text(self, url: str, timeout: int = 15) -> Dict[str, Any]:
+    async def _fetch_page_text(self, url: str, timeout: int = 15) -> Dict[str, Any]:
         if get_scrapling_adapter:
             try:
-                result = get_scrapling_adapter().fetch(url, timeout=timeout)
+                result = await get_scrapling_adapter().fetch_async(url, timeout=timeout)
                 if result.get("ok"):
                     txt = result.get("text", "")
                     return {"ok": True, "text": txt, "html": result.get("html", "")}
@@ -315,49 +317,50 @@ class OutreachScanner:
                 logger.debug(f"Scrapling fetch failed for {url}: {e}")
 
         try:
-            response = requests.get(
-                url,
-                timeout=timeout,
-                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
-            )
-            if response.status_code != 200:
-                err = f"HTTP {response.status_code}"
-                return {"ok": False, "text": "", "html": "", "error": err}
-            html = response.text
-            soup = BeautifulSoup(html, "html.parser")
-            for script in soup(["script", "style"]):
-                script.decompose()
-            text = soup.get_text(separator="\n")
-            lines = (line.strip() for line in text.splitlines())
-            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-            clean_text = "\n".join(chunk for chunk in chunks if chunk)
-            return {"ok": True, "text": clean_text, "html": html}
+            async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
+                response = await client.get(
+                    url,
+                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"},
+                )
+                if response.status_code != 200:
+                    err = f"HTTP {response.status_code}"
+                    return {"ok": False, "text": "", "html": "", "error": err}
+                html = response.text
+                soup = BeautifulSoup(html, "html.parser")
+                for script in soup(["script", "style"]):
+                    script.decompose()
+                text = soup.get_text(separator="\n")
+                lines = (line.strip() for line in text.splitlines())
+                chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+                clean_text = "\n".join(chunk for chunk in chunks if chunk)
+                return {"ok": True, "text": clean_text, "html": html}
         except Exception as e:
             return {"ok": False, "text": "", "html": "", "error": str(e)}
 
     async def scan_url(self, url: str) -> Optional[Dict[str, Any]]:
         if not self._is_business_url(url):
             return None
-        # Check 24h deduplication window
-        now = time_module.time()
-        last_scan = self.scan_cycles_by_url.get(url, 0)
-        if now - last_scan < 86400:  # 24 hours in seconds
-            return None
-        self.scan_cycles_by_url[url] = now
+        async with self._dedup_lock:
+            now = time_module.time()
+            last_scan = self.scan_cycles_by_url.get(url, 0)
+            if now - last_scan < 86400:
+                return None
+            self.scan_cycles_by_url[url] = now
 
-        result = await asyncio.to_thread(self._fetch_page_text, url)
+        async with self._fetch_semaphore:
+            result = await self._fetch_page_text(url)
         if not result.get("ok") or not result.get("text"):
             return None
 
         text = result["text"]
         html = result.get("html", "")
-        
-        # Content hash deduplication
+
         content_hash = hashlib.md5((text + html)[:5000].encode()).hexdigest()
-        if content_hash in self.scanned_content_hashes:
-            return None
-        self.scanned_content_hashes.add(content_hash)
-        
+        async with self._dedup_lock:
+            if content_hash in self.scanned_content_hashes:
+                return None
+            self.scanned_content_hashes.add(content_hash)
+
         score = self._score_signal(text, url)
         contacts = self._extract_contact_hints(text, html)
 
@@ -383,8 +386,9 @@ class OutreachScanner:
             "local_business_score": local_score,
             "enterprise_penalty": enterprise_penalty,
         }
-        self.leads.append(lead)
-        self._save_leads()
+        async with self._dedup_lock:
+            self.leads.append(lead)
+            self._save_leads()
         logger.info(f"New lead: {domain} | score={score['total_score']} | signals={score['signals']}")
         return lead
 
@@ -556,18 +560,17 @@ class OutreachScanner:
             "local service business automation needed",
         ]
         all_leads = []
-        for query in queries[:4]:
-            try:
-                found = await self.search_leads(query, limit=limit)
-                all_leads.extend(found)
-            except Exception as e:
-                logger.debug(f"Business directory scan skip '{query}': {e}")
+        search_tasks = [self.search_leads(q, limit=limit) for q in queries[:6]]
+        results = await asyncio.gather(*search_tasks, return_exceptions=True)
+        for result in results:
+            if isinstance(result, list):
+                all_leads.extend(result)
         return all_leads
 
     async def search_leads(self, query: str, limit: int = 20) -> List[Dict[str, Any]]:
         """Search for leads using SearXNG. Requires SearXNG running at localhost:8888."""
         now = time_module.time()
-        
+
         search_url = settings.SEARXNG_URL.rstrip("/") + "/search"
         params = {
             "q": query,
@@ -575,14 +578,15 @@ class OutreachScanner:
             "language": "en-US",
             "engines": "bing",
         }
-        
+
         leads = []
         try:
-            response = requests.get(search_url, params=params, timeout=30)
+            async with httpx.AsyncClient(timeout=30, follow_redirects=True) as client:
+                response = await client.get(search_url, params=params)
             if response.status_code != 200:
                 logger.error(f"SearXNG search failed: {response.status_code} - is Docker running?")
                 return leads
-            
+
             results = response.json()
             candidate_urls = []
             for result in results.get("results", [])[:limit]:
@@ -591,29 +595,27 @@ class OutreachScanner:
                     continue
                 if not self._is_business_url(url):
                     continue
-                last_scan = self.scan_cycles_by_url.get(url, 0)
-                if now - last_scan < 86400:
-                    continue
+                async with self._dedup_lock:
+                    last_scan = self.scan_cycles_by_url.get(url, 0)
+                    if now - last_scan < 86400:
+                        continue
                 candidate_urls.append(url)
-            
-            for url in candidate_urls:
-                try:
-                    lead = await self.scan_url(url)
-                    if lead:
-                        leads.append(lead)
-                        if len(leads) >= limit:
-                            break
-                except Exception as e:
-                    logger.debug(f"scan_url skip for {url}: {e}")
-                    continue
-            
+
+            scan_tasks = [self.scan_url(u) for u in candidate_urls]
+            scan_results = await asyncio.gather(*scan_tasks, return_exceptions=True)
+            for r in scan_results:
+                if isinstance(r, dict):
+                    leads.append(r)
+                    if len(leads) >= limit:
+                        break
+
             if leads:
                 self._save_leads()
                 logger.info(f"SearXNG search '{query}': {len(leads)} leads found")
-                
+
         except Exception as e:
             logger.error(f"SearXNG search error: {e}")
-        
+
         return leads
 
     def get_new_leads(self, min_score: int = 1, limit: int = 50) -> List[Dict[str, Any]]:
