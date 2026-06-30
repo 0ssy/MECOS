@@ -463,10 +463,11 @@ except urllib.error.HTTPError as e:
                 reject.append(draft)
 
         for draft in auto_send:
-            draft["status"] = "pending_review"
+            draft["status"] = "approved_send"
             draft["ceo_reviewed_at"] = datetime.now().isoformat()
             draft["ceo_reviewed_by"] = "ceo_auto_pass"
             self.outreach.delivery_agent.update_draft(draft)
+            self.outreach.twenty_bridge.sync_draft(draft)
 
         for draft in flag_review:
             self.outreach.delivery_agent.update_draft(draft)

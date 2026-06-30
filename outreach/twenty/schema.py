@@ -70,7 +70,7 @@ MECOS_EMAIL_DRAFT = ObjectDef(
         FieldDef(name="leadBrief", type="RELATION", label="Lead Brief", relation_to="mecosLeadBrief", required=True),
         FieldDef(name="subject", type="TEXT", label="Subject"),
         FieldDef(name="body", type="TEXT", label="Body", required=True),
-        FieldDef(name="status", type="SELECT", label="Status", required=True, options=["pending_review", "approved", "rejected", "sent", "skipped_no_email", "skipped_bad_domain", "skipped_low_quality"]),
+        FieldDef(name="status", type="SELECT", label="Status", required=True, options=["pending_review", "approved_send", "rejected", "sent", "skipped_no_email", "skipped_bad_domain", "skipped_low_quality"]),
         FieldDef(name="recipientEmail", type="TEXT", label="Recipient Email"),
         FieldDef(name="paymentLink", type="TEXT", label="Payment Link"),
         FieldDef(name="invoiceId", type="TEXT", label="Invoice ID"),

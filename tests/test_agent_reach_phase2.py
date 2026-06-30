@@ -277,7 +277,7 @@ def test_ceo_approve_drafts_auto_sends_high_confidence_local():
     result = asyncio.run(ceo.approve_drafts())
 
     assert len(result["auto_send"]) == 1
-    assert result["auto_send"][0]["status"] == "pending_send"
+    assert result["auto_send"][0]["status"] == "approved_send"
 
 
 def test_ceo_approve_drafts_flags_low_confidence():

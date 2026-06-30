@@ -317,6 +317,7 @@ class TwentyBridge:
                 leadBrief {
                   id url
                   lead { id url }
+                  contacts { emails }
                 }
               }
             }
@@ -325,7 +326,7 @@ class TwentyBridge:
         """
         result = self._request(query, {"first": limit})
         data = result.get("data") or {}
-        return [e["node"] for e in data.get("mecosEmailDrafts", {}).get("edges", []) if e.get("node", {}).get("status") == "approved"]
+        return [e["node"] for e in data.get("mecosEmailDrafts", {}).get("edges", []) if e.get("node", {}).get("status") == "approved_send"]
 
     def get_leads_by_status(self, status: str, limit: int = 50) -> List[Dict[str, Any]]:
         query = """

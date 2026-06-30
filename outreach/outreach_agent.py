@@ -427,7 +427,6 @@ class OutreachAgent:
         self._research_orchestrator = research_orchestrator
 
         total_drafts = 0
-        total_sent = 0
         total_invoiced = 0
         for brief in filtered:
             try:
@@ -660,6 +659,7 @@ class OutreachAgent:
 
             full_draft = {
                 "type": "email",
+                "to": contact_email,
                 "subject": subject,
                 "body": body,
                 "lead_brief": {
@@ -667,7 +667,7 @@ class OutreachAgent:
                     "domain": lead.get("domain", brief.get("domain", "")),
                     "contacts": contacts,
                 },
-                "status": "approved",
+                "status": "approved_send",
             }
             if self.delivery_agent.send_draft(full_draft):
                 sent += 1

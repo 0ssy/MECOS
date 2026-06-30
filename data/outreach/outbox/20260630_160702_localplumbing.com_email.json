@@ -1,0 +1,23 @@
+{
+  "type": "email",
+  "to": "owner@localplumbing.com",
+  "subject": "Quick automation idea",
+  "body": "Hi there, this is a test email with low confidence email source that needs manual review before sending. The body is intentionally long enough to pass the minimum length requirement but the source is pattern_guess so it should be flagged.",
+  "status": "approved_send",
+  "lead_brief": {
+    "url": "https://localplumbing.com",
+    "domain": "localplumbing.com",
+    "contacts": {
+      "emails": [
+        "owner@localplumbing.com"
+      ],
+      "email_source": "pattern_guess",
+      "email_confidence": "low"
+    },
+    "local_business_score": 5,
+    "enterprise_penalty": 0
+  },
+  "_filename": "20260630_160702_localplumbing.com_email.json",
+  "approved_at": "2026-06-30T16:08:40.315200",
+  "approved_by": "manual"
+}

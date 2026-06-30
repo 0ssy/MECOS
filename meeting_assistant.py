@@ -128,10 +128,7 @@ class MeetingAssistant:
             loop = asyncio.get_event_loop()
             text = await loop.run_in_executor(
                 None,
-                transcribe,
-                str(chunk_path),
-                "auto",
-                chunk_path.parent,
+                lambda: transcribe(str(chunk_path), provider="auto", out_dir=chunk_path.parent),
             )
             return text.strip() if text else None
         except TranscribeError as e:

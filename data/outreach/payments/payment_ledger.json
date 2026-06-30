@@ -1,20 +1,6 @@
 {
   "payments": [
     {
-      "invoice_id": "inv_20260627_184137_https://",
-      "lead_id": "https://www.microsoft.com/en-us/",
-      "amount": 1000.0,
-      "currency": "USD",
-      "description": "MECOS automation: workflow_retainer",
-      "client_email": "florian.schuster@microsoft.com",
-      "status": "pending",
-      "paypal_order_id": "6FG26623CC0447440",
-      "paypal_capture_id": "",
-      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=6FG26623CC0447440",
-      "created_at": "2026-06-27T18:41:37.843109",
-      "updated_at": "2026-06-27T18:41:39.658563"
-    },
-    {
       "invoice_id": "inv_20260627_184143_https://",
       "lead_id": "https://www.microsoft.com/en-us/",
       "amount": 1000.0,
@@ -6999,8 +6985,22 @@
       "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=4EJ08033N29037723",
       "created_at": "2026-06-30T14:49:45.660014",
       "updated_at": "2026-06-30T14:49:49.598448"
+    },
+    {
+      "invoice_id": "inv_20260630_152406_https://",
+      "lead_id": "https://www.ferguson.com/content",
+      "amount": 1000.0,
+      "currency": "USD",
+      "description": "MECOS automation: workflow_retainer",
+      "client_email": "customer.support@ferguson.com",
+      "status": "pending",
+      "paypal_order_id": "21R30073XV157493K",
+      "paypal_capture_id": "",
+      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=21R30073XV157493K",
+      "created_at": "2026-06-30T15:24:06.400837",
+      "updated_at": "2026-06-30T15:24:08.089211"
     }
   ],
   "withdrawals": [],
-  "last_updated": "2026-06-30T14:49:49.598448"
+  "last_updated": "2026-06-30T15:24:08.089211"
 }
