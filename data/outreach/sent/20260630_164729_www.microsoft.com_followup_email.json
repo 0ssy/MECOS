@@ -1,0 +1,55 @@
+{
+  "type": "followup_email",
+  "to": "florian.schuster@microsoft.com",
+  "subject": "Quick follow-up \u2014 www.microsoft.com",
+  "body": "Hi,\n\nJust checking in \u2014 did my last note about www.microsoft.com land?\n\nIf you're still exploring automation options, I'm happy to share a quick case study or jump on a 10-min call this week.\n\nReply anytime and I'll get right back to you.\n",
+  "lead_brief": {
+    "url": "https://www.microsoft.com/en-us/power-platform/products/power-automate/?msockid=0a362e92ef426fae1cce3916ee456eae",
+    "domain": "www.microsoft.com",
+    "synthesized_at": "2026-06-26T17:12:06.928991",
+    "pain_points": [
+      "manual labor / operational overhead",
+      "growing team / scaling challenges"
+    ],
+    "persona": "scaling_business",
+    "suggested_pitch": "Automated solution for www.microsoft.com targeting Manual Labor / Operational Overhead. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "workflow_retainer",
+      "price_range": "$1,000-$2,000/mo",
+      "description": "Ongoing automation maintenance + new workflows",
+      "delivery": "ongoing"
+    },
+    "recommended_first_tool": "workflow automation retainer \u2014 ongoing optimization",
+    "contacts": {
+      "emails": [
+        "florian.schuster@microsoft.com"
+      ],
+      "phones": [
+        "(800) 642 7676"
+      ],
+      "social": [],
+      "email_source": "api",
+      "email_confidence": "high"
+    },
+    "original_signals": {
+      "inefficiency_markers": 0,
+      "pain_points": 1,
+      "organic_intent": 0,
+      "revenue_fit": 2
+    },
+    "matched_terms": [
+      "repetitive",
+      "enterprise",
+      "small business"
+    ],
+    "status": "ready_for_outreach"
+  },
+  "referral_code": "",
+  "original_sent_file": "20260626_172046_www.microsoft.com_email.json",
+  "created_at": "2026-06-30T16:47:29.987574",
+  "status": "approved_send",
+  "channel": "followup",
+  "_filename": "20260630_164729_www.microsoft.com_followup_email.json",
+  "approved_at": "2026-06-30T16:49:31.170493",
+  "approved_by": "manual"
+}

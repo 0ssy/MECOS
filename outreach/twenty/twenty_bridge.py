@@ -44,14 +44,14 @@ class TwentyBridge:
             payload["variables"] = variables
 
         try:
-            resp = self.session.post(self.graphql_url, json=payload, timeout=30)
+            resp = self.session.post(self.graphql_url, json=payload, timeout=5)
             resp.raise_for_status()
             body = resp.json()
             if body.get("errors"):
                 logger.error(f"Twenty CRM GraphQL errors: {body['errors']}")
             return body
         except requests.exceptions.RequestException as e:
-            logger.error(f"Twenty CRM request failed: {e}")
+            logger.debug(f"Twenty CRM request failed (timeout/disabled): {e}")
             return {"data": None, "errors": [{"message": str(e)}]}
 
     def find_lead_by_url(self, url: str) -> Optional[Dict[str, Any]]:

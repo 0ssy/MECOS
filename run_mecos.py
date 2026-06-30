@@ -49,7 +49,7 @@ def run_mecos():
     print("[MECOS] Starting MECOS engine...")
     env = dict(os.environ)
     env["MECOS_ENABLE_ASSISTANT"] = "true"
-    env["MECOS_ENABLE_OUTREACH"] = "false"
+    env["MECOS_ENABLE_OUTREACH"] = "true"
     result = subprocess.run(
         [sys.executable, "main.py"],
         env=env,

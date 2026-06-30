@@ -467,7 +467,10 @@ except urllib.error.HTTPError as e:
             draft["ceo_reviewed_at"] = datetime.now().isoformat()
             draft["ceo_reviewed_by"] = "ceo_auto_pass"
             self.outreach.delivery_agent.update_draft(draft)
-            self.outreach.twenty_bridge.sync_draft(draft)
+            try:
+                self.outreach.twenty_bridge.sync_draft(draft)
+            except Exception as exc:
+                logger.debug(f"Twenty CRM sync skipped (disabled/unavailable): {exc}")
 
         for draft in flag_review:
             self.outreach.delivery_agent.update_draft(draft)

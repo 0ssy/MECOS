@@ -157,8 +157,17 @@ async def run_cognition_loop(
                 if cycle % 5 == 0:
                     logger.info(f"Outreach status: {outreach_result.get('outreach_status')}")
 
-            # ── CEO supervision (every 3 cycles) ─────────────────────────
-            if ceo_agent and cycle % 3 == 0:
+            # ── CEO approval + immediate send (every 3 cycles) ─────────────
+            if outreach_agent and outreach_agent.enabled and ceo_agent and cycle % 3 == 0:
+                approval = await ceo_agent.approve_drafts()
+                auto_send = approval.get("auto_send", [])
+                if auto_send:
+                    pending = outreach_agent.delivery_agent.list_pending()
+                    approved_drafts = [d for d in pending if d.get("status") == "approved_send"]
+                    for draft in approved_drafts:
+                        if outreach_agent.delivery_agent.send_draft(draft):
+                            logger.info(f"Sent approved draft: {draft.get('to', '')}")
+
                 ceo_result = await ceo_agent.run_cycle()
                 if ceo_result.get("health", {}).get("status") != "healthy":
                     logger.warning("CEO health alert: {}", ceo_result["health"]["issues"])

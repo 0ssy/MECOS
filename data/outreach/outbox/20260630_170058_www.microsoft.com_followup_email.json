@@ -46,10 +46,8 @@
   },
   "referral_code": "",
   "original_sent_file": "20260626_172046_www.microsoft.com_email.json",
-  "created_at": "2026-06-30T16:15:01.095333",
-  "status": "approved_send",
+  "created_at": "2026-06-30T17:00:58.407342",
+  "status": "pending_send",
   "channel": "followup",
-  "_filename": "20260630_161501_www.microsoft.com_followup_email.json",
-  "approved_at": "2026-06-30T16:15:07.769766",
-  "approved_by": "manual"
+  "_filename": "20260630_170058_www.microsoft.com_followup_email.json"
 }
