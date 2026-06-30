@@ -8,10 +8,9 @@ from __future__ import annotations
 import asyncio
 import json
 import time as time_module
-from abc import ABC, abstractmethod
+from abc import ABC
 from datetime import datetime
-from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import httpx
 from loguru import logger
@@ -27,7 +26,9 @@ from config import settings
 class LeadSource(ABC):
     """Base class for industry-specific lead sources."""
 
-    def __init__(self, source_name: str, max_leads: int = 25):
+    def __init__(self, source_name: Optional[str] = None, max_leads: int = 25):
+        if source_name is None:
+            source_name = self.__class__.__name__.replace("LeadSource", "").lower()
         self.source_name = source_name
         self.max_leads = max_leads
         self.feed_path = settings.DATA_DIR / "outreach" / "lead_feeds" / f"{source_name}.jsonl"

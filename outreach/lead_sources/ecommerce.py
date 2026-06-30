@@ -14,6 +14,9 @@ from outreach.lead_sources.base import LeadSource
 class EcommerceLeadSource(LeadSource):
     """Scrapes e-commerce communities for automation pain signals."""
 
+    def __init__(self, max_leads: int = 25):
+        super().__init__("ecommerce", max_leads)
+
     async def fetch_urls(self) -> List[str]:
         """Fetch URLs from e-commerce communities."""
         urls = []

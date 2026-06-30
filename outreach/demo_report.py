@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 
-import requests
+import httpx
 from bs4 import BeautifulSoup
 
 from outreach.scanner import (
@@ -30,11 +30,11 @@ class DemoReportGenerator:
         self.output_dir = output_dir or Path("data/outreach/demos")
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    def generate(self, url: str, lead: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def generate(self, url: str, lead: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         if not OutreachScanner._is_business_url(url):
             return {"ok": False, "error": "url_blocked", "url": url}
 
-        page = self._fetch_page(url)
+        page = await self._fetch_page(url)
         if not page.get("ok"):
             return {"ok": False, "error": page.get("error", "fetch_failed"), "url": url}
 
@@ -81,13 +81,13 @@ class DemoReportGenerator:
             "cta": cta,
         }
 
-    def _fetch_page(self, url: str) -> Dict[str, Any]:
+    async def _fetch_page(self, url: str) -> Dict[str, Any]:
         try:
-            response = requests.get(
-                url,
-                timeout=15,
-                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
-            )
+            async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
+                response = await client.get(
+                    url,
+                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"},
+                )
             if response.status_code != 200:
                 return {"ok": False, "error": f"HTTP {response.status_code}"}
             html = response.text

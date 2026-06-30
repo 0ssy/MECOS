@@ -14,6 +14,9 @@ from outreach.lead_sources.base import LeadSource
 class AgencyLeadSource(LeadSource):
     """Scrapes creative/agency communities for automation opportunities."""
 
+    def __init__(self, max_leads: int = 25):
+        super().__init__("agencies", max_leads)
+
     async def fetch_urls(self) -> List[str]:
         """Fetch URLs from agency communities."""
         urls = []

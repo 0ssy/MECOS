@@ -20,6 +20,9 @@ class SolopreneurLeadSource(LeadSource):
         "https://github.com/topics/solopreneur",
     ]
 
+    def __init__(self, max_leads: int = 25):
+        super().__init__("solopreneurs", max_leads)
+
     async def fetch_urls(self) -> List[str]:
         """Fetch URLs from solopreneur communities."""
         urls = []

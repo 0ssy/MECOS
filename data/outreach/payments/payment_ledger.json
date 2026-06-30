@@ -1,34 +1,6 @@
 {
   "payments": [
     {
-      "invoice_id": "inv_20260627_184130_https://",
-      "lead_id": "https://www.microsoft.com/en-us/",
-      "amount": 1000.0,
-      "currency": "USD",
-      "description": "MECOS automation: workflow_retainer",
-      "client_email": "florian.schuster@microsoft.com",
-      "status": "pending",
-      "paypal_order_id": "9M417057MG1729533",
-      "paypal_capture_id": "",
-      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=9M417057MG1729533",
-      "created_at": "2026-06-27T18:41:30.696598",
-      "updated_at": "2026-06-27T18:41:32.516988"
-    },
-    {
-      "invoice_id": "inv_20260627_184134_https://",
-      "lead_id": "https://www.microsoft.com/en-us/",
-      "amount": 1000.0,
-      "currency": "USD",
-      "description": "MECOS automation: workflow_retainer",
-      "client_email": "florian.schuster@microsoft.com",
-      "status": "pending",
-      "paypal_order_id": "7UY182705B902340H",
-      "paypal_capture_id": "",
-      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=7UY182705B902340H",
-      "created_at": "2026-06-27T18:41:34.572840",
-      "updated_at": "2026-06-27T18:41:35.576645"
-    },
-    {
       "invoice_id": "inv_20260627_184137_https://",
       "lead_id": "https://www.microsoft.com/en-us/",
       "amount": 1000.0,
@@ -6999,8 +6971,36 @@
       "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=0VD16145E8797570U",
       "created_at": "2026-06-29T09:14:54.422894",
       "updated_at": "2026-06-29T09:14:56.353207"
+    },
+    {
+      "invoice_id": "inv_20260630_131157_https://",
+      "lead_id": "https://www.localsearch.ch/en/lo",
+      "amount": 1000.0,
+      "currency": "USD",
+      "description": "MECOS automation: workflow_retainer",
+      "client_email": "christian.weber@localsearch.ch",
+      "status": "pending",
+      "paypal_order_id": "1FX93445SX139134N",
+      "paypal_capture_id": "",
+      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=1FX93445SX139134N",
+      "created_at": "2026-06-30T13:11:57.486295",
+      "updated_at": "2026-06-30T13:12:01.167306"
+    },
+    {
+      "invoice_id": "inv_20260630_144945_https://",
+      "lead_id": "https://www.localsearch.ch/en/lo",
+      "amount": 1000.0,
+      "currency": "USD",
+      "description": "MECOS automation: workflow_retainer",
+      "client_email": "christian.weber@localsearch.ch",
+      "status": "pending",
+      "paypal_order_id": "4EJ08033N29037723",
+      "paypal_capture_id": "",
+      "checkout_url": "https://www.sandbox.paypal.com/checkoutnow?token=4EJ08033N29037723",
+      "created_at": "2026-06-30T14:49:45.660014",
+      "updated_at": "2026-06-30T14:49:49.598448"
     }
   ],
   "withdrawals": [],
-  "last_updated": "2026-06-29T09:14:56.353216"
+  "last_updated": "2026-06-30T14:49:49.598448"
 }

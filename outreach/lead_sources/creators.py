@@ -14,6 +14,9 @@ from outreach.lead_sources.base import LeadSource
 class CreatorLeadSource(LeadSource):
     """Scrapes creator communities for automation needs."""
 
+    def __init__(self, max_leads: int = 25):
+        super().__init__("creators", max_leads)
+
     async def fetch_urls(self) -> List[str]:
         """Fetch URLs from creator communities."""
         urls = []

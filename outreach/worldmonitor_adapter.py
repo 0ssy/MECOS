@@ -6,8 +6,6 @@ Lightweight adapter — no heavy dependencies, uses requests + feedparser concep
 
 from __future__ import annotations
 
-import json
-import os
 import re
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
@@ -91,7 +89,6 @@ class WorldMonitorAdapter:
             items = self._fetch_recent_signals()
             matched = 0
             total_weight = 0.0
-            domain_lower = domain.lower()
 
             for item in items:
                 text = f"{item.get('title','')} {item.get('summary','')}".lower()
@@ -129,6 +126,63 @@ class WorldMonitorAdapter:
     def enrich_batch(self, leads: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Score-adjust a batch of leads using intelligence signals."""
         return [self.enrich_lead_score(l) for l in leads]
+
+    def _calculate_multiplier(self, matched_signals: List[str]) -> float:
+        """Calculate intel multiplier from matched signal types."""
+        if not matched_signals:
+            return 1.0
+        total_weight = sum(self.SIGNAL_WEIGHTS.get(s, 1.0) for s in matched_signals)
+        avg = total_weight / len(matched_signals)
+        return min(max(avg, 0.5), 2.5)
+
+    async def generate_lead_candidates(self, industry: str, count: int = 5, scanner: Optional["OutreachScanner"] = None) -> List[Dict[str, Any]]:
+        """Generate lead candidates from industry intelligence signals."""
+        import asyncio
+        feed_urls = self.INDUSTRY_FEED_URLS.get(industry, [])
+        if not feed_urls:
+            return []
+
+        matched_signals: List[str] = []
+        queries: List[str] = []
+
+        def _fetch_signals_sync() -> List[str]:
+            signals = []
+            for feed_url in feed_urls:
+                try:
+                    resp = self.session.get(feed_url, timeout=10, allow_redirects=True)
+                    if resp.status_code != 200:
+                        continue
+                    entries = self._parse_rss(resp.text)
+                    for item in entries:
+                        text = f"{item.get('title', '')} {item.get('summary', '')}".lower()
+                        for signal_type, keywords in self.SIGNAL_KEYWORDS.items():
+                            for kw in keywords:
+                                if kw in text and signal_type not in signals:
+                                    signals.append(signal_type)
+                except Exception:
+                    continue
+            return signals
+
+        matched_signals = await asyncio.to_thread(_fetch_signals_sync)
+
+        if len(matched_signals) >= 2:
+            queries.append(f"{' '.join(matched_signals[:3])} {industry}")
+
+        candidates: List[Dict[str, Any]] = []
+        for query in queries:
+            if scanner:
+                try:
+                    leads = await scanner.search_leads(query, limit=count // 2)
+                    for lead in leads:
+                        if lead.get("url") in scanner.scanned_urls:
+                            continue
+                        lead["intel_multiplier"] = self._calculate_multiplier(matched_signals)
+                        lead["intel_signals"] = matched_signals
+                        candidates.append(lead)
+                except Exception:
+                    continue
+
+        return candidates
 
     def _fetch_recent_signals(self, max_age_hours: int = 12) -> List[Dict[str, Any]]:
         """Fetch and deduplicate recent items from public feeds."""

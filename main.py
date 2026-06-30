@@ -4,39 +4,39 @@ import asyncio
 import os
 from pathlib import Path
 from typing import Optional
-from loguru import logger
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from loguru import logger
 from uvicorn import Server, Config
 
-from config import settings
-from validate_config import validate_on_startup
-from memory_system import MemorySystem
-from reasoner import Reasoner
-from meta_learner import MetaLearner
-from independence_manager import IndependenceManager
-from dreaming_engine import DreamingEngine
-from neural_brain_service import NeuralBrainService
-from mecos.domain_expansion import DomainExpansionController
-from agent_reach_bridge import get_bridge
-from tool_orchestrator import ToolOrchestrator
 from action_engine import ActionExecutionEngine
-from app_perception import AppPerception
+from agent_reach_bridge import get_bridge
 from app_controller import AppController
+from app_perception import AppPerception
+from assistant_engine import AssistantEngine
+from ceo_agent import CeoAgent
+from config import settings
+from dreaming_engine import DreamingEngine
+from guardian_agent import GuardianAgent
 from health_monitor import HealthMonitor
+from independence_manager import IndependenceManager
+from mecos.domain_expansion import DomainExpansionController
+from meeting_assistant import MeetingAssistant
+from memory_system import MemorySystem
+from meta_learner import MetaLearner
+from neural_brain_service import NeuralBrainService
+from outreach.dashboard import DashboardService
+from outreach.outreach_agent import OutreachAgent
+from reasoner import Reasoner
 from security_agent import SecurityAgent
+from tool_orchestrator import ToolOrchestrator
 from guardian_agent import GuardianAgent
 from trading_agent import TradingAgent
-from outreach.outreach_agent import OutreachAgent
-from outreach.dashboard import DashboardService
-from ceo_agent import CeoAgent
+from ui_overlay.routes import add_transcript_segment, get_router, set_meeting_active, set_suggestion
+from validate_config import validate_on_startup
 
 # Assistant overlay imports
-from meeting_assistant import MeetingAssistant
-from assistant_engine import AssistantEngine
-from kilo_bridge import KiloBridge
-from ui_overlay.routes import get_router, set_meeting_active, add_transcript_segment, set_suggestion
 
 TRADING_ENABLED = os.getenv("MECOS_ENABLE_TRADING", "true").strip().lower() == "true"
 ASSISTANT_ENABLED = os.getenv("MECOS_ENABLE_ASSISTANT", "false").strip().lower() == "true"
@@ -333,8 +333,8 @@ async def main():
         try:
             trading_agent = TradingAgent(memory, tool_orchestrator)
             if neural_brain_service.is_available and hasattr(trading_agent, "neural_brain"):
-                trading_agent.neural_brain = neural_brain_service.brain
-                trading_agent.neural_brain_enabled = True
+                setattr(trading_agent, "neural_brain", neural_brain_service.brain)
+                setattr(trading_agent, "neural_brain_enabled", True)
             independence.set_agents(trading_agent, meta_learner)
             logger.info("IndependenceManager: live TradingAgent + MetaLearner.")
         except Exception as exc:

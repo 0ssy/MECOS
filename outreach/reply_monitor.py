@@ -13,7 +13,7 @@ from typing import List, Optional
 from loguru import logger
 
 from mecos.email_ingester import EmailDocument, EmailIngester
-from outreach.calendar.booking import CalendarBooking
+from outreach.booking_scheduler.booking import CalendarBooking
 
 
 class ReplyMonitor:
@@ -178,7 +178,7 @@ class ReplyMonitor:
             if lead_url:
                 try:
                     from outreach.demo_report import DemoReportGenerator
-                    report = await asyncio.to_thread(DemoReportGenerator().generate, lead_url)
+                    report = await DemoReportGenerator().generate(lead_url)
                     if report.get("ok"):
                         report_path = report.get("report_path")
                         self._log_demo_delivery(reply, report_path)
@@ -209,3 +209,4 @@ class ReplyMonitor:
     def attach_demo_deliverer(self, demo_deliverer) -> None:
         """Attach demo deliverer instance for report delivery."""
         self.demo_deliverer = demo_deliverer
+

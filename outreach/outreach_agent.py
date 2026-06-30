@@ -22,17 +22,13 @@ from outreach.demo_deliverer import DemoDeliverer
 from outreach.email_enricher import EmailEnricher
 from outreach.followup_engine import FollowupEngine
 from outreach.funnel_builder import FunnelBuilder
+from outreach.lead_sources import INDUSTRY_SOURCES
 from outreach.payments.payment_ledger import PaymentLedger
 from outreach.payments.paypal_client import PayPalClient
 from outreach.reply_monitor import ReplyMonitor
 from outreach.research_orchestrator import ResearchOrchestrator
 from outreach.revenue_ledger import RevenueLedger
 from outreach.scanner import PAIN_KEYWORDS, OutreachScanner
-from outreach.lead_sources.base import LeadSource
-from outreach.lead_sources import INDUSTRY_SOURCES
-from outreach.analytics.funnel import FunnelAnalytics
-from outreach.email_sequence import EmailSequence
-from outreach.followup_scheduler import FollowupScheduler
 from outreach.synthesizer import LeadSynthesizer
 from outreach.twenty.twenty_bridge import TwentyBridge
 from outreach.worldmonitor_adapter import WorldMonitorAdapter
@@ -234,6 +230,21 @@ class OutreachAgent:
         
         all_new = dir_leads + search_leads + source_leads
         total = len(all_new)
+
+        if len(all_new) == 0:
+            new_candidates = []
+            for industry in self.lead_sources.keys():
+                try:
+                    candidates = await self.intel_adapter.generate_lead_candidates(
+                        industry, count=5, scanner=self.scanner
+                    )
+                    new_candidates.extend(candidates)
+                except Exception as exc:
+                    logger.debug(f"Intel expansion skip ({industry}): {exc}")
+            all_new.extend(new_candidates)
+            if new_candidates:
+                logger.info(f"WorldMonitorAdapter expansion: added {len(new_candidates)} intel candidates")
+
         logger.info(f"Outreach scan: {total} leads found ({len(dir_leads)} directories + {len(search_leads)} search + {len(source_leads)} industry sources)")
 
         if all_new:
@@ -242,12 +253,24 @@ class OutreachAgent:
             for lead in all_new:
                 local_score = lead.get("local_business_score", 0)
                 enterprise_penalty = lead.get("enterprise_penalty", 0)
-                if local_score < 3 or enterprise_penalty > 2:
-                    skip_reason = ""
-                    if enterprise_penalty > 2:
-                        skip_reason = f"enterprise_penalty={enterprise_penalty}"
-                    else:
+                intel_multiplier = lead.get("intel_multiplier", 1.0)
+
+                skip_reason = ""
+                should_skip = False
+
+                if intel_multiplier > 1.5:
+                    if not (local_score >= 2 or intel_multiplier >= 1.8):
                         skip_reason = f"local_business_score={local_score}"
+                        should_skip = True
+                else:
+                    if local_score < 3 or enterprise_penalty > 2:
+                        if enterprise_penalty > 2:
+                            skip_reason = f"enterprise_penalty={enterprise_penalty}"
+                        else:
+                            skip_reason = f"local_business_score={local_score}"
+                        should_skip = True
+
+                if should_skip:
                     skipped.append({
                         "url": lead.get("url", ""),
                         "domain": lead.get("domain", ""),
@@ -276,13 +299,20 @@ class OutreachAgent:
                     else:
                         self.scanner.leads.append(lead)
 
-            scored = self.intel_adapter.enrich_batch(filtered)
+            scored = await asyncio.to_thread(self.intel_adapter.enrich_batch, filtered)
             for lead in scored:
                 if lead.get("intel_multiplier", 1.0) != 1.0:
-                    self.scanner.leads = [l if l.get("url") != lead.get("url") else lead for l in self.scanner.leads]
+                    self.scanner.leads = [
+                        l if l.get("url") != lead.get("url") else lead
+                        for l in self.scanner.leads
+                    ]
                     self.scanner._save_leads()
 
-            return {"urls_scanned": len(searxng_queries), "new_leads": len(filtered), "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0)}
+            return {
+                "urls_scanned": len(searxng_queries),
+                "new_leads": len(filtered),
+                "intel_scored": sum(1 for l in scored if l.get("intel_multiplier", 1.0) != 1.0),
+            }
 
         return {"urls_scanned": len(searxng_queries), "new_leads": 0, "intel_scored": 0}
 
@@ -508,7 +538,7 @@ class OutreachAgent:
                 if lead_url:
                     try:
                         from outreach.demo_report import DemoReportGenerator
-                        report = await asyncio.to_thread(DemoReportGenerator().generate, lead_url)
+                        report = await DemoReportGenerator().generate(lead_url)
                         if report.get("ok"):
                             report_path = report.get("report_path")
                             self._log_demo_delivery(reply, report_path)
@@ -520,7 +550,7 @@ class OutreachAgent:
                 self.reply_monitor.mark_processed(reply.get("receiver_uid", ""), demo_triggered=(demo_triggered > 0))
             elif reply.get("high_intent"):
                 try:
-                    from outreach.calendar.booking import CalendarBooking
+                    from outreach.booking_scheduler.booking import CalendarBooking
                     booking = CalendarBooking()
                     to_addr = (reply.get("from") or "").split("<")[-1].split(">")[0].strip()
                     if not to_addr and sent_email:

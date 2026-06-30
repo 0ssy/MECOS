@@ -1,5 +1,5 @@
 """
-MECOS Outreach - Calendar
+MECOS Outreach - Booking Scheduler
 Booking and scheduling integrations.
 """
 

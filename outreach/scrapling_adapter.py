@@ -43,7 +43,7 @@ class ScraplingAdapter:
     def _get_cached(self, url: str) -> Optional[Dict[str, Any]]:
         if url in self._cache:
             ts, result = self._cache[url]
-            if time_module.time() - ts < 600:
+            if time_module.time() - ts < 300:
                 return result
             del self._cache[url]
         return None
@@ -79,7 +79,7 @@ class ScraplingAdapter:
         """
         Fetch a URL using Scrapling with httpx fallback.
         Returns dict with ok, text, html, status_code, error keys.
-        Uses 10-minute cache to prevent repeated fetches.
+        Uses 5-minute cache to prevent repeated fetches.
         """
         timeout = timeout or self.timeout
 

@@ -1,0 +1,52 @@
+{
+  "type": "email",
+  "to": "christian.weber@localsearch.ch",
+  "subject": "Quick thought for www.localsearch.ch \u2014 Missing Automation  /  Outdated Processes",
+  "body": "Hi there,\n\nI came across www.localsearch.ch and noticed you mention contact form, founder on your site.\n\nRecent discussion on Twitter mentions related challenges. Title: X - The Everything App / X\n\nURL Source: https://x.com/search?q=www.localsearch.ch%20%20contact%20form%20founder%20startup&f=live\n\nMarkdown Content:\nSee what's happening\n\nSelect an option below:... YouTube content shows interest in automation solutions. Title: \n\nURL Source: https://www.youtube.com/results?search_query=www.localsearch.ch%20%20contact%20form%20founder%20startup%20workflow\n\nWarning: Target URL returned error 403: Forbidden\nWarning: This...\n\nI build focused automations for local service businesses, and missing automation  /  outdated processes tends to be one of the biggest time sinks I see.\n\nFor a business like yours, I'd recommend starting with a single high-impact build:\n- Workflow Automation Retainer \u2014 Ongoing Optimization\n- Turnaround: ongoing (fixed scope, no long-term contract)\n- Investment: $1,000-$2,000/mo\n\nNo monthly retainers, no lock-in. Just a working tool that replaces the repetitive part of your workflow.\n\nIf this sounds useful, I can send a quick demo of a comparable build so you can see exactly what's possible.\n\nBest,\nMECOS Automation\n\n---\nReply STOP to unsubscribe.",
+  "lead_brief": {
+    "url": "https://www.localsearch.ch/en/local-ch/",
+    "domain": "www.localsearch.ch",
+    "synthesized_at": "2026-06-30T13:11:37.302253",
+    "pain_points": [
+      "missing automation / outdated processes",
+      "growing team / scaling challenges"
+    ],
+    "persona": "scaling_business",
+    "suggested_pitch": "Automated solution for www.localsearch.ch targeting Missing Automation / Outdated Processes. Build: 2-3 days. Price: fixed scope. No long-term contract required.",
+    "recommended_package": {
+      "name": "workflow_retainer",
+      "price_range": "$1,000-$2,000/mo",
+      "description": "Ongoing automation maintenance + new workflows",
+      "delivery": "ongoing"
+    },
+    "recommended_first_tool": "workflow automation retainer \u2014 ongoing optimization",
+    "contacts": {
+      "emails": [
+        "christian.weber@localsearch.ch"
+      ],
+      "phones": [],
+      "social": [],
+      "email_source": "api",
+      "email_confidence": "high"
+    },
+    "original_signals": {
+      "inefficiency_markers": 1,
+      "pain_points": 0,
+      "organic_intent": 0,
+      "revenue_fit": 2
+    },
+    "matched_terms": [
+      "contact form",
+      "founder",
+      "startup"
+    ],
+    "status": "ready_for_outreach",
+    "research_summary": "Recent discussion on Twitter mentions related challenges. Title: X - The Everything App / X\n\nURL Source: https://x.com/search?q=www.localsearch.ch%20%20contact%20form%20founder%20startup&f=live\n\nMarkdown Content:\nSee what's happening\n\nSelect an option below:... YouTube content shows interest in automation solutions. Title: \n\nURL Source: https://www.youtube.com/results?search_query=www.localsearch.ch%20%20contact%20form%20founder%20startup%20workflow\n\nWarning: Target URL returned error 403: Forbidden\nWarning: This..."
+  },
+  "created_at": "2026-06-30T13:11:56.235475",
+  "status": "skipped_bad_lead",
+  "channel": "personal_email",
+  "_filename": "20260630_131156_www.localsearch.ch_email.json",
+  "rejected_at": "2026-06-30T13:12:01.430782",
+  "rejected_by": "ceo_auto"
+}
