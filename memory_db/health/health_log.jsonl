@@ -10308,3 +10308,7 @@
 {"name": "llm", "status": "ok", "message": "LLM responding", "latency": 20.100539445877075, "details": {}, "timestamp": "2026-06-30T12:11:15.020636+00:00"}
 {"name": "brokers", "status": "warn", "message": "1 errors", "latency": 2.456068992614746, "details": {"alpaca": "ok", "binance": "error: APIError(code=-2015): Invalid API-key, IP, or permissions for action."}, "timestamp": "2026-06-30T12:11:17.476705+00:00"}
 {"name": "disk_space", "status": "ok", "message": "273.5GB free", "latency": 0.001592397689819336, "details": {"free_gb": 273.52648162841797}, "timestamp": "2026-06-30T12:11:17.481759+00:00"}
+{"name": "memory", "status": "ok", "message": "5145 experiences", "latency": 0.10545873641967773, "details": {"experience_count": 5145, "short_term_buffer_size": 12, "quality": {"promoted": 8, "demoted": 4, "contradictions": 0}}, "timestamp": "2026-06-30T12:13:17.594300+00:00"}
+{"name": "llm", "status": "ok", "message": "LLM responding", "latency": 39.76997780799866, "details": {}, "timestamp": "2026-06-30T12:13:57.365785+00:00"}
+{"name": "brokers", "status": "warn", "message": "1 errors", "latency": 3.748983860015869, "details": {"alpaca": "ok", "binance": "error: APIError(code=-2015): Invalid API-key, IP, or permissions for action."}, "timestamp": "2026-06-30T12:14:01.117795+00:00"}
+{"name": "disk_space", "status": "ok", "message": "273.5GB free", "latency": 0.00552058219909668, "details": {"free_gb": 273.5168266296387}, "timestamp": "2026-06-30T12:14:01.130310+00:00"}
