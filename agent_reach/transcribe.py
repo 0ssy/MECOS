@@ -53,9 +53,15 @@ class NoProviderConfigured(TranscribeError):
     """Raised when no provider has an API key configured."""
 
 
-def _require(binary: str) -> None:
-    if not shutil.which(binary):
-        raise MissingDependency(f"{binary} not found in PATH")
+def _require(binary: str) -> str:
+    path = shutil.which(binary)
+    if path:
+        return binary
+    if binary == "ffmpeg":
+        path = shutil.which("ffmpeg7")
+        if path:
+            return "ffmpeg7"
+    raise MissingDependency(f"{binary} not found in PATH")
 
 
 def _run(cmd: List[str], timeout: int = 600) -> None:
@@ -100,11 +106,11 @@ def download_audio(url: str, out_dir: Path) -> Path:
 
 def compress_audio(src: Path, out_dir: Path) -> Path:
     """Re-encode to mono / 16kHz / 32kbps m4a — keeps most content under 25MB."""
-    _require("ffmpeg")
+    ffmpeg_bin = _require("ffmpeg")
     dst = out_dir / "compressed.m4a"
     _run(
         [
-            "ffmpeg",
+            ffmpeg_bin,
             "-loglevel",
             "error",
             "-y",
@@ -125,11 +131,11 @@ def compress_audio(src: Path, out_dir: Path) -> Path:
 
 def chunk_audio(src: Path, out_dir: Path, segment_seconds: int = CHUNK_SECONDS) -> List[Path]:
     """Split src into segments. Re-encodes each segment so cuts align to keyframes."""
-    _require("ffmpeg")
+    ffmpeg_bin = _require("ffmpeg")
     pattern = out_dir / "chunk_%03d.m4a"
     _run(
         [
-            "ffmpeg",
+            ffmpeg_bin,
             "-loglevel",
             "error",
             "-y",

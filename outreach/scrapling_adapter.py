@@ -8,9 +8,11 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 import time as time_module
 import warnings
 from typing import Any, Dict, Optional
+from urllib.parse import urlparse
 
 import httpx
 from loguru import logger
@@ -39,6 +41,8 @@ class ScraplingAdapter:
         self.timeout = 15
         self.user_agent = "MECOS/1.0 (+https://github.com/0ssy/MECOS)"
         self._cache: Dict[str, Dict[str, Any]] = {}
+        ssl_bypass_env = os.getenv("SCRAPING_SKIP_SSL_VERIFY", "")
+        self._ssl_bypass = ssl_bypass_env.split(",") if ssl_bypass_env else []
 
     def _get_cached(self, url: str) -> Optional[Dict[str, Any]]:
         if url in self._cache:
@@ -195,6 +199,18 @@ class ScraplingAdapter:
             logger.debug(f"Httpx fallback failed for {url}: {e}")
             return {"ok": False, "text": "", "html": "", "error": str(e)}
 
+    def _should_skip_ssl_verify(self, url: str) -> bool:
+        """Check if SSL verification should be skipped for this URL."""
+        try:
+            hostname = urlparse(url).hostname or ""
+            return any(
+                skip_host and hostname.endswith(skip_host)
+                for skip_host in self._ssl_bypass
+                if skip_host
+            )
+        except Exception:
+            return False
+
     async def _fetch_with_httpx_async(
         self,
         url: str,
@@ -206,7 +222,13 @@ class ScraplingAdapter:
             req_headers = headers or {
                 "User-Agent": self.user_agent,
             }
-            async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as client:
+            verify = not self._should_skip_ssl_verify(url)
+            if self._should_skip_ssl_verify(url):
+                hostname = urlparse(url).hostname or "unknown"
+                logger.debug(f"SSL verification skipped for {hostname}")
+            async with httpx.AsyncClient(
+                timeout=timeout, follow_redirects=True, verify=verify
+            ) as client:
                 resp = await client.get(url, headers=req_headers)
 
             html = resp.text
